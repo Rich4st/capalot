@@ -42,8 +42,14 @@ function capalot_widget_init()
         'description'   => '首页模块主内容区域',
         'before_widget' => '<div id="%1$s" class="home-widget %2$s">',
         'after_widget'  => '</div>',
-        'before_title'  => '',
-        'after_title'   => '',
+    ));
+
+    register_sidebar(array(
+        'name'          => '文章侧边栏',
+        'id'            => 'single-sidebar',
+        'description'   => '文章模块侧边栏区域',
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</div>',
     ));
 }
 

@@ -1,7 +1,15 @@
 <?php
-if (is_active_sidebar('home-module')) {
-  dynamic_sidebar('home-module');
-} else { ?>
-  <h1>hello capalot!</h1>
+if (have_posts()) {
+
+  while (have_posts()) {
+    the_post();
+?>
+
+    <!-- 输出文章链接 -->
+    <a href="<?php the_permalink(); ?>">
+      <?php echo the_title(); ?>
+    </a>
+
 <?php
+  }
 }
