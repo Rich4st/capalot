@@ -17,15 +17,33 @@ CSF::createOptions($prefix, array(
 ));
 
 CSF::createSection( $prefix, array(
-  'title'  => 'Tab Title 1',
+  'title'  => '基本设置',
   'fields' => array(
 
-    //
-    // A text field
     array(
-      'id'    => 'opt-text',
-      'type'  => 'text',
-      'title' => 'Simple Text',
+      'id'    => 'site_logo',
+      'type'  => 'upload',
+      'title' => '网站LOGO',
+      'library' => 'image',
+      'placeholder' => 'https://',
+      'button_title' => '上传',
+      'after' => '<p class="cs-text-muted">建议尺寸：200x50</p>',
+      'remove_title' => '删除',
+    ),
+
+  )
+) );
+
+CSF::createSection( $prefix, array(
+  'title'  => '安全设置',
+  'fields' => array(
+
+    array(
+      'id'      => 'site_captcha',
+      'type'    => 'switcher',
+      'title'   => '验证码',
+      'label'   => '开启后注册登录需要填写验证码',
+      'default' => true
     ),
 
   )
