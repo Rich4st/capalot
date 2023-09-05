@@ -33,6 +33,9 @@ function capalot_setup()
 
 add_action('after_setup_theme', 'capalot_setup');
 
+/**
+ * 注册菜单
+ */
 function capalot_widget_init()
 {
 

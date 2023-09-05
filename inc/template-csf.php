@@ -5,6 +5,23 @@ if (!defined('_OPTIONS_PREFIX'))
   define('_OPTIONS_PREFIX', '_capalot_options');
 
 
+if (!function_exists('_capalot')) {
+  /**
+   * 自定义函数获取设置
+   * 
+   * @param string $option 设置项
+   * @param string $default 默认值
+   * @return string
+   */
+  function _capalot($option = '', $default = null)
+  {
+    $options_meta = _OPTIONS_PREFIX;
+    $options      = get_option($options_meta);
+    return (isset($options[$option])) ? $options[$option] : $default;
+  }
+}
+
+
 if (!class_exists('CSF')) {
 
   $options = array(
@@ -19,8 +36,6 @@ if (!class_exists('CSF')) {
 
 /**
  * 初始化主题设置
- * @author Rich4$t
- * @Date   2023-09-05
  * 
  * @param array $params {
  *  @type string $framework_title 框架标题
