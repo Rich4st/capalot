@@ -11,7 +11,7 @@ if ((defined('WP_DEBUG') && WP_DEBUG == true) || _THEME_DEBUG == true) {
     error_reporting(0); //关闭报错止乱码
 }
 
-function jhh_setup()
+function capalot_setup()
 {
     add_theme_support('post-thumbnails'); // 添加缩略图功能
     add_theme_support('post-formats', array('image', 'video', 'audio')); // 添加文章格式功能
@@ -31,4 +31,7 @@ function jhh_setup()
     }
 }
 
-add_action('after_setup_theme', 'jhh_setup');
+add_action('after_setup_theme', 'capalot_setup');
+
+// 加载CSF框架配置
+require_once get_template_directory() . '/inc/template-csf.php';

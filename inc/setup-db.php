@@ -11,7 +11,7 @@ class SetupDB
 
   public function __construct()
   {
-    $this->db_prefix = 'jhh_';
+    $this->db_prefix = 'capalot_';
     $this->db_tables = array(
       'order', //订单表
       'cdk', //优惠码表
@@ -61,7 +61,7 @@ class SetupDB
     // 订单表
     $execute = $wpdb->query(
       "
-      CREATE TABLE IF NOT EXISTS $wpdb->jhh_order(
+      CREATE TABLE IF NOT EXISTS $wpdb->capalot_order(
         id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
         post_id bigint(20) unsigned NOT NULL,
         user_id bigint(20) unsigned NOT NULL,
@@ -84,7 +84,7 @@ class SetupDB
     //优惠码表
     $execute = $wpdb->query(
       "
-      CREATE TABLE IF NOT EXISTS $wpdb->jhh_cdk(
+      CREATE TABLE IF NOT EXISTS $wpdb->capalot_cdk(
           id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
           order_id bigint(20) unsigned NOT NULL,
           type tinyint(3) NOT NULL DEFAULT 0,
@@ -103,7 +103,7 @@ class SetupDB
     //下载记录表
     $execute = $wpdb->query(
       "
-      CREATE TABLE IF NOT EXISTS $wpdb->jhh_download(
+      CREATE TABLE IF NOT EXISTS $wpdb->capalot_download(
           id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
           user_id bigint(20) unsigned NOT NULL,
           post_id bigint(20) unsigned NOT NULL,
@@ -118,7 +118,7 @@ class SetupDB
     //推广记录表
     $execute = $wpdb->query(
       "
-      CREATE TABLE IF NOT EXISTS $wpdb->jhh_aff(
+      CREATE TABLE IF NOT EXISTS $wpdb->capalot_aff(
           id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
           order_id bigint(20) unsigned NOT NULL,
           aff_uid bigint(20) unsigned NOT NULL,
@@ -136,7 +136,7 @@ class SetupDB
     //工单表
     $execute = $wpdb->query(
       "
-      CREATE TABLE IF NOT EXISTS $wpdb->jhh_ticket(
+      CREATE TABLE IF NOT EXISTS $wpdb->capalot_ticket(
           id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
           type tinyint(3) NOT NULL DEFAULT 0 COMMENT '工单类型',
           title varchar(255) NOT NULL COMMENT '工单标题',
