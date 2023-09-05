@@ -33,5 +33,21 @@ function capalot_setup()
 
 add_action('after_setup_theme', 'capalot_setup');
 
+function capalot_widget_init()
+{
+
+    register_sidebar(array(
+        'name'          => '首页模块',
+        'id'            => 'home-module',
+        'description'   => '首页模块主内容区域',
+        'before_widget' => '<div id="%1$s" class="home-widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '',
+        'after_title'   => '',
+    ));
+}
+
+add_action('widgets_init', 'capalot_widget_init');
+
 // 加载CSF框架配置
 require_once get_template_directory() . '/inc/template-csf.php';
