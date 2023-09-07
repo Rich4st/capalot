@@ -67,3 +67,5 @@ require_once get_template_directory() . '/inc/template-assets.php';
 
 // 主题基本优化
 require_once get_template_directory() . '/inc/template-clean.php';
+
+require_once get_template_directory() . '/inc/template-admin.php';
