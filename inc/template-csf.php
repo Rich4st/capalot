@@ -27,9 +27,12 @@ if (!class_exists('CSF')) {
   $options = array(
     '/plugins/codestar-framework/codestar-framework.php', //框架CSF
     '/options/admin-options.php', //后台设置
+    '/options/metabox-options.php', //后台设置
   );
 
+
   foreach ($options as $o) {
+
     require_once get_template_directory() . '/inc' . $o;
   }
 }

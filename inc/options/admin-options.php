@@ -63,3 +63,76 @@ CSF::createSection($prefix, array(
 
   )
 ));
+
+/**
+ * 商城设置
+ */
+CSF::createSection($prefix, array(
+  'id'     => 'shop_options',
+  'title'  => '商城设置',
+));
+
+CSF::createSection($prefix, array(
+  'parent' => 'shop_options',
+  'title'  => '基本设置',
+  'fields' => array(
+
+    array(
+      'id' => 'site_shop_mode',
+      'type' => 'radio',
+      'title' => '商城模式',
+      'options'     => array(
+        'close'    => '不启用商城功能（网站仅作为博客展示）',
+        'all'      => '全能商城（支持游客购买、登录用户购买）',
+        'user_mod' => '用户模式（不支持游客购买）',
+      ),
+      'default'     => 'all',
+    ),
+
+    array(
+      'id' => 'site_currency_name',
+      'type' => 'text',
+      'title' => '站内币名称',
+      'desc' => '设置站内币名称,例如: 金币、下载币、积分、资源币、BB币、USDT等',
+      'default' => '金币',
+      'attributes' => array(
+        'style' => 'width: 6rem'
+      )
+    ),
+
+  )
+));
+
+CSF::createSection($prefix, array(
+  'parent' => 'shop_options',
+  'title' => '默认发布字段',
+  'fields' => array(
+
+    array(
+      'type' => 'heading',
+      'content' => '自定义发布文章时的价格等默认字段，可以配置好默认字段，比如你不想每次都填写价格，可以配置默认为多少',
+    ),
+
+    array(
+      'id' => 'site_default_price',
+      'type' => 'number',
+      'title' => '默认价格',
+      'desc' => '设置默认价格,免费请填写0',
+      'output' => '.heading',
+      'output_mode' => 'width',
+      'default' => 0.1,
+    ),
+
+    array(
+      'id'          => 'site_default_sold_quantity',
+      'type'        => 'number',
+      'title'       => '已售数量',
+      'desc'        => '可自定义修改数字',
+      'unit'        => '个',
+      'output'      => '.heading',
+      'output_mode' => 'width',
+      'default'     => 0,
+    ),
+
+  )
+));

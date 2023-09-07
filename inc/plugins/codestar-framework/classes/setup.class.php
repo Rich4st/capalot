@@ -11,8 +11,8 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
   class CSF_Setup {
 
     // Default constants
-    public static $premium  = false;
-    public static $version  = '2.3.0';
+    public static $premium  = true;
+    public static $version  = '2.2.9';
     public static $dir      = '';
     public static $url      = '';
     public static $css      = '';
@@ -39,7 +39,7 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
 
     private static $instance = null;
 
-    public static function init( $file = __FILE__, $premium = false ) {
+    public static function init( $file = __FILE__, $premium = true ) {
 
       // Set file constant
       self::$file = $file;
@@ -194,9 +194,10 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
       if ( class_exists( 'CSF_Widget' ) && class_exists( 'WP_Widget_Factory' ) && ! empty( self::$args['widget_options'] ) ) {
         $wp_widget_factory = new WP_Widget_Factory();
         global $wp_widget_factory;
+
+
         foreach ( self::$args['widget_options'] as $key => $value ) {
           if ( ! isset( self::$inited[$key] ) ) {
-
             self::$inited[$key] = true;
             $wp_widget_factory->register( CSF_Widget::instance( $key, $value ) );
 
@@ -577,12 +578,12 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
       wp_enqueue_script( 'wp-color-picker' );
 
       // Font awesome 4 and 5 loader
-      if ( apply_filters( 'csf_fa4', false ) ) {
-        wp_enqueue_style( 'csf-fa', 'https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css', array(), '4.7.0', 'all' );
-      } else {
-        wp_enqueue_style( 'csf-fa5', 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css', array(), '5.15.5', 'all' );
-        wp_enqueue_style( 'csf-fa5-v4-shims', 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/v4-shims.min.css', array(), '5.15.5', 'all' );
-      }
+      // // $cdn_src = zb_assets_src('theme');
+      // wp_enqueue_style('csf-fa5', $cdn_src['fw'], array(), '5.15.4', 'all');
+      // wp_enqueue_style('csf-fa5-v4-shims', $cdn_src['fw4'], array(), '5.15.4', 'all');
+
+      // wp_enqueue_style( 'csf-fa5', 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css', array(), '5.15.5', 'all' );
+      // wp_enqueue_style( 'csf-fa5-v4-shims', 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/v4-shims.min.css', array(), '5.15.5', 'all' );
 
       // Check for developer mode
       $min = ( self::$premium && SCRIPT_DEBUG ) ? '' : '.min';
@@ -792,7 +793,7 @@ if ( ! class_exists( 'CSF_Setup' ) ) {
 
 }
 
-CSF_Setup::init( __FILE__, false );
+CSF_Setup::init( __FILE__, true );
 
 /**
  *

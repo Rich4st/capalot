@@ -140,7 +140,7 @@ if ( ! class_exists( 'CSF_Fields' ) ) {
         case 'tags':
         case 'menu':
         case 'menus':
-
+        
           if ( ! empty( $term ) ) {
 
             $query         = new WP_Term_Query( wp_parse_args( $query_args, array(
@@ -162,6 +162,7 @@ if ( ! class_exists( 'CSF_Fields' ) ) {
           if ( ! is_wp_error( $query ) && ! empty( $query->terms ) ) {
             foreach ( $query->terms as $item ) {
               $options[$item->term_id] = $item->name;
+             
             }
           }
 

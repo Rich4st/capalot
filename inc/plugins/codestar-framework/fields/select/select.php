@@ -88,6 +88,8 @@ if ( ! class_exists( 'CSF_Field_select' ) ) {
 
           foreach ( $options as $option_key => $option ) {
 
+
+
             if ( is_array( $option ) && ! empty( $option ) ) {
 
               echo '<optgroup label="'. esc_attr( $option_key ) .'">';
