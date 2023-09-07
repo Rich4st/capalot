@@ -23,7 +23,7 @@ if (_capalot('site_shop_mode', '') !== 'close') {
     'fields' => array(
 
       array(
-        'id'          => 'cao_price',
+        'id'          => 'capalot_price',
         'type'        => 'number',
         'title'       => '价格：*',
         'desc'        => '免费请填写：0',
@@ -34,7 +34,7 @@ if (_capalot('site_shop_mode', '') !== 'close') {
       ),
 
       array(
-        'id'          => 'cao_vip_rate',
+        'id'          => 'capalot_vip_rate',
         'type'        => 'number',
         'title'       => '折扣:',
         'desc'        => '0.N 等于N折;1 等于不打折;0 等于会员免费',
@@ -45,7 +45,7 @@ if (_capalot('site_shop_mode', '') !== 'close') {
       ),
 
       array(
-        'id'          => 'cao_paynum',
+        'id'          => 'capalot_sold_quantity',
         'type'        => 'number',
         'title'       => '已售数量',
         'desc'        => '可自定义修改数字',
