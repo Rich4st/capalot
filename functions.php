@@ -62,4 +62,8 @@ add_action('widgets_init', 'capalot_widget_init');
 // 加载CSF框架配置
 require_once get_template_directory() . '/inc/template-csf.php';
 
+// 加载静态资源
 require_once get_template_directory() . '/inc/template-assets.php';
+
+// 主题基本优化
+require_once get_template_directory() . '/inc/template-clean.php';
