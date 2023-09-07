@@ -1,14 +1,6 @@
 <?php
 defined('ABSPATH') || exit;
 
-
-//调试模式显示错误日志信息
-if ((defined('WP_DEBUG') && WP_DEBUG == true) || _THEME_DEBUG == true) {
-    error_reporting(E_ALL);
-} else {
-    error_reporting(0); //关闭报错止乱码
-}
-
 /**
  * 主题初始化
  */
