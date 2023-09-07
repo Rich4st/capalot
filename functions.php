@@ -2,8 +2,6 @@
 defined('ABSPATH') || exit;
 
 
-define('_THEME_DEBUG', 0); //调试模式控制切勿开启
-
 //调试模式显示错误日志信息
 if ((defined('WP_DEBUG') && WP_DEBUG == true) || _THEME_DEBUG == true) {
     error_reporting(E_ALL);
@@ -64,4 +62,4 @@ add_action('widgets_init', 'capalot_widget_init');
 // 加载CSF框架配置
 require_once get_template_directory() . '/inc/template-csf.php';
 
-require get_template_directory() . '/inc/template-assets.php';
+require_once get_template_directory() . '/inc/template-assets.php';

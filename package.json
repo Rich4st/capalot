@@ -1,0 +1,24 @@
+{
+  "name": "capalot",
+  "version": "1.0.0",
+  "description": "wordpress theme",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npx tailwindcss -i ./assets/css/input.css -o ./assets/css/tailwind.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rich4st/capalot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rich4st/capalot/issues"
+  },
+  "homepage": "https://github.com/Rich4st/capalot#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.3.3"
+  }
+}

@@ -1,13 +1,13 @@
+<?php get_header(); ?>
 <?php
 if (have_posts()) {
 
   while (have_posts()) {
     the_post();
 ?>
-
-    <img src="<?php echo _capalot('site_logo') ?>" alt="">
     <!-- 输出文章链接 -->
-    <h1 class=" text-sky-500">
+    <span class="dashicons dashicons-translation"></span>
+    <h1 class="text-red-500">
       123
     </h1>
     <a href="<?php the_permalink(); ?>">
@@ -17,3 +17,7 @@ if (have_posts()) {
 <?php
   }
 }
+?>
+
+<?php
+get_footer();
