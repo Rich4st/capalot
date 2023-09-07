@@ -11,6 +11,9 @@ if ((defined('WP_DEBUG') && WP_DEBUG == true) || _THEME_DEBUG == true) {
     error_reporting(0); //关闭报错止乱码
 }
 
+/**
+ * 主题初始化
+ */
 function capalot_setup()
 {
     add_theme_support('post-thumbnails'); // 添加缩略图功能
@@ -60,3 +63,5 @@ add_action('widgets_init', 'capalot_widget_init');
 
 // 加载CSF框架配置
 require_once get_template_directory() . '/inc/template-csf.php';
+
+require get_template_directory() . '/inc/template-assets.php';
