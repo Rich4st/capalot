@@ -16,7 +16,7 @@ CSF::createOptions($prefix, array(
   'menu_slug' => 'capalot',
 ));
 
-CSF::createSection( $prefix, array(
+CSF::createSection($prefix, array(
   'title'  => '基本设置',
   'fields' => array(
 
@@ -32,9 +32,9 @@ CSF::createSection( $prefix, array(
     ),
 
   )
-) );
+));
 
-CSF::createSection( $prefix, array(
+CSF::createSection($prefix, array(
   'title'  => '安全设置',
   'fields' => array(
 
@@ -47,4 +47,19 @@ CSF::createSection( $prefix, array(
     ),
 
   )
-) );
+));
+
+
+CSF::createSection($prefix, array(
+  'title'  => '网站优化',
+  'fields' => array(
+
+    array(
+      'id'      => 'gutenberg_disable',
+      'type'    => 'switcher',
+      'title'   => '古藤堡小工具',
+      'default' => false
+    ),
+
+  )
+));
