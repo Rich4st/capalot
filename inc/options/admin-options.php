@@ -10,12 +10,17 @@ if (!class_exists('CSF')) {
 $prefix = _OPTIONS_PREFIX;
 $template_dir = get_template_directory_uri();
 
-// 主题设置选项
+/**
+ * 主题设置
+ */
 CSF::createOptions($prefix, array(
   'menu_title' => '主题设置',
   'menu_slug' => 'capalot',
 ));
 
+/**
+ * 基本设置
+ */
 CSF::createSection($prefix, array(
   'title'  => '基本设置',
   'fields' => array(
@@ -34,6 +39,9 @@ CSF::createSection($prefix, array(
   )
 ));
 
+/**
+ * 安全设置
+ */
 CSF::createSection($prefix, array(
   'title'  => '安全设置',
   'fields' => array(
@@ -49,7 +57,9 @@ CSF::createSection($prefix, array(
   )
 ));
 
-
+/**
+ * 网站优化
+ */
 CSF::createSection($prefix, array(
   'title'  => '网站优化',
   'fields' => array(
@@ -72,6 +82,7 @@ CSF::createSection($prefix, array(
   'title'  => '商城设置',
 ));
 
+// 商城设置 - 基本设置
 CSF::createSection($prefix, array(
   'parent' => 'shop_options',
   'title'  => '基本设置',
@@ -103,6 +114,7 @@ CSF::createSection($prefix, array(
   )
 ));
 
+// 商城设置 - 默认发布字段设置
 CSF::createSection($prefix, array(
   'parent' => 'shop_options',
   'title' => '默认发布字段',
@@ -134,5 +146,33 @@ CSF::createSection($prefix, array(
       'default'     => 0,
     ),
 
+  )
+));
+
+/**
+ * 布局设置
+ */
+CSF::createSection($prefix, array(
+  'id' => 'layout_options',
+  'title' => '布局设置',
+));
+
+CSF::createSection($prefix, array(
+  'parent' => 'layout_options',
+  'title' => '文章列表布局',
+  'fields' => array(
+
+    array(
+      'id' => 'site_pagination_type',
+      'type' => 'radio',
+      'inline' => true,
+      'title' => '分页风格',
+      'options' => array(
+        'standard' => '传统分页',
+        'click' => '点击加载更多',
+        'pull' => '下拉加载更多',
+      ),
+      'default' => 'click'
+    )
   )
 ));

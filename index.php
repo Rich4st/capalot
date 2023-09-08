@@ -1,23 +1,14 @@
 <?php get_header(); ?>
 <?php
-if (have_posts()) {
 
-  while (have_posts()) {
-    the_post();
-?>
-    <!-- 输出文章链接 -->
-    <span class="dashicons dashicons-translation"></span>
-    <h1 class="text-red-500">
-      123
-    </h1>
-    <a href="<?php the_permalink(); ?>">
-      <?php echo the_title(); ?>
-    </a>
-
-<?php
+if (is_active_sidebar('home-module')) {
+  dynamic_sidebar('home-module');
+} else {
+  if (have_posts()) {
+    while (have_posts()) {
+      the_post();
+    }
   }
 }
-?>
 
-<?php
 get_footer();
