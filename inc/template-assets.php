@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 网站静态资源加载
  */
@@ -22,3 +23,16 @@ function enqueue_custom_assets()
 
 // 队列加载JS和CSS文件
 add_action('wp_enqueue_scripts', 'enqueue_custom_assets');
+
+/**
+ * 后台静态资源加载
+ */
+function enqueue_admin_custom_assets($hook)
+{
+  //商城管理页面加载
+  if (strpos($hook, 'capalot-admin') !== false) {
+    wp_enqueue_script('apexcharts', get_template_directory_uri() . '/admin/js/apexcharts.min.js', array(), '3.35.3', true);
+  }
+}
+
+add_action('admin_enqueue_scripts', 'enqueue_admin_custom_assets');
