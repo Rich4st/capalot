@@ -8,7 +8,7 @@ if (!defined('_OPTIONS_PREFIX'))
 if (!function_exists('_capalot')) {
   /**
    * 自定义函数获取设置
-   * 
+   *
    * @param string $option 设置项
    * @param string $default 默认值
    * @return string
@@ -27,7 +27,8 @@ if (!class_exists('CSF')) {
   $options = array(
     '/plugins/codestar-framework/codestar-framework.php', //框架CSF
     '/options/admin-options.php', //后台设置
-    '/options/metabox-options.php', //后台设置
+    '/options/metabox-options.php', //文章高级设置
+    '/options/shortcode-options.php', //简码设置
   );
 
 
@@ -39,7 +40,7 @@ if (!class_exists('CSF')) {
 
 /**
  * 初始化主题设置
- * 
+ *
  * @param array $params {
  *  @type string $framework_title 框架标题
  *  @type string $menu_title 菜单标题

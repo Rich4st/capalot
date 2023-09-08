@@ -60,4 +60,8 @@ require_once get_template_directory() . '/inc/template-assets.php';
 // 主题基本优化
 require_once get_template_directory() . '/inc/template-clean.php';
 
+// 主题后台设置
 require_once get_template_directory() . '/inc/template-admin.php';
+
+// 商城公共方法
+require_once get_template_directory() . '/inc/template-shop.php';
