@@ -10,9 +10,70 @@ class Capalot_Admin
 
   public function __construct()
   {
+
     add_action('admin_menu', array($this, 'admin_menu'));
+    add_filter('manage_users_columns', array($this, 'custom_user_columns'));
+    add_action('manage_users_custom_column', array($this, 'output_user_columns'), 10, 3);
   }
 
+  /**
+   * 自定义用户列表页面显示信息
+   */
+  public function custom_user_columns($columns)
+  {
+
+    unset($columns['posts']);
+    unset($columns['role']);
+
+    $columns['uid']             = 'UID';
+    $columns['vip_type']        = '会员类型';
+    $columns['capalot_balance'] = '余额';
+    $columns['registered']      = '注册时间';
+    $columns['last_login']      = '最近登录';
+    $columns['user_status']     = '账号状态';
+    $columns['user_bind_ref']   = '推荐人';
+    return $columns;
+  }
+
+  public function output_user_columns($var, $column_name, $user_id)
+  {
+
+    switch ($column_name) {
+      case "uid":
+        return sprintf('<code>%s</code>', $user_id);
+        break;
+      case "cao_balance":
+        $balance = (int)get_user_meta($user_id, 'cao_balance', true);
+        return sprintf('<b>%s</b>', $balance);
+        break;
+      case "vip_type":
+        return sprintf('<code class="vip_badge %s">%s</code>','foo', 'bar');
+        break;
+      case "registered":
+        $user = get_userdata($user_id);
+        return sprintf('%s<br><small style="display:block;color: green;">IP：%s</small>', $user->user_registered, $user->user_ip);
+        break;
+      case "last_login":
+        $session = get_user_meta($user_id, 'session_tokens', true);
+        if (!empty($session)) {
+          $session = end($session);
+          return sprintf('%s<br><small style="display:block;color: green;">IP：%s</small>', get_date_from_gmt($session['login']), $session['ip']);
+        } else {
+          return '';
+        }
+        break;
+      case "user_status":
+        $retVal = (empty(get_user_meta($user_id, 'cao_banned', true))) ? '<span style="color: green;">正常</span>' : '<span style="color: red;">封禁</span>';
+        return $retVal;
+        break;
+      // TODO: 推荐人
+    }
+  }
+
+
+  /**
+   * 添加商城管理菜单
+   */
   public function admin_menu()
   {
 
@@ -49,14 +110,13 @@ class Capalot_Admin
       $menu_slug . '-order',
       array($this, 'admin_page_order')
     );
-
   }
 
   /**
    * 加载页面
    * @param string $name 页面名称
    */
-  public function load_page($name) 
+  public function load_page($name)
   {
     $pages_dir = get_template_directory() . '/admin/pages';
 
@@ -79,5 +139,4 @@ class Capalot_Admin
   {
     $this->load_page('order');
   }
-
 }

@@ -29,6 +29,7 @@ if (!class_exists('CSF')) {
     '/options/admin-options.php', //后台设置
     '/options/metabox-options.php', //文章高级设置
     '/options/shortcode-options.php', //简码设置
+    '/options/profile-options.php', //用户设置
   );
 
 
