@@ -2,9 +2,6 @@
 
 defined('ABSPATH') || exit;
 
-if (!is_admin())
-  exit;
-
 if (!class_exists('CSF'))
   exit;
 
