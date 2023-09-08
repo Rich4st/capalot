@@ -1,3 +1,5 @@
+<?php get_header() ?>
+
 <div>
   <div>
     <?php the_content(); ?>

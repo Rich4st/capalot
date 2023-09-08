@@ -7,3 +7,6 @@
   <?php wp_head(); ?>
 </head>
 <body>
+  <div class="bg-black text-white h-12">
+    header area
+  </div>
