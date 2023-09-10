@@ -65,3 +65,6 @@ require_once get_template_directory() . '/inc/template-admin.php';
 
 // 商城公共方法
 require_once get_template_directory() . '/inc/template-shop.php';
+
+// 主题功能标签
+require_once get_template_directory() . '/inc/template-tags.php';

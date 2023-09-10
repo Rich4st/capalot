@@ -16,9 +16,13 @@ function enqueue_custom_assets()
   remove_action('wp_enqueue_scripts', 'wp_enqueue_global_styles');
   remove_action('wp_footer', 'wp_enqueue_global_styles', 1);
 
+  // jquery
+  wp_deregister_script('jquery');
+  wp_enqueue_script('jquery', get_template_directory_uri() . '/assets/js/jquery.min.js', array(), '3.6.0', false);
 
   // tailwindcss
   wp_enqueue_style('tailwind', get_template_directory_uri() . '/assets/css/tailwind.css', array(), '0.1.0');
+  wp_enqueue_script('app', get_template_directory_uri() . '/assets/js/app.js', array(), '0.1.0');
 }
 
 // 队列加载JS和CSS文件

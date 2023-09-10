@@ -18,10 +18,9 @@ $post_data = new WP_Query($query_args);
 
 
 <div class="max-w-7xl mx-auto">
-  <?php var_dump($args) ?>
   <h2 class="text-3xl font-bold text-center"><?php echo $title; ?></h2>
   <p class="text-center text-gray-500"><?php echo $desc; ?></p>
-  <ul class="grid grid-cols-1 md:grid-cols-4 md:gap-8 my-8">
+  <ul class="post-wrap grid grid-cols-1 md:grid-cols-4 md:gap-8 my-8">
     <?php if ($post_data->have_posts()) :
       while ($post_data->have_posts()) : $post_data->the_post(); ?>
         <li class="p-10 shadow-[0_10px_20px_rgba(240,_46,_170,_0.7)]">
@@ -29,5 +28,10 @@ $post_data = new WP_Query($query_args);
         </li>
       <?php endwhile; ?>
     <?php endif; ?>
+    <?php wp_reset_postdata(); ?>
   </ul>
+
+  <?php if (!empty($args['is_pagination'])) : ?>
+    <?php Capalot_Pagination(); ?>
+  <?php endif; ?>
 </div>
