@@ -101,7 +101,6 @@ class Capalot_Admin
       array($this, 'admin_page_index')
     );
 
-
     add_submenu_page(
       $menu_slug,
       $menu_title . '-订单管理',
@@ -109,6 +108,69 @@ class Capalot_Admin
       $menu_role,
       $menu_slug . '-order',
       array($this, 'admin_page_order')
+    );
+
+    add_submenu_page(
+      $menu_slug,
+      $menu_title . '-卡券管理',
+      '卡券管理',
+      $menu_role,
+      $menu_slug . '-cdk',
+      array($this, 'admin_page_cdk')
+    );
+
+    add_submenu_page(
+      $menu_slug,
+      $menu_title . '-推广中心',
+      '推广中心',
+      $menu_role,
+      $menu_slug . '-affiliate',
+      array($this, 'admin_page_aff')
+    );
+
+    add_submenu_page(
+      $menu_slug,
+      $menu_title . '-下载日志',
+      '下载日志',
+      $menu_role,
+      $menu_slug . '-download',
+      array($this, 'admin_page_download')
+    );
+
+    add_submenu_page(
+      $menu_slug,
+      $menu_title . '-工单管理',
+      '工单管理',
+      $menu_role,
+      $menu_slug . '-ticket',
+      array($this, 'admin_page_ticket')
+    );
+
+    add_submenu_page(
+      $menu_slug,
+      $menu_title . '-后台充值',
+      '后台充值',
+      $menu_role,
+      $menu_slug . '-affiliate',
+      array($this, 'admin_page_pay')
+    );
+
+    add_submenu_page(
+      $menu_slug,
+      $menu_title . '-批量修改',
+      '批量修改',
+      $menu_role,
+      $menu_slug . '-affiliate',
+      array($this, 'admin_page_modify')
+    );
+
+    add_submenu_page(
+      $menu_slug,
+      $menu_title . '-数据清理',
+      '数据清理',
+      $menu_role,
+      $menu_slug . '-affiliate',
+      array($this, 'admin_page_clean')
     );
   }
 
@@ -138,5 +200,47 @@ class Capalot_Admin
   public function admin_page_order()
   {
     $this->load_page('order');
+  }
+
+  //卡券管理页面
+  public function admin_page_cdk()
+  {
+    $this->load_page('cdk');
+  }
+
+  //推广中心页面
+  public function admin_page_aff()
+  {
+    $this->load_page('aff');
+  }
+
+  //下载日志页面
+  public function admin_page_download()
+  {
+    $this->load_page('download');
+  }
+
+  //工单管理页面
+  public function admin_page_ticket()
+  {
+    $this->load_page('ticket');
+  }
+
+  //后台充值页面
+  public function admin_page_pay()
+  {
+    $this->load_page('pay');
+  }
+
+  //批量修改页面
+  public function admin_page_modify()
+  {
+    $this->load_page('modify');
+  }
+
+  //数据清理页面
+  public function admin_page_clean()
+  {
+    $this->load_page('clean');
   }
 }
