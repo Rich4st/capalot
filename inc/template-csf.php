@@ -11,7 +11,7 @@ if (!function_exists('_capalot')) {
    *
    * @param string $option 设置项
    * @param string $default 默认值
-   * @return string
+   * @return string || array
    */
   function _capalot($option = '', $default = null)
   {

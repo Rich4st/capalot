@@ -42,8 +42,8 @@ class Capalot_Admin
       case "uid":
         return sprintf('<code>%s</code>', $user_id);
         break;
-      case "cao_balance":
-        $balance = (int)get_user_meta($user_id, 'cao_balance', true);
+      case "capalot_balance":
+        $balance = (int)get_user_meta($user_id, 'capalot_balance', true);
         return sprintf('<b>%s</b>', $balance);
         break;
       case "vip_type":
@@ -63,7 +63,7 @@ class Capalot_Admin
         }
         break;
       case "user_status":
-        $retVal = (empty(get_user_meta($user_id, 'cao_banned', true))) ? '<span style="color: green;">正常</span>' : '<span style="color: red;">封禁</span>';
+        $retVal = (empty(get_user_meta($user_id, 'capalot_banned', true))) ? '<span style="color: green;">正常</span>' : '<span style="color: red;">封禁</span>';
         return $retVal;
         break;
       // TODO: 推荐人

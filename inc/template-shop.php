@@ -48,3 +48,184 @@ function get_site_coin_name()
 {
     return esc_html(_capalot('site_coin_name', '金币'));
 }
+
+//获取网站会员开通套餐
+function get_site_vip_buy_options()
+{
+    $options = _capalot('site_vip_buy_options', array());
+    $buy_options = array();
+
+    if (empty($options) && !is_array($buy_options)) {
+        return $buy_options;
+    }
+
+    $site_vip_options = get_site_vip_options();
+
+    foreach ($options as $item) {
+
+        $title = (!empty($item['title'])) ? esc_html($item['title']) : false;
+        $day_num = (!empty($item['daynum'])) ? absint($item['daynum']) : false;
+        $coin_price = (!empty($item['price'])) ? abs(floatval($item['price'])) : false;
+        $type = $site_vip_options['vip']['key'];
+        $name = $site_vip_options['vip']['name'];
+        $desc = $site_vip_options['vip']['desc'];
+        $downnum = $site_vip_options['vip']['downnum'];
+
+        //永久套餐
+        if ($day_num == 9999) {
+            $type = $site_vip_options['boosvip']['key'];
+            $name = $site_vip_options['boosvip']['name'];
+            $desc = $site_vip_options['boosvip']['desc'];
+            $downnum = $site_vip_options['boosvip']['downnum'];
+        }
+
+        if ($title && $day_num && $coin_price) {
+            $buy_options[$day_num] = [
+                'type'           => $type,
+                'name'           => $name,
+                'desc'           => $desc,
+                'downnum'        => $downnum,
+                'buy_title'      => $title,
+                'day_num'        => $day_num,
+                'coin_price'     => $coin_price,
+            ];
+        }
+    }
+
+    return $buy_options;
+}
+
+//更新用户VIP数据信息
+function update_user_vip_data($user_id, $new_day = '0')
+{
+
+    $user_id = intval($user_id);
+    $vip_buy_options = get_site_vip_buy_options();
+    $new_day = absint($new_day);
+
+    if (empty($new_day)) {
+        $new_type = 'no';
+        $new_day = 0;
+    } else {
+        $new_type = $vip_buy_options[$new_day]['type'];
+        $new_day =  $vip_buy_options[$new_day]['day_num'];
+    }
+
+
+    // 获取用户当前VIP信息
+    $current_vip_data = get_user_vip_data($user_id);
+    $current_vip_type = $current_vip_data['type']; //当前类型
+    $current_end_date = $current_vip_data['end_date']; //
+
+    //降级vip
+    if ($current_end_date == '9999-09-09' && $new_type = 'vip') {
+        $current_end_date = wp_date('Y-m-d');
+    }
+
+    if ($current_vip_type == 'no') {
+        $current_end_date = wp_date('Y-m-d');
+    }
+
+    //计算时差秒数
+    $diff_seconds     = time() - current_time('timestamp');
+    $current_end_time = strtotime($current_end_date) + $diff_seconds;
+    $new_end_time     = $current_end_time + ($new_day * 24 * 60 * 60);
+    $new_vip_type     = $new_type;
+
+    if ($new_type == 'boosvip') {
+        $new_vip_type = 'vip';
+        $new_end_date = "9999-09-09"; //永久
+    } elseif ($new_type == 'no') {
+        $new_vip_type = 'no';
+        $new_end_date = wp_date('Y-m-d');
+    } else {
+        $new_vip_type = 'vip';
+        $new_end_date = wp_date('Y-m-d', $new_end_time); //新到期时间
+    }
+
+    // 更新数据
+    $update_type = update_user_meta($user_id, 'capalot_user_type', $new_vip_type);
+    $update_endtime = update_user_meta($user_id, 'capalot_vip_end_time', $new_end_date);
+
+    $status = ($update_type || $update_endtime) ? true : false;
+    return $status;
+}
+
+//获取用户VIP数据
+function get_user_vip_data($user_id)
+{
+    $vip_options = get_site_vip_options();
+    $user_type   = get_user_vip_type($user_id);
+    //今日可下载次数
+    $downnum_total = $vip_options[$user_type]['downnum'];
+    //今日已下载次数
+    $downnum_used = ZB_Down::get_user_today_down_num($user_id);
+    $downnum_not  = $downnum_total - $downnum_used;
+    $downnum_not = ($downnum_not >= 0) ? $downnum_not : 0;
+
+    $data         = [
+        'name'     => $vip_options[$user_type]['name'],
+        'type'     => $vip_options[$user_type]['key'],
+        'end_date' => get_user_vip_end_date($user_id),
+        'downnums' => ['total' => $downnum_total, 'used' => $downnum_used, 'not' => $downnum_not],
+    ];
+    return $data;
+}
+
+//获取用户余额
+function get_user_coin_balance($user_id)
+{
+    $current_balance = get_user_meta($user_id, 'capalot_balance', true);
+
+    // 如果当前余额未设置，默认为0
+    if (empty($current_balance)) {
+        $current_balance = 0;
+    }
+
+    return abs($current_balance);
+}
+
+//更新用户余额 balance [+ 充值 - 消费扣减]
+function change_user_coin_balance($user_id, $amount, $change_type)
+{
+    // 检查变更类型是否有效
+    if (!in_array($change_type, array('+', '-'))) {
+        return false;
+    }
+    $amount = abs($amount);
+    // 获取当前余额和余额变更记录
+    $current_balance = get_user_coin_balance($user_id);
+    $balance_before = $current_balance;
+
+    $balance_log = get_user_meta($user_id, 'balance_log', true);
+
+    if (empty($balance_log) || !is_array($balance_log)) {
+        $balance_log = array();
+    }
+    // 根据变更类型更新余额和余额变更记录
+    if ($change_type == '+') {
+        $current_balance += $amount;
+        $event = '+';
+    } else {
+        if ($current_balance < $amount) {
+            // 余额不足
+            return false;
+        }
+
+        $current_balance -= $amount;
+        $event = '-';
+    }
+    $new_log_item = array(
+        'date' => wp_date('Y-m-d H:i:s'),
+        'event' => $event,
+        'amount' => $amount,
+        'balance_before' => $balance_before,
+        'balance_after' => $current_balance
+    );
+
+    array_unshift($balance_log, $new_log_item);
+    // 更新用户余额和余额变更记录
+    update_user_meta($user_id, 'capalot_balance', $current_balance);
+    update_user_meta($user_id, 'balance_log', $balance_log);
+    return true;
+}

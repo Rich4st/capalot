@@ -27,7 +27,7 @@ CSF::createSection($prefix, array(
     ),
 
     array(
-      'id'      => 'cao_ref_from',
+      'id'      => 'caaplot_ref_from',
       'type'    => 'text',
       'title'   => '推荐人ID',
       'default' => '',
