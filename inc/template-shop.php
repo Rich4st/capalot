@@ -155,7 +155,7 @@ function update_user_vip_data($user_id, $new_day = '0')
 function get_user_vip_type($user_id)
 {
     $vip_options = get_site_vip_options();
-    $user_type   = get_user_meta($user_id, 'cao_user_type', true);
+    $user_type   = get_user_meta($user_id, 'capalot_user_type', true);
     if (empty($user_type) || !isset($vip_options[$user_type])) {
         return $vip_options['no']['key'];
     }
@@ -182,12 +182,12 @@ function get_user_vip_type($user_id)
 //获取用户到期时间
 function get_user_vip_end_date($user_id) {
     $vip_options  = get_site_vip_options();
-    $user_type = get_user_meta($user_id, 'cao_user_type', true);
+    $user_type = get_user_meta($user_id, 'capalot_user_type', true);
     $current_date = wp_date('Y-m-d');
     if (empty($user_type) || !isset($vip_options[$user_type])) {
         return $current_date;
     }
-    $vip_end_date = get_user_meta($user_id, 'cao_vip_end_time', true);
+    $vip_end_date = get_user_meta($user_id, 'capalot_vip_end_time', true);
     if (strtotime($vip_end_date)) {
         return $vip_end_date;
     }

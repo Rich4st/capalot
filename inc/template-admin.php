@@ -47,7 +47,8 @@ class Capalot_Admin
         return sprintf('<b>%s</b>', $balance);
         break;
       case "vip_type":
-        return sprintf('<code class="vip_badge %s">%s</code>','foo', 'bar');
+        $vip_data = get_user_vip_data($user_id);
+        return sprintf('<code class="vip_badge %s">%s</code>', $vip_data['type'], $vip_data['name']);
         break;
       case "registered":
         $user = get_userdata($user_id);
@@ -66,7 +67,7 @@ class Capalot_Admin
         $retVal = (empty(get_user_meta($user_id, 'capalot_banned', true))) ? '<span style="color: green;">正常</span>' : '<span style="color: red;">封禁</span>';
         return $retVal;
         break;
-      // TODO: 推荐人
+        // TODO: 推荐人
     }
   }
 

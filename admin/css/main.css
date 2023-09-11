@@ -1,0 +1,28 @@
+.vip_badge.no{
+  background: rgb(203 203 203 / 50%);
+  color: #607D8B;
+}
+.vip_badge.vip{
+  background: rgb(119 219 123 / 50%);
+  color: #4CAF50;
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  border-radius: 4px;
+}
+
+.vip_badge.boosvip{
+  background: rgb(255 235 59 / 50%);
+  color: #FF5722;
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  border-radius: 4px;
+}
+.vip_badge.vip::before,
+.vip_badge.boosvip::before{
+  content: '\f197';
+  font-family: dashicons;
+  font-size: 20px;
+  display: block;
+}
