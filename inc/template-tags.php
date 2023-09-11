@@ -166,3 +166,16 @@ function get_response_param($key, $default = '', $method = 'post')
       break;
   }
 }
+
+/**
+ * 获取当前页面URL
+ * @Author Dadong2g
+ * @date   2022-11-27
+ * @return [type]
+ */
+if (!function_exists('get_current_url')) {
+  function get_current_url() {
+      $current_url = home_url(add_query_arg(array()));
+      return esc_url($current_url);
+  }
+}

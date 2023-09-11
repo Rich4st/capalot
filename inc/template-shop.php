@@ -151,6 +151,50 @@ function update_user_vip_data($user_id, $new_day = '0')
     return $status;
 }
 
+//获取当前用户VIP类型
+function get_user_vip_type($user_id)
+{
+    $vip_options = get_site_vip_options();
+    $user_type   = get_user_meta($user_id, 'cao_user_type', true);
+    if (empty($user_type) || !isset($vip_options[$user_type])) {
+        return $vip_options['no']['key'];
+    }
+    $current_date = wp_date('Y-m-d');
+    $vip_end_date = get_user_vip_end_date($user_id);
+    $end_time     = strtotime($vip_end_date);
+    $current_time = strtotime($current_date);
+
+    if (!$end_time) {
+        $end_time = $current_time;
+    }
+
+    if ($user_type === 'vip' && $vip_end_date === '9999-09-09') {
+        return $vip_options['boosvip']['key'];
+    }
+
+    if ($user_type === 'vip' && $end_time > $current_time) {
+        return $vip_options['vip']['key'];
+    }
+
+    return $vip_options['no']['key'];
+}
+
+//获取用户到期时间
+function get_user_vip_end_date($user_id) {
+    $vip_options  = get_site_vip_options();
+    $user_type = get_user_meta($user_id, 'cao_user_type', true);
+    $current_date = wp_date('Y-m-d');
+    if (empty($user_type) || !isset($vip_options[$user_type])) {
+        return $current_date;
+    }
+    $vip_end_date = get_user_meta($user_id, 'cao_vip_end_time', true);
+    if (strtotime($vip_end_date)) {
+        return $vip_end_date;
+    }
+    return $current_date;
+}
+
+
 //获取用户VIP数据
 function get_user_vip_data($user_id)
 {
@@ -158,16 +202,16 @@ function get_user_vip_data($user_id)
     $user_type   = get_user_vip_type($user_id);
     //今日可下载次数
     $downnum_total = $vip_options[$user_type]['downnum'];
-    //今日已下载次数
-    $downnum_used = ZB_Down::get_user_today_down_num($user_id);
-    $downnum_not  = $downnum_total - $downnum_used;
+    //TODO:今日已下载次数
+    // $downnum_used = ZB_Down::get_user_today_down_num($user_id);
+    $downnum_not  = $downnum_total - 0;
     $downnum_not = ($downnum_not >= 0) ? $downnum_not : 0;
 
     $data         = [
         'name'     => $vip_options[$user_type]['name'],
         'type'     => $vip_options[$user_type]['key'],
         'end_date' => get_user_vip_end_date($user_id),
-        'downnums' => ['total' => $downnum_total, 'used' => $downnum_used, 'not' => $downnum_not],
+        'downnums' => ['total' => $downnum_total, 0, 'not' => $downnum_not],
     ];
     return $data;
 }
@@ -228,4 +272,51 @@ function change_user_coin_balance($user_id, $amount, $change_type)
     update_user_meta($user_id, 'capalot_balance', $current_balance);
     update_user_meta($user_id, 'balance_log', $balance_log);
     return true;
+}
+
+//是否开启评论
+function is_site_comments()
+{
+    return !empty(_capalot('is_site_comments', 1));
+}
+
+//获取用户VIP类型标志
+function zb_get_user_badge($user_id = null, $tag = 'a', $class = '')
+{
+    //颜色配置
+    $colors = [
+        'no'        => 'secondary',
+        'vip'     => 'success',
+        'boosvip' => 'warning',
+    ];
+    $data  = get_user_vip_data($user_id);
+
+
+    $color = $colors[$data['type']];
+    $name  = $data['name'];
+    $link  = get_uc_menu_link('vip');
+    // 构建HTML代码
+
+    if ($data['type'] != 'no') {
+        $badge_title   = $data['end_date'] . '到期';
+    } else {
+        $badge_title   = '';
+    }
+
+    $badge_class   = "badge bg-$color text-$color bg-opacity-10 $class";
+    $badge_content = "<i class=\"far fa-gem me-1\"></i>$name";
+    if ($tag == 'a') {
+        return "<$tag title=\"$badge_title\" class=\"$badge_class\" href=\"$link\">$badge_content</$tag>";
+    } else {
+        return "<$tag title=\"$badge_title\" class=\"$badge_class\">$badge_content</$tag>";
+    }
+}
+
+// 菜单获取
+function get_uc_menu_link($menu_action = '') {
+    $prefix = '/user/';
+    if ($menu_action == 'logout') {
+        return esc_url(wp_logout_url(get_current_url()));
+    }
+    return esc_url(home_url($prefix . $menu_action));
 }

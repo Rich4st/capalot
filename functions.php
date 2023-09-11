@@ -68,3 +68,5 @@ require_once get_template_directory() . '/inc/template-shop.php';
 
 // 主题功能标签
 require_once get_template_directory() . '/inc/template-tags.php';
+
+require_once get_template_directory() . '/inc/template-walker.php';

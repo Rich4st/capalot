@@ -62,7 +62,7 @@ CSF::createSection($prefix, array(
   ),
 ));
 
-function _capalot_reply_hide_shortcode($atts, $content = '')
+function _capalot_reply_hide_shortcode($attrs, $content = '')
 {
 
   ob_start();
