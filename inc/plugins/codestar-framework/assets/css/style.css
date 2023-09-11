@@ -197,9 +197,9 @@
   box-shadow: none;
 }
 .csf-nav ul li .csf-arrow:after {
-  content: "\f054";
+  content: "\f345";
   display: inline-block;
-  font-family: "Font Awesome 5 Pro", "Font Awesome 5 Free", "FontAwesome";
+  font-family: dashicons;
   font-weight: 900;
   font-size: 9px;
   line-height: 1;
@@ -223,10 +223,7 @@
   padding: 12px 14px 12px 24px;
 }
 .csf-nav .csf-tab-icon {
-  width: 20px;
-  margin-right: 5px;
-  font-size: 13px;
-  text-align: center;
+  margin-right: 8px;
 }
 .csf-nav .csf-label-error {
   margin-left: 4px;
@@ -1136,10 +1133,10 @@
   float: right;
 }
 .csf-datepicker-wrapper .ui-datepicker-prev:before {
-  content: "\f053";
+  content: "\f345";
 }
 .csf-datepicker-wrapper .ui-datepicker-next:before {
-  content: "\f054";
+  content: "\f347";
 }
 .csf-datepicker-wrapper .ui-datepicker-prev-hover,
 .csf-datepicker-wrapper .ui-datepicker-next-hover {
