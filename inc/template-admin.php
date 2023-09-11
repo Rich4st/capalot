@@ -151,7 +151,7 @@ class Capalot_Admin
       $menu_title . '-后台充值',
       '后台充值',
       $menu_role,
-      $menu_slug . '-affiliate',
+      $menu_slug . '-pay',
       array($this, 'admin_page_pay')
     );
 
@@ -160,7 +160,7 @@ class Capalot_Admin
       $menu_title . '-批量修改',
       '批量修改',
       $menu_role,
-      $menu_slug . '-affiliate',
+      $menu_slug . '-modify',
       array($this, 'admin_page_modify')
     );
 
@@ -169,7 +169,7 @@ class Capalot_Admin
       $menu_title . '-数据清理',
       '数据清理',
       $menu_role,
-      $menu_slug . '-affiliate',
+      $menu_slug . '-clean',
       array($this, 'admin_page_clean')
     );
   }
