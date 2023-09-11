@@ -918,7 +918,7 @@ CSF::createSection($prefix, array(
         array(
           'id'     => 'no',
           'title'  => '默认普通用户',
-          'icon'   => 'fa fa-circle',
+          'icon'   => 'dashicons dashicons-admin-users',
           'fields' => array(
 
             array(
@@ -949,7 +949,7 @@ CSF::createSection($prefix, array(
         array(
           'id'     => 'vip',
           'title'  => '会员用户',
-          'icon'   => 'fa fa-circle',
+          'icon'   => 'dashicons dashicons-admin-users',
           'fields' => array(
             array(
               'id'      => 'vip_name',
@@ -976,7 +976,7 @@ CSF::createSection($prefix, array(
         array(
           'id'     => 'boosvip',
           'title'  => '永久会员用户',
-          'icon'   => 'fa fa-circle',
+          'icon'   => 'dashicons dashicons-admin-users',
           'fields' => array(
             array(
               'id'      => 'boosvip_name',

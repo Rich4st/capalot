@@ -117,32 +117,52 @@ function infinite_scroll_button($type = 'click')
 
 function capalot_load_more()
 {
-    $ajaxposts = new WP_Query([
-        'ignore_sticky_posts' => false,
-        'post_status' => 'publish',
-        'paged' => $_POST['paged'],
-    ]);
+  $ajaxposts = new WP_Query([
+    'ignore_sticky_posts' => false,
+    'post_status' => 'publish',
+    'paged' => $_POST['paged'],
+  ]);
 
+  $response = '';
+  $max_pages = $ajaxposts->max_num_pages;
+
+  if ($ajaxposts->have_posts()) {
+    while ($ajaxposts->have_posts()) : $ajaxposts->the_post();
+      $response .= '<li class="p-10 shadow-[0_10px_20px_rgba(240,_46,_170,_0.7)]">';
+      $response .= '<a href="' . get_the_permalink() . '">' . get_the_title() . '</a>';
+      $response .= '</li>';
+    endwhile;
+  } else {
     $response = '';
-    $max_pages = $ajaxposts->max_num_pages;
+  }
 
-    if ($ajaxposts->have_posts()) {
-        while ($ajaxposts->have_posts()) : $ajaxposts->the_post();
-            $response .= '<li class="p-10 shadow-[0_10px_20px_rgba(240,_46,_170,_0.7)]">';
-            $response .= '<a href="' . get_the_permalink() . '">' . get_the_title() . '</a>';
-            $response .= '</li>';
-        endwhile;
-    } else {
-        $response = '';
-    }
+  $result = [
+    'max' => $max_pages,
+    'html' => $response,
+  ];
 
-    $result = [
-        'max' => $max_pages,
-        'html' => $response,
-    ];
-
-    echo json_encode($result);
-    exit;
+  echo json_encode($result);
+  exit;
 }
 add_action('wp_ajax_capalot_load_more', 'capalot_load_more');
 
+/**
+ * 获取响应参数
+ */
+function get_response_param($key, $default = '', $method = 'post')
+{
+  switch ($method) {
+    case 'post':
+      return (isset($_POST[$key])) ? $_POST[$key] : $default;
+      break;
+    case 'get':
+      return (isset($_GET[$key])) ? $_GET[$key] : $default;
+      break;
+    case 'request':
+      return (isset($_REQUEST[$key])) ? $_REQUEST[$key] : $default;
+      break;
+    default:
+      return null;
+      break;
+  }
+}
