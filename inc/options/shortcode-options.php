@@ -6,8 +6,57 @@ if (!class_exists('CSF')) {
   exit;
 }
 
+
+
 $prefix = _OPTIONS_PREFIX . '-shortcode';
 
+/**
+ * 付费查看内容组件
+ */
+CSF::createShortcoder($prefix . '-pay', array(
+  'button_title'   => '添加付费隐藏内容',
+  'select_title'   => '选择一个简码组件',
+  'insert_title'   => '插入到文章',
+  'show_in_editor' => true,
+  'gutenberg'      => array(
+    'title'       => '添加隐藏内容',
+    'description' => '添加隐藏内容',
+    'icon'        => 'screenoptions',
+    'category'    => 'widgets',
+    'keywords'    => array('shortcode', 'capalot', 'insert', 'hide'),
+    'placeholder' => '在此处编写简码...',
+  ),
+));
+CSF::createSection($prefix . '-pay', array(
+  'title'     => '付费可见内容[capalot-hide]',
+  'view'      => 'normal',
+  'shortcode' => 'capalot-hide',
+  'fields'    => array(
+    array(
+      'id'    => 'content',
+      'type'  => 'wp_editor',
+      'title' => '',
+      'desc'  => '[capalot-hide]隐藏部分付费内容[/capalot-hide]查看价格和权限设置等和付费下载相同',
+    ),
+
+  ),
+));
+function _capalot_hide($atts, $content = 'foo')
+{
+  if (!is_site_shop())
+    return false;
+
+  // 加载并缓存模板内容
+  ob_start();
+  get_template_part('template-parts/shortcode/capalot-hide', '', $content);
+  $html = ob_get_clean();
+  return do_shortcode($html);
+}
+add_shortcode('capalot-hide', '_capalot_hide');
+
+/**
+ * 其他内容组件
+ */
 CSF::createShortcoder($prefix, array(
   'button_title' => '添加内容组件',
   'select_title' => '选择一个简码组件',
@@ -29,17 +78,18 @@ CSF::createSection($prefix, array(
   'view'      => 'normal',
   'shortcode' => 'capalot-login-hide',
   'fields'    => array(
-      array(
-          'id'    => 'content',
-          'type'  => 'wp_editor',
-          'title' => '',
-          'desc'  => '[capalot-login-hide]隐藏部分登录后可见内容[/capalot-login-hide]',
-      ),
+    array(
+      'id'    => 'content',
+      'type'  => 'wp_editor',
+      'title' => '',
+      'desc'  => '[capalot-login-hide]隐藏部分登录后可见内容[/capalot-login-hide]',
+    ),
 
   ),
 ));
 
-function _capalot_login_hide_shortcode($atts, $content = '') {
+function _capalot_login_hide_shortcode($atts, $content = '')
+{
   ob_start();
   get_template_part('template-parts/shortcode/capalot-login-hide', '', $content);
   $html = ob_get_clean();
@@ -62,7 +112,7 @@ CSF::createSection($prefix, array(
   ),
 ));
 
-function _capalot_reply_hide_shortcode($attrs, $content = '')
+function _capalot_reply_hide_shortcode($atts, $content = '')
 {
 
   ob_start();

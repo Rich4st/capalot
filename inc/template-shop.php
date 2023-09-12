@@ -320,3 +320,106 @@ function get_uc_menu_link($menu_action = '') {
     }
     return esc_url(home_url($prefix . $menu_action));
 }
+
+//是否开启商城功能
+function is_site_shop() {
+    return _capalot('site_shop_mode', 'all') !== 'close';
+}
+
+//获取文章价格权限信息
+function get_post_pay_data($post_id) {
+    $price = get_post_meta($post_id, 'cao_price', true);
+    $vip_rate = get_post_meta($post_id, 'cao_vip_rate', true);
+    $boosvip_free = get_post_meta($post_id, 'cao_is_boosvip', true);
+    $disable_no_buy = get_post_meta($post_id, 'cao_close_novip_pay', true);
+    $sales_count = get_post_meta($post_id, 'cao_paynum', true);
+
+    if (!is_numeric($price)) {
+        $price = 0;
+    }
+
+    if (!is_numeric($vip_rate)) {
+        $vip_rate = 1;
+    }elseif ($vip_rate < 0) {
+        $vip_rate = 0;
+    } elseif ($vip_rate > 1) {
+        $vip_rate = 1;
+    } else {
+        $vip_rate = floor($vip_rate * 100) / 100;
+    }
+
+    $data = [
+        'coin_price' => abs(floatval($price)),
+        'vip_rate' => $vip_rate,
+        'boosvip_free' => empty($boosvip_free) ? 0 : 1,
+        'disable_no_buy' => empty($disable_no_buy) ? 0 : 1,
+        'sales_count' => absint($sales_count),
+    ];
+    return $data;
+}
+
+//获取文章价格信息 单位：站内币 0免费 false不可购买
+function get_post_price_data($post_id) {
+    $data = get_post_pay_data($post_id);
+    $post_price = $data['coin_price'];
+
+    $coin_price = floatval($data['coin_price']);
+
+    $prices = [
+        'default' => $coin_price, //原价
+        'no' => $coin_price,
+        'vip' => $coin_price,
+        'boosvip' => $coin_price,
+    ];
+
+    if ($data['disable_no_buy']) {
+        $prices['no'] = false;
+    }
+
+    if (isset($data['vip_rate'])) {
+        $prices['vip'] = $coin_price * $data['vip_rate'];
+        $prices['boosvip'] = $coin_price * $data['vip_rate'];
+    }
+
+    if ($data['boosvip_free']) {
+        $prices['boosvip'] = 0;
+    }
+
+    return (array)$prices;
+}
+
+//根据用户id获取用户购买文章实际价格
+function get_user_pay_post_price($user_id, $post_id) {
+    $post_prices = get_post_price_data($post_id);
+    $user_type   = get_user_vip_type($user_id);
+    return $post_prices[$user_type];
+}
+
+//获取用户支付状态
+function get_user_pay_post_status($user_id, $post_id) {
+
+    $cache_key = 'pay_post_status_' . $user_id . '_' . $post_id;
+    // wp_cache_set($cache_key, 0);
+    $pay_status = wp_cache_get($cache_key);
+
+    if (false === $pay_status) {
+        //查询订单状态
+        $pay_status = Capalot_Shop::get_pay_post_status($user_id, $post_id);
+        wp_cache_set($cache_key, $pay_status);
+    }
+
+    if ($pay_status == true) {
+        return 1;
+    }
+
+    //判断价格权限方式
+    // $price = get_user_pay_post_price($user_id, $post_id);
+    // if ($price === false) {
+    //     return false;
+    // }elseif ($price == 0) {
+    //     return true;
+    // }else{
+    //     return false;
+    // }
+
+}
