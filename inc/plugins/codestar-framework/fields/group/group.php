@@ -47,9 +47,9 @@ if ( ! class_exists( 'CSF_Field_group' ) ) {
         echo '<div class="csf-cloneable-item csf-cloneable-hidden" data-depend-id="'. esc_attr( $this->field['id'] ) .'">';
 
           echo '<div class="csf-cloneable-helper">';
-          echo '<i class="csf-cloneable-sort fas fa-arrows-alt"></i>';
-          echo '<i class="csf-cloneable-clone far fa-clone"></i>';
-          echo '<i class="csf-cloneable-remove csf-confirm fas fa-times" data-confirm="'. esc_html__( 'Are you sure to delete this item?', 'csf' ) .'"></i>';
+          echo '<i class="csf-cloneable-sort dashicons dashicons-move"></i>';
+          echo '<i class="csf-cloneable-clone dashicons dashicons-controls-repeat"></i>';
+          echo '<i class="csf-cloneable-remove csf-confirm dashicons dashicons-no" data-confirm="'. esc_html__( 'Are you sure to delete this item?', 'csf' ) .'"></i>';
           echo '</div>';
 
           echo '<h4 class="csf-cloneable-title">';
@@ -102,9 +102,9 @@ if ( ! class_exists( 'CSF_Field_group' ) ) {
             echo '<div class="csf-cloneable-item">';
 
               echo '<div class="csf-cloneable-helper">';
-              echo '<i class="csf-cloneable-sort fas fa-arrows-alt"></i>';
-              echo '<i class="csf-cloneable-clone far fa-clone"></i>';
-              echo '<i class="csf-cloneable-remove csf-confirm fas fa-times" data-confirm="'. esc_html__( 'Are you sure to delete this item?', 'csf' ) .'"></i>';
+              echo '<i class="csf-cloneable-sort dashicons dashicons-move"></i>';
+              echo '<i class="csf-cloneable-clone dashicons dashicons-controls-repeat"></i>';
+              echo '<i class="csf-cloneable-remove csf-confirm dashicons dashicons-no" data-confirm="'. esc_html__( 'Are you sure to delete this item?', 'csf' ) .'"></i>';
               echo '</div>';
 
               echo '<h4 class="csf-cloneable-title">';

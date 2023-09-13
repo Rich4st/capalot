@@ -898,7 +898,7 @@ CSF::createSection($prefix, array(
       'id'      => 'capalot_is_boosvip',
       'type'    => 'switcher',
       'title'   => '永久会员免费',
-      'desc'   => '勾选后永久会员免费，其他会员按折扣或者原价购买',
+      'desc'   => '开启后永久会员免费，其他会员按折扣或者原价购买',
       'default' => false,
     ),
 
@@ -922,7 +922,7 @@ CSF::createSection($prefix, array(
     ),
 
     array(
-      'id'          => 'site_default_sold_quantity',
+      'id'          => 'capalot_paynum',
       'type'        => 'number',
       'title'       => '已售数量',
       'desc'        => '可自定义修改数字',

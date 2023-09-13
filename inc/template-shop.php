@@ -328,11 +328,11 @@ function is_site_shop() {
 
 //获取文章价格权限信息
 function get_post_pay_data($post_id) {
-    $price = get_post_meta($post_id, 'cao_price', true);
-    $vip_rate = get_post_meta($post_id, 'cao_vip_rate', true);
-    $boosvip_free = get_post_meta($post_id, 'cao_is_boosvip', true);
-    $disable_no_buy = get_post_meta($post_id, 'cao_close_novip_pay', true);
-    $sales_count = get_post_meta($post_id, 'cao_paynum', true);
+    $price = get_post_meta($post_id, 'capalot_price', true);
+    $vip_rate = get_post_meta($post_id, 'capalot_vip_rate', true);
+    $boosvip_free = get_post_meta($post_id, 'capalot_is_boosvip', true);
+    $disable_no_buy = get_post_meta($post_id, 'capalot_close_novip_pay', true);
+    $sales_count = get_post_meta($post_id, 'capalot_sold_quantity', true);
 
     if (!is_numeric($price)) {
         $price = 0;

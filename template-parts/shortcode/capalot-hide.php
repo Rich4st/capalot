@@ -13,10 +13,6 @@ $is_user_login_get_status = $user_pay_post_status === '0' && empty($user_id);
 
 <div class="ri-hide-warp">
   <?php if ($user_pay_post_status && !$is_user_login_get_status) : ?>
-    <h1>
-      <?php echo $user_pay_post_status; ?>
-      ---------->11111111111111111111111111111111111111
-    </h1>
     <span class="hide-msg"><i class="fas fa-unlock me-1"></i><?php echo '已获得查看权限'; ?></span>
     <?php echo $content; ?>
   <?php else : ?>

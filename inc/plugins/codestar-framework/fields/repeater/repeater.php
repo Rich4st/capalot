@@ -19,7 +19,7 @@ if ( ! class_exists( 'CSF_Field_repeater' ) ) {
       $args = wp_parse_args( $this->field, array(
         'max'          => 0,
         'min'          => 0,
-        'button_title' => '<i class="fas fa-plus-circle"></i>',
+        'button_title' => '<i class="dashicons dashicons-plus"></i>',
       ) );
 
       if ( preg_match( '/'. preg_quote( '['. $this->field['id'] .']' ) .'/', $this->unique ) ) {
@@ -43,9 +43,9 @@ if ( ! class_exists( 'CSF_Field_repeater' ) ) {
         echo '</div>';
         echo '<div class="csf-repeater-helper">';
         echo '<div class="csf-repeater-helper-inner">';
-        echo '<i class="csf-repeater-sort fas fa-arrows-alt"></i>';
-        echo '<i class="csf-repeater-clone far fa-clone"></i>';
-        echo '<i class="csf-repeater-remove csf-confirm fas fa-times" data-confirm="'. esc_html__( 'Are you sure to delete this item?', 'csf' ) .'"></i>';
+        echo '<i class="csf-repeater-sort dashicons dashicons-move"></i>';
+        echo '<i class="csf-repeater-clone dashicons dashicons-controls-repeat"></i>';
+        echo '<i class="csf-repeater-remove csf-confirm dashicons dashicons-no" data-confirm="'. esc_html__( 'Are you sure to delete this item?', 'csf' ) .'"></i>';
         echo '</div>';
         echo '</div>';
         echo '</div>';
@@ -71,9 +71,9 @@ if ( ! class_exists( 'CSF_Field_repeater' ) ) {
             echo '</div>';
             echo '<div class="csf-repeater-helper">';
             echo '<div class="csf-repeater-helper-inner">';
-            echo '<i class="csf-repeater-sort fas fa-arrows-alt"></i>';
-            echo '<i class="csf-repeater-clone far fa-clone"></i>';
-            echo '<i class="csf-repeater-remove csf-confirm fas fa-times" data-confirm="'. esc_html__( 'Are you sure to delete this item?', 'csf' ) .'"></i>';
+            echo '<i class="csf-repeater-sort dashicons dashicons-move"></i>';
+            echo '<i class="csf-repeater-clone dashicons dashicons-controls-repeat"></i>';
+            echo '<i class="csf-repeater-remove csf-confirm dashicons dashicons-no" data-confirm="'. esc_html__( 'Are you sure to delete this item?', 'csf' ) .'"></i>';
             echo '</div>';
             echo '</div>';
             echo '</div>';
