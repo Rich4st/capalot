@@ -361,7 +361,6 @@ function get_post_pay_data($post_id) {
 //获取文章价格信息 单位：站内币 0免费 false不可购买
 function get_post_price_data($post_id) {
     $data = get_post_pay_data($post_id);
-    $post_price = $data['coin_price'];
 
     $coin_price = floatval($data['coin_price']);
 
@@ -413,13 +412,13 @@ function get_user_pay_post_status($user_id, $post_id) {
     }
 
     //判断价格权限方式
-    // $price = get_user_pay_post_price($user_id, $post_id);
-    // if ($price === false) {
-    //     return false;
-    // }elseif ($price == 0) {
-    //     return true;
-    // }else{
-    //     return false;
-    // }
+    $price = get_user_pay_post_price($user_id, $post_id);
+    if ($price === false) {
+        return false;
+    }elseif ($price == 0) {
+        return true;
+    }else{
+        return false;
+    }
 
 }
