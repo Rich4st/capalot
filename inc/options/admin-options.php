@@ -866,13 +866,59 @@ CSF::createSection($prefix, array(
     ),
 
     array(
-      'id' => 'site_default_price',
+      'id' => 'capalot_price',
       'type' => 'number',
-      'title' => '默认价格',
+      'title' => '价格',
       'desc' => '设置默认价格,免费请填写0',
       'output' => '.heading',
       'output_mode' => 'width',
       'default' => 0.1,
+    ),
+
+    array(
+      'id' => 'capalot_vip_rate',
+      'type' => 'number',
+      'title' => '会员折扣',
+      'desc' => '0.N 等于N折;1 等于不打折;0 等于会员免费',
+      'output' => '.heading',
+      'unit' => '.N折',
+      'output_mode' => 'width',
+      'default' => 0.1,
+    ),
+
+    array(
+      'id' => 'capalot_close_novip_pay',
+      'type' => 'switcher',
+      'title' => '关闭非会员购买',
+      'desc' => '开启后，非会员无法购买资源',
+      'default' => false,
+    ),
+
+    array(
+      'id'      => 'capalot_is_boosvip',
+      'type'    => 'switcher',
+      'title'   => '永久会员免费',
+      'desc'   => '勾选后永久会员免费，其他会员按折扣或者原价购买',
+      'default' => false,
+    ),
+
+    array(
+      'id'          => 'capalot_expire_day',
+      'type'        => 'number',
+      'title'       => '购买有效期天数',
+      'desc'        => '0表示无限期;N天后失效需要重新购买',
+      'unit'        => '天',
+      'output'      => '.heading',
+      'output_mode' => 'width',
+      'default'     => 0,
+    ),
+
+    array(
+      'id'      => 'capalot_status',
+      'type'    => 'switcher',
+      'title'   => '启用付费下载模块',
+      'desc'   => '开启后可设置付费下载专有内容',
+      'default' => false,
     ),
 
     array(
