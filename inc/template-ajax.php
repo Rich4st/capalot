@@ -104,9 +104,7 @@ class Capalot_Ajax
     wp_send_json([
       'status' => 1,
       'msg' => '获取成功',
-      'data' => [
-        'body' => $body,
-      ],
+      'data' => $body
     ]);
   }
 
@@ -197,8 +195,6 @@ class Capalot_Ajax
         'status' => 0,
         'msg' => '订单金额错误',
       ]);
-
-    var_dump($order_data);
 
     // 订单入库
     if (!Capalot_Shop::add_order($order_data))

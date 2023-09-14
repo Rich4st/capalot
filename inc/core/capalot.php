@@ -22,11 +22,11 @@ class Capalot_Shop
 
     $order = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table_name WHERE user_id = %d AND post_id = %d", $user_id, $post_id));
 
-    if ($order->pay_status === 1) {
+    if ($order == null || $order->pay_status == 0) {
+      return false;
+    } else {
       return true;
     }
-
-    return false;
   }
 
   /**

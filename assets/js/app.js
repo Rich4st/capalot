@@ -38,18 +38,23 @@ let ca = {
 
   // 对话框
   popup: function ({
-    msg,
+    content,
+    html,
+    title,
     time,
     callback,
+    icon = '', // success | info | error
   }) {
 
     Swal.fire({
-      html: msg.body,
-      showConfirmButton: false
+      title,
+      icon,
+      html,
+      showCloseButton: true,
+      showConfirmButton: false,
     });
 
   },
-
 
   // 付款
   pay_action: function (e) {
@@ -75,15 +80,14 @@ let ca = {
 
       ca.ajax({
         data: o,
-        success: (e) => {
-          console.log(e);
-        },
-        complete: () => {
-          console.log('完成请求');
+        complete: ({ responseJSON }) => {
+          const { status, msg } = responseJSON;
+          status === 1
+            ? ca.popup({ title: msg, icon: 'success' })
+            : ca.popup({ title: msg, icon: 'error' })
         }
       })
 
-      console.log(o);
     });
   },
 
@@ -94,7 +98,9 @@ let ca = {
     ca.ajax({
       data: e,
       success: ({ status, msg, data }) => {
-        status == 1 ? ca.popup({ msg: data }) : console.log('2222', e, t);
+        status == 1
+          ? ca.popup({ html: data })
+          : ca.popup({ content: msg });
       }
     });
   },
