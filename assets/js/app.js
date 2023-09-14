@@ -4,14 +4,15 @@ let ca = {
 
   init: function () {
     ca.pay_action();
+    ca.pagination();
   },
 
   /**
    * ajax请求
    * @param {object} data 请求数据
-   * @param {function} beforeSend 发送请求前
-   * @param {function} success 请求成功
-   * @param {function} complete 请求完成
+   * @param {function} beforeSend 发送请求前回调
+   * @param {function} success 请求成功回调
+   * @param {function} complete 请求完成回调
    */
   ajax: function ({
     data,
@@ -35,6 +36,7 @@ let ca = {
     });
   },
 
+  // 对话框
   popup: function ({
     msg,
     time,
@@ -65,7 +67,7 @@ let ca = {
       ca.get_pay_select_html(o)
     });
 
-    $('body').on('click', '.pay-item', function() {
+    $('body').on('click', '.pay-item', function () {
       const el = $(this);
 
       o.pay_type_id = el.data('id');
@@ -95,34 +97,37 @@ let ca = {
         status == 1 ? ca.popup({ msg: data }) : console.log('2222', e, t);
       }
     });
+  },
+
+  // 分页
+  pagination: function () {
+    $('#load-more').on('click', function () {
+
+      currentPage++;
+
+      $.ajax({
+        type: 'POST',
+        url: '/wp-admin/admin-ajax.php',
+        dataType: 'json',
+        data: {
+          action: 'capalot_load_more',
+          paged: currentPage,
+        },
+        success: function (response) {
+          if (currentPage >= response.max) {
+            $('#load-more').hide();
+            $('#no-more-button').show();
+          }
+          $('.post-wrap').append(response.html);
+        }
+      });
+    }
+    );
   }
 
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  $('#load-more').on('click', function () {
-
-    currentPage++;
-
-    $.ajax({
-      type: 'POST',
-      url: '/wp-admin/admin-ajax.php',
-      dataType: 'json',
-      data: {
-        action: 'capalot_load_more',
-        paged: currentPage,
-      },
-      success: function (response) {
-        if (currentPage >= response.max) {
-          $('#load-more').hide();
-          $('#no-more-button').show();
-        }
-        $('.post-wrap').append(response.html);
-      }
-    });
-  }
-  );
-
   ca.init();
 })
 
