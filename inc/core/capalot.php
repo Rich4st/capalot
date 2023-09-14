@@ -38,28 +38,43 @@ class Capalot_Shop
     global $wpdb;
     $table_name = $wpdb->prefix . 'capalot_order';
 
-    return true;
+    $insert = $wpdb->insert(
+      $table_name,
+      [
+        'user_id' => $order_data['user_id'],
+        'post_id' => $order_data['post_id'],
+        'order_trade_no' => $order_data['order_trade_no'],
+        'order_type' => $order_data['order_type'],
+        'order_price' => $order_data['order_price'],
+        'create_time' => time(),
+        'pay_type' => $order_data['pay_type'],
+      ]
+    );
+
+    return $insert ? true : false;
   }
 
   /**
    * 支付回调
-   * @param string $order_trade_no 订单交易号
-   * @param string $trade_no 交易号
+   * @param string $order_data 订单数据
    */
-  public static function pay_notify_callback($order_trade_no, $trade_no)
+  public static function pay_notify_callback($order_data)
   {
     global $wpdb;
     $table_name = $wpdb->prefix . 'capalot_order';
 
-    $time = time('mysql');
-
+    // 更新$order_trade_no对应的订单状态
     $update = $wpdb->update(
       $table_name,
       [
+        'pay_time' => time(),
+        'pay_price' => $order_data['pay_price'],
+        'pay_trade_no' => '999-' . time(),
+        'order_info' => $order_data['order_info'],
         'pay_status' => 1,
-        'pay_order_no' => $order_trade_no,
-        'pay_trade_no' => $trade_no,
-        'pay_time' => $time,
+      ],
+      [
+        'order_trade_no' => $order_data['order_trade_no'],
       ]
     );
 

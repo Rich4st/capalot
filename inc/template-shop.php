@@ -404,6 +404,12 @@ function get_post_price_data($post_id)
     return (array)$prices;
 }
 
+//站内币兑RMB汇率
+function get_site_coin_rate()
+{
+    return absint(_capalot('site_coin_rate', '10'));
+}
+
 //币种金额换算
 function site_convert_amount($amount = 0, $type = 'coin')
 {
@@ -487,9 +493,9 @@ function capalot_get_pay_options($id = null)
         55  => ['id' => 'paypal', 'name' => 'PayPal', 'is' => (bool) _capalot('is_paypal')],
 
         66  => ['id' => 'manualpay', 'name' => '手工支付', 'is' => (bool) _capalot('is_manualpay')],
-        77  => ['id' => 'site_admin_charge', 'name' => __('后台充值', 'ripro'), 'is' => false],
-        88  => ['id' => 'site_cdk_pay', 'name' => __('卡密支付', 'ripro'), 'is' => false],
-        99  => ['id' => 'site_coin_pay', 'name' => __('余额支付', 'ripro'), 'is' => (bool) _capalot('is_site_coin_pay')],
+        77  => ['id' => 'site_admin_charge', 'name' => '后台充值', 'is' => false],
+        88  => ['id' => 'site_cdk_pay', 'name' => '卡密支付', 'is' => false],
+        99  => ['id' => 'site_coin_pay', 'name' => '余额支付', 'is' => (bool) _capalot('is_site_coin_pay')],
     ];
 
     $options = apply_filters('capalot_pay_options', $config);
@@ -549,20 +555,20 @@ function capalot_get_request_pay($order_data)
         'msg' => '支付接口未配置', //消息
     ];
 
-    $pay_options = capalot_get_pay_options($order_data['order_pay_type']);
+    $pay_option = capalot_get_pay_options($order_data['pay_type']);
 
     if (
-        empty($pay_options['is'])
+        empty($pay_option['is'])
         || ($order_data['order_type'] === 2)
-        && $pay_options['id'] === 'site_coin_pay'
+        && $pay_option['id'] === 'site_coin_pay'
     ) {
-        $result['msg'] = '支付方式未开启';
+        $result['msg'] = $pay_option;
         return $result;
     }
 
     if (
         $order_data['order_type'] === 3
-        && $pay_options['id'] === 'site_coin_pay'
+        && $pay_option['id'] === 'site_coin_pay'
         && !empty(_capalot('is_pay_vip_allow_online', false))
     ) {
         $result['msg'] = '支付接口暂未开启';
@@ -574,7 +580,7 @@ function capalot_get_request_pay($order_data)
 
     $CapalotPay = new Capalot_Pay();
 
-    switch ($pay_options['id']) {
+    switch ($pay_option['id']) {
         case 'site_coin_pay':
             // 余额支付
             $user_id = get_current_user_id();
@@ -594,8 +600,7 @@ function capalot_get_request_pay($order_data)
             }
 
             // 处理支付回调
-            $trade_no = '99-' . time(); // 时间戳
-            $update_order = Capalot_Shop::pay_notify_callback($order_data['order_trade_no'], $trade_no);
+            $update_order = Capalot_Shop::pay_notify_callback($order_data);
 
             if (!$update_order) {
                 $result['msg'] = '订单状态处理异常';

@@ -147,16 +147,16 @@ class Capalot_Ajax
       'user_id' => $user_id,
       'post_id' => $post_id,
       'order_price' => 0,
-      'order_trader_no' => wp_date('YmdHis') . mt_rand(100, 999)
+      'order_trade_no' => wp_date('YmdHis') . mt_rand(100, 999)
         . mt_rand(100, 999) . mt_rand(100, 999), // 本地订单号
       'order_type' => $order_type, // 订单类型 1:'Post' 2:'Charge' 3:'VIP'
       'pay_type' => $pay_type_id, // 支付方式
       'pay_price' => 0,
-      'order_name' => esc_html(trim(_capalot('site_shop_name_txt', '商城自助购买'))),
+      'order_name' => '商城自助购买',
       'callback_url' => esc_url(home_url()),
       'order_info' => [
         'aff_id' => 1, // TODO: 获取推荐人信息
-        'ip' => get_ip_address()
+        'ip' => get_ip_address(), // ip
       ],
     ];
 
@@ -185,35 +185,7 @@ class Capalot_Ajax
 
       $post_pay_data = get_post_pay_data($post_id);
       $order_data['order_info']['vip_rate'] = $post_pay_data['vip_rate'];
-    } elseif ($order_type === 2) {
-      //购买VIP
-      $buy_options = get_site_vip_buy_options();
-      $day = absint($order_info_key);
 
-      // 套餐不存在
-      if (empty($buy_options) || empty($buy_options[$day]['coin_price']))
-        wp_send_json([
-          'status' => 0,
-          'msg' => 'VIP套餐不存在',
-        ]);
-
-      // 永久会员无需重复开通
-      $uc_vip_info = get_user_vip_data($user_id);
-      if ($uc_vip_info['type'] === 'boosvip')
-        wp_send_json([
-          'status' => 0,
-          'msg' => '您已获得最高特权，无需重复开通',
-        ]);
-
-      $vip_price = $buy_options[$day]['coin_price'];
-      $order_data['post_id'] = 0;
-      $order_data['order_price'] = site_convert_amount($vip_price, 'rmb');
-      $order_data['pay_price'] = site_convert_amount($vip_price, 'rmb');
-      $order_data['callback_url'] = esc_url(get_uc_menu_link('vip'));
-
-      /// 会员套餐 vip_type 会员类型 vip boosvip
-      $order_data['order_info']['vip_type'] = $buy_options[$day]['vip_type'];
-      $order_data['order_info']['vip_day'] = $buy_options[$day]['day_num'];
     }
 
     // 序列化订单信息
@@ -235,11 +207,11 @@ class Capalot_Ajax
         'msg' => '订单创建失败',
       ]);
 
-    // 请求支付接口
+
+
+    // // 请求支付接口
     $response = capalot_get_request_pay($order_data);
 
-    wp_send_json([
-      'data' => $response
-    ]);
+    wp_send_json($response);
   }
 }
