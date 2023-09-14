@@ -24,6 +24,8 @@ function capalot_assets()
   wp_enqueue_style('tailwind', get_template_directory_uri() . '/assets/css/tailwind.css', array(), '0.1.0');
   // app.js
   wp_enqueue_script('app', get_template_directory_uri() . '/assets/js/app.js', array(), '0.1.0', true);
+  // sweetalert2
+  wp_enqueue_script('sweetalert2', get_template_directory_uri() . '/assets/js/sweetalert2.min.js', array(), '11.0.18', true);
 
   // 文章详情页参数
   $script_params = array(
@@ -33,7 +35,7 @@ function capalot_assets()
     'singular_id' => 0,
     // 'post_content_nav' => intval(_capalot('site_post_content_nav', 0)),
     'current_user_id' => get_current_user_id(),
-    'ajax_nonce' => wp_create_nonce("ca_ajax"),
+    'ajax_nonce' => wp_create_nonce("capalot_ajax"),
     'get_text' => array(
 
       '__copied_pwd' => '密码已复制剪贴板',
