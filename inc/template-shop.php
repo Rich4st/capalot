@@ -180,7 +180,8 @@ function get_user_vip_type($user_id)
 }
 
 //获取用户到期时间
-function get_user_vip_end_date($user_id) {
+function get_user_vip_end_date($user_id)
+{
     $vip_options  = get_site_vip_options();
     $user_type = get_user_meta($user_id, 'capalot_user_type', true);
     $current_date = wp_date('Y-m-d');
@@ -313,7 +314,8 @@ function zb_get_user_badge($user_id = null, $tag = 'a', $class = '')
 }
 
 // 菜单获取
-function get_uc_menu_link($menu_action = '') {
+function get_uc_menu_link($menu_action = '')
+{
     $prefix = '/user/';
     if ($menu_action == 'logout') {
         return esc_url(wp_logout_url(get_current_url()));
@@ -322,12 +324,26 @@ function get_uc_menu_link($menu_action = '') {
 }
 
 //是否开启商城功能
-function is_site_shop() {
+function is_site_shop()
+{
     return _capalot('site_shop_mode', 'all') !== 'close';
 }
 
+//获取商城模式 [close , all , user_mod]
+function get_site_shop_mod()
+{
+    return _capalot('site_shop_mode', 'all');
+}
+
+//是否开启免登录购买功能
+function is_site_not_user_pay()
+{
+    return get_site_shop_mod() === 'all';
+}
+
 //获取文章价格权限信息
-function get_post_pay_data($post_id) {
+function get_post_pay_data($post_id)
+{
     $price = get_post_meta($post_id, 'capalot_price', true);
     $vip_rate = get_post_meta($post_id, 'capalot_vip_rate', true);
     $boosvip_free = get_post_meta($post_id, 'capalot_is_boosvip', true);
@@ -340,7 +356,7 @@ function get_post_pay_data($post_id) {
 
     if (!is_numeric($vip_rate)) {
         $vip_rate = 1;
-    }elseif ($vip_rate < 0) {
+    } elseif ($vip_rate < 0) {
         $vip_rate = 0;
     } elseif ($vip_rate > 1) {
         $vip_rate = 1;
@@ -359,7 +375,8 @@ function get_post_pay_data($post_id) {
 }
 
 //获取文章价格信息 单位：站内币 0免费 false不可购买
-function get_post_price_data($post_id) {
+function get_post_price_data($post_id)
+{
     $data = get_post_pay_data($post_id);
 
     $coin_price = floatval($data['coin_price']);
@@ -387,15 +404,36 @@ function get_post_price_data($post_id) {
     return (array)$prices;
 }
 
+//币种金额换算
+function site_convert_amount($amount = 0, $type = 'coin')
+{
+    // RMB汇率
+    $coin_rate = get_site_coin_rate();
+    switch ($type) {
+        case 'coin':
+            $amount = $amount * $coin_rate;
+            break;
+        case 'rmb':
+            $amount = $amount / $coin_rate;
+            break;
+        default:
+            $amount = $amount;
+            break;
+    }
+    return (float) $amount;
+}
+
 //根据用户id获取用户购买文章实际价格
-function get_user_pay_post_price($user_id, $post_id) {
+function get_user_pay_post_price($user_id, $post_id)
+{
     $post_prices = get_post_price_data($post_id);
     $user_type   = get_user_vip_type($user_id);
     return $post_prices[$user_type];
 }
 
 //获取用户支付状态
-function get_user_pay_post_status($user_id, $post_id) {
+function get_user_pay_post_status($user_id, $post_id)
+{
 
     $cache_key = 'pay_post_status_' . $user_id . '_' . $post_id;
     // wp_cache_set($cache_key, 0);
@@ -415,10 +453,168 @@ function get_user_pay_post_status($user_id, $post_id) {
     $price = get_user_pay_post_price($user_id, $post_id);
     if ($price === false) {
         return false;
-    }elseif ($price == 0) {
+    } elseif ($price == 0) {
         return true;
-    }else{
+    } else {
         return false;
     }
+}
 
+/**
+ * 获取支付方式选项
+ * @param int $id 选项ID
+ *
+ * @return array 选项列表
+ */
+function capalot_get_pay_options($id = null)
+{
+    $config = [
+        1  => ['id' => 'alipay', 'name' => '官方-支付宝', 'is' => (bool) _capalot('is_alipay')],
+        2  => ['id' => 'weixinpay', 'name' => '官方-微信', 'is' => (bool) _capalot('is_weixinpay')],
+
+        11 => ['id' => 'hupijiao_alipay', 'name' => '虎皮椒-支付宝', 'is' => (bool) _capalot('is_hupijiao_alipay')],
+        12 => ['id' => 'hupijiao_weixin', 'name' => '虎皮椒-微信', 'is' => (bool) _capalot('is_hupijiao_weixin')],
+
+        21  => ['id' => 'xunhu_alipay', 'name' => '讯虎-支付宝', 'is' => (bool) _capalot('is_xunhupay_alipay')],
+        22  => ['id' => 'xunhu_weixin', 'name' => '讯虎-微信', 'is' => (bool) _capalot('is_xunhupay_weixin')],
+
+        31  => ['id' => 'payjs_alipay', 'name' => 'PAYJS-支付宝', 'is' => (bool) _capalot('is_payjs_alipay')],
+        32  => ['id' => 'payjs_weixin', 'name' => 'PAYJS-微信', 'is' => (bool) _capalot('is_payjs_weixin')],
+
+        41  => ['id' => 'epay_alipay', 'name' => '易支付-支付宝', 'is' => (bool) _capalot('is_epay_alipay')],
+        42 =>  ['id' => 'epay_weixin', 'name' => '易支付-微信', 'is' => (bool) _capalot('is_epay_weixin')],
+
+        55  => ['id' => 'paypal', 'name' => 'PayPal', 'is' => (bool) _capalot('is_paypal')],
+
+        66  => ['id' => 'manualpay', 'name' => '手工支付', 'is' => (bool) _capalot('is_manualpay')],
+        77  => ['id' => 'site_admin_charge', 'name' => __('后台充值', 'ripro'), 'is' => false],
+        88  => ['id' => 'site_cdk_pay', 'name' => __('卡密支付', 'ripro'), 'is' => false],
+        99  => ['id' => 'site_coin_pay', 'name' => __('余额支付', 'ripro'), 'is' => (bool) _capalot('is_site_coin_pay')],
+    ];
+
+    $options = apply_filters('capalot_pay_options', $config);
+
+    if ($id !== null && isset($options[$id])) {
+        return $options[$id];
+    }
+
+    return $options;
+}
+
+// 获取支付方式选项模板
+function capalot_get_pay_select_html($order_type = 0)
+{
+    $data = capalot_get_pay_options();
+    $html = '<ul class="pay-select-box">';
+    $str = array('虎皮椒-', '讯虎-', 'PayJS-', '易支付-', '码支付-', '官方-');
+
+    // 充值订单或是未登录用户，去掉余额支付
+    if ($order_type === 2 || !is_user_logged_in())
+        unset($data[99]);
+
+    // VIP订单 关闭余额支付
+    if ($order_type === 3 && !empty(_capalot('is_pay_vip_allow_online', false)))
+        unset($data[99]);
+
+    foreach ($data as $key => $item) {
+        if (empty($item['is'])) {
+            continue;
+        }
+
+        $name = str_replace($str, '', $item['name']);
+        $html .= '<li class="pay-item cursor-pointer" data-id="' . $key . '"><i class="fas fa-check-circle me-1"></i>' . $name . '</li>';
+    }
+
+    $html .= '</ul>';
+
+    return apply_filters('capalot_pay_select_html', $html);
+}
+
+// 获取网站当前推荐人信息
+function capalot_get_current_aff_id($user_id = 0)
+{
+    // TODO:
+}
+
+/**
+ * 发起支付请求
+ * @param array $order_data 订单数据
+ */
+function capalot_get_request_pay($order_data)
+{
+    $result = [
+        'status' => 0, //状态
+        'method' => 'popup', // popup|弹窗  url|跳转 jsapi|js方法
+        'num' => $order_data['order_trade_no'], // 订单号
+        'msg' => '支付接口未配置', //消息
+    ];
+
+    $pay_options = capalot_get_pay_options($order_data['order_pay_type']);
+
+    if (
+        empty($pay_options['is'])
+        || ($order_data['order_type'] === 2)
+        && $pay_options['id'] === 'site_coin_pay'
+    ) {
+        $result['msg'] = '支付方式未开启';
+        return $result;
+    }
+
+    if (
+        $order_data['order_type'] === 3
+        && $pay_options['id'] === 'site_coin_pay'
+        && !empty(_capalot('is_pay_vip_allow_online', false))
+    ) {
+        $result['msg'] = '支付接口暂未开启';
+        return $result;
+    }
+
+    $order_info = maybe_unserialize($order_data['order_info']);
+    $order_data['ip'] = $order_info['ip'];
+
+    $CapalotPay = new Capalot_Pay();
+
+    switch ($pay_options['id']) {
+        case 'site_coin_pay':
+            // 余额支付
+            $user_id = get_current_user_id();
+            $coin_amount = site_convert_amount($order_data['pay_price'], 'coin');
+            $user_balance = get_user_coin_balance($user_id);
+
+            usleep(500000);
+
+            if ($user_balance < $coin_amount) {
+                $result['msg'] = '余额不足';
+                return $result;
+            }
+
+            if (!change_user_coin_balance($user_id, $coin_amount, '-')) {
+                $result['msg'] = '余额支付失败';
+                return $result;
+            }
+
+            // 处理支付回调
+            $trade_no = '99-' . time(); // 时间戳
+            $update_order = Capalot_Shop::pay_notify_callback($order_data['order_trade_no'], $trade_no);
+
+            if (!$update_order) {
+                $result['msg'] = '订单状态处理异常';
+                return $result;
+            } else {
+                return [
+                    'status' => 1, //状态
+                    'method' => 'reload', // popup|弹窗  url|跳转 reload|刷新 jsapi|js方法
+                    'num'    => $order_data['order_trade_no'], //订单号
+                    'msg'    => '支付成功'
+                ];
+            }
+
+            break;
+        default:
+            break;
+    }
+
+    // TODO:设置当前订单号缓存
+
+    return apply_filters('capalot_get_request_pay', $result, $order_data);
 }

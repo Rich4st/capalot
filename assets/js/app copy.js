@@ -1,7 +1,9 @@
 const body = jQuery("body"),
   ri = {
     init: function () {
-      ri.lazyLoading(), ri.backTotop(), ri.offCanvas(), ri.stickyHeader(), ri.stickyBar(), ri.pagination(), ri.owlCarousel(), ri.gallerylight(), ri.CodeHighlight(), ri.add_post_views(), ri.social_action(), ri.add_comment(), ri.setIframeHeight(), ri.PostContents(), ri.pay_action(), ri.changeOrder(), ri.account_action()
+      ri.lazyLoading(), ri.backTotop(), ri.offCanvas(), ri.stickyHeader(), ri.stickyBar(), ri.pagination(), ri.owlCarousel(), ri.gallerylight(),
+        ri.CodeHighlight(), ri.add_post_views(), ri.social_action(), ri.add_comment(), ri.setIframeHeight(), ri.PostContents(), ri.pay_action(),
+        ri.changeOrder(), ri.account_action()
     },
     intervalId: null,
     currentPopup: null,
@@ -27,10 +29,14 @@ const body = jQuery("body"),
     },
     notice: function (e = "", t = 220, n = 2e3) {
       let o = jQuery(".ri-notice");
-      !e && o.length ? o.clearQueue().stop().hide() : (!o.length && e && (o = jQuery(`<div class="ri-notice" style="min-width: ${t}px"></div>`), body.append(o)), o.clearQueue().stop().hide().html(e).fadeIn().delay(n).fadeOut())
+      !e && o.length
+        ? o.clearQueue().stop().hide()
+        : (!o.length && e && (o = jQuery(`<div class="ri-notice" style="min-width: ${t}px"></div>`), body.append(o)), o.clearQueue().stop().hide().html(e).fadeIn().delay(n).fadeOut())
     },
     popup: function (e, t = 240, n = null) {
-      const o = jQuery(`<div class="ri-popup"><div class="ri-popup-body" ${t ? `style="width:${t}px"` : ""}><div class="ri-popup-close"><span class="svg-close"></span></div><div class="ri-popup-content">${e}</div></div></div>`),
+      const o = jQuery(`<div class="ri-popup"><div class="ri-popup-body" ${t
+        ? `style="width:${t}px"`
+        : ""}><div class="ri-popup-close"><span class="svg-close"></span></div><div class="ri-popup-content">${e}</div></div></div>`),
         a = (ri.currentPopup && ri.currentPopup.remove(), ri.currentPopup = o, () => {
           body.removeClass("ri-popup-open"), ri.dimmer("close", 100), o.remove()
         });
@@ -603,13 +609,17 @@ const body = jQuery("body"),
         };
         const t = e.find("i"),
           n = t.attr("class");
-        t.length && (t.removeClass().addClass("fa fa-spinner fa-spin me-1"), setTimeout(() => {
-          t.removeClass().addClass(n)
-        }, 700)), ri.get_pay_select_html(o)
-      }), body.on("click", ".pay-item", function () {
+        t.length && (t.removeClass().addClass("fa fa-spinner fa-spin me-1"),
+          setTimeout(() => {
+            t.removeClass().addClass(n)
+          }, 700))
+        ri.get_pay_select_html(o)
+      })
+      body.on("click", ".pay-item", function () {
         const e = jQuery(this),
           t = (o.pay_type_id = e.data("id"), o.action = "zb_get_pay_action", e.find("i")),
           n = t.attr("class");
+
         e.data("click") || ri.ajax({
           data: o,
           before: () => {

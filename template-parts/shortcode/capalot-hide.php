@@ -27,7 +27,8 @@ $is_user_login_get_status = $user_pay_post_status === '0' && empty($user_id);
       <?php else : ?>
         <div class="buy-title"><i class="fas fa-lock me-1"></i><?php _e('本内容需权限查看', 'capalot'); ?></div>
         <div class="buy-btns">
-          <button class="btn btn-danger px-4 rounded-pill js-pay-action" data-id="<?php echo $post_id; ?>" data-type="1" data-info="">
+          <button
+          class="btn btn-danger px-4 rounded-pill js-pay-action" data-id="<?php echo $post_id; ?>" data-type="1" data-info="">
             <i class="fab fa-shopify me-1"></i>
             <?php _e('购买查看权限', 'capalot'); ?>
           </button>
@@ -72,7 +73,7 @@ $is_user_login_get_status = $user_pay_post_status === '0' && empty($user_id);
         </div>
 
         <?php
-        $sales_count = absint(get_post_meta($post_id, 'cao_paynum', true));
+        $sales_count = absint(get_post_meta($post_id, 'capalot_paynum', true));
         if ($sales_count > 0) {
           echo '<div class="buy-count"><i class="fab fa-hotjar me-1"></i>' . sprintf(__('已有<span>%d</span>人解锁查看', 'capalot'), $sales_count) . '</div>';
         }
