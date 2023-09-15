@@ -26,6 +26,10 @@ function capalot_assets()
   wp_enqueue_script('app', get_template_directory_uri() . '/assets/js/app.js', array(), '0.1.0', true);
   // sweetalert2
   wp_enqueue_script('sweetalert2', get_template_directory_uri() . '/assets/js/sweetalert2.min.js', array(), '11.0.18', true);
+  // font-awesome
+  wp_enqueue_script('solid', get_template_directory_uri() . '/assets/js/solid.min.js', array(), '6.4.2', true);
+  wp_enqueue_script('fontawesome', get_template_directory_uri() . '/assets/js/fontawesome.min.js', array(), '6.4.2', true);
+  wp_enqueue_script('brands', get_template_directory_uri() . '/assets/js/brands.min.js', array(), '6.4.2', true);
   // iconify-icon
   wp_enqueue_script('iconify', get_template_directory_uri() . '/assets/js/iconify-icon.min.js', array(), '1.0.7', true);
 
