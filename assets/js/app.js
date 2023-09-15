@@ -52,6 +52,10 @@ let ca = {
       html,
       showCloseButton: true,
       showConfirmButton: false,
+      width: '240px',
+      customClass: {
+        closeButton: 'w-8 h-8 absolute -bottom-2 left-0 right-0 mx-auto bg-white hover:bg-white rounded-full text-[24px]'
+      }
     });
 
   },
