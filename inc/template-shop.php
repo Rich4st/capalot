@@ -615,6 +615,15 @@ function capalot_get_request_pay($order_data)
             }
 
             break;
+        case 'alipay':
+            // TODO: 支付宝支付
+            $config = _capalot('alipay');
+
+            return [
+                'foo' => $config
+            ];
+
+            break;
         default:
             break;
     }
