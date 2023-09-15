@@ -511,7 +511,7 @@ function capalot_get_pay_options($id = null)
 function capalot_get_pay_select_html($order_type = 0)
 {
     $data = capalot_get_pay_options();
-    $html = '<ul class="pay-select-box">';
+    $html = '<ul class="">';
     $str = array('虎皮椒-', '讯虎-', 'PayJS-', '易支付-', '码支付-', '官方-');
 
     // 充值订单或是未登录用户，去掉余额支付
@@ -528,7 +528,16 @@ function capalot_get_pay_select_html($order_type = 0)
         }
 
         $name = str_replace($str, '', $item['name']);
-        $html .= '<li class="pay-item cursor-pointer" data-id="' . $key . '"><i class="fas fa-check-circle me-1"></i>' . $name . '</li>';
+        if($name === '微信') {
+            $icon = '<i class="fa-brands fa-weixin" style="color: #00c900; width:30px;height:30px;"></i>';
+        } elseif ($name === '支付宝'){
+            $icon = '<i class="fa-brands fa-alipay" style="color: #00a0e6; width:30px;height:30px;"></i>';
+        } else {
+            $icon = '<i class="fa-solid fa-coins" style="color: #e9b116; width:30px;height:30px;"></i>';
+        }
+
+        $html .= '<li class="pay-item cursor-pointer w-[240px] mx-auto  border-2 border-[#dfdfe3] p-[0.4rem] text-[1rem] rounded-lg m-2 flex items-center justify-center " data-id="' . $key . '">
+        ' . $icon . $name . '</li>';
     }
 
     $html .= '</ul>';
