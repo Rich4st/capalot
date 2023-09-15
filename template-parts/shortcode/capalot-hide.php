@@ -11,32 +11,32 @@ $is_user_login_get_status = $user_pay_post_status === '0' && empty($user_id);
 
 ?>
 
-<div class="ri-hide-warp">
+<div class=" px-2 ">
   <?php if ($user_pay_post_status && !$is_user_login_get_status) : ?>
-    <span class="hide-msg"><i class="fas fa-unlock me-1"></i><?php echo '已获得查看权限'; ?></span>
+    <span class="font-bold text-[18px] leading-6 relative pl-[18px] border-l-[#3370e9] border-l-2"><i class=""></i><?php echo '已获得查看权限'; ?></span>
     <?php echo $content; ?>
   <?php else : ?>
-    <span class="hide-msg"><i class="fas fa-lock me-1"></i><?php echo '隐藏内容'; ?></span>
-    <div class="hide-buy-warp">
+    <span class="font-bold text-[18px] leading-6 relative pl-[18px] border-l-[#3370e9] border-l-2"><i class=""></i><?php echo '隐藏内容'; ?></span>
+    <div class="my-2 border-2 border-dashed border-[#ffb1cb] rounded-[0.5rem] py-[1.5rem] px-[1rem] text-center block">
       <?php if ($is_user_login_get_status) : ?>
-        <div class="buy-title"><i class="fas fa-lock me-1"></i><?php _e('本内容登录后免费查看', 'capalot'); ?></div>
-        <div class="buy-btns">
+        <div class="text-[#ff5722] text-[1.25rem] mb-[1rem] flex justify-center items-center"><i class=""></i><span class="dashicons dashicons-admin-site-alt3 mr-2"><?php _e('本内容登录后免费查看', 'capalot'); ?></div>
+        <div class="text-[#ff5722] text-[1.25rem] mb-[1rem] flex justify-center items-center leading-[1.5rem]">
           <a rel="nofollow noopener noreferrer" href="<?php echo esc_url(wp_login_url(get_current_url())); ?>" class="btn btn-info px-4 rounded-pill"><i class="far fa-user me-1"></i><?php _e('登录后查看', 'capalot'); ?></a>
         </div>
 
       <?php else : ?>
-        <div class="buy-title"><i class="fas fa-lock me-1"></i><?php _e('本内容需权限查看', 'capalot'); ?></div>
-        <div class="buy-btns">
+        <div class="text-[#ff5722] text-[1.25rem] mb-[1rem] flex justify-center items-center leading-[1.5rem]"><i class=""></i><span class="dashicons dashicons-admin-site-alt3 mr-2"></span><?php _e('本内容需权限查看', 'capalot'); ?></div>
+        <div class="mb-[1rem] text-white text-center">
           <button
-          class="btn btn-danger px-4 rounded-pill js-pay-action" data-id="<?php echo $post_id; ?>" data-type="1" data-info="">
-            <i class="fab fa-shopify me-1"></i>
+          class="js-pay-action cursor-pointer bg-[#d6293e] px-[1.5rem] rounded-full hover:bg-[#b62335] p-2 block my-0 mx-[auto]" data-id="<?php echo $post_id; ?>" data-type="1" data-info="">
+            <i class="fab fa-shopify me-1"></i><span class="dashicons dashicons-cover-image mr-1 "></span>
             <?php _e('购买查看权限', 'capalot'); ?>
           </button>
         </div>
 
-        <div class="buy-desc">
+        <div class="text-[0.95rem] p-[0.5rem] leading-6 md:w-[550px]  w-full bg-[#eaf6ff] text-center block my-0 mx-[auto]">
 
-          <ul class="prices-info">
+          <ul class="">
             <?php
             $site_vip_options = get_site_vip_options();
             $price_names = [
@@ -61,12 +61,12 @@ $is_user_login_get_status = $user_pay_post_status === '0' && empty($user_id);
                 $__price_span = '<span>' . __('免费', 'capalot') . '</span>';
               } elseif ($coin_price < $default_price) {
                 $__rate = $coin_price / $default_price * 10;
-                $__price_span = '<span><i class="fas ' . '金币' . ' me-1"></i>' . $coin_price . '金币' . '<sup class="ms-1">' . sprintf(__('%s折', 'capalot'), $__rate) . '<sup></span>';
+                $__price_span = '<span class="text-[#f7c32e]"><i class="fas ' . '金币' . ' me-1"></i>' . $coin_price . '金币' . '<sup class="ms-1">' . sprintf(__('%s折', 'capalot'), $__rate) . '<sup></span>';
               } else {
-                $__price_span = '<span><i class="fas ' . '金币' . ' me-1"></i>' . $coin_price . '金币' . '</span>';
+                $__price_span = '<span><span class="dashicons dashicons-database text-[1rem]"></span><i class="fas ' . '金币' . ' me-1"></i>' . $coin_price . '金币' . '</span>';
               }
 
-              echo '<li class="price-item ' . $type . '">' . $price_names[$type] . ': ' . $__price_span . '</li>';
+              echo '<li class="inline-block px-2  ' . $type . '">' . $price_names[$type] . ': ' . $__price_span . '</li>';
             } ?>
           </ul>
 
@@ -75,7 +75,7 @@ $is_user_login_get_status = $user_pay_post_status === '0' && empty($user_id);
         <?php
         $sales_count = absint(get_post_meta($post_id, 'capalot_paynum', true));
         if ($sales_count > 0) {
-          echo '<div class="buy-count"><i class="fab fa-hotjar me-1"></i>' . sprintf(__('已有<span>%d</span>人解锁查看', 'capalot'), $sales_count) . '</div>';
+          echo '<div class="text-[#8d9da9] text-[0.9rem] mt-[1rem]"><i class="fab fa-hotjar me-1"></i><span class="dashicons dashicons-admin-customizer mr-1"></span>' . sprintf(__('已有<span>%d</span>人解锁查看', 'capalot'), $sales_count) . '</div>';
         }
         ?>
       <?php endif; ?>
