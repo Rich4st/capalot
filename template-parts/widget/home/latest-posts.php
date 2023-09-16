@@ -16,33 +16,35 @@ $item_config = get_posts_style_config();
 
 ?>
 
-<section class="container">
-  <?php
-  $section_title = $args['title'];
-  $section_desc = $args['desc'];
-  ?>
-  <?php if ($section_title) : ?>
-    <div class="section-title text-center mb-4">
-      <h3><?php echo $section_title ?></h3>
-      <?php if (!empty($section_desc)) : ?>
-        <p class="text-muted mb-0"><?php echo $section_desc ?></p>
-      <?php endif; ?>
-    </div>
-  <?php endif; ?>
+<section class=" dark:bg-[#222529]">
+  <div class="max-w-7xl mx-auto ">
+    <?php
+    $section_title = $args['title'];
+    $section_desc = $args['desc'];
+    ?>
+    <?php if ($section_title) : ?>
+      <div class="section-title text-center mb-4 text-[#595d69]  dark:text-white  ">
+        <h3 class="text-[1.640625rem]  hover:text-black dark:hover:text-white transition-all hover:ease-in-out cursor-pointer mb-[0.5rem]"><?php echo $section_title ?></h3>
+        <?php if (!empty($section_desc)) : ?>
+          <p class="text-muted mb-0 "><?php echo $section_desc ?></p>
+        <?php endif; ?>
+      </div>
+    <?php endif; ?>
 
-  <div class="posts-warp row <?php echo esc_attr($item_config['row_cols_class']); ?>">
-    <?php if ($PostData->have_posts()) :
-      while ($PostData->have_posts()) : $PostData->the_post();
-        get_template_part('template-parts/loop/item', '', $item_config);
-      endwhile;
-    else :
-      get_template_part('template-parts/loop/item', 'none');
-    endif; ?>
+    <ul class="posts-wrap bg-[#ffffff]  dark:bg-[#222529] list-none grid p-[1rem] <?php echo esc_attr($item_config['row_cols_class']); ?>">
+      <?php if ($PostData->have_posts()) :
+        while ($PostData->have_posts()) : $PostData->the_post();
+          get_template_part('template-parts/loop/item', '', $item_config);
+        endwhile;
+      else :
+        get_template_part('template-parts/loop/item', 'none');
+      endif; ?>
+    </ul>
+
+    <?php if (!empty($args['is_pagination'])) : ?>
+      <?php Capalot_Pagination(); ?>
+    <?php endif; ?>
   </div>
-
-  <?php if (!empty($args['is_pagination'])) : ?>
-    <?php Capalot_Pagination(); ?>
-  <?php endif; ?>
 
 </section>
 
