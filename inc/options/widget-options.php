@@ -3,10 +3,7 @@
 defined('ABSPATH') || exit;
 
 /**
- * 资源信息购买组件
- *
- * @param string widget回调函数
- * @param array widget参数
+ * 边栏 - 资源信息购买组件
  */
 CSF::createWidget('capalot_sidebar_post_pay_widget', array(
   'title' => '【边栏】1.资源购买信息组件',
@@ -23,12 +20,6 @@ CSF::createWidget('capalot_sidebar_post_pay_widget', array(
 
   )
 ));
-
-/**
- * 资源信息购买组件回调函数
- * @param array widget参数
- * @param array widget实例
- */
 function capalot_sidebar_post_pay_widget($args, $instance)
 {
 
@@ -51,7 +42,7 @@ function capalot_sidebar_post_pay_widget($args, $instance)
 }
 
 /**
- * 最新文章组件
+ * 首页 - 最新文章组件
  */
 CSF::createWidget('capalot_home_latest_posts_widget', array(
   'title' => '【首页】1.最新文章组件',
@@ -80,7 +71,7 @@ CSF::createWidget('capalot_home_latest_posts_widget', array(
       'title'       => '要排除的分类',
       'placeholder' => '选择要排除的分类',
       'options'     => 'categories',
-  ),
+    ),
 
     array(
       'id' => 'is_pagination',
@@ -96,7 +87,6 @@ CSF::createWidget('capalot_home_latest_posts_widget', array(
 
   )
 ));
-
 function capalot_home_latest_posts_widget($args, $instance)
 {
 
@@ -116,7 +106,7 @@ function capalot_home_latest_posts_widget($args, $instance)
 }
 
 /**
- * 分类文章模块
+ * 首页 - 分类文章模块
  */
 CSF::createWidget('capalot_home_category_posts_widget', array(
   'title' => '【首页】2.分类文章模块',
@@ -159,7 +149,6 @@ CSF::createWidget('capalot_home_category_posts_widget', array(
 
   )
 ));
-
 function capalot_home_category_posts_widget($args, $instance)
 {
 
@@ -172,7 +161,56 @@ function capalot_home_category_posts_widget($args, $instance)
     $instance
   );
 
+  echo $args['before_widget'];
 
   get_template_part('template-parts/widget/home/category-posts', '', $instance);
 
+  echo $args['after_widget'];
+}
+
+/**
+ * 首页 - 分类BOX模块
+ */
+CSF::createWidget('capalot_home_category_box_widget', array(
+  'title' => '【首页】3.分类BOX模块',
+  'className' => 'home-category-box-widget',
+  'desc' => '首页分类BOX模块',
+  'fields' => [
+
+    [
+      'id'          => 'category',
+      'type'        => 'select',
+      'title'       => '要展示的分类',
+      'desc'        => '按顺序选择可以排序',
+      'placeholder' => '选择分类',
+      'inline'      => true,
+      'chosen'      => true,
+      'multiple'    => true,
+      'options'     => 'categories',
+    ],
+    [
+      'id'      => 'is_num',
+      'type'    => 'checkbox',
+      'title'   => '显示文章数量',
+      'default' => true,
+    ]
+
+  ]
+));
+function capalot_home_category_box_widget($args, $instance)
+{
+
+  $instance = array_merge(
+    [
+      'category' => [],
+      'is_num' => true,
+    ],
+    $instance
+  );
+
+  echo $args['before_widget'];
+
+  get_template_part('template-parts/widget/home/category-box', '', $instance);
+
+  echo $args['after_widget'];
 }

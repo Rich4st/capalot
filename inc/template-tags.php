@@ -452,6 +452,12 @@ function get_posts_style_config($cat_id = 0)
   return $config;
 }
 
+function capalot_get_color_class($key = 0) {
+  $colors  = ['danger', 'primary', 'success', 'warning', 'info', 'secondary'];
+  $color   = (isset($colors[$key])) ? $colors[$key] : 'secondary';
+  return $color;
+}
+
 // 获取文章缩略图尺寸
 function get_thumbnail_size_type()
 {
