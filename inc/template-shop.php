@@ -352,6 +352,33 @@ function post_is_download_pay($post_id)
     return false;
 }
 
+/**
+ * 获取加载更多的列表模板
+ *
+ * @param array $post_info 文章信息
+ */
+function get_load_more_template($post_info)
+{
+    $config = _capalot('archive_item_style');
+
+    switch ($config) {
+        case 'grid':
+            $template = $post_info['title'];
+            break;
+        case 'list':
+            $template = 'loop/item-list';
+            break;
+        case 'card':
+            $template = 'loop/item-card';
+            break;
+        default:
+            $template = 'loop/item-grid';
+            break;
+    }
+
+    return $template;
+}
+
 //文章是否有付费查看内容
 function post_has_hide_pay($post_id)
 {
@@ -584,9 +611,9 @@ function capalot_get_pay_select_html($order_type = 0)
         }
 
         $name = str_replace($str, '', $item['name']);
-        if($name === '微信') {
+        if ($name === '微信') {
             $icon = '<i class="fa-brands fa-weixin" style="color: #00c900; width:30px;height:30px; margin-right:8px;"></i>';
-        } elseif ($name === '支付宝'){
+        } elseif ($name === '支付宝') {
             $icon = '<i class="fa-brands fa-alipay" style="color: #00a0e6; width:30px;height:30px;margin-right:8px;"></i>';
         } else {
             $icon = '<i class="fa-solid fa-coins" style="color: #e9b116; width:30px;height:30px; margin-right:8px;"></i>';

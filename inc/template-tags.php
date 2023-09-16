@@ -128,9 +128,11 @@ function capalot_load_more()
 
   if ($ajaxposts->have_posts()) {
     while ($ajaxposts->have_posts()) : $ajaxposts->the_post();
-      $response .= '<li class="p-10 shadow-[0_10px_20px_rgba(240,_46,_170,_0.7)]">';
-      $response .= '<a href="' . get_the_permalink() . '">' . get_the_title() . '</a>';
-      $response .= '</li>';
+    $post_info = [
+      'title' => get_the_title(),
+    ];
+
+    $response .= get_load_more_template($post_info);
     endwhile;
   } else {
     $response = '';
