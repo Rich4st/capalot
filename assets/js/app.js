@@ -129,7 +129,7 @@ let ca = {
             $('#load-more').hide();
             $('#no-more-button').show();
           }
-          $('.post-wrap').append(response.html);
+          $('.posts-wrap').append(response.html);
         }
       });
     }
