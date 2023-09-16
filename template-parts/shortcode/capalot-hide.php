@@ -13,23 +13,23 @@ $is_user_login_get_status = $user_pay_post_status === '0' && empty($user_id);
 
 <div class=" px-2 ">
   <?php if ($user_pay_post_status && !$is_user_login_get_status) : ?>
-    <span class="font-bold text-[18px] leading-6 relative pl-[18px] border-l-[#3370e9] border-l-2"><i class=""></i><?php echo '已获得查看权限'; ?></span>
+    <span class="font-bold text-[18px] leading-6 relative pl-[18px] border-l-[#3370e9] border-l-2"><?php echo '已获得查看权限'; ?></span>
     <?php echo $content; ?>
   <?php else : ?>
-    <span class="font-bold text-[18px] leading-6 relative pl-[18px] border-l-[#3370e9] border-l-2"><i class=""></i><?php echo '隐藏内容'; ?></span>
+    <span class="font-bold text-[18px] leading-6 relative pl-[18px] border-l-[#3370e9] border-l-2"><?php echo '隐藏内容'; ?></span>
     <div class="my-2 border-2 border-dashed border-[#ffb1cb] rounded-[0.5rem] py-[1.5rem] px-[1rem] text-center block">
       <?php if ($is_user_login_get_status) : ?>
-        <div class="text-[#ff5722] text-[1.25rem] mb-[1rem] flex justify-center items-center"><i class=""></i><span class="dashicons dashicons-admin-site-alt3 mr-2"><?php _e('本内容登录后免费查看', 'capalot'); ?></div>
+        <div class="text-[#ff5722] text-[1.25rem] mb-[1rem] flex justify-center items-center"><i class="fas fa-lock me-1"></i><?php _e('本内容登录后免费查看', 'capalot'); ?></div>
         <div class="text-[#ff5722] text-[1.25rem] mb-[1rem] flex justify-center items-center leading-[1.5rem]">
           <a rel="nofollow noopener noreferrer" href="<?php echo esc_url(wp_login_url(get_current_url())); ?>" class="btn btn-info px-4 rounded-pill"><i class="far fa-user me-1"></i><?php _e('登录后查看', 'capalot'); ?></a>
         </div>
 
       <?php else : ?>
-        <div class="text-[#ff5722] text-[1.25rem] mb-[1rem] flex justify-center items-center leading-[1.5rem]"><i class=""></i><span class="dashicons dashicons-admin-site-alt3 mr-2"></span><?php _e('本内容需权限查看', 'capalot'); ?></div>
+        <div class="text-[#ff5722] text-[1.25rem] mb-[1rem] flex justify-center items-center leading-[1.5rem]"><i class="fas fa-lock me-1"></i><?php _e('本内容需权限查看', 'capalot'); ?></div>
         <div class="mb-[1rem] text-white text-center">
           <button
           class="js-pay-action cursor-pointer bg-[#d6293e] px-[1.5rem] rounded-full hover:bg-[#b62335] p-2 block my-0 mx-[auto]" data-id="<?php echo $post_id; ?>" data-type="1" data-info="">
-            <i class="fab fa-shopify me-1"></i><span class="dashicons dashicons-cover-image mr-1 "></span>
+            <i class="fab fa-shopify me-1"></i>
             <?php _e('购买查看权限', 'capalot'); ?>
           </button>
         </div>
@@ -75,7 +75,7 @@ $is_user_login_get_status = $user_pay_post_status === '0' && empty($user_id);
         <?php
         $sales_count = absint(get_post_meta($post_id, 'capalot_paynum', true));
         if ($sales_count > 0) {
-          echo '<div class="text-[#8d9da9] text-[0.9rem] mt-[1rem]"><i class="fab fa-hotjar me-1"></i><span class="dashicons dashicons-admin-customizer mr-1"></span>' . sprintf(__('已有<span>%d</span>人解锁查看', 'capalot'), $sales_count) . '</div>';
+          echo '<div class="text-[#8d9da9] text-[0.9rem] mt-[1rem]"><i class="fab fa-hotjar me-1"></i>' . sprintf(__('已有<span class="text-[#ff5722] mx-[2px] text-[0.875rem]">%d</span>人解锁查看', 'capalot'), $sales_count) . '</div>';
         }
         ?>
       <?php endif; ?>
