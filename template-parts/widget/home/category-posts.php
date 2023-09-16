@@ -18,7 +18,7 @@ $PostData = new WP_Query($query_params);
 $config = get_posts_style_config()
 ?>
 
-<section class=" dark:bg-[#222529]">
+<section class=" dark:bg-[#191b1d]">
   <div class="max-w-7xl mx-auto ">
     <?php
     $section_title = get_cat_name($cat_id);
@@ -33,7 +33,7 @@ $config = get_posts_style_config()
       </div>
     <?php endif; ?>
 
-    <ul class="row bg-[#ffffff]  dark:bg-[#222529] list-none grid p-[1rem] <?php echo esc_attr($config['row_cols_class']); ?>">
+    <ul class="row bg-[#ffffff]  dark:bg-[#191b1d] list-none grid p-[1rem] <?php echo esc_attr($config['row_cols_class']); ?>">
       <?php if ($PostData->have_posts()) :
         while ($PostData->have_posts()) : $PostData->the_post();
           get_template_part('template-parts/loop/item', '', $config);
@@ -42,7 +42,7 @@ $config = get_posts_style_config()
         get_template_part('template-parts/loop/item', 'none');
       endif; ?>
     </ul>
-    
+
   </div>
 </section>
 

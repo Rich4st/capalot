@@ -42,6 +42,45 @@ function capalot_sidebar_post_pay_widget($args, $instance)
 }
 
 /**
+ * 边栏 - 作者信息展示
+ */
+CSF::createWidget('capalot_sidebar_author_widget', array(
+  'title' => '【边栏】2.作者信息展示',
+  'className' => 'author-widget',
+  'desc' => '文章作者信息展示',
+  'fields' => array(
+
+    array(
+      'id' => 'title',
+      'type' => 'text',
+      'title' => '标题',
+      'default' => '作者信息',
+    ),
+
+  )
+));
+function capalot_sidebar_author_widget($args, $instance)
+{
+
+  $instance = array_merge(
+    array(
+      'is_avatar' => true,
+      'is_name' => true,
+      'is_desc' => true,
+      'is_link' => true,
+      'is_social' => true,
+    ),
+    $instance
+  );
+
+  echo $args['before_widget'];
+
+  get_template_part('template-parts/widget/sidebar/author', '', $instance);
+
+  echo $args['after_widget'];
+}
+
+/**
  * 首页 - 最新文章组件
  */
 CSF::createWidget('capalot_home_latest_posts_widget', array(
