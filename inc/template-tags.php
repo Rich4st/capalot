@@ -109,9 +109,9 @@ function Capalot_Pagination($args = array())
 
 function infinite_scroll_button($type = 'click')
 {
-  return '<div class="btn__wrapper text-center">
-  <a href="#!" class="btn btn__primary" id="load-more">加载更多</a>
-  <p id="no-more-button" style="display: none;">没有更多了</p>
+  return '<div class="btn__wrapper text-center py-6">
+  <a href="#!" class="rounded-full bg-black text-white py-2 px-4" id="load-more">加载更多</a>
+  <p id="no-more-button" style="display: none;" class="text-[#b9b2b2] text-[0.9rem]">没有更多了</p>
 </div>';
 }
 
@@ -423,12 +423,12 @@ function get_posts_style_config($cat_id = 0)
 
 
   $row_cols = [
-    '1' => 'row-cols-1 g-2 g-md-3 g-lg-4',
-    '2' => 'row-cols-2 g-2 g-md-3 g-lg-4',
-    '3' => 'row-cols-2 row-cols-md-3 g-2 g-md-3 g-lg-4',
-    '4' => 'row-cols-2 row-cols-md-3 row-cols-lg-4 g-2 g-md-3 g-lg-4',
-    '5' => 'row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-2 g-lg-3',
-    '6' => 'row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-6 g-2 g-lg-3',
+    '1' => 'grid-cols-1 gap-2 lg:gap-4 md:gap-3',
+    '2' => 'grid-cols-2 gap-2 lg:gap-4 md:gap-3',
+    '3' => 'grid-cols-2 md:grid-cols-3 gap-2 lg:gap-4 md:gap-3 ',
+    '4' => 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-3 lg:gap-4',
+    '5' => 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 lg:gap-3',
+    '6' => 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 xxl:grid-cols-6 gap-2 lg:gap-3',
   ];
 
   if ($item_style == 'list' && $item_col >= 2) {
@@ -475,7 +475,7 @@ function get_thumbnail_align_type()
 {
   $options = [
     'bg-left-top', 'bg-right-top', 'bg-center-top',
-    'bg-left-center', 'bg-right-center', 'bg-center-center',
+    'bg-left-center', 'bg-right-center', 'bg-center',
     'bg-left-bottom', 'bg-right-bottom', 'bg-center-bottom'
   ];
   $option = _capalot('site_thumb_fit_type', 'bg-center');
