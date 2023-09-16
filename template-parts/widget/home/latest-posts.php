@@ -3,35 +3,47 @@
 if (empty($args))
   exit;
 
-$title = $args['title'];
-$desc = $args['desc'];
-
 $query_args = array(
   'paged' => get_query_var('paged', 1),
   'ignore_sticky_posts' => false,
   'post_status' => 'publish',
+  // 'category__not_in' => $args['no_cat'] ?? [],
 );
 
-$post_data = new WP_Query($query_args);
+$PostData = new WP_Query($query_args);
+
+$item_config = get_posts_style_config();
 
 ?>
 
+<section class="container">
+  <?php
+  $section_title = $args['title'];
+  $section_desc = $args['desc'];
+  ?>
+  <?php if ($section_title) : ?>
+    <div class="section-title text-center mb-4">
+      <h3><?php echo $section_title ?></h3>
+      <?php if (!empty($section_desc)) : ?>
+        <p class="text-muted mb-0"><?php echo $section_desc ?></p>
+      <?php endif; ?>
+    </div>
+  <?php endif; ?>
 
-<div class="max-w-7xl mx-auto">
-  <h2 class="text-3xl font-bold text-center"><?php echo $title; ?></h2>
-  <p class="text-center text-gray-500"><?php echo $desc; ?></p>
-  <ul class="post-wrap grid grid-cols-1 md:grid-cols-4 md:gap-8 my-8">
-    <?php if ($post_data->have_posts()) :
-      while ($post_data->have_posts()) : $post_data->the_post(); ?>
-        <li class="p-10 shadow-[0_10px_20px_rgba(240,_46,_170,_0.7)]">
-          <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-        </li>
-      <?php endwhile; ?>
-    <?php endif; ?>
-    <?php wp_reset_postdata(); ?>
-  </ul>
+  <div class="posts-warp row <?php echo esc_attr($item_config['row_cols_class']); ?>">
+    <?php if ($PostData->have_posts()) :
+      while ($PostData->have_posts()) : $PostData->the_post();
+        get_template_part('template-parts/loop/item', '', $item_config);
+      endwhile;
+    else :
+      get_template_part('template-parts/loop/item', 'none');
+    endif; ?>
+  </div>
 
   <?php if (!empty($args['is_pagination'])) : ?>
     <?php Capalot_Pagination(); ?>
   <?php endif; ?>
-</div>
+
+</section>
+
+<?php wp_reset_postdata(); ?>

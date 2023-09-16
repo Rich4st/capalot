@@ -74,6 +74,15 @@ CSF::createWidget('capalot_home_latest_posts_widget', array(
     ),
 
     array(
+      'id'          => 'no_cat',
+      'type'        => 'checkbox',
+      'inline'      => true,
+      'title'       => '要排除的分类',
+      'placeholder' => '选择要排除的分类',
+      'options'     => 'categories',
+  ),
+
+    array(
       'id' => 'is_pagination',
       'type' => 'switcher',
       'title' => '是否开启分页',
