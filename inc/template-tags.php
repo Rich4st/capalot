@@ -147,6 +147,163 @@ function capalot_load_more()
 add_action('wp_ajax_capalot_load_more', 'capalot_load_more');
 
 /**
+ * 链接是否新窗口打开
+ */
+function get_target_blank()
+{
+  return empty(_capalot('site_link_blank')) ? '_self' : '_blank';
+}
+
+/**
+ * 默认缩略图
+ */
+function get_default_thumbnail_src()
+{
+  return _capalot('default_thumb')
+    ? _capalot('default_thumb')
+    : get_template_directory_uri() . '/assets/images/default_thumb.png';
+}
+
+/**
+ * 获取缩略图URL
+ */
+function capalot_get_thumbnail_url($post = null, $size = 'thumbnail')
+{
+  if (empty($post))
+    global $post;
+  else
+    $post = get_post($post);
+
+  if (!$post instanceof WP_Post)
+    return get_default_thumbnail_src();
+
+  if (has_post_thumbnail($post)) {
+    return get_the_post_thumbnail_url($post, $size);
+  } elseif (_capalot('is_post_one_thumbnail', true) && !empty($post->post_content)) {
+    ob_start();
+    ob_end_clean();
+    preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $matches);
+    if (!empty($matches[1][0])) {
+      return $matches[1][0];
+    }
+  }
+
+  return get_default_thumbnail_src();
+}
+
+/**
+ * 获取分类信息
+ */
+function capalot_meta_category($num = 2)
+{
+  $categories = get_the_category();
+  $separator = ' ';
+  $output = '';
+  if ($categories) {
+    foreach ($categories as $key => $category) {
+      if ($key == $num) {
+        break;
+      }
+      $output .= '<a href="' . esc_url(get_category_link($category->term_id)) . '">' . esc_html($category->name) . '</a>' . $separator;
+    }
+    echo trim($output, $separator);
+  }
+}
+
+/**
+ * 获取文章描述
+ */
+function capalot_get_post_excerpt($limit = '48')
+{
+  $excerpt = get_the_excerpt();
+
+  if (empty($excerpt)) {
+    $excerpt = get_the_content();
+  }
+
+  return wp_trim_words(strip_shortcodes($excerpt), $limit, '...');
+}
+
+/**
+ * 获取文章点赞数
+ */
+function capalot_get_post_likes($post_id = null)
+{
+  if (empty($post_id)) {
+    global $post;
+    $post_id = $post->ID;
+  }
+  $meta_key = 'likes';
+  $num      = absint(get_post_meta($post_id, $meta_key, true));
+  if (1000 <= $num) {
+    $num = sprintf('%0.1f', $num / 1000) . 'K';
+  }
+  return $num;
+}
+
+/**
+ * 获取文章收藏数
+ */
+function capalot_get_post_favorites($post_id = null)
+{
+  if (empty($post_id)) {
+    global $post;
+    $post_id = $post->ID;
+  }
+  $meta_key = 'favorites';
+  $num      = absint(get_post_meta($post_id, $meta_key, true));
+  if (1000 <= $num) {
+    $num = sprintf('%0.1f', $num / 1000) . 'K';
+  }
+  return $num;
+}
+
+/**
+ * 获取文章浏览数量
+ */
+function capalot_get_post_views($post_id = null)
+{
+  if (empty($post_id)) {
+    global $post;
+    $post_id = $post->ID;
+  }
+  $meta_key = 'views';
+  $this_num = absint(get_post_meta($post_id, $meta_key, true));
+  if (1000 <= $this_num) {
+    $this_num = sprintf('%0.1f', $this_num / 1000) . 'K';
+  }
+  return $this_num;
+}
+
+/**
+ * 获取时间戳
+ */
+function capalot_meta_datetime()
+{
+  $time = get_the_time('U');
+
+  $time_string = sprintf(
+    '<time class="pub-date" datetime="%1$s">%2$s</time>',
+    esc_attr(get_the_date(DATE_W3C)),
+    esc_html(human_time_diff($time, current_time('timestamp')) . __('前', 'ripro'))
+  );
+
+  if (false) {
+    // 显示最近修改时间
+    $modified_time = get_the_modified_time('U');
+    if ($time != $modified_time) {
+      $time_string .= sprintf(
+        '<time class="mod-date" datetime="%1$s">%2$s</time>',
+        esc_attr(get_the_modified_date(DATE_W3C)),
+        esc_html(human_time_diff($modified_time, current_time('timestamp')) . __('前', 'ripro'))
+      );
+    }
+  }
+
+  echo $time_string;
+}
+
+/**
  * 获取响应参数
  */
 function get_response_param($key, $default = '', $method = 'post')
@@ -174,25 +331,119 @@ function get_response_param($key, $default = '', $method = 'post')
  * @return [type]
  */
 if (!function_exists('get_current_url')) {
-  function get_current_url() {
-      $current_url = home_url(add_query_arg(array()));
-      return esc_url($current_url);
+  function get_current_url()
+  {
+    $current_url = home_url(add_query_arg(array()));
+    return esc_url($current_url);
   }
 }
 
 //获取用户客户端IP get_ip_address()
-function get_ip_address($ignore_private_and_reserved = false) {
+function get_ip_address($ignore_private_and_reserved = false)
+{
   $flags = $ignore_private_and_reserved ? (FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) : 0;
   foreach (array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR') as $key) {
-      if (array_key_exists($key, $_SERVER) === true) {
-          foreach (explode(',', $_SERVER[$key]) as $ip) {
-              $ip = trim($ip); // just to be safe
+    if (array_key_exists($key, $_SERVER) === true) {
+      foreach (explode(',', $_SERVER[$key]) as $ip) {
+        $ip = trim($ip); // just to be safe
 
-              if (filter_var($ip, FILTER_VALIDATE_IP, $flags) !== false) {
-                  return $ip;
-              }
-          }
+        if (filter_var($ip, FILTER_VALIDATE_IP, $flags) !== false) {
+          return $ip;
+        }
       }
+    }
   }
   return 'unknown';
+}
+
+/**
+ * 获取文章列表显示风格配置
+ */
+function get_posts_style_config($cat_id = 0)
+{
+  $item_col = _capalot('archive_item_col', '4');
+  $item_style = _capalot('archive_item_style', 'grid');
+  $media_size = _capalot('post_thumbnail_size', 'radio-3x2');
+
+  $media_size_type = get_thumbnail_size_type();
+  $media_align_type = get_thumbnail_align_type();
+
+  $item_entry = _capalot('archive_item_entry', array(
+    'category_dot',
+    'entry_desc',
+    'entry_footer',
+    'vip_icon',
+  ));
+
+  $term_item_style = _capalot('site_term_item_style', []);
+
+  if (!empty($cat_id) && !empty($term_item_style)) {
+    foreach ($term_item_style as $key => $item) {
+      if ($cat_id == $item['cat_id']) {
+        $item_col   = $item['archive_item_col'];
+        $item_style = $item['archive_item_style'];
+        $media_size = $item['post_thumbnail_size'];
+        $item_entry = $item['archive_item_entry'];
+        continue;
+      }
+    }
+  }
+
+
+  $row_cols = [
+    '1' => 'row-cols-1 g-2 g-md-3 g-lg-4',
+    '2' => 'row-cols-2 g-2 g-md-3 g-lg-4',
+    '3' => 'row-cols-2 row-cols-md-3 g-2 g-md-3 g-lg-4',
+    '4' => 'row-cols-2 row-cols-md-3 row-cols-lg-4 g-2 g-md-3 g-lg-4',
+    '5' => 'row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-2 g-lg-3',
+    '6' => 'row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-6 g-2 g-lg-3',
+  ];
+
+  if ($item_style == 'list' && $item_col >= 2) {
+    // 列表模式自适应...
+    $row_cols_class = 'row-cols-1 row-cols-md-2 g-2 g-md-3 g-lg-4';
+  } else {
+    $row_cols_class = $row_cols[$item_col];
+  }
+
+  $config = array(
+    'type'            => $item_style, //grid grid-overlay list list-icon
+    'row_cols_class'  => $row_cols_class,
+    'media_size_type' => $media_size_type,
+    'media_fit_type'  => $media_align_type,
+    'media_class'     => $media_size, // media-3x2 media-3x3 media-2x3
+    'is_vip_icon'     => @in_array('vip_icon', $item_entry),
+    'is_entry_desc'   => @in_array('entry_desc', $item_entry),
+    'is_entry_meta' => @in_array('entry_footer', $item_entry),
+    'is_entry_cat' => @in_array('category_dot', $item_entry),
+  );
+  return $config;
+}
+
+// 获取文章缩略图尺寸
+function get_thumbnail_size_type()
+{
+  $options = ['bg-cover', 'bg-auto', 'bg-contain'];
+  $option = _capalot('site_thumb_size_type', 'bg-cover');
+
+  if (!in_array($option, $options))
+    $option = $options[0];
+
+  return $option;
+}
+
+// 获取文章缩略图对齐方式
+function get_thumbnail_align_type()
+{
+  $options = [
+    'bg-left-top', 'bg-right-top', 'bg-center-top',
+    'bg-left-center', 'bg-right-center', 'bg-center-center',
+    'bg-left-bottom', 'bg-right-bottom', 'bg-center-bottom'
+  ];
+  $option = _capalot('site_thumb_fit_type', 'bg-center');
+
+  if (!in_array($option, $options))
+    $option = $options[0];
+
+  return $option;
 }

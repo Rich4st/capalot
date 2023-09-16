@@ -101,7 +101,69 @@ function capalot_home_latest_posts_widget($args, $instance)
 
   echo $args['before_widget'];
 
-  get_template_part('template-parts/widget/home/latest_posts', '', $instance);
+  get_template_part('template-parts/widget/home/latest-posts', '', $instance);
 
   echo $args['after_widget'];
+}
+
+/**
+ * 分类文章模块
+ */
+CSF::createWidget('capalot_home_category_posts_widget', array(
+  'title' => '【首页】2.分类文章模块',
+  'className' => 'home-category-posts-widget',
+  'desc' => '首页按照分类展示文章',
+  'fields' => array(
+
+    [
+      'id' => 'category',
+      'type' => 'select',
+      'title' => '要展示文章的分类',
+      'placeholder' => '选择分类',
+      'options' => 'categories',
+      'default' => 'all',
+    ],
+
+    [
+      'id'      => 'orderby',
+      'type'    => 'radio',
+      'title'   => '排序方式',
+      'inline'  => true,
+      'options' => array(
+        'date'          => '日期',
+        'rand'          => '随机',
+        'comment_count' => '评论数',
+        'views'         => '阅读量',
+        'modified'      => '最近编辑时间',
+        'title'         => '标题',
+        'ID'            => '文章ID',
+      ),
+      'default' => 'date',
+    ],
+
+    [
+      'id'      => 'count',
+      'type'    => 'text',
+      'title'   => '显示数量',
+      'default' => 8,
+    ],
+
+  )
+));
+
+function capalot_home_category_posts_widget($args, $instance)
+{
+
+  $instance = array_merge(
+    [
+      'category' => 0,
+      'orderby' => 'date',
+      'count' => 8,
+    ],
+    $instance
+  );
+
+
+  get_template_part('template-parts/widget/home/category-posts', '', $instance);
+
 }
