@@ -148,6 +148,63 @@ function capalot_sidebar_posts_widget($args, $instance)
 }
 
 /**
+ * 边栏 - 排行榜展示
+ */
+CSF::createWidget('capalot_sidebar_ranking_widget', array(
+  'title' => '【边栏】4.排行榜展示',
+  'className' => 'sidebar-ranking-widget',
+  'desc' => '排行榜展示',
+  'fields'      => array(
+
+    array(
+      'id'      => 'title',
+      'type'    => 'text',
+      'title'   => '标题',
+      'default' => '排行榜展示',
+    ),
+
+    array(
+      'id'      => 'orderby',
+      'type'    => 'select',
+      'title'   => '排行方式',
+      'options' => array(
+        'views_num' => '阅读量排行',
+        'likes_num' => '点赞量排行',
+        'fav_num'   => '收藏量排行',
+        'down_num'  => '下载量排行',
+        'pay_num'   => '购买量排行',
+      ),
+      'default' => 'views_num',
+    ),
+
+    array(
+      'id'      => 'count',
+      'type'    => 'text',
+      'title'   => '显示数量',
+      'default' => 6,
+    ),
+
+  ),
+));
+function capalot_sidebar_ranking_widget($args, $instance)
+{
+
+  $instance = array_merge(
+    array(
+      'orderby' => 'views_num',
+      'count' => 6,
+    ),
+    $instance
+  );
+
+  echo $args['before_widget'];
+
+  get_template_part('template-parts/widget/sidebar/ranking', '', $instance);
+
+  echo $args['after_widget'];
+}
+
+/**
  * 首页 - 最新文章组件
  */
 CSF::createWidget('capalot_home_latest_posts_widget', array(
