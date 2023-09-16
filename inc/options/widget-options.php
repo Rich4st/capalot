@@ -81,6 +81,73 @@ function capalot_sidebar_author_widget($args, $instance)
 }
 
 /**
+ * 边栏 - 文章展示
+ */
+CSF::createWidget('capalot_sidebar_posts_widget', array(
+  'title' => '【边栏】3.文章展示',
+  'className' => 'sidebar-posts-widget',
+  'desc' => '文章展示',
+  'fields'      => array(
+
+    array(
+      'id'      => 'title',
+      'type'    => 'text',
+      'title'   => '标题',
+      'default' => '文章展示',
+    ),
+
+    array(
+      'id'          => 'category',
+      'type'        => 'select',
+      'title'       => '要展示得分类文章',
+      'placeholder' => '选择分类',
+      'options'     => 'categories',
+    ),
+
+    array(
+      'id'      => 'orderby',
+      'type'    => 'radio',
+      'title'   => '排序方式',
+      'inline'  => true,
+      'options' => array(
+        'date'     => '日期',
+        'rand'     => '随机',
+        'modified' => '最近编辑时间',
+        'title'    => '标题',
+        'ID'       => '文章ID',
+      ),
+      'default' => 'date',
+    ),
+
+    array(
+      'id'      => 'count',
+      'type'    => 'text',
+      'title'   => '显示数量',
+      'default' => 6,
+    ),
+
+  ),
+));
+function capalot_sidebar_posts_widget($args, $instance)
+{
+
+  $instance = array_merge(
+    array(
+      'category' => 0,
+      'orderby' => 'date',
+      'count' => 6,
+    ),
+    $instance
+  );
+
+  echo $args['before_widget'];
+
+  get_template_part('template-parts/widget/sidebar/posts', '', $instance);
+
+  echo $args['after_widget'];
+}
+
+/**
  * 首页 - 最新文章组件
  */
 CSF::createWidget('capalot_home_latest_posts_widget', array(
