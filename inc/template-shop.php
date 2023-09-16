@@ -329,10 +329,66 @@ function is_site_shop()
     return _capalot('site_shop_mode', 'all') !== 'close';
 }
 
+/**
+ * 文章是否有付费资源
+ */
+function post_has_pay($post_id)
+{
+    if (post_is_download_pay($post_id) || post_has_hide_pay($post_id) || post_has_video_pay($post_id)) {
+        return true;
+    }
+    return false;
+}
+
+// 文章是否下载资源文章
+function post_is_download_pay($post_id)
+{
+    $price = get_post_meta($post_id, 'capalot_price', true);
+    $status = get_post_meta($post_id, 'capalot_status', true);
+
+    if (is_numeric($price) && !empty($status)) {
+        return true;
+    }
+    return false;
+}
+
+//文章是否有付费查看内容
+function post_has_hide_pay($post_id)
+{
+
+    $price = get_post_meta($post_id, 'capalot_price', true);
+
+    $content = get_post_field('post_content', $post_id);
+
+    if (is_numeric($price) && has_shortcode($content, 'capalot-hide')) {
+        return true;
+    }
+    return false;
+}
+
+//文章是否有付费播放视频内容
+function post_has_video_pay($post_id)
+{
+
+    $price = get_post_meta($post_id, 'capalot_price', true);
+    $status = get_post_meta($post_id, 'capalot_video', true);
+
+    if (is_numeric($price) && !empty($status)) {
+        return true;
+    }
+    return false;
+}
+
 //获取商城模式 [close , all , user_mod]
 function get_site_shop_mod()
 {
     return _capalot('site_shop_mode', 'all');
+}
+
+//站内币图标
+function get_site_coin_icon()
+{
+    return esc_html(_capalot('site_coin_icon', 'fas fa-coins'));
 }
 
 //是否开启免登录购买功能
@@ -622,6 +678,15 @@ function capalot_get_request_pay($order_data)
                     'msg'    => '支付成功'
                 ];
             }
+
+            break;
+        case 'alipay':
+            // TODO: 支付宝支付
+            $config = _capalot('alipay');
+
+            return [
+                'foo' => $config
+            ];
 
             break;
         default:

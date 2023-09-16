@@ -349,19 +349,147 @@ CSF::createSection($prefix, array(
   'title' => '文章列表布局',
   'fields' => array(
 
+
     array(
-      'id' => 'site_pagination_type',
-      'type' => 'radio',
-      'inline' => true,
-      'title' => '分页风格',
-      'options' => array(
-        'standard' => '传统分页',
-        'click' => '点击加载更多',
-        'pull' => '下拉加载更多',
+      'type'    => 'submessage',
+      'style'   => 'info',
+      'content' => '根据你网站文章类型前往WP后台设置-媒体-缩略图大小设置缩略图尺寸，常见尺寸300x200 ，300x300 ，400x300，如果你网站大部分文章是采集的，建议点选本页面下方关闭WP自带图片裁剪功能，这样后台上传图片时，不默认裁剪多个缩略图，减少占用空间、因本主题功能支持不同宽度高度列表布局，所以没有完美固定的缩略图尺寸推荐，请根据自己网站整体内容风格尝试不同比例尺寸。如需完美尺寸请固定全站风格为一种布局。',
+    ),
+
+    array(
+      'id'      => 'default_thumb',
+      'type'    => 'upload',
+      'title'   => '文章默认缩略图',
+      'desc'    => '设置文章默认缩略图（建议和自定义文章缩略图宽高保持一致）',
+      'default' => get_template_directory_uri() . '/assets/img/thumb.jpg',
+    ),
+
+    array(
+      'id'          => 'site_thumb_size_type',
+      'type'        => 'radio',
+      'inline'      => true,
+      'title'       => '缩略图显示模式',
+      'desc'        => '',
+      'placeholder' => '',
+      'options'     => array(
+        'bg-cover'   => 'cover：自适应铺满',
+        'bg-auto'    => 'auto：原图大小',
+        'bg-contain' => 'contain：缩放全图',
       ),
-      'default' => 'click'
-    )
-  )
+      'default'     => 'bg-cover',
+    ),
+
+    array(
+      'id'          => 'site_thumb_fit_type',
+      'type'        => 'radio',
+      'inline'      => true,
+      'title'       => '缩略图对齐模式',
+      'desc'        => '因网站采用自适应设计，尽可能的在自适应缩略图展示完整的情况根据对齐模式优先对齐展示缩略图',
+      'placeholder' => '',
+      'options'     => array(
+        'bg-left-top'      => '左上',
+        'bg-right-top'     => '右上',
+        'bg-center-top'    => '中上',
+        'bg-center'        => '居中',
+        'bg-center-bottom' => '中下',
+        'bg-left-bottom'   => '左下',
+        'bg-right-bottom'  => '右下',
+      ),
+      'default'     => 'bg-center',
+    ),
+
+    array(
+      'id'      => 'is_post_one_thumbnail',
+      'type'    => 'switcher',
+      'title'   => '自动抓取第一张图片',
+      'desc'    => '没设置特色图自动获取文章中第一张图片作为特色图，如果出现抓取的是最后一张的情况，请检查文章内容中的图片是否有回车或者空格隔开，必须隔开才能识别',
+      'default' => true,
+    ),
+
+    array(
+      'id'      => 'disable_wp_thumbnail_crop',
+      'type'    => 'switcher',
+      'title'   => '关闭WP自带图片裁剪',
+      'desc'    => '防止每次上传图片都生成多余缩略图占用空间问题，如果您网站缩略图尺寸单一，建议开启此项',
+      'default' => false,
+    ),
+
+    array(
+      'id'      => 'post_thumbnail_size',
+      'type'    => 'image_select',
+      'title'   => '全站默认缩略图尺寸比例',
+      'desc'    => '常见宽高3:2比例，3:3正方形，2:3比例，',
+      'options' => array(
+        'ratio-2x3'  => $template_dir . '/assets/img/options/img-2x3.png',
+        'ratio-3x4'  => $template_dir . '/assets/img/options/img-3x4.png',
+        'ratio-1x1'  => $template_dir . '/assets/img/options/img-1x1.png',
+        'ratio-4x3'  => $template_dir . '/assets/img/options/img-4x3.png',
+        'ratio-3x2'  => $template_dir . '/assets/img/options/img-3x2.png',
+        'ratio-16x9' => $template_dir . '/assets/img/options/img-16x9.png',
+        'ratio-21x9' => $template_dir . '/assets/img/options/img-21x9.png',
+      ),
+      'default' => 'ratio-3x2',
+    ),
+
+    array(
+      'id'      => 'archive_item_style',
+      'type'    => 'image_select',
+      'title'   => '全站默认文章列表展示风格',
+      'desc'    => '网格，列表，图片，图标风格',
+      'options' => array(
+        'grid'         => $template_dir . '/assets/img/options/item-grid.png',
+        'grid-overlay' => $template_dir . '/assets/img/options/item-grid-overlay.png',
+        'list'         => $template_dir . '/assets/img/options/item-list.png',
+        'title'        => $template_dir . '/assets/img/options/item-title.png',
+      ),
+      'default' => 'grid',
+    ),
+
+    array(
+      'id'      => 'archive_item_col',
+      'type'    => 'image_select',
+      'title'   => '全站默认文章列表展示列数',
+      'desc'    => '在最大尺寸1080px宽度时显示列数，其他设备自适应展示',
+      'options' => array(
+        '1' => $template_dir . '/assets/img/options/col-1.png',
+        '2' => $template_dir . '/assets/img/options/col-2.png',
+        '3' => $template_dir . '/assets/img/options/col-3.png',
+        '4' => $template_dir . '/assets/img/options/col-4.png',
+        '5' => $template_dir . '/assets/img/options/col-5.png',
+        '6' => $template_dir . '/assets/img/options/col-6.png',
+      ),
+      'default' => '4',
+    ),
+
+    array(
+      'id'      => 'archive_item_entry',
+      'type'    => 'checkbox',
+      'title'   => '全站文章列表辅助信息显示',
+      'options' => array(
+        'category_dot' => '显示分类',
+        'entry_desc'   => '显示摘要',
+        'entry_footer' => '显示时间，阅读数点赞数等',
+        // 'vip_icon'     => 'VIP资源标识',
+      ),
+      'inline'  => true,
+      'default' => array('category_dot', 'entry_desc', 'entry_footer', 'vip_icon'),
+    ),
+
+    array(
+      'id'      => 'site_page_nav_type',
+      'type'    => 'radio',
+      'inline'  => true,
+      'title'   => '网站翻页风格模式',
+      'desc'    => '',
+      'options' => array(
+        'click'  => '点击按钮加载更多',
+        'auto'   => '下拉自动加载更多',
+        'number' => '上/下页翻页按钮',
+      ),
+      'default' => 'click',
+    ),
+
+  ),
 ));
 
 // 布局设置 - 自定义分类布局
