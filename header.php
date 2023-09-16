@@ -14,9 +14,17 @@
       <div class="w-[100px] h-[60px] flex items-center justify-center  ">
         LOGO
       </div>
-      <div class="mx-[20px] w-2 bg-[#4d4d4d]">
+      <div class="relative">
+        <?php if (_capalot('is_site_dark_toggle', true)) : ?>
+          <span id="light-mode" class="absolute cursor-pointer">
+            <i class="fa-solid fa-sun"></i>
+          </span>
+          <span id="dark-mode" class="absolute cursor-pointer hidden">
+            <i class="fa-solid fa-cloud-moon"></i>
+          </span>
+        <?php endif; ?>
       </div>
-      <div class="">
+      <div>
       </div>
       <div>
       </div>

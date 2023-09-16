@@ -283,13 +283,13 @@ CSF::createSection($prefix, array(
     array(
       'id'      => 'is_site_dark_toggle',
       'type'    => 'switcher',
-      'title'   => '网站深色暗黑模式切换',
+      'title'   => '网站亮色暗黑模式切换',
       'desc'    => '开启后，网站可以切换白天黑夜模式',
       'default' => true,
     ),
 
     array(
-      'id'          => 'site_default_color_mod',
+      'id'          => 'site_default_color_mode',
       'type'        => 'radio',
       'inline'      => true,
       'title'       => '网站默认颜色模式',

@@ -5,6 +5,7 @@ let ca = {
   init: function () {
     ca.pay_action();
     ca.pagination();
+    ca.toggle_dark();
   },
 
   /**
@@ -133,6 +134,30 @@ let ca = {
       });
     }
     );
+  },
+
+  // 暗黑模式
+  toggle_dark: function () {
+    const root = $('html')
+
+    const light = $('#light-mode')
+    const dark = $('#dark-mode')
+
+    light.on('click', toggleVisibility);
+    dark.on('click', toggleVisibility);
+
+    // 切换元素可见性的函数
+    function toggleVisibility() {
+      if (light.hasClass("hidden")) {
+        light.removeClass('hidden');
+        dark.addClass('hidden');
+        root.removeClass('dark');
+      } else {
+        light.addClass('hidden');
+        dark.removeClass('hidden');
+        root.addClass('dark');
+      }
+    }
   }
 
 }

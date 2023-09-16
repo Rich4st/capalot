@@ -357,6 +357,36 @@ function get_ip_address($ignore_private_and_reserved = false)
 }
 
 /**
+ * 获取网站默认颜色风格
+ */
+function get_site_default_color_style()
+{
+
+  $style = _capalot('site_default_color_mode', 'light');
+  //读取用户浏览器缓存模式
+  $cookie_style = Capalot_Cookie::get('current_site_color');
+
+  if (!empty($cookie_style)) {
+    $style = $cookie_style;
+  }
+
+  if ($style == 'auto') {
+    $current_hour = wp_date('H'); // 获取当前小时
+    // 定义白天和黑夜的起止时间（您可以根据需要进行调整）
+    $day_start = 6;   // 白天开始时间
+    $night_start = 18;   // 黑夜开始时间
+    // 根据当前时间判断风格
+    if ($current_hour >= $day_start && $current_hour < $night_start) {
+      $style = 'light';   // 白天风格
+    } elseif ($current_hour >= $night_start || $current_hour < $day_start) {
+      $style = 'dark';   // 黑夜风格
+    }
+  }
+
+  return $style;
+}
+
+/**
  * 获取文章列表显示风格配置
  */
 function get_posts_style_config($cat_id = 0)

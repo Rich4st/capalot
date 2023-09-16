@@ -1,7 +1,11 @@
 <?php
 
 new Capalot_Shop();
+new Capalot_Cookie;
 
+/**
+ * 商城
+ */
 class Capalot_Shop
 {
 
@@ -82,6 +86,28 @@ class Capalot_Shop
   }
 }
 
+/**
+ * 支付
+ */
 class Capalot_Pay
 {
+}
+
+/**
+ * 缓存
+ */
+class Capalot_Cookie
+{
+  public function __construct()
+  {
+  }
+
+  public static function get($key)
+  {
+    if (!isset($_COOKIE[$key]))
+      return false;
+
+    return $_COOKIE[$key];
+  }
+
 }
