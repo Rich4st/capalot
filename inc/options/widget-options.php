@@ -575,3 +575,113 @@ function capalot_home_cmspost_widget($args, $instance)
 
   echo $args['after_widget'];
 }
+
+/**
+ * 首页 - 横条图标模块
+ */
+CSF::createWidget('capalot_home_division_widget', array(
+  'title' => '【首页】6.横条图标模块',
+  'className' => 'home-division-widget',
+  'desc' => '首页横条图标模块',
+  'fields'      => array(
+
+    array(
+      'id'          => 'icon_style',
+      'type'        => 'radio',
+      'inline'      => true,
+      'title'       => '图标风格',
+      'placeholder' => '',
+      'options'     => array(
+        'rounded-2'    => '方形',
+        'rounded-circle'   => '圆形',
+      ),
+      'default'     => 'rounded-2',
+    ),
+
+    array(
+      'id'         => 'div_data',
+      'type'       => 'group',
+      'title'      => '新建',
+      'fields'     => array(
+        array(
+          'id'      => 'title',
+          'type'    => 'text',
+          'title'   => '标题文字',
+          'default' => '标题文字',
+        ),
+        array(
+          'id'         => 'icon',
+          'type'       => 'icon',
+          'title'      => '图标',
+          'desc'       => '设置站内币图标，部分页面展示需要',
+          'default'    => 'fab fa-buffer',
+        ),
+        array(
+          'id'      => 'color',
+          'type'    => 'color',
+          'title'   => '图标颜色',
+          'default' => '#1e73be'
+        ),
+        array(
+          'id'      => 'desc',
+          'type'    => 'text',
+          'title'   => '描述内容',
+          'default' => '这里是描述内容介绍',
+        ),
+        array(
+          'id'      => 'link',
+          'type'    => 'text',
+          'title'   => '链接',
+          'desc'   => '不填写则不启用链接',
+          'default' => '',
+        ),
+
+      ),
+      'default' => array(
+        array(
+          'title' => '模块化首页',
+          'icon'  => 'https://cdn.lordicon.com/jlvsilmg.json',
+          'color'  => '#8399ff',
+          'desc'  => 'WP原生可视化模块定制',
+          'link'  => '',
+        ),
+        array(
+          'title' => '商城支持',
+          'icon'  => 'https://cdn.lordicon.com/lpddubrl.json',
+          'color'  => '#FF9800',
+          'desc'  => '付费下载、查看、音视频播放',
+          'link'  => '',
+        ),
+        array(
+          'title' => '多级菜单',
+          'icon'  => 'https://cdn.lordicon.com/tsnvgrkp.json',
+          'color'  => '#4c4c4c',
+          'desc'  => '自定义菜单图标，三级菜单',
+          'link'  => '',
+        ),
+        array(
+          'title' => '会员系统',
+          'icon'  => 'https://cdn.lordicon.com/ljvjsnvh.json',
+          'color'  => '#ff75a4',
+          'desc'  => '内置VIP和用户中心系统',
+          'link'  => '',
+        ),
+      ),
+    ),
+
+  ),
+));
+function capalot_home_division_widget($args, $instance)
+{
+
+  $instance = array_merge(array(
+    'div_data' => array(),
+    'icon_style' => 'cube',
+  ), $instance);
+
+  echo $args['before_widget'];
+
+  get_template_part('template-parts/widget/home/division', '', $instance);
+
+  echo $args['after_widget'];
+}

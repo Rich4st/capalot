@@ -3,7 +3,12 @@ module.exports = {
   darkMode: 'class',
   content: ['./**/*.php', './**/*.js'],
   theme: {
-    extend: {},
+    extend: {
+      backgroundColor: {
+        'dark': '#1e1e20',
+        'dark-card': '#252529',
+      }
+    },
   },
   plugins: [],
 }
