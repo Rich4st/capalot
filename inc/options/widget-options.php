@@ -806,3 +806,59 @@ function capalot_home_bg_btn_widget($args, $instance)
 
   echo $args['after_widget'];
 }
+
+/**
+ * 首页 - 网站动态展示
+ */
+CSF::createWidget('capalot_home_notification_widget', array(
+  'title' => '【首页】8.网站动态展示',
+  'className' => 'home-notification-widget',
+  'desc' => '首页网站动态展示',
+  'fields'      => array(
+
+    array(
+      'id'    => 'title',
+      'type'  => 'Text',
+      'title' => '标题',
+      'default' => '网站动态',
+    ),
+
+    array(
+      'id'      => 'bg_color',
+      'type'    => 'select',
+      'title'   => '背景颜色',
+      'options' => array(
+        'primary'   => '蓝色',
+        'success'   => '绿色',
+        'danger'    => '红色',
+        'warning'   => '黄色',
+        'secondary' => '灰色',
+        'dark'      => '黑色',
+      ),
+      'default' => 'primary',
+    ),
+
+    array(
+      'id'      => 'is_autoplay',
+      'type'    => 'switcher',
+      'title'   => '自动播放',
+      'default' => true,
+    ),
+
+  ),
+));
+function capalot_home_notification_widget($args, $instance)
+{
+
+  $instance = array_merge(array(
+    'title' => '网站动态',
+    'bg_color' => 'primary',
+    'is_autoplay' => true,
+  ), $instance);
+
+  echo $args['before_widget'];
+
+  get_template_part('template-parts/widget/home/notification', '', $instance);
+
+  echo $args['after_widget'];
+}
