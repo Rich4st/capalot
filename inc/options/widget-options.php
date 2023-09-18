@@ -685,3 +685,124 @@ function capalot_home_division_widget($args, $instance)
 
   echo $args['after_widget'];
 }
+
+/**
+ * 首页 - 图片背景按钮
+ */
+CSF::createWidget('capalot_home_bg_btn_widget', array(
+  'title' => '【首页】7.图片背景按钮',
+  'className' => 'home-bg-btn-widget',
+  'desc' => '首页图片背景按钮',
+  'fields'      => array(
+
+
+    array(
+      'id'      => 'title',
+      'type'    => 'text',
+      'title'   => '模块主标题',
+      'default' => '这是图片背景主标题',
+    ),
+    array(
+      'id'      => 'desc',
+      'type'    => 'text',
+      'title'   => '模块介绍文字',
+      'default' => '这里是模块介绍文字，不填写则不显示，并可以添加不同颜色按钮',
+    ),
+
+    array(
+      'id'      => 'bg_img',
+      'type'    => 'upload',
+      'title'   => '背景图片',
+      'default' => get_template_directory_uri() . '/assets/img/bg.jpg',
+    ),
+
+    array(
+      'id'          => 'bg_style',
+      'type'        => 'radio',
+      'inline'      => true,
+      'title'       => '背景图片风格',
+      'placeholder' => '',
+      'options'     => array(
+        'bg-fixed'    => '固定',
+        'bg-scroll'   => '跟随',
+      ),
+      'default'     => 'bg-fixed',
+    ),
+
+    array(
+      'id'         => 'btn_data',
+      'type'       => 'group',
+      'title'      => '新建',
+      'fields'     => array(
+        array(
+          'id'      => 'title',
+          'type'    => 'text',
+          'title'   => '按钮名称',
+          'default' => '标题文字',
+        ),
+        array(
+          'id'         => 'icon',
+          'type'       => 'icon',
+          'title'      => '按钮图标',
+          'desc'       => '设置站内币图标，部分页面展示需要',
+          'default'    => 'fab fa-buffer',
+        ),
+        array(
+          'id'      => 'link',
+          'type'    => 'text',
+          'title'   => '链接',
+          'desc'   => '不填写则不启用链接',
+          'default' => '',
+        ),
+        array(
+          'id'          => 'color',
+          'type'        => 'radio',
+          'inline'      => true,
+          'title'       => '按钮颜色',
+          'placeholder' => '',
+          'options'     => array(
+            'primary' => 'primary',
+            'secondary' => 'secondary',
+            'success' => 'success',
+            'info' => 'info',
+            'error' => 'error',
+          ),
+          'default'     => 'primary',
+        ),
+
+      ),
+      'default' => array(
+        array(
+          'title' => '按钮名称1',
+          'icon'  => 'fab fa-buffer',
+          'color'  => 'info',
+          'link'  => '#',
+        ),
+        array(
+          'title' => '按钮名称2',
+          'icon'  => 'fab fa-buffer',
+          'color'  => 'success',
+          'link'  => '#',
+        ),
+      ),
+    ),
+
+  ),
+));
+function capalot_home_bg_btn_widget($args, $instance)
+{
+
+  $instance = array_merge(array(
+    'title' => '这是图片背景主标题',
+    'desc' => '这里是模块介绍文字，不填写则不显示，并可以添加不同颜色按钮',
+    'bg_img' => get_template_directory_uri() . '/assets/img/bg2.jpg',
+    'bg_style' => '',
+    'btn_data' => array(),
+  ), $instance);
+
+  echo $args['before_widget'];
+
+  get_template_part('template-parts/widget/home/bg-btn', '', $instance);
+
+  echo $args['after_widget'];
+}
