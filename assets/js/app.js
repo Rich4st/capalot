@@ -6,6 +6,7 @@ let ca = {
     ca.pay_action();
     ca.pagination();
     ca.toggle_dark();
+    ca.swiper();
   },
 
   /**
@@ -158,6 +159,10 @@ let ca = {
         root.addClass('dark');
       }
     }
+  },
+
+  swiper: function () {
+    var swiper = new Swiper(".mySwiper", {});
   }
 
 }

@@ -423,17 +423,17 @@ function get_posts_style_config($cat_id = 0)
 
 
   $row_cols = [
-    '1' => 'grid-cols-1 gap-2 lg:gap-4 md:gap-3',
-    '2' => 'grid-cols-2 gap-2 lg:gap-4 md:gap-3',
-    '3' => 'grid-cols-2 md:grid-cols-3 gap-2 lg:gap-4 md:gap-3 ',
-    '4' => 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-3 lg:gap-4',
-    '5' => 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 lg:gap-3',
-    '6' => 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 xxl:grid-cols-6 gap-2 lg:gap-3',
+    '1' => 'grid-cols-1 gap-4',
+    '2' => 'grid-cols-1 md:grid-cols-2 gap-4',
+    '3' => 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ',
+    '4' => 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4',
+    '5' => 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xxl:grid-cols-5 gap-4',
+    '6' => 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xxl:grid-cols-5 xxxl:grid-cols-6 gap-4',
   ];
 
   if ($item_style == 'list' && $item_col >= 2) {
     // 列表模式自适应...
-    $row_cols_class = 'row-cols-1 row-cols-md-2 g-2 g-md-3 g-lg-4';
+    $row_cols_class = 'grid-cols-1 md:grid-cols-2 gap-4 ';
   } else {
     $row_cols_class = $row_cols[$item_col];
   }
