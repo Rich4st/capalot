@@ -28,6 +28,7 @@ function capalot_assets()
   wp_enqueue_script('sweetalert2', get_template_directory_uri() . '/assets/js/sweetalert2.min.js', array(), '11.0.18', true);
   // font-awesome
   wp_enqueue_script('solid', get_template_directory_uri() . '/assets/js/solid.min.js', array(), '6.4.2', true);
+  wp_enqueue_script('regular', get_template_directory_uri() . '/assets/js/regular.min.js', array(), '6.4.2', true);
   wp_enqueue_script('fontawesome', get_template_directory_uri() . '/assets/js/fontawesome.min.js', array(), '6.4.2', true);
   wp_enqueue_script('brands', get_template_directory_uri() . '/assets/js/brands.min.js', array(), '6.4.2', true);
   // swiper
