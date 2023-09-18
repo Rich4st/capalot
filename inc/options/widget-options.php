@@ -485,3 +485,93 @@ function capalot_home_slider_widget($args, $instance)
 
   echo $args['after_widget'];
 }
+
+/**
+ * 首页 - CMS文章模块
+ */
+CSF::createWidget('capalot_home_cmspost_widget', array(
+  'title' => '【首页】5.CMS文章模块',
+  'className' => 'home-cmspost-widget',
+  'desc' => '首页CMS文章模块',
+  'fields'      => array(
+
+    array(
+      'id'      => 'title',
+      'type'    => 'text',
+      'title'   => '标题',
+      'default' => 'CMS文章',
+    ),
+
+    array(
+      'id'      => 'desc',
+      'type'    => 'text',
+      'title'   => '描述介绍',
+      'default' => '当前热门分类文章展示',
+    ),
+
+    array(
+      'id'      => 'style',
+      'type'    => 'select',
+      'title'   => 'CMS布局风格',
+      'options' => array(
+        'list' => '左大图-右列表',
+        'grid-overlay' => '左大图-右网格',
+      ),
+      'default' => 'grid-overlay',
+    ),
+    array(
+      'id'      => 'is_box_right',
+      'type'    => 'switcher',
+      'title'   => '大图右侧显示',
+      'default' => false,
+    ),
+
+    array(
+      'id'          => 'category',
+      'type'        => 'select',
+      'title'       => '要展示得分类文章',
+      'placeholder' => '选择分类',
+      'desc' => '不设置则展示最新文章',
+      'options'     => 'categories',
+    ),
+
+    array(
+      'id'      => 'orderby',
+      'type'    => 'radio',
+      'title'   => '排序方式',
+      'inline'  => true,
+      'options' => array(
+        'date'          => '日期',
+        'rand'          => '随机',
+        'comment_count' => '评论数',
+        'views'         => '阅读量',
+        'modified'      => '最近编辑时间',
+        'title'         => '标题',
+        'ID'            => '文章ID',
+      ),
+      'default' => 'date',
+    ),
+
+  ),
+));
+function capalot_home_cmspost_widget($args, $instance)
+{
+
+  $instance = array_merge(
+    array(
+      'title' => 'CMS文章',
+      'desc' => '当前热门分类文章展示',
+      'style' => 'grid-overlay',
+      'is_box_right' => false,
+      'category' => 0,
+      'orderby' => 'date',
+    ),
+    $instance
+  );
+
+  echo $args['before_widget'];
+
+  get_template_part('template-parts/widget/home/cmspost', '', $instance);
+
+  echo $args['after_widget'];
+}
