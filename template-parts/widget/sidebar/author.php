@@ -21,10 +21,10 @@ $comment_count = get_comments(array(
 ));
 ?>
 
-<div class=" mb-8 bg-white  rounded-xl p-4">
+<div class=" mb-8 bg-white  rounded-md p-4 dark:bg-dark-card">
 
   <?php if (!empty($args['title'])) : ?>
-    <h5 class="widget-title mb-4"><?php echo $args['title']; ?></h5>
+    <h5 class="widget-title mb-4 dark:text-gray-50"><?php echo $args['title']; ?></h5>
   <?php endif; ?>
 
 
@@ -40,7 +40,7 @@ $comment_count = get_comments(array(
       </div>
       <div class="col">
         <span class="d-block h6 fw-bold mb-1"><?php echo $author_name; ?></span>
-        <small class="d-block text-muted"><?php _e('等级', 'ripro'); ?><?php echo zb_get_user_badge($author_id, 'span', 'ms-1 mb-0'); ?></small>
+        <small class="d-block text-muted dark:text-gray-400"><?php _e('等级', 'ripro'); ?><?php echo zb_get_user_badge($author_id, 'span', 'ms-1 mb-0'); ?></small>
       </div>
     </div>
   </div>
@@ -48,23 +48,23 @@ $comment_count = get_comments(array(
   <div class="author-body my-4">
     <div class="row grid grid-cols-3 gap-4 ">
       <div class="col-4 text-center">
-        <span class="h5 mb-0 block"><?php echo $post_count; ?></span>
-        <span class="d-block text-sm block"><?php _e('文章', 'ripro'); ?></span>
+        <span class="h5 mb-0 block dark:text-gray-50"><?php echo $post_count; ?></span>
+        <span class="d-block text-sm block dark:text-gray-400"><?php _e('文章', 'ripro'); ?></span>
       </div>
-      <div class="col-4 text-center">
+      <div class="col-4 text-center dark:text-gray-50">
         <span class="h5 mb-0 block"><?php echo $comment_count; ?></span>
-        <span class="d-block text-sm block"></i><?php _e('评论', 'ripro'); ?></span>
+        <span class="d-block text-sm block dark:text-gray-400"></i><?php _e('评论', 'ripro'); ?></span>
       </div>
-      <div class="col-4 text-center">
+      <div class="col-4 text-center dark:text-gray-50">
         <span class="h5 mb-0 block"><?php echo $fav_count; ?></span>
-        <span class="d-block text-sm block"><?php _e('收藏', 'ripro'); ?></span>
+        <span class="d-block text-sm block dark:text-gray-400"><?php _e('收藏', 'ripro'); ?></span>
       </div>
     </div>
   </div>
 
   <div class="author-footer">
-    <div class="text-center text-[12px] text-neutral-500 bg-[#eee] p-2 rounded-md">
-      <a href="<?php echo $author_link; ?>" class="btn btn-sm px-0 btn-link hover:text-neutral-900"><?php _e('查看作者其他文章', 'ripro'); ?></a>
+    <div class="text-center text-[12px] text-neutral-500 bg-[#eee] dark:bg-dark p-2 rounded-md">
+      <a href="<?php echo $author_link; ?>" class="btn btn-sm px-0 btn-link hover:text-neutral-900 dark:text-gray-400 dark:hover:text-white"><?php _e('查看作者其他文章', 'ripro'); ?></a>
     </div>
   </div>
 
