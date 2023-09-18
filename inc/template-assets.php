@@ -33,6 +33,8 @@ function capalot_assets()
   // swiper
   wp_enqueue_style('swiper', get_template_directory_uri() . '/assets/css/swiper-bundle.min.css', array(), '10.1.0');
   wp_enqueue_script('swiper', get_template_directory_uri() . '/assets/js/swiper-bundle.min.js', array(), '10.1.0', true);
+  // lord-icon
+  wp_enqueue_script('lord-icon', get_template_directory_uri() . '/assets/js/bhenfmcm.js', array(), '0.1.0', true);
 
 
   // 文章详情页参数
