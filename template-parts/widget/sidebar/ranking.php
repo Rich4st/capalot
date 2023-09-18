@@ -1,3 +1,4 @@
+
 <?php
 
 if (empty($args)) {
@@ -50,22 +51,22 @@ if (in_array($args['orderby'], array('views_num', 'likes_num', 'fav_num'))) {
 $PostData = new WP_Query($query_args);
 
 ?>
-<div class=" bg-white p-4 rounded-xl mb-8 ">
+<div class=" bg-white p-4 rounded-md mb-8 dark:bg-dark-card">
 
-  <h5 class="widget-title mb-4"><?php echo $args['title']; ?></h5>
+  <h5 class="widget-title mb-4 dark:text-gray-50"><?php echo $args['title']; ?></h5>
 
-  <div class="row g-3 row-cols-1">
+  <div class="row g-3 row-cols-1 grid gap-4">
     <?php if ($PostData->have_posts()) : $rank_key = 0;
       while ($PostData->have_posts()) : $PostData->the_post();
         $rank_key++; ?>
-        <div class="col py-2">
-          <article class="ranking-item flex flex-row ">
-            <div class=" mr-2">
-              <span class="ranking-num badge  bg-success bg-<?php echo capalot_get_color_class($rank_key); ?> bg-opacity-50 bg-teal-700  px-[11.5px] h-8 leading-8  text-center block rounded-full text-white"><?php echo $rank_key; ?></span>
+        <div class="col ">
+          <article class="ranking-item flex flex-row gap-2">
+            <div class=" ">
+              <span class="ranking-num badge   bg-<?php echo capalot_get_color_class($rank_key); ?> bg-opacity-50 bg-teal-700  px-[11.5px] h-8 leading-8  text-center block rounded-full text-white"><?php echo $rank_key; ?></span>
             </div>
-            
+
             <h3 class="ranking-title">
-              <a class=" leading-8 text-sm line-clamp-1 text-neutral-500 hover:text-neutral-900" target="<?php echo get_target_blank(); ?>" href="<?php the_permalink(); ?>" title="<?php the_title(); ?> "><?php the_title(); ?></a>
+              <a class=" leading-8 text-sm line-clamp-1 text-neutral-500 hover:text-neutral-900 dark:text-gray-400 dark:hover:text-white" target="<?php echo get_target_blank(); ?>" href="<?php the_permalink(); ?>" title="<?php the_title(); ?> "><?php the_title(); ?></a>
             </h3>
           </article>
         </div>
