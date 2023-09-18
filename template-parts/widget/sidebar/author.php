@@ -21,7 +21,7 @@ $comment_count = get_comments(array(
 ));
 ?>
 
-<div class=" mb-8 bg-white dark:bg-black rounded-xl p-4">
+<div class=" mb-8 bg-white  rounded-xl p-4">
 
   <?php if (!empty($args['title'])) : ?>
     <h5 class="widget-title mb-4"><?php echo $args['title']; ?></h5>
