@@ -5,6 +5,11 @@ defined('ABSPATH') || exit;
 $Capalot_UI = new Capalot_UI();
 $screen = $Capalot_UI->screen;
 
+$QueryPayType = urldecode(get_response_param('query-pay-type', 'all', 'get')); // all online
+
+global $pay_type_not_in;
+$pay_type_not_in = ($QueryPayType == 'all') ? '0' : '99,88,77';
+
 ?>
 
 <div>
@@ -22,6 +27,22 @@ $screen = $Capalot_UI->screen;
     <li>
       <?php do_meta_boxes($screen->id, 'column4', null); ?>
     </li>
+    <li>
+      <?php do_meta_boxes($screen->id, 'column5', null); ?>
+    </li>
+    <li>
+      <?php do_meta_boxes($screen->id, 'column6', null); ?>
+    </li>
+    <li>
+      <?php do_meta_boxes($screen->id, 'column7', null); ?>
+    </li>
+    <li>
+      <?php do_meta_boxes($screen->id, 'column8', null); ?>
+    </li>
+  </ul>
+  <ul class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+    <li><?php do_meta_boxes($screen->id, 'chart1', null); ?></li>
+    <li><?php do_meta_boxes($screen->id, 'chart2', null); ?></li>
   </ul>
 </div>
 
@@ -79,6 +100,60 @@ class Capalot_UI
       array($this, 'today_user_quantity'),
       $this->screen->id,
       'column4',
+    );
+
+    // 全站用户余额排行
+    add_meta_box(
+      'widget-5',
+      sprintf('<span class="pl-2 dashicons dashicons-editor-ol"></span><span class="text-base font-semibold">全站用户余额排行</span>'),
+      array($this, 'site_balance_ranking'),
+      $this->screen->id,
+      'column5',
+    );
+
+    // 全站销量排行
+    add_meta_box(
+      'widget-6',
+      sprintf('<span class="pl-2 dashicons dashicons-clipboard"></span><span class="text-base font-semibold">全站销量排行</span>'),
+      array($this, 'site_sales_ranking'),
+      $this->screen->id,
+      'column6',
+    );
+
+    // 全站下载量排行
+    add_meta_box(
+      'widget-7',
+      sprintf('<span class="pl-2 dashicons dashicons-download"></span><span class="text-base font-semibold">全站下载排行</span>'),
+      array($this, 'site_download_ranking'),
+      $this->screen->id,
+      'column7',
+    );
+
+    // 全站推广排行
+    add_meta_box(
+      'widget-8',
+      sprintf('<span class="pl-2 dashicons dashicons-admin-site-alt"></span><span class="text-base font-semibold">全站推广排行</span>'),
+      array($this, 'site_promote_ranking'),
+      $this->screen->id,
+      'column8',
+    );
+
+    // 年度销售统计图表
+    add_meta_box(
+      'chart-1',
+      sprintf('<span class="pl-2 font-semibold">年度销售统计图表（%s）总览</span>', wp_date('Y年1月~m月')),
+      array(&$this, 'annual_sales_statistics_chart'),
+      $this->screen->id,
+      'chart1'
+    );
+
+    // 本月销售统计图表
+    add_meta_box(
+      'chart-2',
+      sprintf('<span class="pl-2 font-semibold">本月销售统计图表（%s）总览</span>', wp_date('Y年1月~m月')),
+      array(&$this, 'monthly_sales_statistics_chart'),
+      $this->screen->id,
+      'chart2'
     );
   }
 
@@ -280,6 +355,408 @@ class Capalot_UI
         } ?>
       </div>
     </div>
+  <?php echo ob_get_clean();
+  }
+
+  /**
+   * 全站用户余额统计
+   */
+  public function site_balance_ranking()
+  {
+    global $wpdb;
+    $results = $wpdb->get_results(
+      "SELECT user_id, meta_value FROM {$wpdb->usermeta} WHERE meta_key='capalot_balance' ORDER BY meta_value DESC LIMIT 7"
+    );
+
+    echo '<div class="card-body">';
+    if (!empty($results)) {
+      echo '<ul class="card-body-ul">';
+      $rank_num = 0;
+      foreach ($results as $result) {
+        $rank_num++;
+        $user_info = get_userdata($result->user_id);
+        $vip_info = get_user_vip_data($result->user_id);
+        $avatar = get_avatar($result->user_id, 50);
+        echo sprintf(
+          '<li class="text-gray-500 flex items-center">
+          <span class="bg-gray-200 py-[1px] px-1 rounded-sm mr-2">%s</span>
+          <span class="rounded-full overflow-hidden w-8 h-8 mr-2"> %s</span>
+          <span style="margin-right:10px;">%s (%s)</span> <span style="margin-left:auto;">%s (%s)</span>
+          </li>',
+          $rank_num,
+          $avatar,
+          $user_info->user_login,
+          $vip_info['name'],
+          $result->meta_value,
+          get_site_coin_name()
+        );
+      }
+      echo '</ul>';
+    } else {
+      echo '<p style="padding:20px;text-align:center;">暂无数据</p>';
+    }
+    echo '</div>';
+  }
+
+  /**
+   * 全站销量排行
+   */
+  public function site_sales_ranking()
+  {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'capalot_order';
+
+    $results = $wpdb->get_results(
+      "SELECT post_id, COUNT(post_id) AS count,SUM(pay_price) AS sum
+      FROM {$table_name}
+      WHERE pay_status=1 AND order_type = 1
+      GROUP BY post_id ORDER BY count DESC LIMIT 10"
+    );
+
+    echo '<div class="card-body">';
+    if (!empty($results)) {
+      echo '<ul class="card-body-ul">';
+      $rank_num = 0;
+      foreach ($results as $result) {
+        $rank_num++;
+
+        if (get_permalink($result->post_id)) {
+          $post = sprintf('<a target="_blank" href=%s>%s</a>', get_permalink($result->post_id), get_the_title($result->post_id));
+        } else {
+          $post = '其他PID : ' . $result->post_id;
+        }
+
+        echo sprintf(
+          '<li class="text-gray-500 flex items-center">
+          <span class="bg-gray-200 py-[1px] px-1 rounded-sm mr-2">%s</span>%s
+          <span style="margin-left:auto;">￥%s (%s单)</span>
+          </li>',
+          $rank_num,
+          $post,
+          $result->sum,
+          $result->count
+        );
+      }
+      echo '</ul>';
+    } else {
+      echo '<p style="padding:20px;text-align:center;">暂无数据</p>';
+    }
+    echo '</div>';
+  }
+
+  /**
+   * 全站下载量排行
+   */
+  public function site_download_ranking()
+  {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'capalot_download';
+
+    $results = $wpdb->get_results(
+      "SELECT post_id, COUNT(post_id) AS count FROM {$table_name} WHERE 1=1 GROUP BY post_id ORDER BY count DESC LIMIT 10"
+    );
+
+    echo '<div class="card-body">';
+    if (!empty($results)) {
+      echo '<ul class="card-body-ul">';
+      $rank_num = 0;
+      foreach ($results as $result) {
+        $rank_num++;
+
+        if (get_permalink($result->post_id)) {
+          $post = sprintf('<a target="_blank" href=%s>%s</a>', get_permalink($result->post_id), get_the_title($result->post_id));
+        } else {
+          $post = '其他PID : ' . $result->post_id;
+        }
+
+        echo sprintf('<li class="text-muted"><span class="badge bg-secondary" style="margin-right:10px;">%s</span>%s <span style="margin-left:auto;">%s (次)</span></li>', $rank_num, $post, $result->count);
+      }
+      echo '</ul>';
+    } else {
+      echo '<p style="padding:20px;text-align:center;">暂无数据</p>';
+    }
+    echo '</div>';
+  }
+
+  /**
+   * 全站推广排行
+   */
+  public function site_promote_ranking()
+  {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'capalot_aff';
+    $results = $wpdb->get_results(
+      "SELECT aff_uid, COUNT(aff_uid) AS count FROM {$table_name} WHERE 1=1 GROUP BY aff_uid ORDER BY count DESC LIMIT 10"
+    );
+
+    echo '<div class="card-body">';
+    if (!empty($results)) {
+      echo '<ul class="card-body-ul">';
+      $rank_num = 0;
+      foreach ($results as $result) {
+        $rank_num++;
+
+        $user_info = get_userdata($result->aff_uid);
+        $vip_info = get_user_vip_data($result->aff_uid);
+        $avatar = get_avatar($result->aff_uid, 50);
+        echo sprintf(
+          '<li class="text-muted">
+          <span class="badge bg-secondary" style="margin-right:10px;">%s</span> %s
+          <span style="margin-right:10px;">%s (%s)</span> <span style="margin-left:auto;">%s (单)</span>
+          </li>',
+          $rank_num,
+          $avatar,
+          $user_info->user_login,
+          $vip_info['name'],
+          $result->count
+        );
+      }
+      echo '</ul>';
+    } else {
+      echo '<p style="padding:20px;text-align:center;">暂无数据</p>';
+    }
+    echo '</div>';
+  }
+
+  /**
+   * 年度销售统计图表
+   */
+  public function annual_sales_statistics_chart()
+  {
+
+    $diff_seconds = time() - current_time('timestamp'); //相差时区多少秒
+
+    $year_start_time = mktime(0, 0, 0, 1, 1, wp_date('Y')) + $diff_seconds; //今年开始时间
+
+    // 今年总计
+    $res = $this->query_pay_info_for_time($year_start_time, time());
+
+    $retval1 = (!empty($res[1]->pay_price)) ? $res[1]->pay_price : 0;
+    $retval2 = (!empty($res[1]->count)) ? $res[1]->count : 0;
+    $title = sprintf('(%s总计) 营业额：￥%s | %s条', date('Y'), $retval1, $retval2);
+
+
+    $series_data  = [];
+    $series_data2 = [];
+    $series_data3 = [];
+    $cat_data     = [];
+
+    //循环
+    for ($i = 0; $i < intval(wp_date('m')); $i++) {
+      $this_m = sprintf("%02d", $i + 1);
+      $star = (mktime(0, 0, 0, $this_m, 1, wp_date('Y')) + $diff_seconds);
+      $end  = (mktime(23, 59, 59, $this_m, wp_date('t'), wp_date('Y')) + $diff_seconds);
+      $date = wp_date('m', $star);
+
+      // var_dump($date);die;
+
+      $cat_data[$i] = $date;
+      $series_data[$i]  = 0;
+      $series_data2[$i] = 0;
+      $series_data3[$i] = 0;
+
+      $res = $this->query_pay_info_for_time($star, $end);
+
+      foreach ($res as $k => $v) {
+        if ($v->pay_status == 0) {
+          $series_data[$i] = $v->pay_price;
+        } elseif ($v->pay_status == 1) {
+          $series_data2[$i] = $v->pay_price;
+        }
+        $series_data3[$i] += $v->count;
+      }
+    }
+
+    $options = [
+      'title'      => [
+        'text' => $title,
+        'floating' => true,
+        'offsetY' => 0,
+        'margin' => 40,
+        'align' => 'left',
+        'align' => 'center',
+        'style' => [
+          'color' => '#444'
+        ],
+      ],
+      'chart'      => [
+        'type' => 'bar',
+        'height' => 480,
+      ],
+      'series'     => [
+        ['name' => '总订单金额/￥', 'data' => $series_data],
+        ['name' => '已付款金额/￥', 'data' => $series_data2],
+        ['name' => '订单数量/条', 'data' => $series_data3],
+      ],
+      'xaxis'      => [
+        'categories' => $cat_data,
+      ],
+      'plotOptions'     => [
+        'bar' => [
+          'horizontal' => false,
+          'borderRadius' => 5,
+          'columnWidth' => '55%',
+          'endingShape' => 'rounded'
+        ],
+      ],
+      'stroke'     => [
+        'show' => true,
+        'width' => 2,
+        'colors' => ['transparent']
+      ],
+      'fill'      => [
+        'opacity' => 1,
+      ],
+      'dataLabels' => [
+        'enabled' => false,
+      ],
+    ];
+
+
+
+    $options = json_encode($options);
+
+    ob_start(); ?>
+    <div id="chart-nian" style="min-height:180px;"></div>
+    <script>
+      jQuery(document).ready(function($) {
+        var options = <?php echo $options; ?>;
+        options.tooltip = {
+          x: {
+            formatter: function(val) {
+              return val + "月详情"
+            },
+          }
+        };
+        options.xaxis.labels = {
+          formatter: function(val) {
+            return val + "月"
+          },
+        };
+        var chart = new ApexCharts(document.querySelector('#chart-nian'), options)
+        chart.render()
+      });
+    </script>
+  <?php echo ob_get_clean();
+  }
+
+  /**
+   * 本月销售统计图表
+   */
+  public function monthly_sales_statistics_chart()
+  {
+    $diff_seconds = time() - current_time('timestamp'); //相差时区多少秒
+
+    // 本月总计
+    $star_m = mktime(0, 0, 0, wp_date('m'), 1, wp_date('Y')) + $diff_seconds; //
+    $end_m = mktime(23, 59, 59, wp_date('m'), wp_date('t'), wp_date('Y')) + $diff_seconds; //
+    $res = $this->query_pay_info_for_time($star_m, $end_m);
+    $retval1 = (!empty($res[1]->pay_price)) ? $res[1]->pay_price : 0;
+    $retval2 = (!empty($res[1]->count)) ? $res[1]->count : 0;
+    $title = sprintf('(%s总计) 营业额：￥%s | %s条', date('m月'), $retval1, $retval2);
+
+
+    global $wpdb, $pay_type_not_in;
+    $table_name = $wpdb->prefix . 'capalot_order';
+
+    $results = $wpdb->get_results(
+      "SELECT
+              DATE_FORMAT(FROM_UNIXTIME(create_time), '%Y-%m-%d') as `date`,
+              SUM(pay_price) AS amount,
+              SUM(IF(pay_status = 1, pay_price, 0)) AS paid_amount,
+              COUNT(*) AS count,
+              SUM(IF(pay_status = 1, 1, 0)) AS paid_count
+          FROM {$table_name}
+          WHERE
+              pay_type NOT IN ({$pay_type_not_in}) AND pay_status IN (0, 1) AND create_time
+              BETWEEN UNIX_TIMESTAMP(DATE_FORMAT(NOW(), '%Y-%m-01')) AND UNIX_TIMESTAMP(NOW())
+          GROUP BY
+              `date`"
+    );
+
+    $data = array();
+    foreach ($results as $row) {
+      $date_parts = date_parse($row->date);
+      $day = $date_parts['day'];
+      $data[$day] = $row;
+    }
+
+    $categories = $amounts = $paid_amounts = $counts = $paid_counts = [];
+    $sum_day = wp_date('t'); //本月共多少天
+    $end_day = wp_date('d'); //今天是第几天
+
+    //循环
+    for ($i = 0; $i < $sum_day; $i++) {
+      $__key = $i + 1; //几号
+      if ($i == $end_day) {
+        break;
+      }
+
+      $categories[$i] = $__key;
+      //赋值转化格式
+      $amounts[$i] = $paid_amounts[$i] = $counts[$i] = $paid_counts[$i] = '0';
+
+      if (isset($data[$__key])) {
+        $setData = $data[$__key];
+        $amounts[$i]  = (float)$setData->amount;
+        $paid_amounts[$i] = (float)$setData->paid_amount;
+        $counts[$i] = (int)$setData->count;
+        $paid_counts[$i] = (int)$setData->paid_count;
+      }
+    }
+
+    $options = [
+      'title'      => [
+        'text' => $title,
+        'floating' => false,
+        'offsetY' => 0,
+        'margin' => 40,
+        'align' => 'center',
+        'style' => [
+          'color' => '#444'
+        ],
+      ],
+      'chart'      => [
+        'type' => 'area',
+        'height' => 480,
+      ],
+      'series'     => [
+        ['name' => '总订单金额', 'data' => $amounts],
+        ['name' => '已付款金额', 'data' => $paid_amounts],
+        ['name' => '总订单数量', 'data' => $counts],
+        ['name' => '已付款订单数量', 'data' => $paid_counts],
+      ],
+      'xaxis'      => [
+        'categories' => $categories,
+      ],
+      'dataLabels' => [
+        'enabled' => false,
+      ],
+      'stroke'     => [
+        'curve' => 'smooth',
+      ],
+    ];
+
+    $options = json_encode($options);
+
+
+
+    ob_start(); ?>
+    <div id="chart-yue" style="min-height:180px;"></div>
+    <script>
+      jQuery(document).ready(function($) {
+        var options = <?php echo $options; ?>;
+        options.tooltip = {
+          x: {
+            formatter: function(val) {
+              return "日期：" + val + "号详情"
+            },
+          }
+        };
+        var chart = new ApexCharts(document.querySelector('#chart-yue'), options)
+        chart.render()
+      });
+    </script>
 <?php echo ob_get_clean();
   }
 
