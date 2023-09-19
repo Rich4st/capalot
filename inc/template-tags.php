@@ -503,3 +503,18 @@ function capalot_substr_cut($user_name)
   }
   return $strlen == 2 ? $firstStr . str_repeat('*', mb_strlen($user_name, 'utf-8') - 1) : $firstStr . str_repeat("*", $strlen - 2) . $lastStr;
 }
+
+// 判断当前是否是移动端
+function capalot_is_mobile()
+{
+  $userAgent = $_SERVER['HTTP_USER_AGENT'];
+  $mobileKeywords = array('Mobile', 'Android', 'iPhone', 'iPad', 'Windows Phone', 'BlackBerry');
+
+  foreach ($mobileKeywords as $keyword) {
+    if (stripos($userAgent, $keyword) !== false) {
+      return true;
+    }
+  }
+
+  return false;
+}

@@ -162,7 +162,9 @@ let ca = {
   },
 
   swiper: function () {
-    var swiper = new Swiper(".mySwiper", {});
+    const el = document.querySelector('.mySwiper');
+
+    var swiper = new Swiper(".mySwiper", JSON.parse(el.dataset.config));
   }
 
 }

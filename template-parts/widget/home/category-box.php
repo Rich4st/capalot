@@ -5,15 +5,11 @@ if (empty($args)) {
 }
 
 $config = [
-  'lazyLoad'   => false,
-  'autoplay'   => false,
-  'loop'       => false,
-  'nav'        => false,
-  'dots'       => false,
-  'responsive' => [
-    0   => ['items' => 2, 'nav' => false],
-    768 => ['items' => 3, 'nav' => false],
-    992 => ['items' => 5, 'nav' => true],
+  'slidesPerView' => capalot_is_mobile() ? 2 : 6,
+  'spaceBetween' => 30,
+  'pagination' => [
+    'el' => '.swiper-pagination',
+    'clickable' => true
   ],
 ];
 
@@ -40,8 +36,8 @@ $def_bg_img = get_template_directory_uri() . '/assets/img/bg.jpg'; //默认缩�
 ?>
 
 
-<section class="container">
-  <div class="widget-catbox owl-carousel owl-theme" data-config='<?php echo json_encode($config); ?>'>
+<section class="swiper mySwiper max-w-7xl mx-auto" data-config='<?php echo json_encode($config); ?>'>
+  <div class="swiper-wrapper">
 
     <?php foreach ($terms as $key => $item) :
 
@@ -52,15 +48,15 @@ $def_bg_img = get_template_directory_uri() . '/assets/img/bg.jpg'; //默认缩�
       $color = capalot_get_color_class($key);
     ?>
 
-      <div class="item">
-        <div class="widget-catbox-item lazy" data-bg="<?php echo $bg_img; ?>" style="background-image: url(<?php echo $bg_img; ?>);">
+      <div class="swiper-slide">
+        <div class="h-40 flex justify-center items-center text-white text-center" style="background-image: url(<?php echo $bg_img; ?>);">
 
           <a href="<?php echo get_term_link($item->term_id, $taxonomy_name); ?>">
-            <div class="catbox-content">
+            <div>
               <?php if (!empty($args['is_num'])) : ?>
-                <span class="badge bg-<?php echo $color; ?> text-white bg-opacity-75 mb-2"><?php echo $item->count; ?>+</span>
+                <span class="bg-<?php echo $color; ?> bg-accent text-sm p-1 rounded-lg"><?php echo $item->count; ?>+</span>
               <?php endif; ?>
-              <h3 class="catbox-title text-white"><?php echo $item->name; ?></h3>
+              <h3 class="font-semibold mt-1 text-xl"><?php echo $item->name; ?></h3>
             </div>
           </a>
 
@@ -68,6 +64,5 @@ $def_bg_img = get_template_directory_uri() . '/assets/img/bg.jpg'; //默认缩�
       </div>
 
     <?php endforeach; ?>
-
   </div>
 </section>
