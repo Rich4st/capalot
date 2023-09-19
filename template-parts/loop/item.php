@@ -9,6 +9,7 @@ $default = [
   'is_entry_cat' => true,
   'is_entry_desc' => true,
   'is_entry_meta' => true,
+  'size' => 'md'
 ];
 
 $args = wp_parse_args($args, $default);
@@ -31,6 +32,31 @@ if ($post_format && isset($format_icons[$post_format])) {
   $post_format_icon = false;
 }
 
+if ($args['type'] == 'grid-overlay') {
+  switch ($args['size']) {
+    case 'sm':
+      $card_size = 'h-44';
+      break;
+    case 'md':
+      $card_size = 'h-48 md:h-80';
+      break;
+    case 'lg':
+      $card_size = 'h-64 md:h-[23rem]';
+      break;
+  }
+} else {
+  switch ($args['size']) {
+    case 'sm':
+      $card_size = 'h-18';
+      break;
+    case 'md':
+      $card_size = 'h-48 md:h-80';
+      break;
+    case 'lg':
+      $card_size = 'h-64 md:h-[23rem]';
+      break;
+  }
+}
 ?>
 <!-- 文章展示页中文章布局 -->
 <?php if ($args['type'] == 'grid') : ?>
@@ -45,8 +71,7 @@ if ($post_format && isset($format_icons[$post_format])) {
       </div>
 
       <div class="entry-media ratio  <?php echo esc_attr($args['media_class']); ?>">
-        <a target="<?php echo get_target_blank(); ?>" style="background-image: url(<?php echo capalot_get_thumbnail_url(); ?>);" 
-        class="block w-full md:h-72 h-40 bg-no-repeat   <?php echo esc_attr($args['media_size_type']); ?> 
+        <a target="<?php echo get_target_blank(); ?>" style="background-image: url(<?php echo capalot_get_thumbnail_url(); ?>);" class="block w-full md:h-72 h-40 bg-no-repeat   <?php echo esc_attr($args['media_size_type']); ?> 
         <?php echo esc_attr($args['media_fit_type']); ?>" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" data-bg="<?php echo capalot_get_thumbnail_url(); ?>">
           <?php if ($post_format_icon) : ?>
             <div class="post-format-icon"><i class="<?php echo $post_format_icon; ?>"></i></div>
@@ -86,7 +111,7 @@ if ($post_format && isset($format_icons[$post_format])) {
   </li>
 
 <?php elseif ($args['type'] == 'grid-overlay') : ?>
-  <li class="col cursor-pointer  md:h-80 h-48  rounded-lg overflow-hidden text-[0.75rem]">
+  <li class="col cursor-pointer <?php echo $card_size; ?>  rounded-lg overflow-hidden text-[0.75rem]">
     <article class="post-item relative group ">
 
       <div class="tips-badge absolute w-10 text-center top-0 start-0 z-[999] m-2 bg-[#b0adac]  rounded-xl">
@@ -96,7 +121,7 @@ if ($post_format && isset($format_icons[$post_format])) {
       </div>
 
       <div class="<?php echo esc_attr($args['media_class']); ?>">
-        <a target="<?php echo get_target_blank(); ?>" style="background-image: url(<?php echo capalot_get_thumbnail_url(); ?>);" class="block rounded-xl  w-full md:h-72 h-40 bg-no-repeat   <?php echo esc_attr($args['media_size_type']); ?> 
+        <a target="<?php echo get_target_blank(); ?>" style="background-image: url(<?php echo capalot_get_thumbnail_url(); ?>);" class="block rounded-xl  w-full <?php echo $card_size; ?> bg-no-repeat   <?php echo esc_attr($args['media_size_type']); ?> 
         <?php echo esc_attr($args['media_fit_type']); ?>" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" data-bg="<?php echo capalot_get_thumbnail_url(); ?>">
           <?php if ($post_format_icon) : ?>
             <div class="post-format-icon"><i class="<?php echo $post_format_icon; ?>"></i></div>
@@ -143,7 +168,7 @@ if ($post_format && isset($format_icons[$post_format])) {
 
 
 <?php elseif ($args['type'] == 'list') : ?>
-  <li class="dark:bg-dark-card  rounded-lg  cursor-pointer shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]  h-32 transition-all duration-300 hover:shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)]  ">
+  <li class="dark:bg-dark-card  rounded-lg  cursor-pointer shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]  <?php echo $card_size; ?> transition-all duration-300 hover:shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)]  ">
     <article class="relative flex flex-row p-2">
 
       <div class="tips-badge absolute w-10 text-center top-0 start-0 z-[999] m-2 bg-[#b0adac]  rounded-xl">
@@ -161,7 +186,7 @@ if ($post_format && isset($format_icons[$post_format])) {
         </a>
       </div>
       <div class="entry-wrapper w-2/3  text-gray-400 text-[0.75rem] ">
-        <div class="entry-body h-24  ">
+        <div class="entry-body h-4/5  ">
 
           <?php if ($args['is_entry_cat']) : ?>
             <div class=" mb-1 whitespace-nowrap text-ellipsis overflow-hidden"><i class="fa-solid fa-tag pr-2" style="color: #82a6f0;"></i><?php capalot_meta_category(2); ?></div>
@@ -205,7 +230,7 @@ if ($post_format && isset($format_icons[$post_format])) {
       <div class="entry-wrapper text-gray-400 text-[0.75rem]">
         <div class="entry-body h-24">
 
-        <?php if ($args['is_entry_cat']) : ?>
+          <?php if ($args['is_entry_cat']) : ?>
             <div class="entry-cat-dot mb-1 whitespace-nowrap text-ellipsis overflow-hidden"><i class="fa-solid fa-tag pr-2" style="color: #82a6f0;"></i><?php capalot_meta_category(2); ?></div>
           <?php endif; ?>
 
