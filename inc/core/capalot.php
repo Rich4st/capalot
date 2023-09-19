@@ -86,9 +86,91 @@ class Capalot_Shop
   /**
    * 获取订单类型
    */
-  public static function get_order_type($param)
+  public static function get_order_type($type)
   {
-    echo $param . '11111111';
+    switch ($type) {
+      case '1':
+        return '文章订单';
+        break;
+      case '2':
+        return '充值订单';
+        break;
+      case '3':
+        return 'VIP订单';
+        break;
+      default:
+        return '其他订单';
+        break;
+    }
+  }
+
+  /**
+   * 获取支付类型
+   */
+  public static function get_pay_type($pay_type)
+  {
+    switch ($pay_type) {
+      case '1':
+        echo '官方-支付宝';
+        break;
+      case '2':
+        echo '官方-微信';
+        break;
+      case '11':
+        echo '虎皮椒-支付宝';
+        break;
+      case '12':
+        echo '虎皮椒-微信';
+        break;
+      case '21':
+        echo '迅虎-支付宝';
+        break;
+      case '22':
+        echo '迅虎-微信';
+        break;
+      case '31':
+        echo 'PATJS-支付宝';
+        break;
+      case '32':
+        echo 'PATJS-微信';
+        break;
+      case '41':
+        echo '易支付-支付宝';
+        break;
+      case '42':
+        echo '易支付-微信';
+        break;
+      case '55':
+        echo 'PayPal';
+        break;
+      case '66':
+        echo '手工支付';
+        break;
+      case '77':
+        echo '后台支付';
+        break;
+      case '88':
+        echo '卡密支付';
+        break;
+      case '99':
+        echo '余额支付';
+        break;
+    }
+  }
+
+  /**
+   * 获取支付状态
+   */
+  public static function get_pay_status($status)
+  {
+    switch ($status) {
+      case '0':
+        return '未支付';
+        break;
+      case '1':
+        return '支付成功';
+        break;
+    }
   }
 }
 
