@@ -14,7 +14,7 @@ $pay_type_not_in = ($QueryPayType == 'all') ? '0' : '99,88,77';
 
 <div>
   <h1 class="text-2xl my-4">商城管理总览/仪表盘</h1>
-  <ul class="grid grid-col-2 md:grid-cols-2 lg:grid-cols-3 md:gap-4">
+  <ul class="grid grid-col-2 md:grid-cols-2 lg:grid-cols-3 md:gap-4 widget-list">
     <li>
       <?php do_meta_boxes($screen->id, 'column1', null); ?>
     </li>
