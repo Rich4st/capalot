@@ -24,7 +24,7 @@ $container = _capalot('site_container_width', '1400');
 
 ?>
 
-
+<section class="dark:bg-dark">
 <div class="swiper mySwiper  <?php echo $args['container']; ?> mx-auto" data-config='<?php echo json_encode($config); ?>' style="max-width: <?php
                                                                                                 if ($container === '') {
                                                                                                   echo '1280';
@@ -55,3 +55,4 @@ $container = _capalot('site_container_width', '1400');
   <div class="swiper-button-next after:text-white"></div>
   <div class="swiper-button-prev after:text-white"></div>
 </div>
+</section>
