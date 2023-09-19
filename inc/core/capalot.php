@@ -1,7 +1,5 @@
 <?php
 
-new Capalot_Shop();
-new Capalot_Cookie;
 
 /**
  * 商城
@@ -84,6 +82,14 @@ class Capalot_Shop
 
     return $update ? true : false;
   }
+
+  /**
+   * 获取订单类型
+   */
+  public static function get_order_type($param)
+  {
+    echo $param . '11111111';
+  }
 }
 
 /**
@@ -91,6 +97,63 @@ class Capalot_Shop
  */
 class Capalot_Pay
 {
+}
+
+class Capalot_Aff
+{
+  public function __construct()
+  {
+  }
+
+  /**
+   * 获取推广状态
+   */
+  public static function get_aff_status($param)
+  {
+    echo $param . '11111111';
+  }
+
+  /**
+   * 更新推广记录
+   */
+  public static function update_aff_log($data, $where, $data_format, $where_format)
+  {
+    global $wpdb;
+
+    // 检查 $wpdb 是否已经初始化，如果没有，可以根据您的需求进行初始化
+
+    // 确保 $data 和 $where 数组的键值对数量匹配
+    if (count($data) !== count($data_format) || count($where) !== count($where_format)) {
+      return false; // 键值对数量不匹配，操作失败
+    }
+
+    // 构建 SQL 更新语句
+    $table_name = $wpdb->prefix . 'aff'; // 表名
+    $sql = "UPDATE $table_name SET ";
+
+    // 构建 SET 子句
+    $set_clause = array();
+    foreach ($data as $key => $value) {
+      $set_clause[] = "$key = %{$data_format[$key]}";
+    }
+    $sql .= implode(', ', $set_clause);
+
+    // 构建 WHERE 子句
+    $where_clause = array();
+    foreach ($where as $key => $value) {
+      $where_clause[] = "$key = %{$where_format[$key]}";
+    }
+    $sql .= " WHERE " . implode(' AND ', $where_clause);
+
+    // 执行 SQL 更新语句
+    $result = $wpdb->query($wpdb->prepare($sql, $data, $data_format));
+
+    if ($result === false) {
+      return false; // 更新失败
+    } else {
+      return true; // 更新成功
+    }
+  }
 }
 
 /**
@@ -109,5 +172,4 @@ class Capalot_Cookie
 
     return $_COOKIE[$key];
   }
-
 }

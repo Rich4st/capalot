@@ -358,6 +358,22 @@ function get_ip_address($ignore_private_and_reserved = false)
   return 'unknown';
 }
 
+// 根据字符串搜索用户id 用于搜索
+function get_user_id_from_str($string) {
+  $string = trim($string);
+
+  if (is_email($string) && $user = get_user_by('email', $string)) {
+      return $user->ID;
+  }
+  if (is_numeric($string) && $user = get_user_by('id', absint($string))) {
+      return $user->ID;
+  }
+  if (is_string($string) && $user = get_user_by('login', $string)) {
+      return $user->ID;
+  }
+  return 0;
+}
+
 /**
  * 获取网站默认颜色风格
  */
