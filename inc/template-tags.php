@@ -128,11 +128,11 @@ function capalot_load_more()
 
   if ($ajaxposts->have_posts()) {
     while ($ajaxposts->have_posts()) : $ajaxposts->the_post();
-    $post_info = [
-      'title' => get_the_title(),
-    ];
+      $post_info = [
+        'title' => get_the_title(),
+      ];
 
-    $response .= get_load_more_template($post_info);
+      $response .= get_load_more_template($post_info);
     endwhile;
   } else {
     $response = '';
@@ -452,7 +452,8 @@ function get_posts_style_config($cat_id = 0)
   return $config;
 }
 
-function capalot_get_color_class($key = 0) {
+function capalot_get_color_class($key = 0)
+{
   $colors  = ['danger', 'primary', 'success', 'warning', 'info', 'secondary'];
   $color   = (isset($colors[$key])) ? $colors[$key] : 'secondary';
   return $color;
@@ -484,4 +485,21 @@ function get_thumbnail_align_type()
     $option = $options[0];
 
   return $option;
+}
+
+//只保留字符串首尾字符，隐藏中间用*代替（两个字符时只显示第一个）
+function capalot_substr_cut($user_name)
+{
+
+  if (empty($user_name)) {
+    return '游客';
+  }
+
+  $strlen   = mb_strlen($user_name, 'utf-8');
+  $firstStr = mb_substr($user_name, 0, 1, 'utf-8');
+  $lastStr  = mb_substr($user_name, -1, 1, 'utf-8');
+  if ($strlen < 2) {
+    return $user_name;
+  }
+  return $strlen == 2 ? $firstStr . str_repeat('*', mb_strlen($user_name, 'utf-8') - 1) : $firstStr . str_repeat("*", $strlen - 2) . $lastStr;
 }
