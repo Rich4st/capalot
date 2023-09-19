@@ -156,6 +156,25 @@ class Capalot_Aff
   }
 }
 
+class Capalot_Cdk
+{
+  public function __construct()
+  {
+  }
+
+  /**
+   * 获取cdk类型
+   */
+  public static function get_cdk_type($type){
+    echo $type;
+  }
+
+  public static function get_cdk_status($p1)
+  {
+    echo $p1;
+  }
+}
+
 /**
  * 缓存
  */
