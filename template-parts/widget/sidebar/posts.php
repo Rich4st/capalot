@@ -32,7 +32,7 @@ $PostData = new WP_Query($query_args);
 
             <div class="entry-media ratio ratio-3x2 col-auto w-1/3">
               <a target="<?php echo get_target_blank(); ?>" class="media-img lazy" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" >
-                <img class=" w-full h-14 object-cover" src="<?php echo capalot_get_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
+                <img class=" w-full h-14 object-cover rounded-md" src="<?php echo capalot_get_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
               </a>
             </div>
 

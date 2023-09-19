@@ -81,6 +81,8 @@ function enqueue_admin_custom_assets($hook)
 
   // main.css
   wp_enqueue_style('admin-main-css', get_template_directory_uri() . '/admin/css/main.css', array(), '6.2');
+  // tailwind
+  wp_enqueue_style('tailwind', get_template_directory_uri() . '/assets/css/tailwind.css', array(), '0.1.0');
 
   //商城管理页面加载
   if (strpos($hook, 'capalot-admin') !== false) {

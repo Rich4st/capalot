@@ -389,6 +389,28 @@ function get_site_default_color_style()
 }
 
 /**
+ * 获取今天开始结束时间戳
+ */
+function get_today_time_range()
+{
+  $timezone_object = wp_timezone();
+  // 获取今天开始和结束时间的DateTime对象
+  $today_start = new DateTime('today', $timezone_object);
+  $today_end = clone $today_start;
+  $today_end->modify('+1 day');
+
+  // 转换为时间戳
+  $today_start_timestamp = $today_start->getTimestamp();
+  $today_end_timestamp = $today_end->getTimestamp();
+
+
+  return array(
+    'start' => $today_start->getTimestamp(),
+    'end'   => $today_end->getTimestamp(),
+  );
+}
+
+/**
  * 获取文章列表显示风格配置
  */
 function get_posts_style_config($cat_id = 0)
