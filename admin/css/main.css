@@ -31,6 +31,11 @@
   margin-bottom: 0 !important;
 }
 
+.pay_status_1 {
+  color: #4CAF50;
+  background-color: rgb(119 219 123 / 50%);
+}
+
 .widget-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

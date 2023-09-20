@@ -10,7 +10,7 @@ $message = $Ri_List_Table->message;
 ?>
 
 <!-- 主页面 -->
-<div class="wrap zb-admin-page">
+<div class="wrap capalot-admin-page">
 
   <h1 class="wp-heading-inline">订单列表/管理</h1>
   <p>可根据用户数字ID，登录名，订单号，支付单号，优惠码，支付单号搜索</p>
@@ -25,7 +25,7 @@ $message = $Ri_List_Table->message;
       <form method="get">
         <?php $Ri_List_Table->search_box('搜索', 'post_id'); ?>
         <input type="hidden" name="page" value="<?php echo $_GET['page']; ?>">
-        <?php wp_nonce_field('zb-admin-page-nonce', '_nonce'); ?>
+        <?php wp_nonce_field('capalot-admin-nonce', '_nonce'); ?>
         <?php $Ri_List_Table->display(); ?>
       </form>
     </div>
@@ -47,9 +47,8 @@ $message = $Ri_List_Table->message;
 if (!class_exists('WP_List_Table')) {
   require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
 }
-/**
- * Create a new table class that will extend the WP_List_Table
- */
+
+
 class Ri_List_Table extends WP_List_Table
 {
   public $message = '';
@@ -326,9 +325,9 @@ class Ri_List_Table extends WP_List_Table
     $row_id  = $item['id'];
     $actions = array(
       'delete' => sprintf(
-        '<a href="admin.php?page=zb-admin-page-order&action=delete&id=%s&_nonce=%s" onclick="return confirm(\'确定删除这个订单?\')">删除</a>',
+        '<a href="admin.php?page=capalot-admin-order&action=delete&id=%s&_nonce=%s" onclick="return confirm(\'确定删除这个订单?\')">删除</a>',
         $row_id,
-        wp_create_nonce('zb-admin-page-nonce')
+        wp_create_nonce('capalot-admin-nonce')
       ),
     );
 
@@ -373,7 +372,7 @@ class Ri_List_Table extends WP_List_Table
       $ids    = isset($_REQUEST['id']) ? $_REQUEST['id'] : array();
       $_nonce = isset($_REQUEST['_nonce']) ? $_REQUEST['_nonce'] : '';
 
-      if (!wp_verify_nonce($_nonce, 'zb-admin-page-nonce')) {
+      if (!wp_verify_nonce($_nonce, 'capalot-admin-nonce')) {
         $this->set_message('nonce验证失败，请返回刷新重试');
         return false;
       }
