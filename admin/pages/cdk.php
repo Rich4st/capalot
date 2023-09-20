@@ -8,18 +8,18 @@ defined('WPINC') || exit;
 
 
 $page_action = get_response_param('action','','get');
-if ($page_action=='addcdk') {
+if ($page_action=='add') {
     include_once get_template_directory() . '/admin/pages/cdk-add.php';
     return;
-}elseif ($page_action=='outputcdk') {
+}elseif ($page_action=='output') {
     include_once get_template_directory() . '/admin/pages/cdk-output.php';
     return;
 }
 
 
-$Ri_List_Table = new Ri_List_Table();
-$Ri_List_Table->prepare_items();
-$message = $Ri_List_Table->message;
+$Capalot_List_Table = new Ri_List_Table();
+$Capalot_List_Table->prepare_items();
+$message = $Capalot_List_Table->message;
 
 ?>
 
@@ -27,8 +27,8 @@ $message = $Ri_List_Table->message;
 <div class="wrap zb-admin-page">
 
     <h1 class="wp-heading-inline">卡券列表/管理</h1>
-    <a class="add-new-h2" href="admin.php?page=zb-admin-page-cdk&action=addcdk">添加卡券</a>
-    <a class="add-new-h2" href="admin.php?page=zb-admin-page-cdk&action=outputcdk">导出卡券</a>
+    <a class="add-new-h2" href="admin.php?page=capalot-admin-cdk&action=add">添加卡券</a>
+    <a class="add-new-h2" href="admin.php?page=capalot-admin-cdk&action=output">导出卡券</a>
     <p>支持余额充值卡、会员兑换卡、注册邀请码管理查询</p>
 
     <?php if (!empty($message)) {echo '<div class="notice notice-zbinfo is-dismissible" id="message"><p>' . $message . '</p></div>';}?>
@@ -38,10 +38,10 @@ $message = $Ri_List_Table->message;
     <div id="post-body-content">
         <div class="meta-box-sortables ui-sortable">
             <form method="get">
-                <?php $Ri_List_Table->search_box('搜索', 'post_id');?>
+                <?php $Capalot_List_Table->search_box('搜索', 'post_id');?>
                 <input type="hidden" name="page" value="<?php echo $_GET['page']; ?>">
-                <?php wp_nonce_field('zb-admin-page-nonce', '_nonce');?>
-                <?php $Ri_List_Table->display();?>
+                <?php wp_nonce_field('capalot-admin-cdk', '_nonce');?>
+                <?php $Capalot_List_Table->display();?>
             </form>
         </div>
     </div>
@@ -101,7 +101,7 @@ class Ri_List_Table extends WP_List_Table {
     //获取数据库数据
     private function table_data($per_page = 5, $page_number = 1) {
         global $wpdb;
-        $table_name = $wpdb->cao_cdk_tbl;
+        $table_name = $wpdb->prefix . 'capalot_cdk';
 
         //筛选
         $where = 'WHERE 1=1';
@@ -221,7 +221,7 @@ class Ri_List_Table extends WP_List_Table {
                 <?php $this->bulk_actions();?>
             </div>
             <?php } ?>
-            <?php 
+            <?php
                 $this->extra_tablenav($which);
                 $this->pagination($which);
             ?>
@@ -276,11 +276,11 @@ class Ri_List_Table extends WP_List_Table {
     public function column_id($item) {
         $row_id  = $item['id'];
         $actions = array();
-        
+
         $actions['delete'] = sprintf(
             '<a href="admin.php?page=zb-admin-page-cdk&action=delete&id=%s&_nonce=%s" onclick="return confirm(\'确定删除这条记录?\')">删除</a>',
             $row_id,
-            wp_create_nonce('zb-admin-page-nonce')
+            wp_create_nonce('capalot-admin-cdk')
         );
 
         return sprintf(
@@ -314,13 +314,14 @@ class Ri_List_Table extends WP_List_Table {
     //批量操作触发
     public function process_bulk_action() {
         global $wpdb;
+        $table_name = $wpdb-> prefix . 'capalot_cdk';
 
         if ('delete' === $this->current_action()) {
 
             $ids    = isset($_REQUEST['id']) ? $_REQUEST['id'] : array();
             $_nonce = isset($_REQUEST['_nonce']) ? $_REQUEST['_nonce'] : '';
 
-            if (!wp_verify_nonce($_nonce, 'zb-admin-page-nonce')) {
+            if (!wp_verify_nonce($_nonce, 'capalot-admin-cdk')) {
                 $this->set_message('nonce验证失败，请返回刷新重试');
                 return false;
             }
@@ -331,7 +332,7 @@ class Ri_List_Table extends WP_List_Table {
 
             if (!empty($ids)) {
                 // status 状态 -1 失效 0未使用 1已使用
-                $sql = $wpdb->query("DELETE FROM $wpdb->cao_cdk_tbl WHERE status <> 1 AND id IN($ids)");
+                $sql = $wpdb->query("DELETE FROM $table_name WHERE status <> 1 AND id IN($ids)");
                 if ($sql) {
                     $this->set_message(sprintf('成功删除 %d 条记录', $sql));
                 } else {
