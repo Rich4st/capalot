@@ -210,4 +210,25 @@ class Capalot_Ajax
 
     wp_send_json($response);
   }
+
+  //公告
+  public function get_site_notify() {
+    $this->valid_nonce_ajax(); #安全验证
+
+    if (!is_site_notify()) {
+        wp_send_json(array(
+            'status' => 0,
+            'msg'    => __('暂无公告', 'ripro'),
+        ));
+    }
+
+    $title = _capalot('site_notify_title');
+    $desc = _capalot('site_notify_desc');
+    $html = '<div class="site-notify-body"><h1 class="notify-title"><i class="fa fa-bell-o me-1"></i>'.$title.'</h1><div class="notify-desc">'.$desc.'</div></div>';
+    wp_send_json(array(
+        'status' => 1,
+        'msg'    => $html,
+    ));
+
+}
 }

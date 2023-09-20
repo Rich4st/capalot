@@ -1,32 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html <?php language_attributes(); ?> data-bs-theme="<?php echo get_site_default_color_style(); ?>">
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=<?php bloginfo('charset'); ?>">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+  <link rel="profile" href="https://gmpg.org/xfn/11">
   <?php wp_head(); ?>
 </head>
 
-<body>
-  <div class="h-[60px] bg-white w-full dark:bg-dark-card">
-    <div class="lg:max-w-[1280px] md:max-w-[720px] w-full mx-auto flex flex-row h-[100%] justify-between items-center dark:text-gray-50">
-      <div class="w-[100px] h-[60px] flex items-center justify-center  ">
-        LOGO
-      </div>
-      <div class="relative">
-        <?php if (_capalot('is_site_dark_toggle', true)) : ?>
-          <span id="light-mode" class="absolute cursor-pointer">
-            <i class="fa-solid fa-sun"></i>
-          </span>
-          <span id="dark-mode" class="absolute cursor-pointer hidden dark:text-gray-400">
-            <i class="fa-solid fa-cloud-moon"></i>
-          </span>
-        <?php endif; ?>
-      </div>
-      <div>
-      </div>
-      <div>
-      </div>
-    </div>
-  </div>
+<body <?php body_class(); ?>>
+  <?php wp_body_open(); ?>
+
+  <?php get_template_part('template-parts/header/menu'); ?>
+
+
+  <main>
