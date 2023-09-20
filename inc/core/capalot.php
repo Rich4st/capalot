@@ -163,15 +163,71 @@ class Capalot_Cdk
   }
 
   /**
-   * 获取cdk类型
+   * 添加cdk
+   *
+   * @param array $cdk_data cdk数据
+   * @param int $cdk_data['amount'] 数额
+   * @param int $cdk_data['type'] 类型
+   * @param int $cdk_data['create_time'] 创建时间
+   * @param int $cdk_data['expiry_time'] 过期时间
+   * @param string $cdk_data['code'] cdk码
+   * @param string $cdk_data['info'] cdk信息
+   * @param int $cdk_data['status'] cdk状态
    */
-  public static function get_cdk_type($type){
-    echo $type;
+  public static function add_cdk($cdk)
+  {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'capalot_cdk';
+
+    $insert = $wpdb->insert(
+      $table_name,
+      [
+        'amount' => $cdk['amount'],
+        'type' => $cdk['type'],
+        'create_time' => $cdk['create_time'],
+        'expiry_time' => $cdk['expiry_time'],
+        'code' => $cdk['code'],
+        'info' => $cdk['info'],
+        'status' => $cdk['status'],
+      ]
+    );
+
+
+    return $insert ? true : false;
   }
 
-  public static function get_cdk_status($p1)
+  /**
+   * 获取cdk类型
+   */
+  public static function get_cdk_type($type)
   {
-    echo $p1;
+    switch ($type) {
+      case 1:
+      case '1':
+        return '余额充值卡';
+        break;
+      case 2:
+      case '2':
+        return '会员兑换卡';
+        break;
+    }
+  }
+
+  /**
+   * 获取CDK使用状态
+   */
+  public static function get_cdk_status($status)
+  {
+    switch ($status) {
+      case 0:
+      case '0':
+        return '未使用';
+        break;
+      case 1:
+      case '1':
+        return '已使用';
+        break;
+    }
   }
 }
 
