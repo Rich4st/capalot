@@ -40,7 +40,7 @@ $message = $Capalot_List_Table->message;
             <form method="get">
                 <?php $Capalot_List_Table->search_box('搜索', 'post_id');?>
                 <input type="hidden" name="page" value="<?php echo $_GET['page']; ?>">
-                <?php wp_nonce_field('zb-admin-page-nonce', '_nonce');?>
+                <?php wp_nonce_field('capalot-admin-cdk', '_nonce');?>
                 <?php $Capalot_List_Table->display();?>
             </form>
         </div>
@@ -280,7 +280,7 @@ class Ri_List_Table extends WP_List_Table {
         $actions['delete'] = sprintf(
             '<a href="admin.php?page=zb-admin-page-cdk&action=delete&id=%s&_nonce=%s" onclick="return confirm(\'确定删除这条记录?\')">删除</a>',
             $row_id,
-            wp_create_nonce('zb-admin-page-nonce')
+            wp_create_nonce('capalot-admin-cdk')
         );
 
         return sprintf(
@@ -321,7 +321,7 @@ class Ri_List_Table extends WP_List_Table {
             $ids    = isset($_REQUEST['id']) ? $_REQUEST['id'] : array();
             $_nonce = isset($_REQUEST['_nonce']) ? $_REQUEST['_nonce'] : '';
 
-            if (!wp_verify_nonce($_nonce, 'zb-admin-page-nonce')) {
+            if (!wp_verify_nonce($_nonce, 'capalot-admin-cdk')) {
                 $this->set_message('nonce验证失败，请返回刷新重试');
                 return false;
             }

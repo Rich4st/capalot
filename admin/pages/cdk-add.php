@@ -70,7 +70,7 @@ if (isset($_POST['save_record'])) {
 
     <h1 class="wp-heading-inline">添加卡券</h1>
     <a class="add-new-h2" href="admin.php?page=capalot-admin-cdk">卡券管理</a>
-    <a class="add-new-h2" href="admin.php?page=capalot-admin-page-cdk&action=output">导出卡券</a>
+    <a class="add-new-h2" href="admin.php?page=capalot-admin-cdk&action=output">导出卡券</a>
     <p>您可在此添加会员兑换卡、余额充值卡、注册邀请码。</p>
 
     <?php if (!empty($message)) {
