@@ -12,9 +12,9 @@ $pay_type_not_in = ($QueryPayType == 'all') ? '0' : '99,88,77';
 
 ?>
 
-<div>
-  <h1 class="text-2xl my-4">商城管理总览/仪表盘</h1>
-  <ul class="grid grid-col-2 md:grid-cols-2 lg:grid-cols-3 md:gap-4 widget-list">
+<div class=" sczl_bg wrap">
+  <h1 class="text-2xl my-4 sczl_h1">商城管理总览/仪表盘</h1>
+  <ul class=" widget-list">
     <li>
       <?php do_meta_boxes($screen->id, 'column1', null); ?>
     </li>
@@ -40,7 +40,7 @@ $pay_type_not_in = ($QueryPayType == 'all') ? '0' : '99,88,77';
       <?php do_meta_boxes($screen->id, 'column8', null); ?>
     </li>
   </ul>
-  <ul class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+  <ul class=" widget-list-b">
     <li><?php do_meta_boxes($screen->id, 'chart1', null); ?></li>
     <li><?php do_meta_boxes($screen->id, 'chart2', null); ?></li>
   </ul>
@@ -69,7 +69,7 @@ class Capalot_UI
     // 今日订单统计
     add_meta_box(
       'widget-1',
-      sprintf('<span class="pl-2 dashicons dashicons-chart-bar"></span><span class="text-base font-semibold">今日订单统计(%s)</span>', wp_date('Y-m-d')),
+      sprintf('<span class="pl-2 dashicons dashicons-chart-bar tj_icon"></span><span class="text-base font-semibold tj_title">今日订单统计(%s)</span>', wp_date('Y-m-d')),
       array($this, 'today_order_quantity'),
       $this->screen->id,
       'column1',
@@ -78,7 +78,7 @@ class Capalot_UI
     // 今日下载统计
     add_meta_box(
       'widget-2',
-      sprintf('<span class="pl-2 dashicons dashicons-download"></span><span class="text-base font-semibold">今日下载统计(%s)</span>', wp_date('Y-m-d')),
+      sprintf('<span class="pl-2 dashicons dashicons-download tj_icon"></span><span class="text-base font-semibold tj_title">今日下载统计(%s)</span>', wp_date('Y-m-d')),
       array($this, 'today_download_quantity'),
       $this->screen->id,
       'column2',
@@ -87,7 +87,7 @@ class Capalot_UI
     // 今日推广统计
     add_meta_box(
       'widget-3',
-      sprintf('<span class="pl-2 dashicons dashicons-networking"></span><span class="text-base font-semibold">今日推广统计(%s)</span>', wp_date('Y-m-d')),
+      sprintf('<span class="pl-2 dashicons dashicons-networking tj_icon"></span><span class="text-base font-semibold tj_title">今日推广统计(%s)</span>', wp_date('Y-m-d')),
       array($this, 'today_promote_quantity'),
       $this->screen->id,
       'column3',
@@ -96,7 +96,7 @@ class Capalot_UI
     // 今日用户统计
     add_meta_box(
       'widget-4',
-      sprintf('<span class="pl-2 dashicons dashicons-groups"></span><span class="text-base font-semibold">今日用户统计(%s)</span>', wp_date('Y-m-d')),
+      sprintf('<span class="pl-2 dashicons dashicons-groups tj_icon"></span><span class="text-base font-semibold tj_title">今日用户统计(%s)</span>', wp_date('Y-m-d')),
       array($this, 'today_user_quantity'),
       $this->screen->id,
       'column4',
@@ -105,7 +105,7 @@ class Capalot_UI
     // 全站用户余额排行
     add_meta_box(
       'widget-5',
-      sprintf('<span class="pl-2 dashicons dashicons-editor-ol"></span><span class="text-base font-semibold">全站用户余额排行</span>'),
+      sprintf('<span class="pl-2 dashicons dashicons-editor-ol tj_icon"></span><span class="text-base font-semibold tj_title">全站用户余额排行</span>'),
       array($this, 'site_balance_ranking'),
       $this->screen->id,
       'column5',
@@ -114,7 +114,7 @@ class Capalot_UI
     // 全站销量排行
     add_meta_box(
       'widget-6',
-      sprintf('<span class="pl-2 dashicons dashicons-clipboard"></span><span class="text-base font-semibold">全站销量排行</span>'),
+      sprintf('<span class="pl-2 dashicons dashicons-clipboard tj_icon"></span><span class="text-base font-semibold tj_title">全站销量排行</span>'),
       array($this, 'site_sales_ranking'),
       $this->screen->id,
       'column6',
@@ -123,7 +123,7 @@ class Capalot_UI
     // 全站下载量排行
     add_meta_box(
       'widget-7',
-      sprintf('<span class="pl-2 dashicons dashicons-download"></span><span class="text-base font-semibold">全站下载排行</span>'),
+      sprintf('<span class="pl-2 dashicons dashicons-download tj_icon"></span><span class="text-base font-semibold tj_title">全站下载排行</span>'),
       array($this, 'site_download_ranking'),
       $this->screen->id,
       'column7',
@@ -132,7 +132,7 @@ class Capalot_UI
     // 全站推广排行
     add_meta_box(
       'widget-8',
-      sprintf('<span class="pl-2 dashicons dashicons-admin-site-alt"></span><span class="text-base font-semibold">全站推广排行</span>'),
+      sprintf('<span class="pl-2 dashicons dashicons-admin-site-alt tj_icon"></span><span class="text-base font-semibold tj_title">全站推广排行</span>'),
       array($this, 'site_promote_ranking'),
       $this->screen->id,
       'column8',
@@ -141,7 +141,7 @@ class Capalot_UI
     // 年度销售统计图表
     add_meta_box(
       'chart-1',
-      sprintf('<span class="pl-2 font-semibold">年度销售统计图表（%s）总览</span>', wp_date('Y年1月~m月')),
+      sprintf('<span class="pl-2 font-semibold tj_title_b">年度销售统计图表（%s）总览</span>', wp_date('Y年1月~m月')),
       array(&$this, 'annual_sales_statistics_chart'),
       $this->screen->id,
       'chart1'
@@ -150,7 +150,7 @@ class Capalot_UI
     // 本月销售统计图表
     add_meta_box(
       'chart-2',
-      sprintf('<span class="pl-2 font-semibold">本月销售统计图表（%s）总览</span>', wp_date('Y年1月~m月')),
+      sprintf('<span class="pl-2 font-semibold tj_title_b">本月销售统计图表（%s）总览</span>', wp_date('Y年1月~m月')),
       array(&$this, 'monthly_sales_statistics_chart'),
       $this->screen->id,
       'chart2'
@@ -183,14 +183,14 @@ class Capalot_UI
       ['name' => '付款率', 'value' => sprintf('%0.1f%%', $ratio)],
     ];
     ob_start(); ?>
-    <div class="text-center">
-      <p> 今日已付款 (<?php echo $count2; ?>/条)</p>
-      <p class="text-xl font-semibold text-orange-400">￥<?php echo $price2; ?></p>
+    <div class="text-center tj_data_a">
+      <p class=" tj_data_pt"> 今日已付款 (<?php echo $count2; ?>/条)</p>
+      <p class="text-xl font-semibold text-orange-400 tj_data_p1">￥<?php echo $price2; ?></p>
     </div>
-    <div class="flex items-center justify-around mt-4 pt-2 border-t">
+    <div class="flex items-center justify-around mt-4 pt-2 border-t tj_data_b">
       <?php foreach ($data as $item) {
         echo '<div class="text-center">';
-        echo '<span class="text-gray-500">' . $item['name'] . '</span>
+        echo '<span class="text-gray-500 tj_data_span">' . $item['name'] . '</span>
               <h4 class="font-semibold">' . $item['value'] . '</h4>';
         echo '</div>';
       } ?>
@@ -246,15 +246,15 @@ class Capalot_UI
       ['name' => '重复下载率', 'value' => sprintf('%0.1f%%', $ratio)],
     ];
     ob_start(); ?>
-    <div class="text-center">
+    <div class="text-center tj_data_a">
       <div>
-        <p>今日被下载产品数</p>
-        <p class="text-xl font-semibold text-green-400"><?php echo $res2; ?> 个</p>
+        <p class=" tj_data_pt">今日被下载产品数</p>
+        <p class="text-xl font-semibold text-green-400 tj_data_p2"><?php echo $res2; ?> 个</p>
       </div>
-      <div class="flex items-center justify-around mt-4 pt-2 border-t">
+      <div class="flex items-center justify-around mt-4 pt-2 border-t tj_data_b">
         <?php foreach ($data as $item) {
           echo '<div class="col text-center">';
-          echo '<span class="text-gray-500">' . $item['name'] . '</span>
+          echo '<span class="text-gray-500 tj_data_span">' . $item['name'] . '</span>
                 <h4 class="font-semibold">' . $item['value'] . '</h4>';
           echo '</div>';
         } ?>
@@ -300,16 +300,16 @@ class Capalot_UI
       ['name' => '提现率', 'value' => sprintf('%0.1f%%', $ratio)],
     ];
     ob_start(); ?>
-    <div class="text-center">
+    <div class="text-center tj_data_a">
       <div>
-        <p>今日推广单数</p>
-        <p class="text-xl font-semibold text-pink-500"><?php echo $sumcount; ?> 单</p>
+        <p class=" tj_data_pt">今日推广单数</p>
+        <p class="text-xl font-semibold text-pink-500 tj_data_p3"><?php echo $sumcount; ?> 单</p>
       </div>
 
-      <div class="flex items-center justify-around mt-4 pt-2 border-t">
+      <div class="flex items-center justify-around mt-4 pt-2 border-t tj_data_b">
         <?php foreach ($data as $item) {
           echo '<div class="col text-center">';
-          echo '<span class="text-gray-500">' . $item['name'] . '</span>
+          echo '<span class="text-gray-500 tj_data_span">' . $item['name'] . '</span>
                 <h4 class="font-semibold">' . $item['value'] . '</h4>';
           echo '</div>';
         } ?>
@@ -341,16 +341,16 @@ class Capalot_UI
       ['name' => '封号率', 'value' => sprintf('%0.1f%%', $ratio)],
     ];
     ob_start(); ?>
-    <div class="card-body text-center">
+    <div class="card-body text-center tj_data_a">
       <div>
-        <p>今日注册用户数</p>
-        <p class="text-xl font-semibold text-sky-500"><?php echo $count2; ?> 位</p>
+        <p class=" tj_data_pt">今日注册用户数</p>
+        <p class="text-xl font-semibold text-sky-500 tj_data_p4"><?php echo $count2; ?> 位</p>
       </div>
 
-      <div class="flex items-center justify-around mt-4 pt-2 border-t">
+      <div class="flex items-center justify-around mt-4 pt-2 border-t tj_data_b">
         <?php foreach ($data as $item) {
           echo '<div class="col text-center">';
-          echo '<span class="text-muted">' . $item['name'] . '</span><h4 class="number-font">' . $item['value'] . '</h4>';
+          echo '<span class="text-muted tj_data_span">' . $item['name'] . '</span><h4 class="number-font">' . $item['value'] . '</h4>';
           echo '</div>';
         } ?>
       </div>

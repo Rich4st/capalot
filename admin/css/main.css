@@ -36,8 +36,111 @@
   background-color: rgb(119 219 123 / 50%);
 }
 
-.widget-list {
+.widget-list li{
+  margin-bottom: 0;
+}
+.widget-list li .meta-box-sortables{
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.5rem;
+  gap: 1rem;
+}
+.widget-list{
+  display: grid;
+  gap: 1rem;
+}
+.widget-list-b{
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width:768px){
+  .widget-list{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .widget-list-b{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width:1280px){
+  .widget-list{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width:1600px){
+  .widget-list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+.widget-list .tj_icon{
+  margin-left: 1rem;
+}
+.widget-list .tj_title{
+  font-size: 1rem;
+  margin-right: 1rem;
+}
+.widget-list .postbox{
+  border: none;
+}
+.widget-list .postbox-header{
+  border-bottom: 1px solid #e5e5e5;
+}
+.widget-list .inside{
+  margin: 0;
+  padding: 1rem;
+}
+.widget-list-b .postbox{
+  border: none;
+}
+.widget-list-b .postbox-header{
+  border-bottom: 1px solid #e5e5e5;
+}
+.widget-list-b .inside{
+  margin: 0;
+  padding: 1rem;
+}
+.widget-list-b .tj_title_b{
+  font-size: 1rem;
+  margin-left: 1rem;
+}
+.tj_data_a{text-align: center;}
+.tj_data_b{
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.tj_data_b h4{
+  margin: 1rem 0 0 0;
+}
+.tj_data_b .tj_data_span{
+  color: #999;
+}
+.tj_data_a .tj_data_p1{
+  color: #FF5722;
+  font-size: 1.5rem;
+  margin:0;
+  font-weight: bold;
+}
+.tj_data_a .tj_data_p2{
+  color: #10c650;
+  font-size: 1.5rem;
+  margin:0;
+  font-weight: bold;
+}
+.tj_data_a .tj_data_p3{
+  color: #ff226c;
+  font-size: 1.5rem;
+  margin:0;
+  font-weight: bold;
+}
+.tj_data_a .tj_data_p4{
+  color: #1981e1;
+  font-size: 1.5rem;
+  margin:0;
+  font-weight: bold;
+}
+.tj_data_a .tj_data_pt{
+  margin: 0 0 1rem 0;
 }
