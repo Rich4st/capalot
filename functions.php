@@ -74,6 +74,9 @@ require_once get_template_directory() . '/inc/template-tags.php';
 // 主题功能标签
 require_once get_template_directory() . '/inc/template-mail.php';
 
+// //伪静态路由
+require_once get_template_directory() . '/inc/template-rewrite.php';
+
 // ajax 请求
 require_once get_template_directory() . '/inc/template-ajax.php';
 
