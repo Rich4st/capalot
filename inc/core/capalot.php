@@ -437,3 +437,76 @@ class Capalot_Download
     return true;
   }
 }
+
+/**
+ * 工单管理
+ */
+class Capalot_Ticket
+{
+  /**
+   * 获取工单状态
+   */
+  public static function get_status($status)
+  {
+    switch ($status) {
+      case '0':
+        return '待回复';
+        break;
+      case '1':
+        return '处理中';
+        break;
+      case '2':
+        return '已回复';
+        break;
+      default:
+        return '已关闭';
+        break;
+    }
+  }
+
+  /**
+   * 获取工单类型
+   */
+  public static function get_type($type)
+  {
+    switch ($type) {
+      case '1':
+        return '资源问题';
+        break;
+      case '2':
+        return '会员问题';
+        break;
+      case '3':
+        return '网站BUG';
+        break;
+      default:
+        return '请他问题';
+        break;
+    }
+  }
+
+  /**
+   * 工单删除
+   */
+  public static function delete($id)
+  {
+    echo '------>$id';
+  }
+
+  /**
+   *
+   */
+  public static function get($id)
+  {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'capalot_ticket';
+  }
+
+  /**
+   * 工单更新
+   */
+  public static function update($id)
+  {
+    echo '---->更新工单';
+  }
+}
