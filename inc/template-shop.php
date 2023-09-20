@@ -329,6 +329,31 @@ function is_site_shop()
     return _capalot('site_shop_mode', 'all') !== 'close';
 }
 
+//是否开启登录
+function is_site_user_login() {
+    return (bool) _capalot('is_site_user_login', true);
+}
+
+//是否开启网站公告
+function is_site_notify() {
+    return !empty(_capalot('is_site_notify', 1));
+}
+
+//是否开启投稿
+function is_site_tougao() {
+    return !empty(_capalot('is_site_tougao', 1));
+}
+
+//是否开工单
+function is_site_tickets() {
+    return !empty(_capalot('is_site_tickets', 1));
+}
+
+//是否开启推广
+function is_site_user_aff() {
+    return (bool) _capalot('is_site_aff', true);
+}
+
 /**
  * 文章是否有付费资源
  */
@@ -723,4 +748,56 @@ function capalot_get_request_pay($order_data)
     // TODO:设置当前订单号缓存
 
     return apply_filters('capalot_get_request_pay', $result, $order_data);
+}
+
+
+
+/**
+ * 获取个人中心菜单
+ * @param  [type]     $menu_part [description]
+ * @return [type]
+ */
+function get_uc_menus($menu_part = null) {
+
+    $default = 'profile';
+
+    $part_tpl = array(
+        'profile' => ['title' => __('基本信息', 'ripro'), 'desc' => '', 'icon' => 'far fa-user'],
+        'coin'    => ['title' => __('我的余额', 'ripro'), 'desc' => '', 'icon' => get_site_coin_icon()],
+        'vip'     => ['title' => __('我的会员', 'ripro'), 'desc' => '', 'icon' => 'fas fa-gem'],
+        'order'   => ['title' => __('我的订单', 'ripro'), 'desc' => '', 'icon' => 'fab fa-shopify'],
+        'down'    => ['title' => __('下载记录', 'ripro'), 'desc' => '', 'icon' => 'fas fa-cloud-download-alt'],
+        'fav'     => ['title' => __('我的收藏', 'ripro'), 'desc' => '', 'icon' => 'fas fa-star'],
+        'aff'     => ['title' => __('我的推广', 'ripro'), 'desc' => '', 'icon' => 'fas fa-hand-holding-usd'],
+        'ticket'  => ['title' => __('我的工单', 'ripro'), 'desc' => '', 'icon' => 'fas fa-question-circle'],
+        'tougao'  => ['title' => __('我的投稿', 'ripro'), 'desc' => '', 'icon' => 'fas fa-edit'],
+        'logout'  => ['title' => __('退出登录', 'ripro'), 'desc' => '', 'icon' => 'fas fa-sign-out-alt'],
+    );
+
+    if (!is_site_shop()) {
+        unset($part_tpl['coin']);
+        unset($part_tpl['vip']);
+        unset($part_tpl['order']);
+        unset($part_tpl['down']);
+        unset($part_tpl['aff']);
+    }
+
+    if (!is_site_user_aff()) {
+        unset($part_tpl['aff']);
+    }
+
+    if (!is_site_tickets()) {
+        unset($part_tpl['ticket']);
+    }
+
+    if (!is_site_tougao()) {
+        unset($part_tpl['tougao']);
+    }
+
+    if ($menu_part !== null) {
+        $menu_part = (array_key_exists($menu_part, $part_tpl)) ? $menu_part : $default;
+        return $part_tpl[$menu_part];
+    }
+
+    return $part_tpl;
 }
