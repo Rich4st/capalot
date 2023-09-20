@@ -13,6 +13,18 @@ $user_pay_post_status = get_user_pay_post_status($user_id, $post_id);
 //是否免费资源并且需要登录后查看
 $is_user_login_get_status = $user_pay_post_status === true && empty($user_id);
 
+//下载地址格式化
+$capalot_downurl_new = get_post_meta($post_id, 'capalot_downurl_new', true);
+if (!empty($capalot_downurl_new) && is_array($capalot_downurl_new)) {
+  foreach ($capalot_downurl_new as $key => $item) {
+    $capalot_downurl_new[$key]['name'] = (!empty($item['name'])) ? trim($item['name']) : '下载地址' . ($key + 1);
+    $capalot_downurl_new[$key]['pwd']  = (!empty($item['pwd'])) ? $item['pwd'] : '';
+    $capalot_downurl_new[$key]['url']  = get_post_endown_url($post_id, $key);
+  }
+} else {
+  $capalot_downurl_new = array();
+}
+
 ?>
 <div class=" bg-white rounded-md p-4 mb-8  relative overflow-hidden dark:bg-dark-card">
 
@@ -147,7 +159,7 @@ $is_user_login_get_status = $user_pay_post_status === true && empty($user_id);
       <?php endif; ?>
 
       <?php if (!empty($args['footer_text'])) : ?>
-        <p class="text-muted mb-0 mt-3 small text-sm 
+        <p class="text-muted mb-0 mt-3 small text-sm
         text-gray-500"><?php echo $args['footer_text']; ?></p>
       <?php endif; ?>
     </div>

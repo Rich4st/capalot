@@ -358,18 +358,59 @@ function get_ip_address($ignore_private_and_reserved = false)
   return 'unknown';
 }
 
+//全站弹窗报错
+function capalot_wp_die($title = '', $msg = '', $back_link = '')
+{
+  ob_start(); ?>
+  <!doctype html>
+  <html <?php language_attributes(); ?>>
+
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=<?php bloginfo('charset'); ?>">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <link rel="profile" href="https://gmpg.org/xfn/11">
+    <title><?php echo get_bloginfo('name') . ' - ' . $title; ?></title>
+    <?php wp_head(); ?>
+  </head>
+
+  <body class="wpdie">
+    <script type="text/javascript">
+      window.onload = function() {
+        var html = '<div class="text-center"><h4 class="text-danger"><i class="fas fa-info-circle"></i> <?php echo $title; ?></h4><hr><div class="text-muted py-3"><?php echo $msg; ?></div></div>';
+        var back_url = '<?php echo $back_link; ?>';
+        ri.popup(html, 400, function() {
+          if (back_url === 'close') {
+            window.close();
+          } else if (back_url !== '') {
+            location.href = back_url;
+          } else {
+            location.href = document.referrer;
+          }
+        })
+      };
+    </script>
+    <?php wp_footer(); ?>
+    <div class="dimmer"></div>
+  </body>
+
+  </html>
+<?php echo ob_get_clean();
+  exit;
+}
+
 // 根据字符串搜索用户id 用于搜索
-function get_user_id_from_str($string) {
+function get_user_id_from_str($string)
+{
   $string = trim($string);
 
   if (is_email($string) && $user = get_user_by('email', $string)) {
-      return $user->ID;
+    return $user->ID;
   }
   if (is_numeric($string) && $user = get_user_by('id', absint($string))) {
-      return $user->ID;
+    return $user->ID;
   }
   if (is_string($string) && $user = get_user_by('login', $string)) {
-      return $user->ID;
+    return $user->ID;
   }
   return 0;
 }

@@ -181,6 +181,9 @@ class Capalot_Pay
 {
 }
 
+/**
+ * 推广
+ */
 class Capalot_Aff
 {
   public function __construct()
@@ -238,6 +241,9 @@ class Capalot_Aff
   }
 }
 
+/**
+ * CDK
+ */
 class Capalot_Cdk
 {
   public function __construct()
@@ -322,11 +328,112 @@ class Capalot_Cookie
   {
   }
 
+  public static function set($key, $value, $expire = 0)
+  {
+    if ($expire == 0) {
+      $expire = time() + 3600 * 24 * 30;
+    }
+
+    setcookie($key, $value, $expire, '/');
+  }
+
   public static function get($key)
   {
     if (!isset($_COOKIE[$key]))
       return false;
 
     return $_COOKIE[$key];
+  }
+}
+
+class Capalot_Code
+{
+  public function __construct()
+  {
+  }
+
+  public static function destr($url)
+  {
+    return $url;
+  }
+
+  public static function enstr($url)
+  {
+    echo $url;
+  }
+}
+
+/**
+ * 下载
+ */
+class Capalot_Download
+{
+  public function __construct()
+  {
+  }
+
+  // 获取用户今天下载数量
+  public static function get_today_post_downnum($user_id, $post_id)
+  {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'capalot_download';
+
+    $today = strtotime(date('Y-m-d', time()));
+    $tomorrow = strtotime(date('Y-m-d', strtotime('+1 day')));
+
+    $sql = "SELECT COUNT(*) FROM $table_name WHERE user_id = %d AND post_id = %d AND create_time >= %d AND create_time < %d";
+
+    $count = $wpdb->get_var($wpdb->prepare($sql, $user_id, $post_id, $today, $tomorrow));
+
+    return $count;
+  }
+
+  // 添加下载记录
+  public static function add($item)
+  {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'capalot_download';
+
+    $insert = $wpdb->insert(
+      $table_name,
+      [
+        'user_id' => $item['user_id'],
+        'post_id' => $item['post_id'],
+        'create_time' => time(),
+        'ip' => $item['ip'],
+        'note' => $item['note'],
+      ]
+    );
+
+    return $insert ? true : false;
+  }
+
+  // 根据文件路径下载文件
+  public static function local_download_file($file_name)
+  {
+    if (!file_exists($file_name)) {
+      return false;
+    }
+
+    $fp = fopen($file_name, "r");
+    $file_size = filesize($file_name);
+
+    //下载文件需要用到的头
+    Header("Content-type: application/octet-stream");
+    Header("Accept-Ranges: bytes");
+    Header("Accept-Length:" . $file_size);
+    Header("Content-Disposition: attachment; filename=" . $file_name);
+
+    $buffer = 1024;
+    $file_count = 0;
+    //向浏览器返回数据
+    while (!feof($fp) && $file_count < $file_size) {
+      $file_con = fread($fp, $buffer);
+      $file_count += $buffer;
+      echo $file_con;
+    }
+    fclose($fp);
+
+    return true;
   }
 }

@@ -92,7 +92,6 @@ class Ri_List_Table extends WP_List_Table {
     private function table_data($per_page = 5, $page_number = 1) {
 
         global $wpdb;
-        // $table_name = $wpdb->capalot_download;
         $table_name = $wpdb->prefix . 'capalot_download';
 
         //排序分页
@@ -100,7 +99,7 @@ class Ri_List_Table extends WP_List_Table {
         $order     = isset($_REQUEST['order']) && in_array($_REQUEST['order'], array('asc', 'desc')) ? $_REQUEST['order'] : 'desc';
         $order_str = sanitize_sql_orderby($orderby . ' ' . $order);
         $limit_from = ($page_number - 1) * $per_page;
-        
+
         $search_term = (!empty($_REQUEST['s'])) ? trim($_REQUEST['s']) : '';
         $search_user_id = get_user_id_from_str($search_term);
         $search_like  = '%' . $wpdb->esc_like($search_term) . '%';
@@ -191,7 +190,7 @@ class Ri_List_Table extends WP_List_Table {
                 <?php $this->bulk_actions();?>
             </div>
             <?php } ?>
-            <?php 
+            <?php
                 $this->extra_tablenav($which);
                 $this->pagination($which);
             ?>
@@ -218,7 +217,7 @@ class Ri_List_Table extends WP_List_Table {
         $row_id            = $item['id'];
         $actions           = array();
         $actions['delete'] = sprintf(
-            '<a href="admin.php?page=capalot-admin-down&action=delete&id=%s&_nonce=%s" onclick="return confirm(\'确定删除这条记录?\')">删除</a>',
+            '<a href="admin.php?page=capalot-admin-download&action=delete&id=%s&_nonce=%s" onclick="return confirm(\'确定删除这条记录?\')">删除</a>',
             $row_id,
             wp_create_nonce('capalot-admin-nonce')
         );

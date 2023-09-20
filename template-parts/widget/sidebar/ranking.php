@@ -1,4 +1,3 @@
-
 <?php
 
 if (empty($args)) {
@@ -25,7 +24,12 @@ if (in_array($args['orderby'], array('views_num', 'likes_num', 'fav_num'))) {
   // 下载量排行...
   global $wpdb;
   $post_ids = $wpdb->get_col(
-    $wpdb->prepare("SELECT post_id FROM {$wpdb->capalot_down} GROUP BY post_id ORDER BY COUNT(*) DESC LIMIT %d", $args['count'])
+    $wpdb->prepare(
+      "SELECT post_id
+      FROM {$wpdb->capalot_down} GROUP BY post_id
+      ORDER BY COUNT(*) DESC LIMIT %d",
+      $args['count']
+    )
   );
 
   if (!empty($post_ids)) {

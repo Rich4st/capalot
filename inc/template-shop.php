@@ -16,6 +16,39 @@ function is_user_commented($user_id, $post_id)
     return count($comments) > 0;
 }
 
+//是否开工单
+function is_site_tags_page()
+{
+    return !empty(_capalot('is_site_tags_page', 1));
+}
+
+//是否开工单
+function is_site_link_manager_page()
+{
+    return !empty(_capalot('is_site_link_manager_page', 1));
+}
+
+//独立VIP介绍页面
+function is_site_vip_price_page()
+{
+    return !empty(_capalot('is_site_vip_price_page', 1));
+}
+
+//是否开启投稿
+function is_site_tougao()
+{
+    return !empty(_capalot('is_site_tougao', 1));
+}
+
+
+//获取文章加密下载地址
+function get_post_endown_url($post_id, $down_key)
+{
+    $nonce     = wp_create_nonce('zb_down');
+    $down_str  = $post_id . '-' . $down_key . '-' . $nonce;
+    return home_url('/goto?down=' . $down_str);
+}
+
 // 获取网站商城会员组配置
 function get_site_vip_options()
 {
