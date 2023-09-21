@@ -34,13 +34,6 @@ function is_site_vip_price_page()
     return !empty(_capalot('is_site_vip_price_page', 1));
 }
 
-//是否开启投稿
-function is_site_tougao()
-{
-    return !empty(_capalot('is_site_tougao', 1));
-}
-
-
 //获取文章加密下载地址
 function get_post_endown_url($post_id, $down_key)
 {
