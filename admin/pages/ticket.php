@@ -13,9 +13,9 @@ if ($page_action=='edit') {
     return;
 }
 
-$Ri_List_Table = new Ri_List_Table();
-$Ri_List_Table->prepare_items();
-$message = $Ri_List_Table->message;
+$Capalot_List_Table = new Ri_List_Table();
+$Capalot_List_Table->prepare_items();
+$message = $Capalot_List_Table->message;
 ?>
 
 <!-- 主页面 -->
@@ -32,10 +32,10 @@ $message = $Ri_List_Table->message;
     <div id="post-body-content">
         <div class="meta-box-sortables ui-sortable">
             <form method="get">
-                <?php $Ri_List_Table->search_box('搜索用户', 's');?>
+                <?php $Capalot_List_Table->search_box('搜索用户', 's');?>
                 <input type="hidden" name="page" value="<?php echo $_GET['page']; ?>">
                 <?php wp_nonce_field('capalot-admin-nonce', '_nonce');?>
-                <?php $Ri_List_Table->display();?>
+                <?php $Capalot_List_Table->display();?>
             </form>
         </div>
     </div>
