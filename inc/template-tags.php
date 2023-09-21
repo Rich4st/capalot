@@ -358,6 +358,11 @@ function get_ip_address($ignore_private_and_reserved = false)
   return 'unknown';
 }
 
+function get_default_lazy_img_src() {
+  return _capalot('default_lazy_thumb') ? _capalot('default_lazy_thumb') : 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+}
+
+
 //全站弹窗报错
 function capalot_wp_die($title = '', $msg = '', $back_link = '')
 {

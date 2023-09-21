@@ -40,30 +40,6 @@ function is_site_tougao()
     return !empty(_capalot('is_site_tougao', 1));
 }
 
-//是否开启签到功能
-function is_site_qiandao()
-{
-    return !empty(_capalot('is_site_qiandao', 1));
-}
-
-//今日是否已签到
-function is_user_today_qiandao($user_id) {
-
-    // 会员当前签到时间
-    $qiandao_time = get_user_meta($user_id, 'cao_qiandao_time', true);
-
-    if (empty($qiandao_time)) {
-        $qiandao_time = 0;
-    }
-
-    $today_time = get_today_time_range(); //今天时间戳信息 $today_time['start'],$today_time['end']
-
-    if ($today_time['start'] < $qiandao_time && $today_time['end'] > $qiandao_time) {
-        return true;
-    }
-    return false;
-}
-
 
 //获取文章加密下载地址
 function get_post_endown_url($post_id, $down_key)

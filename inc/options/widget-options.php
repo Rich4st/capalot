@@ -862,3 +862,164 @@ function capalot_home_notification_widget($args, $instance)
 
   echo $args['after_widget'];
 }
+
+/**
+ * 首页 - 高级搜索模块
+ */
+CSF::createWidget('capalot_home_search_widget', array(
+  'title' => '【首页】9.高级搜索模块',
+  'className' => 'home-search-widget',
+  'desc' => '首页高级搜索模块',
+  'fields'      => array(
+
+    array(
+      'id'      => 'title',
+      'type'    => 'text',
+      'title'   => '搜索介绍标题',
+      'default' => '搜索本站精品资源',
+    ),
+    array(
+      'id'      => 'desc',
+      'type'    => 'text',
+      'title'   => '搜索描述介绍',
+      'default' => 'Capalot全新开发甄品VIP会员资源/素材虚拟商城主题',
+    ),
+
+    array(
+      'id'          => 'bg_type',
+      'type'        => 'radio',
+      'inline'      => true,
+      'title'       => '背景效果',
+      'desc'        => '',
+      'options'     => array(
+        'img'     => '图片',
+        'video'   => '视频',
+        'birds'   => '千纸鹤',
+        'fog'   => '烟雾',
+        'waves'   => '波浪',
+        'net'   => '网格',
+      ),
+      'default'     => 'img',
+    ),
+
+    array(
+      'id'      => 'bg_img',
+      'type'    => 'upload',
+      'title'   => '背景图片',
+      'default' => get_template_directory_uri() . '/assets/img/bg.jpg',
+      'dependency' => array('bg_type', '==', 'img'),
+    ),
+
+    array(
+      'id'      => 'bg_video',
+      'type'    => 'upload',
+      'title'   => 'mp4背景视频',
+      'default' => '',
+      'dependency' => array('bg_type', '==', 'video'),
+    ),
+
+    // 千纸鹤颜色设定
+    array(
+      'id'      => 'birds_color',
+      'type'    => 'color_group',
+      'title'   => '效果器颜色',
+      'options' => array(
+        'bgcolor' => '背景色',
+        'color1' => '千纸鹤颜色1',
+        'color2' => '千纸鹤颜色2',
+      ),
+      'default' => array(
+        'background_color' => '#6b99d2',
+        'color1' => '#ff0000',
+        'color2' => '#00d1ff',
+      ),
+      'dependency' => array('bg_type', 'any', 'birds'),
+    ),
+
+    // 烟雾颜色设定
+    array(
+      'id'      => 'fog_color',
+      'type'    => 'color_group',
+      'title'   => '效果器颜色',
+      'options' => array(
+        'base_color' => '基础色',
+        'highlight_color' => '突出显示颜色',
+        'midtone_color' => '中间调颜色',
+        'lowlight_color' => '低光颜色',
+      ),
+      'default' => array(
+        'highlight_color' => '#ffc300',
+        'midtone_color' => '#ff1f00',
+        'lowlight_color' => '#2d00ff',
+        'base_color' => '#ffebeb',
+      ),
+      'dependency' => array('bg_type', 'any', 'fog'),
+    ),
+
+    // 波浪颜色设定
+    array(
+      'id'      => 'waves_color',
+      'type'    => 'color_group',
+      'title'   => '效果器颜色',
+      'options' => array(
+        'color' => '背景色',
+      ),
+      'default' => array(
+        'color' => '#005588',
+      ),
+      'dependency' => array('bg_type', 'any', 'waves'),
+    ),
+
+    // 网格颜色设定
+    array(
+      'id'      => 'net_color',
+      'type'    => 'color_group',
+      'title'   => '效果器颜色',
+      'options' => array(
+        'bgcolor' => '背景色',
+        'color' => '粒子颜色',
+      ),
+      'default' => array(
+        'bgcolor' => '#23153c',
+        'color' => '#ff3f81',
+      ),
+      'dependency' => array('bg_type', 'any', 'net'),
+    ),
+
+    array(
+      'id'      => 'bg_overlay',
+      'type'    => 'switcher',
+      'title'   => '背景颜色遮罩',
+      'default' => true,
+    ),
+
+    array(
+      'id'      => 'search_hot',
+      'type'    => 'textarea',
+      'title'   => '搜索热词',
+      'desc'    => '每个搜索词用英文逗号隔开',
+      'default' => 'wordpress,测试,下载,素材,作品,主题,插件,你好',
+    ),
+
+  ),
+));
+function capalot_home_search_widget($args, $instance)
+{
+
+  $instance = array_merge(array(
+    'title' => '搜索本站精品资源',
+    'desc' => 'RiPro是Ritheme全新开发甄品VIP会员资源/素材虚拟商城主题',
+    'bg_type' => 'img',
+    'bg_img' => get_template_directory_uri() . '/assets/img/bg.jpg',
+    'bg_video' => '',
+    'color' => array('bgcolor' => '#228ed6', 'color' => '#ededed'),
+    'bg_overlay' => true,
+    'search_hot' => 'wordpress,测试,下载,素材,作品,主题,插件,你好',
+  ), $instance);
+
+  echo $args['before_widget'];
+
+  get_template_part('template-parts/widget/home/search', '', $instance);
+
+  echo $args['after_widget'];
+}
