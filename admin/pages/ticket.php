@@ -7,11 +7,11 @@ defined('WPINC') || exit;
  */
 
 
-// $page_action = get_param('action','','get');
-// if ($page_action=='edit') {
-//     include_once get_template_directory() . '/admin/pages/ticket-edit.php';
-//     return;
-// }
+$page_action = get_response_param('action','','get');
+if ($page_action=='edit') {
+    include_once get_template_directory() . '/admin/pages/ticket-edit.php';
+    return;
+}
 
 $Ri_List_Table = new Ri_List_Table();
 $Ri_List_Table->prepare_items();
@@ -206,7 +206,7 @@ class Ri_List_Table extends WP_List_Table {
                 <?php $this->bulk_actions();?>
             </div>
             <?php } ?>
-            <?php 
+            <?php
                 $this->extra_tablenav($which);
                 $this->pagination($which);
             ?>
@@ -266,7 +266,7 @@ class Ri_List_Table extends WP_List_Table {
         $row_id = $item['id'];
 
         $actions = array();
-      
+
         $actions['edit'] = sprintf(
             '<a href="admin.php?page=capalot-admin-ticket&action=edit&id=%s&_nonce=%s">编辑/回复</a>',
             $row_id,
@@ -331,7 +331,7 @@ class Ri_List_Table extends WP_List_Table {
                             $i++;
                         }
                     }
-                    
+
                     if ($i>0) {
                         $this->set_message(sprintf('成功删除 %d 条记录', $i ));
                     } else {
