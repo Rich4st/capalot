@@ -372,11 +372,6 @@ function is_site_notify() {
     return !empty(_capalot('is_site_notify', 1));
 }
 
-//是否开启投稿
-function is_site_tougao() {
-    return !empty(_capalot('is_site_tougao', 1));
-}
-
 //是否开工单
 function is_site_tickets() {
     return !empty(_capalot('is_site_tickets', 1));
@@ -783,6 +778,23 @@ function capalot_get_request_pay($order_data)
     return apply_filters('capalot_get_request_pay', $result, $order_data);
 }
 
+
+/**
+ * 用户是否第三方注册未设置密码
+ * @param  [type]     $user_id [description]
+ * @return [type]
+ */
+function user_is_oauth_password($user_id){
+    $config = array('qq','weixin');
+    $user = get_user_by('id', $user_id);
+    foreach ($config as $type) {
+        $meta_key   = 'open_' . $type. '_openid';
+        $p2 = get_user_meta($user_id,$meta_key,true);
+        if (!empty($p2) && wp_check_password(md5($p2), $user->user_pass, $user->ID )) {
+            return true;
+        }
+    }
+}
 
 
 /**
