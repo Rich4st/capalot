@@ -80,5 +80,8 @@ require_once get_template_directory() . '/inc/template-rewrite.php';
 // ajax 请求
 require_once get_template_directory() . '/inc/template-ajax.php';
 
+// filters
+require_once get_template_directory() . '/inc/template-filter.php';
+
 require_once get_template_directory() . '/inc/template-walker.php';
 
