@@ -2,13 +2,13 @@
 
     <div class=" text-[#595d69]"> <!-- container-fluid px-lg-5 -->
 	    <div class="flex items-center ">
-	      <div class="mr-4 h-16 flex items-center">
+	      <div class="mr-4  flex items-center">
 	      	<?php
 		    $logo_img = _capalot('site_logo', '');
 			$blog_name = get_bloginfo('name');
 			$home_url = esc_url(home_url('/'));
 		    if (!empty($logo_img)) {
-			  $logo_html = sprintf('<img class="logo regular" src="%s" alt="%s">', esc_url($logo_img), esc_attr($blog_name));
+			  $logo_html = sprintf('<img class="logo h-14 regular" src="%s" alt="%s">', esc_url($logo_img), esc_attr($blog_name));
 			} else {
 			  $logo_html = sprintf('<span class="logo text">%s</span>', esc_html($blog_name));
 			}
@@ -50,10 +50,10 @@
 	        <div class="lg:hidden flex cursor-pointer"><i class="fas fa-bars"></i></div>
 	      </div>
 
-	      <!-- <?php if ( empty(_capalot('remove_site_search',false)) ) : ?>
+	      <?php if ( empty(_capalot('remove_site_search',false)) ) : ?>
 	      <div class=""><?php get_search_form();?></div>
 		  <?php endif;?>
-	       -->
+	      
 	    </div>
     </div>
 
