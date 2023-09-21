@@ -529,30 +529,32 @@ class Capalot_Ticket
   }
 
   /**
-   * 根据ID获取工单数据
+   * 根据id获取工单
    */
   public static function get($id)
   {
     global $wpdb;
     $table_name = $wpdb->prefix . 'capalot_ticket';
 
-    $ticket = $wpdb->select(
-      $table_name,
-      [
-        'id' => $id,
-      ]
-      );
+    $ticket = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table_name WHERE id = %d", $id));
 
-    if($ticket) return $ticket;
-
-    return false;
+    return $ticket;
   }
 
   /**
    * 工单更新
    */
-  public static function update($id)
+  public static function update($update,$where)
   {
-    echo '---->更新工单';
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'capalot_ticket';
+
+    $update = $wpdb->update(
+      $table_name,
+      $update,
+      $where
+    );
+
+    return $update ? true : false;
   }
 }

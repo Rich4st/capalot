@@ -172,8 +172,8 @@ $is_delete = get_response_param('delete',0,'get');
                 $color_key++;
             ?>
             <div class="col">
-                <div class="card text-center bg-<?php echo zb_get_color_class($color_key);?> bg-opacity-25 p-4 h-100 rounded-2">
-                    <h4 class="fw-bold text-<?php echo zb_get_color_class($color_key);?>"><?php echo $target_count;?></h4>
+                <div class="card text-center bg-<?php echo capalot_get_color_class($color_key);?> bg-opacity-25 p-4 h-100 rounded-2">
+                    <h4 class="fw-bold text-<?php echo capalot_get_color_class($color_key);?>"><?php echo $target_count;?></h4>
                     <span class="h6 mb-0 text-muted"><?php echo Capalot_Ticket::get_status($key);?></span>
                 </div>
             </div>

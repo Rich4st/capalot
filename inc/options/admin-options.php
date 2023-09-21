@@ -1033,6 +1033,21 @@ CSF::createSection($prefix, array(
       )
     ),
 
+    array(
+      'id'      => 'site_mycoin_pay_arr',
+      'type'    => 'text',
+      'title'   => '站内币充值套餐设置',
+      'desc'    => '设置充值套餐，用英文逗号隔开，“,”',
+      'default' => '1,10,50,100,300,500,1000,5000',
+    ),
+    array(
+      'id'      => 'site_mycoin_pay_desc',
+      'type'    => 'textarea',
+      'title'   => '站内币充值说明',
+      'desc'   => '每行一个，用于前台展示',
+      'default' => '充值最低额度为1金币' . PHP_EOL . '充值汇率为1元=10金币' . PHP_EOL . '人民币和金币不能互相转换' . PHP_EOL . '余额永久有效，无时间限制',
+    ),
+
   )
 ));
 

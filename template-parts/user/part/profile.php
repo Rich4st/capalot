@@ -41,22 +41,22 @@ if ($unsetoauth =='qq' || $unsetoauth =='weixin') {
             <!-- Input item -->
             <div class="lg:col-span-2 col-span-1 col-start-1 pb-2 ">
                 <label class="pb-2 block"><?php _e('显示昵称', 'ripro');?></label>
-                <input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded" name="display_name" placeholder="" value="<?php echo $current_user->display_name; ?>">
+                <input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark" name="display_name" placeholder="" value="<?php echo $current_user->display_name; ?>">
             </div>
             <!-- Input item -->
             <div class="lg:col-span-2 col-span-1 lg:col-start-3 ">
                 <label class="pb-2 block"><?php _e('联系QQ', 'ripro');?></label>
-                <input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded" name="uc_lxqq" value="<?php echo get_user_meta($current_user->ID,'qq',1);?>">
+                <input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark" name="uc_lxqq" value="<?php echo get_user_meta($current_user->ID,'qq',1);?>">
             </div>
             <!-- Textarea item -->
             <div class="lg:col-span-4 col-span-1 col-start-1">
                 <label class="pb-2 block"><?php _e('个人介绍', 'ripro');?></label>
-                <textarea class="bg-[#ededed] w-full p-2 rounded" rows="3" name="description"><?php echo get_user_meta($current_user->ID,'description',1);?></textarea>
+                <textarea class="bg-[#ededed] w-full p-2 rounded dark:bg-dark" rows="3" name="description"><?php echo get_user_meta($current_user->ID,'description',1);?></textarea>
             </div>
             <!-- Save button -->
             <div class="flex lg:col-start-4 justify-end text-white ">
                 <input type="hidden" name="action" value="zb_update_profile">
-                <button type="submit" id="save-submit" class="bg-black p-2 rounded-lg"><?php _e('保存资料', 'ripro');?></button>
+                <button type="submit" id="save-submit" class="bg-black px-4 py-1 rounded-lg"><?php _e('保存资料', 'ripro');?></button>
             </div>
         </form>
     </div>
@@ -74,12 +74,12 @@ if ($unsetoauth =='qq' || $unsetoauth =='weixin') {
     <form class="gap-4 grid lg:grid-cols-4 grid-cols-1" id="edit-email-form">
       <div class="lg:col-span-2 col-span-1 col-start-1 pb-2 ">
         <label class="pb-2 block"><?php _e('当前邮箱', 'ripro');?></label>
-        <input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded" name="user_email" value="<?php echo $current_user->user_email;?>" disabled>
+        <input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark" name="user_email" value="<?php echo $current_user->user_email;?>" disabled>
       </div>
 
       <div class="lg:col-span-2 col-span-1 lg:col-start-3">
             <label class="pb-2 block"><?php _e('新邮箱地址', 'ripro');?></label>
-            <input type="email" class="bg-[#ededed] w-full h-8 px-2 rounded" name="new_user_email" value="" autocomplete="off">
+            <input type="email" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark" name="new_user_email" value="" autocomplete="off">
       </div>
 
       <div class="lg:col-span-4 col-span-1 col-start-1">
@@ -131,24 +131,24 @@ if ($unsetoauth =='qq' || $unsetoauth =='weixin') {
     <form class="gap-4 grid lg:grid-cols-4 grid-cols-1" id="edit-password-form">
       <div class="lg:col-span-2 col-span-1 col-start-1 pb-2">
         <label class="pb-2 block"><?php _e('邮箱信息', 'ripro');?></label>
-        <input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded" name="user_email" value="<?php echo $current_user->user_email;?>" disabled>
+        <input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark" name="user_email" value="<?php echo $current_user->user_email;?>" disabled>
       </div>
 
       <div class="lg:col-span-2 col-span-1 lg:col-start-3">
           <label class="pb-2 block"><?php _e('旧密码', 'ripro');?></label>
           <?php if (user_is_oauth_password($current_user->ID)) :?>
-            <input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded" name="old_password" value="第三方注册，请设置新密码" autocomplete="off" disabled>
+            <input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark" name="old_password" value="第三方注册，请设置新密码" autocomplete="off" disabled>
           <?php else:?>
-            <input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded" name="old_password" value="" autocomplete="off">
+            <input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark" name="old_password" value="" autocomplete="off">
           <?php endif;?>
       </div>
       <div class="lg:col-span-2 col-span-1 col-start-1 pb-2">
             <label class="pb-2 block"><?php _e('新密码', 'ripro');?></label>
-            <input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded" name="new_password" value="" autocomplete="off">
+            <input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark" name="new_password" value="" autocomplete="off">
       </div>
       <div class="lg:col-span-2 col-span-1 lg:col-start-3">
             <label class="pb-2 block"><?php _e('确认新密码', 'ripro');?></label>
-            <input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded" name="new_password2" value="" autocomplete="off">
+            <input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark" name="new_password2" value="" autocomplete="off">
       </div>
         <!-- Save button -->
       <div class="flex lg:col-start-4 justify-end text-white">

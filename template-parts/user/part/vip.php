@@ -18,20 +18,20 @@ $price_shape = get_template_directory_uri().'/assets/img/price_shape.png';
 ?>
 
 
-<div class="card mb-2 mb-md-4">
-	<div class="card-header mb-3">
-		<h5 class="fw-bold mb-0"><?php _e('会员中心', 'ripro'); ?></h5>
+<div class="mb-4 bg-white   dark:bg-dark-card mx-2 rounded p-4">
+	<div class="mb-3">
+		<h5 class="font-bold"><?php _e('会员中心', 'ripro'); ?></h5>
 	</div>
 
 	<div class="flex justify-between items-start  mb-4">
-		<div class="d-flex align-items-center mb-3">
+		<div class="flex items-center justify-center mb-3">
 			<div class="me-2">
-				<div class="avatar avatar-xl mb-2">
-					<img class="avatar-img rounded-circle border border-white border-3 shadow" src="<?php echo get_avatar_url($current_user->ID); ?>" alt="">
+				<div class=" mb-2">
+					<img class="avatar-img rounded-full border border-white  shadow" src="<?php echo get_avatar_url($current_user->ID); ?>" alt="">
 				</div>
 			</div>
-			<div class="ms-2 lh-1">
-				<h5 class="d-flex align-items-center mb-1">
+			<div class="ms-2 ">
+				<h5 class="flex items-center mb-1">
 				<?php echo $current_user->display_name; ?><?php echo zb_get_user_badge($current_user->ID,'span','mb-0 ms-2'); ?>
 				</h5>
 				<div class="mb-1">
@@ -142,24 +142,24 @@ $price_shape = get_template_directory_uri().'/assets/img/price_shape.png';
 </div>
 
 <?php if (!empty(_capalot('is_site_cdk_pay',true))) :?>
-<div class="card mb-2 mb-md-4 vip-cdk-body">
-	<div class="card-header mb-3">
-		<h5 class="fw-bold mb-0"><?php _e('会员兑换','ripro');?></h5>
+<div class="mb-4 bg-white dark:bg-dark-card mx-2 rounded vip-cdk-body p-4">
+	<div class="mb-3">
+		<h5 class="font-bold"><?php _e('会员兑换','ripro');?></h5>
 	</div>
 	<div class="card-body">
 		<h5 class="text-center mb-4 text-muted"><?php _e('使用CDK码兑换VIP特权','ripro');?></h5>
-		<form class="row" id="vip-cdk-action">
-            <div class="col-12 mb-3">
-                <input type="text" class="form-control" name="cdk_code" placeholder="兑换码/CDK卡号" value="">
+		<form class="w-64 flex flex-col mx-auto" id="vip-cdk-action">
+            <div class="mb-3">
+                <input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark" name="cdk_code" placeholder="兑换码/CDK卡号" value="">
             </div>
-            <div class="col-12 input-group mb-3">
-	          <input type="text" class="form-control rounded-2" name="captcha_code" placeholder="验证码">
-	          <img id="captcha-img" class="rounded-2 lazy" role="button" data-src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/captcha.png');?>" title="<?php _e('点击刷新验证码','ripro');?>" />
+            <div class="flex flex-row space-x-2 mb-3">
+	          <input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark rounded-2" name="captcha_code" placeholder="验证码">
+	          <img id="captcha-img" class="rounded-2 w-full h-8 bg-[#cacaca]  text-white mx-2 rounded" role="button" data-src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/captcha.png');?>" title="<?php _e('点击刷新验证码','ripro');?>" />
 	        </div>
-            <div class="col-12 mb-3 mt-3 text-center">
+            <div class="flex flex-row justify-center space-x-2 mb-3 mt-3 text-center text-sm">
                 <input type="hidden" name="action" value="zb_vip_cdk_action">
-                <button type="submit" id="vip-cdk-submit" class="btn btn-danger text-white px-4"><i class="fas fa-gift me-1"></i><?php _e('立即兑换','ripro');?></button>
-                <a class="btn btn-warning" target="_blank" href="<?php echo _capalot('site_cdk_pay_link');?>" rel="nofollow noopener noreferrer"><i class="fas fa-external-link-alt me-1"></i><?php _e('购买CDK','ripro');?></a>
+                <button type="submit" id="vip-cdk-submit" class="btn bg-[#d6293e] text-white px-4 py-1 rounded"><i class="fas fa-gift me-1"></i><?php _e('立即兑换','ripro');?></button>
+                <a class="btn bg-[#f7c32e]  px-4 py-1 rounded" target="_blank" href="<?php echo _capalot('site_cdk_pay_link');?>" rel="nofollow noopener noreferrer"><i class="fas fa-external-link-alt me-1"></i><?php _e('购买CDK','ripro');?></a>
 
             </div>
         </form>
@@ -167,9 +167,9 @@ $price_shape = get_template_directory_uri().'/assets/img/price_shape.png';
 </div>
 <?php endif;?>
 
-<div class="card">
-	<div class="card-header mb-2">
-		<caption class="fw-bold mb-0"><?php _e('VIP获取记录（最近10条）', 'ripro'); ?></caption>
+<div class="mb-4 bg-white   dark:bg-dark-card mx-2 rounded p-4">
+	<div class="mb-2">
+		<caption class="font-bold "><?php _e('VIP获取记录（最近10条）', 'ripro'); ?></caption>
 	</div>
 
 	<div class="card-body pay-vip-log">
@@ -186,7 +186,7 @@ $price_shape = get_template_directory_uri().'/assets/img/price_shape.png';
 	            $vip_info = $site_vip_options[$info['vip_type']];
 	            ?>
 	            <div class="list-group-item list-group-item-action">
-	                <div class="d-flex w-100 justify-content-between">
+	                <div class="flex w-full justify-between">
 	                    <h6 class="mb-1"><?php printf(__('订单类型：%s', 'ripro'), $vip_info['name']);?></h6>
 	                    <small class="text-muted"><?php echo wp_date('Y-m-d H:i', $item->create_time);?></small>
 	                </div>
