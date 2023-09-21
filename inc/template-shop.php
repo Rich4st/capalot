@@ -34,6 +34,36 @@ function is_site_vip_price_page()
     return !empty(_capalot('is_site_vip_price_page', 1));
 }
 
+//是否开启投稿
+function is_site_tougao()
+{
+    return !empty(_capalot('is_site_tougao', 1));
+}
+
+
+//是否开启签到功能
+function is_site_qiandao() {
+    return !empty(_capalot('is_site_qiandao', 1));
+}
+
+//今日是否已签到
+function is_user_today_qiandao($user_id) {
+
+    // 会员当前签到时间
+    $qiandao_time = get_user_meta($user_id, 'cao_qiandao_time', true);
+
+    if (empty($qiandao_time)) {
+        $qiandao_time = 0;
+    }
+
+    $today_time = get_today_time_range(); //今天时间戳信息 $today_time['start'],$today_time['end']
+
+    if ($today_time['start'] < $qiandao_time && $today_time['end'] > $qiandao_time) {
+        return true;
+    }
+    return false;
+}
+
 //获取文章加密下载地址
 function get_post_endown_url($post_id, $down_key)
 {
@@ -230,7 +260,7 @@ function get_user_vip_data($user_id)
     //今日可下载次数
     $downnum_total = $vip_options[$user_type]['downnum'];
     //TODO:今日已下载次数
-    // $downnum_used = ZB_Down::get_user_today_down_num($user_id);
+    $downnum_used = Capalot_Download::get_user_today_download_num($user_id);
     $downnum_not  = $downnum_total - 0;
     $downnum_not = ($downnum_not >= 0) ? $downnum_not : 0;
 
@@ -238,7 +268,7 @@ function get_user_vip_data($user_id)
         'name'     => $vip_options[$user_type]['name'],
         'type'     => $vip_options[$user_type]['key'],
         'end_date' => get_user_vip_end_date($user_id),
-        'downnums' => ['total' => $downnum_total, 0, 'not' => $downnum_not],
+        'downnums' => ['total' => $downnum_total, 0, 'used' => $downnum_used, 'not' => $downnum_not],
     ];
     return $data;
 }
@@ -356,27 +386,26 @@ function is_site_shop()
 }
 
 //是否开启登录
-function is_site_user_login() {
+function is_site_user_login()
+{
     return (bool) _capalot('is_site_user_login', true);
 }
 
 //是否开启网站公告
-function is_site_notify() {
+function is_site_notify()
+{
     return !empty(_capalot('is_site_notify', 1));
 }
 
-//是否开启投稿
-function is_site_tougao() {
-    return !empty(_capalot('is_site_tougao', 1));
-}
-
 //是否开工单
-function is_site_tickets() {
+function is_site_tickets()
+{
     return !empty(_capalot('is_site_tickets', 1));
 }
 
 //是否开启推广
-function is_site_user_aff() {
+function is_site_user_aff()
+{
     return (bool) _capalot('is_site_aff', true);
 }
 
@@ -679,6 +708,29 @@ function capalot_get_pay_select_html($order_type = 0)
     return apply_filters('capalot_pay_select_html', $html);
 }
 
+//获取用户的推广链接
+function get_user_aff_permalink($link_url, $user_id = null)
+{
+    if (empty($user_id)) {
+        global $current_user;
+        $user_id = $current_user->ID;
+    }
+    if (empty($user_id)) {
+        return $link_url;
+    }
+
+    $url = esc_url_raw(
+        add_query_arg(
+            array(
+                'aff'  => $user_id,
+            ),
+            $link_url
+        )
+    );
+    return $url;
+}
+
+
 // 获取网站当前推荐人信息
 function capalot_get_current_aff_id($user_id = 0)
 {
@@ -777,13 +829,32 @@ function capalot_get_request_pay($order_data)
 }
 
 
+/**
+ * 用户是否第三方注册未设置密码
+ * @param  [type]     $user_id [description]
+ * @return [type]
+ */
+function user_is_oauth_password($user_id)
+{
+    $config = array('qq', 'weixin');
+    $user = get_user_by('id', $user_id);
+    foreach ($config as $type) {
+        $meta_key   = 'open_' . $type . '_openid';
+        $p2 = get_user_meta($user_id, $meta_key, true);
+        if (!empty($p2) && wp_check_password(md5($p2), $user->user_pass, $user->ID)) {
+            return true;
+        }
+    }
+}
+
 
 /**
  * 获取个人中心菜单
  * @param  [type]     $menu_part [description]
  * @return [type]
  */
-function get_uc_menus($menu_part = null) {
+function get_uc_menus($menu_part = null)
+{
 
     $default = 'profile';
 

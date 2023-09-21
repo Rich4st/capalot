@@ -231,4 +231,40 @@ class Capalot_Ajax
     ));
 
 }
+
+
+    //签到
+    public function user_qiandao() {
+      $this->valid_nonce_ajax(); #安全验证
+      $user_id  = get_current_user_id();
+      
+      if (!is_site_qiandao()) {
+          wp_send_json(array(
+              'status' => 0,
+              'msg'    => __('签到功能暂未开启', 'ripro'),
+          ));
+      }
+      
+      if (is_user_today_qiandao($user_id)) {
+          wp_send_json(array(
+              'status' => 0,
+              'msg'    => __('今日已签到，请明日再来', 'ripro'),
+          ));
+      }
+
+      $site_qiandao_coin_num = sprintf('%0.1f', abs(_capalot('site_qiandao_coin_num','0.5')));
+
+      if (!update_user_meta($user_id, 'cao_qiandao_time',time()) || !change_user_coin_balance($user_id, $site_qiandao_coin_num, '+')) {
+          wp_send_json(array(
+              'status' => 0,
+              'msg'    => __('签到失败', 'ripro'),
+          ));
+      }
+
+      wp_send_json(array(
+          'status' => 1,
+          'msg'    => sprintf(__('签到成功，领取(%s)%s', 'ripro'), $site_qiandao_coin_num,get_site_coin_name()),
+      ));
+  }
+
 }
