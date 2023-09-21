@@ -38,7 +38,6 @@ CSF::createSection($prefix, array(
       'default' => _capalot('site_favicon', get_template_directory_uri() . '/assets/img/favicon.png'),
     ),
 
-
     array(
       'id'      => 'is_site_notify',
       'type'    => 'switcher',
@@ -71,7 +70,6 @@ CSF::createSection($prefix, array(
       'dependency' => array('is_site_notify', '==', 'true'),
     ),
 
-
     array(
       'id'      => 'is_site_tougao',
       'type'    => 'switcher',
@@ -87,6 +85,7 @@ CSF::createSection($prefix, array(
       'label'   => '控制网站评论功能开关，如果用不到，推荐关闭',
       'default' => true,
     ),
+
     array(
       'id'      => 'is_site_tickets',
       'type'    => 'switcher',
@@ -102,6 +101,7 @@ CSF::createSection($prefix, array(
       'label'   => '开启后可打开访问，功能页面地址：' . esc_url(home_url('/tags')),
       'default' => true,
     ),
+
     array(
       'id'      => 'is_site_link_manager_page',
       'type'    => 'switcher',
@@ -109,6 +109,7 @@ CSF::createSection($prefix, array(
       'label'   => '开启后可打开访问，功能页面地址：' . esc_url(home_url('/links')),
       'default' => true,
     ),
+
     array(
       'id'      => 'is_site_vip_price_page',
       'type'    => 'switcher',
@@ -117,7 +118,6 @@ CSF::createSection($prefix, array(
       'default' => true,
     ),
 
-
     array(
       'id'      => 'site_main_target_blank',
       'type'    => 'switcher',
@@ -125,7 +125,6 @@ CSF::createSection($prefix, array(
       'desc'    => '主要链接包括列表展示盒网格展示一些文章都新窗口打开',
       'default' => false,
     ),
-
 
     array(
       'id'       => 'site_web_css',
@@ -940,6 +939,61 @@ CSF::createSection($prefix, array(
 
   ),
 ));
+
+/**
+ * 高级搜索
+ */
+CSF::createSection($prefix, array(
+  'icon' => 'dashicons dashicons-search',
+  'title'  => '高级搜索',
+  'fields' => array(
+
+    array(
+      'id'      => 'remove_site_search',
+      'type'    => 'switcher',
+      'title'   => '关闭网站全站搜索功能（注意开关）',
+      'desc'    => '禁用后全站前台无法搜索文章，可以有效防止爆破，数据库堵塞',
+      'default' => false,
+    ),
+
+    array(
+      'id'      => 'is_site_pro_search_title',
+      'type'    => 'switcher',
+      'title'   => '优化全站搜索只搜文章标题',
+      'desc'    => '开启后，网站搜索关键词时，只根据文章标题进行搜索查询，在文章数量较多得时候，搜索性能提升巨大，按需开启',
+      'default' => false,
+    ),
+
+    array(
+      'id'      => 'pro_search_select_depth',
+      'type'    => 'radio',
+      'inline'  => true,
+      'title'   => '搜索框中分类展示层级深度',
+      'options' => array(
+        '1' => '只显示1级主分类',
+        '2' => '扩展到2级子分类',
+        '3' => '扩展到3级子分类',
+      ),
+      'default' => '1',
+    ),
+
+    array(
+      'id'      => 'pro_search_select_order',
+      'type'    => 'radio',
+      'inline'  => true,
+      'title'   => '搜索框中分类选择排序方式',
+      'options' => array(
+        'id'    => '分类ID',
+        'name'  => '分类名称',
+        'slug'  => '分类别名',
+        'count' => '分类文章总数',
+      ),
+      'default' => 'id',
+    ),
+
+  ),
+));
+
 
 /**
  * 商城设置
