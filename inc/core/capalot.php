@@ -239,6 +239,15 @@ class Capalot_Aff
       return true; // 更新成功
     }
   }
+
+  /**
+   * 获取推广信息
+   * 
+   */
+  public static function get_user_aff_info($data)
+  {
+    echo  $data . '12345';
+  }
 }
 
 /**
@@ -436,6 +445,22 @@ class Capalot_Download
 
     return true;
   }
+
+  // 获取用户今日下载量
+  public static function get_user_today_download_num($user_id)
+  {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'capalot_download';
+
+    $today = strtotime(date('Y-m-d', time()));
+    $tomorrow = strtotime(date('Y-m-d', strtotime('+1 day')));
+
+    $sql = "SELECT COUNT(*) FROM $table_name WHERE user_id = %d AND create_time >= %d AND create_time < %d";
+
+    $count = $wpdb->get_var($wpdb->prepare($sql, $user_id, $today, $tomorrow));
+
+    return $count;
+  }
 }
 
 /**
@@ -480,7 +505,7 @@ class Capalot_Ticket
         return '网站BUG';
         break;
       default:
-        return '请他问题';
+        return '其他问题';
         break;
     }
   }
@@ -490,16 +515,37 @@ class Capalot_Ticket
    */
   public static function delete($id)
   {
-    echo '------>$id';
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'capalot_ticket';
+
+    $delete = $wpdb->delete(
+      $table_name,
+      [
+        'id' => $id,
+      ]
+    );
+
+    return $delete ? true : false;
   }
 
   /**
-   *
+   * 根据ID获取工单数据
    */
   public static function get($id)
   {
     global $wpdb;
     $table_name = $wpdb->prefix . 'capalot_ticket';
+
+    $ticket = $wpdb->select(
+      $table_name,
+      [
+        'id' => $id,
+      ]
+      );
+
+    if($ticket) return $ticket;
+
+    return false;
   }
 
   /**

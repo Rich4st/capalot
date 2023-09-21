@@ -15,48 +15,48 @@ if ($unsetoauth =='qq' || $unsetoauth =='weixin') {
 
 ?>
 
-<div class="card mb-sm-4">
-    <div class="card-header mb-3">
-      <h5 class="fw-bold mb-0"><?php _e('基本信息', 'ripro');?></h5>
+<div class=" mb-4 bg-white dark:bg-dark-card p-4 mx-2 rounded">
+    <div class=" mb-3 ">
+      <h5 class="font-bold"><?php _e('基本信息', 'ripro');?></h5>
     </div>
     <div class="card-body">
-        <div class="d-flex justify-content-between align-items-start mb-4">
+        <div class="flex justify-between items-start  mb-4">
           <!-- Image -->
-          <div class="position-relative">
-              <div class="d-flex align-items-center">
-                  <div class="position-relative me-3">
-                      <div class="avatar avatar-xl">
-                          <img class="avatar-img rounded-circle border border-white border-3 shadow" src="<?php echo get_avatar_url($current_user->ID); ?>" alt="">
+          <div class="relative">
+              <div class="flex items-center">
+                  <div class="position me-3">
+                      <div class="avatar avatar-xl py-2">
+                          <img class="avatar-img rounded-full border border-white shadow" src="<?php echo get_avatar_url($current_user->ID); ?>" alt="user">
                       </div>
                   </div>
-                  <div class="d-block">
-                    <label for="inputAvatarFile" type="button" class="btn btn-primary-soft"><?php _e('上传头像', 'ripro');?></label>
-                    <input class="d-none" type="file" name="inputAvatarFile" id="inputAvatarFile" accept=".jpg, .gif, .png" resetonclick="true">
+                  <div class="block">
+                    <label for="inputAvatarFile" type="button" class="btn rounded py-1 px-2 bg-primary bg-opacity-10 text-[#306fea]"><?php _e('上传头像', 'ripro');?></label>
+                    <input class="hidden" type="file" name="inputAvatarFile" id="inputAvatarFile" accept=".jpg, .gif, .png" resetonclick="true">
                   </div>
               </div>
           </div>
         </div>
 
-        <form class="row g-4" id="user-profile">
+        <form class="gap-4 grid lg:grid-cols-4 grid-cols-1" id="user-profile">
             <!-- Input item -->
-            <div class="col-lg-6">
-                <label class="form-label"><?php _e('显示昵称', 'ripro');?></label>
-                <input type="text" class="form-control" name="display_name" placeholder="" value="<?php echo $current_user->display_name; ?>">
+            <div class="lg:col-span-2 col-span-1 col-start-1 pb-2 ">
+                <label class="pb-2 block"><?php _e('显示昵称', 'ripro');?></label>
+                <input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded" name="display_name" placeholder="" value="<?php echo $current_user->display_name; ?>">
             </div>
             <!-- Input item -->
-            <div class="col-lg-6">
-                <label class="form-label"><?php _e('联系QQ', 'ripro');?></label>
-                <input type="text" class="form-control" name="uc_lxqq" value="<?php echo get_user_meta($current_user->ID,'qq',1);?>">
+            <div class="lg:col-span-2 col-span-1 lg:col-start-3 ">
+                <label class="pb-2 block"><?php _e('联系QQ', 'ripro');?></label>
+                <input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded" name="uc_lxqq" value="<?php echo get_user_meta($current_user->ID,'qq',1);?>">
             </div>
             <!-- Textarea item -->
-            <div class="col-12">
-                <label class="form-label"><?php _e('个人介绍', 'ripro');?></label>
-                <textarea class="form-control" rows="3" name="description"><?php echo get_user_meta($current_user->ID,'description',1);?></textarea>
+            <div class="lg:col-span-4 col-span-1 col-start-1">
+                <label class="pb-2 block"><?php _e('个人介绍', 'ripro');?></label>
+                <textarea class="bg-[#ededed] w-full p-2 rounded" rows="3" name="description"><?php echo get_user_meta($current_user->ID,'description',1);?></textarea>
             </div>
             <!-- Save button -->
-            <div class="d-sm-flex justify-content-end mt-3">
+            <div class="flex lg:col-start-4 justify-end text-white ">
                 <input type="hidden" name="action" value="zb_update_profile">
-                <button type="submit" id="save-submit" class="btn btn-dark mb-0"><?php _e('保存资料', 'ripro');?></button>
+                <button type="submit" id="save-submit" class="bg-black p-2 rounded-lg"><?php _e('保存资料', 'ripro');?></button>
             </div>
         </form>
     </div>
@@ -64,25 +64,25 @@ if ($unsetoauth =='qq' || $unsetoauth =='weixin') {
 
 
 
-<div class="card mb-sm-4">
+<div class="mb-4 bg-white dark:bg-dark-card p-4 mx-2 rounded">
   <!-- Content -->
-  <div class="card-header mb-3">
-    <h5 class="fw-bold mb-0"><?php _e('账户绑定', 'ripro');?></h5>
+  <div class="mb-3">
+    <h5 class="font-bold"><?php _e('账户绑定', 'ripro');?></h5>
   </div>
   <!-- Button -->
 
-    <form class="row g-4" id="edit-email-form">
-      <div class="col-lg-6">
-        <label class="form-label"><?php _e('当前邮箱', 'ripro');?></label>
-        <input type="text" class="form-control" name="user_email" value="<?php echo $current_user->user_email;?>" disabled>
+    <form class="gap-4 grid lg:grid-cols-4 grid-cols-1" id="edit-email-form">
+      <div class="lg:col-span-2 col-span-1 col-start-1 pb-2 ">
+        <label class="pb-2 block"><?php _e('当前邮箱', 'ripro');?></label>
+        <input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded" name="user_email" value="<?php echo $current_user->user_email;?>" disabled>
       </div>
 
-      <div class="col-lg-6">
-            <label class="form-label"><?php _e('新邮箱地址', 'ripro');?></label>
-            <input type="email" class="form-control" name="new_user_email" value="" autocomplete="off">
+      <div class="lg:col-span-2 col-span-1 lg:col-start-3">
+            <label class="pb-2 block"><?php _e('新邮箱地址', 'ripro');?></label>
+            <input type="email" class="bg-[#ededed] w-full h-8 px-2 rounded" name="new_user_email" value="" autocomplete="off">
       </div>
 
-      <div class="col-lg-12">
+      <div class="lg:col-span-4 col-span-1 col-start-1">
             <?php if (_capalot('is_sns_qq',false) || _capalot('is_sns_weixin',false)) :?>
               <div class="position-relative my-4">
                 <hr>
@@ -108,9 +108,9 @@ if ($unsetoauth =='qq' || $unsetoauth =='weixin') {
       </div>
 
         <!-- Save button -->
-      <div class="d-sm-flex justify-content-end mt-3">
+      <div class="flex lg:col-start-4 justify-end text-white ">
           <input type="hidden" name="action" value="zb_update_new_email">
-          <button type="submit" id="edit-email" class="btn btn-danger mb-0"><?php _e('确认修改邮箱', 'ripro');?></button>
+          <button type="submit" id="edit-email" class="bg-[#d6293e] p-2 text-white rounded-lg"><?php _e('确认修改邮箱', 'ripro');?></button>
       </div>
     </form>
 
@@ -121,39 +121,39 @@ if ($unsetoauth =='qq' || $unsetoauth =='weixin') {
 
 
 
-<div class="card">
+<div class="bg-white dark:bg-dark-card p-4 mx-2 rounded">
   <!-- Content -->
-  <div class="card-header mb-3">
-    <h5 class="fw-bold mb-0"><?php _e('密码修改', 'ripro');?></h5>
+  <div class="mb-3">
+    <h5 class="font-bold"><?php _e('密码修改', 'ripro');?></h5>
   </div>
   <!-- Button -->
 
-    <form class="row g-4" id="edit-password-form">
-      <div class="col-lg-6">
-        <label class="form-label"><?php _e('邮箱信息', 'ripro');?></label>
-        <input type="text" class="form-control" name="user_email" value="<?php echo $current_user->user_email;?>" disabled>
+    <form class="gap-4 grid lg:grid-cols-4 grid-cols-1" id="edit-password-form">
+      <div class="lg:col-span-2 col-span-1 col-start-1 pb-2">
+        <label class="pb-2 block"><?php _e('邮箱信息', 'ripro');?></label>
+        <input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded" name="user_email" value="<?php echo $current_user->user_email;?>" disabled>
       </div>
 
-      <div class="col-lg-6">
-          <label class="form-label"><?php _e('旧密码', 'ripro');?></label>
+      <div class="lg:col-span-2 col-span-1 lg:col-start-3">
+          <label class="pb-2 block"><?php _e('旧密码', 'ripro');?></label>
           <?php if (user_is_oauth_password($current_user->ID)) :?>
-            <input type="text" class="form-control" name="old_password" value="第三方注册，请设置新密码" autocomplete="off" disabled>
+            <input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded" name="old_password" value="第三方注册，请设置新密码" autocomplete="off" disabled>
           <?php else:?>
-            <input type="text" class="form-control" name="old_password" value="" autocomplete="off">
+            <input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded" name="old_password" value="" autocomplete="off">
           <?php endif;?>
       </div>
-      <div class="col-lg-6">
-            <label class="form-label"><?php _e('新密码', 'ripro');?></label>
-            <input type="text" class="form-control" name="new_password" value="" autocomplete="off">
+      <div class="lg:col-span-2 col-span-1 col-start-1 pb-2">
+            <label class="pb-2 block"><?php _e('新密码', 'ripro');?></label>
+            <input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded" name="new_password" value="" autocomplete="off">
       </div>
-      <div class="col-lg-6">
-            <label class="form-label"><?php _e('确认新密码', 'ripro');?></label>
-            <input type="text" class="form-control" name="new_password2" value="" autocomplete="off">
+      <div class="lg:col-span-2 col-span-1 lg:col-start-3">
+            <label class="pb-2 block"><?php _e('确认新密码', 'ripro');?></label>
+            <input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded" name="new_password2" value="" autocomplete="off">
       </div>
         <!-- Save button -->
-      <div class="d-sm-flex justify-content-end mt-3">
+      <div class="flex lg:col-start-4 justify-end text-white">
           <input type="hidden" name="action" value="zb_update_password">
-          <button type="submit" id="edit-password" class="btn btn-danger mb-0"><?php _e('确认修改密码', 'ripro');?></button>
+          <button type="submit" id="edit-password" class="bg-[#d6293e] p-2 text-white rounded-lg"><?php _e('确认修改密码', 'ripro');?></button>
       </div>
     </form>
 
