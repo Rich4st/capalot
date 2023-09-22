@@ -6,7 +6,11 @@ let ca = {
     ca.pay_action();
     ca.pagination();
     ca.toggle_dark();
-    // ca.swiper();
+
+    const swiperEl = document.querySelector('.swiper');
+    if (swiperEl)
+      ca.swiper();
+
     ca.account_action();
   },
 
