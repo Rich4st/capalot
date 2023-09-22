@@ -7,6 +7,7 @@ let ca = {
     ca.pagination();
     ca.toggle_dark();
     ca.swiper();
+    ca.account_action();
   },
 
   /**
@@ -29,6 +30,7 @@ let ca = {
       dataType: 'json',
       data,
       async: !0,
+
       beforeSend,
       success,
       complete,
@@ -36,6 +38,46 @@ let ca = {
         console.log(e.responseText, 5000);
       }
     });
+  },
+
+  // 登录注册操作
+  account_action: function () {
+    const login_btn = document.querySelector('#click-submit')
+    const form = $('#account-from');
+
+    login_btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const payload = form.serializeArray();
+      let o = decodeURIComponent(location.href.split("redirect_to=")[1] || ""),
+        n = {
+          nonce: capalot.ajax_nonce
+        };
+      payload.forEach(({ name: name, value: v }) => {
+        n[name] = v
+      });
+
+      ca.ajax({
+        data: n,
+        beforeSend: () => {
+          login_btn.classList.add('loading');
+        },
+        success: ({
+          status,
+          msg,
+          back_url
+        }) => {
+          ca.popup({ title: msg, icon: status == 1 ? 'success' : 'error' })
+          1 == status && setTimeout(() => {
+            (o = window.frames.length !== parent.frames.length ? "" : o)
+              ? window.location.href = o
+              : back_url ? window.location.href = back_url : window.location.reload()
+          }, 2e3)
+        },
+        complete: () => {
+          login_btn.classList.remove('loading');
+        }
+      })
+    })
   },
 
   // 对话框

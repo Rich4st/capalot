@@ -14,15 +14,15 @@ class Capalot_Rewrite {
         // 页面跳转捕获
         add_action('template_redirect', array($this, 'custom_redirect'));
 
-        if (_capalot('site_no_categoty', false)) {
+        if (_capalot('site_no_category', false)) {
             add_action('init', array($this, 'no_category_base_permastruct'));
             add_action('created_category', array($this, 'no_category_base_refresh_rules'));
             add_action('delete_category', array($this, 'no_category_base_refresh_rules'));
             add_action('edited_category', array($this, 'no_category_base_refresh_rules'));
 
             add_filter('category_rewrite_rules', array($this, 'no_category_base_rewrite_rules'));
-            add_filter('query_vars', array($this, 'no_category_base_query_vars')); // Adds 'category_redirect' query variable
-            add_filter('request', array($this, 'no_category_base_request')); // Redirects if 'category_redirect' is set
+            add_filter('query_vars', array($this, 'no_category_base_query_vars'));
+            add_filter('request', array($this, 'no_category_base_request'));
         }
     }
 

@@ -994,6 +994,264 @@ CSF::createSection($prefix, array(
   ),
 ));
 
+/**
+ * 登录注册
+ */
+CSF::createSection($prefix, array(
+  'icon' => 'dashicons dashicons-admin-users',
+  'title'  => '登录注册',
+  'fields' => array(
+
+    array(
+      'id'          => 'site_loginpage_bg_type',
+      'type'        => 'radio',
+      'inline'      => true,
+      'title'       => '登录注册页面-背景效果',
+      'desc'        => '',
+      'options'     => array(
+        'img'     => '图片',
+        'birds'   => '千纸鹤',
+        'fog'   => '烟雾',
+        'waves'   => '波浪',
+        'net'   => '网格',
+      ),
+      'default'     => 'img',
+    ),
+
+    array(
+      'id'      => 'site_loginpage_bg_img',
+      'type'    => 'upload',
+      'title'   => '登录注册页面-背景图片',
+      'default' => get_template_directory_uri() . '/assets/img/bg.jpg',
+      'dependency' => array('site_loginpage_bg_type', '==', 'img'),
+    ),
+
+    // 千纸鹤颜色设定
+    array(
+      'id'      => 'birds_color',
+      'type'    => 'color_group',
+      'title'   => '效果器颜色',
+      'options' => array(
+        'bgcolor' => '背景色',
+        'color1' => '千纸鹤颜色1',
+        'color2' => '千纸鹤颜色2',
+      ),
+      'default' => array(
+        'background_color' => '#6b99d2',
+        'color1' => '#ff0000',
+        'color2' => '#00d1ff',
+      ),
+      'dependency' => array('site_loginpage_bg_type', 'any', 'birds'),
+    ),
+
+    // 烟雾颜色设定
+    array(
+      'id'      => 'fog_color',
+      'type'    => 'color_group',
+      'title'   => '效果器颜色',
+      'options' => array(
+        'base_color' => '基础色',
+        'highlight_color' => '突出显示颜色',
+        'midtone_color' => '中间调颜色',
+        'lowlight_color' => '低光颜色',
+      ),
+      'default' => array(
+        'highlight_color' => '#ffc300',
+        'midtone_color' => '#ff1f00',
+        'lowlight_color' => '#2d00ff',
+        'base_color' => '#ffebeb',
+      ),
+      'dependency' => array('site_loginpage_bg_type', 'any', 'fog'),
+    ),
+
+    // 波浪颜色设定
+    array(
+      'id'      => 'waves_color',
+      'type'    => 'color_group',
+      'title'   => '效果器颜色',
+      'options' => array(
+        'color' => '背景色',
+      ),
+      'default' => array(
+        'color' => '#005588',
+      ),
+      'dependency' => array('site_loginpage_bg_type', 'any', 'waves'),
+    ),
+
+    // 网格颜色设定
+    array(
+      'id'      => 'net_color',
+      'type'    => 'color_group',
+      'title'   => '效果器颜色',
+      'options' => array(
+        'bgcolor' => '背景色',
+        'color' => '粒子颜色',
+      ),
+      'default' => array(
+        'bgcolor' => '#23153c',
+        'color' => '#ff3f81',
+      ),
+      'dependency' => array('site_loginpage_bg_type', 'any', 'net'),
+    ),
+
+    array(
+      'id'      => 'site_user_agreement_href',
+      'type'    => 'text',
+      'title'   => '网站用户协议页面地址',
+      'default' => '#',
+    ),
+    array(
+      'id'      => 'site_privacy_href',
+      'type'    => 'text',
+      'title'   => '网站隐私政策页面地址',
+      'default' => '#',
+    ),
+
+    array(
+      'id'      => 'is_site_user_login',
+      'type'    => 'switcher',
+      'title'   => '登录模块',
+      'desc'    => '网站登录功能总开关',
+      'default' => true,
+    ),
+
+    array(
+      'id'      => 'is_site_user_register',
+      'type'    => 'switcher',
+      'desc'    => '网站注册功能总开关，为了确保注册只走前台通道，请您在wp后台设置-常规-成员资格中，取消勾选任何人都可以注册选项，关闭wp自带的注册功能防止用户而已注册。',
+      'title'   => '注册模块',
+      'default' => true,
+    ),
+
+    array(
+      'id'         => 'is_site_invitecode_register',
+      'type'       => 'switcher',
+      'title'      => '仅允许邀请码注册',
+      'desc'       => '开启此功能后，新注册用户必须使用邀请码注册，否则无法注册，邀请码可在后台运营管理-卡卷管理中生成注册邀请码，支持批量生成，并且每个邀请码支持设置过期时间到期后自动失效',
+      'default'    => false,
+      'dependency' => array('is_site_user_register', '==', 'true'),
+    ),
+
+    array(
+      'id'         => 'site_invitecode_get_url',
+      'type'       => 'text',
+      'title'      => '邀请码获取地址',
+      'desc'       => '获取注册邀请码获取地址，例如发卡地址或者某个页面或者文章发布了一些注册邀请码，用户打开后自行复制或者购买',
+      'default'    => '#',
+      'dependency' => array('is_site_invitecode_register', '==', 'true'),
+    ),
+
+    array(
+      'id'      => 'is_sns_qq',
+      'type'    => 'switcher',
+      'title'   => 'QQ登录',
+      'label'   => '申请地址： QQ互联官网 https://connect.qq.com/',
+      'default' => _capalot('is_sns_qq', false),
+    ),
+    array(
+      'id'         => 'sns_qq',
+      'type'       => 'fieldset',
+      'title'      => '配置详情',
+      'fields'     => array(
+        array(
+          'id'      => 'app_id',
+          'type'    => 'text',
+          'title'   => 'Appid',
+          'default' => _capalot('sns_qq:app_id', ''),
+        ),
+        array(
+          'id'      => 'app_secret',
+          'type'    => 'text',
+          'title'   => 'Appkey',
+          'default' => _capalot('sns_qq:app_secret', ''),
+        ),
+        array(
+          'type'    => 'subheading',
+          'content' => '回调地址填写：' . esc_url(home_url('/oauth/qq/callback')),
+        ),
+      ),
+      'dependency' => array('is_sns_qq', '==', 'true'),
+    ),
+    array(
+      'id'      => 'is_sns_weixin',
+      'type'    => 'switcher',
+      'title'   => '微信登录',
+      'label'   => '申请地址： 微信开放平台官网 https://open.weixin.qq.com/，2021年12月27日之后，微信公众号模式官方不再输出头像、昵称信息，所以公众号登录模式意义不大，所以暂时砍掉，特别说明，建议不要使用微信登录，要掏认证费。网站只需要一个QQ登录一般足够',
+      'default' => _capalot('is_sns_weixin', false),
+    ),
+    array(
+      'id'         => 'sns_weixin',
+      'type'       => 'fieldset',
+      'title'      => '配置详情',
+      'fields'     => array(
+
+        // 微信登陆模式
+        // array(
+        //     'id'          => 'sns_weixin_mod',
+        //     'type'        => 'select',
+        //     'title'       => '微信登陆模式',
+        //     'placeholder' => '',
+        //     'options'     => array(
+        //         'open' => '微信开放平台',
+        //         'mp'   => '微信公众号（认证服务号）',
+        //     ),
+        //     'default'     => 'mp',
+        //     'desc'        => '推荐使用公众号模式，因微信官方openid和unionid模式错综复杂，建议不要中途更换模式',
+        // ),
+
+        array(
+          'id'      => 'app_id',
+          'type'    => 'text',
+          'title'   => '开放平台 Appid',
+          'default' => _capalot('sns_weixin:app_id', ''),
+          // 'dependency' => array('sns_weixin_mod', '==', 'open'),
+        ),
+        array(
+          'id'      => 'app_secret',
+          'type'    => 'text',
+          'title'   => '开放平台 AppSecret',
+          'default' => _capalot('sns_weixin:app_secret', ''),
+          // 'dependency' => array('sns_weixin_mod', '==', 'open'),
+        ),
+
+        array(
+          'type'    => 'subheading',
+          'content' => '配置说明：微信开放平台-授权回调域填写：' . parse_url(home_url(), PHP_URL_HOST) . '</br> 本接口为微信开放平台接口模式，不支持公众号接入，仅适合PC端',
+          // 'dependency' => array('sns_weixin_mod', '==', 'open'),
+        ),
+
+        // array(
+        //     'id'         => 'mp_app_id',
+        //     'type'       => 'text',
+        //     'title'      => '公众号 Appid',
+        //     'default' => _capalot('sns_weixin:mp_app_id',''),
+        //     // 'dependency' => array('sns_weixin_mod', '==', 'mp'),
+        // ),
+        // array(
+        //     'id'         => 'mp_app_secret',
+        //     'type'       => 'text',
+        //     'title'      => '公众号 AppSecret',
+        //     'default' => _capalot('sns_weixin:mp_app_secret',''),
+        //     // 'dependency' => array('sns_weixin_mod', '==', 'mp'),
+        // ),
+        // array(
+        //     'id'         => 'mp_app_token',
+        //     'type'       => 'text',
+        //     'title'      => '公众号配置 token',
+        //     'default' => _capalot('sns_weixin:mp_app_token',''),
+        //     'desc'       => '自定义一个随机字符串作为token通信密码，与-公众号后台->基本配置->服务器配置->令牌(Token)，保持一致即可',
+        //     // 'dependency' => array('sns_weixin_mod', '==', 'mp'),
+        // ),
+
+
+
+      ),
+      'dependency' => array('is_sns_weixin', '==', 'true'),
+    ),
+
+  ),
+));
+
 
 /**
  * 商城设置

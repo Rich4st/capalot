@@ -48,6 +48,7 @@ class Capalot_Ajax
     $this->add_action('get_pay_select_html'); //获取支付方式
     $this->add_action('get_pay_action'); //下单
     $this->add_action('user_login', 0); //登录
+    $this->add_action('user_register', 0); //注册
   }
 
   /**
@@ -124,6 +125,159 @@ class Capalot_Ajax
       'status'   => 1,
       'msg'      => __('登录成功', 'ripro'),
       'back_url' => get_uc_menu_link(),
+    ));
+  }
+
+  // 用户注册
+  public function user_register()
+  {
+
+    $this->valid_nonce_ajax(); #安全验证
+
+    if (!is_site_user_register()) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => '本站未开启注册功能',
+      ));
+    }
+
+    $user_name        = wp_unslash(get_response_param('user_name'), true);
+    $user_email       = sanitize_email(get_response_param('user_email'));
+    $user_password    = wp_unslash(get_response_param('user_password'));
+    $user_password_ok = wp_unslash(get_response_param('user_password_ok'));
+    $invite_code      = esc_sql(trim(get_response_param('invite_code')));
+    $captcha_code     = wp_unslash(trim(get_response_param('captcha_code')));
+
+    if (!validate_username($user_name)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('用户名格式错误', 'ripro'),
+      ));
+    }
+
+    if (!is_email($user_email)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('邮箱地址格式错误', 'ripro'),
+      ));
+    }
+
+    if (!$user_name || !$user_email || !$user_password || !$user_password_ok) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('请输入完整注册信息', 'ripro'),
+      ));
+    }
+
+    if ($user_password !== $user_password_ok) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('两次密码输入不一致', 'ripro'),
+      ));
+    }
+
+    if (is_site_img_captcha() && !is_img_captcha(strtolower($captcha_code))) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('验证码错误，请刷新验证码', 'ripro'),
+      ));
+    }
+
+    if (username_exists($user_name)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('此用户名已被注册', 'ripro'),
+      ));
+    }
+
+    if (email_exists($user_email)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('此邮箱已被注册', 'ripro'),
+      ));
+    }
+
+
+    //邀请码注册
+    if (is_site_invitecode_register()) {
+
+      if (empty($invite_code)) {
+        wp_send_json(array(
+          'status' => 0,
+          'msg'    => __('请输入邀请码', 'ripro'),
+        ));
+      }
+
+      //验证邀请码
+      $cdk_data = Capalot_Cdk::get_cdk($invite_code);
+
+      if (empty($cdk_data)) {
+        wp_send_json(array(
+          'status' => 0,
+          'msg'    => __('邀请码错误', 'ripro'),
+        ));
+      }
+
+      if ($cdk_data->type != 3 || $cdk_data->status != 0) {
+        wp_send_json(array(
+          'status' => 0,
+          'msg'    => __('邀请码已失效', 'ripro'),
+        ));
+      }
+
+      if (time() > $cdk_data->expiry_time) {
+        wp_send_json(array(
+          'status' => 0,
+          'msg'    => __('邀请码已到期', 'ripro'),
+        ));
+      }
+
+      // 处理优惠码状态
+      $update_cdk = Capalot_Cdk::update_cdk(
+        array('status' => 1),
+        array('id' => $cdk_data->id),
+        array('%d'),
+        array('%d')
+      );
+
+      if (!$update_cdk) {
+        wp_send_json(array(
+          'status' => 0,
+          'msg'    => __('邀请码状态异常，请刷新重试', 'ripro'),
+        ));
+      }
+    }
+
+
+    $user_id = wp_create_user($user_name, $user_password, $user_email);
+
+    if (is_wp_error($user_id)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => $user_id->get_error_message(),
+      ));
+    }
+
+    $UserLogin = wp_signon(array(
+      'user_login' => $user_name,
+      'user_password' => $user_password,
+      'remember' => true
+    ), false);
+
+    if (is_wp_error($UserLogin)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => $UserLogin->get_error_message(),
+      ));
+    }
+
+    wp_set_current_user($UserLogin->ID, $UserLogin->user_login);
+    wp_set_auth_cookie($UserLogin->ID, true);
+
+    wp_send_json(array(
+      'status'   => 1,
+      'msg'      => __('注册成功，即将自动登录', 'ripro'),
+      'back_url' => get_uc_menu_link('profile'),
     ));
   }
 

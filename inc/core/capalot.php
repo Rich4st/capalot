@@ -242,7 +242,7 @@ class Capalot_Aff
 
   /**
    * 获取推广信息
-   * 
+   *
    */
   public static function get_user_aff_info($data)
   {
@@ -325,6 +325,36 @@ class Capalot_Cdk
         return '已使用';
         break;
     }
+  }
+
+  /**
+   * 根据code获取CDK
+   */
+  public static function get_cdk($code)
+  {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'capalot_cdk';
+
+    $cdk = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table_name WHERE code = %s", $code));
+
+    return $cdk;
+  }
+
+  /**
+   * 更改邀请码状态
+   */
+  public static function update_cdk($update, $where)
+  {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'capalot_cdk';
+
+    $update = $wpdb->update(
+      $table_name,
+      $update,
+      $where
+    );
+
+    return $update ? true : false;
   }
 }
 
