@@ -40,7 +40,7 @@ $comment_count = get_comments(array(
       </div>
       <div class="col">
         <span class="d-block h6 fw-bold mb-1"><?php echo $author_name; ?></span>
-        <small class="d-block text-muted dark:text-gray-400"><?php _e('等级', 'ripro'); ?><?php echo zb_get_user_badge($author_id, 'span', 'ms-1 mb-0'); ?></small>
+        <small class="d-block text-muted dark:text-gray-400"><?php _e('等级', 'ripro'); ?><?php echo capalot_get_user_badge($author_id, 'span', 'ms-1 mb-0'); ?></small>
       </div>
     </div>
   </div>

@@ -60,7 +60,7 @@ $site_color = get_site_default_color_style();
                 <span class="ms-2 hidden md:block"><?php echo $current_user->display_name; ?></span>
             </div>
             <?php if (is_site_shop()) : ?>
-                <?php echo zb_get_user_badge($current_user->ID, 'span', 'md:block hidden items-center   ms-2'); ?>
+                <?php echo capalot_get_user_badge($current_user->ID, 'span', 'md:block hidden items-center   ms-2'); ?>
             <?php endif; ?>
         </a>
 
@@ -73,7 +73,7 @@ $site_color = get_site_default_color_style();
                                 <img class="rounded-full border m-4 h-10 w-10 inline-block border-white border-3 shadow" src="<?php echo get_avatar_url($current_user->ID); ?>" alt="user">
                             </div>
                             <div class="mr-2 flex flex-col">
-                                <?php echo zb_get_user_badge($current_user->ID, 'span'); ?>
+                                <?php echo capalot_get_user_badge($current_user->ID, 'span'); ?>
                                 <b class=" mt-2"><?php echo $current_user->display_name; ?></b>
                             </div>
                         </div>
@@ -148,7 +148,7 @@ $site_color = get_site_default_color_style();
 <?php else : ?>
 
     <?php if (is_site_user_login()) : ?>
-        <a class="action-btn login-btn btn-sm btn" rel="nofollow noopener noreferrer" href="<?php echo esc_url(wp_login_url(get_current_url())); ?>"><i class="far fa-user me-1"></i><?php _e('登录', 'ripro'); ?></a>
+        <a class="action-btn login-btn btn-sm btn" rel="nofollow noopener noreferrer" href="<?php echo esc_url(wp_login_url(get_current_url())); ?>"><i class="far fa-user me-1"></i>登录</a>
     <?php endif; ?>
 
 <?php endif; ?>

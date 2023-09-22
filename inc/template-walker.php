@@ -21,7 +21,7 @@ class ZB_Walker_Comment extends Walker_Comment
 
     if ($comment->user_id) {
 
-      $author = $author . ' ' . zb_get_user_badge($comment->user_id, 'span');
+      $author = $author . ' ' . capalot_get_user_badge($comment->user_id, 'span');
     } else if ($comment->comment_author_url) {
       $author = '<a href="' . esc_url($comment->comment_author_url) . '" target="_blank" rel="nofollow">' . $author . '</a>';
     }

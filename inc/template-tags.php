@@ -328,9 +328,6 @@ function get_response_param($key, $default = '', $method = 'post')
 
 /**
  * 获取当前页面URL
- * @Author Dadong2g
- * @date   2022-11-27
- * @return [type]
  */
 if (!function_exists('get_current_url')) {
   function get_current_url()
@@ -338,6 +335,11 @@ if (!function_exists('get_current_url')) {
     $current_url = home_url(add_query_arg(array()));
     return esc_url($current_url);
   }
+}
+
+//是否开启图片验证码功能
+function is_site_img_captcha() {
+  return !empty(_capalot('is_site_img_captcha', 1));
 }
 
 //获取用户客户端IP get_ip_address()
