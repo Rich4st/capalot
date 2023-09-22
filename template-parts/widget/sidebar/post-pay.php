@@ -37,14 +37,35 @@ if (!empty($capalot_downurl_new) && is_array($capalot_downurl_new)) {
         <?php if (!empty($capalot_downurl_new)) : ?>
           <div class="d-grid gap-2 mt-3 ">
             <?php foreach ($capalot_downurl_new as $item) : ?>
-              <a target="_blank" href="<?php echo esc_attr($item['url']); ?>" class="btn btn-lg btn-success rounded-2" rel="nofollow noopener noreferrer"><i class="fas fa-cloud-download-alt me-1"></i><?php echo $item['name']; ?></a>
+              <a target="_blank" href="<?php echo esc_attr($item['url']); ?>" class="btn btn-lg btn-success rounded-2 text-xl text-center rounded-md py-3 px-2 bg-teal-500 text-white block hover:bg-teal-600" rel="nofollow noopener noreferrer"><i class="fas fa-cloud-download-alt me-1"></i><?php echo $item['name']; ?></a>
               <?php if (!empty($item['pwd'])) : ?>
-                <span class="text-muted user-select-all copy-pwd" data-pwd="<?php echo esc_attr($item['pwd']); ?>"><?php _e('密码: ', 'ripro'); ?><?php echo esc_attr($item['pwd']); ?><i class="far fa-copy ms-1"></i></span>
+                <div class=" py-2 text-center cursor-pointer">
+                <span class="  text-gray-400">密码：</span><span id="copy_span" class="  text-muted user-select-all copy-pwd     text-gray-400" pwd="<?php echo esc_attr($item['pwd']); ?>"><?php _e('', 'ripro'); ?><?php echo esc_attr($item['pwd']); ?><i class="far fa-copy ms-1"></i></span>
+                </div>
               <?php endif; ?>
             <?php endforeach ?>
           </div>
         <?php endif; ?>
       </div>
+      <script>
+        // 复制密码
+        let copy_span = document.getElementById('copy_span');
+        let copy_t = document.getElementById('copy_t');
+        copy_span.addEventListener('click', () => {
+          navigator.clipboard
+          .writeText(copy_span.innerText)
+          .then(()=>{
+            copy_t.style.display = 'block';
+            setTimeout(function(){
+              copy_t.style.display = 'none';
+            },2000);
+            
+          })
+          .catch(()=>{
+            alert('复制失败');
+          })
+        });
+      </script>
 
     <?php else : ?>
       <div class="down-buy-warp">

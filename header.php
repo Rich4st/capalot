@@ -17,3 +17,10 @@
 
 
   <main>
+
+
+    <div class=" hidden" id="copy_t">
+      <div class=" fixed w-full flex h-full justify-center z-50 ">
+        <div class="  self-center  bg-black/80 text-white py-2 px-4 rounded-md">密码已复制</div>
+      </div>
+    </div>
