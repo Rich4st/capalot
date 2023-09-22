@@ -60,7 +60,7 @@ if ($args['type'] == 'grid-overlay') {
 ?>
 <!-- 文章展示页中文章布局 -->
 <?php if ($args['type'] == 'grid') : ?>
-  <li class="dark:bg-dark-card rounded-lg overflow-hidden cursor-pointer shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]  md:h-96 h-64 transition-all duration-300 
+  <li class="dark:bg-dark-card rounded-lg overflow-hidden list-none cursor-pointer shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]  md:h-96 h-64 transition-all duration-300 
   hover:shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)]  ">
     <article class="post-item item-grid relative">
 

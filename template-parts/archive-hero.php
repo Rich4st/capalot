@@ -12,8 +12,7 @@ $bg_img = (!empty($meta_bg)) ? $meta_bg : capalot_get_thumbnail_url();
         <?php
         the_archive_title('<h1 class="archive-title mb-2 text-xl font-bold dark:text-gray-50">', '</h1>');
 
-        the_archive_description('<p class="archive-desc mt-2 mb-0">', '</p>');
-        // get_search_form();
+        the_archive_description('<p class="archive-desc mt-2 mb-0 dark:text-gray-400">', '</p>');
         ?>
 
     </div>

@@ -20,8 +20,31 @@ $site_color = get_site_default_color_style();
 <?php endif; ?>
 
 <?php if (empty(_capalot('remove_site_search', false))) : ?>
-    <span class="action-btn cursor-pointer toggle-search" rel="nofollow noopener noreferrer" title="<?php _e('站内搜索', 'ripro'); ?>"><i class="fas fa-search"></i></span>
+    <span class="action-btn cursor-pointer toggle-search hover:opacity-70" id="search_on" rel="nofollow noopener noreferrer" title="<?php _e('站内搜索', 'ripro'); ?>"><i class="fas fa-search"></i></span>
 <?php endif; ?>
+
+<script>
+    // 显示/隐藏搜索框
+    let search_on = document.getElementById('search_on');
+    let search_form = document.getElementById('search_form');
+    let hea_bg = document.getElementById('hea_bg');
+
+    search_on.addEventListener('click', function(){
+        if(search_form.style.display == 'none' || !search_form.style.display){
+            search_form.style.display = 'block';
+        }else{
+            search_form.style.display = 'none';
+        }
+    });
+    document.addEventListener('click', function(){
+        search_form.style.display = 'none';
+    });
+    hea_bg.addEventListener('click', function(){
+        var e = event || window.event;
+        e.stopPropagation();
+    });
+
+</script>
 
 <?php if (is_site_notify()) : ?>
     <span class="action-btn cursor-pointer toggle-notify" rel="nofollow noopener noreferrer" title="<?php _e('网站公告', 'ripro'); ?>"><i class="fa fa-bell"></i></span>
