@@ -71,7 +71,12 @@ let ca = {
           msg,
           back_url
         }) => {
-          ca.popup({ title: msg, icon: status == 1 ? 'success' : 'error' })
+          ca.popup({
+            title: msg,
+            icon: status == 1 ? 'success' : 'error',
+            showCloseButton: false,
+          });
+
           1 == status && setTimeout(() => {
             (o = window.frames.length !== parent.frames.length ? "" : o)
               ? window.location.href = o
@@ -93,13 +98,16 @@ let ca = {
     time,
     callback,
     icon = '', // success | info | error
+    showCloseButton = true,
+    position = 'center',
   }) {
 
     Swal.fire({
       title,
       icon,
       html,
-      showCloseButton: true,
+      showCloseButton,
+      position,
       showConfirmButton: false,
       width: '240px',
       customClass: {
