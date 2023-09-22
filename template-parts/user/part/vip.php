@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 global $current_user;
 
@@ -32,7 +32,7 @@ $price_shape = get_template_directory_uri().'/assets/img/price_shape.png';
 			</div>
 			<div class="ms-2 ">
 				<h5 class="flex items-center mb-1">
-				<?php echo $current_user->display_name; ?><?php echo zb_get_user_badge($current_user->ID,'span','mb-0 ms-2'); ?>
+				<?php echo $current_user->display_name; ?><?php echo capalot_get_user_badge($current_user->ID,'span','mb-0 ms-2'); ?>
 				</h5>
 				<div class="mb-1">
 					<span><?php echo $current_user->user_login; ?></span>
@@ -48,7 +48,7 @@ $price_shape = get_template_directory_uri().'/assets/img/price_shape.png';
 		</div>
 
 		<div class="row row-cols-2 row-cols-md-4 g-2 g-md-4">
-			<?php 
+			<?php
 			$item = [
 				'total' => __('每天可下载数', 'ripro'),
 	            'used' => __('今日已用次数', 'ripro'),
@@ -70,7 +70,7 @@ $price_shape = get_template_directory_uri().'/assets/img/price_shape.png';
 		</div>
 	</div>
 
-	
+
 
 	<div class="card-body mb-4">
 		<div class="card-header mb-3">
@@ -84,9 +84,9 @@ $price_shape = get_template_directory_uri().'/assets/img/price_shape.png';
 	</div>
 
 	<div class="card-body">
-    	
+
     	<div class="row row-cols-1 row-cols-md-3 g-3 justify-content-center">
-			<?php foreach ($site_vip_buy_options as $day => $item) : 
+			<?php foreach ($site_vip_buy_options as $day => $item) :
 				if ($item['day_num']==9999) {
 					$day_title = __('永久', 'ripro');
 				}else{
@@ -94,13 +94,13 @@ $price_shape = get_template_directory_uri().'/assets/img/price_shape.png';
 				}
 				$rate_day_coin = round($item['coin_price'] / $item['day_num'], 0);
 			?>
-			
+
 			<div class="col">
 				<div class="price-card text-center">
 				    <div class="price-header bg-<?php echo $vip_colors[$item['type']];?> bg-opacity-10">
-				    	
+
 				        <span class="price-plan"><?php echo $item['buy_title'];?></span>
-				       
+
 				        <h3 class="price-ammount"><?php echo $item['coin_price'];?><sup><?php echo get_site_coin_name();?></sup></h3>
 
 				        <span class="price-sub text-<?php echo $vip_colors[$item['type']];?>"><i class="far fa-gem me-1"></i><?php echo $item['name'];?><sup><?php echo $day_title;?></sup></span>
@@ -115,7 +115,7 @@ $price_shape = get_template_directory_uri().'/assets/img/price_shape.png';
 				        </ul>
 				    </div>
 				    <div class="price-footer">
-				    	<?php 
+				    	<?php
 				    	$btn_text = __('立即开通', 'ripro');
 				    	$disabled = '';
 				    	if ($uc_vip_info['type'] == 'boosvip') {
@@ -135,7 +135,7 @@ $price_shape = get_template_directory_uri().'/assets/img/price_shape.png';
 
 		</div>
 
-		
+
 
 	</div>
 
@@ -173,7 +173,7 @@ $price_shape = get_template_directory_uri().'/assets/img/price_shape.png';
 	</div>
 
 	<div class="card-body pay-vip-log">
-	    <?php 
+	    <?php
 	    global $wpdb;
 	    $data = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$wpdb->cao_order_tbl} WHERE user_id = %d AND order_type=3 AND pay_status=1 ORDER BY create_time DESC LIMIT 10", $current_user->ID));
 
@@ -191,7 +191,7 @@ $price_shape = get_template_directory_uri().'/assets/img/price_shape.png';
 	                    <small class="text-muted"><?php echo wp_date('Y-m-d H:i', $item->create_time);?></small>
 	                </div>
 	                <small class="text-muted"><?php printf(__('支付金额：￥%1$s（%2$s）', 'ripro'),$item->order_price, site_convert_amount($item->order_price,'coin') . get_site_coin_name() );?></small>
- 
+
 	                <small class="text-muted"><?php printf(__('支付方式：%s', 'ripro'), Capalot_Shop::get_pay_type($item->pay_type));?></small>
 
 	            </div>
@@ -218,7 +218,7 @@ $price_shape = get_template_directory_uri().'/assets/img/price_shape.png';
             formData.forEach(({ name, value }) => {
               data[name] = value;
             });
-            
+
 	        ri.ajax({
 	            data,
 	            before: () => {
