@@ -27,21 +27,6 @@ class Capalot_Ajax
   }
 
   /**
-   * 初始化所有接口请求
-   */
-  private function init()
-  {
-    $apis = [
-      'get_pay_select_html', // 获取支付方式HTML
-      'get_pay_action', // 支付接口
-    ];
-
-    foreach ($apis as $api) {
-      $this->add_action($api);
-    }
-  }
-
-  /**
    * 添加接口
    * @param string $hook_name 接口名称
    * @param int $type -1:全部用户可用 0:未登录用户可用 1:登录用户可用
@@ -56,6 +41,16 @@ class Capalot_Ajax
   }
 
   /**
+   * 初始化所有接口请求
+   */
+  private function init()
+  {
+    $this->add_action('get_pay_select_html'); //获取支付方式
+    $this->add_action('get_pay_action'); //下单
+    $this->add_action('user_login', 0); //登录
+  }
+
+  /**
    * 接口安全验证
    */
   private function valid_nonce_ajax()
@@ -66,6 +61,70 @@ class Capalot_Ajax
         'msg' => '非法请求',
       ]);
     }
+  }
+
+  // 用户登录
+  public function user_login()
+  {
+
+    $this->valid_nonce_ajax(); #安全验证
+
+    if (!is_site_user_login()) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => '本站未开启登录功能',
+      ));
+    }
+
+    $user_name     = sanitize_user(get_response_param('user_name'), true);
+    $user_password = wp_unslash(get_response_param('user_password'));
+    $captcha_code  = wp_unslash(trim(get_response_param('captcha_code')));
+    $remember      = (empty(get_response_param('remember'))) ? false : true;
+
+    if (!$user_name || !$user_password) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => '请输入账号或密码',
+      ));
+    }
+
+    if (is_site_img_captcha() && !is_img_captcha(strtolower($captcha_code))) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => '验证码错误，请刷新验证码',
+      ));
+    }
+
+    $UserData = [
+      'user_login'    => $user_name,
+      'user_password' => $user_password,
+      'remember'      => $remember,
+    ];
+
+    $UserLogin = wp_signon($UserData, false);
+    if (is_wp_error($UserLogin)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => '用户名或密码不正确',
+      ));
+    }
+
+    if (!empty(get_user_meta($UserLogin->ID, 'cao_banned', true))) {
+      wp_logout();
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => sprintf('此账号已被封禁（ %s ）', get_user_meta($UserLogin->ID, 'cao_banned_reason', true)),
+      ));
+    }
+
+    wp_set_current_user($UserLogin->ID, $UserLogin->user_login);
+    wp_set_auth_cookie($UserLogin->ID, true);
+
+    wp_send_json(array(
+      'status'   => 1,
+      'msg'      => __('登录成功', 'ripro'),
+      'back_url' => get_uc_menu_link(),
+    ));
   }
 
   // 获取支付方式HTML
@@ -183,7 +242,6 @@ class Capalot_Ajax
 
       $post_pay_data = get_post_pay_data($post_id);
       $order_data['order_info']['vip_rate'] = $post_pay_data['vip_rate'];
-
     }
 
     // 序列化订单信息
@@ -212,59 +270,58 @@ class Capalot_Ajax
   }
 
   //公告
-  public function get_site_notify() {
+  public function get_site_notify()
+  {
     $this->valid_nonce_ajax(); #安全验证
 
     if (!is_site_notify()) {
-        wp_send_json(array(
-            'status' => 0,
-            'msg'    => __('暂无公告', 'ripro'),
-        ));
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('暂无公告', 'ripro'),
+      ));
     }
 
     $title = _capalot('site_notify_title');
     $desc = _capalot('site_notify_desc');
-    $html = '<div class="site-notify-body"><h1 class="notify-title"><i class="fa fa-bell-o me-1"></i>'.$title.'</h1><div class="notify-desc">'.$desc.'</div></div>';
+    $html = '<div class="site-notify-body"><h1 class="notify-title"><i class="fa fa-bell-o me-1"></i>' . $title . '</h1><div class="notify-desc">' . $desc . '</div></div>';
     wp_send_json(array(
-        'status' => 1,
-        'msg'    => $html,
+      'status' => 1,
+      'msg'    => $html,
     ));
-
-}
-
-
-    //签到
-    public function user_qiandao() {
-      $this->valid_nonce_ajax(); #安全验证
-      $user_id  = get_current_user_id();
-      
-      if (!is_site_qiandao()) {
-          wp_send_json(array(
-              'status' => 0,
-              'msg'    => __('签到功能暂未开启', 'ripro'),
-          ));
-      }
-      
-      if (is_user_today_qiandao($user_id)) {
-          wp_send_json(array(
-              'status' => 0,
-              'msg'    => __('今日已签到，请明日再来', 'ripro'),
-          ));
-      }
-
-      $site_qiandao_coin_num = sprintf('%0.1f', abs(_capalot('site_qiandao_coin_num','0.5')));
-
-      if (!update_user_meta($user_id, 'cao_qiandao_time',time()) || !change_user_coin_balance($user_id, $site_qiandao_coin_num, '+')) {
-          wp_send_json(array(
-              'status' => 0,
-              'msg'    => __('签到失败', 'ripro'),
-          ));
-      }
-
-      wp_send_json(array(
-          'status' => 1,
-          'msg'    => sprintf(__('签到成功，领取(%s)%s', 'ripro'), $site_qiandao_coin_num,get_site_coin_name()),
-      ));
   }
 
+  //签到
+  public function user_qiandao()
+  {
+    $this->valid_nonce_ajax(); #安全验证
+    $user_id  = get_current_user_id();
+
+    if (!is_site_qiandao()) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('签到功能暂未开启', 'ripro'),
+      ));
+    }
+
+    if (is_user_today_qiandao($user_id)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('今日已签到，请明日再来', 'ripro'),
+      ));
+    }
+
+    $site_qiandao_coin_num = sprintf('%0.1f', abs(_capalot('site_qiandao_coin_num', '0.5')));
+
+    if (!update_user_meta($user_id, 'cao_qiandao_time', time()) || !change_user_coin_balance($user_id, $site_qiandao_coin_num, '+')) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('签到失败', 'ripro'),
+      ));
+    }
+
+    wp_send_json(array(
+      'status' => 1,
+      'msg'    => sprintf(__('签到成功，领取(%s)%s', 'ripro'), $site_qiandao_coin_num, get_site_coin_name()),
+    ));
+  }
 }
