@@ -337,8 +337,14 @@ function is_site_comments()
     return !empty(_capalot('is_site_comments', 1));
 }
 
+//是否开启邀请码注册
+function is_site_invitecode_register()
+{
+    return (bool) _capalot('is_site_invitecode_register', true);
+}
+
 //获取用户VIP类型标志
-function zb_get_user_badge($user_id = null, $tag = 'a', $class = '')
+function capalot_get_user_badge($user_id = null, $tag = 'a', $class = '')
 {
     //颜色配置
     $colors = [
@@ -377,6 +383,12 @@ function get_uc_menu_link($menu_action = '')
         return esc_url(wp_logout_url(get_current_url()));
     }
     return esc_url(home_url($prefix . $menu_action));
+}
+
+//是否开启注册
+function is_site_user_register()
+{
+    return (bool) _capalot('is_site_user_register', true);
 }
 
 //是否开启商城功能
