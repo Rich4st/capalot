@@ -11,9 +11,9 @@ $is_user_login_get_status = $user_pay_post_status === '0' && empty($user_id);
 
 ?>
 
-<div class=" px-2 ">
+<div class=" p-4 border-dashed border-2 border-rose-200 rounded-md my-4 bg-gray-100 overflow-hidden relative dark:bg-dark dark:border-gray-600">
   <?php if ($user_pay_post_status && !$is_user_login_get_status) : ?>
-    <span class="font-bold text-[18px] leading-6 relative pl-[18px] border-l-[#3370e9] border-l-2"><?php echo '已获得查看权限'; ?></span>
+    <div class="absolute right-0 top-0 px-2 bg-rose-300 text-white z-40 rounded-tr-md rounded-bl-md"><span class=" text-sm  "><?php echo '已获得查看权限'; ?></span></div>
     <?php echo $content; ?>
   <?php else : ?>
     <span class="font-bold text-[18px] leading-6 relative pl-[18px] border-l-[#3370e9] border-l-2"><?php echo '隐藏内容'; ?></span>
