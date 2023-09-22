@@ -6,7 +6,7 @@ let ca = {
     ca.pay_action();
     ca.pagination();
     ca.toggle_dark();
-    ca.swiper();
+    // ca.swiper();
     ca.account_action();
   },
 
@@ -47,6 +47,7 @@ let ca = {
 
     login_btn.addEventListener('click', (e) => {
       e.preventDefault();
+      console.log(123);
       const payload = form.serializeArray();
       let o = decodeURIComponent(location.href.split("redirect_to=")[1] || ""),
         n = {
