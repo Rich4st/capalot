@@ -97,6 +97,12 @@
 
 
 
+<?php get_template_part('template-parts/footer/rollbar'); ?>
+
+
+
+
+
 <div class=" fixed top-0 left-0 right-0 bottom-0  bg-black/80 z-50 hidden" id="fixedB"></div>
 <?php get_template_part('template-parts/footer/off-canvas'); ?>
 
@@ -112,17 +118,22 @@
     } else {
       fixedB.style.display = 'none';
     }
-    $('#navBg').animate({width:'toggle'},100);
+    $('#navBg').animate({
+      width: 'toggle'
+    }, 100);
   });
   fixedB.addEventListener('click', function() {
     fixedB.style.display = 'none';
-    $('#navBg').animate({width:'toggle'},100);
+    $('#navBg').animate({
+      width: 'toggle'
+    }, 100);
   });
   closeNav.addEventListener('click', function() {
     fixedB.style.display = 'none';
-    $('#navBg').animate({width:'toggle'},100);
+    $('#navBg').animate({
+      width: 'toggle'
+    }, 100);
   });
-  
 </script>
 
 
