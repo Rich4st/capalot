@@ -50,7 +50,7 @@ $is_delete = get_response_param('delete',0,'get');
 
             <!-- Save button -->
             <div class="flex lg:col-start-4 justify-end text-white">
-                <input type="hidden" name="action" value="zb_user_save_ticket">
+                <input type="hidden" name="action" value="capalot_user_save_ticket">
                 <button type="submit" id="save-ticket" class="bg-black py-1 px-2 rounded"><?php _e('提交工单', 'ripro');?></button>
             </div>
         </form>
@@ -228,7 +228,7 @@ $is_delete = get_response_param('delete',0,'get');
 jQuery(function($) {
 
 	$('.delete-ticket').click(function(e) {
-        return confirm(zb.gettext.__is_delete_n);
+        return confirm(capalot.gettext.__is_delete_n);
     });
 
     //提交工单
@@ -238,7 +238,7 @@ jQuery(function($) {
         var formData = $("#ticket-form").serializeArray();
 
         var data = {
-          nonce: zb.ajax_nonce,
+          nonce: capalot.ajax_nonce,
         };
 
         formData.forEach(({ name, value }) => {
@@ -258,10 +258,10 @@ jQuery(function($) {
         var url = window.location.href;
     	url = url.split('?')[0]; // 截取问号及其后面的字符串
 
-    	ri.ajax({data,
+    	ca.ajax({data,
           before: () => {_this.attr("disabled", "true")},
           result: ({status,msg}) => {
-              ri.notice(msg);
+              ca.notice(msg);
               if (status == 1) {
                   setTimeout(function() {
                       window.location.replace(url);

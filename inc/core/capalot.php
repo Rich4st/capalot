@@ -589,4 +589,32 @@ class Capalot_Ticket
 
     return $update ? true : false;
   }
+
+  /**
+   * 新增工单数据
+   */
+  public static function add($data){
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'capalot_ticket';
+
+    $insert = $wpdb->insert(
+      $table_name,
+      [
+        'type' => $data['type'],
+        'title' => $data['title'],
+        'content' => $data['content'],
+        'reply_content' => $data['reply_content'],
+        'file' => $data['file'],
+        'reply_file' => $data['reply_file'],
+        'creator_id' => $data['creator_id'],
+        'assignee_id' => $data['assignee_id'],
+        'create_time' => time(),
+        'updated_time' => time(),
+        'reply_time' => time(),
+        'status' => $data['status'],
+      ]
+    );
+
+    return $insert ? true : false;
+  }
 }
