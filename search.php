@@ -2,7 +2,7 @@
 
 get_header();
 
-// $archive_item_config = zb_get_archive_item_config();
+$archive_item_config = get_posts_style_config();
 
 ?>
 
