@@ -194,6 +194,13 @@ function capalot_get_thumbnail_url($post = null, $size = 'thumbnail')
 }
 
 /**
+ * 获取面包屑导航
+ */
+function capalot_get_breadcrumb($class = 'bc')
+{
+}
+
+/**
  * 获取分类信息
  */
 function capalot_meta_category($num = 2)
@@ -261,6 +268,114 @@ function capalot_get_post_favorites($post_id = null)
 }
 
 /**
+ * 是否已经收藏该文章
+ */
+function capalot_is_post_fav($user_id = null, $post_id = null)
+{
+  if (empty($post_id)) {
+    global $post;
+    $post_id = $post->ID;
+  }
+  if (empty($user_id)) {
+    $user_id = get_current_user_id();
+  }
+  $post_id = absint($post_id);
+
+  if (get_post_status($post_id) === false) {
+    return false;
+  }
+
+  $meta_key = 'follow_post';
+
+  $data = get_user_meta($user_id, $meta_key, true); # 获取...
+
+  if (empty($data) || !is_array($data)) {
+    return false;
+  }
+  return in_array($post_id, $data);
+}
+
+/**
+ * 收藏或喜欢点赞
+ */
+function capalot_add_post_fav($user_id = null, $post_id = 0)
+{
+
+  $post_id = absint($post_id);
+  if (get_post_status($post_id) === false) {
+    return false;
+  }
+  if (empty($user_id)) {
+    $user_id = get_current_user_id();
+  }
+
+  $meta_key = 'follow_post';
+  $post_key = 'follow_num';
+
+  $old_data = get_user_meta($user_id, $meta_key, true); # 获取...
+
+  if (empty($old_data) || !is_array($old_data)) {
+    $new_data = [];
+  } else {
+    $new_data = $old_data;
+  }
+
+  if (!in_array($post_id, $new_data)) {
+    // 新数据 开始处理
+    array_push($new_data, $post_id);
+  }
+  if (true) {
+    $favnum  = absint(get_post_meta($post_id, $post_key, true));
+    $new_num = $favnum + 1;
+    update_post_meta($post_id, $post_key, $new_num);
+  }
+
+  return update_user_meta($user_id, $meta_key, $new_data);
+}
+
+/**
+ * 取消收藏文章
+ */
+function capalot_delete_post_fav($user_id = null, $post_id = 0)
+{
+
+  $post_id = absint($post_id);
+  if (get_post_status($post_id) === false) {
+    return false;
+  }
+  if (empty($user_id)) {
+    $user_id = get_current_user_id();
+  }
+
+  $meta_key = 'follow_post';
+  $post_key = 'follow_num';
+
+  $old_data = get_user_meta($user_id, $meta_key, true); # 获取...
+
+  if (empty($old_data) || !is_array($old_data)) {
+    $new_data = [];
+  } else {
+    $new_data = $old_data;
+  }
+
+  if (in_array($post_id, $new_data)) {
+    $new_data = array_values(array_diff($new_data, [$post_id]));
+  }
+
+  if (true) {
+    $favnum  = absint(get_post_meta($post_id, $post_key, true));
+    $new_num = $favnum - 1;
+    if ($new_num < 0) {
+      $new_num = 0;
+    }
+
+    update_post_meta($post_id, $post_key, $new_num);
+  }
+
+  return update_user_meta($user_id, $meta_key, $new_data);
+}
+
+/**
  * 获取文章浏览数量
  */
 function capalot_get_post_views($post_id = null)
@@ -275,6 +390,25 @@ function capalot_get_post_views($post_id = null)
     $this_num = sprintf('%0.1f', $this_num / 1000) . 'K';
   }
   return $this_num;
+}
+
+/**
+ * 添加文章点赞数
+ */
+function capalot_add_post_likes($post_id = null, $num = 1)
+{
+  if (empty($post_id)) {
+    global $post;
+    $post_id = $post->ID;
+  }
+  $meta_key = 'likes';
+  $this_num = intval(get_post_meta($post_id, $meta_key, true));
+  $new_num  = $this_num + $num;
+  if ($new_num < 0) {
+    $new_num = 1;
+  }
+
+  return update_post_meta($post_id, $meta_key, $new_num);
 }
 
 /**
@@ -340,12 +474,14 @@ if (!function_exists('get_current_url')) {
 /**
  * 获取默认头像
  */
-function get_default_avatar_src() {
+function get_default_avatar_src()
+{
   return get_template_directory_uri() . '/assets/img/avatar.png';
 }
 
 //是否开启图片验证码功能
-function is_site_img_captcha() {
+function is_site_img_captcha()
+{
   return !empty(_capalot('is_site_img_captcha', 1));
 }
 
@@ -367,7 +503,8 @@ function get_ip_address($ignore_private_and_reserved = false)
   return 'unknown';
 }
 
-function get_default_lazy_img_src() {
+function get_default_lazy_img_src()
+{
   return _capalot('default_lazy_thumb') ? _capalot('default_lazy_thumb') : 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
 }
 

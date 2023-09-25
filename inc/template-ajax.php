@@ -54,6 +54,8 @@ class Capalot_Ajax
     $this->add_action('update_avatar', 1); //上传头像
     $this->add_action('get_captcha_img'); //验证码
     $this->add_action('user_register', 0); //注册
+    $this->add_action('add_like_post'); //点赞文章
+    $this->add_action('add_fav_post'); //收藏文章
   }
 
   /**
@@ -285,6 +287,7 @@ class Capalot_Ajax
       'back_url' => get_uc_menu_link('profile'),
     ));
   }
+
   //验证码
   public function get_captcha_img()
   {
@@ -294,6 +297,7 @@ class Capalot_Ajax
       'msg'    => get_img_captcha(),
     ));
   }
+
   //上传头像
   public function update_avatar()
   {
@@ -427,6 +431,7 @@ class Capalot_Ajax
       'msg'    => __('头像上传成功', 'ripro'),
     ));
   }
+
   //保存个人信息
   public function update_profile()
   {
@@ -504,8 +509,6 @@ class Capalot_Ajax
     ));
   }
 
-
-
   //修改密码
   public function update_password()
   {
@@ -548,7 +551,6 @@ class Capalot_Ajax
       'msg'    => __('密码修改成功，请使用新密码重新登录', 'ripro'),
     ));
   }
-
 
   // 获取支付方式HTML
   public function get_pay_select_html()
@@ -805,5 +807,68 @@ class Capalot_Ajax
       'status' => 1,
       'msg'    => sprintf(__('签到成功，领取(%s)%s', 'ripro'), $site_qiandao_coin_num, get_site_coin_name()),
     ));
+  }
+
+  // 点赞文章
+  public function add_like_post()
+  {
+    $this->valid_nonce_ajax(); #安全验证
+
+    $post_id = (int) get_response_param('post_id');
+
+    if ($post_id && capalot_add_post_likes($post_id, 1)) {
+      wp_send_json(array(
+        'status' => 1,
+        'msg'    => '点赞成功',
+      ));
+    } else {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => '点赞失败',
+      ));
+    }
+  }
+
+  // 收藏文章
+  public function add_fav_post()
+  {
+    $this->valid_nonce_ajax(); #安全验证
+
+    $post_id = (int) get_response_param('post_id');
+    $is_add  = (int) get_response_param('is_add');
+    $user_id = get_current_user_id();
+
+    if (empty($user_id)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('请登录后收藏', 'ripro'),
+      ));
+    }
+
+    $is_fav = capalot_is_post_fav($user_id, $post_id);
+
+    if ($is_add) {
+      if ($is_fav) {
+        wp_send_json(array(
+          'status' => 0,
+          'msg'    => '您已收藏过',
+        ));
+      }
+
+      if (capalot_add_post_fav($user_id, $post_id)) {
+        wp_send_json(array(
+          'status' => 1,
+          'msg'    => '收藏成功',
+        ));
+      }
+    } else {
+      if ($is_fav) {
+        capalot_delete_post_fav($user_id, $post_id);
+      }
+      wp_send_json(array(
+        'status' => 1,
+        'msg'    => '已取消收藏',
+      ));
+    }
   }
 }
