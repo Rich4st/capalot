@@ -1,7 +1,7 @@
 <header class="  dark:bg-dark ">
 
 	<div class=" lg:max-w-[80rem] m-auto lg:px-0 px-2 py-2">
-		<div class=" text-[#595d69] relative" id="hea_bg"> <!-- container-fluid px-lg-5 -->
+		<div class=" text-[#595d69] relative px-1" id="hea_bg"> <!-- container-fluid px-lg-5 -->
 			<div class="flex items-center ">
 				<div class="mr-4  flex items-center">
 					<?php
@@ -31,11 +31,11 @@
 
 						$cached_menu = wp_nav_menu(array(
 							'container' => true,
-							'fallback_cb' => 'ZB_Walker_Nav_Menu::fallback',
+							'fallback_cb' => 'Capalot_Walker_Nav_Menu::fallback',
 							'menu_id' => 'header-navbar',
 							'menu_class' => 'nav-list',
 							'theme_location' => 'main-menu',
-							'walker' => new ZB_Walker_Nav_Menu(true),
+							'walker' => new Capalot_Walker_Nav_Menu(true),
 							'echo' => false, // 返回html内容
 						));
 

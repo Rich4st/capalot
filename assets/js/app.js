@@ -12,6 +12,7 @@ let ca = {
       ca.swiper();
 
     ca.account_action();
+    ca.social_action();
   },
 
   /**
@@ -49,99 +50,139 @@ let ca = {
     const login_btn = document.querySelector('#click-submit')
     const form = $('#account-from');
 
-    login_btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      console.log(123);
-      const payload = form.serializeArray();
-      let o = decodeURIComponent(location.href.split("redirect_to=")[1] || ""),
-        n = {
-          nonce: capalot.ajax_nonce
-        };
-      payload.forEach(({ name: name, value: v }) => {
-        n[name] = v
-      });
+    if (login_btn) {
+      login_btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        console.log(123);
+        const payload = form.serializeArray();
+        let o = decodeURIComponent(location.href.split("redirect_to=")[1] || ""),
+          n = {
+            nonce: capalot.ajax_nonce
+          };
+        payload.forEach(({ name: name, value: v }) => {
+          n[name] = v
+        });
+
+        ca.ajax({
+          data: n,
+          beforeSend: () => {
+            login_btn.classList.add('loading');
+          },
+          success: ({
+            status,
+            msg,
+            back_url
+          }) => {
+            ca.popup({
+              title: msg,
+              icon: status == 1 ? 'success' : 'error',
+              showCloseButton: false,
+            });
+
+            1 == status && setTimeout(() => {
+              (o = window.frames.length !== parent.frames.length ? "" : o)
+                ? window.location.href = o
+                : back_url ? window.location.href = back_url : window.location.reload()
+            }, 2e3)
+          },
+          complete: () => {
+            login_btn.classList.remove('loading');
+          }
+        })
+      })
+    }
+
+  },
+
+  // 社交操作
+  social_action: function () {
+    const storage_key = 'post_like_storage';
+    const like_btn = document.querySelector('.post-like-btn');
+    const fav_btn = document.querySelector('.post-fav-btn');
+
+    if (!like_btn || !fav_btn) {
+      return;
+    }
+
+    // 点赞文章
+    like_btn.addEventListener('click', (e) => {
+      if (localStorage.getItem(storage_key) === capalot.singular_id) {
+        return ca.popup({ title: '您已经点过赞了', icon: 'info' });
+      }
+      like_btn.classList.add('bg-[#fdf0fb]');
+
+      const unlike_icon = like_btn.querySelector('.unlike');
+      const liked_icon = like_btn.querySelector('.liked');
 
       ca.ajax({
-        data: n,
+        data: {
+          action: 'capalot_add_like_post',
+          nonce: capalot.ajax_nonce,
+          post_id: capalot.singular_id,
+        },
         beforeSend: () => {
-          login_btn.classList.add('loading');
+          unlike_icon.classList.add('fa-spinner', 'fa-spin');
         },
-        success: ({
-          status,
-          msg,
-          back_url
-        }) => {
-          ca.popup({
-            title: msg,
-            icon: status == 1 ? 'success' : 'error',
-            showCloseButton: false,
-          });
+        success: ({ status, msg }) => {
+          status === 1
+            ? ca.popup({ title: msg, icon: 'success' })
+            : ca.popup({ title: msg, icon: 'error' });
 
-          1 == status && setTimeout(() => {
-            (o = window.frames.length !== parent.frames.length ? "" : o)
-              ? window.location.href = o
-              : back_url ? window.location.href = back_url : window.location.reload()
-          }, 2e3)
-        },
-        complete: () => {
-          login_btn.classList.remove('loading');
+          $('.fa-spinner').addClass('hidden')
+
+          liked_icon.classList.remove('hidden');
         }
       })
-    })
-  },
+    });
 
-  // 登录注册操作
-  account_action: function () {
-    const login_btn = document.querySelector('#click-submit')
-    const form = $('#account-from');
+    // 收藏文章
+    fav_btn.addEventListener('click', () => {
+      if (localStorage.getItem(storage_key) === capalot.singular_id) {
+        return ca.popup({ title: '您已经收藏过了', icon: 'info' });
+      }
+      fav_btn.classList.add('bg-[#fdf0fb]');
 
-    login_btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      console.log(123);
-      const payload = form.serializeArray();
-      let o = decodeURIComponent(location.href.split("redirect_to=")[1] || ""),
-        n = {
-          nonce: capalot.ajax_nonce
-        };
-      payload.forEach(({ name: name, value: v }) => {
-        n[name] = v
-      });
+      const unfav_icon = fav_btn.querySelector('.unfav');
+      const fav_icon = fav_btn.querySelector('.fav');
 
       ca.ajax({
-        data: n,
+        data: {
+          action: 'capalot_add_fav_post',
+          nonce: capalot.ajax_nonce,
+          is_add: fav_btn.dataset.is,
+          post_id: capalot.singular_id,
+        },
         beforeSend: () => {
-          login_btn.classList.add('loading');
+          unfav_icon.classList.add('fa-spinner', 'fa-spin');
         },
-        success: ({
-          status,
-          msg,
-          back_url
-        }) => {
-          ca.popup({
-            title: msg,
-            icon: status == 1 ? 'success' : 'error',
-            showCloseButton: false,
-          });
+        success: ({ status, msg }) => {
+          status === 1
+            ? ca.notice({ title: msg, icon: 'success' })
+            : ca.notice({ title: msg, icon: 'error' });
 
-          1 == status && setTimeout(() => {
-            (o = window.frames.length !== parent.frames.length ? "" : o)
-              ? window.location.href = o
-              : back_url ? window.location.href = back_url : window.location.reload()
-          }, 2e3)
-        },
-        complete: () => {
-          login_btn.classList.remove('loading');
+          $('.fa-spinner').addClass('hidden')
+          fav_btn.dataset.is == '0' ? fav_btn.dataset.is = '1' : fav_btn.dataset.is = '0';
+          fav_icon.classList.remove('hidden');
         }
       })
-    })
+    });
   },
 
-  notice: function (e = "", t = 220, n = 2e3) {
-    let o = jQuery(".ca-notice");
-    !e && o.length
-      ? o.clearQueue().stop().hide()
-      : (!o.length && e && (o = jQuery(`<div class="ca-notice" style="min-width: ${t}px"></div>`), body.append(o)), o.clearQueue().stop().hide().html(e).fadeIn().delay(n).fadeOut())
+  // toast 提示
+  notice: function ({ title, icon, timer = 2000 }) {
+    Swal.fire({
+      title,
+      position: 'top',
+      toast: true,
+      timer,
+      icon,
+      showConfirmButton: false,
+      customClass: {
+        container: 'mt-10'
+      }
+    });
   },
+
   // 对话框
   popup: function ({
     content,
@@ -268,6 +309,7 @@ let ca = {
     }
   },
 
+  // 轮播初始化
   swiper: function () {
     const el = document.querySelector('.mySwiper');
 
