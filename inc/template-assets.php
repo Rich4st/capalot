@@ -22,6 +22,8 @@ function capalot_assets()
 
   // tailwindcss
   wp_enqueue_style('tailwind', get_template_directory_uri() . '/assets/css/tailwind.css', array(), '0.1.0');
+  // custom css
+  wp_enqueue_style('custom', get_template_directory_uri() . '/assets/css/custom.css', array(), '0.1.0');
   // app.js
   wp_enqueue_script('app', get_template_directory_uri() . '/assets/js/app.js', array(), '0.1.0', true);
   // sweetalert2

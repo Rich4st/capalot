@@ -46,7 +46,7 @@ $item_config = [
 	<div class="card-body">
 
 		<?php if ($PostData->have_posts() ) : ?>
-			<div class="grid grid-cols-2 gap-2 md:grid-cols-3">
+			<div class="grid grid-cols-2 gap-2 md:grid-cols-3 list-none">
 			<?php while ( $PostData->have_posts() ) : $PostData->the_post();
 
 				get_template_part( 'template-parts/loop/item', get_post_format() ,$item_config);
@@ -54,7 +54,7 @@ $item_config = [
 			endwhile;?>
 			</div>
 			<?php 
-			zb_custom_pagination($page,$PostData->max_num_pages);
+			capalot_custom_pagination($page,$PostData->max_num_pages);
 			wp_reset_postdata();
 		else :
 

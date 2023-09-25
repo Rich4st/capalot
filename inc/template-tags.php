@@ -201,6 +201,38 @@ function capalot_get_breadcrumb($class = 'bc')
 }
 
 /**
+ * 分页
+ * @param  integer    $pagenum       [当前页面]
+ * @param  integer    $max_num_pages [MAX数量]
+ * @return [type]
+ */
+function capalot_custom_pagination($pagenum = 0, $max_num_pages = 0) {
+
+  $page_links = paginate_links(array(
+      'base'      => add_query_arg('page', '%#%'),
+      'format'    => '?page=%#%',
+      'total'     => intval($max_num_pages),
+      'current'   => intval($pagenum),
+      'show_all'   => false,
+  ));
+
+  if ($page_links) {
+      echo '<nav class="fav-pagination mt-3 md:mt-4 text-center">
+      ' . $page_links . '
+      </nav>';
+  }
+
+}
+
+function is_weixin_visit() {
+  if (strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false) {
+      return true;
+  } else {
+      return false;
+  }
+}
+
+/**
  * 获取分类信息
  */
 function capalot_meta_category($num = 2)
@@ -478,7 +510,6 @@ function get_default_avatar_src()
 {
   return get_template_directory_uri() . '/assets/img/avatar.png';
 }
-
 //是否开启图片验证码功能
 function is_site_img_captcha()
 {
