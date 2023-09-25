@@ -26,7 +26,7 @@ if ($unsetoauth =='qq' || $unsetoauth =='weixin') {
               <div class="flex items-center">
                   <div class="position me-3">
                       <div class="avatar avatar-xl py-2">
-                          <img class="avatar-img rounded-full border border-white shadow" src="<?php echo get_avatar_url($current_user->ID); ?>" alt="user">
+                          <img class="rounded-full border border-white shadow" src="<?php echo get_avatar_url($current_user->ID); ?>" alt="user">
                       </div>
                   </div>
                   <div class="block">
@@ -55,7 +55,7 @@ if ($unsetoauth =='qq' || $unsetoauth =='weixin') {
             </div>
             <!-- Save button -->
             <div class="flex lg:col-start-4 justify-end text-white ">
-                <input type="hidden" name="action" value="zb_update_profile">
+                <input type="hidden" name="action" value="capalot_update_profile">
                 <button type="submit" id="save-submit" class="bg-black px-4 py-1 rounded-lg"><?php _e('保存资料', 'ripro');?></button>
             </div>
         </form>
@@ -109,7 +109,7 @@ if ($unsetoauth =='qq' || $unsetoauth =='weixin') {
 
         <!-- Save button -->
       <div class="flex lg:col-start-4 justify-end text-white ">
-          <input type="hidden" name="action" value="zb_update_new_email">
+          <input type="hidden" name="action" value="capalot_update_new_email">
           <button type="submit" id="edit-email" class="bg-[#d6293e] p-2 text-white rounded-lg"><?php _e('确认修改邮箱', 'ripro');?></button>
       </div>
     </form>
@@ -152,7 +152,7 @@ if ($unsetoauth =='qq' || $unsetoauth =='weixin') {
       </div>
         <!-- Save button -->
       <div class="flex lg:col-start-4 justify-end text-white">
-          <input type="hidden" name="action" value="zb_update_password">
+          <input type="hidden" name="action" value="capalot_update_password">
           <button type="submit" id="edit-password" class="bg-[#d6293e] p-2 text-white rounded-lg"><?php _e('确认修改密码', 'ripro');?></button>
       </div>
     </form>
@@ -169,11 +169,11 @@ jQuery(function($) {
 
   $("#inputAvatarFile").change(function(e) {
     var formData = new FormData();
-    formData.append("nonce",zb.ajax_nonce);
-    formData.append("action", "zb_update_avatar");
+    formData.append("nonce",capalot.ajax_nonce);
+    formData.append("action", "capalot_update_avatar");
     formData.append("file", e.currentTarget.files[0]);
     $.ajax({
-        url:zb.ajax_url,
+        url:capalot.ajax_url,
         dataType:'json',
         type:'POST',
         async: false,
@@ -181,7 +181,8 @@ jQuery(function($) {
         processData : false, // 使数据不做处理
         contentType : false, // 不要设置Content-Type请求头
         success: function(result){
-            ri.notice(result.msg);
+            ca.notice(result.msg);
+            console.log( result.msg);
             if (result.status == 1) {
                 setTimeout(function() {
                     window.location.reload()
@@ -189,7 +190,7 @@ jQuery(function($) {
             }
         },
         error:function(e){
-            ri.notice(e.responseText);
+            ca.notice(e.responseText);
         }
     });
 
@@ -202,17 +203,17 @@ jQuery(function($) {
       var formData = $("#user-profile").serializeArray();
 
       var data = {
-          nonce: zb.ajax_nonce,
+          nonce: capalot.ajax_nonce,
       };
 
       formData.forEach(({ name, value }) => {
         data[name] = value;
       });
 
-      ri.ajax({data,
+      ca.ajax({data,
           before: () => {_this.attr("disabled", "true")},
           result: ({status,msg}) => {
-              ri.notice(msg);
+              ca.notice(msg);
               if (status == 1) {
                   setTimeout(function() {
                       window.location.reload()
@@ -230,7 +231,7 @@ jQuery(function($) {
       var formData = $("#edit-password-form").serializeArray();
 
       var data = {
-          nonce: zb.ajax_nonce,
+          nonce: capalot.ajax_nonce,
       };
 
       formData.forEach(({ name, value }) => {
@@ -249,10 +250,10 @@ jQuery(function($) {
         return;
       }
 
-      ri.ajax({data,
+      ca.ajax({data,
           before: () => {_this.attr("disabled", "true")},
           result: ({status,msg}) => {
-              ri.notice(msg);
+              ca.notice(msg);
               if (status == 1) {
                   setTimeout(function() {
                       window.location.reload()
@@ -269,7 +270,7 @@ jQuery(function($) {
       var _this = $(this);
       var formData = $("#edit-email-form").serializeArray();
       var data = {
-          nonce: zb.ajax_nonce,
+          nonce: capalot.ajax_nonce,
       };
 
       formData.forEach(({ name, value }) => {
@@ -281,10 +282,10 @@ jQuery(function($) {
         return;
       }
 
-      ri.ajax({data,
+      ca.ajax({data,
           before: () => {_this.attr("disabled", "true")},
           result: ({status,msg}) => {
-              ri.notice(msg);
+              ca.notice(msg);
               if (status == 1) {
                   setTimeout(function() {
                       window.location.reload()

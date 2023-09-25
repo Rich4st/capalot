@@ -13,24 +13,24 @@ $is_delete = get_response_param('delete',0,'get');
 
 <?php if ($page_action == 'new') : ?>
 <!-- 新建工单 -->
-<div class="card">
-	<div class="card-header mb-3">
-		<h5 class="fw-bold mb-0 d-flex align-content-center"><?php _e('新建工单', 'ripro');?>
-			<a href="<?php echo esc_url($list_link);?>" class="badge bg-dark btn-dark bg-opacity-75 ms-2"><?php _e('返回工单列表', 'ripro');?></a>
+<div class="mb-4 bg-white dark:bg-dark-card p-4 mx-2 rounded">
+	<div class="mb-3">
+		<h5 class="font-bold pb-4"><?php _e('新建工单', 'ripro');?>
+			<a href="<?php echo esc_url($list_link);?>" class="px-2 py-1 text-sm rounded bg-dark bg-opacity-75 ms-2 text-white"><?php _e('返回工单列表', 'ripro');?></a>
 		</h5>
 		<hr>
 	</div>
 	<div class="card-body">
-		<form class="row g-4" id="ticket-form">
+		<form class="gap-4 grid lg:grid-cols-4 grid-cols-1" id="ticket-form">
             <!-- Input item -->
-            <div class="col-lg-6">
-                <label class="form-label"><?php _e('创建人', 'ripro');?></label>
-                <input type="text" class="form-control" value="<?php echo $current_user->display_name;?> (<?php echo $current_user->user_login; ?>)" disabled>
+            <div class="lg:col-span-2 col-span-1 col-start-1 pb-2">
+                <label class="pb-2 block"><?php _e('创建人', 'ripro');?></label>
+                <input type="text" class="bg-[#f0f1f3] w-full h-8 px-2 rounded dark:bg-dark" value="<?php echo $current_user->display_name;?> (<?php echo $current_user->user_login; ?>)" disabled>
             </div>
             <!-- Input item -->
-            <div class="col-lg-6">
-                <label class="form-label"><?php _e('工单类型', 'ripro');?></label>
-                <select name="type" class="form-select">
+            <div class="lg:col-span-2 col-span-1 col-start-1 pb-2">
+                <label class="pb-2 block"><?php _e('工单类型', 'ripro');?></label>
+                <select name="type" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark">
                 	<?php $option = [1,2,3,4];
                 	foreach ($option as $value) {
                 		echo '<option value="'.$value.'">'.Capalot_Ticket::get_type($value).'</option>';
@@ -38,20 +38,20 @@ $is_delete = get_response_param('delete',0,'get');
 				</select>
 
             </div>
-            <div class="col-12">
-                <label class="form-label"><?php _e('工单标题', 'ripro');?></label>
-                <input type="text" class="form-control" name="title" placeholder="" value="">
+            <div class="lg:col-span-4 col-span-1 col-start-1">
+                <label class="pb-2 block"><?php _e('工单标题', 'ripro');?></label>
+                <input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark" name="title" placeholder="" value="">
             </div>
             <!-- Textarea item -->
-            <div class="col-12">
-                <label class="form-label"><?php _e('描述', 'ripro');?></label>
-                <textarea class="form-control" rows="8" name="content"></textarea>
+            <div class="lg:col-span-4 col-span-1 col-start-1">
+                <label class="pb-2 block"><?php _e('描述', 'ripro');?></label>
+                <textarea class="bg-[#ededed] w-full h-24 px-2 rounded dark:bg-dark" rows="8" name="content"></textarea>
             </div>
 
             <!-- Save button -->
-            <div class="d-sm-flex justify-content-end mt-3">
+            <div class="flex lg:col-start-4 justify-end text-white">
                 <input type="hidden" name="action" value="zb_user_save_ticket">
-                <button type="submit" id="save-ticket" class="btn btn-dark mb-0"><?php _e('提交工单', 'ripro');?></button>
+                <button type="submit" id="save-ticket" class="bg-black py-1 px-2 rounded"><?php _e('提交工单', 'ripro');?></button>
             </div>
         </form>
 	</div>
@@ -60,10 +60,10 @@ $is_delete = get_response_param('delete',0,'get');
 
 <?php elseif ($page_action == 'view') : ?>
 <!-- 查看工单详情 -->
-<div class="card">
-	<div class="card-header mb-2">
-		<h5 class="fw-bold mb-0 d-flex align-content-center"><?php _e('工单详情', 'ripro');?>
-			<a href="<?php echo $list_link;?>" class="badge bg-dark btn-dark bg-opacity-75 ms-2"><?php _e('返回工单列表', 'ripro');?></a>
+<div class="mb-4 bg-white dark:bg-dark-card p-4 mx-2 rounded">
+	<div class="mb-2">
+		<h5 class="font-bold mb-4"><?php _e('工单详情', 'ripro');?>
+			<a href="<?php echo $list_link;?>" class="p-1 rounded bg-dark text-sm text-white bg-opacity-75 ms-2"><?php _e('返回工单列表', 'ripro');?></a>
 		</h5>
 		<hr>
 	</div>
@@ -72,7 +72,6 @@ $is_delete = get_response_param('delete',0,'get');
 
 		$data = Capalot_Ticket::get($view_id);
 
-        var_dump($data);
 		if (empty($data)) : ?>
 			<p class="p-4 text-center fs-4 text-muted"><?php _e('获取工单信息失败', 'ripro');?></p>
 		<?php else : ?>
@@ -93,16 +92,16 @@ $is_delete = get_response_param('delete',0,'get');
 				);
 			}?>
 			<div class="mb-3">
-	    		<div class="mb-3 small text-muted d-flex align-items-center flex-wrap">
-                	<span class="avatar avatar-xs">
-						<img class="avatar-img rounded-circle" src="<?php echo get_avatar_url($data->creator_id); ?>">
+	    		<div class="mb-3 text-muted text-[#9497a4] flex items-center ">
+                	<span class=" w-12 h-12 mr-2">
+						<img class="rounded-full" src="<?php echo get_avatar_url($data->creator_id); ?>">
 					</span>
                     <span class="ms-1"><?php echo $current_user->display_name;?> <?php echo wp_date('Y-m-d H:i',$data->create_time); ?> 提交</span>
                     <span class="ms-2">【<?php echo Capalot_Ticket::get_type($data->type); ?>】</span>
                     <span class="ms-2">状态：(<?php echo Capalot_Ticket::get_status($data->status); ?>)</span>
                 </div>
-	    		<h5 class="fw-bold mb-2"><i class="fas fa-question-circle me-1"></i><?php echo esc_html($data->title); ?></h5>
-                <div class="p-2 p-lg-3 bg-info bg-opacity-25 rounded-2">
+	    		<h5 class="font-bold mb-2"><i class="fas fa-question-circle me-1"></i><?php echo esc_html($data->title); ?></h5>
+                <div class="p-2 lg:p-3 bg-info bg-opacity-25 rounded-2">
                 	<?php echo $data->content;?>
                 	<?php if (!empty($data->file)) : ?>
                     <div class="mt-2"><a class="btn-link text-muted" href="<?php echo esc_url($data->file);?>" onclick="event.preventDefault(); document.getElementById('flieImage').src=this.href"><?php _e('查看附件', 'ripro');?></a><img class="border border-white border-3 shadow" id="flieImage" src=""></div>
@@ -113,21 +112,21 @@ $is_delete = get_response_param('delete',0,'get');
 
 	    	<?php if (!empty($data->reply_content)) : ?>
 	    	<hr>
-	    	<div class="mb-3">
-                <div class="mb-3 small text-muted d-flex align-items-center flex-wrap">
-                	<span class="avatar avatar-xs">
-						<img class="avatar-img rounded-circle" src="<?php echo get_avatar_url($data->assignee_id); ?>">
+	    	<div class="mb-3 my-4">
+                <div class="mb-3 small text-muted flex items-center text-[#9497a4]">
+                	<span class="w-12 h-12 mr-2">
+						<img class="rounded-full" src="<?php echo get_avatar_url($data->assignee_id); ?>">
 					</span>
                     <span class="ms-1"><?php echo get_userdata($data->assignee_id)->display_name;?> <?php echo wp_date('Y-m-d H:i',$data->reply_time); ?> <?php _e('工单回复内容：', 'ripro');?></span>
                 </div>
-                <div class="p-2 p-lg-3 bg-success bg-opacity-25 rounded-2">
+                <div class="p-2 lg:p-3 bg-success bg-opacity-25 rounded-2">
                 	<?php echo $data->reply_content;?>
                 </div>
 			</div>
 	    	<?php endif;?>
 	    	
-	    	<div class="d-sm-flex justify-content-end mt-3">
-                <a href="<?php echo esc_url(add_query_arg(array('action' => 'view','id' => $data->id,'delete'=>1),$ticket_link));?>" class="delete-ticket btn btn-danger mb-0"><?php _e('删除工单', 'ripro');?></a>
+	    	<div class="flex justify-end  mt-3">
+                <a href="<?php echo esc_url(add_query_arg(array('action' => 'view','id' => $data->id,'delete'=>1),$ticket_link));?>" class="bg-[#d6293e] text-white px-2 py-1 rounded"><?php _e('删除工单', 'ripro');?></a>
             </div>
 	    	
 		<?php endif; ?>
@@ -141,8 +140,8 @@ $is_delete = get_response_param('delete',0,'get');
 <!-- 工单列表 -->
 <div class="mb-4 bg-white dark:bg-dark-card p-4 mx-2 rounded">
 	<div class="mb-4">
-		<h5 class="font-bold  d-flex align-content-center"><?php _e('工单列表', 'ripro');?>
-			<a href="<?php echo esc_url($new_link);?>" class="badge bg-dark btn-dark bg-opacity-75 ms-2"><?php _e('新建工单', 'ripro');?></a>
+		<h5 class="font-bold"><?php _e('工单列表', 'ripro');?>
+			<a href="<?php echo esc_url($new_link);?>" class="p-1 rounded text-white bg-dark text-sm bg-opacity-75 ms-2"><?php _e('新建工单', 'ripro');?></a>
 		</h5>
 	</div>
 	<div class="card-body">
@@ -157,7 +156,7 @@ $is_delete = get_response_param('delete',0,'get');
         ,ARRAY_A);
 
         ?>
-        <div class="row row-cols-2 row-cols-md-4 g-2 g-md-4 mb-4">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
             <?php 
             $item = [0,1,2,3];
             $color_key = 0;
@@ -172,22 +171,22 @@ $is_delete = get_response_param('delete',0,'get');
                 $color_key++;
             ?>
             <div class="col">
-                <div class="card text-center bg-<?php echo capalot_get_color_class($color_key);?> bg-opacity-25 p-4 h-100 rounded-2">
-                    <h4 class="fw-bold text-<?php echo capalot_get_color_class($color_key);?>"><?php echo $target_count;?></h4>
-                    <span class="h6 mb-0 text-muted"><?php echo Capalot_Ticket::get_status($key);?></span>
+                <div class="card text-center bg-<?php echo capalot_get_color_class($color_key);?> bg-opacity-25 p-4 h-full rounded">
+                    <h4 class="font-bold text-<?php echo capalot_get_color_class($color_key);?>"><?php echo $target_count;?></h4>
+                    <span class="h6 text-muted"><?php echo Capalot_Ticket::get_status($key);?></span>
                 </div>
             </div>
             <?php endforeach;?>
         </div>
 
-        <div class="card-header mb-2"><?php _e('最近20条','ripro' );?></div>
+        <div class=" mb-2"><?php _e('最近20条','ripro' );?></div>
 
         <?php 
 		if (empty($data)) {
 			echo '<p class="p-4 text-center">' . __('暂无记录','ripro' ) . '</p>';
 		}else{
 
-			echo '<div class="list-group">';
+			echo '<div class="bg-[#ededed] rounded border dark:bg-dark dark:border-transparent border-[#dadada]">';
 			foreach ($data as $item) : ?>
 
 				<?php switch ($item->status) {
@@ -196,18 +195,18 @@ $is_delete = get_response_param('delete',0,'get');
 					default: $color = 'danger'; break;
 				}?>
 
-				<a href="<?php echo esc_url(add_query_arg(array('action' => 'view','id' => $item->id),$ticket_link));?>" class="ticket-item list-group-item list-group-item-light">
-					<div class="d-flex align-items-sm-center">
-						<div class="avatar flex-shrink-0 me-2">
-							<img class="avatar-img rounded-pill" src="<?php echo get_avatar_url($item->creator_id); ?>">
+				<a href="<?php echo esc_url(add_query_arg(array('action' => 'view','id' => $item->id),$ticket_link));?>" class="px-4 my-2 block ">
+					<div class="flex items-center">
+						<div class="w-12 h-12">
+							<img class="avatar-img rounded-full" src="<?php echo get_avatar_url($item->creator_id); ?>">
 						</div>
-						<div class="w-100">
-						    <div class="d-block d-md-flex w-100 justify-content-between">
-								<h6 class="fw-bold mb-1"><?php echo esc_html($item->title);?></h6>
+						<div class="w-full pl-2">
+						    <div class="flex w-full justify-between ">
+								<h6 class="font-bold mb-1"><?php echo esc_html($item->title);?></h6>
 								<small class="text-muted"><?php echo wp_date('Y-m-d H:i',$item->create_time);?></small>
 							</div>
-						    <span class="badge bg-opacity-10 text-<?php echo esc_attr( $color );?> bg-<?php echo esc_attr( $color );?>"><?php echo Capalot_Ticket::get_status($item->status);?></span>
-						    <span class="badge text-muted"><?php echo Capalot_Ticket::get_type($item->type);?></span>
+						    <span class="p-1 rounded text-sm bg-opacity-10 text-<?php echo esc_attr( $color );?> bg-<?php echo esc_attr( $color );?>"><?php echo Capalot_Ticket::get_status($item->status);?></span>
+						    <span class="badge text-sm"><?php echo Capalot_Ticket::get_type($item->type);?></span>
 				    	</div>
 				    </div>
 				</a>

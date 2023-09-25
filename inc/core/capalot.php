@@ -326,7 +326,6 @@ class Capalot_Cdk
         break;
     }
   }
-
   /**
    * 根据code获取CDK
    */
@@ -398,6 +397,9 @@ class Capalot_Code
 
   public static function enstr($url)
   {
+    echo $url;
+  }
+  public static function encid($url){
     echo $url;
   }
 }
@@ -574,7 +576,7 @@ class Capalot_Ticket
   /**
    * 工单更新
    */
-  public static function update($update,$where)
+  public static function update($update, $where)
   {
     global $wpdb;
     $table_name = $wpdb->prefix . 'capalot_ticket';

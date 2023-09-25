@@ -337,6 +337,13 @@ if (!function_exists('get_current_url')) {
   }
 }
 
+/**
+ * 获取默认头像
+ */
+function get_default_avatar_src() {
+  return get_template_directory_uri() . '/assets/img/avatar.png';
+}
+
 //是否开启图片验证码功能
 function is_site_img_captcha() {
   return !empty(_capalot('is_site_img_captcha', 1));
