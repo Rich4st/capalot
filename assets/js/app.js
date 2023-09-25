@@ -237,8 +237,8 @@ let ca = {
         complete: ({ responseJSON }) => {
           const { status, msg } = responseJSON;
           status === 1
-            ? ca.popup({ title: msg, icon: 'success' })
-            : ca.popup({ title: msg, icon: 'error' })
+            ? ca.notice({ title: msg, icon: 'success' })
+            : ca.notice({ title: msg, icon: 'error' })
         }
       })
 
