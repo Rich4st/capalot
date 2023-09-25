@@ -998,11 +998,12 @@ class Capalot_Ajax
 
     if ($ajaxposts->have_posts()) {
       while ($ajaxposts->have_posts()) : $ajaxposts->the_post();
-        $post_info = [
-          'title' => get_the_title(),
-        ];
+        $item_config = get_posts_style_config();
 
-        $response .= get_load_more_template($post_info);
+        ob_start();
+        get_template_part('template-parts/loop/item', '', $item_config);
+
+        $response .= ob_get_clean();
       endwhile;
     } else {
       $response = '';
