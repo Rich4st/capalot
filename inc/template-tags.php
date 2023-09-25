@@ -107,6 +107,7 @@ function Capalot_Pagination($args = array())
   }
 }
 
+// 无限滚动加载按钮
 function infinite_scroll_button($type = 'click')
 {
   return '<div class="btn__wrapper text-center py-6">
@@ -114,39 +115,6 @@ function infinite_scroll_button($type = 'click')
   <p id="no-more-button" style="display: none;" class="text-[#b9b2b2] text-[0.9rem]">没有更多了</p>
 </div>';
 }
-
-function capalot_load_more()
-{
-  $ajaxposts = new WP_Query([
-    'ignore_sticky_posts' => false,
-    'post_status' => 'publish',
-    'paged' => $_POST['paged'],
-  ]);
-
-  $response = '';
-  $max_pages = $ajaxposts->max_num_pages;
-
-  if ($ajaxposts->have_posts()) {
-    while ($ajaxposts->have_posts()) : $ajaxposts->the_post();
-      $post_info = [
-        'title' => get_the_title(),
-      ];
-
-      $response .= get_load_more_template($post_info);
-    endwhile;
-  } else {
-    $response = '';
-  }
-
-  $result = [
-    'max' => $max_pages,
-    'html' => $response,
-  ];
-
-  echo json_encode($result);
-  exit;
-}
-add_action('wp_ajax_capalot_load_more', 'capalot_load_more');
 
 /**
  * 链接是否新窗口打开
