@@ -23,28 +23,6 @@ $site_color = get_site_default_color_style();
     <span class="action-btn cursor-pointer toggle-search hover:opacity-70" id="search_on" rel="nofollow noopener noreferrer" title="<?php _e('站内搜索', 'ripro'); ?>"><i class="fas fa-search"></i></span>
 <?php endif; ?>
 
-<script>
-    // 显示/隐藏搜索框
-    let search_on = document.getElementById('search_on');
-    let search_form = document.getElementById('search_form');
-    let hea_bg = document.getElementById('hea_bg');
-
-    search_on.addEventListener('click', function(){
-        if(search_form.style.display == 'none' || !search_form.style.display){
-            search_form.style.display = 'block';
-        }else{
-            search_form.style.display = 'none';
-        }
-    });
-    document.addEventListener('click', function(){
-        search_form.style.display = 'none';
-    });
-    hea_bg.addEventListener('click', function(){
-        var e = event || window.event;
-        e.stopPropagation();
-    });
-
-</script>
 
 <?php if (is_site_notify()) : ?>
     <span class="action-btn cursor-pointer toggle-notify" rel="nofollow noopener noreferrer" title="<?php _e('网站公告', 'ripro'); ?>"><i class="fa fa-bell"></i></span>
@@ -54,7 +32,7 @@ $site_color = get_site_default_color_style();
 <?php if (is_user_logged_in()) : ?>
 
     <div class="group relative ">
-        <a class="flex" href="<?php echo get_uc_menu_link(); ?>" rel="nofollow noopener noreferrer">
+        <a class="flex" href="<?php echo get_uc_menu_link(); ?>" rel="nofollow noopener noreferrer"  id="adminT">
             <div class="flex">
                 <img class="avatar-img rounded-full" src="<?php echo get_avatar_url($current_user->ID); ?>" width="30" alt="avatar">
                 <span class="ms-2 hidden md:block"><?php echo $current_user->display_name; ?></span>
@@ -65,7 +43,7 @@ $site_color = get_site_default_color_style();
         </a>
 
         <?php if (is_site_shop()) : ?>
-            <div class="dark:bg-dark text-[#595d69] group-hover:block hidden absolute top-8 rounded-lg  shadow-lg right-0  text-sm w-[400px]  z-[9999] bg-white">
+            <div class="dark:bg-dark text-[#595d69] group-hover:block hidden absolute top-8 rounded-lg  shadow-lg right-0  text-sm w-[400px]  z-[9999] bg-white " id="adminC">
                 <div class="flex justify-between bg-[#dfeeff] dark:bg-dark-card">
                     <div class="hover-info p-2">
                         <div class="flex items-center ">
@@ -152,3 +130,32 @@ $site_color = get_site_default_color_style();
     <?php endif; ?>
 
 <?php endif; ?>
+
+
+
+<script>
+    // 显示/隐藏搜索框
+    let search_on = document.getElementById('search_on');
+    let search_form = document.getElementById('search_form');
+    let hea_bg = document.getElementById('hea_bg');
+    let adminT = document.getElementById('adminT');
+    let adminC = document.getElementById('adminC');
+    search_on.addEventListener('click', function(){
+        if(search_form.style.display == 'none' || !search_form.style.display){
+            search_form.style.display = 'block';
+        }else{
+            search_form.style.display = 'none';
+        }
+    });
+    document.addEventListener('click', function(){
+        search_form.style.display = 'none';
+    });
+    hea_bg.addEventListener('click', function(){
+        var e = event || window.event;
+        e.stopPropagation();
+    });
+   
+    adminT.addEventListener('click', function(){
+        adminC.style.display = 'none';
+    });
+</script>

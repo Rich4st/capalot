@@ -40,7 +40,7 @@ if (!empty($capalot_downurl_new) && is_array($capalot_downurl_new)) {
               <a target="_blank" href="<?php echo esc_attr($item['url']); ?>" class="btn btn-lg btn-success rounded-2 text-xl text-center rounded-md py-3 px-2 bg-teal-500 text-white block hover:bg-teal-600" rel="nofollow noopener noreferrer"><i class="fas fa-cloud-download-alt me-1"></i><?php echo $item['name']; ?></a>
               <?php if (!empty($item['pwd'])) : ?>
                 <div class=" py-2 text-center cursor-pointer">
-                <span class="  text-gray-400">密码：</span><span id="copy_span" class="  text-muted user-select-all copy-pwd     text-gray-400" pwd="<?php echo esc_attr($item['pwd']); ?>"><?php _e('', 'ripro'); ?><?php echo esc_attr($item['pwd']); ?><i class="far fa-copy ms-1"></i></span>
+                  <span class="  text-gray-400">密码：</span><span id="copy_span" class="  text-muted user-select-all copy-pwd copy_p    text-gray-400" pwd="<?php echo esc_attr($item['pwd']); ?>"><?php _e('', 'ripro'); ?><?php echo esc_attr($item['pwd']); ?><i class="far fa-copy ms-1"></i></span>
                 </div>
               <?php endif; ?>
             <?php endforeach ?>
@@ -49,22 +49,25 @@ if (!empty($capalot_downurl_new) && is_array($capalot_downurl_new)) {
       </div>
       <script>
         // 复制密码
-        let copy_span = document.getElementById('copy_span');
         let copy_t = document.getElementById('copy_t');
-        copy_span.addEventListener('click', () => {
-          navigator.clipboard
-          .writeText(copy_span.innerText)
-          .then(()=>{
-            copy_t.style.display = 'block';
-            setTimeout(function(){
-              copy_t.style.display = 'none';
-            },2000);
-            
-          })
-          .catch(()=>{
-            alert('复制失败');
-          })
-        });
+        let copy_p = document.getElementsByClassName('copy_p');
+        for (let i = 0; i <= copy_p.length; i++) {
+          copy_p[i].onclick = function() {
+            navigator.clipboard
+              .writeText(copy_p[i].innerText)
+              .then(() => {
+                console.log('复制成功：'+copy_p[i].innerText);
+                copy_t.style.display = 'block';
+                setTimeout(function() {
+                  copy_t.style.display = 'none';
+                }, 1500);
+
+              })
+              .catch(() => {
+                alert('复制失败');
+              })
+          }
+        }
       </script>
 
     <?php else : ?>
