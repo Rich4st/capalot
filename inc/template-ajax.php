@@ -48,6 +48,9 @@ class Capalot_Ajax
     $this->add_action('get_pay_select_html'); //获取支付方式
     $this->add_action('get_pay_action'); //下单
     $this->add_action('user_login', 0); //登录
+    $this->add_action('update_avatar', 1); //上传头像
+    $this->add_action('update_profile', 1); //保存个人信息
+    $this->add_action('update_new_email', 1); //保存个人信息
     $this->add_action('user_register', 0); //注册
   }
 
@@ -280,6 +283,140 @@ class Capalot_Ajax
       'back_url' => get_uc_menu_link('profile'),
     ));
   }
+      //上传头像
+      public function update_avatar(){
+        $this->valid_nonce_ajax(); #安全验证
+        $user_id = get_current_user_id();
+        $file = !empty($_FILES['file']) ? $_FILES['file'] : null;
+
+        if (empty($file)) {
+            wp_send_json(array(
+                'status' => 0,
+                'msg'    => __('请选择头像上传', 'ripro'),
+            ));
+        }
+
+
+        //图片上传 没有则不处理
+        if ($file["size"] > 500000) {
+            wp_send_json(array(
+                'status' => 0,
+                'msg'    => __('图片大小超出500KB限制', 'ripro'),
+            ));
+        }
+
+        if (!in_array($file["type"], ['image/jpg', 'image/gif', 'image/png', 'image/jpeg'])) {
+            wp_send_json(array(
+                'status' => 0,
+                'msg'    => __('仅支持上传图片', 'ripro'),
+            ));
+        }
+
+        // 检测文件是否为真实的图片
+        $check = getimagesize($file["tmp_name"]);
+        if ($check === false) {
+            wp_send_json(array(
+                'status' => 0,
+                'msg'    => __('图片格式错误', 'ripro'),
+            ));
+        }
+
+        
+        // 上传文件
+        $allowedExtensions = array("jpg", "jpeg", "png", "gif");
+        $extension = pathinfo($file["name"], PATHINFO_EXTENSION);
+
+        // 检查上传文件的扩展名是否在允许的范围内
+        if (!in_array(strtolower($extension), $allowedExtensions)) {
+            wp_send_json(array(
+                'status' => 0,
+                'msg'    => __('只允许上传图片文件', 'ripro'),
+            ));
+        }
+
+        // 根据上传文件的类型创建相应的图像
+        switch (strtolower($extension)) {
+            case "jpg":
+            case "jpeg":
+                $source = imagecreatefromjpeg($file["tmp_name"]);
+                break;
+            case "png":
+                $source = imagecreatefrompng($file["tmp_name"]);
+                break;
+            case "gif":
+                $source = imagecreatefromgif($file["tmp_name"]);
+                break;
+            default:
+                wp_send_json(array(
+                    'status' => 0,
+                    'msg'    => __('未知的文件类型', 'ripro'),
+                ));
+        }
+
+
+        // 缩放和裁剪图像到200x200大小
+        $newWidth = 100;
+        $newHeight = 100;
+        $canvas = imagecreatetruecolor($newWidth, $newHeight);
+        imagecopyresampled($canvas, $source, 0, 0, 0, 0, $newWidth, $newHeight, imagesx($source), imagesy($source));
+
+        // 将裁剪后的图像保存到字节数组
+        ob_start();
+        switch (strtolower($extension)) {
+            case "jpg":
+            case "jpeg":
+                imagejpeg($canvas, null, 90);
+                break;
+            case "png":
+                imagepng($canvas, null, 9);
+                break;
+            case "gif":
+                imagegif($canvas, null);
+                break;
+        }
+        $imageData = ob_get_contents();
+        ob_end_clean();
+
+
+        // 移动上传的文件到指定目录并重命名
+        $newFilename = 'avatar-' . Capalot_Code::encid($user_id) . '.' . $extension;
+
+
+        add_filter( 'upload_dir', function($dirs){
+            $dirs['baseurl'] = WP_CONTENT_URL . '/uploads';
+            $dirs['basedir'] = WP_CONTENT_DIR . '/uploads';
+            $dirs['path'] = $dirs['basedir'] . $dirs['subdir'];
+            $dirs['url'] = $dirs['baseurl'] . $dirs['subdir'];
+            return $dirs;
+        } );
+
+        $wp_upload_dir = wp_upload_dir();
+        
+        $file_path = $wp_upload_dir['basedir'] . '/1234/01/' . $newFilename;
+        // 如果文件存在，则删除它
+        if (file_exists($file_path)) {
+            @unlink($file_path);
+        }
+
+        $upload = wp_upload_bits($newFilename, null, $imageData, '1234/01');
+
+        if ($upload['error']) {
+            wp_send_json(array(
+                'status' => 0,
+                'msg'    => __('上传失败请重试', 'ripro'),
+            ));
+        }
+
+        update_user_meta($user_id, 'user_custom_avatar', $upload['url']);
+        update_user_meta($user_id, 'user_avatar_type', 'custom');
+
+        wp_send_json(array(
+            'status' => 1,
+            'msg'    => __('头像上传成功', 'ripro'),
+        ));
+
+    }
+
 
   // 获取支付方式HTML
   public function get_pay_select_html()
@@ -396,6 +533,65 @@ class Capalot_Ajax
 
       $post_pay_data = get_post_pay_data($post_id);
       $order_data['order_info']['vip_rate'] = $post_pay_data['vip_rate'];
+    } elseif ($order_type == 2) {
+      // 充值...
+      $recharge_amount = absint($order_info_key);
+      $_minnum = absint(_capalot('site_coin_pay_minnum'));
+      $_maxnum = absint(_capalot('site_coin_pay_maxnum'));
+
+      if (empty($recharge_amount)) {
+        wp_send_json(array(
+          'status' => 0,
+          'msg'    => __('充值数量不能为0', 'ripro'),
+        ));
+      }
+
+      if ($recharge_amount < $_minnum) {
+        wp_send_json(array(
+          'status' => 0,
+          'msg'    => __('最低充值限制', 'ripro') . $_minnum . get_site_coin_name(),
+        ));
+      }
+
+      if ($recharge_amount > $_maxnum) {
+        wp_send_json(array(
+          'status' => 0,
+          'msg'    => __('最高充值限制', 'ripro') . $_minnum . get_site_coin_name(),
+        ));
+      }
+
+      $order_data['post_id'] = 0;
+      $order_data['order_price'] = site_convert_amount($recharge_amount, 'rmb');
+      $order_data['pay_price'] = site_convert_amount($recharge_amount, 'rmb');
+      $order_data['callback_url'] = esc_url(get_uc_menu_link('coin'));
+    } elseif ($order_type == 3) {
+      // 购买VIP...
+      $buy_options = get_site_vip_buy_options();
+      $day = absint($order_info_key);
+      if (empty($buy_options) || empty($buy_options[$day]['coin_price'])) {
+        wp_send_json(array(
+          'status' => 0,
+          'msg'    => __('VIP套餐不存在', 'ripro'),
+        ));
+      }
+
+      $uc_vip_info = get_user_vip_data($user_id);
+      if ($uc_vip_info['type'] == 'boosvip') {
+        wp_send_json(array(
+          'status' => 0,
+          'msg'    => __('您已获得最高特权，无需重复开通', 'ripro'),
+        ));
+      }
+
+      $vip_price = $buy_options[$day]['coin_price'];
+      $order_data['post_id'] = 0;
+      $order_data['order_price'] = site_convert_amount($vip_price, 'rmb');
+      $order_data['pay_price'] = site_convert_amount($vip_price, 'rmb');
+      $order_data['callback_url'] = esc_url(get_uc_menu_link('vip'));
+
+      //VIP订单其他信息 vip_type 会员类型 vip boosvip
+      $order_data['order_info']['vip_type'] = $buy_options[$day]['type'];
+      $order_data['order_info']['vip_day'] = $buy_options[$day]['day_num'];
     }
 
     // 序列化订单信息

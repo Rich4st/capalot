@@ -1,5 +1,5 @@
 let currentPage = 1;
-
+const body = jQuery("body");
 let ca = {
 
   init: function () {
@@ -90,6 +90,58 @@ let ca = {
     })
   },
 
+  // 登录注册操作
+  account_action: function () {
+    const login_btn = document.querySelector('#click-submit')
+    const form = $('#account-from');
+
+    login_btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      console.log(123);
+      const payload = form.serializeArray();
+      let o = decodeURIComponent(location.href.split("redirect_to=")[1] || ""),
+        n = {
+          nonce: capalot.ajax_nonce
+        };
+      payload.forEach(({ name: name, value: v }) => {
+        n[name] = v
+      });
+
+      ca.ajax({
+        data: n,
+        beforeSend: () => {
+          login_btn.classList.add('loading');
+        },
+        success: ({
+          status,
+          msg,
+          back_url
+        }) => {
+          ca.popup({
+            title: msg,
+            icon: status == 1 ? 'success' : 'error',
+            showCloseButton: false,
+          });
+
+          1 == status && setTimeout(() => {
+            (o = window.frames.length !== parent.frames.length ? "" : o)
+              ? window.location.href = o
+              : back_url ? window.location.href = back_url : window.location.reload()
+          }, 2e3)
+        },
+        complete: () => {
+          login_btn.classList.remove('loading');
+        }
+      })
+    })
+  },
+
+  notice: function (e = "", t = 220, n = 2e3) {
+    let o = jQuery(".ca-notice");
+    !e && o.length
+      ? o.clearQueue().stop().hide()
+      : (!o.length && e && (o = jQuery(`<div class="ca-notice" style="min-width: ${t}px"></div>`), body.append(o)), o.clearQueue().stop().hide().html(e).fadeIn().delay(n).fadeOut())
+  },
   // 对话框
   popup: function ({
     content,

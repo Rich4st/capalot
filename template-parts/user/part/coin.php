@@ -37,7 +37,7 @@ global $current_user;
 		<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4 ">
 			<?php foreach ($site_mycoin_pay_arr as $num) : ?>
 
-				<div class="border py-2 rounded dark:border-0 hover:border-[#ffc107] dark:hover:border dark:bg-[#0c0d0e] cursor-pointer">
+				<div class="border py-2 rounded dark:border-transparent dark:hover:border-[#ffc107] focus:border-[#ffc107] hover:border-[#ffc107] dark:bg-[#0c0d0e] cursor-pointer">
 					<div class="coin-pay-card text-center" data-num="<?php echo absint($num); ?>">
 						<h5 class="mb-1 text-[#ffc107]"><?php echo absint($num) . get_site_coin_name(); ?></h6>
 							<p class="text-muted">￥<?php echo site_convert_amount(absint($num), 'rmb'); ?></p>
@@ -86,7 +86,8 @@ global $current_user;
 				</div>
 				<div class="flex flex-row space-x-2 mb-3">
 					<input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark" name="captcha_code" placeholder="验证码">
-					<img id="captcha-img" class="rounded-2 w-full h-8 bg-[#cacaca]  text-white mx-2 rounded" role="button" data-src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/captcha.png'); ?>" title="<?php _e('点击刷新验证码', 'ripro'); ?>" />
+					<!-- <img id="captcha-img" class="rounded-2 w-full h-8 bg-[#cacaca]  text-white mx-2 rounded" role="button" data-src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/captcha.png'); ?>" title="<?php _e('点击刷新验证码', 'ripro'); ?>" /> -->
+					<img id="captcha-img" class="rounded-2 w-full h-8 bg-[#cacaca]  text-white mx-2 rounded" role="button" src="<?php echo get_template_directory_uri() ?>/assets/img/captcha.png" title="<?php _e('点击刷新验证码', 'ripro'); ?>" />
 				</div>
 				<div class="flex flex-row justify-center space-x-2 mb-3 mt-3 text-center text-sm">
 					<input type="hidden" name="action" value="zb_vip_cdk_action">

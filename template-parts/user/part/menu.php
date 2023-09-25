@@ -40,7 +40,7 @@ $uc_vip_info = get_user_vip_data($current_user->ID);
 	$uc_menus = get_uc_menus();
 	$menu_items = '<ul class="uc-menu-warp space-y-4">';
 	foreach ($uc_menus as $key => $item) {
-	  $class = ($uc_action === $key) ? 'menu-item current-menu-item' : 'menu-item';
+	  $class = ($uc_action === $key) ? 'menu-item current-menu-item text-red-500' : 'menu-item';
 	  $menu_items .= sprintf(
 	    '<li class="%s"><a href="%s"><i class="%s me-1"></i>%s</a></li>',
 	    esc_attr($class),

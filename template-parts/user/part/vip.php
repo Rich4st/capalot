@@ -22,12 +22,12 @@ $price_shape = get_template_directory_uri().'/assets/img/price_shape.png';
 	<div class="mb-3">
 		<h5 class="font-bold"><?php _e('会员中心', 'ripro'); ?></h5>
 	</div>
-
+	
 	<div class="flex justify-between items-start  mb-4">
 		<div class="flex items-center justify-center mb-3">
 			<div class="me-2">
 				<div class=" mb-2">
-					<img class="avatar-img rounded-full border border-white  shadow" src="<?php echo get_avatar_url($current_user->ID); ?>" alt="">
+					<img class="avatar-img rounded-full border border-white  shadow" src="<?php echo get_avatar_url($current_user->ID); ?>" alt="user">
 				</div>
 			</div>
 			<div class="ms-2 ">
@@ -37,6 +37,7 @@ $price_shape = get_template_directory_uri().'/assets/img/price_shape.png';
 				<div class="mb-1">
 					<span><?php echo $current_user->user_login; ?></span>
 					<?php
+					
 					if ($uc_vip_info['type'] != 'no') {
 						printf('<span>%s%s</span>', $uc_vip_info['end_date'],__('到期', 'ripro') );
 					} else {
@@ -46,7 +47,7 @@ $price_shape = get_template_directory_uri().'/assets/img/price_shape.png';
 				</div>
 			</div>
 		</div>
-
+		
 		<div class="row row-cols-2 row-cols-md-4 g-2 g-md-4">
 			<?php
 			$item = [
