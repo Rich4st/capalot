@@ -54,6 +54,8 @@ class Capalot_Ajax
     $this->add_action('update_avatar', 1); //上传头像
     $this->add_action('get_captcha_img'); //验证码
     $this->add_action('user_register', 0); //注册
+    $this->add_action('user_save_ticket', 1); //保存工单
+    $this->add_action('user_qiandao', 1); //签到
   }
 
   /**
@@ -549,6 +551,114 @@ class Capalot_Ajax
     ));
   }
 
+
+  //提交工单
+  public function user_save_ticket()
+  {
+    $this->valid_nonce_ajax(); #安全验证
+    $user_id  = get_current_user_id();
+    $file_uri = '';
+    // $file     = !empty($_FILES['file']) ? $_FILES['file'] : null;
+    $file     = null;
+    $type     = absint(get_response_param('type'));
+    $title    = sanitize_text_field(trim(get_response_param('title')));
+    $content  = wp_kses_post(get_response_param('content'));
+
+
+    if (!is_site_tickets()) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('网站工单功能暂未开启', 'ripro'),
+      ));
+    }
+
+    if (empty($title)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('请输入工单标题', 'ripro'),
+      ));
+    }
+
+
+    if (empty($title)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('请输入工单标题', 'ripro'),
+      ));
+    }
+
+    if (empty($content)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('请输入工单内容', 'ripro'),
+      ));
+    }
+
+    //图片上传 没有则不处理
+    if (!empty($file)) {
+
+      if ($file["size"] > 1000000) {
+        wp_send_json(array(
+          'status' => 0,
+          'msg'    => __('图片大小超出1MB限制', 'ripro'),
+        ));
+      }
+
+      if (!in_array($file["type"], ['image/jpg', 'image/gif', 'image/png', 'image/jpeg'])) {
+        wp_send_json(array(
+          'status' => 0,
+          'msg'    => __('仅支持上传图片附件', 'ripro'),
+        ));
+      }
+
+      // 检测文件是否为真实的图片
+      $check = getimagesize($file["tmp_name"]);
+      if ($check === false) {
+        wp_send_json(array(
+          'status' => 0,
+          'msg'    => __('图片格式错误', 'ripro'),
+        ));
+      }
+
+      // 获取默认上传目录路径
+      $upload_dir = wp_upload_dir();
+      $ticket_dir = $upload_dir['basedir'] . '/ticket-file'; // 新建ticket目录
+      $ticket_uri = $upload_dir['baseurl'] . '/ticket-file'; // ticket目录的URL地址
+      if (!file_exists($ticket_dir)) {
+        mkdir($ticket_dir, 0755, true);
+      }
+
+      // 上传文件
+      $date = wp_date('Ymd_His'); // get the current date and time in "YYYYMMDDHHIISS" format
+      $new_file = $date . '_' . basename($file["name"]); // combine the date and original filename
+      $target_file = $ticket_dir . '/' . $new_file;
+      if (move_uploaded_file($file["tmp_name"], $target_file)) {
+        $file_uri = str_replace($ticket_dir, $ticket_uri, $target_file);
+      }
+    }
+
+    $data = [
+      'type'        => $type,
+      'title'       => $title,
+      'content'     => $content,
+      'file'        => $file_uri,
+      'creator_id'  => $user_id,
+      'create_time' => time(),
+      'status'      => 0,
+    ];
+
+    if (!Capalot_Ticket::add($data)) {
+      wp_send_json(array(
+        'status' => 1,
+        'msg'    => __('工单提交失败，请重试', 'ripro'),
+      ));
+    }
+
+    wp_send_json(array(
+      'status' => 1,
+      'msg'    => __('工单提交成功，客服会尽快处理', 'ripro'),
+    ));
+  }
 
   // 获取支付方式HTML
   public function get_pay_select_html()
