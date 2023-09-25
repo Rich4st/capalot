@@ -3,7 +3,7 @@
     <div class="grid place-items-center md:grid-cols-2 lg:grid-cols-4">
       <div class="mb-6">
         <h5 class="mb-2.5 font-bold uppercase text-neutral-800 dark:text-neutral-200">
-       LOGo
+          LOGo
         </h5>
 
         <ul class="mb-0 list-none">
@@ -22,7 +22,7 @@
         </ul>
       </div>
 
-   
+
       <div class="mb-6">
         <h5 class="mb-2.5 font-bold uppercase text-neutral-800 dark:text-neutral-200">
           快速导航
@@ -94,6 +94,51 @@
     <a class="text-neutral-800 dark:text-neutral-400" href="/">capalot</a>
   </div>
 </footer>
+
+
+
+<?php get_template_part('template-parts/footer/rollbar'); ?>
+
+
+
+
+
+<div class=" fixed top-0 left-0 right-0 bottom-0  bg-black/80 z-50 hidden" id="fixedB"></div>
+<?php get_template_part('template-parts/footer/off-canvas'); ?>
+
+<script>
+  // 移动端导航
+  let menuA = document.getElementById('menuA');
+  let fixedB = document.getElementById('fixedB');
+  let navBg = document.getElementById('navBg');
+  let closeNav = document.getElementById('closeNav');
+  menuA.addEventListener('click', function() {
+    if (fixedB.style.display == 'none' || !fixedB.style.display) {
+      fixedB.style.display = 'block';
+    } else {
+      fixedB.style.display = 'none';
+    }
+    $('#navBg').animate({
+      width: 'toggle'
+    }, 100);
+  });
+  fixedB.addEventListener('click', function() {
+    fixedB.style.display = 'none';
+    $('#navBg').animate({
+      width: 'toggle'
+    }, 100);
+  });
+  closeNav.addEventListener('click', function() {
+    fixedB.style.display = 'none';
+    $('#navBg').animate({
+      width: 'toggle'
+    }, 100);
+  });
+</script>
+
+
+
+
 
 <?php wp_footer(); ?>
 

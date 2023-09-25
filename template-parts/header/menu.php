@@ -55,8 +55,13 @@
 
 				<div class="flex items-center justify-center text-center space-x-4 ml-auto">
 					<?php get_template_part('template-parts/header/action-hover'); ?>
-					<div class="lg:hidden flex cursor-pointer"><i class="fas fa-bars"></i></div>
+					<div class="lg:hidden flex cursor-pointer" id="menuA"><i class="fas fa-bars"></i></div>
 				</div>
+
+				<!-- <div class="actions">
+					<?php get_template_part('template-parts/header/action-hover'); ?>
+					<div class="burger d-flex d-lg-none"><i class="fas fa-bars"></i></div>
+				</div> -->
 
 
 
@@ -67,3 +72,5 @@
 </header>
 
 <div class="header-gap"></div>
+
+
