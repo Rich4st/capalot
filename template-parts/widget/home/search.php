@@ -94,7 +94,7 @@ switch ($type) {
             <form method="get" action="<?php echo esc_url(home_url('/')); ?>">
               <div class=" flex flex-row   ">
                 <?php if (_capalot('is_site_pro_search', true)) : ?>
-                  <div class="search-select w-1/6 self-center">
+                  <div class="search-select w-2/6 lg:w-1/6  self-center">
                     <div class=" flex justify-center ">
                       <?php
                       wp_dropdown_categories(array(
@@ -106,13 +106,13 @@ switch ($type) {
                         'hierarchical'     => true,
                         'depth'     => intval(_capalot('pro_search_select_depth', 1)),
                         'id'     => 'cat-search-select',
-                        'class'     => 'form-select dark:bg-dark-card dark:text-gray-400 outline-none',
+                        'class'     => 'form-select dark:bg-dark-card dark:text-gray-400 outline-none w-full',
                       )); ?>
                     </div>
                   </div>
                 <?php endif; ?>
 
-                <div class="search-fields  w-5/6">
+                <div class="search-fields  w-4/6 lg:w-5/6">
                   <div class=" flex flex-row px-2">
                     <div class=" w-5/6"><input type="text" class=" text-lg py-2 px-2 w-full outline-none dark:bg-dark-card dark:text-gray-400" placeholder="<?php _e('输入关键词 回车...', 'ripro'); ?>" autocomplete="off" value="<?php echo esc_attr(get_search_query()) ?>" name="s" required="required"></div>
                     <div class=" w-1/6 self-center ">
