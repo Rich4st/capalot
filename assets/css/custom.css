@@ -1,0 +1,30 @@
+.fav-pagination{
+    padding:20px 0;
+}
+
+.fav-pagination > .page-numbers{
+    padding:0.6rem 1rem;
+    margin:0 4px;
+    background-color: #ededed;
+    color:#6b6985;
+    border-radius: 0.2rem;
+}
+
+.fav-pagination > .page-numbers:hover{
+    background-color: #1e1e20;
+    color: white;
+}
+
+.fav-pagination > .current {
+    background-color:#1e1e20;
+    color: white;
+    font-weight: bold;
+}
+
+:is(.dark .page-numbers) {
+    background-color: #252529;
+}
+
+:is(.dark .current){
+    background-color:#1e1e20;
+}
