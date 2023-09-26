@@ -32,35 +32,10 @@ if ($post_format && isset($format_icons[$post_format])) {
   $post_format_icon = false;
 }
 
-if ($args['type'] == 'grid-overlay') {
-  switch ($args['size']) {
-    case 'sm':
-      $card_size = 'h-44';
-      break;
-    case 'md':
-      $card_size = 'h-48 md:h-80';
-      break;
-    case 'lg':
-      $card_size = 'h-64 md:h-[23rem]';
-      break;
-  }
-} else {
-  switch ($args['size']) {
-    case 'sm':
-      $card_size = 'h-18';
-      break;
-    case 'md':
-      $card_size = 'h-48 md:h-80';
-      break;
-    case 'lg':
-      $card_size = 'h-64 md:h-[23rem]';
-      break;
-  }
-}
 ?>
 <!-- 文章展示页中文章布局 -->
 <?php if ($args['type'] == 'grid') : ?>
-  <li class="dark:bg-dark-card rounded-lg overflow-hidden list-none cursor-pointer shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]  md:h-96 h-64 transition-all duration-300 
+  <li class="dark:bg-dark-card rounded-lg overflow-hidden list-none cursor-pointer shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]   transition-all duration-300 
   hover:shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)]  ">
     <article class="post-item item-grid relative">
 
@@ -71,7 +46,7 @@ if ($args['type'] == 'grid-overlay') {
       </div>
 
       <div class="entry-media ratio  <?php echo esc_attr($args['media_class']); ?>">
-        <a target="<?php echo get_target_blank(); ?>" style="background-image: url(<?php echo capalot_get_thumbnail_url(); ?>);" class="block w-full md:h-72 h-40 bg-no-repeat   <?php echo esc_attr($args['media_size_type']); ?> 
+        <a target="<?php echo get_target_blank(); ?>" style="background-image: url(<?php echo capalot_get_thumbnail_url(); ?>);" class="block  bg-no-repeat   <?php echo esc_attr($args['media_size_type']); ?> 
         <?php echo esc_attr($args['media_fit_type']); ?>" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" data-bg="<?php echo capalot_get_thumbnail_url(); ?>">
           <?php if ($post_format_icon) : ?>
             <div class="post-format-icon"><i class="<?php echo $post_format_icon; ?>"></i></div>
@@ -79,7 +54,7 @@ if ($args['type'] == 'grid-overlay') {
         </a>
       </div>
 
-      <div class="entry-wrapper  w-full text-gray-400  p-2 h-24 text-[0.75rem]">
+      <div class="entry-wrapper   text-gray-400  p-2  text-[0.75rem]">
         <?php if ($args['is_entry_cat']) : ?>
           <div class="entry-cat-dot   mb-1 whitespace-nowrap text-ellipsis overflow-hidden"><i class="fa-solid fa-tag pr-2" style="color: #82a6f0;"></i><?php capalot_meta_category(2); ?></div>
         <?php endif; ?>
@@ -89,7 +64,7 @@ if ($args['type'] == 'grid-overlay') {
         </h2>
 
         <?php if ($args['is_entry_desc']) : ?>
-          <div class="entry-desc mp-1  h-5 whitespace-nowrap text-ellipsis overflow-hidden" title="<?php echo capalot_get_post_excerpt(40); ?>"><?php echo capalot_get_post_excerpt(40); ?></div>
+          <div class="entry-desc mp-1 whitespace-nowrap text-ellipsis overflow-hidden" title="<?php echo capalot_get_post_excerpt(40); ?>"><?php echo capalot_get_post_excerpt(40); ?></div>
         <?php endif; ?>
 
         <?php if ($args['is_entry_meta']) : ?>
@@ -111,7 +86,7 @@ if ($args['type'] == 'grid-overlay') {
   </li>
 
 <?php elseif ($args['type'] == 'grid-overlay') : ?>
-  <li class="col cursor-pointer <?php echo $card_size; ?>  rounded-lg overflow-hidden text-[0.75rem]">
+  <li class="col cursor-pointer rounded-lg overflow-hidden text-[0.75rem]">
     <article class="post-item relative group ">
 
       <div class="tips-badge absolute w-10 text-center top-0 start-0 z-[999] m-2 bg-[#b0adac]  rounded-xl">
@@ -119,35 +94,7 @@ if ($args['type'] == 'grid-overlay') {
           <div class="text-[0.5rem] bg-opacity-25 text-white"><?php _e('置顶', 'ripro'); ?></div>
         <?php endif; ?>
       </div>
-
-      <div class="<?php echo esc_attr($args['media_class']); ?>">
-        <a target="<?php echo get_target_blank(); ?>" style="background-image: url(<?php echo capalot_get_thumbnail_url(); ?>);" class="block rounded-xl  w-full <?php echo $card_size; ?> bg-no-repeat   <?php echo esc_attr($args['media_size_type']); ?> 
-        <?php echo esc_attr($args['media_fit_type']); ?>" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" data-bg="<?php echo capalot_get_thumbnail_url(); ?>">
-          <?php if ($post_format_icon) : ?>
-            <div class="post-format-icon"><i class="<?php echo $post_format_icon; ?>"></i></div>
-          <?php endif; ?>
-        </a>
-
-        <div class="absolute text-gray-50 bottom-0 left-0 top-0 right-0 hidden group-hover:flex items-center justify-between px-2 w-full h-full  bg-opacity-10 transition-opacity" style="background: linear-gradient(180deg,transparent 62%,rgba(0, 0, 0, 0.00345888) 63.94%,rgba(0, 0, 0, 0.014204) 65.89%,rgba(0, 0, 0, 0.0326639) 67.83%,rgba(0, 0, 0, 0.0589645) 69.78%,rgba(0, 0, 0, 0.0927099) 71.72%,rgba(0, 0, 0, 0.132754) 73.67%,rgba(0, 0, 0, 0.177076) 75.61%,rgba(0, 0, 0, 0.222924) 77.56%,rgba(0, 0, 0, 0.267246) 79.5%,rgba(0, 0, 0, 0.30729) 81.44%,rgba(0, 0, 0, 0.341035) 83.39%,rgba(0, 0, 0, 0.367336) 85.33%,rgba(0, 0, 0, 0.385796) 87.28%,rgba(0, 0, 0, 0.396541) 89.22%,rgba(0, 0, 0, 0.4) 91.17%);border-radius:0 0 0.75rem 0.75rem;">
-          <div class="absolute bottom-4 left-2 w-2/3">
-            <?php if ($args['is_entry_cat']) : ?>
-              <div class="mb-1 whitespace-nowrap  text-ellipsis overflow-hidden"><i class="fa-solid fa-tag pr-2"></i><?php capalot_meta_category(2); ?></div>
-            <?php endif; ?>
-
-            <h2 class="font-bold text-base  whitespace-nowrap text-ellipsis overflow-hidden">
-              <a target="<?php echo get_target_blank(); ?>" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a>
-            </h2>
-          </div>
-          <div class="absolute bottom-4 right-2">
-            <i class="fa-regular fa-bookmark w-6 h-6 hover:text-[#9e9ea7]"></i>
-            <i class="fa-regular fa-heart w-6 h-6 hover:text-[#9e9ea7] "></i>
-          </div>
-        </div>
-
-      </div>
-
-
-      <div class="h-8 p-2  absolute w-full text-gray-400 ">
+      <div class=" p-2 text-white absolute bottom-0 z-[99] w-full">
         <?php if ($args['is_entry_meta']) : ?>
           <div class="entry-meta flex flex-row justify-between">
             <div class="">
@@ -163,6 +110,33 @@ if ($args['type'] == 'grid-overlay') {
           </div>
         <?php endif; ?>
       </div>
+
+      <div class="entry-media ratio  <?php echo esc_attr($args['media_class']); ?>">
+        <a target="<?php echo get_target_blank(); ?>" style="background-image: url(<?php echo capalot_get_thumbnail_url(); ?>);" class="block  bg-no-repeat overflow-hidden  <?php echo esc_attr($args['media_size_type']); ?> 
+        <?php echo esc_attr($args['media_fit_type']); ?>" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" data-bg="<?php echo capalot_get_thumbnail_url(); ?>">
+          <?php if ($post_format_icon) : ?>
+            <div class="post-format-icon"><i class="<?php echo $post_format_icon; ?>"></i></div>
+          <?php endif; ?>
+        </a>
+
+        <div class="absolute text-gray-50 bottom-0 left-0 top-0 right-0 hidden group-hover:flex items-center justify-between px-2 w-full h-full  bg-opacity-10 transition-opacity" style="background: linear-gradient(180deg,transparent 62%,rgba(0, 0, 0, 0.00345888) 63.94%,rgba(0, 0, 0, 0.014204) 65.89%,rgba(0, 0, 0, 0.0326639) 67.83%,rgba(0, 0, 0, 0.0589645) 69.78%,rgba(0, 0, 0, 0.0927099) 71.72%,rgba(0, 0, 0, 0.132754) 73.67%,rgba(0, 0, 0, 0.177076) 75.61%,rgba(0, 0, 0, 0.222924) 77.56%,rgba(0, 0, 0, 0.267246) 79.5%,rgba(0, 0, 0, 0.30729) 81.44%,rgba(0, 0, 0, 0.341035) 83.39%,rgba(0, 0, 0, 0.367336) 85.33%,rgba(0, 0, 0, 0.385796) 87.28%,rgba(0, 0, 0, 0.396541) 89.22%,rgba(0, 0, 0, 0.4) 91.17%);border-radius:0 0 0.75rem 0.75rem;">
+          <a class="w-full h-full" target="<?php echo get_target_blank(); ?>" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
+            <div class="absolute bottom-8 left-2 w-2/3">
+              <?php if ($args['is_entry_cat']) : ?>
+                <div class="mb-1 whitespace-nowrap  text-ellipsis overflow-hidden"><i class="fa-solid fa-tag pr-2"></i><?php capalot_meta_category(2); ?></div>
+              <?php endif; ?>
+
+              <h2 class="font-bold text-base  whitespace-nowrap text-ellipsis overflow-hidden">
+                <a target="<?php echo get_target_blank(); ?>" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a>
+              </h2>
+            </div>
+            <div class="absolute bottom-8 right-2">
+              <i class="fa-regular fa-bookmark w-6 h-6 hover:text-[#9e9ea7]"></i>
+              <i class="fa-regular fa-heart w-6 h-6 hover:text-[#9e9ea7] "></i>
+            </div>
+          </a>
+        </div>
+      </div>
     </article>
   </li>
 
@@ -177,16 +151,16 @@ if ($args['type'] == 'grid-overlay') {
         <?php endif; ?>
       </div>
 
-      <div class="entry-media ratio w-1/3 pr-2  <?php echo esc_attr($args['media_class']); ?>">
-        <a target="<?php echo get_target_blank(); ?>" style="background-image: url(<?php echo capalot_get_thumbnail_url(); ?>);" class="block  bg-no-repeat h-full w-full   <?php echo esc_attr($args['media_size_type']); ?> 
+      <div class="max-w-[8rem] ratio ratio-16x9 col-auto mr-2 ">
+        <a target="<?php echo get_target_blank(); ?>" style="background-image: url(<?php echo capalot_get_thumbnail_url(); ?>);" class="block  bg-no-repeat  <?php echo esc_attr($args['media_size_type']); ?>
         <?php echo esc_attr($args['media_fit_type']); ?>" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" data-bg="<?php echo capalot_get_thumbnail_url(); ?>">
           <?php if ($post_format_icon) : ?>
             <div class="post-format-icon"><i class="<?php echo $post_format_icon; ?>"></i></div>
           <?php endif; ?>
         </a>
       </div>
-      <div class="entry-wrapper w-2/3  text-gray-400 text-[0.75rem] ">
-        <div class="entry-body h-4/5  ">
+      <div class="entry-wrapper  w-full text-gray-400 text-[0.75rem] ">
+        <div class="entry-body h-5/6  ">
 
           <?php if ($args['is_entry_cat']) : ?>
             <div class=" mb-1 whitespace-nowrap text-ellipsis overflow-hidden"><i class="fa-solid fa-tag pr-2" style="color: #82a6f0;"></i><?php capalot_meta_category(2); ?></div>
@@ -200,7 +174,7 @@ if ($args['type'] == 'grid-overlay') {
           <?php endif; ?>
         </div>
         <?php if ($args['is_entry_meta']) : ?>
-          <div class="entry-meta flex flex-row justify-between">
+          <div class="entry-meta flex flex-row justify-between ">
             <div>
               <span class="meta-date"><i class="fa-regular fa-clock pr-1"></i>
                 <?php capalot_meta_datetime(); ?></span>

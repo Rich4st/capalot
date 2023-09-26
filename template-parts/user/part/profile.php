@@ -137,18 +137,18 @@ if ($unsetoauth == 'qq' || $unsetoauth == 'weixin') {
     <div class="lg:col-span-2 col-span-1 lg:col-start-3">
       <label class="pb-2 block"><?php _e('旧密码', 'ripro'); ?></label>
       <?php if (user_is_oauth_password($current_user->ID)) : ?>
-        <input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark" name="old_password" value="第三方注册，请设置新密码" autocomplete="off" disabled>
+        <input type="password" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark" name="old_password" value="第三方注册，请设置新密码" autocomplete="off" disabled>
       <?php else : ?>
-        <input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark" name="old_password" value="" autocomplete="off">
+        <input type="password" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark" name="old_password" value="" autocomplete="off">
       <?php endif; ?>
     </div>
     <div class="lg:col-span-2 col-span-1 col-start-1 pb-2">
       <label class="pb-2 block"><?php _e('新密码', 'ripro'); ?></label>
-      <input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark" name="new_password" value="" autocomplete="off">
+      <input type="password" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark" name="new_password" value="" autocomplete="off">
     </div>
     <div class="lg:col-span-2 col-span-1 lg:col-start-3">
       <label class="pb-2 block"><?php _e('确认新密码', 'ripro'); ?></label>
-      <input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark" name="new_password2" value="" autocomplete="off">
+      <input type="password" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark" name="new_password2" value="" autocomplete="off">
     </div>
     <!-- Save button -->
     <div class="flex lg:col-start-4 justify-end text-white">
@@ -181,17 +181,13 @@ if ($unsetoauth == 'qq' || $unsetoauth == 'weixin') {
         processData: false, // 使数据不做处理
         contentType: false, // 不要设置Content-Type请求头
         success: function(result) {
-          ca.notice(result.msg);
-          console.log(result.msg);
+          ca.notice({ title: result.msg });
           if (result.status == 1) {
             setTimeout(function() {
               window.location.reload()
-            }, 2000);
+            }, 1);
           }
         },
-        error: function(e) {
-          ca.notice(e.responseText);
-        }
       });
 
     });
@@ -222,7 +218,7 @@ if ($unsetoauth == 'qq' || $unsetoauth == 'weixin') {
           status,
           msg
         }) => {
-          ca.notice(msg);
+          ca.notice({ title: msg });
           if (status == 1) {
             setTimeout(function() {
               window.location.reload()
@@ -273,7 +269,7 @@ if ($unsetoauth == 'qq' || $unsetoauth == 'weixin') {
           status,
           msg
         }) => {
-          ca.notice(msg);
+          ca.notice({ title: msg });
           if (status == 1) {
             setTimeout(function() {
               window.location.reload()
@@ -316,7 +312,7 @@ if ($unsetoauth == 'qq' || $unsetoauth == 'weixin') {
           status,
           msg
         }) => {
-          ca.notice(msg);
+          ca.notice({ title: msg });
           if (status == 1) {
             setTimeout(function() {
               window.location.reload()
