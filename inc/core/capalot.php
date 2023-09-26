@@ -253,6 +253,7 @@ class Capalot_Aff
     $withdrawed = self::withdrawed($user_id);
 
     $user_aff_info = [
+      'ref_uids' => self::get_ref_total($user_id),
       'total' => $total,
       'can_be_withdraw' => $can_be_withdraw,
       'withdrawing' => $withdrawing,
@@ -266,6 +267,19 @@ class Capalot_Aff
   public static function get_total($user_id)
   {
     return get_user_meta($user_id, 'capalot_aff_total', 1);
+  }
+
+  // 获取用户推广总数
+  public static function get_ref_total($user_id)
+  {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'capalot_aff';
+
+    $sql = "SELECT COUNT(*) FROM $table_name WHERE aff_uid = %d";
+
+    $count = $wpdb->get_var($wpdb->prepare($sql, $user_id));
+
+    return $count;
   }
 
   /**
