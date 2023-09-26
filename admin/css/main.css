@@ -146,6 +146,58 @@
 }
 
 
+/* 排行 */
+.ranking_list ul{
+  display: grid;
+  gap: 0.5rem;
+}
+.ranking_list ul li span{
+  display: block;
+}
+.ranking_list ul li{
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: auto auto repeat(1, 50% 1fr);
+  flex: auto;
+  justify-content: center;
+  align-items: center;
+
+}
+.ranking_list .numA_s{
+  width: 1.5rem;
+  height: 1.5rem;
+  text-align: center;
+  line-height: 1.5rem;
+  border-radius: 4px;
+  background: #e5e5e5;
+}
+.ranking_list .imgB_s img{
+  height: 2rem;
+  width: 2rem;
+  display: block;
+  border-radius: 100%;
+}
+
+.download_list ul li{
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: auto repeat(1, 70% 1fr);
+  flex: auto;
+  justify-content: center;
+  align-items: center;
+}
+.download_list ul li span{
+  display: block;
+}
+.download_list ul li .d_numA{
+  width: 1.5rem;
+  height: 1.5rem;
+  text-align: center;
+  line-height: 1.5rem;
+  border-radius: 4px;
+  background: #e5e5e5;
+}
+
 /* 全站销量排行 */
 .sales_ranking .item {
   display: flex;
