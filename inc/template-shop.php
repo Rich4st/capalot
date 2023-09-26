@@ -715,6 +715,50 @@ function get_user_aff_permalink($link_url, $user_id = null)
     return $url;
 }
 
+// 文章是否下载资源文章
+function post_is_down_pay($post_id) {
+    $price = get_post_meta($post_id, 'cao_price', true);
+    $status = get_post_meta($post_id, 'cao_status', true);
+
+    if (is_numeric($price) && !empty($status)) {
+        return true;
+    }
+    return false;
+}
+
+//文章是否有付费查看内容
+function post_is_hide_pay($post_id) {
+    
+    $price = get_post_meta($post_id, 'cao_price', true);
+
+    $content = get_post_field('post_content', $post_id);
+
+    if (is_numeric($price) && has_shortcode($content, 'rihide')) {
+        return true;
+    }
+    return false;
+}
+
+//文章是否有付费播放视频内容
+function post_is_video_pay($post_id) {
+    
+    $price = get_post_meta($post_id, 'cao_price', true);
+    $status = get_post_meta($post_id, 'cao_video', true);
+
+    if (is_numeric($price) && !empty($status)) {
+        return true;
+    }
+    return false;
+
+}
+
+// 文章是否有付费资源
+function post_is_pay($post_id) {
+    if (post_is_down_pay($post_id) || post_is_hide_pay($post_id) || post_is_video_pay($post_id)) {
+        return true;
+    }
+    return false;
+}
 
 // 获取网站当前推荐人信息
 function capalot_get_current_aff_id($user_id = 0)
