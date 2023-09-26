@@ -17,7 +17,7 @@ global $current_user;
 			</div>
 		</div>
 
-		<div class="row row-cols-2 row-cols-md-4 g-2 g-md-4">
+		<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
 			<?php
 
 			$user_aff_info = Capalot_Aff::get_user_aff_info($current_user->ID);
@@ -31,47 +31,50 @@ global $current_user;
 
 			$color_key = 0;
 
-			var_dump($user_aff_info);
 			foreach ($item as $key => $name) : $value = $user_aff_info[$key];
 				$color_key++; ?>
 				<!-- Counter item -->
 				<div class="col">
-					<div class="card bg-<?php echo zb_get_color_class($color_key); ?> bg-opacity-25 p-4 h-100 rounded-2">
-						<h4 class="fw-bold text-<?php echo zb_get_color_class($color_key); ?>">￥<?php echo $value; ?></h4>
-						<span class="h6 mb-0 text-muted"><?php echo $name; ?></span>
+					<div class="rounded bg-<?php echo capalot_get_color_class($color_key); ?>  bg-opacity-25 p-4">
+						<h4 class="font-bold text-<?php echo capalot_get_color_class($color_key); ?>">￥<?php echo $value; ?></h4>
+						<span class="text-sm"><?php echo $name; ?></span>
 					</div>
 				</div>
 			<?php endforeach; ?>
 
 		</div>
-		<div class="w-100 text-center mt-3">
-			<button id="user-aff-submit" data-action="zb_user_aff_action" class="btn btn-dark text-white px-5"><?php _e('申请提现', 'ripro'); ?></button>
+		<div class="w-full text-center my-2">
+			<button id="user-aff-submit" data-action="capalot_user_aff_action" class="bg-black text-white py-1  px-5 rounded"><?php _e('申请提现', 'ripro'); ?></button>
 		</div>
 
-		<hr>
-		<div class="mb-3">
-			<h6 class="d-flex align-content-centermb-2"><?php _e('已成功推广注册', 'ripro'); ?><span class="badge me-1 bg-success ms-2"><?php echo count($user_aff_info['ref_uids']); ?></span></h6>
+		<hr class="mb-2">
+		<div class="my-3">
+			<h6 class="flex  mb-2">
+				<?php _e('已成功推广注册', 'ripro'); ?>
+				<span class="badge me-1 bg-success ms-2">
+					<?php echo $user_aff_info['ref_uids']; ?>
+				</span></h6>
 			<?php
 			if (!empty($user_aff_info['ref_uids'])) {
 				$user_i = 0;
 				foreach ($user_aff_info['ref_uids'] as $uid) {
 					$user_i++;
 					if ($user_i <= 20) {
-						$s = zb_substr_cut(get_user_meta(intval($uid), 'nickname', 1));
-						printf('<div class="avatar avatar-sm m-1"><img class="avatar-img rounded-circle border border-white border-3 shadow" src="%s" title="%s"></div>', get_avatar_url($uid), $s);
+						$s = capalot_substr_cut(get_user_meta(intval($uid), 'nickname', 1));
+						printf('<div class="avatar avatar-sm m-1"><img class="avatar-img rounded-full border border-white border-3 shadow" src="%s" title="%s"></div>', get_avatar_url($uid), $s);
 					}
 				}
 			} else {
-				echo '<p class="text-muted">' . __('暂无用户通过您的推广链接注册', 'ripro') . '</p>';
+				echo '<p class="text-muted py-2 text-[#ededed]">' . __('暂无用户通过您的推广链接注册', 'ripro') . '</p>';
 			} ?>
 		</div>
 
 		<h6><?php _e('推广说明：', 'ripro'); ?></h6>
-		<ol class="list-group list-group-numbered">
+		<ol class="list-decimal  ml-6">
 			<?php
-			$list = _cao('site_tixian_desc', array());
+			$list = _capalot('site_tixian_desc', array());
 			foreach ($list as $key => $item) {
-				printf('<li class="list-group-item list-group-item-light text-muted">%s</li>', $item['content']);
+				printf('<li class="py-2 border-b text-muted text-[#ededed]">%s</li>', $item['content']);
 			}
 			?>
 		</ol>
@@ -80,22 +83,23 @@ global $current_user;
 	</div>
 </div>
 
-<div class="card">
-	<div class="card-header mb-2">
-		<h5 class="fw-bold mb-0"><?php _e('佣金记录', 'ripro'); ?></h5>
-	</div>
+<div class="mb-4 bg-white dark:bg-dark-card p-4 mx-2 rounded">
+	<div class="card-header mb-2"><h5 class="fw-bold mb-0"><?php _e('佣金记录','ripro' );?></h5></div>
 
 	<div class="card-body">
 		<div class="card-header mb-2"><?php _e('最近20条', 'ripro'); ?></div>
 		<?php
 
 		global $wpdb;
+		$table_aff = $wpdb->prefix . 'capalot_aff';
+		$table_order = $wpdb->prefix . 'capalot_order';
+
 		// 查询语句
 		$query = $wpdb->prepare(
 			"SELECT a.*, CONVERT(a.aff_rate * b.pay_price, DECIMAL(10,2)) AS aff_money,
 		            b.pay_price, b.user_id AS pay_user, b.post_id, b.order_type, b.order_trade_no
-		     FROM $wpdb->cao_aff_tbl AS a
-		     LEFT JOIN $wpdb->cao_order_tbl AS b ON a.order_id = b.id
+		     FROM $table_aff AS a
+		     LEFT JOIN $table_order AS b ON a.order_id = b.id
 		     WHERE b.id IS NOT NULL AND a.aff_uid = %d
 		     ORDER BY a.create_time DESC
 		     LIMIT 20",
@@ -108,11 +112,11 @@ global $current_user;
 			echo '<p class="p-4 text-center">' . __('暂无记录', 'ripro') . '</p>';
 		} else {
 
-			echo '<div class="list-group">';
+			echo '<div class="bg-[#ededed] rounded border dark:bg-dark dark:border-transparent border-[#dadada]">';
 			foreach ($data as $item) : ?>
-				<div class="list-group-item list-group-item-action">
-					<div class="d-block d-md-flex w-100 justify-content-between">
-						<h6 class="mb-1"><?php _e('推广类型', 'ripro'); ?>（<?php echo $item->note; ?>）<?php _e('购买人：', 'ripro'); ?><?php echo zb_substr_cut(get_user_meta(intval($item->pay_user), 'nickname', 1)); ?></h6>
+				<div class="px-4 my-2 block ">
+					<div class="flex justify-between w-ful">
+						<h6 class="text-muted block md:inline-block"><?php _e('推广类型', 'ripro'); ?>（<?php echo $item->note; ?>）<?php _e('购买人：', 'ripro'); ?><?php echo capalot_substr_cut(get_user_meta(intval($item->pay_user), 'nickname', 1)); ?></h6>
 						<small class="text-muted"><?php echo wp_date('Y-m-d H:i', $item->create_time); ?></small>
 					</div>
 					<small class="text-muted d-block d-md-inline-block"><?php _e('订单金额：￥', 'ripro'); ?><?php echo $item->pay_price; ?></small>
@@ -134,10 +138,10 @@ global $current_user;
 			e.preventDefault();
 			var _this = $(this);
 			var data = {
-				nonce: zb.ajax_nonce,
+				nonce: capalot.ajax_nonce,
 				action: _this.data("action")
 			};
-			ri.ajax({
+			ca.ajax({
 				data,
 				before: () => {
 					_this.attr("disabled", "true")
@@ -146,8 +150,8 @@ global $current_user;
 					status,
 					msg
 				}) => {
-					ri.notice(msg);
-					if (status == 1) {
+					ca.notice(msg);
+				if (status == 1) {
 						setTimeout(function() {
 							window.location.reload()
 						}, 2000)
