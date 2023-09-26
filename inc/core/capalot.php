@@ -366,6 +366,7 @@ class Capalot_Cookie
   {
   }
 
+  // 设置cookie
   public static function set($key, $value, $expire = 0)
   {
     if ($expire == 0) {
@@ -375,12 +376,19 @@ class Capalot_Cookie
     setcookie($key, $value, $expire, '/');
   }
 
+  // 根据key获取cookie中的值
   public static function get($key)
   {
     if (!isset($_COOKIE[$key]))
       return false;
 
     return $_COOKIE[$key];
+  }
+
+  // 删除cookie
+  public static function delete($key)
+  {
+    setcookie($key, '', time() - 3600, '/');
   }
 }
 

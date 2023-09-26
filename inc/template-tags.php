@@ -174,29 +174,30 @@ function capalot_get_breadcrumb($class = 'bc')
  * @param  integer    $max_num_pages [MAX数量]
  * @return [type]
  */
-function capalot_custom_pagination($pagenum = 0, $max_num_pages = 0) {
+function capalot_custom_pagination($pagenum = 0, $max_num_pages = 0)
+{
 
   $page_links = paginate_links(array(
-      'base'      => add_query_arg('page', '%#%'),
-      'format'    => '?page=%#%',
-      'total'     => intval($max_num_pages),
-      'current'   => intval($pagenum),
-      'show_all'   => false,
+    'base'      => add_query_arg('page', '%#%'),
+    'format'    => '?page=%#%',
+    'total'     => intval($max_num_pages),
+    'current'   => intval($pagenum),
+    'show_all'   => false,
   ));
 
   if ($page_links) {
-      echo '<nav class="fav-pagination mt-3 md:mt-4 text-center">
+    echo '<nav class="fav-pagination mt-3 md:mt-4 text-center">
       ' . $page_links . '
       </nav>';
   }
-
 }
 
-function is_weixin_visit() {
+function is_weixin_visit()
+{
   if (strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false) {
-      return true;
+    return true;
   } else {
-      return false;
+    return false;
   }
 }
 
@@ -478,6 +479,7 @@ function get_default_avatar_src()
 {
   return get_template_directory_uri() . '/assets/img/avatar.png';
 }
+
 //是否开启图片验证码功能
 function is_site_img_captcha()
 {
@@ -698,6 +700,60 @@ function get_thumbnail_size_type()
     $option = $options[0];
 
   return $option;
+}
+
+// 获取图片验证码
+function get_captcha_code_img()
+{
+  // 生成随机验证码
+  $captcha_code = substr(md5(mt_rand()), 0, 6);
+
+  // 将验证码保存到Cookie中
+  Capalot_Cookie::set('captcha_code', $captcha_code, time() + 60 * 5, '/');
+
+  // 创建图片
+  $image = imagecreatetruecolor(100, 30);
+
+  // 定义颜色
+  $bg_color = imagecolorallocate($image, 255, 255, 255);
+  $text_color = imagecolorallocate($image, 0, 0, 0);
+
+  // 填充背景色
+  imagefilledrectangle($image, 0, 0, 100, 30, $bg_color);
+
+  // 添加验证码文本
+  imagestring($image, 5, 30, 5, $captcha_code, $text_color);
+
+  // 将图像输出为base64编码的数据
+  ob_start();
+  imagepng($image);
+  $image_data = ob_get_clean();
+  $base64_image = 'data:image/png;base64,' . base64_encode($image_data);
+
+  // 输出base64编码的图片数据
+  return $base64_image;
+
+  // 销毁图像
+  imagedestroy($image);
+}
+
+/**
+ * 确认验证码是否正确
+ *
+ * @param $code 验证码
+ */
+function verify_captcha_code($code)
+{
+  // 验证$code与cookie中的验证码是否一致
+  $captcha_code = Capalot_Cookie::get('captcha_code');
+  if (empty($captcha_code) || $captcha_code != $code) {
+    return false;
+  }
+
+  // 验证成功后，删除cookie中的验证码
+  Capalot_Cookie::delete('captcha_code');
+
+  return true;
 }
 
 // 获取文章缩略图对齐方式
