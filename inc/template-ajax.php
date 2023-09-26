@@ -48,6 +48,18 @@ class Capalot_Ajax
     $this->add_action('get_pay_select_html'); //获取支付方式
     $this->add_action('get_pay_action'); //下单
     $this->add_action('user_login', 0); //登录
+    $this->add_action('update_profile', 1); //保存个人信息
+    $this->add_action('update_new_email', 1); //保存个人信息
+    $this->add_action('update_password', 1); //修改密码
+    $this->add_action('update_avatar', 1); //上传头像
+    $this->add_action('get_captcha_img'); //验证码
+    $this->add_action('user_register', 0); //注册
+    $this->add_action('user_save_ticket', 1); //保存工单
+    $this->add_action('user_qiandao', 1); //签到
+    $this->add_action('add_like_post'); //点赞文章
+    $this->add_action('add_fav_post'); //收藏文章
+    $this->add_action('load_more'); //加载更多文章
+
   }
 
   /**
@@ -124,6 +136,531 @@ class Capalot_Ajax
       'status'   => 1,
       'msg'      => __('登录成功', 'ripro'),
       'back_url' => get_uc_menu_link(),
+    ));
+  }
+
+  // 用户注册
+  public function user_register()
+  {
+
+    $this->valid_nonce_ajax(); #安全验证
+
+    if (!is_site_user_register()) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => '本站未开启注册功能',
+      ));
+    }
+
+    $user_name        = wp_unslash(get_response_param('user_name'), true);
+    $user_email       = sanitize_email(get_response_param('user_email'));
+    $user_password    = wp_unslash(get_response_param('user_password'));
+    $user_password_ok = wp_unslash(get_response_param('user_password_ok'));
+    $invite_code      = esc_sql(trim(get_response_param('invite_code')));
+    $captcha_code     = wp_unslash(trim(get_response_param('captcha_code')));
+
+    if (!validate_username($user_name)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('用户名格式错误', 'ripro'),
+      ));
+    }
+
+    if (!is_email($user_email)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('邮箱地址格式错误', 'ripro'),
+      ));
+    }
+
+    if (!$user_name || !$user_email || !$user_password || !$user_password_ok) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('请输入完整注册信息', 'ripro'),
+      ));
+    }
+
+    if ($user_password !== $user_password_ok) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('两次密码输入不一致', 'ripro'),
+      ));
+    }
+
+    if (is_site_img_captcha() && !is_img_captcha(strtolower($captcha_code))) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('验证码错误，请刷新验证码', 'ripro'),
+      ));
+    }
+
+    if (username_exists($user_name)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('此用户名已被注册', 'ripro'),
+      ));
+    }
+
+    if (email_exists($user_email)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('此邮箱已被注册', 'ripro'),
+      ));
+    }
+
+
+    //邀请码注册
+    if (is_site_invitecode_register()) {
+
+      if (empty($invite_code)) {
+        wp_send_json(array(
+          'status' => 0,
+          'msg'    => __('请输入邀请码', 'ripro'),
+        ));
+      }
+
+      //验证邀请码
+      $cdk_data = Capalot_Cdk::get_cdk($invite_code);
+
+      if (empty($cdk_data)) {
+        wp_send_json(array(
+          'status' => 0,
+          'msg'    => __('邀请码错误', 'ripro'),
+        ));
+      }
+
+      if ($cdk_data->type != 3 || $cdk_data->status != 0) {
+        wp_send_json(array(
+          'status' => 0,
+          'msg'    => __('邀请码已失效', 'ripro'),
+        ));
+      }
+
+      if (time() > $cdk_data->expiry_time) {
+        wp_send_json(array(
+          'status' => 0,
+          'msg'    => __('邀请码已到期', 'ripro'),
+        ));
+      }
+
+      // 处理优惠码状态
+      $update_cdk = Capalot_Cdk::update_cdk(
+        array('status' => 1),
+        array('id' => $cdk_data->id),
+        array('%d'),
+        array('%d')
+      );
+
+      if (!$update_cdk) {
+        wp_send_json(array(
+          'status' => 0,
+          'msg'    => __('邀请码状态异常，请刷新重试', 'ripro'),
+        ));
+      }
+    }
+
+
+    $user_id = wp_create_user($user_name, $user_password, $user_email);
+
+    if (is_wp_error($user_id)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => $user_id->get_error_message(),
+      ));
+    }
+
+    $UserLogin = wp_signon(array(
+      'user_login' => $user_name,
+      'user_password' => $user_password,
+      'remember' => true
+    ), false);
+
+    if (is_wp_error($UserLogin)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => $UserLogin->get_error_message(),
+      ));
+    }
+
+    wp_set_current_user($UserLogin->ID, $UserLogin->user_login);
+    wp_set_auth_cookie($UserLogin->ID, true);
+
+    wp_send_json(array(
+      'status'   => 1,
+      'msg'      => __('注册成功，即将自动登录', 'ripro'),
+      'back_url' => get_uc_menu_link('profile'),
+    ));
+  }
+
+  //验证码
+  public function get_captcha_img()
+  {
+    $this->valid_nonce_ajax(); #安全验证
+    wp_send_json(array(
+      'status' => 1,
+      'msg'    => get_img_captcha(),
+    ));
+  }
+
+  //上传头像
+  public function update_avatar()
+  {
+    $this->valid_nonce_ajax(); #安全验证
+    $user_id = get_current_user_id();
+    $file = !empty($_FILES['file']) ? $_FILES['file'] : null;
+
+    if (empty($file)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('请选择头像上传', 'ripro'),
+      ));
+    }
+
+
+    //图片上传 没有则不处理
+    if ($file["size"] > 500000) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('图片大小超出500KB限制', 'ripro'),
+      ));
+    }
+
+    if (!in_array($file["type"], ['image/jpg', 'image/gif', 'image/png', 'image/jpeg'])) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('仅支持上传图片', 'ripro'),
+      ));
+    }
+
+    // 检测文件是否为真实的图片
+    $check = getimagesize($file["tmp_name"]);
+    if ($check === false) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('图片格式错误', 'ripro'),
+      ));
+    }
+
+
+    // 上传文件
+    $allowedExtensions = array("jpg", "jpeg", "png", "gif");
+    $extension = pathinfo($file["name"], PATHINFO_EXTENSION);
+
+    // 检查上传文件的扩展名是否在允许的范围内
+    if (!in_array(strtolower($extension), $allowedExtensions)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('只允许上传图片文件', 'ripro'),
+      ));
+    }
+
+    // 根据上传文件的类型创建相应的图像
+    switch (strtolower($extension)) {
+      case "jpg":
+      case "jpeg":
+        $source = imagecreatefromjpeg($file["tmp_name"]);
+        break;
+      case "png":
+        $source = imagecreatefrompng($file["tmp_name"]);
+        break;
+      case "gif":
+        $source = imagecreatefromgif($file["tmp_name"]);
+        break;
+      default:
+        wp_send_json(array(
+          'status' => 0,
+          'msg'    => __('未知的文件类型', 'ripro'),
+        ));
+    }
+
+
+    // 缩放和裁剪图像到200x200大小
+    $newWidth = 100;
+    $newHeight = 100;
+    $canvas = imagecreatetruecolor($newWidth, $newHeight);
+    imagecopyresampled($canvas, $source, 0, 0, 0, 0, $newWidth, $newHeight, imagesx($source), imagesy($source));
+
+    // 将裁剪后的图像保存到字节数组
+    ob_start();
+    switch (strtolower($extension)) {
+      case "jpg":
+      case "jpeg":
+        imagejpeg($canvas, null, 90);
+        break;
+      case "png":
+        imagepng($canvas, null, 9);
+        break;
+      case "gif":
+        imagegif($canvas, null);
+        break;
+    }
+    $imageData = ob_get_contents();
+    ob_end_clean();
+
+
+    // 移动上传的文件到指定目录并重命名
+    $newFilename = 'avatar-' . Capalot_Code::encid($user_id) . '.' . $extension;
+
+
+    add_filter('upload_dir', function ($dirs) {
+      $dirs['baseurl'] = WP_CONTENT_URL . '/uploads';
+      $dirs['basedir'] = WP_CONTENT_DIR . '/uploads';
+      $dirs['path'] = $dirs['basedir'] . $dirs['subdir'];
+      $dirs['url'] = $dirs['baseurl'] . $dirs['subdir'];
+      return $dirs;
+    });
+
+    $wp_upload_dir = wp_upload_dir();
+
+    $file_path = $wp_upload_dir['basedir'] . '/1234/01/' . $newFilename;
+    // 如果文件存在，则删除它
+    if (file_exists($file_path)) {
+      @unlink($file_path);
+    }
+
+    $upload = wp_upload_bits($newFilename, null, $imageData, '1234/01');
+
+    if ($upload['error']) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('上传失败请重试', 'ripro'),
+      ));
+    }
+
+    update_user_meta($user_id, 'user_custom_avatar', $upload['url']);
+    update_user_meta($user_id, 'user_avatar_type', 'custom');
+
+    wp_send_json(array(
+      'status' => 1,
+      'msg'    => __('头像上传成功', 'ripro'),
+    ));
+  }
+
+  //保存个人信息
+  public function update_profile()
+  {
+
+    $this->valid_nonce_ajax(); #安全验证
+
+    $user_id      = get_current_user_id();
+    $display_name = sanitize_text_field(get_response_param('display_name'));
+    $description  = sanitize_text_field(get_response_param('description'));
+    $uc_lxqq      = (!empty(absint(get_response_param('uc_lxqq')))) ? absint(get_response_param('uc_lxqq')) : '';
+
+    $meta_input = [
+      'qq'     => $uc_lxqq,
+      'description' => $description,
+    ];
+
+    $UserData = wp_update_user([
+      'ID'           => $user_id,
+      'nickname'     => $display_name,
+      'display_name' => $display_name,
+      'meta_input'   => $meta_input,
+    ]);
+
+    if (is_wp_error($UserData)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('保存失败', 'ripro'),
+      ));
+    }
+
+    wp_send_json(array(
+      'status' => 1,
+      'msg'    => __('保存成功', 'ripro'),
+    ));
+  }
+
+  //修改邮箱
+  public function update_new_email()
+  {
+
+    $this->valid_nonce_ajax(); #安全验证
+
+    $user_id      = get_current_user_id();
+    $new_user_email = sanitize_email(get_response_param('new_user_email'));
+
+    if (!is_email($new_user_email)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('邮箱地址格式错误', 'ripro'),
+      ));
+    }
+
+    if (email_exists($new_user_email)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('此邮箱已被使用', 'ripro'),
+      ));
+    }
+
+    $UserData = wp_update_user([
+      'ID'           => $user_id,
+      'user_email'   => $new_user_email,
+    ]);
+
+    if (is_wp_error($UserData)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('邮箱修改失败', 'ripro'),
+      ));
+    }
+
+    wp_send_json(array(
+      'status' => 1,
+      'msg'    => __('邮箱修改成功', 'ripro'),
+    ));
+  }
+
+  //修改密码
+  public function update_password()
+  {
+    $this->valid_nonce_ajax(); #安全验证
+    global $current_user;
+    $old_pwd  = get_response_param('old_password');
+    $new_pwd  = get_response_param('new_password');
+    $new_pwd2 = get_response_param('new_password2');
+
+    if (empty($old_pwd) || empty($new_pwd) || empty($new_pwd2)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('请输入完整密码修改信息', 'ripro'),
+      ));
+    }
+    if ($old_pwd == $new_pwd) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('新密码不能与旧密码相同', 'ripro'),
+      ));
+    }
+    if ($new_pwd !== $new_pwd2) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('两次输入的密码不一致', 'ripro'),
+      ));
+    }
+
+    if (!user_is_oauth_password($current_user->ID) && !wp_check_password($old_pwd, $current_user->data->user_pass, $current_user->ID)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('旧密码错误，请输入正确的密码', 'ripro'),
+      ));
+    }
+
+    wp_set_password($new_pwd2, $current_user->ID);
+    wp_logout();
+    wp_send_json(array(
+      'status' => 1,
+      'msg'    => __('密码修改成功，请使用新密码重新登录', 'ripro'),
+    ));
+  }
+
+  //提交工单
+  public function user_save_ticket()
+  {
+    $this->valid_nonce_ajax(); #安全验证
+    $user_id  = get_current_user_id();
+    $file_uri = '';
+    // $file     = !empty($_FILES['file']) ? $_FILES['file'] : null;
+    $file     = null;
+    $type     = absint(get_response_param('type'));
+    $title    = sanitize_text_field(trim(get_response_param('title')));
+    $content  = wp_kses_post(get_response_param('content'));
+
+
+    if (!is_site_tickets()) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('网站工单功能暂未开启', 'ripro'),
+      ));
+    }
+
+    if (empty($title)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('请输入工单标题', 'ripro'),
+      ));
+    }
+
+
+    if (empty($title)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('请输入工单标题', 'ripro'),
+      ));
+    }
+
+    if (empty($content)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('请输入工单内容', 'ripro'),
+      ));
+    }
+
+    //图片上传 没有则不处理
+    if (!empty($file)) {
+
+      if ($file["size"] > 1000000) {
+        wp_send_json(array(
+          'status' => 0,
+          'msg'    => __('图片大小超出1MB限制', 'ripro'),
+        ));
+      }
+
+      if (!in_array($file["type"], ['image/jpg', 'image/gif', 'image/png', 'image/jpeg'])) {
+        wp_send_json(array(
+          'status' => 0,
+          'msg'    => __('仅支持上传图片附件', 'ripro'),
+        ));
+      }
+
+      // 检测文件是否为真实的图片
+      $check = getimagesize($file["tmp_name"]);
+      if ($check === false) {
+        wp_send_json(array(
+          'status' => 0,
+          'msg'    => __('图片格式错误', 'ripro'),
+        ));
+      }
+
+      // 获取默认上传目录路径
+      $upload_dir = wp_upload_dir();
+      $ticket_dir = $upload_dir['basedir'] . '/ticket-file'; // 新建ticket目录
+      $ticket_uri = $upload_dir['baseurl'] . '/ticket-file'; // ticket目录的URL地址
+      if (!file_exists($ticket_dir)) {
+        mkdir($ticket_dir, 0755, true);
+      }
+
+      // 上传文件
+      $date = wp_date('Ymd_His'); // get the current date and time in "YYYYMMDDHHIISS" format
+      $new_file = $date . '_' . basename($file["name"]); // combine the date and original filename
+      $target_file = $ticket_dir . '/' . $new_file;
+      if (move_uploaded_file($file["tmp_name"], $target_file)) {
+        $file_uri = str_replace($ticket_dir, $ticket_uri, $target_file);
+      }
+    }
+
+    $data = [
+      'type'        => $type,
+      'title'       => $title,
+      'content'     => $content,
+      'file'        => $file_uri,
+      'creator_id'  => $user_id,
+      'create_time' => time(),
+      'status'      => 0,
+    ];
+
+    if (!Capalot_Ticket::add($data)) {
+      wp_send_json(array(
+        'status' => 1,
+        'msg'    => __('工单提交失败，请重试', 'ripro'),
+      ));
+    }
+
+    wp_send_json(array(
+      'status' => 1,
+      'msg'    => __('工单提交成功，客服会尽快处理', 'ripro'),
     ));
   }
 
@@ -242,6 +779,65 @@ class Capalot_Ajax
 
       $post_pay_data = get_post_pay_data($post_id);
       $order_data['order_info']['vip_rate'] = $post_pay_data['vip_rate'];
+    } elseif ($order_type == 2) {
+      // 充值...
+      $recharge_amount = absint($order_info_key);
+      $_minnum = absint(_capalot('site_coin_pay_minnum'));
+      $_maxnum = absint(_capalot('site_coin_pay_maxnum'));
+
+      if (empty($recharge_amount)) {
+        wp_send_json(array(
+          'status' => 0,
+          'msg'    => __('充值数量不能为0', 'ripro'),
+        ));
+      }
+
+      if ($recharge_amount < $_minnum) {
+        wp_send_json(array(
+          'status' => 0,
+          'msg'    => __('最低充值限制', 'ripro') . $_minnum . get_site_coin_name(),
+        ));
+      }
+
+      if ($recharge_amount > $_maxnum) {
+        wp_send_json(array(
+          'status' => 0,
+          'msg'    => __('最高充值限制', 'ripro') . $_minnum . get_site_coin_name(),
+        ));
+      }
+
+      $order_data['post_id'] = 0;
+      $order_data['order_price'] = site_convert_amount($recharge_amount, 'rmb');
+      $order_data['pay_price'] = site_convert_amount($recharge_amount, 'rmb');
+      $order_data['callback_url'] = esc_url(get_uc_menu_link('coin'));
+    } elseif ($order_type == 3) {
+      // 购买VIP...
+      $buy_options = get_site_vip_buy_options();
+      $day = absint($order_info_key);
+      if (empty($buy_options) || empty($buy_options[$day]['coin_price'])) {
+        wp_send_json(array(
+          'status' => 0,
+          'msg'    => __('VIP套餐不存在', 'ripro'),
+        ));
+      }
+
+      $uc_vip_info = get_user_vip_data($user_id);
+      if ($uc_vip_info['type'] == 'boosvip') {
+        wp_send_json(array(
+          'status' => 0,
+          'msg'    => __('您已获得最高特权，无需重复开通', 'ripro'),
+        ));
+      }
+
+      $vip_price = $buy_options[$day]['coin_price'];
+      $order_data['post_id'] = 0;
+      $order_data['order_price'] = site_convert_amount($vip_price, 'rmb');
+      $order_data['pay_price'] = site_convert_amount($vip_price, 'rmb');
+      $order_data['callback_url'] = esc_url(get_uc_menu_link('vip'));
+
+      //VIP订单其他信息 vip_type 会员类型 vip boosvip
+      $order_data['order_info']['vip_type'] = $buy_options[$day]['type'];
+      $order_data['order_info']['vip_day'] = $buy_options[$day]['day_num'];
     }
 
     // 序列化订单信息
@@ -323,5 +919,102 @@ class Capalot_Ajax
       'status' => 1,
       'msg'    => sprintf(__('签到成功，领取(%s)%s', 'ripro'), $site_qiandao_coin_num, get_site_coin_name()),
     ));
+  }
+
+  // 点赞文章
+  public function add_like_post()
+  {
+    $this->valid_nonce_ajax(); #安全验证
+
+    $post_id = (int) get_response_param('post_id');
+
+    if ($post_id && capalot_add_post_likes($post_id, 1)) {
+      wp_send_json(array(
+        'status' => 1,
+        'msg'    => '点赞成功',
+      ));
+    } else {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => '点赞失败',
+      ));
+    }
+  }
+
+  // 收藏文章
+  public function add_fav_post()
+  {
+    $this->valid_nonce_ajax(); #安全验证
+
+    $post_id = (int) get_response_param('post_id');
+    $is_add  = (int) get_response_param('is_add');
+    $user_id = get_current_user_id();
+
+    if (empty($user_id)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('请登录后收藏', 'ripro'),
+      ));
+    }
+
+    $is_fav = capalot_is_post_fav($user_id, $post_id);
+
+    if ($is_add) {
+      if ($is_fav) {
+        wp_send_json(array(
+          'status' => 0,
+          'msg'    => '您已收藏过',
+        ));
+      }
+
+      if (capalot_add_post_fav($user_id, $post_id)) {
+        wp_send_json(array(
+          'status' => 1,
+          'msg'    => '收藏成功',
+        ));
+      }
+    } else {
+      if ($is_fav) {
+        capalot_delete_post_fav($user_id, $post_id);
+      }
+      wp_send_json(array(
+        'status' => 1,
+        'msg'    => '已取消收藏',
+      ));
+    }
+  }
+
+  // 分页加载更多文章
+  function load_more()
+  {
+    $ajaxposts = new WP_Query([
+      'ignore_sticky_posts' => false,
+      'post_status' => 'publish',
+      'paged' => $_POST['paged'],
+    ]);
+
+    $response = '';
+    $max_pages = $ajaxposts->max_num_pages;
+
+    if ($ajaxposts->have_posts()) {
+      while ($ajaxposts->have_posts()) : $ajaxposts->the_post();
+        $item_config = get_posts_style_config();
+
+        ob_start();
+        get_template_part('template-parts/loop/item', '', $item_config);
+
+        $response .= ob_get_clean();
+      endwhile;
+    } else {
+      $response = '';
+    }
+
+    $result = [
+      'max' => $max_pages,
+      'html' => $response,
+    ];
+
+    echo json_encode($result);
+    exit;
   }
 }

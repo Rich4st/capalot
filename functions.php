@@ -9,6 +9,34 @@ function capalot_setup()
     add_theme_support('post-thumbnails'); // 添加缩略图功能
     add_theme_support('post-formats', array('image', 'video', 'audio')); // 添加文章格式功能
 
+    register_nav_menus(
+        array(
+            'main-menu' => '全站顶部菜单',
+        )
+    );
+
+    add_theme_support(
+        'html5',
+        array(
+            'search-form',
+            'comment-form',
+            'comment-list',
+            'gallery',
+            'caption',
+            'style',
+            'script',
+        )
+    );
+
+    // 小工具选择性刷新
+    add_theme_support('customize-selective-refresh-widgets');
+
+    // 删除render_block 过滤器
+    remove_filter('render_block', 'wp_render_duotone_support');
+    remove_filter('render_block', 'wp_restore_group_inner_container');
+    remove_filter('render_block', 'wp_render_layout_support_flag');
+
+
     // 第一次启用主题时，创建数据库表
     if (get_option('theme_setup') != 'done') {
         require get_template_directory() . '/inc/setup-db.php';
@@ -84,4 +112,3 @@ require_once get_template_directory() . '/inc/template-ajax.php';
 require_once get_template_directory() . '/inc/template-filter.php';
 
 require_once get_template_directory() . '/inc/template-walker.php';
-

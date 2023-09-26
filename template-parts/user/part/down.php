@@ -22,7 +22,7 @@ global $current_user;
 			echo '<p class="p-4 text-center">'.__('暂无记录','ripro').'</p>';
 		}else{
 
-			echo '<div class="bg-[#ededed] rounded border border-[#dadada]">';
+			echo '<div class="bg-[#ededed] rounded border  dark:bg-dark dark:border-transparent border-[#dadada]">';
 			foreach ($data as $item) : ?>
 				<a target="_blank" href="<?php echo get_permalink($item->post_id);?>" class="px-4 my-2 block ">
 					<div class="flex justify-between w-full">

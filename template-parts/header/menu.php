@@ -31,11 +31,11 @@
 
 						$cached_menu = wp_nav_menu(array(
 							'container' => true,
-							'fallback_cb' => 'ZB_Walker_Nav_Menu::fallback',
+							'fallback_cb' => 'Capalot_Walker_Nav_Menu::fallback',
 							'menu_id' => 'header-navbar',
 							'menu_class' => 'nav-list',
 							'theme_location' => 'main-menu',
-							'walker' => new ZB_Walker_Nav_Menu(true),
+							'walker' => new Capalot_Walker_Nav_Menu(true),
 							'echo' => false, // 返回html内容
 						));
 

@@ -311,14 +311,18 @@ const body = jQuery("body"),
         o = jQuery(".post-like-btn"),
         a = jQuery(".post-share-btn"),
         i = "post_like_storage";
+
       new ClipboardJS(".user-select-all", {
         text: function (e) {
           return e.textContent
         }
       }).on("success", function (e) {
         ri.notice(zb.gettext.__copy_succes)
-      }), o.on("click", function () {
-        if (localStorage.getItem(i) == zb.singular_id) return o.addClass("disabled"), ri.notice(o.data("text")), !1;
+      });
+
+      o.on("click", function () {
+        if (localStorage.getItem(i) == zb.singular_id)
+          return o.addClass("disabled"), ri.notice(o.data("text")), !1;
         const e = jQuery(this).find("i"),
           t = e.attr("class");
         ri.ajax({
@@ -340,7 +344,9 @@ const body = jQuery("body"),
             e.removeClass().addClass(t)
           }
         })
-      }), n.on("click", function () {
+      });
+
+      n.on("click", function () {
         const e = jQuery(this).find("i"),
           t = e.attr("class");
         ri.ajax({
@@ -362,7 +368,9 @@ const body = jQuery("body"),
             e.removeClass().addClass(t)
           }
         })
-      }), a.on("click", function () {
+      });
+
+      a.on("click", function () {
         const e = jQuery(this).find("i"),
           t = e.attr("class");
         ri.ajax({

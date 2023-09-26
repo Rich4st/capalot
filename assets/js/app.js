@@ -1,12 +1,18 @@
 let currentPage = 1;
-
+const body = jQuery("body");
 let ca = {
 
   init: function () {
     ca.pay_action();
     ca.pagination();
     ca.toggle_dark();
-    ca.swiper();
+
+    const swiperEl = document.querySelector('.swiper');
+    if (swiperEl)
+      ca.swiper();
+
+    ca.account_action();
+    ca.social_action();
   },
 
   /**
@@ -29,11 +35,150 @@ let ca = {
       dataType: 'json',
       data,
       async: !0,
+
       beforeSend,
       success,
       complete,
       error: function (e) {
         console.log(e.responseText, 5000);
+      }
+    });
+  },
+
+  // 登录注册操作
+  account_action: function () {
+    const login_btn = document.querySelector('#click-submit')
+    const form = $('#account-from');
+
+    if (login_btn) {
+      login_btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        console.log(123);
+        const payload = form.serializeArray();
+        let o = decodeURIComponent(location.href.split("redirect_to=")[1] || ""),
+          n = {
+            nonce: capalot.ajax_nonce
+          };
+        payload.forEach(({ name: name, value: v }) => {
+          n[name] = v
+        });
+
+        ca.ajax({
+          data: n,
+          beforeSend: () => {
+            login_btn.classList.add('loading');
+          },
+          success: ({
+            status,
+            msg,
+            back_url
+          }) => {
+            ca.popup({
+              title: msg,
+              icon: status == 1 ? 'success' : 'error',
+              showCloseButton: false,
+            });
+
+            1 == status && setTimeout(() => {
+              (o = window.frames.length !== parent.frames.length ? "" : o)
+                ? window.location.href = o
+                : back_url ? window.location.href = back_url : window.location.reload()
+            }, 2e3)
+          },
+          complete: () => {
+            login_btn.classList.remove('loading');
+          }
+        })
+      })
+    }
+
+  },
+
+  // 社交操作
+  social_action: function () {
+    const storage_key = 'post_like_storage';
+    const like_btn = document.querySelector('.post-like-btn');
+    const fav_btn = document.querySelector('.post-fav-btn');
+
+    if (!like_btn || !fav_btn) {
+      return;
+    }
+
+    // 点赞文章
+    like_btn.addEventListener('click', (e) => {
+      if (localStorage.getItem(storage_key) === capalot.singular_id) {
+        return ca.popup({ title: '您已经点过赞了', icon: 'info' });
+      }
+      like_btn.classList.add('bg-[#fdf0fb]');
+
+      const unlike_icon = like_btn.querySelector('.unlike');
+      const liked_icon = like_btn.querySelector('.liked');
+
+      ca.ajax({
+        data: {
+          action: 'capalot_add_like_post',
+          nonce: capalot.ajax_nonce,
+          post_id: capalot.singular_id,
+        },
+        beforeSend: () => {
+          unlike_icon.classList.add('fa-spinner', 'fa-spin');
+        },
+        success: ({ status, msg }) => {
+          status === 1
+            ? ca.popup({ title: msg, icon: 'success' })
+            : ca.popup({ title: msg, icon: 'error' });
+
+          $('.fa-spinner').addClass('hidden')
+
+          liked_icon.classList.remove('hidden');
+        }
+      })
+    });
+
+    // 收藏文章
+    fav_btn.addEventListener('click', () => {
+      if (localStorage.getItem(storage_key) === capalot.singular_id) {
+        return ca.popup({ title: '您已经收藏过了', icon: 'info' });
+      }
+      fav_btn.classList.add('bg-[#fdf0fb]');
+
+      const unfav_icon = fav_btn.querySelector('.unfav');
+      const fav_icon = fav_btn.querySelector('.fav');
+
+      ca.ajax({
+        data: {
+          action: 'capalot_add_fav_post',
+          nonce: capalot.ajax_nonce,
+          is_add: fav_btn.dataset.is,
+          post_id: capalot.singular_id,
+        },
+        beforeSend: () => {
+          unfav_icon.classList.add('fa-spinner', 'fa-spin');
+        },
+        success: ({ status, msg }) => {
+          status === 1
+            ? ca.notice({ title: msg, icon: 'success' })
+            : ca.notice({ title: msg, icon: 'error' });
+
+          $('.fa-spinner').addClass('hidden')
+          fav_btn.dataset.is == '0' ? fav_btn.dataset.is = '1' : fav_btn.dataset.is = '0';
+          fav_icon.classList.remove('hidden');
+        }
+      })
+    });
+  },
+
+  // toast 提示
+  notice: function ({ title, icon, timer = 2000 }) {
+    Swal.fire({
+      title,
+      position: 'top',
+      toast: true,
+      timer,
+      icon,
+      showConfirmButton: false,
+      customClass: {
+        container: 'mt-10'
       }
     });
   },
@@ -46,13 +191,16 @@ let ca = {
     time,
     callback,
     icon = '', // success | info | error
+    showCloseButton = true,
+    position = 'center',
   }) {
 
     Swal.fire({
       title,
       icon,
       html,
-      showCloseButton: true,
+      showCloseButton,
+      position,
       showConfirmButton: false,
       width: '240px',
       customClass: {
@@ -89,8 +237,8 @@ let ca = {
         complete: ({ responseJSON }) => {
           const { status, msg } = responseJSON;
           status === 1
-            ? ca.popup({ title: msg, icon: 'success' })
-            : ca.popup({ title: msg, icon: 'error' })
+            ? ca.notice({ title: msg, icon: 'success' })
+            : ca.notice({ title: msg, icon: 'error' })
         }
       })
 
@@ -161,6 +309,7 @@ let ca = {
     }
   },
 
+  // 轮播初始化
   swiper: function () {
     const el = document.querySelector('.mySwiper');
 

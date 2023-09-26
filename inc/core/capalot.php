@@ -242,7 +242,7 @@ class Capalot_Aff
 
   /**
    * 获取推广信息
-   * 
+   *
    */
   public static function get_user_aff_info($data)
   {
@@ -326,6 +326,35 @@ class Capalot_Cdk
         break;
     }
   }
+  /**
+   * 根据code获取CDK
+   */
+  public static function get_cdk($code)
+  {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'capalot_cdk';
+
+    $cdk = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table_name WHERE code = %s", $code));
+
+    return $cdk;
+  }
+
+  /**
+   * 更改邀请码状态
+   */
+  public static function update_cdk($update, $where)
+  {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'capalot_cdk';
+
+    $update = $wpdb->update(
+      $table_name,
+      $update,
+      $where
+    );
+
+    return $update ? true : false;
+  }
 }
 
 /**
@@ -368,6 +397,9 @@ class Capalot_Code
 
   public static function enstr($url)
   {
+    echo $url;
+  }
+  public static function encid($url){
     echo $url;
   }
 }
@@ -544,7 +576,7 @@ class Capalot_Ticket
   /**
    * 工单更新
    */
-  public static function update($update,$where)
+  public static function update($update, $where)
   {
     global $wpdb;
     $table_name = $wpdb->prefix . 'capalot_ticket';
@@ -556,5 +588,33 @@ class Capalot_Ticket
     );
 
     return $update ? true : false;
+  }
+
+  /**
+   * 新增工单数据
+   */
+  public static function add($data){
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'capalot_ticket';
+
+    $insert = $wpdb->insert(
+      $table_name,
+      [
+        'type' => $data['type'],
+        'title' => $data['title'],
+        'content' => $data['content'],
+        'reply_content' => $data['reply_content'],
+        'file' => $data['file'],
+        'reply_file' => $data['reply_file'],
+        'creator_id' => $data['creator_id'],
+        'assignee_id' => $data['assignee_id'],
+        'create_time' => time(),
+        'updated_time' => time(),
+        'reply_time' => time(),
+        'status' => $data['status'],
+      ]
+    );
+
+    return $insert ? true : false;
   }
 }

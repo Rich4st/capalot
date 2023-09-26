@@ -15,7 +15,7 @@ $uc_vip_info = get_user_vip_data($current_user->ID);
 		</h5>
 		<p class="mb-1"><?php echo $current_user->user_login; ?></p>
 		<?php if(is_site_shop()):?>
-		<p class="mb-1"><?php echo capalot_get_user_badge($current_user->ID,'span','mb-0'); ?></p>
+		<p class="mb-1"><?php echo capalot_get_user_badge($current_user->ID,'span','mb-0 px-1 rounded'); ?></p>
 		<?php endif;?>
 
 		<?php if ($uc_vip_info['type'] != 'no') {
@@ -28,8 +28,8 @@ $uc_vip_info = get_user_vip_data($current_user->ID);
 	<?php if(is_site_shop()):?>
 	<div class="text-center bg-success bg-opacity-10 py-4 text-sm">
 	    <p class="mb-2 text-[#67d5b4]"><?php printf(__('每天可下载数(%d)', 'ripro'), $uc_vip_info['downnums']['total']);?></p>
-	    <span class="badge bg-primary bg-opacity-10 text-primary mb-1"><?php printf(__('今日已用(%d)', 'ripro'), $uc_vip_info['downnums']['used']);?></span>
-	    <span class="badge bg-primary text-[#4d84ea] bg-opacity-10 text-primary mb-1"><?php printf(__('今日剩余(%d)', 'ripro'), $uc_vip_info['downnums']['not']);?></span>
+	    <span class="badge bg-primary bg-opacity-10 text-primary mb-1 rounded px-1"><?php printf(__('今日已用(%d)', 'ripro'), $uc_vip_info['downnums']['used']);?></span>
+	    <span class="badge bg-primary text-[#4d84ea] bg-opacity-10 text-primary mb-1 rounded px-1"><?php printf(__('今日剩余(%d)', 'ripro'), $uc_vip_info['downnums']['not']);?></span>
 	</div>
 	<?php endif;?>
 </div>
@@ -40,7 +40,7 @@ $uc_vip_info = get_user_vip_data($current_user->ID);
 	$uc_menus = get_uc_menus();
 	$menu_items = '<ul class="uc-menu-warp space-y-4">';
 	foreach ($uc_menus as $key => $item) {
-	  $class = ($uc_action === $key) ? 'menu-item current-menu-item' : 'menu-item';
+	  $class = ($uc_action === $key) ? 'menu-item current-menu-item text-red-500' : 'menu-item';
 	  $menu_items .= sprintf(
 	    '<li class="%s"><a href="%s"><i class="%s me-1"></i>%s</a></li>',
 	    esc_attr($class),

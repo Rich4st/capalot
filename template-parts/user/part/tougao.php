@@ -35,10 +35,10 @@ $page_link = get_uc_menu_link('tougao');
 ?>
 
 <!-- 投稿列表 -->
-<div class="card user-tougao-warp">
-	<div class="card-header mb-4">
-		<h5 class="fw-bold mb-0 d-flex align-items-center justify-content-between"><?php _e('投稿管理', 'ripro');?>
-		<a class="btn btn-sm btn-success" href="<?php echo esc_url(home_url('/tougao' ));?>"><i class="fas fa-edit me-1"></i><?php _e('新建投稿', 'ripro');?></a>
+<div class="mb-4 bg-white dark:bg-dark-card p-4 mx-2 rounded user-tougao-warp">
+	<div class="mb-4">
+		<h5 class="font-bold flex justify-between  items-center"><?php _e('投稿管理', 'ripro');?>
+		<a class="bg-[#0cbc87] px-2 py-1 text-white rounded  " href="<?php echo esc_url(home_url('/tougao' ));?>"><i class="fa-solid fa-pen-to-square"></i><?php _e('新建投稿', 'ripro');?></a>
 		</h5>
 		<div class="mt-2">
 			<?php

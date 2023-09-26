@@ -416,7 +416,7 @@ class Capalot_UI
 
     echo '<div class="card-body">';
     if (!empty($results)) {
-      echo '<ul class="card-body-ul">';
+      echo '<ul class="card-body-ul sales_ranking">';
       $rank_num = 0;
       foreach ($results as $result) {
         $rank_num++;
@@ -428,8 +428,8 @@ class Capalot_UI
         }
 
         echo sprintf(
-          '<li class="text-gray-500 flex items-center">
-          <span class="bg-gray-200 py-[1px] px-1 rounded-sm mr-2">%s</span>%s
+          '<li class="item">
+          <span class="title">%s</span>%s
           <span style="margin-left:auto;">￥%s (%s单)</span>
           </li>',
           $rank_num,
