@@ -169,7 +169,7 @@ let ca = {
   },
 
   // toast 提示
-  notice: function ({ title, icon, timer = 2000 }) {
+  notice: function ({ title = '成功', icon = 'success', timer = 2000 }) {
     Swal.fire({
       title,
       position: 'top',
