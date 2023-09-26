@@ -2357,6 +2357,14 @@ CSF::createSection($prefix, array(
       'default' => false
     ),
 
+    array(
+      'id' => 'show_admin_bar',
+      'type'    => 'switcher',
+      'title'   => '移除前端顶部管理栏',
+      'desc'    => '',
+      'default' => true,
+    )
+
   )
 ));
 
