@@ -368,9 +368,9 @@ class Capalot_UI
       "SELECT user_id, meta_value FROM {$wpdb->usermeta} WHERE meta_key='capalot_balance' ORDER BY meta_value DESC LIMIT 7"
     );
 
-    echo '<div class="card-body">';
+    echo '<div class=" ranking_list">';
     if (!empty($results)) {
-      echo '<ul class="card-body-ul">';
+      echo '<ul class="">';
       $rank_num = 0;
       foreach ($results as $result) {
         $rank_num++;
@@ -378,10 +378,11 @@ class Capalot_UI
         $vip_info = get_user_vip_data($result->user_id);
         $avatar = get_avatar($result->user_id, 50);
         echo sprintf(
-          '<li class="text-gray-500 flex items-center">
-          <span class="bg-gray-200 py-[1px] px-1 rounded-sm mr-2">%s</span>
-          <span class="rounded-full overflow-hidden w-8 h-8 mr-2"> %s</span>
-          <span style="margin-right:10px;">%s (%s)</span> <span style="margin-left:auto;">%s (%s)</span>
+          '<li class="">
+          <span class="numA_s">%s</span>
+          <span class="imgB_s"> %s</span>
+          <span style="nameC_s">%s (%s)</span>
+          <span style="goldD_s">%s (%s)</span>
           </li>',
           $rank_num,
           $avatar,
@@ -415,7 +416,7 @@ class Capalot_UI
 
     echo '<div class="card-body">';
     if (!empty($results)) {
-      echo '<ul class="card-body-ul">';
+      echo '<ul class="card-body-ul sales_ranking">';
       $rank_num = 0;
       foreach ($results as $result) {
         $rank_num++;
@@ -427,8 +428,8 @@ class Capalot_UI
         }
 
         echo sprintf(
-          '<li class="text-gray-500 flex items-center">
-          <span class="bg-gray-200 py-[1px] px-1 rounded-sm mr-2">%s</span>%s
+          '<li class="item">
+          <span class="title">%s</span>%s
           <span style="margin-left:auto;">￥%s (%s单)</span>
           </li>',
           $rank_num,
@@ -456,9 +457,9 @@ class Capalot_UI
       "SELECT post_id, COUNT(post_id) AS count FROM {$table_name} WHERE 1=1 GROUP BY post_id ORDER BY count DESC LIMIT 10"
     );
 
-    echo '<div class="card-body">';
+    echo '<div class="download_list">';
     if (!empty($results)) {
-      echo '<ul class="card-body-ul">';
+      echo '<ul class="">';
       $rank_num = 0;
       foreach ($results as $result) {
         $rank_num++;
@@ -466,10 +467,10 @@ class Capalot_UI
         if (get_permalink($result->post_id)) {
           $post = sprintf('<a target="_blank" href=%s>%s</a>', get_permalink($result->post_id), get_the_title($result->post_id));
         } else {
-          $post = '其他PID : ' . $result->post_id;
+          $post = '<span>其他PID : ' . $result->post_id . '</span>';
         }
 
-        echo sprintf('<li class="text-muted"><span class="badge bg-secondary" style="margin-right:10px;">%s</span>%s <span style="margin-left:auto;">%s (次)</span></li>', $rank_num, $post, $result->count);
+        echo sprintf('<li class=" "><span class="d_numA" style="">%s</span>%s <span style="">%s (次)</span></li>', $rank_num, $post, $result->count);
       }
       echo '</ul>';
     } else {
