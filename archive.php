@@ -10,7 +10,7 @@ $archive_item_config = get_posts_style_config();
 
 <?php get_template_part('template-parts/archive-hero'); ?>
 
-<section class="py-16 px-4">
+<section class="py-16 px-4 dark:bg-dark">
   <?php do_action('ripro_ads', 'ad_archive_top'); ?>
 
   <div class="posts-warp grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-cols-1 md:gap-8 gap-2 <?php echo esc_attr($archive_item_config['row_cols_class']); ?>">
