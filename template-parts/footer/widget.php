@@ -18,30 +18,30 @@ if (empty(_capalot('is_site_footer_widget', true))) {
         echo '<a href="' . esc_url(home_url('/')) . '"><img class="logo regular max-h-16" src="' . esc_url($logo_img) . '" alt="' . esc_attr(get_bloginfo('name')) . '"></a>';
         ?>
       </div>
-      <p class=" text-sm text-gray-600"><?php echo $site_dese; ?></p>
+      <p class=" text-sm text-gray-600 dark:text-gray-400"><?php echo $site_dese; ?></p>
     </div>
 
     <div class=" ">
-      <h4 class=" text-lg"><?php _e('快速导航', 'ripro'); ?></h4>
-      <ul class=" text-gray-600 text-sm leading-6">
+      <h4 class=" text-lg dark:text-gray-50"><?php _e('快速导航', 'ripro'); ?></h4>
+      <ul class=" text-gray-600 text-sm leading-6 dark:text-gray-400">
         <?php foreach (_capalot('site_footer_widget_link1', array()) as $item) {
-          printf('<li><a href="%s" class=" hover:text-gray-950">%s</a></li>', $item['href'], $item['title']);
+          printf('<li><a href="%s" class=" hover:text-gray-950 hover:dark:text-gray-200">%s</a></li>', $item['href'], $item['title']);
         } ?>
       </ul>
     </div>
 
     <div class="">
-      <h4 class=" text-lg"><?php _e('关于本站', 'ripro'); ?></h4>
-      <ul class=" text-gray-600 text-sm leading-6">
+      <h4 class=" text-lg dark:text-gray-50"><?php _e('关于本站', 'ripro'); ?></h4>
+      <ul class=" text-gray-600 text-sm leading-6 dark:text-gray-400">
         <?php foreach (_capalot('site_footer_widget_link2', array()) as $item) {
-          printf('<li><a href="%s" class=" hover:text-gray-950">%s</a></li>', $item['href'], $item['title']);
+          printf('<li><a href="%s" class=" hover:text-gray-950 hover:dark:text-gray-200">%s</a></li>', $item['href'], $item['title']);
         } ?>
       </ul>
     </div>
 
     <div class=" col-span-2">
-      <h4 class="widget-title"><?php _e('联系我们', 'ripro'); ?></h4>
-      <div class=" text-sm text-gray-600"><?php echo _capalot('site_contact_desc'); ?></div>
+      <h4 class="widget-title dark:text-gray-50"><?php _e('联系我们', 'ripro'); ?></h4>
+      <div class=" text-sm text-gray-600 dark:text-gray-400"><?php echo _capalot('site_contact_desc'); ?></div>
     </div>
   </div>
 </div>
