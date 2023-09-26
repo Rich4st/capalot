@@ -241,12 +241,88 @@ class Capalot_Aff
   }
 
   /**
-   * 获取推广信息
+   * 获取用户推广信息
    *
+   * @param int $user_id 用户ID
    */
-  public static function get_user_aff_info($data)
+  public static function get_user_aff_info($user_id)
   {
-    echo  $data . '12345';
+    $total = self::get_total($user_id);
+    $can_be_withdraw = self::can_be_withdraw($user_id);
+    $withdrawing = self::withdrawing($user_id);
+    $withdrawed = self::withdrawed($user_id);
+
+    $user_aff_info = [
+      'total' => $total,
+      'can_be_withdraw' => $can_be_withdraw,
+      'withdrawing' => $withdrawing,
+      'withdrawed' => $withdrawed,
+    ];
+
+    return $user_aff_info;
+  }
+
+  // 获取用户累计佣金
+  public static function get_total($user_id)
+  {
+    return get_user_meta($user_id, 'capalot_aff_total', 1);
+  }
+
+  /**
+   * 更新用户累计佣金
+   *
+   * @param int $user_id 用户ID
+   * @param int $num 佣金数额
+   */
+  public static function update_total($user_id, $num)
+  {
+    $total = get_user_meta($user_id, 'capalot_aff_total', 1);
+
+    $total += $num;
+
+    update_user_meta($user_id, 'capalot_aff_total', $total);
+  }
+
+  // 可提现金额
+  public static function can_be_withdraw($user_id)
+  {
+    // 累计佣金 - 提现中金额 - 已提现金额
+    $total = self::get_total($user_id);
+    $withdrawing = self::withdrawing($user_id);
+    $withdrawed = self::withdrawed($user_id);
+
+    // 转换为浮点数并相减，空则为0
+    $can_be_withdraw = floatval($total) - floatval($withdrawing) - floatval($withdrawed);
+
+    return $can_be_withdraw;
+  }
+
+  // 提现中金额
+  public static function withdrawing($user_id)
+  {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'capalot_aff';
+
+    // 获取所有status为0，aff_uid为$user_id的数据并将他们的aff_rate相加
+    $sql = "SELECT SUM(aff_rate) FROM $table_name WHERE aff_uid = %d AND status = 0";
+
+    $sum = $wpdb->get_var($wpdb->prepare($sql, $user_id));
+
+    return $sum ? (float) $sum : 0;
+  }
+
+  // 已提现金额
+  public static function withdrawed($user_id)
+  {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'capalot_aff';
+
+    // 获取所有status为1，aff_uid为$user_id的数据并将他们的aff_rate相加
+    $sql = "SELECT SUM(aff_rate) FROM $table_name WHERE aff_uid = %d AND status = 1";
+
+    $sum = $wpdb->get_var($wpdb->prepare($sql, $user_id));
+
+    return $sum ? (float) $sum : 0;
   }
 }
 
@@ -407,7 +483,8 @@ class Capalot_Code
   {
     echo $url;
   }
-  public static function encid($url){
+  public static function encid($url)
+  {
     echo $url;
   }
 }
@@ -601,7 +678,8 @@ class Capalot_Ticket
   /**
    * 新增工单数据
    */
-  public static function add($data){
+  public static function add($data)
+  {
     global $wpdb;
     $table_name = $wpdb->prefix . 'capalot_ticket';
 
