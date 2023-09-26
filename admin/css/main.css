@@ -144,3 +144,30 @@
 .tj_data_a .tj_data_pt{
   margin: 0 0 1rem 0;
 }
+
+
+/* 全站销量排行 */
+.sales_ranking .item {
+  display: flex;
+  align-items: center;
+  color: rgb(107 114 128);
+  margin-bottom: 4px;
+}
+
+.sales_ranking .item>a {
+  text-decoration: none;
+  color: rgb(107 114 128);
+}
+
+.sales_ranking .item>a:hover {
+  text-decoration: underline;
+  color: #1981e1;
+}
+
+
+.sales_ranking .title {
+  background-color: rgb(229 231 235);
+  padding: 1px 6px;
+  border-radius: 2px;
+  margin-right: 8px;
+}
