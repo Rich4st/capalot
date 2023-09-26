@@ -117,7 +117,7 @@ $page_link = get_uc_menu_link('tougao');
 										<span class="meta-likes  md:inline-block hidden mr-1"><i class="far fa-heart me-1"></i><?php echo capalot_get_post_likes(); ?></span>
 										<span class="meta-fav md:inline-block hidden mr-1"><i class="far fa-star me-1"></i><?php echo capalot_get_post_favorites(); ?></span>
 										<span class="meta-views mr-1"><i class="fa-regular fa-eye pr-1"></i><?php echo capalot_get_post_views(); ?></span>
-										<?php if (is_site_shop() && post_is_pay($post_id)) : ?>
+										<?php if (is_site_shop() && post_has_pay($post_id)) : ?>
 											<span class="meta-price whitespace-nowrap flex flex-row"><i class="<?php echo get_site_coin_icon(); ?> me-1"></i><?php echo $post_price; ?></span>
 										<?php endif; ?>
 
