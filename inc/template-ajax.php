@@ -58,6 +58,8 @@ class Capalot_Ajax
     $this->add_action('user_qiandao', 1); //签到
     $this->add_action('add_like_post'); //点赞文章
     $this->add_action('add_fav_post'); //收藏文章
+    $this->add_action('load_more'); //加载更多文章
+
   }
 
   /**
@@ -980,5 +982,39 @@ class Capalot_Ajax
         'msg'    => '已取消收藏',
       ));
     }
+  }
+
+  // 分页加载更多文章
+  function load_more()
+  {
+    $ajaxposts = new WP_Query([
+      'ignore_sticky_posts' => false,
+      'post_status' => 'publish',
+      'paged' => $_POST['paged'],
+    ]);
+
+    $response = '';
+    $max_pages = $ajaxposts->max_num_pages;
+
+    if ($ajaxposts->have_posts()) {
+      while ($ajaxposts->have_posts()) : $ajaxposts->the_post();
+        $item_config = get_posts_style_config();
+
+        ob_start();
+        get_template_part('template-parts/loop/item', '', $item_config);
+
+        $response .= ob_get_clean();
+      endwhile;
+    } else {
+      $response = '';
+    }
+
+    $result = [
+      'max' => $max_pages,
+      'html' => $response,
+    ];
+
+    echo json_encode($result);
+    exit;
   }
 }

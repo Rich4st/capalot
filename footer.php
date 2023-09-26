@@ -1,99 +1,29 @@
-<footer class="flex flex-col items-center bg-neutral-100 text-center dark:bg-neutral-600 lg:text-left">
-  <div class="container p-6">
-    <div class="grid place-items-center md:grid-cols-2 lg:grid-cols-4">
-      <div class="mb-6">
-        <h5 class="mb-2.5 font-bold uppercase text-neutral-800 dark:text-neutral-200">
-          LOGo
-        </h5>
 
-        <ul class="mb-0 list-none">
-          <li>
-            <a href="/" class="text-neutral-800 dark:text-neutral-200">Link 1</a>
-          </li>
-          <li>
-            <a href="/" class="text-neutral-800 dark:text-neutral-200">Link 2</a>
-          </li>
-          <li>
-            <a href="/" class="text-neutral-800 dark:text-neutral-200">Link 3</a>
-          </li>
-          <li>
-            <a href="/" class="text-neutral-800 dark:text-neutral-200">Link 4</a>
-          </li>
-        </ul>
-      </div>
+</main>
+<!-- **************** MAIN CONTENT END **************** -->
 
+<!-- =======================
+Footer START -->
+<footer class=" py-6">
+	<div class=" lg:max-w-[80rem] m-auto px-4 lg:px-0">
 
-      <div class="mb-6">
-        <h5 class="mb-2.5 font-bold uppercase text-neutral-800 dark:text-neutral-200">
-          快速导航
-        </h5>
+		<?php get_template_part( 'template-parts/footer/widget');?>
 
-        <ul class="mb-0 list-none">
-          <li>
-            <a href="/" class="text-neutral-800 dark:text-neutral-200">Link 1</a>
-          </li>
-          <li>
-            <a href="/" class="text-neutral-800 dark:text-neutral-200">Link 2</a>
-          </li>
-          <li>
-            <a href="/" class="text-neutral-800 dark:text-neutral-200">Link 3</a>
-          </li>
-          <li>
-            <a href="/" class="text-neutral-800 dark:text-neutral-200">Link 4</a>
-          </li>
-        </ul>
-      </div>
+		<div class=" text-center  text-sm text-gray-600 py-4">
+			<div><?php echo _capalot('site_copyright_text','Copyright © 2023 <a target="_blank" href="http://ritheme.com/">RiPro-V5</a> - All rights reserved');?></div>
+			<div class=""><?php echo _capalot('site_ipc_text','') . _capalot('site_ipc2_text','');?></div>
+		</div>
 
-      <div class="mb-6">
-        <h5 class="mb-2.5 font-bold uppercase text-neutral-800 dark:text-neutral-200">
-          关于本站
-        </h5>
+		<?php get_template_part( 'template-parts/footer/links');?>
 
-        <ul class="mb-0 list-none">
-          <li>
-            <a href="/" class="text-neutral-800 dark:text-neutral-200">Link 1</a>
-          </li>
-          <li>
-            <a href="/" class="text-neutral-800 dark:text-neutral-200">Link 2</a>
-          </li>
-          <li>
-            <a href="/" class="text-neutral-800 dark:text-neutral-200">Link 3</a>
-          </li>
-          <li>
-            <a href="/" class="text-neutral-800 dark:text-neutral-200">Link 4</a>
-          </li>
-        </ul>
-      </div>
+		<?php if (defined('WP_DEBUG') && WP_DEBUG == true) {
+			echo '<p id="debug-info" class="m-0 small text-primary w-100 text-center ">'.sprintf('SQL：%s',get_num_queries()).'<span class="sep"> | </span>'.sprintf('Pages：%ss',timer_stop(0,5)).'</p>';
+		}?>
 
-      <div class="mb-6">
-        <h5 class="mb-2.5 font-bold uppercase text-neutral-800 dark:text-neutral-200">
-          联系我们
-        </h5>
-
-        <ul class="mb-0 list-none">
-          <li>
-            <a href="/" class="text-neutral-800 dark:text-neutral-200">Link 1</a>
-          </li>
-          <li>
-            <a href="/" class="text-neutral-800 dark:text-neutral-200">Link 2</a>
-          </li>
-          <li>
-            <a href="/" class="text-neutral-800 dark:text-neutral-200">Link 3</a>
-          </li>
-          <li>
-            <a href="/" class="text-neutral-800 dark:text-neutral-200">Link 4</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="w-full bg-neutral-200 p-4 text-center text-neutral-700 dark:bg-neutral-700 dark:text-neutral-200">
-    © 2023 Copyright:
-    <a class="text-neutral-800 dark:text-neutral-400" href="/">capalot</a>
-  </div>
+	</div>
 </footer>
+<!-- =======================
+Footer END -->
 
 
 
@@ -141,7 +71,9 @@
 
 
 <?php wp_footer(); ?>
-
+<!-- 自定义js代码 统计代码 -->
+<?php if ( !empty(_capalot('site_web_js')) ) echo _capalot('site_web_js');?>
+<!-- 自定义js代码 统计代码 END -->
 </body>
 
 </html>
