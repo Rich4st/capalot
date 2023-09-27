@@ -4,7 +4,7 @@
  * 主题AJAX接口
  * 地址：domain/wp-admin/admin-ajax.php
  * 参数：action 接口
- * 参数：nonce 安全验证参数 使用 wp_create_nonce("zb_ajax") 方法生成
+ * 参数：nonce 安全验证参数 使用 wp_create_nonce("capalot_ajax") 方法生成
  * $this->add_action('test_api'); //全部用户可用
  * $this->add_action('test_api',0); //未登录用户可用
  * $this->add_action('test_api',1); //登录用户可用
@@ -61,7 +61,7 @@ class Capalot_Ajax
     $this->add_action('load_more'); //加载更多文章
     $this->add_action('get_captcha_code'); //获取验证码
     $this->add_action('add_share_post'); //分享文章
-
+    $this->add_action('add_post_views'); //文章阅读数量+1
   }
 
   /**
@@ -989,6 +989,7 @@ class Capalot_Ajax
     }
   }
 
+  // 分享文章
   public function add_share_post()
   {
     $this->valid_nonce_ajax(); #安全验证
@@ -1020,6 +1021,26 @@ class Capalot_Ajax
       'status' => 1,
       'msg'    => array('data' => $data, 'html' => $body),
     ));
+  }
+
+  // 文章阅读数量+1
+  public function add_post_views()
+  {
+
+    $this->valid_nonce_ajax(); #安全验证
+
+    $post_id = (int) get_response_param('post_id');
+    if ($post_id && capalot_add_post_views($post_id)) {
+      wp_send_json(array(
+        'status' => 1,
+        'msg'    => sprintf('PID：%s ', $post_id),
+      ));
+    } else {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => sprintf('PID：%s error', $post_id),
+      ));
+    }
   }
 
   // 分页加载更多文章

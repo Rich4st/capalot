@@ -20,6 +20,9 @@ let ca = {
       ca.captcha_action();
       captcha_code.addEventListener('click', ca.captcha_action);
     }
+
+    if (capalot.singular_id !== '0')
+      ca.add_post_views();
   },
 
   /**
@@ -208,7 +211,12 @@ let ca = {
     })
   },
 
-  // toast 提示
+  /**
+   * toast 提示
+   * @param {string} title 标题
+   * @param {string} icon 图标 'success' | 'error'
+   * @param {number} timer 延迟时间 ms后自动关闭
+   */
   notice: function ({ title = '成功', icon = 'success', timer = 2000 }) {
     Swal.fire({
       title,
@@ -223,7 +231,10 @@ let ca = {
     });
   },
 
-  // 对话框
+  /**
+   * 对话框
+   * @see https://sweetalert2.github.io/#configuration
+   */
   popup: function ({
     content,
     html,
@@ -354,6 +365,17 @@ let ca = {
     const el = document.querySelector('.mySwiper');
 
     var swiper = new Swiper(".mySwiper", JSON.parse(el.dataset.config));
+  },
+
+  // 文章阅读数量+1
+  add_post_views: function () {
+    ca.ajax({
+      data: {
+        action: 'capalot_add_post_views',
+        nonce: capalot.ajax_nonce,
+        post_id: capalot.singular_id,
+      }
+    })
   }
 
 }
