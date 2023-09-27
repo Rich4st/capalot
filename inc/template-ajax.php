@@ -404,7 +404,7 @@ class Capalot_Ajax
 
 
     // 移动上传的文件到指定目录并重命名
-    $newFilename = 'avatar-' . Capalot_Code::encid($user_id) . '.' . $extension;
+    $newFilename = 'avatar-' . $user_id . '.' . $extension;
 
 
     add_filter('upload_dir', function ($dirs) {
@@ -437,7 +437,7 @@ class Capalot_Ajax
 
     wp_send_json(array(
       'status' => 1,
-      'msg'    => __('头像上传成功', 'ripro'),
+      'msg'    => '头像上传成功',
     ));
   }
 
