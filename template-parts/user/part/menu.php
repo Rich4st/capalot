@@ -28,8 +28,8 @@ $uc_vip_info = get_user_vip_data($current_user->ID);
 	<?php if(is_site_shop()):?>
 	<div class="text-center bg-success bg-opacity-10 py-4 text-sm">
 	    <p class="mb-2 text-[#67d5b4]"><?php printf(__('每天可下载数(%d)', 'ripro'), $uc_vip_info['downnums']['total']);?></p>
-	    <span class="badge bg-primary bg-opacity-10 text-primary mb-1 rounded px-1"><?php printf(__('今日已用(%d)', 'ripro'), $uc_vip_info['downnums']['used']);?></span>
-	    <span class="badge bg-primary text-[#4d84ea] bg-opacity-10 text-primary mb-1 rounded px-1"><?php printf(__('今日剩余(%d)', 'ripro'), $uc_vip_info['downnums']['not']);?></span>
+	    <span class="badge bg-primary bg-opacity-10  mb-1 rounded px-1"><?php printf(__('今日已用(%d)', 'ripro'), $uc_vip_info['downnums']['used']);?></span>
+	    <span class="badge bg-primary  bg-opacity-10  mb-1 rounded px-1"><?php printf(__('今日剩余(%d)', 'ripro'), $uc_vip_info['downnums']['not']);?></span>
 	</div>
 	<?php endif;?>
 </div>

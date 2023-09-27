@@ -103,7 +103,7 @@ $price_shape = get_template_directory_uri() . '/assets/img/price_shape.png';
 					 hover:shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)]">
 						<div class="py-4 bg-no-repeat bg-cover bg-center bg-<?php echo $vip_colors[$item['type']]; ?> bg-opacity-10">
 
-							<span class="text-[#641a71] text-xl font-bold mb-2"><?php echo $item['buy_title']; ?></span>
+							<span class=" text-xl font-bold mb-2"><?php echo $item['buy_title']; ?></span>
 
 							<h3 class="text-[#fb2971] text-2xl font-bold mb-2"><?php echo $item['coin_price']; ?><sup class="text-base font-semibold "><?php echo get_site_coin_name(); ?></sup></h3>
 
