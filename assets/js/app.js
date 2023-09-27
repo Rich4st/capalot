@@ -1,5 +1,6 @@
 let currentPage = 1;
 const body = jQuery("body");
+
 let ca = {
 
   init: function () {
@@ -13,6 +14,12 @@ let ca = {
 
     ca.account_action();
     ca.social_action();
+
+    const captcha_code = document.querySelector('#captcha-img');
+    if (captcha_code) {
+      ca.captcha_action();
+      captcha_code.addEventListener('click', ca.captcha_action);
+    }
   },
 
   /**
@@ -73,7 +80,7 @@ let ca = {
             msg,
             back_url
           }) => {
-            ca.popup({
+            ca.notice({
               title: msg,
               icon: status == 1 ? 'success' : 'error',
               showCloseButton: false,
@@ -168,8 +175,25 @@ let ca = {
     });
   },
 
+  // 获取验证码
+  captcha_action: function () {
+    ca.ajax({
+      data: {
+        action: 'capalot_get_captcha_code',
+        nonce: capalot.ajax_nonce,
+      },
+      success: ({ status, msg }) => {
+        if (status == 1) {
+          let img = document.querySelector('#captcha-img');
+
+          img.setAttribute('src', msg)
+        }
+      }
+    })
+  },
+
   // toast 提示
-  notice: function ({ title, icon, timer = 2000 }) {
+  notice: function ({ title = '成功', icon = 'success', timer = 2000 }) {
     Swal.fire({
       title,
       position: 'top',

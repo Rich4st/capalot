@@ -71,7 +71,7 @@ $container = _capalot('site_container_width', '1400');
     <?php endif; ?>
 
 
-    <div class="<?php echo esc_attr($cms_style); ?>  grid md:grid-cols-2 grid-cols-1 gap-4 p-2">
+    <div class="<?php echo esc_attr($cms_style); ?>  grid lg:grid-cols-2 grid-cols-1 gap-4 p-2">
 
       <?php if ($PostData->have_posts()) : $counter = 0; ?>
 

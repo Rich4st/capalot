@@ -40,6 +40,11 @@ class capalot_clean
       add_filter('use_block_editor_for_post', '__return_false');
       remove_action('wp_enqueue_scripts', 'wp_common_block_scripts_and_styles');
     }
+
+    // 自带顶部导航栏
+    if(_capalot('show_admin_bar', true)) {
+      add_filter('show_admin_bar', '__return_false');
+    }
   }
 
   public function admin_init()

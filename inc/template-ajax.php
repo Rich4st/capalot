@@ -59,6 +59,7 @@ class Capalot_Ajax
     $this->add_action('add_like_post'); //点赞文章
     $this->add_action('add_fav_post'); //收藏文章
     $this->add_action('load_more'); //加载更多文章
+    $this->add_action('get_captcha_code'); //获取验证码
 
   }
 
@@ -100,7 +101,7 @@ class Capalot_Ajax
       ));
     }
 
-    if (is_site_img_captcha() && !is_img_captcha(strtolower($captcha_code))) {
+    if (is_site_img_captcha() && !verify_captcha_code(strtolower($captcha_code))) {
       wp_send_json(array(
         'status' => 0,
         'msg'    => '验证码错误，请刷新验证码',
@@ -187,7 +188,7 @@ class Capalot_Ajax
       ));
     }
 
-    if (is_site_img_captcha() && !is_img_captcha(strtolower($captcha_code))) {
+    if (is_site_img_captcha() && !verify_captcha_code(strtolower($captcha_code))) {
       wp_send_json(array(
         'status' => 0,
         'msg'    => __('验证码错误，请刷新验证码', 'ripro'),
@@ -293,12 +294,15 @@ class Capalot_Ajax
   }
 
   //验证码
-  public function get_captcha_img()
+  public function get_captcha_code()
   {
     $this->valid_nonce_ajax(); #安全验证
+
+    session_start();
+
     wp_send_json(array(
       'status' => 1,
-      'msg'    => get_img_captcha(),
+      'msg'    => get_captcha_code_img(),
     ));
   }
 
