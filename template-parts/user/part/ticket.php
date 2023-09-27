@@ -24,13 +24,13 @@ $is_delete = get_response_param('delete', 0, 'get');
 			<form class="gap-4 grid lg:grid-cols-4 grid-cols-1" id="ticket-form">
 				<!-- Input item -->
 				<div class="lg:col-span-2 col-span-1 col-start-1 pb-2">
-					<label class="pb-2 block"><?php _e('创建人', 'ripro'); ?></label>
-					<input type="text" class="bg-[#f0f1f3] w-full h-8 px-2 rounded dark:bg-dark" value="<?php echo $current_user->display_name; ?> (<?php echo $current_user->user_login; ?>)" disabled>
+					<label class="pb-2 block text-gray-500"><?php _e('创建人', 'ripro'); ?></label>
+					<input type="text" class="w-full  dark:border-gray-500 dark:bg-dark form-control p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" value="<?php echo $current_user->display_name; ?> (<?php echo $current_user->user_login; ?>)" disabled>
 				</div>
 				<!-- Input item -->
 				<div class="lg:col-span-2 col-span-1 col-start-1 pb-2">
-					<label class="pb-2 block"><?php _e('工单类型', 'ripro'); ?></label>
-					<select name="type" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark">
+					<label class="pb-2 block text-gray-500"><?php _e('工单类型', 'ripro'); ?></label>
+					<select name="type" class="w-full  dark:border-gray-500 dark:bg-dark form-control p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500">
 						<?php $option = [1, 2, 3, 4];
 						foreach ($option as $value) {
 							echo '<option value="' . $value . '">' . Capalot_Ticket::get_type($value) . '</option>';
@@ -39,13 +39,13 @@ $is_delete = get_response_param('delete', 0, 'get');
 
 				</div>
 				<div class="lg:col-span-4 col-span-1 col-start-1">
-					<label class="pb-2 block"><?php _e('工单标题', 'ripro'); ?></label>
-					<input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark" name="title" placeholder="" value="">
+					<label class="pb-2 block text-gray-500"><?php _e('工单标题', 'ripro'); ?></label>
+					<input type="text" class="w-full  dark:border-gray-500 dark:bg-dark form-control p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="title" placeholder="" value="">
 				</div>
 				<!-- Textarea item -->
 				<div class="lg:col-span-4 col-span-1 col-start-1">
-					<label class="pb-2 block"><?php _e('描述', 'ripro'); ?></label>
-					<textarea class="bg-[#ededed] w-full h-24 px-2 rounded dark:bg-dark" rows="8" name="content"></textarea>
+					<label class="pb-2 block text-gray-500"><?php _e('描述', 'ripro'); ?></label>
+					<textarea class="w-full  dark:border-gray-500 dark:bg-dark form-control p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" rows="8" name="content"></textarea>
 				</div>
 
 				<!-- Save button -->
