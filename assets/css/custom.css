@@ -1,22 +1,22 @@
-.fav-pagination{
-    padding:20px 0;
+.fav-pagination {
+    padding: 20px 0;
 }
 
-.fav-pagination > .page-numbers{
-    padding:0.6rem 1rem;
-    margin:0 4px;
+.fav-pagination>.page-numbers {
+    padding: 0.6rem 1rem;
+    margin: 0 4px;
     background-color: #ededed;
-    color:#6b6985;
+    color: #6b6985;
     border-radius: 0.2rem;
 }
 
-.fav-pagination > .page-numbers:hover{
+.fav-pagination>.page-numbers:hover {
     background-color: #1e1e20;
     color: white;
 }
 
-.fav-pagination > .current {
-    background-color:#1e1e20;
+.fav-pagination>.current {
+    background-color: #1e1e20;
     color: white;
     font-weight: bold;
 }
@@ -25,8 +25,8 @@
     background-color: #252529;
 }
 
-:is(.dark .current){
-    background-color:#1e1e20;
+:is(.dark .current) {
+    background-color: #1e1e20;
 }
 
 /* 宽高比例 */
@@ -75,4 +75,35 @@
 
 .ratio-21x9 {
     --ca-aspect-ratio: 42.8571428571%
+}
+
+/* 颜色 */
+.bg-danger {
+    --tw-bg-opacity: 1;
+    background-color: rgb(12 188 135 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#f7c32e\] {
+    --tw-bg-opacity: 0.2;
+    background-color: rgb(247 195 46 / var(--tw-bg-opacity));
+}
+
+.text-primary {
+    --tw-text-opacity: 1;
+    color: rgb(87 13 248 / var(--tw-text-opacity));
+}
+
+.text-success {
+    --tw-text-opacity: 1;
+    color: rgb(54 211 153 / var(--tw-text-opacity));
+}
+
+.text-secondary {
+    --tw-text-opacity: 0.7;
+    color: rgb(89 93 105 / var(--tw-text-opacity));
+}
+
+.bg-secondary {
+    --tw-bg-opacity: 0.2;
+    background-color: rgb(89 93 105 / var(--tw-bg-opacity));
 }
