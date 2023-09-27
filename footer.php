@@ -4,12 +4,12 @@
 
 <!-- =======================
 Footer START -->
-<footer class=" py-6">
+<footer class=" py-6 dark:bg-dark">
 	<div class=" lg:max-w-[80rem] m-auto px-4 lg:px-0">
 
 		<?php get_template_part( 'template-parts/footer/widget');?>
 
-		<div class=" text-center  text-sm text-gray-600 py-4">
+		<div class=" text-center  text-sm text-gray-600 py-4 dark:text-gray-400">
 			<div><?php echo _capalot('site_copyright_text','Copyright © 2023 <a target="_blank" href="http://ritheme.com/">RiPro-V5</a> - All rights reserved');?></div>
 			<div class=""><?php echo _capalot('site_ipc_text','') . _capalot('site_ipc2_text','');?></div>
 		</div>

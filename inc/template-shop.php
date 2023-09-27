@@ -336,7 +336,21 @@ function is_site_comments()
 {
     return !empty(_capalot('is_site_comments', 1));
 }
-
+//是否开启作者佣金
+function is_site_author_aff() {
+    return (bool) _capalot('is_site_author_aff', true);
+}
+//获取网站作者佣金比例
+function get_site_author_aff_rate() {
+    $ratio = (float) _capalot('site_author_aff_ratio', 0);
+    if ($ratio >= 1) {
+        $ratio = 0;
+    }
+    if ($ratio <= 0) {
+        $ratio = 0;
+    }
+    return $ratio;
+}
 //是否开启邀请码注册
 function is_site_invitecode_register()
 {
