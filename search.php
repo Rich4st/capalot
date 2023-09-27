@@ -14,7 +14,7 @@ $archive_item_config = get_posts_style_config();
 	<section class=" lg:max-w-[80rem] m-auto px-2 lg:px-0 py-8 ">
 		<?php do_action('ripro_ads', 'ad_archive_top'); ?>
 
-		<div class="posts-warp row grid lg:grid-cols-4 grid-cols-2 lg:gap-4 gap-2 <?php echo esc_attr($archive_item_config['row_cols_class']); ?>">
+		<div class="posts-wrap row grid lg:grid-cols-4 grid-cols-2 lg:gap-4 gap-2 <?php echo esc_attr($archive_item_config['row_cols_class']); ?>">
 			<?php if (have_posts()) :
 				while (have_posts()) : the_post();
 					get_template_part('template-parts/loop/item', get_post_format(), $archive_item_config);
