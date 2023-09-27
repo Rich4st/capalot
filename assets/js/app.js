@@ -8,9 +8,9 @@ let ca = {
     ca.pagination();
     ca.toggle_dark();
 
-    // const swiperEl = document.querySelector('.swiper');
-    // if (swiperEl)
-    //   ca.swiper();
+    const swiperEl = document.querySelector('.swiper');
+    if (swiperEl)
+      ca.swiper();
 
     ca.account_action();
     ca.social_action();
