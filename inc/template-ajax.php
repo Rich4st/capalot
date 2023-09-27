@@ -862,8 +862,6 @@ class Capalot_Ajax
         'msg' => '订单创建失败',
       ]);
 
-
-
     // // 请求支付接口
     $response = capalot_get_request_pay($order_data);
 

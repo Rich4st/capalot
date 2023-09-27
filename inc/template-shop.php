@@ -42,15 +42,17 @@ function is_site_tougao()
 
 
 //是否开启签到功能
-function is_site_qiandao() {
+function is_site_qiandao()
+{
     return !empty(_capalot('is_site_qiandao', 1));
 }
 
 //今日是否已签到
-function is_user_today_qiandao($user_id) {
+function is_user_today_qiandao($user_id)
+{
 
     // 会员当前签到时间
-    $qiandao_time = get_user_meta($user_id, 'cao_qiandao_time', true);
+    $qiandao_time = get_user_meta($user_id, 'capalot_qiandao_time', true);
 
     if (empty($qiandao_time)) {
         $qiandao_time = 0;
@@ -156,8 +158,10 @@ function update_user_vip_data($user_id, $new_day = '0')
 {
 
     $user_id = intval($user_id);
+    $vip_options = get_site_vip_options();
     $vip_buy_options = get_site_vip_buy_options();
     $new_day = absint($new_day);
+    var_dump($new_day);
 
     if (empty($new_day)) {
         $new_type = 'no';
@@ -259,7 +263,7 @@ function get_user_vip_data($user_id)
     $user_type   = get_user_vip_type($user_id);
     //今日可下载次数
     $downnum_total = $vip_options[$user_type]['downnum'];
-    //TODO:今日已下载次数
+    // 今日已下载次数
     $downnum_used = Capalot_Download::get_user_today_download_num($user_id);
     $downnum_not  = $downnum_total - 0;
     $downnum_not = ($downnum_not >= 0) ? $downnum_not : 0;
@@ -337,11 +341,13 @@ function is_site_comments()
     return !empty(_capalot('is_site_comments', 1));
 }
 //是否开启作者佣金
-function is_site_author_aff() {
+function is_site_author_aff()
+{
     return (bool) _capalot('is_site_author_aff', true);
 }
 //获取网站作者佣金比例
-function get_site_author_aff_rate() {
+function get_site_author_aff_rate()
+{
     $ratio = (float) _capalot('site_author_aff_ratio', 0);
     if ($ratio >= 1) {
         $ratio = 0;
@@ -800,11 +806,18 @@ function capalot_get_request_pay($order_data)
                 $result['msg'] = '订单状态处理异常';
                 return $result;
             } else {
+                $uc_vip_info = get_user_vip_data($order_data['user_id']);
+
+                if ($uc_vip_info['type'] != 'boosvip') {
+                    $update = update_user_vip_data($order_data['user_id'], $order_data['order_price']);
+                }
+
                 return [
                     'status' => 1, //状态
                     'method' => 'reload', // popup|弹窗  url|跳转 reload|刷新 jsapi|js方法
                     'num'    => $order_data['order_trade_no'], //订单号
-                    'msg'    => '支付成功'
+                    'msg'    => '支付成功',
+                    'order' => $order_data
                 ];
             }
 
@@ -827,6 +840,35 @@ function capalot_get_request_pay($order_data)
     return apply_filters('capalot_get_request_pay', $result, $order_data);
 }
 
+/**
+ * 支付成功后处理订单
+ *
+ * 处理订单业务逻辑 1 => 'Post',2 => 'VIP',3 => 'Other'
+ */
+function capalot_pay_success_callback($order)
+{
+    if (empty($order) || empty($order->pay_status))
+        return false;
+
+    $order_info = maybe_unserialize($order->order_info);
+
+    if ($order->order_type == 1) {
+        // TODO: 文章订单
+    } elseif ($order->order_type == 2) {
+        // TODO: 充值订单
+    } elseif ($order->order_type == 3 && isset($order_info['vip_type'])) {
+        $uc_vip_info = get_user_vip_data($order->user_id);
+
+        if ($uc_vip_info['type'] != 'boosvip') {
+
+            //更新用户会员状态
+            $update = update_user_vip_data($order->user_id, $order_info['vip_day']);
+        }
+
+        $site_vip_options = get_site_vip_options();
+    }
+}
+add_action('site_pay_order_success', 'capalot_pay_success_callback', 10, 1);
 
 /**
  * 用户是否第三方注册未设置密码
