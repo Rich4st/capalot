@@ -60,7 +60,7 @@ $site_color = get_site_default_color_style();
                         <?php
                         printf('<a href="%s"><i class="%s me-1"></i>%s</a>', get_uc_menu_link('logout'), $uc_menus['logout']['icon'], $uc_menus['logout']['title']);
                         if (in_array('administrator', $current_user->roles)) {
-                            printf('<a target="_blank" href="%s"><i class="fab fa-wordpress me-1"></i>%s</a>', esc_url(home_url('/wp-admin/')), __('后台管理', 'ripro'));
+                            printf('<a target="_blank" href="%s"><i class="fab fa-wordpress me-1 fa-lg"></i>%s</a>', esc_url(home_url('/wp-admin/')), __('后台管理', 'ripro'));
                         } else {
                             printf('<a href="%s"><i class="%s me-1"></i>%s</a>', get_uc_menu_link('aff'), $uc_menus['aff']['icon'], $uc_menus['aff']['title']);
                         }
@@ -93,7 +93,7 @@ $site_color = get_site_default_color_style();
                                 if ($item['key'] != 'no') {
                                     $color = $colors[$item['key']];
                                     $link  = get_uc_menu_link('vip');
-                                    echo '<a class="btn btn-sm md:block bg-' . $color . ' text-white bg-opacity-75 rounded-lg p-2 py-3 mb-2" href="' . $link . '"><i class="far fa-gem me-1"></i>' . __('本站', 'ripro') . $item['name'] . '</a>';
+                                    echo '<a class="btn btn-sm md:block bg-' . $color . ' text-white bg-opacity-75 rounded-lg p-2 py-3 mb-2" href="' . $link . '"><i class="far fa-gem me-1 fa-lg"></i>' . __('本站', 'ripro') . $item['name'] . '</a>';
                                 }
                             }
                             ?>
@@ -109,7 +109,7 @@ $site_color = get_site_default_color_style();
                         $menus_item1 = ['profile', 'coin', 'vip', 'fav', 'order'];
                         foreach ($menus_item1 as $key) {
                             printf(
-                                '<a href="%s"><i class="%s bg-[#eeeeee] p-4 rounded-full"></i><div>%s</div></a>',
+                                '<a href="%s"><i class="%s bg-[#eeeeee] p-4 rounded-full fa-lg"></i><div>%s</div></a>',
                                 get_uc_menu_link($key),
                                 $uc_menus[$key]['icon'],
                                 $uc_menus[$key]['title']
