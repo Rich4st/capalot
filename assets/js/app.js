@@ -267,11 +267,12 @@ let ca = {
     let el = document.querySelector('.js-pay-action');
 
     $('.js-pay-action').on('click', function () {
+
       o = {
         nonce: capalot.ajax_nonce,
-        post_id: el.dataset.id,
-        order_type: el.dataset.type,
-        order_info: el.dataset.info,
+        post_id: $(this).data("id"),
+        order_type: $(this).data("type"),
+        order_info: $(this).data("info")
       };
 
       ca.get_pay_select_html(o)
