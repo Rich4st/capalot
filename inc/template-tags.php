@@ -685,7 +685,7 @@ function get_posts_style_config($cat_id = 0)
 
 function capalot_get_color_class($key = 0)
 {
-  $colors  = ['danger', 'primary', 'success', 'warning', 'info', 'secondary'];
+  $colors  = ['danger', 'primary', 'success', '[#ffca00]', 'info', 'secondary'];
   $color   = (isset($colors[$key])) ? $colors[$key] : 'secondary';
   return $color;
 }
