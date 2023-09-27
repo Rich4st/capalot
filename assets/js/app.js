@@ -20,6 +20,9 @@ let ca = {
       ca.captcha_action();
       captcha_code.addEventListener('click', ca.captcha_action);
     }
+
+    if (capalot.singular_id !== '0')
+      ca.add_post_views();
   },
 
   /**
@@ -106,8 +109,9 @@ let ca = {
     const storage_key = 'post_like_storage';
     const like_btn = document.querySelector('.post-like-btn');
     const fav_btn = document.querySelector('.post-fav-btn');
+    const share_btn = document.querySelector('.post-share-btn')
 
-    if (!like_btn || !fav_btn) {
+    if (!like_btn || !fav_btn || !share_btn) {
       return;
     }
 
@@ -173,6 +177,21 @@ let ca = {
         }
       })
     });
+
+    // 分享文章
+    share_btn.addEventListener('click', () => {
+
+      ca.ajax({
+        data: {
+          action: 'capalot_add_share_post',
+          nonce: capalot.ajax_nonce,
+          post_id: capalot.singular_id
+        },
+        success: ({ msg, status }) => {
+          ca.popup({ html: msg.html });
+        },
+      })
+    });
   },
 
   // 获取验证码
@@ -192,7 +211,12 @@ let ca = {
     })
   },
 
-  // toast 提示
+  /**
+   * toast 提示
+   * @param {string} title 标题
+   * @param {string} icon 图标 'success' | 'error'
+   * @param {number} timer 延迟时间 ms后自动关闭
+   */
   notice: function ({ title = '成功', icon = 'success', timer = 2000 }) {
     Swal.fire({
       title,
@@ -207,7 +231,10 @@ let ca = {
     });
   },
 
-  // 对话框
+  /**
+   * 对话框
+   * @see https://sweetalert2.github.io/#configuration
+   */
   popup: function ({
     content,
     html,
@@ -338,6 +365,17 @@ let ca = {
     const el = document.querySelector('.mySwiper');
 
     var swiper = new Swiper(".mySwiper", JSON.parse(el.dataset.config));
+  },
+
+  // 文章阅读数量+1
+  add_post_views: function () {
+    ca.ajax({
+      data: {
+        action: 'capalot_add_post_views',
+        nonce: capalot.ajax_nonce,
+        post_id: capalot.singular_id,
+      }
+    })
   }
 
 }

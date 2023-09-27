@@ -377,6 +377,25 @@ function capalot_delete_post_fav($user_id = null, $post_id = 0)
 }
 
 /**
+ * 添加文章阅读数量
+ */
+function capalot_add_post_views($post_id = null)
+{
+  if (empty($post_id)) {
+    global $post;
+    $post_id = $post->ID;
+  }
+  $meta_key = 'views';
+  $this_num = intval(get_post_meta($post_id, $meta_key, true));
+  $new_num  = $this_num + 1;
+  if ($new_num < 0) {
+    $new_num = 1;
+  }
+
+  return update_post_meta($post_id, $meta_key, $new_num);
+}
+
+/**
  * 获取文章浏览数量
  */
 function capalot_get_post_views($post_id = null)
@@ -770,6 +789,15 @@ function get_thumbnail_align_type()
     $option = $options[0];
 
   return $option;
+}
+
+/**
+ * 获取二维码地址
+ */
+function get_qrcode_url($text)
+{
+  $api_url = get_template_directory_uri() . '/inc/plugins/qrcode/qrcode.php?data=';
+  return $api_url . $text;
 }
 
 //只保留字符串首尾字符，隐藏中间用*代替（两个字符时只显示第一个）

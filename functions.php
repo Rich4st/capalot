@@ -28,6 +28,9 @@ function capalot_setup()
         )
     );
 
+    // 开启友情链接功能
+    add_filter('pre_option_link_manager_enabled', '__return_true');
+
     // 小工具选择性刷新
     add_theme_support('customize-selective-refresh-widgets');
 

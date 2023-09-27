@@ -12,7 +12,6 @@ if ($unsetoauth == 'qq' || $unsetoauth == 'weixin') {
   }
 }
 
-
 ?>
 
 <div class=" mb-4 bg-white dark:bg-dark-card p-4 mx-2 rounded">
@@ -61,8 +60,6 @@ if ($unsetoauth == 'qq' || $unsetoauth == 'weixin') {
     </form>
   </div>
 </div>
-
-
 
 <div class="mb-4 bg-white dark:bg-dark-card p-4 mx-2 rounded">
   <!-- Content -->
@@ -114,12 +111,7 @@ if ($unsetoauth == 'qq' || $unsetoauth == 'weixin') {
     </div>
   </form>
 
-
-
-
 </div>
-
-
 
 <div class="bg-white dark:bg-dark-card p-4 mx-2 rounded">
   <!-- Content -->
@@ -159,11 +151,6 @@ if ($unsetoauth == 'qq' || $unsetoauth == 'weixin') {
 
 </div>
 
-
-
-
-
-
 <script type="text/javascript">
   jQuery(function($) {
 
@@ -185,9 +172,15 @@ if ($unsetoauth == 'qq' || $unsetoauth == 'weixin') {
           status,
           icon
         }) {
-          status === 1
-            ? ca.notice({ title: msg, icon: 'success' })
-            : ca.notice({ title: msg, icon: 'error' });        
+          status === 1 ?
+            ca.notice({
+              title: msg,
+              icon: 'success'
+            }) :
+            ca.notice({
+              title: msg,
+              icon: 'error'
+            });
           if (status == 1) {
             setTimeout(function() {
               window.location.reload()
@@ -203,7 +196,10 @@ if ($unsetoauth == 'qq' || $unsetoauth == 'weixin') {
         complete: ({
           responseJSON
         }) => {
-          const { status, msg } = responseJSON;
+          const {
+            status,
+            msg
+          } = responseJSON;
 
           if (status == 0)
             return;
@@ -240,9 +236,15 @@ if ($unsetoauth == 'qq' || $unsetoauth == 'weixin') {
           msg,
           icon
         }) => {
-          status === 1
-            ? ca.notice({ title: msg, icon: 'success' })
-            : ca.notice({ title: msg, icon: 'error' });        
+          status === 1 ?
+            ca.notice({
+              title: msg,
+              icon: 'success'
+            }) :
+            ca.notice({
+              title: msg,
+              icon: 'error'
+            });
           if (status == 1) {
             setTimeout(function() {
               window.location.reload()
@@ -284,6 +286,14 @@ if ($unsetoauth == 'qq' || $unsetoauth == 'weixin') {
         return;
       }
 
+      if (data.new_password !== data.new_password2) {
+        ca.notice({
+          title: '两次密码不一致',
+          icon: 'error'
+        });
+        return;
+      }
+
       ca.ajax({
         data,
         beforeSend: () => {
@@ -294,9 +304,15 @@ if ($unsetoauth == 'qq' || $unsetoauth == 'weixin') {
           msg,
           icon
         }) => {
-          status === 1
-            ? ca.notice({ title: msg, icon: 'success' })
-            : ca.notice({ title: msg, icon: 'error' });
+          status === 1 ?
+            ca.notice({
+              title: msg,
+              icon: 'success'
+            }) :
+            ca.notice({
+              title: msg,
+              icon: 'error'
+            });
           if (status == 1) {
             setTimeout(function() {
               window.location.reload()
@@ -330,6 +346,15 @@ if ($unsetoauth == 'qq' || $unsetoauth == 'weixin') {
         return;
       }
 
+      const email_regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+      if (!email_regex.test(data.new_user_email)) {
+        ca.notice({
+          title: '邮箱格式错误',
+          icon: 'error'
+        });
+        return;
+      }
+
       ca.ajax({
         data,
         beforeSend: () => {
@@ -340,9 +365,15 @@ if ($unsetoauth == 'qq' || $unsetoauth == 'weixin') {
           msg,
           icon
         }) => {
-          status === 1
-            ? ca.notice({ title: msg, icon: 'success' })
-            : ca.notice({ title: msg, icon: 'error' });
+          status === 1 ?
+            ca.notice({
+              title: msg,
+              icon: 'success'
+            }) :
+            ca.notice({
+              title: msg,
+              icon: 'error'
+            });
           if (status == 1) {
             setTimeout(function() {
               window.location.reload()
