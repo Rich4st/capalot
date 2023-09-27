@@ -380,7 +380,8 @@ const body = jQuery("body"),
             post_id: zb.singular_id
           },
           before: () => {
-            a.addClass("disabled"), e.removeClass().addClass("fa fa-spinner fa-spin me-1")
+            a.addClass("disabled")
+            e.removeClass().addClass("fa fa-spinner fa-spin me-1")
           },
           result: ({
             msg: e

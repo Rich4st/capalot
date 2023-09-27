@@ -30,7 +30,7 @@ $author_name = get_the_author_meta('display_name', $author_id);
         <button class="post-share-btn px-4 py-2 rounded-full transition-all duration-300
           hover:shadow-[0_5px_20px_rgba(240,_46,_170,_0.4)] dark:bg-dark
           shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px]" title='分享'>
-          <i class="fa-regular fa-share-from-square"></i>
+          <i class="share fa-solid fa-share"></i>
         </button>
       <?php endif; ?>
 

@@ -12,7 +12,6 @@ if ($unsetoauth == 'qq' || $unsetoauth == 'weixin') {
   }
 }
 
-
 ?>
 
 <div class=" mb-4 bg-white dark:bg-dark-card p-4 mx-2 rounded">
@@ -30,7 +29,7 @@ if ($unsetoauth == 'qq' || $unsetoauth == 'weixin') {
             </div>
           </div>
           <div class="block">
-            <label for="inputAvatarFile" type="button" class="btn rounded py-1 px-2 bg-primary bg-opacity-10 text-[#306fea]"><?php _e('上传头像', 'ripro'); ?></label>
+            <label for="inputAvatarFile" type="button" class="btn rounded py-1 px-2 bg-[#2163e8] bg-opacity-10 text-[#007aff] hover:bg-opacity-90 hover:text-white cursor-pointer"><?php _e('上传头像', 'ripro'); ?></label>
             <input class="hidden" type="file" name="inputAvatarFile" id="inputAvatarFile" accept=".jpg, .gif, .png" resetonclick="true">
           </div>
         </div>
@@ -40,29 +39,27 @@ if ($unsetoauth == 'qq' || $unsetoauth == 'weixin') {
     <form class="gap-4 grid lg:grid-cols-4 grid-cols-1" id="user-profile">
       <!-- Input item -->
       <div class="lg:col-span-2 col-span-1 col-start-1 pb-2 ">
-        <label class="pb-2 block"><?php _e('显示昵称', 'ripro'); ?></label>
-        <input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark" name="display_name" placeholder="" value="<?php echo $current_user->display_name; ?>">
+        <label class="pb-2 block text-gray-500"><?php _e('显示昵称', 'ripro'); ?></label>
+        <input type="text" class="w-full  dark:border-gray-500 dark:bg-dark form-control p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="display_name" placeholder="" value="<?php echo $current_user->display_name; ?>">
       </div>
       <!-- Input item -->
       <div class="lg:col-span-2 col-span-1 lg:col-start-3 ">
-        <label class="pb-2 block"><?php _e('联系QQ', 'ripro'); ?></label>
-        <input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark" name="uc_lxqq" value="<?php echo get_user_meta($current_user->ID, 'qq', 1); ?>">
+        <label class="pb-2 block text-gray-500"><?php _e('联系QQ', 'ripro'); ?></label>
+        <input type="text" class="w-full  dark:border-gray-500 dark:bg-dark form-control p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="uc_lxqq" value="<?php echo get_user_meta($current_user->ID, 'qq', 1); ?>">
       </div>
       <!-- Textarea item -->
       <div class="lg:col-span-4 col-span-1 col-start-1">
-        <label class="pb-2 block"><?php _e('个人介绍', 'ripro'); ?></label>
-        <textarea class="bg-[#ededed] w-full p-2 rounded dark:bg-dark" rows="3" name="description"><?php echo get_user_meta($current_user->ID, 'description', 1); ?></textarea>
+        <label class="pb-2 block text-gray-500"><?php _e('个人介绍', 'ripro'); ?></label>
+        <textarea class="w-full  dark:border-gray-500 dark:bg-dark form-control p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" rows="3" name="description"><?php echo get_user_meta($current_user->ID, 'description', 1); ?></textarea>
       </div>
       <!-- Save button -->
       <div class="flex lg:col-start-4 justify-end text-white ">
         <input type="hidden" name="action" value="capalot_update_profile">
-        <button type="submit" id="save-submit" class="bg-black px-4 py-1 rounded-lg"><?php _e('保存资料', 'ripro'); ?></button>
+        <button type="submit" id="save-submit" class="bg-black px-4 py-1 rounded-lg hover:bg-[#3c3c41]"><?php _e('保存资料', 'ripro'); ?></button>
       </div>
     </form>
   </div>
 </div>
-
-
 
 <div class="mb-4 bg-white dark:bg-dark-card p-4 mx-2 rounded">
   <!-- Content -->
@@ -73,13 +70,13 @@ if ($unsetoauth == 'qq' || $unsetoauth == 'weixin') {
 
   <form class="gap-4 grid lg:grid-cols-4 grid-cols-1" id="edit-email-form">
     <div class="lg:col-span-2 col-span-1 col-start-1 pb-2 ">
-      <label class="pb-2 block"><?php _e('当前邮箱', 'ripro'); ?></label>
-      <input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark" name="user_email" value="<?php echo $current_user->user_email; ?>" disabled>
+      <label class="pb-2 block text-gray-500"><?php _e('当前邮箱', 'ripro'); ?></label>
+      <input type="text" class="w-full  dark:border-gray-500 dark:bg-dark form-control p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="user_email" value="<?php echo $current_user->user_email; ?>" disabled>
     </div>
 
     <div class="lg:col-span-2 col-span-1 lg:col-start-3">
-      <label class="pb-2 block"><?php _e('新邮箱地址', 'ripro'); ?></label>
-      <input type="email" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark" name="new_user_email" value="" autocomplete="off">
+      <label class="pb-2 block text-gray-500"><?php _e('新邮箱地址', 'ripro'); ?></label>
+      <input type="email" class="w-full  dark:border-gray-500 dark:bg-dark form-control p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="new_user_email" value="" autocomplete="off">
     </div>
 
     <div class="lg:col-span-4 col-span-1 col-start-1">
@@ -110,16 +107,11 @@ if ($unsetoauth == 'qq' || $unsetoauth == 'weixin') {
     <!-- Save button -->
     <div class="flex lg:col-start-4 justify-end text-white ">
       <input type="hidden" name="action" value="capalot_update_new_email">
-      <button type="submit" id="edit-email" class="bg-[#d6293e] p-2 text-white rounded-lg"><?php _e('确认修改邮箱', 'ripro'); ?></button>
+      <button type="submit" id="edit-email" class="bg-[#d6293e] p-2 text-white rounded-lg hover:bg-[#b62335]"><?php _e('确认修改邮箱', 'ripro'); ?></button>
     </div>
   </form>
 
-
-
-
 </div>
-
-
 
 <div class="bg-white dark:bg-dark-card p-4 mx-2 rounded">
   <!-- Content -->
@@ -130,39 +122,34 @@ if ($unsetoauth == 'qq' || $unsetoauth == 'weixin') {
 
   <form class="gap-4 grid lg:grid-cols-4 grid-cols-1" id="edit-password-form">
     <div class="lg:col-span-2 col-span-1 col-start-1 pb-2">
-      <label class="pb-2 block"><?php _e('邮箱信息', 'ripro'); ?></label>
-      <input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark" name="user_email" value="<?php echo $current_user->user_email; ?>" disabled>
+      <label class="pb-2 block text-gray-500"><?php _e('邮箱信息', 'ripro'); ?></label>
+      <input type="text" class="w-full  dark:border-gray-500 dark:bg-dark form-control p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="user_email" value="<?php echo $current_user->user_email; ?>" disabled>
     </div>
 
     <div class="lg:col-span-2 col-span-1 lg:col-start-3">
-      <label class="pb-2 block"><?php _e('旧密码', 'ripro'); ?></label>
+      <label class="pb-2 block text-gray-500"><?php _e('旧密码', 'ripro'); ?></label>
       <?php if (user_is_oauth_password($current_user->ID)) : ?>
-        <input type="password" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark" name="old_password" value="第三方注册，请设置新密码" autocomplete="off" disabled>
+        <input type="password" class="w-full  dark:border-gray-500 dark:bg-dark form-control p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="old_password" value="第三方注册，请设置新密码" autocomplete="off" disabled>
       <?php else : ?>
-        <input type="password" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark" name="old_password" value="" autocomplete="off">
+        <input type="password" class="w-full  dark:border-gray-500 dark:bg-dark form-control p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="old_password" value="" autocomplete="off">
       <?php endif; ?>
     </div>
     <div class="lg:col-span-2 col-span-1 col-start-1 pb-2">
-      <label class="pb-2 block"><?php _e('新密码', 'ripro'); ?></label>
-      <input type="password" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark" name="new_password" value="" autocomplete="off">
+      <label class="pb-2 block text-gray-500"><?php _e('新密码', 'ripro'); ?></label>
+      <input type="password" class="w-full  dark:border-gray-500 dark:bg-dark form-control p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="new_password" value="" autocomplete="off">
     </div>
     <div class="lg:col-span-2 col-span-1 lg:col-start-3">
-      <label class="pb-2 block"><?php _e('确认新密码', 'ripro'); ?></label>
-      <input type="password" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark" name="new_password2" value="" autocomplete="off">
+      <label class="pb-2 block text-gray-500"><?php _e('确认新密码', 'ripro'); ?></label>
+      <input type="password" class="w-full  dark:border-gray-500 dark:bg-dark form-control p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="new_password2" value="" autocomplete="off">
     </div>
     <!-- Save button -->
     <div class="flex lg:col-start-4 justify-end text-white">
       <input type="hidden" name="action" value="capalot_update_password">
-      <button type="submit" id="edit-password" class="bg-[#d6293e] p-2 text-white rounded-lg"><?php _e('确认修改密码', 'ripro'); ?></button>
+      <button type="submit" id="edit-password" class="bg-[#d6293e] p-2 text-white rounded-lg hover:bg-[#b62335]"><?php _e('确认修改密码', 'ripro'); ?></button>
     </div>
   </form>
 
 </div>
-
-
-
-
-
 
 <script type="text/javascript">
   jQuery(function($) {
@@ -180,14 +167,44 @@ if ($unsetoauth == 'qq' || $unsetoauth == 'weixin') {
         data: formData,
         processData: false, // 使数据不做处理
         contentType: false, // 不要设置Content-Type请求头
-        success: function(result) {
-          ca.notice({ title: result.msg });
-          if (result.status == 1) {
+        success: function({
+          msg,
+          status,
+          icon
+        }) {
+          status === 1 ?
+            ca.notice({
+              title: msg,
+              icon: 'success'
+            }) :
+            ca.notice({
+              title: msg,
+              icon: 'error'
+            });
+          if (status == 1) {
             setTimeout(function() {
               window.location.reload()
-            }, 1);
+            }, 2000)
           }
         },
+        error: (error) => {
+          ca.notice({
+            title: error,
+            icon: 'error'
+          })
+        },
+        complete: ({
+          responseJSON
+        }) => {
+          const {
+            status,
+            msg
+          } = responseJSON;
+
+          if (status == 0)
+            return;
+          window.location.reload();
+        }
       });
 
     });
@@ -216,9 +233,18 @@ if ($unsetoauth == 'qq' || $unsetoauth == 'weixin') {
         },
         success: ({
           status,
-          msg
+          msg,
+          icon
         }) => {
-          ca.notice({ title: msg });
+          status === 1 ?
+            ca.notice({
+              title: msg,
+              icon: 'success'
+            }) :
+            ca.notice({
+              title: msg,
+              icon: 'error'
+            });
           if (status == 1) {
             setTimeout(function() {
               window.location.reload()
@@ -260,6 +286,14 @@ if ($unsetoauth == 'qq' || $unsetoauth == 'weixin') {
         return;
       }
 
+      if (data.new_password !== data.new_password2) {
+        ca.notice({
+          title: '两次密码不一致',
+          icon: 'error'
+        });
+        return;
+      }
+
       ca.ajax({
         data,
         beforeSend: () => {
@@ -267,9 +301,18 @@ if ($unsetoauth == 'qq' || $unsetoauth == 'weixin') {
         },
         success: ({
           status,
-          msg
+          msg,
+          icon
         }) => {
-          ca.notice({ title: msg });
+          status === 1 ?
+            ca.notice({
+              title: msg,
+              icon: 'success'
+            }) :
+            ca.notice({
+              title: msg,
+              icon: 'error'
+            });
           if (status == 1) {
             setTimeout(function() {
               window.location.reload()
@@ -303,16 +346,34 @@ if ($unsetoauth == 'qq' || $unsetoauth == 'weixin') {
         return;
       }
 
-     ca.ajax({
+      const email_regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+      if (!email_regex.test(data.new_user_email)) {
+        ca.notice({
+          title: '邮箱格式错误',
+          icon: 'error'
+        });
+        return;
+      }
+
+      ca.ajax({
         data,
         beforeSend: () => {
           _this.attr("disabled", "true")
         },
         success: ({
           status,
-          msg
+          msg,
+          icon
         }) => {
-          ca.notice({ title: msg });
+          status === 1 ?
+            ca.notice({
+              title: msg,
+              icon: 'success'
+            }) :
+            ca.notice({
+              title: msg,
+              icon: 'error'
+            });
           if (status == 1) {
             setTimeout(function() {
               window.location.reload()
