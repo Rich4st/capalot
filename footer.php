@@ -25,9 +25,8 @@ Footer START -->
 Footer END -->
 
 
-
 <?php get_template_part('template-parts/footer/rollbar'); ?>
-<div class=" fixed right-8 bottom-12 z-50 hidden  " id="Top_btn">
+<div class=" fixed lg:right-8 lg:bottom-12 right-4 bottom-4 z-50 hidden  " id="Top_btn">
   <div class="  text-center w-[48px] ">
     <div class=" cursor-pointer bg-white dark:bg-dark-card dark:border-[#252529] p-2 rounded-md shadow-lg border border-gray-200 text-2xl text-gray-500 dark:text-gray-400 hover:opacity-70"><i class="fas fa-caret-up"></i></div>
   </div>
@@ -41,12 +40,12 @@ Footer END -->
     totop.onclick = function() {
       timer = setInterval(function() {
         var backTop = document.documentElement.scrollTop ||  document.body.scrollTop;
-        speedTop = backTop / 5;
+        speedTop = backTop / 2;
         document.documentElement.scrollTop = backTop - speedTop;
         if (backTop == 0) {
           clearInterval(timer);
         }
-      }, 30)
+      }, 10)
     }
     var pageHeight = 400;
     window.onscroll = function() {
