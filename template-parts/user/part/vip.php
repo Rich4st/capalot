@@ -131,7 +131,7 @@ $price_shape = get_template_directory_uri() . '/assets/img/price_shape.png';
 								$btn_text = __('立即升级', 'ripro');
 							}
 							?>
-							<button class="btn bg-<?php echo $vip_colors[$item['type']]; ?> text-<?php echo $vip_colors[$item['type']]; ?> hover:bg-opacity-100   bg-opacity-10 rounded p-2 js-pay-action" data-id="0" data-type="3" data-info="<?php echo $item['day_num']; ?>" <?php echo $disabled; ?>><i class="far fa-gem me-1"></i><?php echo $btn_text; ?></button>
+							<button class="btn bg-<?php echo $vip_colors[$item['type']]; ?> text-<?php echo $vip_colors[$item['type']]; ?> hover:text-white hover:bg-opacity-100   bg-opacity-10 rounded p-2 js-pay-action" data-id="0" data-type="3" data-info="<?php echo $item['day_num']; ?>" <?php echo $disabled; ?>><i class="far fa-gem me-1"></i><?php echo $btn_text; ?></button>
 						</div>
 					</div>
 				</div>
@@ -233,9 +233,18 @@ $price_shape = get_template_directory_uri() . '/assets/img/price_shape.png';
 				},
 				result: ({
 					status,
-					msg
+					msg,
+					icon
 				}) => {
-					ca.notice(msg);
+					status === 1 ?
+						ca.notice({
+							title: msg,
+							icon: 'success'
+						}) :
+						ca.notice({
+							title: msg,
+							icon: 'error'
+						});
 					if (status == 1) {
 						setTimeout(function() {
 							window.location.reload()
