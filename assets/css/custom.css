@@ -79,7 +79,7 @@
 
 /* 颜色 */
 .bg-danger {
-    --tw-bg-opacity: 1;
+    --tw-bg-opacity: 0.2;
     background-color: rgb(12 188 135 / var(--tw-bg-opacity));
 }
 
