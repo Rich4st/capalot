@@ -161,7 +161,6 @@ function update_user_vip_data($user_id, $new_day = '0')
     $vip_options = get_site_vip_options();
     $vip_buy_options = get_site_vip_buy_options();
     $new_day = absint($new_day);
-    var_dump($new_day);
 
     if (empty($new_day)) {
         $new_type = 'no';
@@ -265,7 +264,7 @@ function get_user_vip_data($user_id)
     $downnum_total = $vip_options[$user_type]['downnum'];
     // 今日已下载次数
     $downnum_used = Capalot_Download::get_user_today_download_num($user_id);
-    $downnum_not  = $downnum_total - 0;
+    $downnum_not  = $downnum_total - $downnum_used;
     $downnum_not = ($downnum_not >= 0) ? $downnum_not : 0;
 
     $data         = [
@@ -817,7 +816,6 @@ function capalot_get_request_pay($order_data)
                     'method' => 'reload', // popup|弹窗  url|跳转 reload|刷新 jsapi|js方法
                     'num'    => $order_data['order_trade_no'], //订单号
                     'msg'    => '支付成功',
-                    'order' => $order_data
                 ];
             }
 
