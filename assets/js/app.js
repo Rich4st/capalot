@@ -8,9 +8,9 @@ let ca = {
     ca.pagination();
     ca.toggle_dark();
 
-    const swiperEl = document.querySelector('.swiper');
-    if (swiperEl)
-      ca.swiper();
+    // const swiperEl = document.querySelector('.swiper');
+    // if (swiperEl)
+    //   ca.swiper();
 
     ca.account_action();
     ca.social_action();
@@ -106,8 +106,9 @@ let ca = {
     const storage_key = 'post_like_storage';
     const like_btn = document.querySelector('.post-like-btn');
     const fav_btn = document.querySelector('.post-fav-btn');
+    const share_btn = document.querySelector('.post-share-btn')
 
-    if (!like_btn || !fav_btn) {
+    if (!like_btn || !fav_btn || !share_btn) {
       return;
     }
 
@@ -171,6 +172,21 @@ let ca = {
           fav_btn.dataset.is == '0' ? fav_btn.dataset.is = '1' : fav_btn.dataset.is = '0';
           fav_icon.classList.remove('hidden');
         }
+      })
+    });
+
+    // 分享文章
+    share_btn.addEventListener('click', () => {
+
+      ca.ajax({
+        data: {
+          action: 'capalot_add_share_post',
+          nonce: capalot.ajax_nonce,
+          post_id: capalot.singular_id
+        },
+        success: ({ msg, status }) => {
+          ca.popup({ html: msg.html });
+        },
       })
     });
   },

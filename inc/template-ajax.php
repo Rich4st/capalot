@@ -60,6 +60,7 @@ class Capalot_Ajax
     $this->add_action('add_fav_post'); //收藏文章
     $this->add_action('load_more'); //加载更多文章
     $this->add_action('get_captcha_code'); //获取验证码
+    $this->add_action('add_share_post'); //分享文章
 
   }
 
@@ -986,6 +987,39 @@ class Capalot_Ajax
         'msg'    => '已取消收藏',
       ));
     }
+  }
+
+  public function add_share_post()
+  {
+    $this->valid_nonce_ajax(); #安全验证
+    $post_id = (int) get_response_param('post_id');
+    $user_id = get_current_user_id();
+    $share_url = get_user_aff_permalink(get_permalink($post_id), $user_id);
+
+    $body = '<div class="share-body"><img class="share-qrcode" src="' . get_qrcode_url($share_url) . '">';
+    $body .= '<div class="share-url user-select-all">' . $share_url . '</div><div class="share-desc">' . '手机扫码或复制链接分享' . '</div></div>';
+
+    $post = get_post($post_id);
+    $categories = get_the_category($post_id);
+
+    $data = [
+      'title'    => get_the_title($post_id),
+      'desc'     => wp_trim_words(strip_shortcodes($post->post_content), 92, '...'),
+      'img'      => set_url_scheme(capalot_get_thumbnail_url($post, 'thumbnail')),
+      'category' => '+ ' . $categories[0]->name . ' by ' . get_the_author_meta('display_name', $post->post_author),
+      'date_day' => get_the_date('d', $post_id),
+      'date_year' => get_the_date('m / Y', $post_id),
+      'qrcode'   => get_qrcode_url($share_url),
+      'url'   => get_permalink($post_id),
+      'site_logo' => set_url_scheme(_capalot('site_logo', '')),
+      'site_name' => get_bloginfo('name'),
+      'site_desc' => get_bloginfo('description'),
+    ];
+
+    wp_send_json(array(
+      'status' => 1,
+      'msg'    => array('data' => $data, 'html' => $body),
+    ));
   }
 
   // 分页加载更多文章

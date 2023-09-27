@@ -772,6 +772,15 @@ function get_thumbnail_align_type()
   return $option;
 }
 
+/**
+ * 获取二维码地址
+ */
+function get_qrcode_url($text)
+{
+  $api_url = get_template_directory_uri() . '/inc/plugins/qrcode/qrcode.php?data=';
+  return $api_url . $text;
+}
+
 //只保留字符串首尾字符，隐藏中间用*代替（两个字符时只显示第一个）
 function capalot_substr_cut($user_name)
 {
