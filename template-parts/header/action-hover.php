@@ -9,10 +9,12 @@ $site_color = get_site_default_color_style();
 <?php if (!empty(_capalot('is_site_dark_toggle', true))) : ?>
     <div class="h-full mr-4 bottom-auto relative mb-6">
         <?php if (_capalot('is_site_dark_toggle', true)) : ?>
-            <span id="light-mode" class="absolute cursor-pointer">
+            <span id="light-mode" class="absolute cursor-pointer
+            <?php if(get_site_default_color_style() === 'dark') echo ' hidden'; ?>">
                 <i class="fa-solid fa-sun"></i>
             </span>
-            <span id="dark-mode" class="absolute cursor-pointer hidden dark:text-gray-400">
+            <span id="dark-mode" class="absolute cursor-pointer dark:text-gray-400
+            <?php if(get_site_default_color_style() === 'light') echo ' hidden'; ?>">
                 <i class="fa-solid fa-cloud-moon"></i>
             </span>
         <?php endif; ?>
@@ -154,7 +156,7 @@ $site_color = get_site_default_color_style();
         var e = event || window.event;
         e.stopPropagation();
     });
-   
+
     adminT.addEventListener('click', function(){
         adminC.style.display = 'none';
     });
