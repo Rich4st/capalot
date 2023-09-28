@@ -111,7 +111,7 @@ function Capalot_Pagination($args = array())
 function infinite_scroll_button($type = 'click')
 {
   return '<div class="btn__wrapper text-center py-6">
-  <a href="#!" class="rounded-full bg-black text-white py-2 px-4" id="load-more"><i class="fa-solid fa-spinner fa-spin hidden more_icon"></i>加载更多</a>
+  <button class="rounded-full bg-black text-white py-2 px-4" id="load-more"><i class="fa-solid fa-spinner fa-spin hidden more_icon"></i>加载更多</button>
   <p id="no-more-button" style="display: none;" class="text-[#b9b2b2] text-[0.9rem]">没有更多了</p>
 </div>';
 }
