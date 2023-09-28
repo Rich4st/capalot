@@ -39,7 +39,7 @@ Footer END -->
 
     totop.onclick = function() {
       timer = setInterval(function() {
-        var backTop = document.documentElement.scrollTop ||  document.body.scrollTop;
+        var backTop = document.documentElement.scrollTop || document.body.scrollTop;
         speedTop = backTop / 2;
         document.documentElement.scrollTop = backTop - speedTop;
         if (backTop == 0) {
@@ -64,37 +64,45 @@ Footer END -->
 
 
 
-<div class=" fixed top-0 left-0 right-0 bottom-0  bg-black/80 z-50 hidden" id="fixedB"></div>
+<div class=" fixed top-0 left-0 right-0 bottom-0  bg-black/80 z-[99] hidden" id="fixedB"></div>
 <?php get_template_part('template-parts/footer/off-canvas'); ?>
 
 <script>
   // 移动端导航
-  let menuA = document.getElementById('menuA');
-  let fixedB = document.getElementById('fixedB');
-  let navBg = document.getElementById('navBg');
-  let closeNav = document.getElementById('closeNav');
+  let menuA = document.getElementById('menuA'); 
+  let fixedB = document.getElementById('fixedB'); 
+  let navBg = document.getElementById('navBg'); 
+  let closeNav = document.getElementById('closeNav'); 
+
   menuA.addEventListener('click', function() {
-    if (fixedB.style.display == 'none' || !fixedB.style.display) {
-      fixedB.style.display = 'block';
-    } else {
-      fixedB.style.display = 'none';
+    if (fixedB.classList.contains('hidden')) {
+      fixedB.classList.add('block');
+      fixedB.classList.remove('hidden');
     }
     $('#navBg').animate({
       width: 'toggle'
     }, 100);
   });
   fixedB.addEventListener('click', function() {
-    fixedB.style.display = 'none';
+    fixedB.classList.add('hidden');
+    fixedB.classList.remove('block');
     $('#navBg').animate({
       width: 'toggle'
     }, 100);
   });
   closeNav.addEventListener('click', function() {
-    fixedB.style.display = 'none';
+     fixedB.classList.add('hidden');
+    fixedB.classList.remove('block');
     $('#navBg').animate({
       width: 'toggle'
     }, 100);
   });
+  $(window).resize(function(){
+    if($(window).width() > 1024 ){
+      fixedB.classList.add('hidden');
+      navBg.classList.add('hidden');
+    }
+  })
 </script>
 
 
