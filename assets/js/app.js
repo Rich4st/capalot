@@ -142,6 +142,17 @@ let ca = {
 
           $('.fa-spinner').addClass('hidden')
 
+          const count_el = document.querySelector('.like-count');
+          const count = parseInt(count_el.innerText);
+
+          if(like_btn.dataset.is == '0') {
+            like_btn.dataset.is = '1';
+            count_el.innerText = count -1;
+          } else {
+            like_btn.dataset.is = '0';
+            count_el.innerText = count + 1;
+          }
+
           liked_icon.classList.remove('hidden');
         }
       })

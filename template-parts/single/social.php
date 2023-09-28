@@ -37,10 +37,11 @@ $author_name = get_the_author_meta('display_name', $author_id);
 
       <?php if (in_array('fav', $btnOption)) :
         $is_fav = (capalot_is_post_fav()) ? 0 : 1;
+        $fav_text = ($is_fav == '0') ? '取消收藏' : '收藏';
       ?>
         <button class="post-fav-btn px-4 py-2 rounded-full transition-all duration-300
           hover:shadow-[0_5px_20px_rgba(240,_46,_170,_0.4)] dark:bg-dark
-          shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px]" title='收藏' data-is="<?php echo $is_fav; ?>">
+          shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px]" title='<?php echo $fav_text; ?>' data-is="<?php echo $is_fav; ?>">
           <i class="<?php if($is_fav == '0') echo 'hidden'; ?> unfav fa-regular fa-star"></i>
           <i class="<?php if($is_fav == '1') echo 'hidden'; ?> fav fa-solid fa-star" style="color: #ea64d9;"></i>
         </button>
@@ -48,13 +49,14 @@ $author_name = get_the_author_meta('display_name', $author_id);
 
       <?php if (in_array('like', $btnOption)) :
           $is_like = (capalot_is_post_like()) ? 0 : 1;
+          $like_title = ($is_like == '0') ? '取消点赞' : '点赞';
         ?>
         <button class="post-like-btn relative px-4 py-2 rounded-full transition-all duration-300
           hover:shadow-[0_5px_20px_rgba(240,_46,_170,_0.4)] dark:bg-dark
-          shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px]" title="点赞" data-is='<?php echo $is_like; ?>'>
-          <i class="unlike fa-regular fa-heart"></i>
-          <i class="hidden liked fa-solid fa-heart" style="color: #ea64d9;"></i>
-          <span class="count text-sm text-gray-400 bg-white  absolute -top-1 -right-1 px-1 rounded-full border">
+          shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px]" title="<?php echo $like_title; ?>" data-is='<?php echo $is_like; ?>'>
+          <i class="<?php if($is_like == '0') echo 'hidden'; ?> unlike fa-regular fa-heart"></i>
+          <i class="<?php if($is_like == '1') echo 'hidden'; ?> liked fa-solid fa-heart" style="color: #ea64d9;"></i>
+          <span class="like-count text-sm text-gray-400 bg-white  absolute -top-1 -right-1 px-1 rounded-full border">
             <?php echo capalot_get_post_likes(); ?>
           </span>
         </button>
