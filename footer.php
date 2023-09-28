@@ -69,10 +69,10 @@ Footer END -->
 
 <script>
   // 移动端导航
-  let menuA = document.getElementById('menuA'); 
-  let fixedB = document.getElementById('fixedB'); 
-  let navBg = document.getElementById('navBg'); 
-  let closeNav = document.getElementById('closeNav'); 
+  let menuA = document.getElementById('menuA');
+  let fixedB = document.getElementById('fixedB');
+  let navBg = document.getElementById('navBg');
+  let closeNav = document.getElementById('closeNav');
 
   menuA.addEventListener('click', function() {
     if (fixedB.classList.contains('hidden')) {
@@ -91,18 +91,21 @@ Footer END -->
     }, 100);
   });
   closeNav.addEventListener('click', function() {
-     fixedB.classList.add('hidden');
+    fixedB.classList.add('hidden');
     fixedB.classList.remove('block');
     $('#navBg').animate({
       width: 'toggle'
     }, 100);
   });
-  $(window).resize(function(){
-    if($(window).width() > 1024 ){
-      fixedB.classList.add('hidden');
-      navBg.classList.add('hidden');
-    }
-  })
+  window.addEventListener('load', function() {
+    window.addEventListener('resize', function() {
+      var widthA = window.innerWidth;
+      if (widthA >= 1024) {
+        navBg.style.display = 'none';
+        fixedB.classList.add('hidden');
+      }
+    });
+  });
 </script>
 
 
