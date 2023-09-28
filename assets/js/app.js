@@ -130,14 +130,15 @@ let ca = {
           action: 'capalot_add_like_post',
           nonce: capalot.ajax_nonce,
           post_id: capalot.singular_id,
+          is_add: like_btn.dataset.is,
         },
         beforeSend: () => {
           unlike_icon.classList.add('fa-spinner', 'fa-spin');
         },
         success: ({ status, msg }) => {
           status === 1
-            ? ca.popup({ title: msg, icon: 'success' })
-            : ca.popup({ title: msg, icon: 'error' });
+            ? ca.notice({ title: msg, icon: 'success' })
+            : ca.notice({ title: msg, icon: 'error' });
 
           $('.fa-spinner').addClass('hidden')
 

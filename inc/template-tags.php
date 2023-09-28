@@ -297,6 +297,34 @@ function capalot_is_post_fav($user_id = null, $post_id = null)
 }
 
 /**
+ * 是否已点赞该文章
+ */
+function capalot_is_post_like($user_id = null, $post_id = null)
+{
+  if (empty($post_id)) {
+    global $post;
+    $post_id = $post->ID;
+  }
+  if (empty($user_id)) {
+    $user_id = get_current_user_id();
+  }
+  $post_id = absint($post_id);
+
+  if (get_post_status($post_id) === false) {
+    return false;
+  }
+
+  $meta_key = 'like_post';
+
+  $data = get_user_meta($user_id, $meta_key, true); # 获取点赞文章
+
+  if (empty($data) || !is_array($data)) {
+    return false;
+  }
+  return in_array($post_id, $data);
+}
+
+/**
  * 收藏或喜欢点赞
  */
 function capalot_add_post_fav($user_id = null, $post_id = 0)
@@ -377,6 +405,48 @@ function capalot_delete_post_fav($user_id = null, $post_id = 0)
 }
 
 /**
+ * 取消点赞文章
+ */
+function capalot_delete_post_like($user_id = null, $post_id = null)
+{
+  $post_id = absint($post_id);
+  if (get_post_status($post_id) === false) {
+    return false;
+  }
+
+  if (empty($user_id)) {
+    $user_id = get_current_user_id();
+  }
+
+  $meta_key = 'like_post';
+  $post_key = 'likes';
+
+  $old_data = get_user_meta($user_id, $meta_key, true); # 获取...
+
+  if (empty($old_data) || !is_array($old_data)) {
+    $new_data = [];
+  } else {
+    $new_data = $old_data;
+  }
+
+  if (in_array($post_id, $new_data)) {
+    $new_data = array_values(array_diff($new_data, [$post_id]));
+  }
+
+  if (true) {
+    $favnum  = absint(get_post_meta($post_id, $post_key, true));
+    $new_num = $favnum - 1;
+    if ($new_num < 0) {
+      $new_num = 0;
+    }
+
+    update_post_meta($post_id, $post_key, $new_num);
+  }
+
+  return update_user_meta($user_id, $meta_key, $new_data);
+}
+
+/**
  * 添加文章阅读数量
  */
 function capalot_add_post_views($post_id = null)
@@ -421,12 +491,31 @@ function capalot_add_post_likes($post_id = null, $num = 1)
     global $post;
     $post_id = $post->ID;
   }
+  $user_id = get_current_user_id();
+
   $meta_key = 'likes';
+  $user_meta_key = 'like_post';
+
+  $old_data = get_user_meta($user_id, $user_meta_key, true); # 获取...
+
+  if (empty($old_data) || !is_array($old_data)) {
+    $new_data = [];
+  } else {
+    $new_data = $old_data;
+  }
+
+  if (!in_array($post_id, $new_data)) {
+    // 新数据 开始处理
+    array_push($new_data, $post_id);
+  }
+
   $this_num = intval(get_post_meta($post_id, $meta_key, true));
   $new_num  = $this_num + $num;
   if ($new_num < 0) {
     $new_num = 1;
   }
+
+  update_user_meta($user_id, $user_meta_key, $new_data);
 
   return update_post_meta($post_id, $meta_key, $new_num);
 }

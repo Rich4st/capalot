@@ -930,16 +930,36 @@ class Capalot_Ajax
     $this->valid_nonce_ajax(); #安全验证
 
     $post_id = (int) get_response_param('post_id');
+    $is_add = (int) get_response_param('is_add');
+    $user_id = get_current_user_id();
 
-    if ($post_id && capalot_add_post_likes($post_id, 1)) {
+    $is_like = capalot_is_post_like($user_id, $post_id);
+
+    if ($is_add) {
+      if ($is_like) {
+        wp_send_json(array(
+          'status' => 0,
+          'msg'    => '您已点赞过',
+        ));
+      }
+
+      if ($post_id && capalot_add_post_likes($post_id, 1)) {
+        wp_send_json(array(
+          'status' => 1,
+          'msg'    => '点赞成功',
+        ));
+      } else {
+        wp_send_json(array(
+          'status' => 0,
+          'msg'    => '点赞失败',
+        ));
+      }
+    } else {
+      if($is_like) capalot_delete_post_like($user_id, $post_id);
+
       wp_send_json(array(
         'status' => 1,
-        'msg'    => '点赞成功',
-      ));
-    } else {
-      wp_send_json(array(
-        'status' => 0,
-        'msg'    => '点赞失败',
+        'msg'    => '已取消点赞',
       ));
     }
   }
