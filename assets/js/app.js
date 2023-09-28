@@ -260,7 +260,6 @@ let ca = {
     });
 
   },
-
   // 付款
   pay_action: function (e) {
     let o = null;
@@ -314,6 +313,7 @@ let ca = {
   // 分页
   pagination: function () {
     $('#load-more').on('click', function () {
+      const icon = document.querySelector('.more_icon')
 
       currentPage++;
 
@@ -325,12 +325,18 @@ let ca = {
           action: 'capalot_load_more',
           paged: currentPage,
         },
+        beforeSend: () => {
+          icon.style.display = 'inline-block'
+        },
         success: function (response) {
           if (currentPage >= response.max) {
             $('#load-more').hide();
             $('#no-more-button').show();
           }
           $('.posts-wrap').append(response.html);
+        },
+        complete: () => {
+          icon.style.display = 'none'
         }
       });
     }
