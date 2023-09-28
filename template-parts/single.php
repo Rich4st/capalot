@@ -18,7 +18,7 @@ $single_style = _capalot('single_style', 'general'); //general hero
 ?>
 <div class="bg-[#ededed] dark:bg-dark">
   <div class="flex lg:flex-row flex-col bg-[#ededed] justify-center lg:max-w-7xl md:max-w-3xl w-full md:mx-auto py-4 px-2 dark:bg-dark">
-    <div class="bg-white dark:bg-dark-card prose-sm lg:w-[75%] w-full lg:mx-4 rounded-md p-[1.25rem] mb-[1.5rem] text-base leading-8 text-slate-700">
+    <div class="bg-white relative py-10 dark:bg-dark-card prose-sm lg:w-[75%] w-full lg:mx-4 rounded-md px-5 text-base leading-8 text-slate-700">
 
       <div>
         <?php
