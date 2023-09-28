@@ -64,7 +64,7 @@ if ($post_format && isset($format_icons[$post_format])) {
         </h2>
 
         <?php if ($args['is_entry_desc']) : ?>
-          <div class="entry-desc mp-1 whitespace-nowrap text-ellipsis overflow-hidden" title="<?php echo capalot_get_post_excerpt(40); ?>"><?php echo capalot_get_post_excerpt(40); ?></div>
+          <div class="entry-desc mp-1 whitespace-nowrap text-ellipsis overflow-hidden h-4" title="<?php echo capalot_get_post_excerpt(40); ?>"><?php echo capalot_get_post_excerpt(40); ?></div>
         <?php endif; ?>
 
         <?php if ($args['is_entry_meta']) : ?>
