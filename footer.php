@@ -3,7 +3,7 @@
 
 <!-- =======================
 Footer START -->
-<footer class=" py-6 dark:bg-dark">
+<footer class=" lg:pt-6 lg:pb-6 pt-4 pb-16 dark:bg-dark">
   <div class=" lg:max-w-[80rem] m-auto px-4 lg:px-0">
 
     <?php get_template_part('template-parts/footer/widget'); ?>
@@ -26,7 +26,7 @@ Footer END -->
 
 
 <?php get_template_part('template-parts/footer/rollbar'); ?>
-<div class=" fixed lg:right-8 lg:bottom-12 right-4 bottom-4 z-50 hidden  " id="Top_btn">
+<div class=" fixed lg:right-8 lg:bottom-12 right-4 bottom-20 z-50 hidden  " id="Top_btn">
   <div class="  text-center w-[48px] ">
     <div class=" cursor-pointer bg-white dark:bg-dark-card dark:border-[#252529] p-2 rounded-md shadow-lg border border-gray-200 text-2xl text-gray-500 dark:text-gray-400 hover:opacity-70"><i class="fas fa-caret-up"></i></div>
   </div>
@@ -110,6 +110,15 @@ Footer END -->
 
 
 
+<div class=" lg:hidden fixed bottom-0 w-full left-0 z-[9988899] bg-white shadow-[0_-3px_10px_0_rgba(0,0,0,0.05)] border-t ">
+  <ul class=" grid grid-cols-5 text-center py-2">
+    <li><a target="" href="/" rel="nofollow noopener noreferrer"><i class="fas fa-home text-lg text-gray-600"></i><span class=" block text-sm text-gray-600">首页</span></a></li>
+    <li><a target="" href="/tags" rel="nofollow noopener noreferrer"><i class="fas fa-layer-group text-lg text-gray-600"></i><span class=" block text-sm text-gray-600">分类</span></a></li>
+    <li><a target="" href="/vip-prices" rel="nofollow noopener noreferrer"><i class="far fa-gem text-lg text-gray-600"></i><span class=" block text-sm text-gray-600">会员</span></a></li>
+    <li><a target="" href="/user" rel="nofollow noopener noreferrer"><i class="fas fa-user text-lg text-gray-600"></i><span class=" block text-sm text-gray-600">我的</span></a></li>
+    <li><a target="" href="https://ritheme.com/" rel="nofollow noopener noreferrer"><i class="fab fa-wordpress text-lg text-gray-600"></i><span class=" block text-sm text-gray-600">同款</span></a></li>
+  </ul>
+</div>
 
 
 <?php wp_footer(); ?>
