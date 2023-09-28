@@ -23,6 +23,9 @@ let ca = {
 
     if (capalot.singular_id !== '0')
       ca.add_post_views();
+
+    if (document.querySelector('#delete-icon'))
+      ca.delete_post();
   },
 
   /**
@@ -145,9 +148,9 @@ let ca = {
           const count_el = document.querySelector('.like-count');
           const count = parseInt(count_el.innerText);
 
-          if(like_btn.dataset.is == '0') {
+          if (like_btn.dataset.is == '0') {
             like_btn.dataset.is = '1';
-            count_el.innerText = count -1;
+            count_el.innerText = count - 1;
           } else {
             like_btn.dataset.is = '0';
             count_el.innerText = count + 1;
@@ -248,30 +251,39 @@ let ca = {
    * @see https://sweetalert2.github.io/#configuration
    */
   popup: function ({
-    content,
+    text,
     html,
     title,
     time,
-    callback,
-    icon = '', // success | info | error
+    callback = function () { },
+    icon = '', // success | warning | error
     showCloseButton = true,
+    showConfirmButton = false,
+    confirmButtonText = '确定',
+    showCancelButton = false,
+    cancelButtonText = '取消',
     position = 'center',
+    width = '240px',
+    customClass = {},
   }) {
 
     Swal.fire({
       title,
+      text,
       icon,
       html,
       showCloseButton,
       position,
-      showConfirmButton: false,
-      width: '240px',
-      customClass: {
-        closeButton: 'w-8 h-8 absolute -bottom-2 left-0 right-0 mx-auto bg-white hover:bg-white rounded-full text-[24px]'
-      }
-    });
+      showConfirmButton,
+      confirmButtonText,
+      showCancelButton,
+      cancelButtonText,
+      width,
+      customClass,
+    }).then(callback);
 
   },
+
   // 付款
   pay_action: function (e) {
     let o = null;
@@ -315,9 +327,13 @@ let ca = {
     ca.ajax({
       data: e,
       success: ({ status, msg, data }) => {
+        const customClass = {
+          closeButton: 'w-8 h-8 absolute -bottom-2 left-0 right-0 mx-auto bg-white hover:bg-white rounded-full text-[24px]'
+        }
+
         status == 1
-          ? ca.popup({ html: data })
-          : ca.popup({ content: msg });
+          ? ca.popup({ html: data, customClass })
+          : ca.popup({ content: msg, customClass });
       }
     });
   },
@@ -402,6 +418,32 @@ let ca = {
         nonce: capalot.ajax_nonce,
         post_id: capalot.singular_id,
       }
+    })
+  },
+
+  // 删除文章
+  delete_post: function () {
+    const delete_icons = document.querySelectorAll('#delete-icon');
+
+    if (!delete_icons) {
+      return;
+    }
+
+    delete_icons.forEach((el) => {
+      el.addEventListener('click', () => {
+        const post_id = el.dataset.id;
+        const action = el.dataset.action;
+
+        const text = action === 'delete_post' ? '确认彻底删除该投稿吗？删除后不可恢复！' : '确认彻底删除该投稿吗？您可以在回收站恢复该投稿。';
+
+        const callback = (result) => {
+          if (result.isConfirmed) {
+            window.location.href = `?action=${action}&post_id=${post_id}`;
+          }
+        }
+
+        ca.popup({ title: '确认删除?', text, width: '20rem', icon: 'warning', showCancelButton: true, showConfirmButton: true, callback })
+      })
     })
   }
 
