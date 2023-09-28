@@ -683,7 +683,7 @@ function get_site_default_color_style()
 
   $style = _capalot('site_default_color_mode', 'light');
   //读取用户浏览器缓存模式
-  $cookie_style = Capalot_Cookie::get('current_site_color');
+  $cookie_style = Capalot_Cookie::get('theme');
 
   if (!empty($cookie_style)) {
     $style = $cookie_style;

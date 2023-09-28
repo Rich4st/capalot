@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html <?php language_attributes(); ?> data-bs-theme="<?php echo get_site_default_color_style(); ?>">
+<html <?php language_attributes(); ?> class="<?php echo get_site_default_color_style(); ?>">
 
 <head>
   <meta charset="UTF-8">

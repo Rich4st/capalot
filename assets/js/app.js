@@ -374,11 +374,15 @@ let ca = {
       if (light.hasClass("hidden")) {
         light.removeClass('hidden');
         dark.addClass('hidden');
+
         root.removeClass('dark');
+        document.cookie = "theme=light;path=/";
       } else {
         light.addClass('hidden');
         dark.removeClass('hidden');
+
         root.addClass('dark');
+        document.cookie = "theme=dark;path=/";
       }
     }
   },
