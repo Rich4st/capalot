@@ -1,4 +1,4 @@
-<div class="search-form absolute inset-0 bg-sky-100 border-2 border-sky-500 rounded-md  z-50 dark:bg-dark-card dark:border-[#252529] ">
+<div class="search-form absolute inset-0 bg-white border-2 border-sky-500 rounded-md  z-50 dark:bg-dark-card dark:border-[#252529] ">
     <div class=" h-full grid content-center">
         <div class=" px-2">
             <form method="get" action="<?php echo esc_url(home_url('/')); ?>">
@@ -16,7 +16,7 @@
                                     'hierarchical'     => true,
                                     'depth'     => intval(_capalot('pro_search_select_depth', 1)),
                                     'id'     => 'cat-search-select',
-                                    'class'     => 'form-select text-sky-500 bg-sky-100 dark:bg-dark-card dark:text-gray-400 outline-none w-full',
+                                    'class'     => 'form-select text-sky-500  dark:bg-dark-card dark:text-gray-400 outline-none w-full',
                                 )); ?>
                             </div>
                         </div>
@@ -24,7 +24,7 @@
 
                     <div class="search-fields  lg:w-5/6 w-4/6">
                         <div class=" flex flex-row px-2">
-                            <div class=" w-5/6"><input type="text" class=" text-lg text-gray-950 py-2 px-2 w-full bg-sky-100 outline-none  dark:bg-dark-card dark:text-gray-400" placeholder="<?php _e('输入关键词 回车...', 'ripro'); ?>" autocomplete="off" value="<?php echo esc_attr(get_search_query()) ?>" name="s" required="required"></div>
+                            <div class=" w-5/6"><input type="text" class=" text-lg text-gray-950 py-2 px-2 w-full  outline-none  dark:bg-dark-card dark:text-gray-400" placeholder="<?php _e('输入关键词 回车...', 'ripro'); ?>" autocomplete="off" value="<?php echo esc_attr(get_search_query()) ?>" name="s" required="required"></div>
                             <div class=" w-1/6 self-center ">
                                 <div class=" flex justify-end text-sky-500 hover:opacity-70"><button title="点击搜索" type="submit"><i class="fas  fa-search "></i></button></div>
                             </div>
