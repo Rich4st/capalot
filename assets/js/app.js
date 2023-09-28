@@ -405,9 +405,11 @@ let ca = {
 
   // 轮播初始化
   swiper: function () {
-    const el = document.querySelector('.mySwiper');
+    const swipers = document.querySelectorAll('.mySwiper');
 
-    var swiper = new Swiper(".mySwiper", JSON.parse(el.dataset.config));
+    swipers.forEach((el) => {
+      new Swiper(el, JSON.parse(el.dataset.config));
+    })
   },
 
   // 文章阅读数量+1
