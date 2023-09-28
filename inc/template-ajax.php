@@ -1064,10 +1064,15 @@ class Capalot_Ajax
   // 分页加载更多文章
   function load_more()
   {
+    $cat = get_response_param('cat');
+    $s = get_response_param('s');
+
     $ajaxposts = new WP_Query([
       'ignore_sticky_posts' => false,
       'post_status' => 'publish',
       'paged' => $_POST['paged'],
+      's' => $s,
+      'cat' => $cat,
     ]);
 
     $response = '';

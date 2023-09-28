@@ -328,6 +328,8 @@ let ca = {
       const icon = document.querySelector('.more_icon')
 
       currentPage++;
+      const cat = new URL(window.location.href).searchParams.get('cat');
+      const s = new URL(window.location.href).searchParams.get('s');
 
       $.ajax({
         type: 'POST',
@@ -336,6 +338,8 @@ let ca = {
         data: {
           action: 'capalot_load_more',
           paged: currentPage,
+          cat,
+          s,
         },
         beforeSend: () => {
           icon.style.display = 'inline-block'
