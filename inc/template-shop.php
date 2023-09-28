@@ -867,7 +867,89 @@ function capalot_pay_success_callback($order)
     }
 }
 add_action('site_pay_order_success', 'capalot_pay_success_callback', 10, 1);
+/**
+ * 获取第三方登录地址
+ * @param  string     $method   [description]
+ * @param  boolean    $callback [description]
+ * @return [type]
+ */
+function get_oauth_permalink($method = 'qq', $callback = false) {
+    if (!in_array($method, array('qq', 'weixin'))) {
+        $method = 'qq';
+    }
+    $callback = (!empty($callback)) ? '/callback' : '';
+    return esc_url(home_url('/oauth/' . $method . $callback));
+}
+/**
+ * 第三方登录回调事件处理
+ * @param  [type]     $snsInfo [description]
+ * @return [type]
+ */
+function zb_oauth_callback_event($data) {
+    global $wpdb;
 
+    $current_uid = get_current_user_id(); //当前用户
+    // 查询meta关联的用户
+    $meta_key   = 'open_' . $data['method'] . '_openid';
+    $search_uid = $wpdb->get_var(
+        $wpdb->prepare("SELECT user_id FROM $wpdb->usermeta WHERE meta_key=%s AND meta_value=%s", $meta_key, $data['openid'])
+    );
+
+    // 如果当前用户已登录，而$search_user存在，即该开放平台账号连接被其他用户占用了，不能再重复绑定了
+    if (!empty($current_uid) && !empty($search_uid) && $current_uid != $search_uid) {
+        capalot_wp_die(
+            __('绑定失败', 'ripro'),
+            __('当前用户之前已有其他账号绑定，请先登录其他账户解绑，或者激活已经使用该方式登录的账号！', 'ripro')
+        );
+    }
+
+    if (!empty($search_uid) && empty($current_uid)) {
+        // 该开放平台账号已连接过WP系统，再次使用它直接登录
+        $user = get_user_by('id', $search_uid);
+        if ($user) {
+            zb_updete_user_oauth_info($user->ID, $data);
+
+            wp_set_current_user($user->ID, $user->user_login);
+            wp_set_auth_cookie($user->ID, true);
+            do_action('wp_login', $user->user_login, $user);
+            wp_safe_redirect(get_uc_menu_link());exit;
+        }
+    } elseif (!empty($current_uid) && empty($search_uid)) {
+        //当前已登录了本地账号, 直接绑定该账号
+        zb_updete_user_oauth_info($current_uid, $data);
+        wp_safe_redirect(get_uc_menu_link());exit;
+
+    } elseif (empty($search_uid) && empty($current_uid)) {
+        //新用户注册
+        $new_user_data = array(
+            'user_login'   => $data['method'] . mt_rand(1000, 9999) . mt_rand(1000, 9999),
+            'user_email'   => "",
+            'display_name' => $data['name'],
+            'nickname'     => $data['name'],
+            'user_pass'    => md5($data['openid']),
+            'role'         => get_option('default_role'),
+        );
+
+        $new_user = wp_insert_user($new_user_data);
+
+        if (is_wp_error($new_user)) {
+            capalot_wp_die(__('新用户注册失败', 'ripro'), $new_user->get_error_message());
+        } else {
+            //登陆当前用户
+            $user = get_user_by('id', $new_user);
+            if ($user) {
+                zb_updete_user_oauth_info($user->ID, $data);
+                update_user_meta($user->ID, 'user_avatar_type', $data['method']); //更新默认头像
+
+                wp_set_current_user($user->ID, $user->user_login);
+                wp_set_auth_cookie($user->ID, true);
+                do_action('wp_login', $user->user_login, $user);
+                wp_safe_redirect(get_uc_menu_link());exit;
+            }
+        }
+    }
+
+}
 /**
  * 用户是否第三方注册未设置密码
  * @param  [type]     $user_id [description]
