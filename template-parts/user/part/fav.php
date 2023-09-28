@@ -46,7 +46,7 @@ $item_config = [
 	<div class="card-body">
 
 		<?php if ($PostData->have_posts() ) : ?>
-			<div class="grid grid-cols-2 gap-2 md:grid-cols-3 list-none">
+			<div class="grid grid-cols-1 md:grid-cols-2  gap-4 lg:grid-cols-3 list-none">
 			<?php while ( $PostData->have_posts() ) : $PostData->the_post();
 
 				get_template_part( 'template-parts/loop/item', get_post_format() ,$item_config);

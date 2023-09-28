@@ -38,7 +38,7 @@ $container = _capalot('site_container_width', '1400')
       </div>
     <?php endif; ?>
 
-    <ul class="posts-wrap bg-white  dark:bg-dark list-none grid p-4 <?php echo esc_attr($item_config['row_cols_class']); ?>">
+    <ul class="posts-wrap bg-white  dark:bg-dark list-none grid p-2 <?php echo esc_attr($item_config['row_cols_class']); ?>">
       <?php if ($PostData->have_posts()) :
         while ($PostData->have_posts()) : $PostData->the_post();
           get_template_part('template-parts/loop/item', '', $item_config);
