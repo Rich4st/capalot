@@ -56,7 +56,7 @@ if (!empty($capalot_downurl_new) && is_array($capalot_downurl_new)) {
             navigator.clipboard
               .writeText(copy_p[i].innerText)
               .then(() => {
-                console.log('复制成功：'+copy_p[i].innerText);
+                console.log('复制成功：' + copy_p[i].innerText);
                 copy_t.style.display = 'block';
                 setTimeout(function() {
                   copy_t.style.display = 'none';
@@ -70,23 +70,30 @@ if (!empty($capalot_downurl_new) && is_array($capalot_downurl_new)) {
         }
       </script>
 
+
+
     <?php else : ?>
       <div class="down-buy-warp">
         <?php if ($is_user_login_get_status) : ?>
-          <div class="buy-title"><i class="fas fa-lock me-1"></i><?php _e('本资源登录后免费下载', 'ripro'); ?></div>
+          <div class=" text-center "><i class="fas fa-lock me-1"></i><?php _e('本资源登录后免费下载', 'ripro'); ?></div>
           <div class="buy-btns">
             <a rel="nofollow noopener noreferrer" href="<?php echo esc_url(wp_login_url(get_current_url())); ?>" class="btn btn-info px-4 rounded-pill"><i class="far fa-user me-1"></i><?php _e('登录后下载', 'ripro'); ?></a>
           </div>
 
         <?php else : ?>
-          <div class="buy-title"><i class="fas fa-lock me-1"></i></i><?php _e('本资源需权限下载', 'ripro'); ?></div>
-          <div class="buy-btns">
-            <button class="btn btn-danger px-4 rounded-pill js-pay-action" data-id="<?php echo $post_id; ?>" data-type="1" data-info=""><i class="fab fa-shopify me-1"></i><?php _e('购买下载权限', 'ripro'); ?></button>
+          <div class="buy-title text-center text-teal-500 "><i class="fas fa-lock me-1"></i></i><?php _e('本资源需权限下载', 'ripro'); ?></div>
+          <div class=" text-center mt-4">
+            <button class=" hover:bg-[#b62335] text-white py-2 px-4 bg-[#d6293e] rounded-full " data-id="<?php echo $post_id; ?>" data-type="1" data-info=""><i class="fab fa-shopify me-1"></i><?php _e('购买下载权限', 'ripro'); ?></button>
           </div>
 
-          <div class="buy-desc">
 
-            <ul class="prices-info">
+          <div class=" mt-2 mb-4">
+            <div class=" translate-y-1 opacity-70">
+              <svg t="1695893791005" class="icon m-auto " viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4005" width="20" height="20">
+                <path d="M27.273 753.613l485.222-484.233 484.233 485.222z" fill="#a2e9f5" p-id="4006"></path>
+              </svg>
+            </div>
+            <ul class=" leading-10 p-4 bg-sky-100 text-sm  divide-gray-200 divide-y ">
               <?php
               $site_vip_options = get_site_vip_options();
               $price_names = [
@@ -109,7 +116,7 @@ if (!empty($capalot_downurl_new) && is_array($capalot_downurl_new)) {
                 if ($coin_price === false) {
                   $__price_span = '<span>' . __('不可购买', 'ripro') . '</span>';
                 } elseif ($coin_price == 0) {
-                  $__price_span = '<span>' . __('免费', 'ripro') . '</span>';
+                  $__price_span =   __('免费', 'ripro');
                 } elseif ($coin_price < $default_price) {
                   $__rate = $coin_price / $default_price * 10;
                   $__price_span = $coin_price . get_site_coin_name() . '<sup class="ms-1">' . sprintf(__('%s折', 'ripro'), $__rate) . '<sup></span>';
@@ -117,7 +124,7 @@ if (!empty($capalot_downurl_new) && is_array($capalot_downurl_new)) {
                   $__price_span = $coin_price . get_site_coin_name() . '</span>';
                 }
 
-                echo '<li class="price-item ' . $type . '">' . $price_names[$type] . ': ' . $__price_span . '</li>';
+                echo '<li class=" flex justify-between text-gray-600 ' . $type . '">' .  $price_names[$type] .  ': ' . '<span>' .  $__price_span .  '</span>' . '</li>';
               } ?>
             </ul>
 
@@ -126,7 +133,7 @@ if (!empty($capalot_downurl_new) && is_array($capalot_downurl_new)) {
           <?php
           $sales_count = absint(get_post_meta($post_id, 'capalot_paynum', true));
           if (!empty($args['is_sales_count']) && $sales_count > 0) {
-            echo '<div class="buy-count"><i class="fab fa-hotjar me-1"></i>' . sprintf(__('已有<span>%d</span>人解锁下载', 'ripro'), $sales_count) . '</div>';
+            echo '<div class=" text-gray-400 text-sm text-center"><i class="fab fa-hotjar me-1"></i>' . sprintf(__('已有<span class=" text-sky-400">%d</span>人解锁下载', 'ripro'), $sales_count) . '</div>';
           }
           ?>
         <?php endif; ?>
@@ -134,6 +141,7 @@ if (!empty($capalot_downurl_new) && is_array($capalot_downurl_new)) {
       </div>
 
     <?php endif; ?>
+
 
 
     <div class="down-buy-info">
