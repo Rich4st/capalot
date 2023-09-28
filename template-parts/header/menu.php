@@ -1,7 +1,7 @@
-<header class="  dark:bg-dark ">
+<header class=" navbar dark:bg-dark w-full bg-white opacity-1 z-[99] ease-in-out duration-800">
 
 	<div class=" lg:max-w-[80rem] m-auto lg:px-0 px-2 py-2">
-		<div class=" text-[#595d69] relative px-1" id="hea_bg"> <!-- container-fluid px-lg-5 -->
+		<div class=" text-[#595d69] relative px-1 " id="hea_bg"> <!-- container-fluid px-lg-5 -->
 			<div class="flex items-center ">
 				<div class="mr-4  flex items-center">
 					<?php
@@ -72,5 +72,26 @@
 </header>
 
 <div class="header-gap"></div>
+<script>
+	var prevScrollpos = window.pageYOffset;
 
 
+	window.addEventListener('scroll', function() {
+		var currentScrollPos = window.pageYOffset;
+		var navbar = document.querySelector('.navbar');
+		var scrolled = window.scrollY;
+		if (scrolled >= 80) {
+			if (prevScrollpos > currentScrollPos) {
+				navbar.style.opacity = '1';
+				navbar.classList.add('fixed');
+			} else {
+				navbar.style.opacity = '0';
+				navbar.classList.add('fixed');
+			}
+		}else{
+			navbar.classList.remove('fixed');
+		}
+
+		prevScrollpos = currentScrollPos;
+	});
+</script>
