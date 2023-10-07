@@ -62,6 +62,7 @@ class Capalot_Ajax
     $this->add_action('get_captcha_code'); //获取验证码
     $this->add_action('add_share_post'); //分享文章
     $this->add_action('add_post_views'); //文章阅读数量+1
+    $this->add_action('ajax_comment'); //ajax评论
   }
 
   /**
@@ -1099,4 +1100,26 @@ class Capalot_Ajax
     echo json_encode($result);
     exit;
   }
+
+  // 评论
+  public function ajax_comment() {
+
+    $this->valid_nonce_ajax(); #安全验证
+
+    $comment = wp_handle_comment_submission(wp_unslash($_POST));
+    if (is_wp_error($comment)) {
+        $error_data = intval($comment->get_error_data());
+        if (!empty($error_data)) {
+            wp_die($comment->get_error_message(), __('Comment Submission Failure'), array('response' => $error_data, 'back_link' => true));exit;
+        } else {
+            wp_die('Unknown error', __('Comment Submission Failure'), array('response' => 500, 'back_link' => true));exit;
+        }
+    }
+
+    $user = wp_get_current_user();
+    do_action('set_comment_cookies', $comment, $user);
+
+    echo "success";exit;
+
+}
 }

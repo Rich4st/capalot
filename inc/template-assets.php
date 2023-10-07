@@ -39,7 +39,9 @@ function capalot_assets()
   // lord-icon
   wp_enqueue_script('lord-icon', get_template_directory_uri() . '/assets/js/bhenfmcm.js', array(), '0.1.0', true);
 
-
+  if (is_singular() && comments_open() && get_option('thread_comments')) {
+    wp_enqueue_script('comment-reply');
+  }
   // 文章详情页参数
   $script_params = array(
     'home_url' => esc_url(home_url()),
