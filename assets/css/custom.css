@@ -292,3 +292,18 @@
     color: white;
     font-weight: bold;
 }
+/* 面包屑 */
+.breadcrumb {
+    align-items: center;
+    display: flex;
+}
+
+.breadcrumb>li {
+    margin-right: 0.3rem;
+    list-style: none;
+}
+
+.breadcrumb>li:not(:last-child)::after {
+    transform: translate(0.6rem, 0);
+    content: "/";
+}

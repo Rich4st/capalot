@@ -164,9 +164,114 @@ function capalot_get_thumbnail_url($post = null, $size = 'thumbnail')
 /**
  * 获取面包屑导航
  */
-function capalot_get_breadcrumb($class = 'bc')
+function capalot_get_breadcrumb($class = 'breadcrumb')
 {
+  global $post, $wp_query;
+  echo '<ol class="' . $class . '"><li class=""><a href="' . home_url() . '">' . __('首页', 'ripro') . '</a></li>';
+
+  if (is_category()) {
+    $cat_obj   = $wp_query->get_queried_object();
+    $thisCat   = $cat_obj->term_id;
+    $thisCat   = get_category($thisCat);
+    $parentCat = get_category($thisCat->parent);
+
+    if ($thisCat->parent != 0) {
+      // echo capalot_get_category_parents_link($parentCat, 'category');
+      echo $parentCat . '111';
+    }
+
+    echo '<li class="active">';
+    single_cat_title();
+    echo '</li>';
+  } elseif (is_day()) {
+    echo '<li><a href="' . get_year_link(get_the_time('Y')) . '">' . get_the_time('Y') . '</a> </li>';
+    echo '<li><a href="' . get_month_link(get_the_time('Y'), get_the_time('m')) . '">' . get_the_time('F') . '</a> </li>';
+    echo '<li class="active">' . get_the_time('d') . '</li>';
+  } elseif (is_month()) {
+    echo '<li><a href="' . get_year_link(get_the_time('Y')) . '">' . get_the_time('Y') . '</a> </li>';
+    echo '<li class="active">' . get_the_time('F') . '</li>';
+  } elseif (is_year()) {
+    echo '<li class="active">' . get_the_time('Y') . '</li>';
+  } elseif (is_attachment()) {
+    echo '<li class="active">' . get_the_title() . '</li>';
+  } elseif (is_single()) {
+    $post_type = get_post_type();
+    if ($post_type == 'post') {
+      $cat = get_the_category();
+      $cat = isset($cat[0]) ? $cat[0] : 0;
+      echo capalot_get_term_parents_link($cat, 'category');
+      echo '<li class="active">' . __('正文', 'ripro') . '</li>';
+    } else {
+      $obj = get_post_type_object($post_type);
+      echo '<li class="active">';
+      echo $obj->labels->singular_name;
+      echo '</li>';
+    }
+  } elseif (is_page() && !$post->post_parent) {
+    echo '<li class="active">' . get_the_title() . '</li>';
+  } elseif (is_page() && $post->post_parent) {
+    $parent_id   = $post->post_parent;
+    $breadcrumbs = array();
+    while ($parent_id) {
+      $page          = get_post($parent_id);
+      $breadcrumbs[] = '<li><a href="' . get_permalink($page->ID) . '">' . get_the_title($page->ID) . '</a></li>';
+      $parent_id     = $page->post_parent;
+    }
+    $breadcrumbs = array_reverse($breadcrumbs);
+    foreach ($breadcrumbs as $crumb) {
+      echo $crumb;
+    }
+
+    echo '<li class="active">' . get_the_title() . '</li>';
+  } elseif (is_search()) {
+    $kw = get_search_query();
+    $kw = !empty($kw) ? $kw : '无';
+    echo '<li class="active">' . sprintf(__('搜索: %s', 'ripro'), $kw) . '</li>';
+  } elseif (is_tag()) {
+    echo '<li class="active">';
+    single_tag_title();
+    echo '</li>';
+  } elseif (is_author()) {
+    global $author;
+    $userdata = get_userdata($author);
+    echo '<li class="active">' . $userdata->display_name . '</li>';
+  } elseif (is_404()) {
+    echo '<li class="active">404</li>';
+  }
+
+  if (get_query_var('paged')) {
+    echo '<li class="active">' . sprintf(__('第%s页', 'ripro'), get_query_var('paged')) . '</li>';
+  }
+
+  echo '</ol>';
 }
+
+/**
+ * 根据分类id获取分类父集返回链接
+ * @param  [type]     $id       [description]
+ * @param  [type]     $taxonomy [description]
+ * @param  array      $visited  [description]
+ * @return [type]
+ */
+function capalot_get_term_parents_link($id, $taxonomy, $visited = array())
+{
+  if (!$id) {
+    return '';
+  }
+  $chain  = '';
+  $parent = get_term($id, $taxonomy);
+  if (is_wp_error($parent)) {
+    return '';
+  }
+  $name = $parent->name;
+  if ($parent->parent && ($parent->parent != $parent->term_id) && !in_array($parent->parent, $visited)) {
+    $visited[] = $parent->parent;
+    $chain .= capalot_get_term_parents_link($parent->parent, $taxonomy, $visited);
+  }
+  $chain .= '<li><a href="' . esc_url(get_category_link($parent->term_id)) . '">' . $name . '</a></li>';
+  return $chain;
+}
+
 
 /**
  * 分页
