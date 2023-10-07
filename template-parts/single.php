@@ -30,6 +30,19 @@ $single_style = _capalot('single_style', 'general'); //general hero
         ?>
         <?php get_template_part('template-parts/single/content') ?>
       </div>
+
+      <?php get_template_part('template-parts/single/entry-navigation');?>
+
+      <?php get_template_part('template-parts/single/entry-related-posts');?>
+
+
+
+      <!-- 评论 -->
+      <?php
+        if (comments_open() || get_comments_number()) :
+          comments_template();
+        endif;
+      ?>
     </div>
     <div class=" sidebar lg:w-[25%] w-full lg:mx-4  mb-[1.5rem] ">
       <?php dynamic_sidebar('single-sidebar'); ?>

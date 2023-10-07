@@ -31,16 +31,16 @@ $comment_count = get_comments(array(
 
   <div class="author-header">
     <div class="row align-items-center flex flex-row">
-      <div class="col-auto mr-8">
+      <div class=" w-1/4  flex items-center">
         <!-- Avatar -->
-        <div class="avatar ">
+        <div class=" ">
           <img class="lazy avatar-img rounded-circle   w-12 h-12 shadow rounded-full" src="<?php echo $author_img; ?>">
         </div>
 
       </div>
-      <div class="col">
-        <span class="d-block h6 fw-bold mb-1"><?php echo $author_name; ?></span>
-        <small class="d-block text-muted dark:text-gray-400"><?php _e('等级', 'ripro'); ?><?php echo capalot_get_user_badge($author_id, 'span', 'ms-1 mb-0'); ?></small>
+      <div class=" w-3/4">
+        <span class="  mb-1 block dark:text-gray-50"><?php echo $author_name; ?></span>
+        <small class="d-block text-muted text-gray-600 dark:text-gray-400 "><?php _e('等级', 'ripro'); ?><?php echo capalot_get_user_badge($author_id, 'span', ' !bg-gray-200 rounded-md ml-2 px-2 text-[12px] py-1 !text-gray-600 dark:!bg-dark dark:!text-gray-400'); ?></small>
       </div>
     </div>
   </div>

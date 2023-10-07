@@ -377,6 +377,171 @@ function capalot_delete_post_fav($user_id = null, $post_id = 0)
 }
 
 /**
+ * 取消点赞文章
+ */
+function capalot_delete_post_like($user_id = null, $post_id = null)
+{
+  $post_id = absint($post_id);
+  if (get_post_status($post_id) === false) {
+    return false;
+  }
+
+  if (empty($user_id)) {
+    $user_id = get_current_user_id();
+  }
+
+  $meta_key = 'like_post';
+  $post_key = 'likes';
+
+  $old_data = get_user_meta($user_id, $meta_key, true); # 获取...
+
+  if (empty($old_data) || !is_array($old_data)) {
+    $new_data = [];
+  } else {
+    $new_data = $old_data;
+  }
+
+  if (in_array($post_id, $new_data)) {
+    $new_data = array_values(array_diff($new_data, [$post_id]));
+  }
+
+  if (true) {
+    $favnum  = absint(get_post_meta($post_id, $post_key, true));
+    $new_num = $favnum - 1;
+    if ($new_num < 0) {
+      $new_num = 0;
+    }
+
+    update_post_meta($post_id, $post_key, $new_num);
+  }
+
+  return update_user_meta($user_id, $meta_key, $new_data);
+}
+
+
+/**
+ * 获取列表显示风格配置
+ * @Author Dadong2g
+ * @date   2022-12-08
+ * @return [type]
+ */
+function capalot_get_archive_item_config($cat_id = 0) {
+
+  $item_col   = _capalot('archive_item_col', '4');
+  $item_style = _capalot('archive_item_style', 'grid');
+  $media_size = _capalot('post_thumbnail_size', 'radio-3x2');
+
+  $media_size_type = capalot_get_thumbnail_size_type();
+  $media_fit_type = capalot_get_thumbnail_fit_type();
+
+  $item_entry = _capalot('archive_item_entry', array(
+      'category_dot',
+      'entry_desc',
+      'entry_footer',
+      'vip_icon',
+  ));
+
+  $term_item_style = _capalot('site_term_item_style', array());
+
+  
+
+  if (!empty($cat_id) && !empty($term_item_style)) {
+      foreach ($term_item_style as $key => $item) {
+          if ($cat_id == $item['cat_id']) {
+              $item_col   = $item['archive_item_col'];
+              $item_style = $item['archive_item_style'];
+              $media_size = $item['post_thumbnail_size'];
+              $item_entry = $item['archive_item_entry'];
+              continue;
+          }
+      }
+  }
+
+
+  $row_cols = [
+      '1' => 'row-cols-1 g-2 g-md-3 g-lg-4',
+      '2' => 'row-cols-2 g-2 g-md-3 g-lg-4',
+      '3' => 'row-cols-2 row-cols-md-3 g-2 g-md-3 g-lg-4',
+      '4' => 'row-cols-2 row-cols-md-3 row-cols-lg-4 g-2 g-md-3 g-lg-4',
+      '5' => 'row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-2 g-lg-3',
+      '6' => 'row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-6 g-2 g-lg-3',
+  ];
+
+  if ($item_style=='list' && $item_col >= 2) {
+      // 列表模式自适应...
+      $row_cols_class = 'row-cols-1 row-cols-md-2 g-2 g-md-3 g-lg-4';
+  }else{
+      $row_cols_class = $row_cols[$item_col];
+  }
+
+  $config = array(
+      'type'            => $item_style, //grid grid-overlay list list-icon
+      'row_cols_class'  => $row_cols_class,
+      'media_size_type' => $media_size_type,
+      'media_fit_type'  => $media_fit_type,
+      'media_class'     => $media_size, // media-3x2 media-3x3 media-2x3
+      'is_vip_icon'     => @in_array('vip_icon', $item_entry),
+      'is_entry_desc'   => @in_array('entry_desc', $item_entry),
+      'is_entry_meta' => @in_array('entry_footer', $item_entry),
+      'is_entry_cat' => @in_array('category_dot', $item_entry),
+  );
+  return $config;
+}
+
+
+
+function capalot_get_thumbnail_size_type(){
+  $options = array(
+      'bg-cover',
+      'bg-auto',
+      'bg-contain',
+  );
+  $opt = _capalot('site_thumb_size_type','bg-cover');
+
+  if (!in_array($opt, $options)) {
+      $opt = $options[0];
+  }
+  return $opt;
+}
+
+function capalot_get_thumbnail_fit_type(){
+  $options = array(
+      'bg-left-top',
+      'bg-right-top',
+      'bg-center-top',
+      'bg-center',
+      'bg-center-bottom',
+      'bg-left-bottom',
+      'bg-right-bottom',
+  );
+  $opt = _capalot('site_thumb_fit_type','bg-center');
+
+  if (!in_array($opt, $options)) {
+      $opt = $options[0];
+  }
+  return $opt;
+}
+
+/**
+ * 添加文章阅读数量
+ */
+function capalot_add_post_views($post_id = null)
+{
+  if (empty($post_id)) {
+    global $post;
+    $post_id = $post->ID;
+  }
+  $meta_key = 'views';
+  $this_num = intval(get_post_meta($post_id, $meta_key, true));
+  $new_num  = $this_num + 1;
+  if ($new_num < 0) {
+    $new_num = 1;
+  }
+
+  return update_post_meta($post_id, $meta_key, $new_num);
+}
+
+/**
  * 获取文章浏览数量
  */
 function capalot_get_post_views($post_id = null)

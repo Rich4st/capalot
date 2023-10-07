@@ -99,15 +99,29 @@ Footer END -->
 
 
 
-<div class=" lg:hidden fixed bottom-0 w-full left-0 z-[9988899] bg-white shadow-[0_-3px_10px_0_rgba(0,0,0,0.05)] border-t ">
-  <ul class=" grid grid-cols-5 text-center py-2">
-    <li><a target="" href="/" rel="nofollow noopener noreferrer"><i class="fas fa-home text-lg text-gray-600"></i><span class=" block text-sm text-gray-600">首页</span></a></li>
-    <li><a target="" href="/tags" rel="nofollow noopener noreferrer"><i class="fas fa-layer-group text-lg text-gray-600"></i><span class=" block text-sm text-gray-600">分类</span></a></li>
-    <li><a target="" href="/vip-prices" rel="nofollow noopener noreferrer"><i class="far fa-gem text-lg text-gray-600"></i><span class=" block text-sm text-gray-600">会员</span></a></li>
-    <li><a target="" href="/user" rel="nofollow noopener noreferrer"><i class="fas fa-user text-lg text-gray-600"></i><span class=" block text-sm text-gray-600">我的</span></a></li>
-    <li><a target="" href="https://ritheme.com/" rel="nofollow noopener noreferrer"><i class="fab fa-wordpress text-lg text-gray-600"></i><span class=" block text-sm text-gray-600">同款</span></a></li>
+
+<div class=" lg:hidden fixed bottom-0 w-full left-0 z-[9988899] bg-white dark:bg-dark-card shadow-[0_-3px_10px_0_rgba(0,0,0,0.05)] border-t dark:border-t-[#222] ">
+  <ul class=" flex text-center py-2 justify-around text-gray-600 dark:text-gray-50 ">
+    <li><a target="" href="/" ><i class="fas fa-home text-lg "></i><span class=" block text-sm ">首页</span></a></li>
+    <?php foreach (_capalot('site_footer_widget_link1', array()) as $item) {
+      $link_item = '<li><a href="' . $item['href'] . '"  ><i class="fas fa-layer-group text-lg "></i><span class=" block text-sm ">分类</span></a></li>';
+
+      if ($item['title'] === '标签云' &&  _capalot('is_site_tags_page')) {
+        echo  $link_item;
+      }
+    } ?>
+    <?php foreach (_capalot('site_footer_widget_link2', array()) as $item) {
+      $link_item = '<li><a href="' . $item['href'] . '"  ><i class="far fa-gem text-lg "></i><span class=" block text-sm ">会员</span></a></li>';
+
+      if ($item['title'] === 'VIP介绍' &&  _capalot('is_site_vip_price_page')) {
+        echo  $link_item;
+      }
+    } ?>
+    <li><a target="" href="/user" ><i class="fas fa-user text-lg "></i><span class=" block text-sm ">我的</span></a></li>
+    <li><a target="" href="https://ritheme.com/" ><i class="fab fa-wordpress text-lg "></i><span class=" block text-sm ">同款</span></a></li>
   </ul>
 </div>
+
 
 
 <?php wp_footer(); ?>
