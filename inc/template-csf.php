@@ -31,6 +31,7 @@ if (!class_exists('CSF')) {
     '/options/shortcode-options.php', //简码设置
     '/options/profile-options.php', //用户设置
     '/options/widget-options.php', //小工具设置
+    '/options/taxonomy-options.php', //分类目录设置
   );
 
 
