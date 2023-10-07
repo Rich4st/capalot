@@ -220,30 +220,33 @@ if (_capalot('site_shop_mode', 'all') !== 'close') {
   ));
 }
 
+if (_capalot('is_theme_seo', false)) {
 
-CSF::createSection($prefix, array(
-  'title'  => '自定义SEO信息',
-  'fields' => array(
-    array(
-      'id'       => 'post_title',
-      'type'     => 'text',
-      'title'    => '自定义SEO标题',
-      'subtitle' => '留空则不设置',
+  CSF::createSection($prefix, array(
+    'title'  => '自定义SEO信息',
+    'fields' => array(
+      array(
+        'id'       => 'post_title',
+        'type'     => 'text',
+        'title'    => '自定义SEO标题',
+        'subtitle' => '留空则不设置',
+      ),
+
+      array(
+        'id'       => 'description',
+        'type'     => 'textarea',
+        'title'    => '自定义SEO描述',
+        'subtitle' => '字数控制到80-180最佳,留空则不设置',
+      ),
+
+      array(
+        'id'       => 'keywords',
+        'type'     => 'text',
+        'title'    => '自定义SEO关键词',
+        'subtitle' => '关键词用英文逗号,隔开,留空则不设置',
+      ),
+
     ),
+  ));
 
-    array(
-      'id'       => 'post_description',
-      'type'     => 'textarea',
-      'title'    => '自定义SEO描述',
-      'subtitle' => '字数控制到80-180最佳,留空则不设置',
-    ),
-
-    array(
-      'id'       => 'post_keywords',
-      'type'     => 'text',
-      'title'    => '自定义SEO关键词',
-      'subtitle' => '关键词用英文逗号,隔开,留空则不设置',
-    ),
-
-  ),
-));
+}
