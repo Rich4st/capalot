@@ -7,7 +7,7 @@ let ca = {
     ca.pay_action();
     ca.pagination();
     ca.toggle_dark();
-    ca. add_comment();
+    ca.add_comment();
 
     const swiperEl = document.querySelector('.swiper');
     if (swiperEl)
@@ -464,12 +464,12 @@ let ca = {
           t.prop("disabled", !0).val(capalot.get_text.__commiting)
         },
         error: function (e, t, n) {
-          ca.notice(e.responseText)
+          ca.notice({title:e.responseText,icon:'error'})
         },
         success: function (e) {
-          "success" == e ? (t.val(capalot.get_text.__comment_success), ca.notice(capalot.get_text.__refresh_page), setTimeout(function () {
+          ("success" == e) ? (t.val(capalot.get_text.__comment_success), ca.notice(capalot.get_text.__refresh_page), setTimeout(function () {
             window.location.reload()
-          }, 2e3)) : ca.notice(e);
+          }, 2e3)) : ca.notice({ title: e, icon: "error" });
         },
         complete: function (e) {
           t.prop("disabled", !1).val(n)
