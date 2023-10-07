@@ -87,6 +87,8 @@ switch ($type) {
     <p class=" text-white"><?php echo $args['desc']; ?></p>
 
 
+
+    <?php if (empty(_capalot('remove_site_search', false))) : ?>
     <div class=" max-w-[60rem] m-auto lg:px-0 px-4">
       <div class="search-form   bg-white border-2 rounded-md   dark:bg-dark-card dark:border-[#252529]">
         <div class=" h-full grid content-center">
@@ -126,15 +128,14 @@ switch ($type) {
         </div>
       </div>
     </div>
-
-
+    <?php endif; ?>
 
     <?php if (!empty($search_hot_exp)) : ?>
       <ul class="space-x-1 flex justify-center items-center text-sm text-gray-300">
         <li class="mr-1">搜索热词:</li>
         <?php foreach ($search_hot_exp as $exp) {
           if (!empty($exp)) {
-            echo '<li class="hover:text-gray-100 hover:underline"><a href="' . get_search_link($exp) . '">' . $exp . '</a></li>';
+            echo '<li class="hover:text-gray-100 hover:underline"><a href="' . esc_url(home_url('/')). '?s=' . $exp . '">' . $exp . '</a></li>';
           }
         } ?>
       </ul>

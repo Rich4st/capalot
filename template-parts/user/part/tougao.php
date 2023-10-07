@@ -126,10 +126,14 @@ $page_link = get_uc_menu_link('tougao');
 									<div>
 										<span class="meta-action">
 
-											<a target="_blank" href="<?php echo esc_url(add_query_arg(array('post_id' => $post_id), home_url('/tougao'))); ?>" class="text-[#509ff8] md:mr-4 mr-0"><i class="bi bi-pencil-square fa-fw me-1"></i><?php _e('编辑', 'ripro'); ?></a>
+											<a target="_blank" href="<?php echo esc_url(add_query_arg(array('post_id' => $post_id), home_url('/tougao'))); ?>" class="text-[#509ff8] md:mr-4 mr-0">
+												<i class="fa-solid fa-pen-to-square mr-1"></i><?php _e('编辑', 'ripro'); ?>
+											</a>
 
 											<?php $retVal = ($curr_page_action == 'trash') ? 'delete_post' : 'trash_post'; ?>
-											<a href="<?php echo esc_url(add_query_arg(array('action' => $retVal, 'post_id' => $post_id), $page_link)); ?>" class="text-red-500 md:mr-2"><i class="bi bi-trash3 fa-fw me-1"></i><?php _e('删除', 'ripro'); ?></a>
+											<button data-action="<?php echo $retVal; ?>" data-id="<?php echo $post_id; ?>" id="delete-icon" class="text-red-500 md:mr-2">
+												<i class="fa-solid fa-trash mr-1"></i><?php _e('删除', 'ripro'); ?>
+											</button>
 										</span>
 									</div>
 								</div>

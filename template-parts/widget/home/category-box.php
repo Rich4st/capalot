@@ -5,7 +5,7 @@ if (empty($args)) {
 }
 
 $config = [
-  'slidesPerView' => capalot_is_mobile() ? 2 : 6,
+  'slidesPerView' => capalot_is_mobile() ? 2 : 4,
   'spaceBetween' => 30,
   'pagination' => [
     'el' => '.swiper-pagination',
@@ -36,7 +36,7 @@ $def_bg_img = get_template_directory_uri() . '/assets/img/bg.jpg'; //默认缩�
 ?>
 
 
-<section class="swiper mySwiper max-w-7xl mx-auto" data-config='<?php echo json_encode($config); ?>'>
+<section class="swiper mySwiper max-w-7xl mx-auto dark:bg-dark" data-config='<?php echo json_encode($config); ?>'>
   <div class="swiper-wrapper">
 
     <?php foreach ($terms as $key => $item) :
@@ -48,7 +48,7 @@ $def_bg_img = get_template_directory_uri() . '/assets/img/bg.jpg'; //默认缩�
       $color = capalot_get_color_class($key);
     ?>
 
-      <div class="swiper-slide">
+      <div class="swiper-slide py-8">
         <div class="h-40 flex justify-center items-center text-white text-center" style="background-image: url(<?php echo $bg_img; ?>);">
 
           <a href="<?php echo get_term_link($item->term_id, $taxonomy_name); ?>">

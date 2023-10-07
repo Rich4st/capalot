@@ -18,7 +18,7 @@ $container = _capalot('site_container_width', '1400')
 // TODO:视频模块
 ?>
 <div class="bg-[#ededed] dark:bg-dark">
-  <div style="max-width: <?php
+<div style="max-width: <?php
                           if ($container === '') {
                             echo '1280';
                           } else {

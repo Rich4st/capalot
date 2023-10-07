@@ -31,7 +31,7 @@ $archive_item_config = get_posts_style_config();
 		<?php capalot_pagination(array(
 			'range'  => 4,
 			'nav_class' => 'page-nav mt-4',
-			// 'nav_type'  => _cao('site_page_nav_type', 'click'),
+			'nav_type'  => _capalot('site_page_nav_type', 'click'),
 		)); ?>
 
 	</section>
