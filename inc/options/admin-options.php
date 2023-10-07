@@ -1305,6 +1305,29 @@ CSF::createSection($prefix, array(
       'desc'   => '每行一个，用于前台展示',
       'default' => '充值最低额度为1金币' . PHP_EOL . '充值汇率为1元=10金币' . PHP_EOL . '人民币和金币不能互相转换' . PHP_EOL . '余额永久有效，无时间限制',
     ),
+    array(
+      'id'      => 'is_site_qiandao',
+      'type'    => 'switcher',
+      'title'   => '每日签到功能',
+      'desc'   => '启用后在前台个人中心我的余额界面右上角可以点击签到领取奖励',
+      'default' => false,
+    ),
+    array(
+      'id'         => 'site_qiandao_coin_num',
+      'type'       => 'text',
+      'title'      => '每日签到赠送' . _capalot('site_coin_name') . '数量',
+      'desc'       => '填写单个数字0.5表示固定赠送0.5，签到赠送的站内币直接到账用户的钱包余额',
+      'default'    => _capalot('site_qiandao_coin_num', '0.5'),
+      'dependency' => array('is_site_qiandao', '==', 'true'),
+    ),
+
+    array(
+      'id'      => 'site_shop_name_txt',
+      'type'    => 'text',
+      'title'   => '自定义全站订单名称',
+      'desc'    => '购买资源时在支付平台显示的商品名称，例如自助购买，自助充值，防止，敏感词汇风控,字数不要超过8个，防止微信支付报错',
+      'default' => '商城自助购买',
+    ),
 
   )
 ));
