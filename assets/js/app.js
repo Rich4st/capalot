@@ -455,6 +455,7 @@ let ca = {
       })
     })
   },
+
   // 新增评论
   add_comment: function () {
     const o = jQuery("#commentform");
@@ -502,6 +503,15 @@ let ca = {
       scrollThreshold: !1,
       button: ".infinite-scroll-button"
     }))
+  },
+
+  // 防抖
+  debounce: function (fn, wait) {
+    let timeout = null;
+    return function () {
+      if (timeout !== null) clearTimeout(timeout);
+      timeout = setTimeout(fn, wait);
+    }
   },
 
 }

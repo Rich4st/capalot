@@ -142,13 +142,12 @@ global $current_user;
 			$(this).addClass("active").parent().siblings().find(".coin-pay-card").removeClass("active");
 		});
 
-		$(".user-qiandao-action").on("click", function(e) {
-			e.preventDefault();
+		$(".user-qiandao-action").on("click", ca.debounce(function() {
 			var _this = $(this);
 
 			var iconEl = _this.find('i');
 			var def_icon = iconEl.attr('class');
-			var spinner_icon = 'fa fa-spinner fa-spin me-1';
+			var spinner_icon = 'fa-solid fa-spinner fa-spin me-1';
 
 			var data = {
 				nonce: capalot.ajax_nonce,
@@ -158,27 +157,34 @@ global $current_user;
 				data,
 				beforeSend: () => {
 					iconEl.removeClass().addClass(spinner_icon);
+					// user-qiandao-action增加class disabled
+					_this.addClass('pointer-events-none');
 				},
-				result: ({
-					status,
-					msg,
-					icon
+				complete: ({
+					responseJSON
 				}) => {
-					ca.notice({
-						title: msg,
-						icon: status == 1 ? 'success' : 'error',
-					});
-					if (status == 1) {
+					const {
+						status,
+						msg
+					} = responseJSON;
+
+					if (status === 1) {
+						ca.notice({
+							title: msg,
+							icon: 'success',
+						});
 						setTimeout(function() {
 							window.location.reload()
-						}, 2000)
+						}, 1000)
+					} else {
+						ca.notice({
+							title: msg,
+							icon: 'error',
+						});
 					}
 				},
-				complete: () => {
-					iconEl.removeClass().addClass(def_icon);
-				}
 			});
-		});
+		}, 500));
 
 		// vip-cdk-submit
 		$("#vip-cdk-submit").on("click", function(e) {
