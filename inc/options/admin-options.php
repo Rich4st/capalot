@@ -2351,10 +2351,19 @@ CSF::createSection($prefix, array(
   'fields' => array(
 
     array(
-      'id'      => 'gutenberg_disable',
+      'id'      => 'gutenberg_edit',
       'type'    => 'switcher',
-      'title'   => '古藤堡小工具',
-      'default' => false
+      'title'   => '使用古滕堡编辑器',
+      'desc'    => '',
+      'default' => false,
+    ),
+
+    array(
+      'id'      => 'gutenberg_widgets',
+      'type'    => 'switcher',
+      'title'   => '使用古滕堡小工具',
+      'desc'    => '',
+      'default' => false,
     ),
 
     array(
