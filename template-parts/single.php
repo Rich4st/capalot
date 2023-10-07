@@ -14,13 +14,21 @@ $single_style = _capalot('single_style', 'general'); //general hero
 
 <?php
 
+$container = _capalot('site_container_width', '1400')
 // TODO:视频模块
 ?>
 <div class="bg-[#ededed] dark:bg-dark">
-  <div class="flex lg:flex-row flex-col bg-[#ededed] justify-center lg:max-w-7xl md:max-w-3xl w-full md:mx-auto py-4 px-2 dark:bg-dark">
-    <div class="bg-white dark:bg-dark-card prose-sm lg:w-[75%] w-full lg:mx-4 rounded-md p-[1.25rem] mb-[1.5rem] text-base leading-8 text-slate-700">
+  <div style="max-width: <?php
+                          if ($container === '') {
+                            echo '1280';
+                          } else {
+                            echo $container;
+                          }
+                          ?>px;" 
+    class="mx-auto flex lg:flex-row flex-col justify-center p-2 lg:py-4 dark:bg-dark w-full">
+    <div class=" lg:w-[75%] w-full prose-sm text-slate-700 dark:text-gray-400">
 
-      <div>
+      <div class="bg-white dark:bg-dark-card p-2 lg:p-4 rounded mb-8">
         <?php
         if ($single_style === 'general') {
 
@@ -30,7 +38,13 @@ $single_style = _capalot('single_style', 'general'); //general hero
         ?>
         <?php get_template_part('template-parts/single/content') ?>
       </div>
+      <?php
+      if (comments_open() || get_comments_number()) :
+        comments_template();
+      endif;
+      ?>
     </div>
+
     <div class=" sidebar lg:w-[25%] w-full lg:mx-4  mb-[1.5rem] ">
       <?php dynamic_sidebar('single-sidebar'); ?>
     </div>

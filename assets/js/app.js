@@ -7,6 +7,7 @@ let ca = {
     ca.pay_action();
     ca.pagination();
     ca.toggle_dark();
+    ca. add_comment();
 
     const swiperEl = document.querySelector('.swiper');
     if (swiperEl)
@@ -383,7 +384,55 @@ let ca = {
         post_id: capalot.singular_id,
       }
     })
-  }
+  },
+  // 新增评论
+  add_comment: function () {
+    const o = jQuery("#commentform");
+    o.find('input[type="submit"]'), o.submit(function (e) {
+      e.preventDefault();
+      const t = jQuery("#submit"),
+        n = t.val();
+      jQuery.ajax({
+        type: "POST",
+        url: capalot.ajax_url,
+        data: o.serialize() + "&action=capalot_ajax_comment&nonce=" + capalot.ajax_nonce,
+        beforeSend: function (e) {
+          t.prop("disabled", !0).val(capalot.get_text.__commiting)
+        },
+        error: function (e, t, n) {
+          ca.notice(e.responseText)
+        },
+        success: function (e) {
+          "success" == e ? (t.val(capalot.get_text.__comment_success), ca.notice(capalot.get_text.__refresh_page), setTimeout(function () {
+            window.location.reload()
+          }, 2e3)) : ca.notice(e);
+        },
+        complete: function (e) {
+          t.prop("disabled", !1).val(n)
+        }
+      })
+    });
+    var e = jQuery(".comments-list");
+    const a = jQuery(".infinite-scroll-button"),
+      i = jQuery(".infinite-scroll-status"),
+      r = jQuery(".infinite-scroll-msg");
+    a.length && (e.on("request.infiniteScroll", function (e, t) {
+      i.show()
+    }), e.on("load.infiniteScroll", function (e, t, n) {
+      i.hide()
+    }), e.on("last.infiniteScroll", function (e, t, n) {
+      a.hide(), r.show()
+    }), e.infiniteScroll({
+      append: ".comments-list > *",
+      debug: !1,
+      hideNav: ".comments-pagination",
+      history: !1,
+      path: ".comments-pagination a.next",
+      prefill: !1,
+      scrollThreshold: !1,
+      button: ".infinite-scroll-button"
+    }))
+  },
 
 }
 
