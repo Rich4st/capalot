@@ -1305,6 +1305,29 @@ CSF::createSection($prefix, array(
       'desc'   => '每行一个，用于前台展示',
       'default' => '充值最低额度为1金币' . PHP_EOL . '充值汇率为1元=10金币' . PHP_EOL . '人民币和金币不能互相转换' . PHP_EOL . '余额永久有效，无时间限制',
     ),
+    array(
+      'id'      => 'is_site_qiandao',
+      'type'    => 'switcher',
+      'title'   => '每日签到功能',
+      'desc'   => '启用后在前台个人中心我的余额界面右上角可以点击签到领取奖励',
+      'default' => false,
+    ),
+    array(
+      'id'         => 'site_qiandao_coin_num',
+      'type'       => 'text',
+      'title'      => '每日签到赠送' . _capalot('site_coin_name') . '数量',
+      'desc'       => '填写单个数字0.5表示固定赠送0.5，签到赠送的站内币直接到账用户的钱包余额',
+      'default'    => _capalot('site_qiandao_coin_num', '0.5'),
+      'dependency' => array('is_site_qiandao', '==', 'true'),
+    ),
+
+    array(
+      'id'      => 'site_shop_name_txt',
+      'type'    => 'text',
+      'title'   => '自定义全站订单名称',
+      'desc'    => '购买资源时在支付平台显示的商品名称，例如自助购买，自助充值，防止，敏感词汇风控,字数不要超过8个，防止微信支付报错',
+      'default' => '商城自助购买',
+    ),
 
   )
 ));
@@ -2349,23 +2372,111 @@ CSF::createSection($prefix, array(
   'title'  => '网站优化',
   'icon' => 'dashicons dashicons-update',
   'fields' => array(
-
     array(
-      'id'      => 'gutenberg_disable',
+      'id'      => 'gutenberg_edit',
       'type'    => 'switcher',
-      'title'   => '古藤堡小工具',
-      'default' => false
+      'title'   => '使用古滕堡编辑器',
+      'desc'    => '',
+      'default' => false,
     ),
 
     array(
-      'id' => 'show_admin_bar',
+      'id'      => 'gutenberg_widgets',
+      'type'    => 'switcher',
+      'title'   => '使用古滕堡小工具',
+      'desc'    => '',
+      'default' => false,
+    ),
+
+
+    array(
+      'id'      => 'site_update_file_md5_rename',
+      'type'    => 'switcher',
+      'title'   => '上传文件MD5加密重命名',
+      'desc'    => '建议开启，可以有效解决中文字符无法上传图片问题，防止付费图片被抓包等',
+      'default' => false,
+    ),
+
+    array(
+      'id'      => 'remove_wptexturize',
+      'type'    => 'switcher',
+      'title'   => '禁用wordpress文章内容输出转码转义功能',
+      'desc'    => '禁用后在编辑器中输入代码乱码将原格式输出，不进行转义，适合有写代码内容的开启。',
+      'default' => false,
+    ),
+
+    array(
+      'id'      => 'show_admin_bar',
       'type'    => 'switcher',
       'title'   => '移除前端顶部管理栏',
       'desc'    => '',
       'default' => true,
-    )
+    ),
 
-  )
+    array(
+      'id'      => 'remove_admin_bar_menu',
+      'type'    => 'switcher',
+      'title'   => '移除WP后台顶部LOGO菜单链接',
+      'desc'    => '',
+      'default' => true,
+    ),
+
+    array(
+      'id'      => 'remove_admin_foote_wp',
+      'type'    => 'switcher',
+      'title'   => '移除wp后台底部版本信息',
+      'desc'    => '',
+      'default' => true,
+    ),
+
+    array(
+      'id'      => 'remove_admin_menu',
+      'type'    => 'switcher',
+      'title'   => '移除WP后台仪表盘菜单',
+      'desc'    => '',
+      'default' => true,
+    ),
+
+    array(
+      'id'      => 'remove_emoji',
+      'type'    => 'switcher',
+      'title'   => '移除WP自带emoji表情插件',
+      'desc'    => '可以大幅度精简JS和CSS',
+      'default' => true,
+    ),
+
+    array(
+      'id'      => 'remove_wp_head_more',
+      'type'    => 'switcher',
+      'title'   => '精简优化网站前台head标签代码',
+      'desc'    => '',
+      'default' => true,
+    ),
+
+    array(
+      'id'      => 'remove_wp_img_attributes',
+      'type'    => 'switcher',
+      'title'   => '精简优化网站图片代码',
+      'desc'    => '移除wp自带编辑器插入图片时一堆不必要的html属性和元素',
+      'default' => false,
+    ),
+
+    array(
+      'id'      => 'remove_wp_rest_api',
+      'type'    => 'switcher',
+      'title'   => '关闭网站REST API接口',
+      'desc'    => '如果你有使用小程序等功能，请不要优化此项',
+      'default' => false,
+    ),
+    array(
+      'id'      => 'remove_wp_xmlrpc',
+      'type'    => 'switcher',
+      'title'   => '关闭XML-RPC (pingback) 功能',
+      'desc'    => 'XML-RPC 是 WordPress 用于第三方客户端，关闭后可以防止爆破攻击',
+      'default' => false,
+    ),
+
+  ),
 ));
 
 /**

@@ -4,7 +4,7 @@
  * 主题AJAX接口
  * 地址：domain/wp-admin/admin-ajax.php
  * 参数：action 接口
- * 参数：nonce 安全验证参数 使用 wp_create_nonce("zb_ajax") 方法生成
+ * 参数：nonce 安全验证参数 使用 wp_create_nonce("capalot_ajax") 方法生成
  * $this->add_action('test_api'); //全部用户可用
  * $this->add_action('test_api',0); //未登录用户可用
  * $this->add_action('test_api',1); //登录用户可用
@@ -61,7 +61,8 @@ class Capalot_Ajax
     $this->add_action('load_more'); //加载更多文章
     $this->add_action('get_captcha_code'); //获取验证码
     $this->add_action('add_share_post'); //分享文章
-
+    $this->add_action('add_post_views'); //文章阅读数量+1
+    $this->add_action('ajax_comment'); //ajax评论
   }
 
   /**
@@ -123,11 +124,11 @@ class Capalot_Ajax
       ));
     }
 
-    if (!empty(get_user_meta($UserLogin->ID, 'cao_banned', true))) {
+    if (!empty(get_user_meta($UserLogin->ID, 'capalot_banned', true))) {
       wp_logout();
       wp_send_json(array(
         'status' => 0,
-        'msg'    => sprintf('此账号已被封禁（ %s ）', get_user_meta($UserLogin->ID, 'cao_banned_reason', true)),
+        'msg'    => sprintf('此账号已被封禁（ %s ）', get_user_meta($UserLogin->ID, 'capalot_banned_reason', true)),
       ));
     }
 
@@ -862,8 +863,6 @@ class Capalot_Ajax
         'msg' => '订单创建失败',
       ]);
 
-
-
     // // 请求支付接口
     $response = capalot_get_request_pay($order_data);
 
@@ -913,7 +912,7 @@ class Capalot_Ajax
 
     $site_qiandao_coin_num = sprintf('%0.1f', abs(_capalot('site_qiandao_coin_num', '0.5')));
 
-    if (!update_user_meta($user_id, 'cao_qiandao_time', time()) || !change_user_coin_balance($user_id, $site_qiandao_coin_num, '+')) {
+    if (!update_user_meta($user_id, 'capalot_qiandao_time', time()) || !change_user_coin_balance($user_id, $site_qiandao_coin_num, '+')) {
       wp_send_json(array(
         'status' => 0,
         'msg'    => __('签到失败', 'ripro'),
@@ -932,16 +931,36 @@ class Capalot_Ajax
     $this->valid_nonce_ajax(); #安全验证
 
     $post_id = (int) get_response_param('post_id');
+    $is_add = (int) get_response_param('is_add');
+    $user_id = get_current_user_id();
 
-    if ($post_id && capalot_add_post_likes($post_id, 1)) {
+    $is_like = capalot_is_post_like($user_id, $post_id);
+
+    if ($is_add) {
+      if ($is_like) {
+        wp_send_json(array(
+          'status' => 0,
+          'msg'    => '您已点赞过',
+        ));
+      }
+
+      if ($post_id && capalot_add_post_likes($post_id, 1)) {
+        wp_send_json(array(
+          'status' => 1,
+          'msg'    => '点赞成功',
+        ));
+      } else {
+        wp_send_json(array(
+          'status' => 0,
+          'msg'    => '点赞失败',
+        ));
+      }
+    } else {
+      if($is_like) capalot_delete_post_like($user_id, $post_id);
+
       wp_send_json(array(
         'status' => 1,
-        'msg'    => '点赞成功',
-      ));
-    } else {
-      wp_send_json(array(
-        'status' => 0,
-        'msg'    => '点赞失败',
+        'msg'    => '已取消点赞',
       ));
     }
   }
@@ -989,6 +1008,7 @@ class Capalot_Ajax
     }
   }
 
+  // 分享文章
   public function add_share_post()
   {
     $this->valid_nonce_ajax(); #安全验证
@@ -1022,13 +1042,38 @@ class Capalot_Ajax
     ));
   }
 
+  // 文章阅读数量+1
+  public function add_post_views()
+  {
+
+    $this->valid_nonce_ajax(); #安全验证
+
+    $post_id = (int) get_response_param('post_id');
+    if ($post_id && capalot_add_post_views($post_id)) {
+      wp_send_json(array(
+        'status' => 1,
+        'msg'    => sprintf('PID：%s ', $post_id),
+      ));
+    } else {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => sprintf('PID：%s error', $post_id),
+      ));
+    }
+  }
+
   // 分页加载更多文章
   function load_more()
   {
+    $cat = get_response_param('cat');
+    $s = get_response_param('s');
+
     $ajaxposts = new WP_Query([
       'ignore_sticky_posts' => false,
       'post_status' => 'publish',
       'paged' => $_POST['paged'],
+      's' => $s,
+      'cat' => $cat,
     ]);
 
     $response = '';
@@ -1055,4 +1100,26 @@ class Capalot_Ajax
     echo json_encode($result);
     exit;
   }
+
+  // 评论
+  public function ajax_comment() {
+
+    $this->valid_nonce_ajax(); #安全验证
+
+    $comment = wp_handle_comment_submission(wp_unslash($_POST));
+    if (is_wp_error($comment)) {
+        $error_data = intval($comment->get_error_data());
+        if (!empty($error_data)) {
+            wp_die($comment->get_error_message(), __('Comment Submission Failure'), array('response' => $error_data, 'back_link' => true));exit;
+        } else {
+            wp_die('Unknown error', __('Comment Submission Failure'), array('response' => 500, 'back_link' => true));exit;
+        }
+    }
+
+    $user = wp_get_current_user();
+    do_action('set_comment_cookies', $comment, $user);
+
+    echo "success";exit;
+
+}
 }

@@ -11,7 +11,7 @@ global $current_user;
 			<?php if (!is_user_today_qiandao($current_user->ID)) : ?>
 				<a class="user-qiandao-action btn p-2 rounded text-black bg-[#fad877]" href="javascript:;"><i class="fa fa-check-square me-1"></i><?php _e('签到领取', 'ripro'); ?><?php echo get_site_coin_name(); ?></a>
 			<?php else : ?>
-				<a class="btn btn-sm text-secondary" href="javascript:;"><i class="fa fa-check-square me-1"></i><?php _e('今日已签到', 'ripro'); ?></a>
+				<a class="btn p-1  text-black" href="javascript:;"><i class="fa fa-check-square me-1"></i><?php _e('今日已签到', 'ripro'); ?></a>
 			<?php endif; ?>
 		</div>
 	<?php endif; ?>
@@ -142,39 +142,49 @@ global $current_user;
 			$(this).addClass("active").parent().siblings().find(".coin-pay-card").removeClass("active");
 		});
 
-		$(".user-qiandao-action").on("click", function(e) {
-			e.preventDefault();
+		$(".user-qiandao-action").on("click", ca.debounce(function() {
 			var _this = $(this);
 
 			var iconEl = _this.find('i');
 			var def_icon = iconEl.attr('class');
-			var spinner_icon = 'fa fa-spinner fa-spin me-1';
+			var spinner_icon = 'fa-solid fa-spinner fa-spin me-1';
 
 			var data = {
-				nonce: zb.ajax_nonce,
-				action: 'zb_user_qiandao'
+				nonce: capalot.ajax_nonce,
+				action: 'capalot_user_qiandao'
 			};
-			ri.ajax({
+			ca.ajax({
 				data,
-				before: () => {
+				beforeSend: () => {
 					iconEl.removeClass().addClass(spinner_icon);
+					// user-qiandao-action增加class disabled
+					_this.addClass('pointer-events-none');
 				},
-				result: ({
-					status,
-					msg
+				complete: ({
+					responseJSON
 				}) => {
-					ri.notice(msg);
-					if (status == 1) {
+					const {
+						status,
+						msg
+					} = responseJSON;
+
+					if (status === 1) {
+						ca.notice({
+							title: msg,
+							icon: 'success',
+						});
 						setTimeout(function() {
 							window.location.reload()
-						}, 2000)
+						}, 1000)
+					} else {
+						ca.notice({
+							title: msg,
+							icon: 'error',
+						});
 					}
 				},
-				complete: () => {
-					iconEl.removeClass().addClass(def_icon);
-				}
 			});
-		});
+		}, 500));
 
 		// vip-cdk-submit
 		$("#vip-cdk-submit").on("click", function(e) {
@@ -182,7 +192,7 @@ global $current_user;
 			var _this = $(this);
 			var formData = $("#vip-cdk-action").serializeArray();
 			var data = {
-				nonce: zb.ajax_nonce,
+				nonce: capalot.ajax_nonce,
 			};
 
 			formData.forEach(({
@@ -192,16 +202,20 @@ global $current_user;
 				data[name] = value;
 			});
 
-			ri.ajax({
+			ca.ajax({
 				data,
-				before: () => {
+				beforeSend: () => {
 					_this.attr("disabled", "true")
 				},
 				result: ({
 					status,
-					msg
+					msg,
+					icon
 				}) => {
-					ri.notice(msg);
+					ca.notice({
+						title: msg,
+						icon: status == 1 ? 'success' : 'error',
+					});
 					if (status == 1) {
 						setTimeout(function() {
 							window.location.reload()

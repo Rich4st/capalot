@@ -28,4 +28,6 @@
 
 <?php get_template_part('template-parts/single/tags') ?>
 
-<?php get_template_part('template-parts/single/social'); ?>
+<div class="absolute bottom-0 left-4 right-4">
+  <?php get_template_part('template-parts/single/social'); ?>
+</div>

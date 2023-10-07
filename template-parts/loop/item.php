@@ -38,7 +38,7 @@ if ($post_format && isset($format_icons[$post_format])) {
   <li class="dark:bg-dark-card rounded-lg overflow-hidden list-none cursor-pointer bg-white border dark:border-[#222] transition hover:shadow-2xl hover:-translate-y-1  duration-500">
     <article class="post-item item-grid relative">
 
-      <div class="tips-badge absolute w-10 text-center top-0 start-0 z-[999] m-2 bg-[#b0adac]  rounded-xl">
+      <div class="tips-badge absolute w-10 text-center top-0 start-0 z-50 m-2 bg-[#b0adac]  rounded-xl">
         <?php if (is_sticky()) : ?>
           <div class="text-[0.5rem] bg-opacity-25 text-white">置顶</div>
         <?php endif; ?>
@@ -63,7 +63,7 @@ if ($post_format && isset($format_icons[$post_format])) {
         </h2>
 
         <?php if ($args['is_entry_desc']) : ?>
-          <div class="entry-desc mp-1 whitespace-nowrap text-ellipsis overflow-hidden" title="<?php echo capalot_get_post_excerpt(40); ?>"><?php echo capalot_get_post_excerpt(40); ?></div>
+          <div class="entry-desc mp-1 whitespace-nowrap text-ellipsis overflow-hidden h-4" title="<?php echo capalot_get_post_excerpt(40); ?>"><?php echo capalot_get_post_excerpt(40); ?></div>
         <?php endif; ?>
 
         <?php if ($args['is_entry_meta']) : ?>
@@ -88,12 +88,12 @@ if ($post_format && isset($format_icons[$post_format])) {
   <li class="col cursor-pointer rounded-lg overflow-hidden text-[0.75rem]">
     <article class="post-item relative group ">
 
-      <div class="tips-badge absolute w-10 text-center top-0 start-0 z-[999] m-2 bg-[#b0adac]  rounded-xl">
+      <div class="tips-badge absolute w-10 text-center top-0 start-0 z-50 m-2 bg-[#b0adac]  rounded-xl">
         <?php if (is_sticky()) : ?>
           <div class="text-[0.5rem] bg-opacity-25 text-white"><?php _e('置顶', 'ripro'); ?></div>
         <?php endif; ?>
       </div>
-      <div class=" p-2 text-white absolute bottom-0 z-[99] w-full">
+      <div class=" p-2 text-white absolute bottom-0 z-50 w-full">
         <?php if ($args['is_entry_meta']) : ?>
           <div class="entry-meta flex flex-row justify-between">
             <div class="">
@@ -144,7 +144,7 @@ if ($post_format && isset($format_icons[$post_format])) {
   <li class="dark:bg-dark-card  rounded-lg  cursor-pointer shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]  <?php echo $card_size; ?> transition-all duration-300 hover:shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)]  ">
     <article class="relative flex flex-row p-2">
 
-      <div class="tips-badge absolute w-10 text-center top-0 start-0 z-[999] m-2 bg-[#b0adac]  rounded-xl">
+      <div class="tips-badge absolute w-10 text-center top-0 start-0 z-50 m-2 bg-[#b0adac]  rounded-xl">
         <?php if (is_sticky()) : ?>
           <div class="text-[0.5rem] bg-opacity-25 text-white"><?php _e('置顶', 'ripro'); ?></div>
         <?php endif; ?>
@@ -194,7 +194,7 @@ if ($post_format && isset($format_icons[$post_format])) {
   <li class="dark:bg-dark-card  rounded-lg  cursor-pointer shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]  h-32 transition-all duration-300 hover:shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)] ">
     <article class="item-list relative p-2">
 
-      <div class="absolute w-10 text-center top-0 right-0 z-[999] m-2 bg-[#b0adac]  rounded-xl">
+      <div class="absolute w-10 text-center top-0 right-0 z-50 m-2 bg-[#b0adac]  rounded-xl">
         <?php if (is_sticky()) : ?>
           <div class="text-[0.5rem] bg-opacity-25 text-white"><?php _e('置顶', 'ripro'); ?></div>
         <?php endif; ?>

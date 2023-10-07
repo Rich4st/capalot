@@ -42,15 +42,17 @@ function is_site_tougao()
 
 
 //是否开启签到功能
-function is_site_qiandao() {
+function is_site_qiandao()
+{
     return !empty(_capalot('is_site_qiandao', 1));
 }
 
 //今日是否已签到
-function is_user_today_qiandao($user_id) {
+function is_user_today_qiandao($user_id)
+{
 
     // 会员当前签到时间
-    $qiandao_time = get_user_meta($user_id, 'cao_qiandao_time', true);
+    $qiandao_time = get_user_meta($user_id, 'capalot_qiandao_time', true);
 
     if (empty($qiandao_time)) {
         $qiandao_time = 0;
@@ -156,6 +158,7 @@ function update_user_vip_data($user_id, $new_day = '0')
 {
 
     $user_id = intval($user_id);
+    $vip_options = get_site_vip_options();
     $vip_buy_options = get_site_vip_buy_options();
     $new_day = absint($new_day);
 
@@ -259,9 +262,9 @@ function get_user_vip_data($user_id)
     $user_type   = get_user_vip_type($user_id);
     //今日可下载次数
     $downnum_total = $vip_options[$user_type]['downnum'];
-    //TODO:今日已下载次数
+    // 今日已下载次数
     $downnum_used = Capalot_Download::get_user_today_download_num($user_id);
-    $downnum_not  = $downnum_total - 0;
+    $downnum_not  = $downnum_total - $downnum_used;
     $downnum_not = ($downnum_not >= 0) ? $downnum_not : 0;
 
     $data         = [
@@ -337,11 +340,13 @@ function is_site_comments()
     return !empty(_capalot('is_site_comments', 1));
 }
 //是否开启作者佣金
-function is_site_author_aff() {
+function is_site_author_aff()
+{
     return (bool) _capalot('is_site_author_aff', true);
 }
 //获取网站作者佣金比例
-function get_site_author_aff_rate() {
+function get_site_author_aff_rate()
+{
     $ratio = (float) _capalot('site_author_aff_ratio', 0);
     if ($ratio >= 1) {
         $ratio = 0;
@@ -800,11 +805,17 @@ function capalot_get_request_pay($order_data)
                 $result['msg'] = '订单状态处理异常';
                 return $result;
             } else {
+                $uc_vip_info = get_user_vip_data($order_data['user_id']);
+
+                if ($uc_vip_info['type'] != 'boosvip') {
+                    $update = update_user_vip_data($order_data['user_id'], $order_data['order_price']);
+                }
+
                 return [
                     'status' => 1, //状态
                     'method' => 'reload', // popup|弹窗  url|跳转 reload|刷新 jsapi|js方法
                     'num'    => $order_data['order_trade_no'], //订单号
-                    'msg'    => '支付成功'
+                    'msg'    => '支付成功',
                 ];
             }
 
@@ -827,7 +838,118 @@ function capalot_get_request_pay($order_data)
     return apply_filters('capalot_get_request_pay', $result, $order_data);
 }
 
+/**
+ * 支付成功后处理订单
+ *
+ * 处理订单业务逻辑 1 => 'Post',2 => 'VIP',3 => 'Other'
+ */
+function capalot_pay_success_callback($order)
+{
+    if (empty($order) || empty($order->pay_status))
+        return false;
 
+    $order_info = maybe_unserialize($order->order_info);
+
+    if ($order->order_type == 1) {
+        // TODO: 文章订单
+    } elseif ($order->order_type == 2) {
+        // TODO: 充值订单
+    } elseif ($order->order_type == 3 && isset($order_info['vip_type'])) {
+        $uc_vip_info = get_user_vip_data($order->user_id);
+
+        if ($uc_vip_info['type'] != 'boosvip') {
+
+            //更新用户会员状态
+            $update = update_user_vip_data($order->user_id, $order_info['vip_day']);
+        }
+
+        $site_vip_options = get_site_vip_options();
+    }
+}
+add_action('site_pay_order_success', 'capalot_pay_success_callback', 10, 1);
+/**
+ * 获取第三方登录地址
+ * @param  string     $method   [description]
+ * @param  boolean    $callback [description]
+ * @return [type]
+ */
+function get_oauth_permalink($method = 'qq', $callback = false) {
+    if (!in_array($method, array('qq', 'weixin'))) {
+        $method = 'qq';
+    }
+    $callback = (!empty($callback)) ? '/callback' : '';
+    return esc_url(home_url('/oauth/' . $method . $callback));
+}
+/**
+ * 第三方登录回调事件处理
+ * @param  [type]     $snsInfo [description]
+ * @return [type]
+ */
+function zb_oauth_callback_event($data) {
+    global $wpdb;
+
+    $current_uid = get_current_user_id(); //当前用户
+    // 查询meta关联的用户
+    $meta_key   = 'open_' . $data['method'] . '_openid';
+    $search_uid = $wpdb->get_var(
+        $wpdb->prepare("SELECT user_id FROM $wpdb->usermeta WHERE meta_key=%s AND meta_value=%s", $meta_key, $data['openid'])
+    );
+
+    // 如果当前用户已登录，而$search_user存在，即该开放平台账号连接被其他用户占用了，不能再重复绑定了
+    if (!empty($current_uid) && !empty($search_uid) && $current_uid != $search_uid) {
+        capalot_wp_die(
+            __('绑定失败', 'ripro'),
+            __('当前用户之前已有其他账号绑定，请先登录其他账户解绑，或者激活已经使用该方式登录的账号！', 'ripro')
+        );
+    }
+
+    if (!empty($search_uid) && empty($current_uid)) {
+        // 该开放平台账号已连接过WP系统，再次使用它直接登录
+        $user = get_user_by('id', $search_uid);
+        if ($user) {
+            zb_updete_user_oauth_info($user->ID, $data);
+
+            wp_set_current_user($user->ID, $user->user_login);
+            wp_set_auth_cookie($user->ID, true);
+            do_action('wp_login', $user->user_login, $user);
+            wp_safe_redirect(get_uc_menu_link());exit;
+        }
+    } elseif (!empty($current_uid) && empty($search_uid)) {
+        //当前已登录了本地账号, 直接绑定该账号
+        zb_updete_user_oauth_info($current_uid, $data);
+        wp_safe_redirect(get_uc_menu_link());exit;
+
+    } elseif (empty($search_uid) && empty($current_uid)) {
+        //新用户注册
+        $new_user_data = array(
+            'user_login'   => $data['method'] . mt_rand(1000, 9999) . mt_rand(1000, 9999),
+            'user_email'   => "",
+            'display_name' => $data['name'],
+            'nickname'     => $data['name'],
+            'user_pass'    => md5($data['openid']),
+            'role'         => get_option('default_role'),
+        );
+
+        $new_user = wp_insert_user($new_user_data);
+
+        if (is_wp_error($new_user)) {
+            capalot_wp_die(__('新用户注册失败', 'ripro'), $new_user->get_error_message());
+        } else {
+            //登陆当前用户
+            $user = get_user_by('id', $new_user);
+            if ($user) {
+                zb_updete_user_oauth_info($user->ID, $data);
+                update_user_meta($user->ID, 'user_avatar_type', $data['method']); //更新默认头像
+
+                wp_set_current_user($user->ID, $user->user_login);
+                wp_set_auth_cookie($user->ID, true);
+                do_action('wp_login', $user->user_login, $user);
+                wp_safe_redirect(get_uc_menu_link());exit;
+            }
+        }
+    }
+
+}
 /**
  * 用户是否第三方注册未设置密码
  * @param  [type]     $user_id [description]

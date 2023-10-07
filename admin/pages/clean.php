@@ -16,11 +16,13 @@ if (isset($_GET['clear_hook'])) {
 
   switch (trim($_GET['clear_hook'])) {
     case 'order':
-      $query   = $wpdb->query($wpdb->prepare("DELETE FROM $wpdb->capalot_order WHERE pay_status = %d AND create_time < %s", 0, strtotime("-1 day")));
+      $table_name = $wpdb->prefix . 'capalot_order';
+      $query   = $wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE pay_status = %d AND create_time < %s", 0, strtotime("-1 day")));
       $message = sprintf('一天前所有未支付订单清理成功 (%s)个记录', number_format_i18n($query));
       break;
     case 'down':
-      $query   = $wpdb->query($wpdb->prepare("DELETE FROM $wpdb->capalot_download WHERE create_time < %s", strtotime("-7 day")));
+      $table_name = $wpdb->prefix . 'capalot_download';
+      $query   = $wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE create_time < %s", strtotime("-7 day")));
       $message = sprintf('成功清理7天前下载记录 (%s)个记录', number_format_i18n($query));
       break;
     case 'optimize':
@@ -69,11 +71,10 @@ if (isset($_GET['clear_hook'])) {
     <?php
 
     $tables = [];
+    $order_table = $wpdb->prefix . 'capalot_order';
 
-
-
-    $count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(id) FROM $wpdb->capalot_order WHERE 1=%d", 1));
-    $count2 = $wpdb->get_var($wpdb->prepare("SELECT COUNT(id) FROM $wpdb->capalot_order WHERE pay_status=%d", 0));
+    $count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(id) FROM $order_table WHERE 1=%d", 1));
+    $count2 = $wpdb->get_var($wpdb->prepare("SELECT COUNT(id) FROM $order_table WHERE pay_status=%d", 0));
 
     $sum = $count + $count2;
 
@@ -92,9 +93,9 @@ if (isset($_GET['clear_hook'])) {
       ],
     ];
 
-
-    $count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(id) FROM $wpdb->capalot_download WHERE 1=%d", 1));
-    $count2 = $wpdb->get_var($wpdb->prepare("SELECT COUNT(id) FROM $wpdb->capalot_download WHERE create_time<%s", strtotime("-7 day")));
+    $download_table = $wpdb->prefix . 'capalot_download';
+    $count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(id) FROM $download_table WHERE 1=%d", 1));
+    $count2 = $wpdb->get_var($wpdb->prepare("SELECT COUNT(id) FROM $download_table WHERE create_time<%s", strtotime("-7 day")));
     $sum = $count + $count2;
     $ratio = ($sum > 0) ? round(($count2 / $sum * 100)) : 0;
     $d_link = ($ratio > 0) ? 'admin.php?page=zb-admin-page-clear&clear_hook=down&day=7' : '';
@@ -124,63 +125,6 @@ if (isset($_GET['clear_hook'])) {
         ]
       ],
     ];
-
-
-    //老款数据迁移功能
-
-    $old_db = $wpdb->prefix . 'capalot_order';
-    $is_old_db = $wpdb->get_var("SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = '{$wpdb->dbname}' AND table_name = '{$old_db}'");
-    $old_data_count = $wpdb->get_var("SELECT COUNT(*) FROM $old_db WHERE status=1");
-
-    if (!empty($is_old_db) && !empty($old_data_count)) {
-      $tables['migrate_old_order_data'] = [
-        'title' => '迁移旧版本订单数据',
-        'desc' => '总计 <strong class="attention"><span>' . $old_data_count . '</span></strong> 只迁移支付成功的订单数据，未支付和无效订单不迁移',
-        'tr' => [
-          [
-            '订单数据',
-            $old_data_count,
-            '100%',
-            'admin.php?page=zb-admin-page-clear&clear_hook=migrate_old_order_data&day=1',
-          ]
-        ],
-      ];
-    }
-
-
-    $meta_data_count = $wpdb->get_var("SELECT COUNT(*) FROM $wpdb->postmeta WHERE meta_key = 'capalot_downurl' OR meta_key = 'video_url'");
-    if (!empty($meta_data_count)) {
-      $tables['migrate_old_post_meta'] = [
-        'title' => '迁移旧版本资源地址',
-        'desc' => '总计 <strong class="attention"><span>' . $meta_data_count . '</span></strong> 每次点击处理最多1000条数据，如果还有剩余，请多点几次，只迁移旧版本中有下载地址和新版本中没有设置下载地址的文章的下载地址。以便于支持多地址下载功能和多集媒体功能',
-        'tr' => [
-          [
-            '旧版下载地址',
-            $meta_data_count,
-            '100%',
-            'admin.php?page=zb-admin-page-clear&clear_hook=migrate_old_post_meta&day=1',
-          ]
-        ],
-      ];
-    }
-
-
-    $old_meta_opt = _capalot('custom_post_meta_opt');
-    if (!empty($old_meta_opt) && is_array($old_meta_opt)) {
-      $tables['migrate_old_filter_meta'] = [
-        'title' => '迁移旧版本自定义筛选字段',
-        'desc' => '总计 <strong class="attention"><span>' . count($old_meta_opt) . '</span></strong> 迁移旧版本自定义筛选字段到新版本自定义分类法字段中',
-        'tr' => [
-          [
-            '旧版筛选字段',
-            count($old_meta_opt),
-            '100%',
-            'admin.php?page=zb-admin-page-clear&clear_hook=migrate_old_filter_meta&day=1',
-          ]
-        ],
-      ];
-    }
-
 
     foreach ($tables as $key => $item) {
       echo '<div class="clear-itme-warp">';

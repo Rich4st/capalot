@@ -81,22 +81,22 @@ if ($unsetoauth == 'qq' || $unsetoauth == 'weixin') {
 
     <div class="lg:col-span-4 col-span-1 col-start-1">
       <?php if (_capalot('is_sns_qq', false) || _capalot('is_sns_weixin', false)) : ?>
-        <div class="position-relative my-4">
-          <hr>
-          <p class="small bg-white position-absolute top-50 start-50 translate-middle px-2"><?php _e('快捷登录绑定信息', 'ripro'); ?></p>
+        <div class="relative my-4">
+          <hr class="">
+          <p class="small text-sm bg-white absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 -right-1/2 px-2"><?php _e('快捷登录绑定信息', 'ripro'); ?></p>
         </div>
-        <div class="d-grid gap-2 d-md-block text-center">
+        <div class="grid gap-4 md:block py-4  text-white text-center">
 
           <?php if (_capalot('is_sns_qq', false)) {
             if (!empty(get_user_meta($current_user->ID, 'open_qq_openid', true))) {
-              echo '<a href="' . get_uc_menu_link('profile') . '?unsetoauth=qq" class="btn btn-danger mx-2"><i class="fab fa-qq me-1"></i>' . __('解绑QQ登录', 'ripro') . '</a>';
+              echo '<a href="' . get_uc_menu_link('profile') . '?unsetoauth=qq" class="btn rounded  bg-danger hover:bg-[#4386d3]   cursor-pointer p-2 mx-2"><i class="fab fa-qq me-1"></i>' . __('解绑QQ登录', 'ripro') . '</a>';
             } else {
-              echo '<a href="' . get_oauth_permalink('qq') . '" class="btn btn-info mx-2"><i class="fab fa-qq me-1"></i>' . __('绑定QQ登录', 'ripro') . '</a>';
+              echo '<a href="' . get_oauth_permalink('qq') . '" class="btn bg-info hover:bg-[#4386d3]  cursor-pointer rounded p-2 mx-2"><i class="fab fa-qq me-1"></i>' . __('绑定QQ登录', 'ripro') . '</a>';
             }
             if (!empty(get_user_meta($current_user->ID, 'open_weixin_openid', true))) {
-              echo '<a href="' . get_uc_menu_link('profile') . '?unsetoauth=weixin" class="btn btn-danger mx-2"><i class="fab fa-qq me-1"></i>' . __('解绑微信登录', 'ripro') . '</a>';
+              echo '<a href="' . get_uc_menu_link('profile') . '?unsetoauth=weixin" class="btn bg-danger hover:bg-[#0aa073]  cursor-pointer rounded p-2 mx-2"><i class="fab fa-qq me-1"></i>' . __('解绑微信登录', 'ripro') . '</a>';
             } else {
-              echo '<a href="' . get_oauth_permalink('weixin') . '" class="btn btn-success mx-2"><i class="fab fa-weixin me-1"></i>' . __('绑定微信登录', 'ripro') . '</a>';
+              echo '<a href="' . get_oauth_permalink('weixin') . '" class="btn bg-success hover:bg-[#0aa073]  cursor-pointer rounded p-2 mx-2"><i class="fab fa-weixin me-1"></i>' . __('绑定微信登录', 'ripro') . '</a>';
             }
           } ?>
 

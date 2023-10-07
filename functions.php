@@ -115,3 +115,6 @@ require_once get_template_directory() . '/inc/template-ajax.php';
 require_once get_template_directory() . '/inc/template-filter.php';
 
 require_once get_template_directory() . '/inc/template-walker.php';
+
+// seo设置
+require_once get_template_directory() . '/inc/template-seo.php';

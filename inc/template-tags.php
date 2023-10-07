@@ -111,7 +111,7 @@ function Capalot_Pagination($args = array())
 function infinite_scroll_button($type = 'click')
 {
   return '<div class="btn__wrapper text-center py-6">
-  <a href="#!" class="rounded-full bg-black text-white py-2 px-4" id="load-more">加载更多</a>
+  <button id="load-more" type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"><i class="fa-solid fa-spinner fa-spin hidden more_icon"></i>加载更多</button>
   <p id="no-more-button" style="display: none;" class="text-[#b9b2b2] text-[0.9rem]">没有更多了</p>
 </div>';
 }
@@ -297,6 +297,34 @@ function capalot_is_post_fav($user_id = null, $post_id = null)
 }
 
 /**
+ * 是否已点赞该文章
+ */
+function capalot_is_post_like($user_id = null, $post_id = null)
+{
+  if (empty($post_id)) {
+    global $post;
+    $post_id = $post->ID;
+  }
+  if (empty($user_id)) {
+    $user_id = get_current_user_id();
+  }
+  $post_id = absint($post_id);
+
+  if (get_post_status($post_id) === false) {
+    return false;
+  }
+
+  $meta_key = 'like_post';
+
+  $data = get_user_meta($user_id, $meta_key, true); # 获取点赞文章
+
+  if (empty($data) || !is_array($data)) {
+    return false;
+  }
+  return in_array($post_id, $data);
+}
+
+/**
  * 收藏或喜欢点赞
  */
 function capalot_add_post_fav($user_id = null, $post_id = 0)
@@ -417,7 +445,6 @@ function capalot_delete_post_like($user_id = null, $post_id = null)
 
   return update_user_meta($user_id, $meta_key, $new_data);
 }
-
 
 /**
  * 获取列表显示风格配置
@@ -567,12 +594,31 @@ function capalot_add_post_likes($post_id = null, $num = 1)
     global $post;
     $post_id = $post->ID;
   }
+  $user_id = get_current_user_id();
+
   $meta_key = 'likes';
+  $user_meta_key = 'like_post';
+
+  $old_data = get_user_meta($user_id, $user_meta_key, true); # 获取...
+
+  if (empty($old_data) || !is_array($old_data)) {
+    $new_data = [];
+  } else {
+    $new_data = $old_data;
+  }
+
+  if (!in_array($post_id, $new_data)) {
+    // 新数据 开始处理
+    array_push($new_data, $post_id);
+  }
+
   $this_num = intval(get_post_meta($post_id, $meta_key, true));
   $new_num  = $this_num + $num;
   if ($new_num < 0) {
     $new_num = 1;
   }
+
+  update_user_meta($user_id, $user_meta_key, $new_data);
 
   return update_post_meta($post_id, $meta_key, $new_num);
 }
@@ -740,7 +786,7 @@ function get_site_default_color_style()
 
   $style = _capalot('site_default_color_mode', 'light');
   //读取用户浏览器缓存模式
-  $cookie_style = Capalot_Cookie::get('current_site_color');
+  $cookie_style = Capalot_Cookie::get('theme');
 
   if (!empty($cookie_style)) {
     $style = $cookie_style;
@@ -850,7 +896,7 @@ function get_posts_style_config($cat_id = 0)
 
 function capalot_get_color_class($key = 0)
 {
-  $colors  = ['danger', 'primary', 'success', 'warning', 'info', 'secondary'];
+  $colors  = ['danger', 'primary', 'success', '[#f7c32e]', 'info', 'secondary'];
   $color   = (isset($colors[$key])) ? $colors[$key] : 'secondary';
   return $color;
 }

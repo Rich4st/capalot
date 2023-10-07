@@ -108,11 +108,12 @@ if ($is_login_action && !is_site_user_login()) {
 
 		?>
 
-		<div class="login-and-register h-screen flex justify-center items-center bg-contain bg-no-repeat <?php echo $classex; ?>">
+		<div class="login-and-register h-screen flex justify-center items-center bg-cover object-center bg-center bg-no-repeat <?php echo $classex; ?>"
+		style="background-image: url(<?php echo esc_url($args['bg_img']); ?>);">
 			<div class="bg-white shadow rounded-md overflow-hidden py-16 px-10 text-center">
 				<!-- Logo -->
 				<a class="flex justify-center items-center mb-3" href="<?php echo esc_url(home_url()); ?>">
-					<img class="logo regular mb-2" src="<?php echo esc_url(_capalot('site_logo', '')); ?>" alt="<?php echo get_bloginfo('name'); ?>">
+					<img class="logo regular mb-2 w-10 h-10" src="<?php echo esc_url(_capalot('site_logo', '')); ?>" alt="<?php echo get_bloginfo('name'); ?>">
 				</a>
 
 				<form id="account-from" class="text-start account-from space-y-4">

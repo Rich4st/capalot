@@ -14,6 +14,9 @@ class Capalot_Admin
     add_action('admin_menu', array($this, 'admin_menu'));
     add_filter('manage_users_columns', array($this, 'custom_user_columns'));
     add_action('manage_users_custom_column', array($this, 'output_user_columns'), 10, 3);
+
+    add_filter('manage_posts_columns', array($this, 'manage_posts_columns'));
+    add_action('manage_posts_custom_column', array($this, 'manage_posts_custom_column'), 10, 2);
   }
 
   /**
@@ -68,6 +71,57 @@ class Capalot_Admin
         return $retVal;
         break;
         // TODO: 推荐人
+    }
+  }
+
+  /**
+   * 自定义文章列表显示信息
+   */
+  public function manage_posts_columns($columns)
+  {
+
+    $post_type = get_post_type();
+    if ($post_type == 'post') {
+      return array_merge(
+        $columns,
+        array(
+          'capalot_price' => '售价',
+          'capalot_vip_rate' => '会员折扣',
+          'pay_info' => '销售数据'
+        )
+      );
+    } else {
+      return $columns;
+    }
+  }
+
+  public function manage_posts_custom_column($column, $post_id)
+  {
+    switch ($column) {
+      case 'capalot_price':
+        $meta = get_post_meta($post_id, 'cao_price', true);
+        if ($meta == '0') {
+          echo sprintf('<b class="vip_badge">%s</b>', '免费');
+        } else {
+          $meta = ($meta == '') ? '无' : (float) $meta . get_site_coin_name();
+          echo sprintf('<b class="vip_badge">%s</b>', $meta);
+        }
+
+        break;
+      case 'capalot_vip_rate':
+        $meta = get_post_meta($post_id, 'capalot_vip_rate', true);
+        $meta = ($meta == '' || $meta == '1') ? '无' : ($meta * 10) . '折';
+        echo sprintf('<b class="vip_badge">%s</b>', $meta);
+        break;
+      case 'pay_info':
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'capalot_order';
+
+        $data = $wpdb->get_row(
+          $wpdb->prepare("SELECT COUNT(post_id) as count,SUM(pay_price) as sum_price FROM $table_name WHERE post_id = %d AND pay_status = 1", $post_id)
+        );
+        echo sprintf('销量：<b>%s</b><small style="display:block;color: green;">销售额：￥%s</small>', $data->count, sprintf('%0.2f', $data->sum_price));
+        break;
     }
   }
 

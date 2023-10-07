@@ -7,6 +7,7 @@ let ca = {
     ca.pay_action();
     ca.pagination();
     ca.toggle_dark();
+    ca.add_comment();
 
     const swiperEl = document.querySelector('.swiper');
     if (swiperEl)
@@ -20,6 +21,12 @@ let ca = {
       ca.captcha_action();
       captcha_code.addEventListener('click', ca.captcha_action);
     }
+
+    if (capalot.singular_id !== '0')
+      ca.add_post_views();
+
+    if (document.querySelector('#delete-icon'))
+      ca.delete_post();
   },
 
   /**
@@ -127,16 +134,28 @@ let ca = {
           action: 'capalot_add_like_post',
           nonce: capalot.ajax_nonce,
           post_id: capalot.singular_id,
+          is_add: like_btn.dataset.is,
         },
         beforeSend: () => {
           unlike_icon.classList.add('fa-spinner', 'fa-spin');
         },
         success: ({ status, msg }) => {
           status === 1
-            ? ca.popup({ title: msg, icon: 'success' })
-            : ca.popup({ title: msg, icon: 'error' });
+            ? ca.notice({ title: msg, icon: 'success' })
+            : ca.notice({ title: msg, icon: 'error' });
 
           $('.fa-spinner').addClass('hidden')
+
+          const count_el = document.querySelector('.like-count');
+          const count = parseInt(count_el.innerText);
+
+          if (like_btn.dataset.is == '0') {
+            like_btn.dataset.is = '1';
+            count_el.innerText = count - 1;
+          } else {
+            like_btn.dataset.is = '0';
+            count_el.innerText = count + 1;
+          }
 
           liked_icon.classList.remove('hidden');
         }
@@ -208,7 +227,12 @@ let ca = {
     })
   },
 
-  // toast 提示
+  /**
+   * toast 提示
+   * @param {string} title 标题
+   * @param {string} icon 图标 'success' | 'error'
+   * @param {number} timer 延迟时间 ms后自动关闭
+   */
   notice: function ({ title = '成功', icon = 'success', timer = 2000 }) {
     Swal.fire({
       title,
@@ -223,30 +247,41 @@ let ca = {
     });
   },
 
-  // 对话框
+  /**
+   * 对话框
+   * @see https://sweetalert2.github.io/#configuration
+   */
   popup: function ({
-    content,
+    text,
     html,
     title,
     time,
-    callback,
-    icon = '', // success | info | error
+    callback = function () { },
+    icon = '', // success | warning | error
     showCloseButton = true,
+    showConfirmButton = false,
+    confirmButtonText = '确定',
+    showCancelButton = false,
+    cancelButtonText = '取消',
     position = 'center',
+    width = '240px',
+    customClass = {},
   }) {
 
     Swal.fire({
       title,
+      text,
       icon,
       html,
       showCloseButton,
       position,
-      showConfirmButton: false,
-      width: '240px',
-      customClass: {
-        closeButton: 'w-8 h-8 absolute -bottom-2 left-0 right-0 mx-auto bg-white hover:bg-white rounded-full text-[24px]'
-      }
-    });
+      showConfirmButton,
+      confirmButtonText,
+      showCancelButton,
+      cancelButtonText,
+      width,
+      customClass,
+    }).then(callback);
 
   },
 
@@ -256,11 +291,12 @@ let ca = {
     let el = document.querySelector('.js-pay-action');
 
     $('.js-pay-action').on('click', function () {
+
       o = {
         nonce: capalot.ajax_nonce,
-        post_id: el.dataset.id,
-        order_type: el.dataset.type,
-        order_info: el.dataset.info,
+        post_id: $(this).data("id"),
+        order_type: $(this).data("type"),
+        order_info: $(this).data("info")
       };
 
       ca.get_pay_select_html(o)
@@ -276,9 +312,15 @@ let ca = {
         data: o,
         complete: ({ responseJSON }) => {
           const { status, msg } = responseJSON;
-          status === 1
-            ? ca.notice({ title: msg, icon: 'success' })
-            : ca.notice({ title: msg, icon: 'error' })
+
+          if (status === 1) {
+            ca.notice({ title: msg, icon: 'success' })
+            setTimeout(() => {
+              window.location.reload();
+            }, 2000)
+          } else {
+            ca.notice({ title: msg, icon: 'error' })
+          }
         }
       })
 
@@ -292,9 +334,13 @@ let ca = {
     ca.ajax({
       data: e,
       success: ({ status, msg, data }) => {
+        const customClass = {
+          closeButton: 'w-8 h-8 absolute -bottom-2 left-0 right-0 mx-auto bg-white hover:bg-white rounded-full text-[24px]'
+        }
+
         status == 1
-          ? ca.popup({ html: data })
-          : ca.popup({ content: msg });
+          ? ca.popup({ html: data, customClass })
+          : ca.popup({ content: msg, customClass });
       }
     });
   },
@@ -302,8 +348,11 @@ let ca = {
   // 分页
   pagination: function () {
     $('#load-more').on('click', function () {
+      const icon = document.querySelector('.more_icon')
 
       currentPage++;
+      const cat = new URL(window.location.href).searchParams.get('cat');
+      const s = new URL(window.location.href).searchParams.get('s');
 
       $.ajax({
         type: 'POST',
@@ -312,6 +361,11 @@ let ca = {
         data: {
           action: 'capalot_load_more',
           paged: currentPage,
+          cat,
+          s,
+        },
+        beforeSend: () => {
+          icon.style.display = 'inline-block'
         },
         success: function (response) {
           if (currentPage >= response.max) {
@@ -319,6 +373,9 @@ let ca = {
             $('#no-more-button').show();
           }
           $('.posts-wrap').append(response.html);
+        },
+        complete: () => {
+          icon.style.display = 'none'
         }
       });
     }
@@ -340,21 +397,122 @@ let ca = {
       if (light.hasClass("hidden")) {
         light.removeClass('hidden');
         dark.addClass('hidden');
+
         root.removeClass('dark');
+        document.cookie = "theme=light;path=/";
       } else {
         light.addClass('hidden');
         dark.removeClass('hidden');
+
         root.addClass('dark');
+        document.cookie = "theme=dark;path=/";
       }
     }
   },
 
   // 轮播初始化
   swiper: function () {
-    const el = document.querySelector('.mySwiper');
+    const swipers = document.querySelectorAll('.mySwiper');
 
-    var swiper = new Swiper(".mySwiper", JSON.parse(el.dataset.config));
-  }
+    swipers.forEach((el) => {
+      new Swiper(el, JSON.parse(el.dataset.config));
+    })
+  },
+
+  // 文章阅读数量+1
+  add_post_views: function () {
+    ca.ajax({
+      data: {
+        action: 'capalot_add_post_views',
+        nonce: capalot.ajax_nonce,
+        post_id: capalot.singular_id,
+      }
+    })
+  },
+
+  // 删除文章
+  delete_post: function () {
+    const delete_icons = document.querySelectorAll('#delete-icon');
+
+    if (!delete_icons) {
+      return;
+    }
+
+    delete_icons.forEach((el) => {
+      el.addEventListener('click', () => {
+        const post_id = el.dataset.id;
+        const action = el.dataset.action;
+
+        const text = action === 'delete_post' ? '确认彻底删除该投稿吗？删除后不可恢复！' : '确认彻底删除该投稿吗？您可以在回收站恢复该投稿。';
+
+        const callback = (result) => {
+          if (result.isConfirmed) {
+            window.location.href = `?action=${action}&post_id=${post_id}`;
+          }
+        }
+
+        ca.popup({ title: '确认删除?', text, width: '20rem', icon: 'warning', showCancelButton: true, showConfirmButton: true, callback })
+      })
+    })
+  },
+
+  // 新增评论
+  add_comment: function () {
+    const o = jQuery("#commentform");
+    o.find('input[type="submit"]'), o.submit(function (e) {
+      e.preventDefault();
+      const t = jQuery("#submit"),
+        n = t.val();
+      jQuery.ajax({
+        type: "POST",
+        url: capalot.ajax_url,
+        data: o.serialize() + "&action=capalot_ajax_comment&nonce=" + capalot.ajax_nonce,
+        beforeSend: function (e) {
+          t.prop("disabled", !0).val(capalot.get_text.__commiting)
+        },
+        error: function (e, t, n) {
+          ca.notice({ title: e.responseText, icon: 'error' })
+        },
+        success: function (e) {
+          ("success" == e) ? (t.val(capalot.get_text.__comment_success), ca.notice(capalot.get_text.__refresh_page), setTimeout(function () {
+            window.location.reload()
+          }, 2e3)) : ca.notice({ title: e, icon: "error" });
+        },
+        complete: function (e) {
+          t.prop("disabled", !1).val(n)
+        }
+      })
+    });
+    var e = jQuery(".comments-list");
+    const a = jQuery(".infinite-scroll-button"),
+      i = jQuery(".infinite-scroll-status"),
+      r = jQuery(".infinite-scroll-msg");
+    a.length && (e.on("request.infiniteScroll", function (e, t) {
+      i.show()
+    }), e.on("load.infiniteScroll", function (e, t, n) {
+      i.hide()
+    }), e.on("last.infiniteScroll", function (e, t, n) {
+      a.hide(), r.show()
+    }), e.infiniteScroll({
+      append: ".comments-list > *",
+      debug: !1,
+      hideNav: ".comments-pagination",
+      history: !1,
+      path: ".comments-pagination a.next",
+      prefill: !1,
+      scrollThreshold: !1,
+      button: ".infinite-scroll-button"
+    }))
+  },
+
+  // 防抖
+  debounce: function (fn, wait) {
+    let timeout = null;
+    return function () {
+      if (timeout !== null) clearTimeout(timeout);
+      timeout = setTimeout(fn, wait);
+    }
+  },
 
 }
 
