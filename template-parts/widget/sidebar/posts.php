@@ -28,23 +28,23 @@ $PostData = new WP_Query($query_args);
       while ($PostData->have_posts()) : $PostData->the_post(); ?>
 
         <div class="col ">
-          <article class="post-item item-list flex flex-row gap-4">
+          <div class=" grid grid-cols-6 gap-4 items-center">
 
-            <div class="entry-media ratio ratio-3x2 col-auto w-1/3">
-              <a target="<?php echo get_target_blank(); ?>" class="media-img lazy" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" >
+            <div class=" col-span-2">
+              <a target="<?php echo get_target_blank(); ?>" class="media-img lazy" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
                 <img class=" w-full h-14 object-cover rounded-md" src="<?php echo capalot_get_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
               </a>
             </div>
 
-            <div class="entry-wrapper w-2/3">
-              <div class="entry-body">
-                <h2 class="entry-title">
+            <div class=" col-span-4">
+              <div class="">
+                <h2 class="">
                   <a class=" text-sm line-clamp-2  text-neutral-500 hover:text-neutral-900 dark:text-gray-400 dark:hover:text-white" target="<?php echo get_target_blank(); ?>" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a>
                 </h2>
               </div>
             </div>
 
-          </article>
+          </div>
         </div>
 
     <?php endwhile;

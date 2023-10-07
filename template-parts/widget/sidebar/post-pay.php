@@ -93,7 +93,7 @@ if (!empty($capalot_downurl_new) && is_array($capalot_downurl_new)) {
                 <path d="M27.273 753.613l485.222-484.233 484.233 485.222z" fill="#a2e9f5" p-id="4006"></path>
               </svg>
             </div>
-            <ul class=" leading-10 p-4 bg-sky-100 text-sm  divide-gray-200 divide-y ">
+            <ul class=" leading-10 p-4 bg-sky-100 text-sm  divide-gray-200 divide-y dark:bg-dark dark:divide-[#333]  ">
               <?php
               $site_vip_options = get_site_vip_options();
               $price_names = [
@@ -124,7 +124,7 @@ if (!empty($capalot_downurl_new) && is_array($capalot_downurl_new)) {
                   $__price_span = $coin_price . get_site_coin_name() . '</span>';
                 }
 
-                echo '<li class=" flex justify-between text-gray-600 ' . $type . '">' .  $price_names[$type] .  ': ' . '<span>' .  $__price_span .  '</span>' . '</li>';
+                echo '<li class=" flex justify-between text-gray-600 dark:text-gray-400  ' . $type . '">' .  $price_names[$type] .  ': ' . '<span>' .  $__price_span .  '</span>' . '</li>';
               } ?>
             </ul>
 
