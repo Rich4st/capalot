@@ -1,6 +1,6 @@
 <?php
 
-if(post_password_required() || !comments_open() || !is_site_comments()) return;
+if (post_password_required() || !comments_open() || !is_site_comments()) return;
 
 ?>
 
@@ -40,6 +40,15 @@ if(post_password_required() || !comments_open() || !is_site_comments()) return;
 			));
 			?>
 		</ul>
+		
+		<?php if ($the_paginate = paginate_comments_links(array('echo' => false))) : ?>
+			<!-- 评论翻页按钮 -->
+			<div class="comments-nav infinite-scroll flex justify-center">
+				<div class="comments-pagination">
+					<?= $the_paginate; ?>
+				</div>
+			</div>
+		<?php endif; ?>
 
 
 	<?php endif; ?>

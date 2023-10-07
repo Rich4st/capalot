@@ -271,3 +271,24 @@
 #comments .comments-list .comment .children .children {
     margin-left: 0;
 }
+#comments .comments-nav
+{
+    padding: 20px 0;
+}
+#comments .comments-nav .page-numbers{
+    padding: 0.6rem 1rem;
+    margin: 0 4px;
+    background-color: #ededed;
+    color: #6b6985;
+    border-radius: 0.2rem;
+}
+#comments .comments-nav .page-numbers:hover {
+    background-color: #1e1e20;
+    color: white;
+}
+
+#comments .comments-nav .current {
+    background-color: #1e1e20;
+    color: white;
+    font-weight: bold;
+}
