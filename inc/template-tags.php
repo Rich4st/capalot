@@ -124,42 +124,113 @@ function get_target_blank()
   return empty(_capalot('site_link_blank')) ? '_self' : '_blank';
 }
 
+
+
+
 /**
  * 默认缩略图
+ * @Author Dadong2g
+ * @date   2022-01-22
+ * @return [type]
  */
-function get_default_thumbnail_src()
-{
-  return _capalot('default_thumb')
-    ? _capalot('default_thumb')
-    : get_template_directory_uri() . '/assets/images/default_thumb.png';
+function get_default_thumbnail_src() {
+  return _capalot('default_thumb') ? _capalot('default_thumb') : get_template_directory_uri() . '/assets/img/thumb.jpg';
+}
+
+
+function _capalot_get_default_lazy_img_src() {
+  return _capalot('default_lazy_thumb') ? _capalot('default_lazy_thumb') : 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+}
+
+
+
+function _capalot_get_thumbnail_size_type(){
+  $options = array(
+      'bg-cover',
+      'bg-auto',
+      'bg-contain',
+  );
+  $opt = _capalot('site_thumb_size_type','bg-cover');
+
+  if (!in_array($opt, $options)) {
+      $opt = $options[0];
+  }
+  return $opt;
+}
+
+function _capalot_get_thumbnail_fit_type(){
+  $options = array(
+      'bg-left-top',
+      'bg-right-top',
+      'bg-center-top',
+      'bg-center',
+      'bg-center-bottom',
+      'bg-left-bottom',
+      'bg-right-bottom',
+  );
+  $opt = _capalot('site_thumb_fit_type','bg-center');
+
+  if (!in_array($opt, $options)) {
+      $opt = $options[0];
+  }
+  return $opt;
 }
 
 /**
- * 获取缩略图URL
- */
-function capalot_get_thumbnail_url($post = null, $size = 'thumbnail')
-{
-  if (empty($post))
-    global $post;
-  else
-    $post = get_post($post);
+* 获取缩略图地址
+* @Author Dadong2g
+* @date   2023-04-19
+* @param  [type]     $post [description]
+* @param  string     $size [description]
+* @return [type]
+*/
+function capalot_get_thumbnail_url($post = null, $size = 'thumbnail') {
 
-  if (!$post instanceof WP_Post)
-    return get_default_thumbnail_src();
+  if (empty($post)) {
+      global $post;
+  } else {
+      $post = get_post($post);
+  }
+
+  if (!$post instanceof WP_Post) {
+      return get_default_thumbnail_src();
+  }
 
   if (has_post_thumbnail($post)) {
-    return get_the_post_thumbnail_url($post, $size);
+      return get_the_post_thumbnail_url($post, $size);
   } elseif (_capalot('is_post_one_thumbnail', true) && !empty($post->post_content)) {
-    ob_start();
-    ob_end_clean();
-    preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $matches);
-    if (!empty($matches[1][0])) {
-      return $matches[1][0];
-    }
+      // Automatically get the first image in the post content
+      ob_start();
+      ob_end_clean();
+      preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $matches);
+      if (!empty($matches[1][0])) {
+          return $matches[1][0];
+      }
   }
 
   return get_default_thumbnail_src();
 }
+
+/**
+* 获取缩略图
+* @Author Dadong2g
+* @date   2022-01-06
+* @param  string     $class [description]
+* @return [type]
+*/
+function capalot_the_thumbnail($post = null, $class = 'thumb lazy', $size = 'thumbnail') {
+  if (empty($post)) {
+      global $post;
+  }
+
+  if (is_numeric($post)) {
+      $post = get_post($post);
+  }
+
+  echo get_the_post_thumbnail($post->ID, $size, array('class' => $class, 'alt' => the_title_attribute(array('echo' => false))));
+
+}
+
 
 /**
  * 获取面包屑导航
