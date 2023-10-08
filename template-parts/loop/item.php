@@ -35,7 +35,7 @@ if ($post_format && isset($format_icons[$post_format])) {
 ?>
 <!-- 文章展示页中文章布局 -->
 <?php if ($args['type'] == 'grid') : ?>
-  <li class="dark:bg-dark-card rounded-lg overflow-hidden list-none cursor-pointer bg-white border dark:border-[#222] transition hover:shadow-2xl hover:-translate-y-1  duration-500">
+  <li class="dark:bg-dark-card rounded-lg overflow-hidden list-none cursor-pointer bg-white border dark:border-[#222] transition  hover:-translate-y-1 hover:shadow-2xl  duration-500">
     <article class="post-item item-grid relative">
 
       <div class="tips-badge absolute w-10 text-center top-0 start-0 z-50 m-2 bg-[#b0adac]  rounded-xl">
@@ -58,12 +58,12 @@ if ($post_format && isset($format_icons[$post_format])) {
           <div class="entry-cat-dot   mb-1 whitespace-nowrap text-ellipsis overflow-hidden"><i class="fa-solid fa-tag pr-2" style="color: #82a6f0;"></i><?php capalot_meta_category(2); ?></div>
         <?php endif; ?>
 
-        <h2 class="font-bold text-black  dark:text-gray-50  text-base whitespace-nowrap text-ellipsis overflow-hidden">
+        <h2 class="font-bold text-gray-700  dark:text-gray-50  text-base whitespace-nowrap text-ellipsis overflow-hidden">
           <a target="<?php echo get_target_blank(); ?>" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a>
         </h2>
 
         <?php if ($args['is_entry_desc']) : ?>
-          <div class="entry-desc mp-1 whitespace-nowrap text-ellipsis overflow-hidden h-4" title="<?php echo capalot_get_post_excerpt(40); ?>"><?php echo capalot_get_post_excerpt(40); ?></div>
+          <div class=" text-gray-400 text-[12px] min-h-[1.25rem]  line-clamp-1 my-1 " title="<?php echo capalot_get_post_excerpt(40); ?>"><?php echo capalot_get_post_excerpt(40); ?></div>
         <?php endif; ?>
 
         <?php if ($args['is_entry_meta']) : ?>
