@@ -3,20 +3,37 @@
 $post_id = get_the_ID();
 
 $bg_image = capalot_get_thumbnail_url($post_id);
-$single_style = _capalot('single_style', 'general'); //general hero
+$single_style = _capalot('single_style', 'hero'); //general hero
 
+$container = _capalot('site_container_width', '1400')
 ?>
 
 <?php if (!empty(_capalot('single_top_breadcrumb', false))) : ?>
-  // TODO: 面包屑
+  <!-- 面包屑 -->
+  <div class="container-full  dark:bg-dark  dark:text-gray-400">
+    <div class="mx-auto" style="max-width: <?php
+                                            if ($container === '') {
+                                              echo '1280';
+                                            } else {
+                                              echo $container;
+                                            }
+                                            ?>px;">
+      <nav class="container hidden md:flex flex-col  p-2" aria-label="breadcrumb">
+        <?php capalot_get_breadcrumb('breadcrumb mb-0 flex'); ?>
+      </nav>
+    </div>
+    <?php
+    if ($single_style === 'hero') {
+      get_template_part('template-parts/single/hero');
+    }
+    ?>
+  </div>
+  </div>
 <?php endif; ?>
 
 
-<?php
+<!--  TODO:视频模块 -->
 
-$container = _capalot('site_container_width', '1400')
-// TODO:视频模块
-?>
 <div class="bg-[#ededed] dark:bg-dark">
   <div style="max-width: <?php
                           if ($container === '') {
