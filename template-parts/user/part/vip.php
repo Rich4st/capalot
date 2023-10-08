@@ -154,10 +154,10 @@ $price_shape = get_template_directory_uri() . '/assets/img/price_shape.png';
 			<h5 class="text-center mb-4 text-muted"><?php _e('使用CDK码兑换VIP特权', 'ripro'); ?></h5>
 			<form class="w-64 flex flex-col mx-auto" id="vip-cdk-action">
 				<div class="mb-3">
-					<input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark" name="cdk_code" placeholder="兑换码/CDK卡号" value="">
+					<input type="text" class="bg-[#ededed] h-8 w-full  dark:border-gray-500 dark:bg-dark form-control p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="cdk_code" placeholder="兑换码/CDK卡号" value="">
 				</div>
 				<div class="flex flex-row space-x-2 mb-3">
-					<input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark rounded-2" name="captcha_code" placeholder="验证码">
+					<input type="text" class="bg-[#ededed] h-8 w-full  dark:border-gray-500 dark:bg-dark form-control p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="captcha_code" placeholder="验证码">
 					<img id="captcha-img" class="rounded-2 w-full h-8 bg-[#cacaca]  text-white mx-2 rounded" role="button" src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/captcha.png'); ?>" data-src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/captcha.png'); ?>" title="<?php _e('点击刷新验证码', 'ripro'); ?>" />
 				</div>
 				<div class="flex flex-row justify-center space-x-2 mb-3 mt-3 text-center text-sm">
