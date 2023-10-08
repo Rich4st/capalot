@@ -19,11 +19,12 @@ $price_shape = get_template_directory_uri() . '/assets/img/price_shape.png';
 
 ?>
 
-<div class=" text-center py-8 bg-gray-200 dark:bg-dark-card">
-	<div class="archive-hero-bg lazy" data-bg="<?php echo $bg_image; ?>"></div>
-	<div class="">
-		<h1 class="  text-xl font-bold dark:text-gray-50"><i class="far fa-gem me-1 "></i><?php _e('本站VIP', 'ripro'); ?></h1>
-		<div class=" dark:text-gray-400">
+<div class=" relative overflow-hidden">
+	<div class="absolute left-0 top-0 right-0 w-full h-full z-[-1] "   style="background-image: url(<?php echo $bg_image; ?>); background-position:50%;background-size:100%; "></div>
+    <div class=" absolute  backdrop-blur-lg h-full w-full bg-black/30"></div>
+	<div class=" relative z-50 py-12 text-center text-white ">
+		<h1 class="  text-xl font-bold "><i class="far fa-gem me-1 "></i><?php _e('本站VIP', 'ripro'); ?></h1>
+		<div class=" text-sm text-white/80 mt-2 ">
 			<p><?php _e('加入本站VIP，畅享海量资源', 'ripro'); ?></p>
 		</div>
 	</div>
@@ -45,7 +46,7 @@ $price_shape = get_template_directory_uri() . '/assets/img/price_shape.png';
 
 				<div class="  text-center bg-white dark:bg-dark-card shadow-xl dark:shadow-none shadow-gray-600/10 relative transition transform   hover:-translate-y-3 duration-300">
 					<div class="">
-						<div class=" py-8 px-4 bg-<?php echo $vip_colors[$item['type']]; ?> bg-sky-100 bg-opacity-70 dark:bg-dark-card">
+						<div class=" py-8 px-4  bg-sky-100 bg-opacity-70 dark:bg-dark-card">
 							<span class=" text-xl font-bold text-sky-800 dark:text-gray-50 "><?php echo $item['buy_title']; ?></span>
 
 							<h3 class=" text-2xl font-bold text-red-500 my-4"><?php echo $item['coin_price']; ?><sup><?php echo get_site_coin_name(); ?></sup></h3>

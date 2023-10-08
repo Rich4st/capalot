@@ -24,11 +24,11 @@ $bg_image = get_template_directory_uri() . '/assets/img/bg.jpg';
 
 ?>
 
-<div class=" text-center py-8 bg-gray-200 dark:bg-dark-card">
-	<div class="" data-bg="<?php echo $bg_image; ?>"></div>
-	<div class=" dark:text-gray-50">
+<div class=" relative overflow-hidden">
+	<div class="absolute left-0 top-0 right-0 w-full h-full z-[-1] " style="background-image: url(<?php echo $bg_image; ?>); background-position:50%;background-size:100%; "></div>
+	<div class=" absolute  backdrop-blur-lg h-full w-full bg-black/30"></div>
+	<div class=" relative z-50 py-12 text-center text-white">
 		<h1 class=" text-xl font-bold"><i class="fas fa-tags me-1"></i><?php _e('标签云', 'ripro'); ?></h1>
-
 	</div>
 </div>
 
@@ -59,7 +59,7 @@ $bg_image = get_template_directory_uri() . '/assets/img/bg.jpg';
 						<a class=" " href="<?php echo get_tag_link($tag->term_id); ?>" rel="tag" title="<?php echo $tag->name; ?>">
 							<div class=" grid lg:grid-cols-7 grid-cols-6  lg:gap-4 gap-2   justify-center items-center">
 								<div class=" col-span-2 text-center ">
-									<div class=" lg:text-2xl text-xl dark:text-gray-400 transition hover:rotate-[360deg] lg:w-12 lg:h-12 lg:leading-[3rem] w-10 h-10 leading-10 rounded-full  tag-substr bg-opacity-10 bg-<?php echo esc_attr( $color );?> text-<?php echo esc_attr( $color );?>"><?php echo mb_substr($tag->name, 0, 1); ?></div>
+									<div class=" lg:text-2xl text-xl dark:text-gray-400 transition hover:rotate-[360deg] lg:w-12 lg:h-12 lg:leading-[3rem] w-10 h-10 leading-10 rounded-full  tag-substr bg-opacity-10 bg-<?php echo esc_attr($color); ?> text-<?php echo esc_attr($color); ?>"><?php echo mb_substr($tag->name, 0, 1); ?></div>
 								</div>
 								<div class=" lg:col-span-5 col-span-4">
 									<b class=" text-md font-normal text-gray-600  hover:underline dark:text-gray-50"><?php echo $tag->name; ?></b>
