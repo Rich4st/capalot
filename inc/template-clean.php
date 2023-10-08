@@ -54,6 +54,21 @@ class capalot_clean
     if (_capalot('show_admin_bar', true)) {
       add_filter('show_admin_bar', '__return_false');
     }
+
+    add_action('admin_menu', array($this, 'admin_render'), 999);
+    add_action('admin_init', array($this, 'admin_init'), 999);
+  }
+
+  public function admin_render()
+  {
+    if (_capalot('remove_admin_menu', true)) {
+      // Remove Dashboard
+      remove_menu_page('index.php');
+      // Remove Dashboard -> Update Core notice
+      remove_submenu_page('index.php', 'update-core.php');
+    }
+    // 移除外观—>主题文件编辑器
+    remove_submenu_page('themes.php', 'theme-editor.php');
   }
 
   public function admin_init()

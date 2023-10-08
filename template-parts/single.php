@@ -54,6 +54,18 @@ $container = _capalot('site_container_width', '1400')
         ?>
         <?php get_template_part('template-parts/single/content') ?>
       </div>
+
+      <?php get_template_part('template-parts/single/entry-navigation');?>
+
+      <?php get_template_part('template-parts/single/entry-related-posts');?>
+
+
+
+      <!-- 评论 -->
+      <?php
+        if (comments_open() || get_comments_number()) :
+          comments_template();
+        endif;
       <!-- 评论 -->
       <?php
       if (comments_open() || get_comments_number()) :

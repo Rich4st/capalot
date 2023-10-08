@@ -124,11 +124,11 @@ class Capalot_Ajax
       ));
     }
 
-    if (!empty(get_user_meta($UserLogin->ID, 'cao_banned', true))) {
+    if (!empty(get_user_meta($UserLogin->ID, 'capalot_banned', true))) {
       wp_logout();
       wp_send_json(array(
         'status' => 0,
-        'msg'    => sprintf('此账号已被封禁（ %s ）', get_user_meta($UserLogin->ID, 'cao_banned_reason', true)),
+        'msg'    => sprintf('此账号已被封禁（ %s ）', get_user_meta($UserLogin->ID, 'capalot_banned_reason', true)),
       ));
     }
 
@@ -912,7 +912,7 @@ class Capalot_Ajax
 
     $site_qiandao_coin_num = sprintf('%0.1f', abs(_capalot('site_qiandao_coin_num', '0.5')));
 
-    if (!update_user_meta($user_id, 'cao_qiandao_time', time()) || !change_user_coin_balance($user_id, $site_qiandao_coin_num, '+')) {
+    if (!update_user_meta($user_id, 'capalot_qiandao_time', time()) || !change_user_coin_balance($user_id, $site_qiandao_coin_num, '+')) {
       wp_send_json(array(
         'status' => 0,
         'msg'    => __('签到失败', 'ripro'),

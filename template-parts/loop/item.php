@@ -35,8 +35,7 @@ if ($post_format && isset($format_icons[$post_format])) {
 ?>
 <!-- 文章展示页中文章布局 -->
 <?php if ($args['type'] == 'grid') : ?>
-  <li class="dark:bg-dark-card rounded-lg overflow-hidden list-none cursor-pointer shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]   transition-all duration-300 
-  hover:shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)]  ">
+  <li class="dark:bg-dark-card rounded-lg overflow-hidden list-none cursor-pointer bg-white border dark:border-[#222] transition hover:shadow-2xl hover:-translate-y-1  duration-500">
     <article class="post-item item-grid relative">
 
       <div class="tips-badge absolute w-10 text-center top-0 start-0 z-50 m-2 bg-[#b0adac]  rounded-xl">

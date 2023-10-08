@@ -312,9 +312,15 @@ let ca = {
         data: o,
         complete: ({ responseJSON }) => {
           const { status, msg } = responseJSON;
-          status === 1
-            ? ca.notice({ title: msg, icon: 'success' })
-            : ca.notice({ title: msg, icon: 'error' })
+
+          if (status === 1) {
+            ca.notice({ title: msg, icon: 'success' })
+            setTimeout(() => {
+              window.location.reload();
+            }, 2000)
+          } else {
+            ca.notice({ title: msg, icon: 'error' })
+          }
         }
       })
 
@@ -449,6 +455,7 @@ let ca = {
       })
     })
   },
+
   // 新增评论
   add_comment: function () {
     const o = jQuery("#commentform");
@@ -464,7 +471,7 @@ let ca = {
           t.prop("disabled", !0).val(capalot.get_text.__commiting)
         },
         error: function (e, t, n) {
-          ca.notice({title:e.responseText,icon:'error'})
+          ca.notice({ title: e.responseText, icon: 'error' })
         },
         success: function (e) {
           ("success" == e) ? (t.val(capalot.get_text.__comment_success), ca.notice(capalot.get_text.__refresh_page), setTimeout(function () {
@@ -496,6 +503,15 @@ let ca = {
       scrollThreshold: !1,
       button: ".infinite-scroll-button"
     }))
+  },
+
+  // 防抖
+  debounce: function (fn, wait) {
+    let timeout = null;
+    return function () {
+      if (timeout !== null) clearTimeout(timeout);
+      timeout = setTimeout(fn, wait);
+    }
   },
 
 }
