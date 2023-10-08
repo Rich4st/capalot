@@ -14,7 +14,7 @@ if (empty(_capalot('is_single_bottom_navigation', true))) {
                         <div class=""><i class="fas fa-arrow-left"></i></div>
                         <div class=" col-span-4">
                             <span class=" text-gray-400 dark:text-gray-400 text-sm block text-right"><?php echo esc_html('上一篇', 'ripro'); ?></span>
-                            <div class=" text-base dark:text-gray-50  line-clamp-1"><?php echo get_the_title($pre); ?></div>
+                            <div class=" flex justify-end"><div class=" text-base dark:text-gray-50 line-clamp-1"><?php echo get_the_title($pre); ?></div></div>
                         </div>
                     </div>
                 </a>
@@ -26,7 +26,7 @@ if (empty(_capalot('is_single_bottom_navigation', true))) {
                     <div class=" grid grid-cols-5 gap-4 items-center">
                         <div class=" col-span-4">
                             <span class=" text-gray-400 dark:text-gray-400 text-sm block text-left"><?php echo esc_html('下一篇', 'ripro'); ?></span>
-                            <div class=" text-base line-clamp-1 dark:text-gray-50"><?php echo get_the_title($next); ?></div>
+                            <div class=" flex justify-start"><div class=" text-base line-clamp-1 dark:text-gray-50"><?php echo get_the_title($next); ?></div></div>
                         </div>
                         <div class=" text-right"><i class="fas fa-arrow-right"></i></div>
                     </div>
