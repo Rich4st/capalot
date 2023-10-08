@@ -35,7 +35,7 @@ $site_vip_options = _capalot('site_vip_options');
 $post_title = '';
 $post_content = '';
 $post_status = 'publish';
-$post_format = '';
+// $post_format = '';
 $post_category = 0;
 $post_tags = '';
 $thumbnail_id = -1;
@@ -60,7 +60,7 @@ if ($is_editing) {
     $post_title = $post->post_title;
     $post_content = $post->post_content;
     $post_status = $post->post_status;
-    $post_format = get_post_format($post_id); // 需要主题支持文章形式才有效
+    // $post_format = get_post_format($post_id); // 需要主题支持文章形式才有效
     $post_category = wp_get_post_categories($post_id)[0];
     $post_tags = implode(', ', wp_get_post_tags($post_id, array('fields' => 'names')));
     $thumbnail_id = get_post_thumbnail_id($post_id);
@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $post_title = $_POST['post_title'];
     $post_content = $_POST['post_content'];
     $post_status = $_POST['post_status'];
-    $post_format = $_POST['post_format'];
+    // $post_format = $_POST['post_format'];
     $post_category = intval($_POST['post_category']);
     $post_tags = $_POST['post_tags'];
     $thumbnail_id = $_POST['_thumbnail_id'];
@@ -385,7 +385,7 @@ get_header();
                                         <option value="draft" <?php selected($post_status, 'draft'); ?>><?php _e('草稿', 'ripro'); ?></option>
                                     </select>
                                 </div>
-                                <div class="mb-2">
+                                <!-- <div class="mb-2">
                                     <label class="form-label pb-2 block"><?php _e('文章形式', 'ripro'); ?></label>
                                     <select name="post_format" class="form-select w-full  dark:border-gray-500 dark:bg-dark  p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500">
                                         <option value="" <?php selected($post_format, ''); ?>><?php _e('标准', 'ripro'); ?></option>
@@ -393,7 +393,7 @@ get_header();
                                         <option value="video" <?php selected($post_format, 'video'); ?>><?php _e('视频', 'ripro'); ?></option>
                                         <option value="audio" <?php selected($post_format, 'audio'); ?>><?php _e('音频', 'ripro'); ?></option>
                                     </select>
-                                </div>
+                                </div> -->
                                 <div class="mb-2">
                                     <label class="form-label pb-2 block"><?php _e('分类栏目', 'ripro'); ?></label>
                                     <?php wp_dropdown_categories(array(
