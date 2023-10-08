@@ -8,6 +8,7 @@ let ca = {
     ca.pagination();
     ca.toggle_dark();
     ca.add_comment();
+    ca.post_tougao();
 
     const swiperEl = document.querySelector('.swiper');
     if (swiperEl)
@@ -512,6 +513,53 @@ let ca = {
       if (timeout !== null) clearTimeout(timeout);
       timeout = setTimeout(fn, wait);
     }
+  },
+
+  // 投稿
+  post_tougao: function () {
+    const o = jQuery(".tougao_thumbnail");
+    o.on("click", function () {
+      const n = wp.media({
+        multiple: !1
+      });
+      n.on("select", function () {
+        var e = n.state().get("selection").first().toJSON(),
+          t = e.url,
+          e = e.id;
+        jQuery("#_thumbnail_id").val(e), o.empty(), e = jQuery("<img>").attr("src", t), o.append(e)
+      }), n.open()
+    }),
+      body.on("click", ".add-input-file", function () {
+        const t = jQuery(this).closest(".input-group").find(".input-file-url"),
+          n = wp.media({
+            multiple: !1
+          });
+        n.on("select", function () {
+          var e = n.state().get("selection").first().toJSON().url;
+          t.val(e)
+        }), n.open()
+      });
+    const e = jQuery("#capalot_video_switch"),
+      t = jQuery("#capalot_status_switch"),
+      n = jQuery("#price-input-warp"),
+      a = jQuery("#down-input-warp"),
+      i = jQuery("#video-input-warp");
+
+    function r() {
+      e.is(":checked") || t.is(":checked") ? n.show() : n.hide(), t.is(":checked") ? a.show() : a.hide(), e.is(":checked") ? i.show() : i.hide()
+    }
+    r(), e.on("change", r), t.on("change", r), jQuery(".meta-input-item-add").on("click", function () {
+      var e = jQuery(this).closest(".meta-input-warp").find(".meta-input-group");
+      let t = e.find(".meta-input-item").length;
+      var n = e.find(".meta-input-item:first").clone();
+      n.find("input").each(function () {
+        var e = jQuery(this).attr("name").replace(/\[\d+\]/g, "[" + t + "]");
+        jQuery(this).attr("name", e), jQuery(this).val("")
+      }), e.append(n)
+    }), jQuery(".meta-input-group").on("click", ".meta-input-item-remove", function () {
+      var e = jQuery(this).closest(".meta-input-item");
+      0 !== e.index() && e.remove()
+    })
   },
 
 }
