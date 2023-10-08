@@ -40,7 +40,7 @@ $container = _capalot('site_container_width', '1400');
 ?>
 
 
-<section class="dark:bg-dark pt-3 pb-0 ">
+<section class="dark:bg-dark py-3 ">
 	<div class="mx-auto " style="max-width: <?php if ($container === '') {
 												echo '1280';
 											} else {
