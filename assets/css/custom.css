@@ -307,3 +307,9 @@
     transform: translate(0.6rem, 0);
     content: "/";
 }
+/* 我的余额-充值 */
+.coin-pay-card.active,
+.coin-pay-card:hover {
+    border: 1px solid #ffc107;
+    background: unset
+}

@@ -9,13 +9,13 @@ global $current_user;
 	<?php if (is_site_qiandao()) : ?>
 		<div class="balance-qiandao flex justify-end text-sm">
 			<?php if (!is_user_today_qiandao($current_user->ID)) : ?>
-				<a class="user-qiandao-action btn p-2 rounded text-black bg-[#fad877]" href="javascript:;"><i class="fa fa-check-square me-1"></i><?php _e('签到领取', 'ripro'); ?><?php echo get_site_coin_name(); ?></a>
+				<a class="user-qiandao-action btn p-2 rounded text-black dark:text-gray-400 bg-[#fad877]" href="javascript:;"><i class="fa fa-check-square me-1"></i><?php _e('签到领取', 'ripro'); ?><?php echo get_site_coin_name(); ?></a>
 			<?php else : ?>
-				<a class="btn p-1  text-black" href="javascript:;"><i class="fa fa-check-square me-1"></i><?php _e('今日已签到', 'ripro'); ?></a>
+				<a class="btn p-1  text-black dark:text-gray-400" href="javascript:;"><i class="fa fa-check-square me-1"></i><?php _e('今日已签到', 'ripro'); ?></a>
 			<?php endif; ?>
 		</div>
 	<?php endif; ?>
-	<div class=" text-center text-xl text-[#ff9800]">
+	<div class="balance-info text-center text-xl text-[#ff9800]">
 		<div><?php _e('当前账户余额', 'ripro'); ?></div>
 		<hr class="border-[#ffe7bf] block overflow-hidden w-36 mx-auto">
 		<div><?php printf('<i class="%s me-1"></i>%s%s', get_site_coin_icon(), get_user_coin_balance($current_user->ID), get_site_coin_name()); ?></div>
@@ -37,8 +37,8 @@ global $current_user;
 		<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4 ">
 			<?php foreach ($site_mycoin_pay_arr as $num) : ?>
 
-				<div class="border py-2 rounded dark:border-transparent dark:hover:border-[#ffc107] focus:border-[#ffc107] hover:border-[#ffc107] dark:bg-[#0c0d0e] cursor-pointer">
-					<div class="coin-pay-card text-center" data-num="<?php echo absint($num); ?>">
+				<div class="cursor-pointer">
+					<div class="coin-pay-card  border  rounded py-2 text-center" data-num="<?php echo absint($num); ?>">
 						<h5 class="mb-1 text-[#ffc107]"><?php echo absint($num) . get_site_coin_name(); ?></h6>
 							<p class="text-muted">￥<?php echo site_convert_amount(absint($num), 'rmb'); ?></p>
 					</div>
@@ -82,10 +82,10 @@ global $current_user;
 			<h5 class="text-center mb-4 text-muted"><?php _e('使用CDK码兑换站内币', 'ripro'); ?></h5>
 			<form class="w-64 flex flex-col mx-auto" id="vip-cdk-action">
 				<div class="mb-3">
-					<input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark" name="cdk_code" placeholder="兑换码/CDK卡号" value="">
+					<input type="text" class="bg-[#ededed] h-8 w-full  dark:border-gray-500 dark:bg-dark form-control p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="cdk_code" placeholder="兑换码/CDK卡号" value="">
 				</div>
 				<div class="flex flex-row space-x-2 mb-3">
-					<input type="text" class="bg-[#ededed] w-full h-8 px-2 rounded dark:bg-dark" name="captcha_code" placeholder="验证码">
+					<input type="text" class=" bg-[#ededed] h-8 w-full  dark:border-gray-500 dark:bg-dark form-control p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="captcha_code" placeholder="验证码">
 					<!-- <img id="captcha-img" class="rounded-2 w-full h-8 bg-[#cacaca]  text-white mx-2 rounded" role="button" data-src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/captcha.png'); ?>" title="<?php _e('点击刷新验证码', 'ripro'); ?>" /> -->
 					<img id="captcha-img" class="rounded-2 w-full h-8 bg-[#cacaca]  text-white mx-2 rounded" role="button" src="<?php echo get_template_directory_uri() ?>/assets/img/captcha.png" title="<?php _e('点击刷新验证码', 'ripro'); ?>" />
 				</div>
