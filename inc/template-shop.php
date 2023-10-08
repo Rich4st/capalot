@@ -674,6 +674,31 @@ function capalot_get_pay_options($id = null)
     return $options;
 }
 
+// 获取支付弹窗内容
+function capalot_get_pay_body_html($id, $price, $qrimg)
+{
+    //分组
+    $alipay_group    = [1, 11, 21, 31, 41];
+    $weixinpay_group = [2, 12, 22, 32, 42];
+
+    if (in_array($id, $alipay_group)) {
+        # alipay
+        $icon_url = get_template_directory_uri() . '/assets/img/alipay.png';
+        $title    = sprintf(__('支付宝扫码支付 %s 元', 'ripro'), $price);
+    } elseif (in_array($id, $weixinpay_group)) {
+        # weixinpay
+        $icon_url = get_template_directory_uri() . '/assets/img/weixinpay.png';
+        $title    = sprintf(__('微信扫码支付 %s 元', 'ripro'), $price);
+    } else {
+        $icon_url = '';
+        $title    = sprintf(__('扫码支付 %s 元', 'ripro'), $price);
+    }
+
+    $desc = __('支付后请等待 5 秒左右，切勿关闭扫码窗口', 'ripro');
+    $html = sprintf('<div class="pay-body-html"><img class="pay-icon" src="%s"><div class="title">%s</div><div class="qrcode"><img src="%s"></div><div class="desc">%s</div></div>', $icon_url, $title, $qrimg, $desc);
+    return apply_filters('ri_pay_body_html', $html);
+}
+
 // 获取支付方式选项模板
 function capalot_get_pay_select_html($order_type = 0)
 {
@@ -823,17 +848,29 @@ function capalot_get_request_pay($order_data)
         case 'alipay':
             // TODO: 支付宝支付
             $config = _capalot('alipay');
+            $api_type = (isset($config['api_type'])) ? $config['api_type'] : '';
 
-            return [
-                'foo' => $config
-            ];
+            if ($api_type == 'web') {
+                $result['method'] = 'url';
+                $pay_url          = wp_is_mobile() && !empty($config['is_mobile'])
+                    ? $CapalotPay->alipay_app_wap_pay($order_data)
+                    : $CapalotPay->alipay_app_web_pay($order_data);
+            } elseif ($api_type == 'qr') {
+                $pay_url = $CapalotPay->alipay_app_qr_pay($order_data);
+                $pay_url = capalot_get_pay_body_html($order_data['pay_type'], $order_data['pay_price'], get_qrcode_url($pay_url));
+            }
 
             break;
         default:
             break;
     }
 
-    // TODO:设置当前订单号缓存
+    // 设置当前订单号缓存
+    if (!empty($pay_url)) {
+        Capalot_Cookie::set('current_order_num', $order_data['order_trade_no'], 300);
+        $result['status'] = 1;
+        $result['msg']    = $pay_url;
+    }
 
     return apply_filters('capalot_get_request_pay', $result, $order_data);
 }
@@ -873,7 +910,8 @@ add_action('site_pay_order_success', 'capalot_pay_success_callback', 10, 1);
  * @param  boolean    $callback [description]
  * @return [type]
  */
-function get_oauth_permalink($method = 'qq', $callback = false) {
+function get_oauth_permalink($method = 'qq', $callback = false)
+{
     if (!in_array($method, array('qq', 'weixin'))) {
         $method = 'qq';
     }
@@ -885,7 +923,8 @@ function get_oauth_permalink($method = 'qq', $callback = false) {
  * @param  [type]     $snsInfo [description]
  * @return [type]
  */
-function zb_oauth_callback_event($data) {
+function zb_oauth_callback_event($data)
+{
     global $wpdb;
 
     $current_uid = get_current_user_id(); //当前用户
@@ -912,13 +951,14 @@ function zb_oauth_callback_event($data) {
             wp_set_current_user($user->ID, $user->user_login);
             wp_set_auth_cookie($user->ID, true);
             do_action('wp_login', $user->user_login, $user);
-            wp_safe_redirect(get_uc_menu_link());exit;
+            wp_safe_redirect(get_uc_menu_link());
+            exit;
         }
     } elseif (!empty($current_uid) && empty($search_uid)) {
         //当前已登录了本地账号, 直接绑定该账号
         zb_updete_user_oauth_info($current_uid, $data);
-        wp_safe_redirect(get_uc_menu_link());exit;
-
+        wp_safe_redirect(get_uc_menu_link());
+        exit;
     } elseif (empty($search_uid) && empty($current_uid)) {
         //新用户注册
         $new_user_data = array(
@@ -944,11 +984,11 @@ function zb_oauth_callback_event($data) {
                 wp_set_current_user($user->ID, $user->user_login);
                 wp_set_auth_cookie($user->ID, true);
                 do_action('wp_login', $user->user_login, $user);
-                wp_safe_redirect(get_uc_menu_link());exit;
+                wp_safe_redirect(get_uc_menu_link());
+                exit;
             }
         }
     }
-
 }
 /**
  * 用户是否第三方注册未设置密码

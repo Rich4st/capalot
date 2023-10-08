@@ -1269,9 +1269,11 @@ CSF::createSection($prefix, array(
   'fields' => array(
 
     array(
-      'id' => 'site_shop_mode',
-      'type' => 'radio',
-      'title' => '商城模式',
+      'id'          => 'site_shop_mode',
+      'type'        => 'radio',
+      'title'       => '商城模式配置',
+      'desc'        => '',
+      'placeholder' => '',
       'options'     => array(
         'close'    => '不启用商城功能（网站仅作为博客展示）',
         'all'      => '全能商城（支持游客购买、登录用户购买）',
@@ -1281,16 +1283,55 @@ CSF::createSection($prefix, array(
     ),
 
     array(
-      'id' => 'site_currency_name',
-      'type' => 'text',
-      'title' => '站内币名称',
-      'desc' => '设置站内币名称,例如: 金币、下载币、积分、资源币、BB币、USDT等',
-      'default' => '金币',
+      'id'         => 'site_coin_name',
+      'type'       => 'text',
+      'title'      => '站内币名称',
+      'desc'       => '设置站内币名称，例如：金币、下载币、积分、资源币、BB币、USDT等',
+      'default'    => '金币',
       'attributes' => array(
-        'style' => 'width: 6rem'
-      )
+        'style' => 'width: 100px;',
+      ),
     ),
 
+    array(
+      'id'         => 'site_coin_rate',
+      'type'       => 'text',
+      'title'      => '站内币充值比例',
+      'default'    => '10',
+      'desc'       => '默认：1元等于10个站内币(必须是正整数1~10000，建议一次设置好，后续谨慎更改，会影响后台订单的汇率)',
+      'attributes' => array(
+        'style' => 'width: 100px;',
+      ),
+    ),
+
+    array(
+      'id'      => 'site_coin_icon',
+      'type'    => 'icon',
+      'title'   => '站内币图标',
+      'desc'    => '设置站内币图标，部分页面展示需要',
+      'default' => 'fas fa-coins',
+    ),
+
+    array(
+      'id'         => 'site_coin_pay_minnum',
+      'type'       => 'text',
+      'title'      => '站内币最小充值数量限制',
+      'default'    => '1',
+      'desc'       => '',
+      'attributes' => array(
+        'style' => 'width: 100px;',
+      ),
+    ),
+    array(
+      'id'         => 'site_coin_pay_maxnum',
+      'type'       => 'text',
+      'title'      => '站内币最大充值数量限制',
+      'default'    => '9999',
+      'desc'       => '',
+      'attributes' => array(
+        'style' => 'width: 100px;',
+      ),
+    ),
     array(
       'id'      => 'site_mycoin_pay_arr',
       'type'    => 'text',
@@ -1305,6 +1346,7 @@ CSF::createSection($prefix, array(
       'desc'   => '每行一个，用于前台展示',
       'default' => '充值最低额度为1金币' . PHP_EOL . '充值汇率为1元=10金币' . PHP_EOL . '人民币和金币不能互相转换' . PHP_EOL . '余额永久有效，无时间限制',
     ),
+
     array(
       'id'      => 'is_site_qiandao',
       'type'    => 'switcher',
@@ -1317,7 +1359,7 @@ CSF::createSection($prefix, array(
       'type'       => 'text',
       'title'      => '每日签到赠送' . _capalot('site_coin_name') . '数量',
       'desc'       => '填写单个数字0.5表示固定赠送0.5，签到赠送的站内币直接到账用户的钱包余额',
-      'default'    => _capalot('site_qiandao_coin_num', '0.5'),
+      'default'    => '0.5',
       'dependency' => array('is_site_qiandao', '==', 'true'),
     ),
 
@@ -1329,7 +1371,7 @@ CSF::createSection($prefix, array(
       'default' => '商城自助购买',
     ),
 
-  )
+  ),
 ));
 
 // 商城设置 - 默认发布字段

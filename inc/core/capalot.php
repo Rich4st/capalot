@@ -179,6 +179,58 @@ class Capalot_Shop
  */
 class Capalot_Pay
 {
+  public function alipay_app_wap_pay($order_data = null)
+  {
+    $params = new \Yurun\PaySDK\AlipayApp\Params\PublicParams;
+    $params->appID = '2016092000554414';
+
+    $pay = new \Yurun\PaySDK\Alipay\SDK($params);
+
+    // 支付接口
+    $request = new \Yurun\PaySDK\Alipay\Params\Pay\Request;
+    $request->notify_url = ''; // 支付后通知地址（作为支付成功回调，这个可靠）
+    $request->return_url = ''; // 支付后跳转返回地址
+    $request->businessParams->seller_id = $GLOBALS['PAY_CONFIG']['appid']; // 卖家支付宝用户号
+    $request->businessParams->out_trade_no = 'test' . mt_rand(10000000, 99999999); // 商户订单号
+    $request->businessParams->total_fee = 0.01; // 价格
+    $request->businessParams->subject = '测试商品'; // 商品标题
+
+    // 跳转到支付页面
+    // $pay->redirectExecute($request);
+
+    // 获取跳转url
+    $pay->prepareExecute($request, $url);
+    var_dump($url);
+  }
+
+  public function alipay_app_web_pay($order_data = null)
+  {
+    $params = new \Yurun\PaySDK\AlipayApp\Params\PublicParams;
+    $params->appID = '2016092000554414';
+
+    $pay = new \Yurun\PaySDK\Alipay\SDK($params);
+
+    // 支付接口
+    $request = new \Yurun\PaySDK\Alipay\Params\Pay\Request;
+    $request->notify_url = ''; // 支付后通知地址（作为支付成功回调，这个可靠）
+    $request->return_url = ''; // 支付后跳转返回地址
+    $request->businessParams->seller_id = $GLOBALS['PAY_CONFIG']['appid']; // 卖家支付宝用户号
+    $request->businessParams->out_trade_no = 'test' . mt_rand(10000000, 99999999); // 商户订单号
+    $request->businessParams->total_fee = 0.01; // 价格
+    $request->businessParams->subject = '测试商品'; // 商品标题
+
+    // 跳转到支付页面
+    // $pay->redirectExecute($request);
+
+    // 获取跳转url
+    $pay->prepareExecute($request, $url);
+    var_dump($url);
+  }
+
+  public function alipay_app_qr_pay($order_data = null)
+  {
+    return 'alipay_app_qr_pay';
+  }
 }
 
 /**
