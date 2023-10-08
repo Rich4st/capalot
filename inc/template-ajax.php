@@ -63,6 +63,7 @@ class Capalot_Ajax
     $this->add_action('add_share_post'); //分享文章
     $this->add_action('add_post_views'); //文章阅读数量+1
     $this->add_action('ajax_comment'); //ajax评论
+    $this->add_action('vip_cdk_action', 1); //卡密兑换
   }
 
   /**
@@ -956,7 +957,7 @@ class Capalot_Ajax
         ));
       }
     } else {
-      if($is_like) capalot_delete_post_like($user_id, $post_id);
+      if ($is_like) capalot_delete_post_like($user_id, $post_id);
 
       wp_send_json(array(
         'status' => 1,
@@ -1102,24 +1103,184 @@ class Capalot_Ajax
   }
 
   // 评论
-  public function ajax_comment() {
+  public function ajax_comment()
+  {
 
     $this->valid_nonce_ajax(); #安全验证
 
     $comment = wp_handle_comment_submission(wp_unslash($_POST));
     if (is_wp_error($comment)) {
-        $error_data = intval($comment->get_error_data());
-        if (!empty($error_data)) {
-            wp_die($comment->get_error_message(), __('Comment Submission Failure'), array('response' => $error_data, 'back_link' => true));exit;
-        } else {
-            wp_die('Unknown error', __('Comment Submission Failure'), array('response' => 500, 'back_link' => true));exit;
-        }
+      $error_data = intval($comment->get_error_data());
+      if (!empty($error_data)) {
+        wp_die($comment->get_error_message(), __('Comment Submission Failure'), array('response' => $error_data, 'back_link' => true));
+        exit;
+      } else {
+        wp_die('Unknown error', __('Comment Submission Failure'), array('response' => 500, 'back_link' => true));
+        exit;
+      }
     }
 
     $user = wp_get_current_user();
     do_action('set_comment_cookies', $comment, $user);
 
-    echo "success";exit;
+    echo "success";
+    exit;
+  }
 
-}
+  //卡密兑换VIP接口
+  public function vip_cdk_action()
+  {
+    $this->valid_nonce_ajax(); #安全验证
+    $cdk_code     = esc_sql(trim(get_response_param('cdk_code')));
+    $captcha_code = wp_unslash(trim(get_response_param('captcha_code')));
+    $user_id      = get_current_user_id();
+
+
+    if (empty(_capalot('is_site_cdk_pay', true))) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('暂未开启兑换', 'ripro'),
+      ));
+    }
+
+    if (empty($user_id)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('请登录后兑换', 'ripro'),
+      ));
+    }
+
+    if (empty($cdk_code)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('请输入兑换码', 'ripro'),
+      ));
+    }
+
+    if (is_site_img_captcha() && !verify_captcha_code(strtolower($captcha_code))) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('验证码错误，请刷新验证码', 'ripro'),
+      ));
+    }
+
+    $cdk_data = Capalot_Cdk::get_cdk($cdk_code);
+
+    if (empty($cdk_data)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('兑换码错误', 'ripro'),
+      ));
+    }
+
+    if ($cdk_data->status != 0) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('兑换码无效', 'ripro'),
+      ));
+    }
+
+    if (time() > $cdk_data->expiry_time) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('兑换码已到期', 'ripro'),
+      ));
+    }
+
+    //判断卡密类型
+    if ($cdk_data->type == 1) {
+      // 余额充值卡...
+      if (empty($cdk_data->amount) || $cdk_data->amount < 0) {
+        wp_send_json(array(
+          'status' => 0,
+          'msg'    => __('兑换金额错误', 'ripro'),
+        ));
+      }
+
+      $order_price = site_convert_amount($cdk_data->amount, 'rmb');
+      $order_type = 2;
+      $order_info = array(
+        'ip' => get_ip_address(),
+      );
+    } elseif ($cdk_data->type == 2) {
+      // 会员兑换卡...
+      $vip_day = absint($cdk_data->info);
+      $vip_buy_options = get_site_vip_buy_options();
+
+      if (!isset($vip_buy_options[$vip_day])) {
+        wp_send_json(array(
+          'status' => 0,
+          'msg'    => __('兑换类型错误', 'ripro'),
+        ));
+      }
+
+      $vip_options = $vip_buy_options[$vip_day];
+      $uc_vip_info = get_user_vip_data($user_id);
+      if ($uc_vip_info['type'] == 'boosvip') {
+        wp_send_json(array(
+          'status' => 0,
+          'msg'    => __('您已获得最高特权，无需重复开通', 'ripro'),
+        ));
+      }
+
+      $order_price = site_convert_amount($vip_options['coin_price'], 'rmb');
+      $order_type = 3;
+      $order_info = array(
+        'ip' => get_ip_address(),
+        'vip_type' => $vip_options['type'],
+        'vip_day' => $vip_options['day_num'],
+      );
+    }
+
+    //添加订单入库
+    $order_data = [
+      'user_id'        => $user_id,
+      'post_id'        => 0,
+      'order_price'    => $order_price,
+      'order_trade_no' => wp_date("YmdHis") . mt_rand(100, 999) . mt_rand(100, 999) . mt_rand(100, 999), //本地订单号
+      'order_type'     => $order_type, //订单类型 1=>'Post',2=>'charge',3=>'VIP'
+      'pay_type'       => 88, //支付方式ID
+      'pay_price'      => $order_price,
+      'order_info'     => maybe_serialize($order_info),
+    ];
+
+    // 添加订单入库
+    if (!Capalot_Shop::add_order($order_data)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('订单创建失败', 'ripro'),
+      ));
+    }
+
+    // 处理优惠码状态
+    $update_cdk = Capalot_Cdk::update_cdk(
+      array('status' => 1),
+      array('id' => $cdk_data->id),
+      array('%d'),
+      array('%d')
+    );
+
+    if (!$update_cdk) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('兑换失败，请更换重试', 'ripro'),
+      ));
+    }
+
+    //处理回调
+    $update_order = Capalot_Shop::pay_notify_callback($order_data['order_trade_no'], $cdk_data->code);
+
+    if (!$update_order) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('订单状态处理异常', 'ripro'),
+      ));
+      return  $cdk_data;
+    }
+
+    wp_send_json(array(
+      'status' => 1,
+      'msg'    => __('兑换成功，即将刷新页面', 'ripro'),
+    ));
+  }
 }
