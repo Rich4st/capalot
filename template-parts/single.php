@@ -49,11 +49,6 @@ $container = _capalot('site_container_width', '1400')
         if (comments_open() || get_comments_number()) :
           comments_template();
         endif;
-      <!-- 评论 -->
-      <?php
-      if (comments_open() || get_comments_number()) :
-        comments_template();
-      endif;
       ?>
     </div>
 
