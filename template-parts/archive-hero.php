@@ -6,14 +6,14 @@ $bg_img = (!empty($meta_bg)) ? $meta_bg : capalot_get_thumbnail_url();
 
 ?>
 
-<div class="archive-hero text-center py-4 bg-gray-200 dark:bg-dark-card">
-    <div class="archive-hero-bg lazy" bg="<?php echo esc_url($bg_img); ?>"></div>
-    <div class=" py-2 py-md-4 lg:max-w-[80rem] m-auto ">
+<div class=" relative overflow-hidden">
+    <div class=" absolute left-0 top-0 right-0 w-full h-full z-[-1] blur-lg" style="background-image: url(<?php echo esc_url($bg_img); ?>); background-position:50%;background-size:140%;"></div>
+    <div class=" absolute w-full h-full bg-black/30 z-10"></div>
+    <div class=" max-w-[80rem] m-auto lg:px-0 px-4 py-8 text-center relative z-50">
         <?php
-        the_archive_title('<h1 class="archive-title mb-2 text-xl font-bold dark:text-gray-50">', '</h1>');
-
-        the_archive_description('<p class="archive-desc mt-2 mb-0 dark:text-gray-400">', '</p>');
+        the_archive_title('<h1 class=" text-white text-xl font-bold">', '</h1>');
+        the_archive_description('<div class=" text-white text-md mt-4">', '</div>');
         ?>
-
     </div>
 </div>
+
