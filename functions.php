@@ -7,7 +7,6 @@ defined('ABSPATH') || exit;
 function capalot_setup()
 {
     add_theme_support('post-thumbnails'); // 添加缩略图功能
-    add_theme_support('post-formats', array('image', 'video', 'audio')); // 添加文章格式功能
 
     register_nav_menus(
         array(
