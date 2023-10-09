@@ -441,6 +441,7 @@ get_header();
                     </div>
 
                 </div>
+            </div>
         </form>
 
 
@@ -457,11 +458,23 @@ get_header();
 
 <script type="text/javascript">
     jQuery(function($) {
-        ca.post_tougao();
         // 监听表单提交事件
         $('#post-form').submit(function(e) {
 
         });
+        const tougao_thumbnail = document.querySelector('.tougao_thumbnail ');
+        tougao_thumbnail.addEventListener('click', function(event) {
+            const text = document.querySelectorAll('.screen-reader-text');
+            text.forEach((el) => {
+                el.classList.add('hidden')
+            })
+        })
+
+        const els = document.querySelectorAll('.csf-shortcode-button');
+        els.forEach((el) => {
+            el.classList.add('hidden')
+        })
+
     });
 </script>
 
