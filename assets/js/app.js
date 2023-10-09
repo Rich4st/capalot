@@ -9,6 +9,7 @@ let ca = {
     ca.toggle_dark();
     ca.add_comment();
     ca.post_tougao();
+    ca.notification();
 
     const swiperEl = document.querySelector('.swiper');
     if (swiperEl)
@@ -561,6 +562,27 @@ let ca = {
       0 !== e.index() && e.remove()
     })
   },
+
+  // 公告
+  notification: function () {
+    const notification_btn = document.querySelector('.toggle-notify');
+
+    notification_btn.addEventListener('click', function () {
+      ca.ajax({
+        data: {
+          action: 'capalot_get_site_notify',
+          nonce: capalot.ajax_nonce,
+        },
+        success: ({ status, title, desc }) => {
+          status === 1
+            ? ca.popup({ title, text: desc, width: '20rem', icon: 'info' })
+            : ca.popup({ title, text: desc, width: '20rem', icon: 'error' })
+        }
+      })
+
+
+    })
+  }
 
 }
 
