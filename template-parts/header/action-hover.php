@@ -40,20 +40,22 @@ $site_color = get_site_default_color_style();
                 <span class="ms-2 hidden md:block"><?php echo $current_user->display_name; ?></span>
             </div>
             <?php if (is_site_shop()) : ?>
-                <?php echo capalot_get_user_badge($current_user->ID, 'span', 'md:block hidden items-center   ms-2'); ?>
+                <?php echo capalot_get_user_badge($current_user->ID, 'span', 'md:flex items-center hidden rounded px-1  ml-2'); ?>
             <?php endif; ?>
         </a>
 
         <?php if (is_site_shop()) : ?>
-            <div class="dark:bg-dark text-[#595d69] group-hover:block hidden absolute top-8 rounded-lg  shadow-lg right-0  text-sm w-[400px]  z-[9999] bg-white " id="adminC">
+            <div class="dark:bg-dark text-[#595d69] md:group-hover:block hidden absolute top-8 rounded-lg  shadow-lg right-0  text-sm w-[400px]  z-[9999] bg-white " id="adminC">
                 <div class="flex justify-between bg-[#dfeeff] dark:bg-dark-card">
                     <div class="hover-info p-2">
                         <div class="flex items-center ">
                             <div class="mr-2">
                                 <img class="rounded-full border m-4 h-10 w-10 inline-block border-white border-3 shadow" src="<?php echo get_avatar_url($current_user->ID); ?>" alt="user">
                             </div>
-                            <div class="mr-2 flex flex-col">
-                                <?php echo capalot_get_user_badge($current_user->ID, 'span'); ?>
+                            <div class="mr-2 flex flex-col ">
+                                <div class="rounded px-1">
+                                <?php echo capalot_get_user_badge($current_user->ID, 'span','flex items-center rounded px-1 '); ?>
+                                </div>
                                 <b class=" mt-2"><?php echo $current_user->display_name; ?></b>
                             </div>
                         </div>
