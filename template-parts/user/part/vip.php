@@ -98,7 +98,7 @@ $price_shape = get_template_directory_uri() . '/assets/img/price_shape.png';
 			?>
 
 				<div class="col">
-					<div class="price-card text-center rounded overflow-hidden border border-[#eee] dark:bg-dark cursor-pointer 
+					<div class="price-card text-center rounded overflow-hidden border border-[#eee] dark:bg-dark cursor-pointer
 					shadow-[rgba(0,_0,_0,_0.1)_0px_1px_1px] transition-all duration-300
 					 hover:shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)]">
 						<div class="py-4 bg-no-repeat bg-cover bg-center bg-<?php echo $vip_colors[$item['type']]; ?> bg-opacity-10">
@@ -234,26 +234,18 @@ $price_shape = get_template_directory_uri() . '/assets/img/price_shape.png';
 				success: ({
 					status,
 					msg,
-					icon
 				}) => {
-					status == 1 ?
-						ca.notice({
-							title: msg,
-							icon: 'success'
-						}) :
-						ca.notice({
-							title: msg,
-							icon: 'error'
-						});
-					if (status == 1) {
-						setTimeout(function() {
-							window.location.reload()
-						}, 2000)
+					ca.notice({
+						title: msg,
+						icon: status == '1' ? 'success' : 'error'
+					})
+
+					if (status == '1') {
+						setTimeout(() => {
+							window.location.reload();
+						}, 1000);
 					}
 				},
-				complete: () => {
-					_this.removeAttr("disabled")
-				}
 			});
 		});
 	});

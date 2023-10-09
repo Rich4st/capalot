@@ -90,7 +90,7 @@ global $current_user;
 					<img id="captcha-img" class="rounded-2 w-full h-8 bg-[#cacaca]  text-white mx-2 rounded" role="button" src="<?php echo get_template_directory_uri() ?>/assets/img/captcha.png" title="<?php _e('点击刷新验证码', 'ripro'); ?>" />
 				</div>
 				<div class="flex flex-row justify-center space-x-2 mb-3 mt-3 text-center text-sm">
-					<input type="hidden" name="action" value="zb_vip_cdk_action">
+					<input type="hidden" name="action" value="capalot_vip_cdk_action">
 					<button type="submit" id="vip-cdk-submit" class="btn bg-[#d6293e] text-white px-4 py-1 rounded"><i class="fas fa-gift me-1"></i><?php _e('立即兑换', 'ripro'); ?></button>
 					<a class="btn bg-[#f7c32e]  px-4 py-1 rounded" target="_blank" href="<?php echo _capalot('site_cdk_pay_link'); ?>" rel="nofollow noopener noreferrer"><i class="fas fa-external-link-alt me-1"></i><?php _e('购买CDK', 'ripro'); ?></a>
 
@@ -207,10 +207,9 @@ global $current_user;
 				beforeSend: () => {
 					_this.attr("disabled", "true")
 				},
-				result: ({
+				success: ({
 					status,
 					msg,
-					icon
 				}) => {
 					ca.notice({
 						title: msg,

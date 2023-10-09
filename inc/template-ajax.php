@@ -1268,7 +1268,7 @@ class Capalot_Ajax
     }
 
     //处理回调
-    $update_order = Capalot_Shop::pay_notify_callback($order_data['order_trade_no'], $cdk_data->code);
+    $update_order = Capalot_Shop::pay_notify_callback($order_data, $cdk_data->code);
 
     if (!$update_order) {
       wp_send_json(array(

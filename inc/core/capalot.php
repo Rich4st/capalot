@@ -60,7 +60,7 @@ class Capalot_Shop
    * 支付回调
    * @param string $order_data 订单数据
    */
-  public static function pay_notify_callback($order_data)
+  public static function pay_notify_callback($order_data, $cdk_code = null)
   {
     global $wpdb;
     $table_name = $wpdb->prefix . 'capalot_order';
@@ -70,9 +70,9 @@ class Capalot_Shop
       $table_name,
       [
         'pay_time' => time(),
-        'pay_price' => $order_data['pay_price'],
+        'pay_price' => $order_data['pay_price'] ?? '0',
         'pay_trade_no' => '999-' . time(),
-        'order_info' => $order_data['order_info'],
+        'order_info' => $order_data['order_info'] ?? $cdk_code,
         'pay_status' => 1,
       ],
       [
