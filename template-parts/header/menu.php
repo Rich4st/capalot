@@ -1,7 +1,18 @@
-<header class=" navbar dark:bg-dark w-full bg-white opacity-1 z-[99] ease-in-out duration-800">
+<style>
+	.header-transparent .site-header:not(.navbar-sticky) {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		background: transparent;
+		z-index: 99;
+	}
+</style>
 
-	<div class=" lg:max-w-[80rem] m-auto lg:px-0 px-2 py-2">
-		<div class=" text-[#595d69] relative px-1 " id="hea_bg"> <!-- container-fluid px-lg-5 -->
+<header class=" site-header  dark:bg-dark dark:text-gray-400  w-full bg-white  z-[99] ">
+
+	<div class=" container lg:max-w-[80rem] m-auto lg:px-0 px-2  py-2">
+		<div class=" navbar relative px-1 " id="hea_bg"> <!-- container-fluid px-lg-5 -->
 			<div class="flex items-center ">
 				<div class="mr-4  flex items-center">
 					<?php
@@ -58,11 +69,6 @@
 					<div class="lg:hidden flex cursor-pointer" id="menuA"><i class="fas fa-bars"></i></div>
 				</div>
 
-				<!-- <div class="actions">
-					<?php get_template_part('template-parts/header/action-hover'); ?>
-					<div class="burger d-flex d-lg-none"><i class="fas fa-bars"></i></div>
-				</div> -->
-
 
 
 			</div>
@@ -78,7 +84,7 @@
 
 	window.addEventListener('scroll', function() {
 		var currentScrollPos = window.pageYOffset;
-		var navbar = document.querySelector('.navbar');
+		var navbar = document.querySelector('.site-header');
 		var scrolled = window.scrollY;
 		if (scrolled >= 80) {
 			if (prevScrollpos > currentScrollPos) {
@@ -88,8 +94,9 @@
 				navbar.style.opacity = '0';
 				navbar.classList.add('fixed');
 			}
-		}else{
+		} else {
 			navbar.classList.remove('fixed');
+
 		}
 
 		prevScrollpos = currentScrollPos;

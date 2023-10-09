@@ -1,6 +1,110 @@
 <?php
 
 /**
+ * 自定义顶部css
+ * @Author Dadong2g
+ * @date   2023-03-14
+ * @return [type]
+ */
+function custom_head_css()
+{
+    $css = '';
+
+    //背景颜色配置
+    $container_width = (int) _capalot('site_container_width', '');
+
+    if ($container_width > 0) {
+        $css .= "@media (min-width: 1200px){ .container-xl, .container-lg, .container-md, .container-sm, .container { max-width: {$container_width}px; } }";
+    }
+
+    //背景颜色配置
+    $body_background = _capalot('site_background', array());
+    $__css           = '';
+    if( is_array ($body_background) || is_object ($body_background)){
+        foreach ($body_background as $property => $value) {
+            if (!empty($value)) {
+                if (is_array($value)) {
+                    $url = isset($value['url']) && !empty($value['url']) ? $value['url'] : null;
+                    if ($url !== null) {
+                        $__css .= "$property: url('$url');";
+                    }
+                } else {
+                    $__css .= "$property: $value;";
+                }
+            }
+        }
+    }
+    
+
+    if (!empty($__css)) {
+        $css .= "body{{$__css}}\n";
+    }
+
+    //顶部菜单配置
+    $header_color = _capalot('site_header_color', array());
+    $__css        = '';
+
+    if (!empty($header_color['bg-color'])) {
+        $__css .= ".site-header{background-color:{$header_color['bg-color']};}\n";
+        $__css .= ".navbar .nav-list .sub-menu:before{border-bottom-color:{$header_color['sub-bg-color']};}\n";
+    }
+    if (!empty($header_color['sub-bg-color'])) {
+        $__css .= ".navbar .nav-list .sub-menu{background-color:{$header_color['sub-bg-color']};}\n";
+    }
+    if (!empty($header_color['color'])) {
+        $__css .= ".site-header,.navbar .nav-list a,.navbar .actions .action-btn{color:{$header_color['color']};}\n";
+    }
+    if (!empty($header_color['hover-color'])) {
+        $__css .= ".navbar .nav-list a:hover,.navbar .nav-list > .menu-item.current-menu-item > a {color:{$header_color['hover-color']};}\n";
+    }
+
+    if (!empty($__css)) {
+        $css .= "$__css";
+    }
+
+    //自定义CSS
+    $custom_web_css = _capalot('site_web_css');
+    if ($custom_web_css) {
+        $css .= $custom_web_css;
+    }
+    //打包输出
+    if (!empty($css)) {
+        echo "<style type=\"text/css\">\n" . $css . "\n</style>";
+    }
+}
+add_action('wp_head', 'custom_head_css');
+
+
+
+
+/**
+ * Adds custom classes to the array of body classes.
+ *
+ * @param array $classes Classes for the body element.
+ * @return array
+ */
+function custom_body_classes($classes)
+{
+
+    if (get_query_var('uc-page')) {
+        $classes[] = 'uc-page';
+    }
+
+    if (get_query_var('pay-vip-page')) {
+        $classes[] = 'vip-prices-page';
+    }
+
+    //顶部透明菜单
+    $is_home_header_transparent = (bool) _capalot('is_site_home_header_transparent', false);
+    if (is_home() && $is_home_header_transparent) {
+        $classes[] = 'header-transparent';
+    }
+
+    return $classes;
+}
+add_filter('body_class', 'custom_body_classes');
+
+/**
  * 内页描述优化
  */
 function capalot_archive_description($description)
@@ -45,7 +149,8 @@ function capalot_lostpassword_url($url, $redirect)
 add_filter('lostpassword_url', 'capalot_lostpassword_url', 20, 2);
 
 //替换默认头像
-function _get_avatar_url($url, $id_or_email, $args) {
+function _get_avatar_url($url, $id_or_email, $args)
+{
     $user_id = 0;
     if (is_numeric($id_or_email)) {
         $user_id = absint($id_or_email);
@@ -65,7 +170,6 @@ function _get_avatar_url($url, $id_or_email, $args) {
             if (isset($user->ID) && $user->ID) {
                 $user_id = $user->ID;
             }
-
         }
     }
 
@@ -92,12 +196,10 @@ function _get_avatar_url($url, $id_or_email, $args) {
 
             $avatar_url = set_url_scheme($custom_avatar); //头像存在
         }
-
     } elseif (in_array($avatar_type, ['qq', 'weixin', 'weibo'])) {
         $avatar_url = set_url_scheme(get_user_meta($user_id, 'open_' . $avatar_type . '_avatar', true)); //开发平台
     }
 
     return preg_replace('/^(http|https):/i', '', $avatar_url);
-
 }
 add_filter('get_avatar_url', '_get_avatar_url', 10, 3);

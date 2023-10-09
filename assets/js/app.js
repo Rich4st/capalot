@@ -9,7 +9,9 @@ let ca = {
     ca.toggle_dark();
     ca.add_comment();
     ca.post_tougao();
-    ca.notification();
+    const notification_btn = document.querySelector('.toggle-notify');
+    if (notification_btn)
+      ca.notification();
 
     const swiperEl = document.querySelector('.swiper');
     if (swiperEl)
@@ -69,7 +71,6 @@ let ca = {
     if (login_btn) {
       login_btn.addEventListener('click', (e) => {
         e.preventDefault();
-        console.log(123);
         const payload = form.serializeArray();
         let o = decodeURIComponent(location.href.split("redirect_to=")[1] || ""),
           n = {
