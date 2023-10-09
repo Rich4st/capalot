@@ -88,6 +88,16 @@
     background-color: rgb(247 195 46 / var(--tw-bg-opacity));
 }
 
+.bg-warning {
+    --tw-bg-opacity: 0.5;
+    background-color: rgb(253 243 213 / var(--tw-bg-opacity));
+}
+
+.text-warning {
+    --tw-text-opacity: 1;
+    color: rgb(247 195 46 / var(--tw-text-opacity));
+}
+
 .text-primary {
     --tw-text-opacity: 1;
     color: rgb(87 13 248 / var(--tw-text-opacity));
@@ -107,10 +117,12 @@
     --tw-bg-opacity: 0.2;
     background-color: rgb(89 93 105 / var(--tw-bg-opacity));
 }
+
 /* 评论部分 */
 #comments .comment-respond {
     position: relative;
 }
+
 #comments .comment-reply-title {
     display: inline-block;
     margin: 0;
@@ -124,11 +136,13 @@
     border-radius: 0.3rem;
     line-height: 1;
 }
+
 #comments .comment-reply-title #cancel-comment-reply-link {
     margin-left: 0.5rem;
     font-size: 0.875rem;
     text-decoration: underline
 }
+
 #comments .comment-form {
     display: block;
     position: relative;
@@ -136,6 +150,7 @@
     clear: both;
     content: "";
 }
+
 #comments .comment-form .comment-notes {
     font-size: 0.875rem;
     color: #595d69;
@@ -271,17 +286,19 @@
 #comments .comments-list .comment .children .children {
     margin-left: 0;
 }
-#comments .comments-nav
-{
+
+#comments .comments-nav {
     padding: 20px 0;
 }
-#comments .comments-nav .page-numbers{
+
+#comments .comments-nav .page-numbers {
     padding: 0.6rem 1rem;
     margin: 0 4px;
     background-color: #ededed;
     color: #6b6985;
     border-radius: 0.2rem;
 }
+
 #comments .comments-nav .page-numbers:hover {
     background-color: #1e1e20;
     color: white;
@@ -292,6 +309,7 @@
     color: white;
     font-weight: bold;
 }
+
 /* 面包屑 */
 .breadcrumb {
     align-items: center;
@@ -307,6 +325,7 @@
     transform: translate(0.6rem, 0);
     content: "/";
 }
+
 /* 我的余额-充值 */
 .coin-pay-card.active,
 .coin-pay-card:hover {
