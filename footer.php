@@ -3,8 +3,8 @@
 
 <!-- =======================
 Footer START -->
-<footer class=" lg:pt-6 lg:pb-6 pt-4 pb-16 dark:bg-dark">
-  <div class=" lg:max-w-[80rem] m-auto px-4 lg:px-0">
+<footer class=" lg:pt-6 lg:pb-6 pt-4 pb-16 bg-white dark:bg-dark">
+  <div class=" container lg:max-w-[80rem] m-auto px-4 lg:px-0">
 
     <?php get_template_part('template-parts/footer/widget'); ?>
 
