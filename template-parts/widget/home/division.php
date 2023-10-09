@@ -3,12 +3,18 @@
 if (empty($args)) {
   return;
 }
-
+$container = _capalot('site_container_width', '1400');
 ?>
 
 
 <section class=" dark:bg-dark py-4">
-  <div class="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-4">
+  <div class="lg:my-6 my-2 mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-4" style="max-width: <?php
+                                                        if ($container === '') {
+                                                            echo '1280';
+                                                        } else {
+                                                            echo $container;
+                                                        }
+                                                        ?>px;">
 
     <?php foreach ($args['div_data'] as $key => $item) : ?>
 

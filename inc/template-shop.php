@@ -499,6 +499,8 @@ function get_site_shop_mod()
 //站内币图标
 function get_site_coin_icon()
 {
+    if (_capalot('site_coin_icon', 'fas fa-coins') === '')
+        return esc_html("fa-solid fa-coins");
     return esc_html(_capalot('site_coin_icon', 'fas fa-coins'));
 }
 
