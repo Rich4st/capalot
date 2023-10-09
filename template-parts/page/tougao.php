@@ -154,7 +154,7 @@ get_header();
 
 ?>
 
-<section class=" dark:bg-dark bg-[#ededed] p-2 dark:text-gray-400">
+<section class=" dark:bg-dark  p-2 dark:text-gray-400">
     <div class="lg:my-6 my-2 mx-auto" style="max-width: <?php
                                                         if ($container === '') {
                                                             echo '1280';

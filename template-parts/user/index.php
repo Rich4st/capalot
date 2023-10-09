@@ -24,7 +24,7 @@ $bg_image = get_template_directory_uri() . '/assets/img/bg.png';
 $container = _capalot('site_container_width', '1400')
 ?>
 
-<section class="dark:bg-dark bg-[#ededed] py-2">
+<section class="dark:bg-dark  py-2">
     <div class="lg:my-6 my-2  mx-auto flex dark:text-gray-400 text-[#4d4d4d] " style="max-width: <?php
                                                                 if ($container === '') {
                                                                     echo '1280';
