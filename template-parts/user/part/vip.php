@@ -31,8 +31,9 @@ $price_shape = get_template_directory_uri() . '/assets/img/price_shape.png';
 				</div>
 			</div>
 			<div class="ms-2 ">
-				<h5 class="flex items-center mb-1 font-bold dark:text-white">
-					<?php echo $current_user->display_name; ?><?php echo capalot_get_user_badge($current_user->ID, 'span', 'mb-0 ms-2 rounded px-1'); ?>
+				<h5 class="flex items-center text-[1.18rem]  mb-1 dark:text-white">
+					<?php echo $current_user->display_name; ?>
+					<?php echo capalot_get_user_badge($current_user->ID, 'span', ' ms-2 rounded px-1'); ?>
 				</h5>
 				<div class="mb-1 text-sm">
 					<span><?php echo $current_user->user_login; ?></span>
