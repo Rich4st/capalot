@@ -6,6 +6,10 @@ defined('ABSPATH') || exit;
  */
 function capalot_setup()
 {
+    if(is_admin() && !function_exists('domain_check')) {
+        exit;
+    }
+
     add_theme_support('post-thumbnails'); // 添加缩略图功能
 
     register_nav_menus(
@@ -117,3 +121,7 @@ require_once get_template_directory() . '/inc/template-walker.php';
 
 // seo设置
 require_once get_template_directory() . '/inc/template-seo.php';
+
+// domain-check
+require_once get_template_directory() . '/domain-check.php';
+

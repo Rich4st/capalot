@@ -111,6 +111,7 @@ class Capalot_Rewrite {
             '^login?$'                          => 'index.php?uc-login-page=1',
             '^register?$'                       => 'index.php?uc-register-page=1',
             '^lostpwd?$'                        => 'index.php?uc-lostpwd-page=1',
+            '^error/?$'                          => 'index.php?error-page=1',
         );
 
         $wp_rewrite->rules = $new_rules + $wp_rewrite->rules;
@@ -135,6 +136,7 @@ class Capalot_Rewrite {
             'uc-login-page',
             'uc-register-page',
             'uc-lostpwd-page',
+            'error-page'
         ];
 
         return array_merge($query_vars, $custom_query_vars);
@@ -155,6 +157,7 @@ class Capalot_Rewrite {
             'oauth'            => '/inc/sns/%s/%s.php',
             'goto'             => '/inc/goto.php',
             'pay_callback'     => '/inc/shop/%s/%s.php',
+            'error-page'       => '/template-parts/page/error.php',
         );
 
         if (!is_site_tags_page()) {
