@@ -203,3 +203,39 @@ function _get_avatar_url($url, $id_or_email, $args)
     return preg_replace('/^(http|https):/i', '', $avatar_url);
 }
 add_filter('get_avatar_url', '_get_avatar_url', 10, 3);
+
+
+
+/**
+ * 广告代码
+ * @Author Dadong2g
+ * @date   2023-06-26
+ * @param  [type]     $slug [description]
+ * @return [type]
+ */
+function capalot_ripro_ads_filter($slug) {
+
+    if (defined('DOING_AJAX') && DOING_AJAX) {
+        return false;
+    }
+
+    $position   = (strpos($slug, 'bottum') !== false) ? ' bottum' : ' top';
+    $is_ads     = _capalot($slug);
+    $ads_pc     = _capalot($slug . '_pc');
+    $ads_mobile = _capalot($slug . '_mobile');
+
+    $html = '';
+    if (wp_is_mobile() && $is_ads && !empty($ads_mobile)) {
+        $html = '<div class="site-addswarp mobile' . $position . '">';
+        $html .= $ads_mobile;
+        $html .= '</div>';
+    } else if ($is_ads && isset($ads_pc)) {
+        $html = '<div class="site-addswarp pc' . $position . '">';
+        $html .= $ads_pc;
+        $html .= '</div>';
+    }
+    echo $html;
+}
+
+add_action('ripro_ads', 'capalot_ripro_ads_filter', 10, 1);
+
