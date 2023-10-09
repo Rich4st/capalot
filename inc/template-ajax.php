@@ -64,6 +64,7 @@ class Capalot_Ajax
     $this->add_action('add_post_views'); //文章阅读数量+1
     $this->add_action('ajax_comment'); //ajax评论
     $this->add_action('vip_cdk_action', 1); //卡密兑换
+    $this->add_action('get_site_notify'); //获取全站公告
   }
 
   /**
@@ -884,10 +885,10 @@ class Capalot_Ajax
 
     $title = _capalot('site_notify_title');
     $desc = _capalot('site_notify_desc');
-    $html = '<div class="site-notify-body"><h1 class="notify-title"><i class="fa fa-bell-o me-1"></i>' . $title . '</h1><div class="notify-desc">' . $desc . '</div></div>';
     wp_send_json(array(
       'status' => 1,
-      'msg'    => $html,
+      'title'  => $title,
+      'desc'   => $desc
     ));
   }
 
@@ -1268,7 +1269,7 @@ class Capalot_Ajax
     }
 
     //处理回调
-    $update_order = Capalot_Shop::pay_notify_callback($order_data['order_trade_no'], $cdk_data->code);
+    $update_order = Capalot_Shop::pay_notify_callback($order_data, $cdk_data->code);
 
     if (!$update_order) {
       wp_send_json(array(
