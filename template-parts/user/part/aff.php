@@ -65,7 +65,7 @@ global $current_user;
 					}
 				}
 			} else {
-				echo '<p class="text-muted py-2 text-[#ededed]">' . __('暂无用户通过您的推广链接注册', 'ripro') . '</p>';
+				echo '<p class="text-muted py-2 ">' . __('暂无用户通过您的推广链接注册', 'ripro') . '</p>';
 			} ?>
 		</div>
 
@@ -74,7 +74,7 @@ global $current_user;
 			<?php
 			$list = _capalot('site_tixian_desc', array());
 			foreach ($list as $key => $item) {
-				printf('<li class="py-2 border-b text-muted text-[#ededed]">%s</li>', $item['content']);
+				printf('<li class="py-2 border-b text-muted ">%s</li>', $item['content']);
 			}
 			?>
 		</ol>

@@ -56,8 +56,7 @@ $site_color = get_site_default_color_style();
                             </div>
                             <div class="mr-2 flex flex-col ">
                                 <div class="rounded px-1">
-
-                                    <?php echo capalot_get_user_badge($current_user->ID, 'span', 'flex items-center rounded px-1 '); ?>
+                                    <?php echo capalot_get_user_badge($current_user->ID, 'span', 'flex items-center rounded px-1 dark:bg-dark-card'); ?>
                                 </div>
                                 <b class=" mt-2"><?php echo $current_user->display_name; ?></b>
                             </div>
