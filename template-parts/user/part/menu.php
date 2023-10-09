@@ -15,7 +15,7 @@ $uc_vip_info = get_user_vip_data($current_user->ID);
 		</h5>
 		<p class="mb-1"><?php echo $current_user->user_login; ?></p>
 		<?php if (is_site_shop()) : ?>
-			<p class="mb-1"><?php echo capalot_get_user_badge($current_user->ID, 'span', 'mb-0 px-1 rounded'); ?></p>
+			<p class="mb-1"><?php echo capalot_get_user_badge($current_user->ID, 'span', 'mb-0 px-1 rounded dark:bg-dark-card'); ?></p>
 		<?php endif; ?>
 
 		<?php if ($uc_vip_info['type'] != 'no') {
