@@ -38,11 +38,11 @@ $site_color = get_site_default_color_style();
     <div class="group relative ">
         <a class="flex" href="<?php echo get_uc_menu_link(); ?>" rel="nofollow noopener noreferrer" id="adminT">
             <div class="flex">
-                <img class="avatar-img rounded-full" src="<?php echo get_avatar_url($current_user->ID); ?>" width="30" alt="avatar">
+                <img class="avatar-img rounded-full " src="<?php echo get_avatar_url($current_user->ID); ?>" width="30" alt="avatar">
                 <span class="ms-2 hidden md:block"><?php echo $current_user->display_name; ?></span>
             </div>
             <?php if (is_site_shop()) : ?>
-                <?php echo capalot_get_user_badge($current_user->ID, 'span', 'md:flex items-center hidden rounded px-1  ml-2'); ?>
+                <?php echo capalot_get_user_badge($current_user->ID, 'span', 'md:flex items-center hidden rounded px-1  ml-2 dark:bg-dark'); ?>
             <?php endif; ?>
         </a>
 
@@ -56,6 +56,7 @@ $site_color = get_site_default_color_style();
                             </div>
                             <div class="mr-2 flex flex-col ">
                                 <div class="rounded px-1">
+
                                     <?php echo capalot_get_user_badge($current_user->ID, 'span', 'flex items-center rounded px-1 '); ?>
                                 </div>
                                 <b class=" mt-2"><?php echo $current_user->display_name; ?></b>
