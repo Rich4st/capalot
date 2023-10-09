@@ -332,3 +332,8 @@
     border: 1px solid #ffc107;
     background: unset
 }
+
+/* 视频组件 */
+.wp-video-shortcode{
+    overflow: hidden;
+}
