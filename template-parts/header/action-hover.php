@@ -10,11 +10,11 @@ $site_color = get_site_default_color_style();
     <div class="h-full mr-4 bottom-auto relative mb-6">
         <?php if (_capalot('is_site_dark_toggle', true)) : ?>
             <span id="light-mode" class="absolute cursor-pointer
-            <?php if(get_site_default_color_style() === 'dark') echo ' hidden'; ?>">
+            <?php if (get_site_default_color_style() === 'dark') echo ' hidden'; ?>">
                 <i class="fa-solid fa-sun"></i>
             </span>
             <span id="dark-mode" class="absolute cursor-pointer dark:text-gray-400
-            <?php if(get_site_default_color_style() === 'light') echo ' hidden'; ?>">
+            <?php if (get_site_default_color_style() === 'light') echo ' hidden'; ?>">
                 <i class="fa-solid fa-cloud-moon"></i>
             </span>
         <?php endif; ?>
@@ -27,14 +27,16 @@ $site_color = get_site_default_color_style();
 
 
 <?php if (is_site_notify()) : ?>
-    <span class="action-btn cursor-pointer toggle-notify" rel="nofollow noopener noreferrer" title="<?php _e('网站公告', 'ripro'); ?>"><i class="fa fa-bell"></i></span>
+    <span class="action-btn cursor-pointer toggle-notify" rel="nofollow noopener noreferrer" title='网站公告'>
+        <i class="fa-regular fa-bell"></i>
+    </span>
 <?php endif; ?>
 
 
 <?php if (is_user_logged_in()) : ?>
 
     <div class="group relative ">
-        <a class="flex" href="<?php echo get_uc_menu_link(); ?>" rel="nofollow noopener noreferrer"  id="adminT">
+        <a class="flex" href="<?php echo get_uc_menu_link(); ?>" rel="nofollow noopener noreferrer" id="adminT">
             <div class="flex">
                 <img class="avatar-img rounded-full " src="<?php echo get_avatar_url($current_user->ID); ?>" width="30" alt="avatar">
                 <span class="ms-2 hidden md:block"><?php echo $current_user->display_name; ?></span>
@@ -54,7 +56,8 @@ $site_color = get_site_default_color_style();
                             </div>
                             <div class="mr-2 flex flex-col ">
                                 <div class="rounded px-1">
-                                <?php echo capalot_get_user_badge($current_user->ID, 'span','flex items-center rounded px-1 dark:bg-dark-card'); ?>
+
+                                    <?php echo capalot_get_user_badge($current_user->ID, 'span', 'flex items-center rounded px-1 '); ?>
                                 </div>
                                 <b class=" mt-2"><?php echo $current_user->display_name; ?></b>
                             </div>
@@ -144,22 +147,22 @@ $site_color = get_site_default_color_style();
     let hea_bg = document.getElementById('hea_bg');
     let adminT = document.getElementById('adminT');
     let adminC = document.getElementById('adminC');
-    search_on.addEventListener('click', function(){
-        if(search_form.style.display == 'none' || !search_form.style.display){
+    search_on.addEventListener('click', function() {
+        if (search_form.style.display == 'none' || !search_form.style.display) {
             search_form.style.display = 'block';
-        }else{
+        } else {
             search_form.style.display = 'none';
         }
     });
-    document.addEventListener('click', function(){
+    document.addEventListener('click', function() {
         search_form.style.display = 'none';
     });
-    hea_bg.addEventListener('click', function(){
+    hea_bg.addEventListener('click', function() {
         var e = event || window.event;
         e.stopPropagation();
     });
 
-    adminT.addEventListener('click', function(){
+    adminT.addEventListener('click', function() {
         adminC.style.display = 'none';
     });
 </script>
