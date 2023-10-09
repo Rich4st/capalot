@@ -9,9 +9,10 @@ $archive_item_config = get_posts_style_config();
 ?>
 
 <?php get_template_part('template-parts/archive-hero'); ?>
+<?php get_template_part('template-parts/archive-filter');?>
 
 <section class="  dark:bg-dark">
-	<div class="max-w-[80rem] m-auto py-8 lg:px-0 px-4">
+	<div class=" container max-w-[80rem] m-auto py-8">
 
 		<?php do_action('ripro_ads', 'ad_archive_top'); ?>
 
