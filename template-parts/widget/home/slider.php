@@ -34,7 +34,8 @@ $container = _capalot('site_container_width', '1400');
                                                                                                 ?>px;">
   <div class="swiper-wrapper " >
 
-    <?php foreach ($args['data'] as $item) : ?>
+    <?php if($args['data']):
+    foreach ($args['data'] as $item) : ?>
 
       <div class="swiper-slide text-white ">
         <div class=" relative h-44 md:h-80">
@@ -49,7 +50,8 @@ $container = _capalot('site_container_width', '1400');
         </div>
       </div>
 
-    <?php endforeach; ?>
+    <?php endforeach;
+    endif; ?>
 
   </div>
   <div class="swiper-button-next after:text-white"></div>
