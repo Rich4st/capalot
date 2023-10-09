@@ -36,7 +36,7 @@ $container = _capalot('site_container_width', '1400');
 ?>
 
 <section class="dark:bg-dark">
-  <div class="swiper mySwiper  lg:my-6 my-2 mx-auto" data-config='<?php echo json_encode($config); ?>' style="max-width: <?php
+  <div class="swiper mySwiper   mx-auto" data-config='<?php echo json_encode($config); ?>' style="max-width: <?php
                                                                                                                           if ($container === '') {
                                                                                                                             echo '1280';
                                                                                                                           } else {
@@ -55,8 +55,8 @@ $container = _capalot('site_container_width', '1400');
       ?>
 
         <div class="swiper-slide py-8 cursor-pointer text-white">
-          <div class="rounded h-40 w-full bg-black bg-opacity-30 relative  ">
-            <div class="h-full w-full flex justify-center items-center  text-center bg-cover bg-center z-[-1] absolute hover:ease-in-out hover:duration-700" style="background-image: url(<?php echo $bg_img; ?>);">
+          <div class="rounded h-40 w-full bg-black bg-opacity-30 relative overflow-hidden ">
+            <div class="h-full w-full flex justify-center items-center  text-center bg-cover bg-center z-[-1] absolute hover:ease-in-out hover:duration-700 " style="background-image: url(<?php echo $bg_img; ?>);">
               <a href="<?php echo get_term_link($item->term_id, $taxonomy_name); ?>">
                 <?php if (!empty($args['is_num'])) : ?>
                   <span class="bg-<?php echo $color; ?> bg-accent  text-sm p-1 rounded-lg"><?php echo $item->count; ?>+</span>

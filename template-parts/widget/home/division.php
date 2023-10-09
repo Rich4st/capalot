@@ -8,7 +8,7 @@ $container = _capalot('site_container_width', '1400');
 
 
 <section class=" dark:bg-dark py-4">
-  <div class="lg:my-6 my-2 mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-4" style="max-width: <?php
+  <div class="mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-4" style="max-width: <?php
                                                         if ($container === '') {
                                                             echo '1280';
                                                         } else {
@@ -18,7 +18,7 @@ $container = _capalot('site_container_width', '1400');
 
     <?php foreach ($args['div_data'] as $key => $item) : ?>
 
-      <div class="flex dark:bg-dark-card flex-col text-center md:flex-row md:text-left items-center justify-center
+      <div class="flex dark:bg-dark-card bg-white flex-col text-center md:flex-row md:text-left items-center justify-center
       p-1 shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-sm">
 
         <lord-icon src="<?php echo esc_attr($item['icon']); ?>" trigger="hover" colors="primary:#4be1ec,secondary:#cb5eee"
