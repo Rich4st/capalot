@@ -12,11 +12,11 @@ $archive_item_config = get_posts_style_config();
 <?php get_template_part('template-parts/archive-filter');?>
 
 <section class="  dark:bg-dark">
-	<div class=" container max-w-[80rem] m-auto py-8">
+	<div class=" container max-w-[80rem] m-auto py-8 lg:px-0 px-4">
 
 		<?php do_action('ripro_ads', 'ad_archive_top'); ?>
 
-		<ul class="posts-wrap grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-cols-1 md:gap-8 gap-2 <?php echo esc_attr($archive_item_config['row_cols_class']); ?>">
+		<ul class="posts-wrap grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-cols-1 md:gap-8 gap-2 mb-4  <?php echo esc_attr($archive_item_config['row_cols_class']); ?>">
 			<?php if (have_posts()) :
 				while (have_posts()) : the_post();
 					get_template_part('template-parts/loop/item', get_post_format(), $archive_item_config);
@@ -26,12 +26,12 @@ $archive_item_config = get_posts_style_config();
 			endif;
 			?>
 		</ul>
-		<?php do_action('ripro_ads', 'ad_archive_bottum'); ?>
+		
+		<?php do_action('ripro_ads', 'ad_archive_bottom'); ?>
 
-		<?php Capalot_Pagination(); ?>
+		
+		
 	</div>
-
 </section>
-
 <?php
 get_footer();

@@ -1,3 +1,4 @@
+<?php do_action('ripro_ads', 'ad_single_top'); ?>
 <article <?php post_class('post-content'); ?>>
   <?php
   the_content(
@@ -25,6 +26,8 @@
   <?php get_template_part('template-parts/single/entry-copyright'); ?>
 
 </article>
+
+<?php do_action('ripro_ads', 'ad_single_bottom'); ?>
 
 <?php get_template_part('template-parts/single/tags') ?>
 
