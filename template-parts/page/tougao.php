@@ -257,35 +257,37 @@ get_header();
 
                                     <div class="meta-input-group">
 
-                                        <?php foreach ($post_meta_fields['capalot_downurl_new'] as $key => $item) : ?>
+                                        <?php if ($post_meta_fields['capalot_downurl_new']) :
+                                            foreach ($post_meta_fields['capalot_downurl_new'] as $key => $item) : ?>
 
-                                            <?php
-                                            $_name = 'post_meta[capalot_downurl_new][' . $key . ']';
-                                            ?>
-                                            <div class="meta-input-item grid grid-cols-12 gap-2 mb-2 items-center">
-                                                <div class="col-span-1  cursor-pointer py-1  text-gray-400">
-                                                    <div class="meta-input-item-remove form-control form-control-sm text-center  "><i class="far fa-trash-alt"></i></div>
-                                                </div>
-                                                <div class="md:col-span-2 col-span-5 col-start-2">
-                                                    <div class="input-group input-group-sm mb-1">
-                                                        <input type="text" class="form-control w-full   dark:border-gray-500 dark:bg-dark  p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" placeholder="<?php _e('资源名称', 'ripro'); ?>" name="<?php echo $_name; ?>[name]" value="<?php echo esc_html($item['name']); ?>">
+                                                <?php
+                                                $_name = 'post_meta[capalot_downurl_new][' . $key . ']';
+                                                ?>
+                                                <div class="meta-input-item grid grid-cols-12 gap-2 mb-2 items-center">
+                                                    <div class="col-span-1  cursor-pointer py-1  text-gray-400">
+                                                        <div class="meta-input-item-remove form-control form-control-sm text-center  "><i class="far fa-trash-alt"></i></div>
+                                                    </div>
+                                                    <div class="md:col-span-2 col-span-5 col-start-2">
+                                                        <div class="input-group input-group-sm mb-1">
+                                                            <input type="text" class="form-control w-full   dark:border-gray-500 dark:bg-dark  p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" placeholder="<?php _e('资源名称', 'ripro'); ?>" name="<?php echo $_name; ?>[name]" value="<?php echo esc_html($item['name']); ?>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="md:col-span-3 md:col-start-4 col-span-6 col-start-7">
+                                                        <div class="input-group input-group-sm mb-1">
+                                                            <input type="text" class="form-control w-full   dark:border-gray-500 dark:bg-dark  p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" placeholder="<?php _e('下载密码', 'ripro'); ?>" name="<?php echo $_name; ?>[pwd]" value="<?php echo $item['pwd']; ?>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="md:col-span-6 md:col-start-7 col-span-12 col-start-1 ">
+                                                        <div class="input-group input-group-sm mb-1 flex flex-row">
+                                                            <input type="text" class="input-file-url form-control w-full   dark:border-gray-500 dark:bg-dark  p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" placeholder="<?php _e('下载地址', 'ripro'); ?>" name="<?php echo $_name; ?>[url]" value="<?php echo $item['url']; ?>">
+                                                            <?php if (current_user_can('upload_files')) : ?>
+                                                                <button class="add-input-file btn btn-outline-secondary p-2 " type="button"><i class="fas fa-upload"></i></button>
+                                                            <?php endif; ?>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="md:col-span-3 md:col-start-4 col-span-6 col-start-7">
-                                                    <div class="input-group input-group-sm mb-1">
-                                                        <input type="text" class="form-control w-full   dark:border-gray-500 dark:bg-dark  p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" placeholder="<?php _e('下载密码', 'ripro'); ?>" name="<?php echo $_name; ?>[pwd]" value="<?php echo $item['pwd']; ?>">
-                                                    </div>
-                                                </div>
-                                                <div class="md:col-span-6 md:col-start-7 col-span-12 col-start-1 ">
-                                                    <div class="input-group input-group-sm mb-1 flex flex-row">
-                                                        <input type="text" class="input-file-url form-control w-full   dark:border-gray-500 dark:bg-dark  p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" placeholder="<?php _e('下载地址', 'ripro'); ?>" name="<?php echo $_name; ?>[url]" value="<?php echo $item['url']; ?>">
-                                                        <?php if (current_user_can('upload_files')) : ?>
-                                                            <button class="add-input-file btn btn-outline-secondary p-2 " type="button"><i class="fas fa-upload"></i></button>
-                                                        <?php endif; ?>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <?php endforeach; ?>
+                                        <?php endforeach;
+                                        endif; ?>
 
                                     </div>
 
@@ -326,7 +328,9 @@ get_header();
                                     </div>
                                     <div class="meta-input-group">
 
-                                        <?php foreach ($post_meta_fields['video_url_new'] as $key => $item) : ?>
+                                        <?php
+                                        if($post_meta_fields['video_url_new']):
+                                        foreach ($post_meta_fields['video_url_new'] as $key => $item) : ?>
 
                                             <?php
                                             $_name = 'post_meta[video_url_new][' . $key . ']';
@@ -354,7 +358,8 @@ get_header();
                                                     </div>
                                                 </div>
                                             </div>
-                                        <?php endforeach; ?>
+                                        <?php endforeach;
+                                        endif; ?>
 
                                     </div>
                                     <div class="mb-3">
