@@ -263,16 +263,16 @@ if ($is_login_action && !is_site_user_login()) {
 					<!-- oauth mode -->
 					<?php if (($is_login_action || $is_reg_action)) : ?>
 						<?php if (_capalot('is_sns_qq', false) || _capalot('is_sns_weixin', false)) : ?>
-							<div class="position-relative my-4">
+							<div class="relative">
 								<hr>
-								<p class="small bg-white position-absolute top-50 start-50 translate-middle px-2"><?php _e('快捷登录/注册', 'ripro'); ?></p>
+								<p class="text-sm w-32 text-gray-500 bg-white text-center absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 -right-1/2"><?php _e('快捷登录/注册', 'ripro'); ?></p>
 							</div>
-							<div class="d-grid gap-2 d-md-block text-center">
+							<div class="grid gap-2 md:block py-4  text-white text-center">
 								<?php if (_capalot('is_sns_qq', false)) : ?>
-									<a href="<?php echo get_oauth_permalink('qq'); ?>" class="btn btn-sm btn-info"><i class="fab fa-qq me-1"></i><?php _e('QQ登录', 'ripro'); ?></a>
+									<a href="<?php echo get_oauth_permalink('qq'); ?>" class="btn bg-info hover:bg-[#4386d3]  cursor-pointer rounded py-2 px-4 mx-2"><i class="fab fa-qq me-1"></i><?php _e('QQ登录', 'ripro'); ?></a>
 								<?php endif; ?>
 								<?php if (_capalot('is_sns_weixin', false)) : ?>
-									<a href="<?php echo get_oauth_permalink('weixin'); ?>" class="btn btn-sm btn-success"><i class="fab fa-weixin me-1"></i><?php _e('微信登录', 'ripro'); ?></a>
+									<a href="<?php echo get_oauth_permalink('weixin'); ?>" class="btn bg-success hover:bg-[#0aa073]  cursor-pointer rounded py-2 px-4 mx-2"><i class="fab fa-weixin me-1"></i><?php _e('微信登录', 'ripro'); ?></a>
 								<?php endif; ?>
 							</div>
 						<?php endif; ?>
