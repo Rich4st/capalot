@@ -19,12 +19,14 @@ if (empty($args)) {
       <?php endif; ?>
 
       <div class="space-x-4 flex gap-4  justify-center">
-        <?php foreach ($args['btn_data'] as $key => $item) :
+        <?php if($args['btn_data']) :
+         foreach ($args['btn_data'] as $key => $item) :
           if (strpos($item['link'], 'http') === false) :
             $item['link'] = 'https://' . $item['link'];
           endif; ?>
           <a class="bgBtn bg-<?php echo esc_attr($item['color']); ?> px-6 rounded-full hover:opacity-70 p-2 w-fit !mx-0" href="<?php echo $item['link']; ?>"><i class="<?php echo esc_attr($item['icon']); ?> me-1"></i><?php echo $item['title']; ?></a>
-        <?php endforeach; ?>
+        <?php endforeach; 
+        endif;?>
       </div>
 
     </div>
