@@ -9,7 +9,7 @@ $bg_image = capalot_get_thumbnail_url($post_id);
         <div class="w-full  py-3 md:py-10 bg-black bg-opacity-50">
             <div class="article-header">
                 <?php the_title('<h1 class="post-title mb-2 lg:mb-3 text-[1.5rem] font-semibold leading-[1.2] line-clamp-2">', '</h1>'); ?>
-                <div class="article-meta text-[0.7rem] md:text-base">
+                <div class="article-meta text-[0.7rem] md:text-base space-x-1 sm:space-x-2">
                     <?php get_template_part('template-parts/single/meta'); ?>
                 </div>
             </div>
