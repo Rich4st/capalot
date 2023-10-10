@@ -86,9 +86,13 @@ function enqueue_admin_custom_assets($hook)
   // main.css
   wp_enqueue_style('admin-main-css', get_template_directory_uri() . '/admin/css/main.css', array(), '6.2');
 
+  //fontawesome
+  wp_enqueue_style('admin-fontawesome', get_template_directory_uri() . '/admin/css/font-awesome/css/all.css', array(), '6.4.2');
+  wp_enqueue_style('admin-fontawesome-shims', get_template_directory_uri() . '/admin/css/font-awesome/css/v4-shims.css', array(), '6.4.2');
+
   //商城管理页面加载
   if (strpos($hook, 'capalot-admin') !== false) {
-    wp_enqueue_script('apexcharts', get_template_directory_uri() . '/admin/js/apexcharts.min.js', array(), '3.35.3', true);
+    wp_enqueue_script('apexcharts', get_template_directory_uri() . '/admin/font-awesome/apexcharts.min.js', array(), '3.35.3', true);
   }
 }
 

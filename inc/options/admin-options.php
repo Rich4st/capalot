@@ -25,6 +25,23 @@ CSF::createSection($prefix, array(
   'fields' => array(
 
     array(
+      'id'          => 'assets_cdn_mode',
+      'type'        => 'radio',
+      'inline'      => true,
+      'title'       => '网站静态资源加载模式',
+      'desc'        => '推荐使用CDN加载图标文件，速度较快，不占用网站请求压力，优化效果明显，如果某个CDN节点不稳定或者慢，更换即可',
+      'placeholder' => '',
+      'options'     => array(
+        'theme'      => '本地加载',
+        'jsdelivr'   => 'jsdelivr源',
+        'unpkg'      => 'unpkg源',
+        'cloudflare' => 'cloudflare源',
+        'bootcdn'    => 'bootcdn源',
+      ),
+      'default'     => 'theme',
+    ),
+
+    array(
       'id'      => 'site_logo',
       'type'    => 'upload',
       'title'   => '网站LOGO',
