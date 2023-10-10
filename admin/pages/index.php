@@ -365,7 +365,7 @@ class Capalot_UI
   {
     global $wpdb;
     $results = $wpdb->get_results(
-      "SELECT user_id, meta_value FROM {$wpdb->usermeta} WHERE meta_key='capalot_balance' ORDER BY meta_value DESC LIMIT 7"
+      "SELECT user_id, meta_value FROM {$wpdb->usermeta} WHERE meta_key='capalot_balance' ORDER BY meta_value+0 DESC LIMIT 7"
     );
 
     echo '<div class=" ranking_list">';
@@ -381,8 +381,8 @@ class Capalot_UI
           '<li class="">
           <span class="numA_s">%s</span>
           <span class="imgB_s"> %s</span>
-          <span style="nameC_s">%s (%s)</span>
-          <span style="goldD_s">%s (%s)</span>
+          <span class="nameC_s">%s (%s)</span>
+          <span class="goldD_s">%s (%s)</span>
           </li>',
           $rank_num,
           $avatar,
@@ -470,7 +470,7 @@ class Capalot_UI
           $post = '<span>其他PID : ' . $result->post_id . '</span>';
         }
 
-        echo sprintf('<li class=" "><span class="d_numA" style="">%s</span>%s <span style="">%s (次)</span></li>', $rank_num, $post, $result->count);
+        echo sprintf('<li class=" "><span class="d_numA" style="">%s</span>%s <span class="d_numB">%s (次)</span></li>', $rank_num, $post, $result->count);
       }
       echo '</ul>';
     } else {
