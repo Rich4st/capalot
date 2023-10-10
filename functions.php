@@ -85,6 +85,10 @@ function capalot_widget_init()
 
 add_action('widgets_init', 'capalot_widget_init');
 
+if (is_file($composer = get_template_directory() . '/vendor/autoload.php')) {
+    require_once $composer;
+}
+
 require_once get_template_directory() . '/inc/core/capalot.php';
 
 // 加载CSF框架配置
