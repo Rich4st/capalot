@@ -19,9 +19,8 @@ if (empty($args)) {
       <?php endif; ?>
 
       <div class="space-x-4 flex gap-4  justify-center">
-        <!-- <a class="bg-<?php echo esc_attr($item['color']); ?> rounded-full hover:opacity-70 p-2 w-fit" href="<?php echo $item['link']; ?>"><i class="<?php echo esc_attr($item['icon']); ?> me-1"></i><?php echo $item['title']; ?></a> -->
         <?php foreach ($args['btn_data'] as $key => $item) : ?>
-          <a class=" bg-blue-500 px-6 rounded-full hover:opacity-70 p-2 w-fit !mx-0" href="<?php echo $item['link']; ?>"><i class="<?php echo esc_attr($item['icon']); ?> me-1"></i><?php echo $item['title']; ?></a>
+          <a class="bg-<?php echo esc_attr( $item['color'] );?> px-6 rounded-full hover:opacity-70 p-2 w-fit !mx-0" href="<?php echo $item['link']; ?>"><i class="<?php echo esc_attr($item['icon']); ?> me-1"></i><?php echo $item['title']; ?></a>
         <?php endforeach; ?>
       </div>
       
