@@ -197,7 +197,9 @@ $price_shape = get_template_directory_uri() . '/assets/img/price_shape.png';
 						<small class="text-muted"><?php echo wp_date('Y-m-d H:i', $item->create_time); ?></small>
 					</div>
 					<small class="text-muted"><?php printf(__('支付金额：￥%1$s（%2$s）', 'ripro'), $item->order_price, site_convert_amount($item->order_price, 'coin') . get_site_coin_name()); ?></small>
-					<small class="text-muted"><?php printf(__('支付方式：%s', 'ripro'), Capalot_Shop::get_pay_type($item->pay_type)); ?></small>
+					<small class="text-muted">
+						支付方式：<?php echo Capalot_Shop::get_pay_type($item->pay_type); ?>
+					</small>
 
 				</div>
 		<?php }
