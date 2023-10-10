@@ -337,3 +337,13 @@
 .wp-video-shortcode{
     overflow: hidden;
 }
+/* 弹窗组件 */
+.supports-drag-drop button .screen-reader-text{
+    display: none !important;
+}
+.supports-drag-drop .media-toolbar .screen-reader-text{
+    display: none !important;
+}
+.supports-drag-drop .media-modal-content .screen-reader-text{
+    display: none !important;
+}
