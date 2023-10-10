@@ -119,7 +119,7 @@ CSF::createSection($prefix, array(
     ),
 
     array(
-      'id'      => 'site_main_target_blank',
+      'id'      => 'site_link_blank',
       'type'    => 'switcher',
       'title'   => '网站主链接新窗口打开文章',
       'desc'    => '主要链接包括列表展示盒网格展示一些文章都新窗口打开',
