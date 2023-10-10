@@ -150,7 +150,7 @@ class Capalot_UI
     // 本月销售统计图表
     add_meta_box(
       'chart-2',
-      sprintf('<span class="pl-2 font-semibold tj_title_b">本月销售统计图表（%s）总览</span>', wp_date('Y年1月~m月')),
+      sprintf('<span class="pl-2 font-semibold tj_title_b">本月销售统计图表（%s）总览</span>', wp_date('Y年m月')),
       array(&$this, 'monthly_sales_statistics_chart'),
       $this->screen->id,
       'chart2'
