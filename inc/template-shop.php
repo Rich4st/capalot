@@ -69,7 +69,7 @@ function is_user_today_qiandao($user_id)
 //获取文章加密下载地址
 function get_post_endown_url($post_id, $down_key)
 {
-    $nonce     = wp_create_nonce('zb_down');
+    $nonce     = wp_create_nonce('capalot_down');
     $down_str  = $post_id . '-' . $down_key . '-' . $nonce;
     return home_url('/goto?down=' . $down_str);
 }
@@ -906,6 +906,7 @@ function capalot_pay_success_callback($order)
     }
 }
 add_action('site_pay_order_success', 'capalot_pay_success_callback', 10, 1);
+
 /**
  * 获取第三方登录地址
  * @param  string     $method   [description]
@@ -925,7 +926,8 @@ function get_oauth_permalink($method = 'qq', $callback = false)
  * @param  [type]     $snsInfo [description]
  * @return [type]
  */
-function zb_oauth_callback_event($data)
+
+function capalot_oauth_callback_event($data)
 {
     global $wpdb;
 
@@ -948,7 +950,7 @@ function zb_oauth_callback_event($data)
         // 该开放平台账号已连接过WP系统，再次使用它直接登录
         $user = get_user_by('id', $search_uid);
         if ($user) {
-            zb_updete_user_oauth_info($user->ID, $data);
+            capalot_updete_user_oauth_info($user->ID, $data);
 
             wp_set_current_user($user->ID, $user->user_login);
             wp_set_auth_cookie($user->ID, true);
@@ -958,7 +960,7 @@ function zb_oauth_callback_event($data)
         }
     } elseif (!empty($current_uid) && empty($search_uid)) {
         //当前已登录了本地账号, 直接绑定该账号
-        zb_updete_user_oauth_info($current_uid, $data);
+        capalot_updete_user_oauth_info($current_uid, $data);
         wp_safe_redirect(get_uc_menu_link());
         exit;
     } elseif (empty($search_uid) && empty($current_uid)) {
@@ -980,7 +982,7 @@ function zb_oauth_callback_event($data)
             //登陆当前用户
             $user = get_user_by('id', $new_user);
             if ($user) {
-                zb_updete_user_oauth_info($user->ID, $data);
+                capalot_updete_user_oauth_info($user->ID, $data);
                 update_user_meta($user->ID, 'user_avatar_type', $data['method']); //更新默认头像
 
                 wp_set_current_user($user->ID, $user->user_login);
@@ -992,6 +994,21 @@ function zb_oauth_callback_event($data)
         }
     }
 }
+
+// 更新用户oauth信息
+function capalot_updete_user_oauth_info($user_id, $data)
+{
+    $meta = 'open_' . $data['method'];
+    unset($data['method']);
+    foreach ($data as $key => $value) {
+        if (!empty($value)) {
+            $meta_key = $meta . '_' . $key;
+            update_user_meta($user_id, $meta_key, $value);
+        }
+    }
+    return true;
+}
+
 /**
  * 用户是否第三方注册未设置密码
  * @param  [type]     $user_id [description]

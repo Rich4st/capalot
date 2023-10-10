@@ -177,11 +177,20 @@
   display: block;
   border-radius: 100%;
 }
+.ranking_list ul li .goldD_s{
+  text-align: right;
+}
 
+
+
+.download_list ul{
+  display: grid;
+  gap: 0.8rem;
+}
 .download_list ul li{
   display: grid;
   gap: 0.8rem;
-  grid-template-columns: auto repeat(1, 70% 1fr);
+  grid-template-columns: auto repeat(1, 60% 1fr);
   flex: auto;
   justify-content: center;
   align-items: center;
@@ -197,6 +206,12 @@
   border-radius: 4px;
   background: #e5e5e5;
 }
+.download_list ul li .d_numB{
+  text-align: right;
+}
+
+
+
 
 /* 全站销量排行 */
 .sales_ranking .item {
