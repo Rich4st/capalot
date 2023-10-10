@@ -374,16 +374,23 @@ class Capalot_Ajax
 
     $reset_link = '<a href="' . $reset_url . '">' . $reset_url . '</a>';
 
-    $send = do_action('capalot_send_mail_msg', [
-      'email' => $user_data->user_email,
-      'title' => __('重置密码链接', 'ripro'),
-      'msg'   => sprintf(__('请打开此链接重置您的账号密码: %s', 'ripro'), $reset_link),
-    ]);
+    // $send = do_action('capalot_send_mail_msg', [
+    //   'email' => $user_data->user_email,
+    //   'title' => __('重置密码链接', 'ripro'),
+    //   'msg'   => sprintf(__('请打开此链接重置您的账号密码: %s', 'ripro'), $reset_link),
+    // ]);
+    wp_mail(
+      $user_data->user_email,
+      __('重置密码链接', 'ripro'),
+      sprintf(__('请打开此链接重置您的账号密码: %s', 'ripro'), $reset_link),
+      array('Content-Type: text/html; charset=UTF-8')
+    );
 
     wp_send_json(array(
       'status'   => 1,
       'msg'      => __('重置密码链接将发送到您的邮箱', 'ripro'),
-      'back_url' => esc_url(home_url()),
+      // 'back_url' => esc_url(home_url()),
+      'link' => $reset_link
     ));
   }
 

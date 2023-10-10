@@ -2369,11 +2369,11 @@ CSF::createSection($prefix, array(
     ),
 
     array(
-      'id'         => 'smtp_mail_nicname',
+      'id'         => 'smtp_mail_nickname',
       'type'       => 'text',
       'title'      => '发信人昵称',
       'subtitle'   => '昵称',
-      'default'    => _capalot('smtp_mail_nicname', get_bloginfo('name')),
+      'default'    => _capalot('smtp_mail_nickname', get_bloginfo('name')),
       'dependency' => array('is_site_smtp', '==', 'true'),
     ),
     array(
