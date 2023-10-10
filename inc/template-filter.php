@@ -206,6 +206,45 @@ add_filter('get_avatar_url', '_get_avatar_url', 10, 3);
 
 
 
+
+/**
+ * 搜素功能过滤器
+ * @Author Dadong2g
+ * @date   2023-02-13
+ * @param  [type]     $search   [description]
+ * @param  [type]     $wp_query [description]
+ * @return [type]
+ */
+function site_search_by_title_only($search, $wp_query) {
+    global $wpdb;
+
+    if (empty($search) || empty(_capalot('is_site_pro_search_title', false))) {
+        return $search; // skip processing - no search term in query
+    }
+
+    // skip processing - no search term in query
+    $q      = $wp_query->query_vars;
+    $n      = !empty($q['exact']) ? '' : '%';
+    $search = $searchand = '';
+    foreach ((array) $q['search_terms'] as $term) {
+        $term = esc_sql($wpdb->esc_like($term));
+        $search .= "{$searchand}($wpdb->posts.post_title LIKE '{$n}{$term}{$n}')";
+        $searchand = ' AND ';
+    }
+    if (!empty($search)) {
+        $search = " AND ({$search}) ";
+        if (!is_user_logged_in()) {
+            $search .= " AND ($wpdb->posts.post_password = '') ";
+        }
+
+    }
+    return $search;
+
+}
+add_filter('posts_search', 'site_search_by_title_only', 99, 2);
+
+
+
 /**
  * 广告代码
  * @Author Dadong2g
