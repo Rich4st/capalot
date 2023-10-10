@@ -390,7 +390,7 @@ function capalot_meta_category($num = 2)
       if ($key == $num) {
         break;
       }
-      $output .= '<a href="' . esc_url(get_category_link($category->term_id)) . '">' . esc_html($category->name) . '</a>' . $separator;
+      $output .= '<a class="hover:text-red-500" href="' . esc_url(get_category_link($category->term_id)) . '"><i class="fa-solid fa-tag pr-2"></i>' . esc_html($category->name) . '</a>' . $separator;
     }
     echo trim($output, $separator);
   }
