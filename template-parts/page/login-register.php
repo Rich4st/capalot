@@ -241,7 +241,7 @@ if ($is_login_action && !is_site_user_login()) {
 							<div class="flex flex-col">
 								<label class="form-label mb-2 text-gray-500"><?php _e('账号绑定的邮箱*', 'ripro'); ?></label>
 								<input type="email" class="form-control focus:invalid:border-pink-500 focus:invalid:ring-pink-500 p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="user_email" placeholder="<?php _e('邮箱地址', 'ripro'); ?>">
-								<input type="hidden" name="action focus:invalid:border-pink-500 focus:invalid:ring-pink-500 p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" value="zb_user_lostpwd">
+								<input type="hidden" name="action" value="capalot_user_lostpwd">
 							</div>
 
 							<div class="mb-3 flex justify-between items-center">
