@@ -131,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // 创建新文章或更新现有文章
         if ($is_editing) {
             wp_update_post($post);
-            $message = '<div class="alert alert-success bg-[#cef2e7] text-[#0a966c] md:p-4 p-2 rounded" role="alert"><i class="fas fa-check-circle me-1"></i>' . __('更新成功', 'ripro') . ' <a class="text-gray-500" target="_blank" href="' . esc_url(get_permalink($post_id)) . '">' . esc_url(get_permalink($post_id)) . '</a></div>';
+            $message = '<div class="alert alert-success mb-2 bg-[#cef2e7] text-[#0a966c] md:p-4 p-2 rounded" role="alert"><i class="fas fa-check-circle me-1"></i>' . __('更新成功', 'ripro') . ' <a class="text-gray-500" target="_blank" href="' . esc_url(get_permalink($post_id)) . '">' . esc_url(get_permalink($post_id)) . '</a></div>';
         } else {
             $post_id = wp_insert_post($post);
             wp_redirect(esc_url(add_query_arg(array('post_id' => $post_id), home_url('/tougao'))));
@@ -153,7 +153,7 @@ get_header();
 
 ?>
 
-<section class=" dark:bg-dark  p-2 dark:text-gray-400">
+<section class="tougao dark:bg-dark  p-2 dark:text-gray-400">
     <div class="lg:my-6 my-2 mx-auto" style="max-width: <?php
                                                         if ($container === '') {
                                                             echo '1280';
@@ -167,7 +167,7 @@ get_header();
                     <!-- 新增编辑文章 -->
                     <div class="card overflow-visible">
                         <?php echo $message; ?>
-                        <h5 class="font-bold"><?php echo $is_editing ? __('编辑文章', 'ripro') : __('发布文章', 'ripro'); ?></h5>
+                        <h5 class="font-bold mb-2"><?php echo $is_editing ? __('编辑文章', 'ripro') : __('发布文章', 'ripro'); ?></h5>
                         <div class="text-sm small mb-3">
                             <p class="mb-1"><?php _e('如遇无法添加附件到本文章提示，请先将文章发布文后添加。', 'ripro'); ?></p>
                             <?php if (is_site_author_aff()) : ?>
@@ -263,7 +263,7 @@ get_header();
                                             $_name = 'post_meta[capalot_downurl_new][' . $key . ']';
                                             ?>
                                             <div class="meta-input-item grid grid-cols-12 gap-2 mb-2 items-center">
-                                                <div class="col-span-1  cursor-pointer py-1  text-gray-400">
+                                                <div class="col-span-1  cursor-pointer py-1 dark:bg-dark text-gray-400">
                                                     <div class="meta-input-item-remove form-control form-control-sm text-center  "><i class="far fa-trash-alt"></i></div>
                                                 </div>
                                                 <div class="md:col-span-2 col-span-5 col-start-2">
@@ -370,7 +370,7 @@ get_header();
                     </div>
                 </div>
 
-                <div class="tougao-sidebar  md:w-[25%] w-full bg-white dark:bg-dark-card p-4  rounded text-gray-600">
+                <div class="tougao-sidebar h-full  md:w-[25%] w-full bg-white dark:bg-dark-card p-4  rounded dark:text-gray-400 text-gray-600">
                     <div class="sidebar">
                         <div class="widget">
                             <h5 class="widget-title font-bold"><?php _e('发布', 'ripro'); ?></h5>
@@ -463,13 +463,6 @@ get_header();
         $('#post-form').submit(function(e) {
 
         });
-        const tougao_thumbnail = document.querySelector('.tougao_thumbnail ');
-        tougao_thumbnail.addEventListener('click', function(event) {
-            const text = document.querySelectorAll('.screen-reader-text');
-            text.forEach((el) => {
-                el.classList.add('hidden')
-            })
-        })
 
         const els = document.querySelectorAll('.csf-shortcode-button');
         els.forEach((el) => {
