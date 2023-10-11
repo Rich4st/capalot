@@ -267,12 +267,12 @@ if ($is_login_action && !is_site_user_login()) {
 								<hr>
 								<p class="text-sm w-32 text-gray-500 bg-white text-center absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 -right-1/2"><?php _e('快捷登录/注册', 'ripro'); ?></p>
 							</div>
-							<div class="grid gap-2 md:block py-4  text-white text-center">
+							<div class=" py-4  text-white text-center">
 								<?php if (_capalot('is_sns_qq', false)) : ?>
 									<a href="<?php echo get_oauth_permalink('qq'); ?>" class="btn bg-info hover:bg-[#4386d3]  cursor-pointer rounded py-2 px-4 mx-2"><i class="fab fa-qq me-1"></i><?php _e('QQ登录', 'ripro'); ?></a>
 								<?php endif; ?>
 								<?php if (_capalot('is_sns_weixin', false)) : ?>
-									<a href="<?php echo get_oauth_permalink('weixin'); ?>" class="btn bg-success hover:bg-[#0aa073]  cursor-pointer rounded py-2 px-4 mx-2"><i class="fab fa-weixin me-1"></i><?php _e('微信登录', 'ripro'); ?></a>
+									<a href="<?php echo get_oauth_permalink('weixin'); ?>" class="btn bg-success hover:bg-[#0aa073]  cursor-pointer rounded py-2 px-4  mx-2"><i class="fab fa-weixin me-1"></i><?php _e('微信登录', 'ripro'); ?></a>
 								<?php endif; ?>
 							</div>
 						<?php endif; ?>
