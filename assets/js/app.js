@@ -81,23 +81,19 @@ let ca = {
         });
 
         const pwd_reg = /^(?=.*[a-zA-Z])(?=.*\d)[^]{8,}$/;
-        const mail_reg = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/;
 
-        console.log(n);
-
-        if(!n.user_name || !n.user_email || !n.user_password) {
-          return ca.notice({ title: '请填写完整信息', icon: 'error' });
-        } else if(!mail_reg.test(n.user_email)) {
-          return ca.notice({ title: '邮箱格式不正确', icon: 'error' });
+        // 判断n是否有user_password_ok属性
+        if (n.hasOwnProperty('user_password_ok')) {
+          if (n.user_password !== n.user_password_ok) {
+            return ca.notice({ title: '两次密码不一致', icon: 'error' });
+          } else if (!pwd_reg.test(n.user_password)) {
+            return ca.notice({ title: '密码必须包含数字和字母，长度至少8位', icon: 'error' });
+          } else if (n.captcha_code.length <= 0) {
+            return ca.notice({ title: '请输入验证码', icon: 'error' });
+          }
         }
 
-        if(n.user_password !== n.user_password_ok){
-          return ca.notice({ title: '两次密码不一致', icon: 'error' });
-        } else if(!pwd_reg.test(n.user_password)){
-          return ca.notice({ title: '密码必须包含数字和字母，长度至少8位', icon: 'error' });
-        } else if(n.captcha_code.length <= 0) {
-          return ca.notice({ title: '请输入验证码', icon: 'error' });
-        }
+
 
         ca.ajax({
           data: n,
