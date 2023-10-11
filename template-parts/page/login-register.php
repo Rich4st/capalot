@@ -171,9 +171,9 @@ if ($is_login_action && !is_site_user_login()) {
 						</div>
 
 						<?php if (is_site_invitecode_register()) : ?>
-							<div class="mb-3">
-								<label class="form-label"><?php _e('邀请码* ', 'ripro'); ?><a target="_blank" class="ms-2 small text-danger" href="<?php echo _capalot('site_invitecode_get_url'); ?>"><?php _e('获取邀请码', 'ripro'); ?></a></label>
-								<input type="text" class="form-control" name="invite_code" placeholder="必填">
+							<div class="mb-3 flex flex-col">
+								<label class="form-label mb-2 text-gray-500"><?php _e('邀请码* ', 'ripro'); ?><a target="_blank" class="ms-2 text-sm text-error " href="<?php echo _capalot('site_invitecode_get_url'); ?>"><?php _e('获取邀请码', 'ripro'); ?></a></label>
+								<input type="text" class="form-control focus:invalid:border-pink-500 focus:invalid:ring-pink-500 p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="invite_code" placeholder="必填">
 							</div>
 						<?php endif; ?>
 
