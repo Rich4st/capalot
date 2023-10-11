@@ -109,10 +109,10 @@ require_once get_template_directory() . '/inc/template-shop.php';
 // 主题功能标签
 require_once get_template_directory() . '/inc/template-tags.php';
 
-// 主题功能标签
+// 消息通知
 require_once get_template_directory() . '/inc/template-mail.php';
 
-// //伪静态路由
+// 伪静态路由
 require_once get_template_directory() . '/inc/template-rewrite.php';
 
 // ajax 请求
@@ -125,9 +125,6 @@ require_once get_template_directory() . '/inc/template-walker.php';
 
 // seo设置
 require_once get_template_directory() . '/inc/template-seo.php';
-
-// 消息通知
-require_once get_template_directory() . '/inc/template-mail.php';
 
 // domain-check
 require_once get_template_directory() . '/domain-check.php';
