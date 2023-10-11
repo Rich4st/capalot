@@ -65,7 +65,8 @@ class Capalot_Ajax
     $this->add_action('ajax_comment'); //ajax评论
     $this->add_action('vip_cdk_action', 1); //卡密兑换
     $this->add_action('get_site_notify'); //获取全站公告
-    $this->add_action('user_lostpwd', 0); //找回密码
+    $this->add_action('user_lost_pwd', 0); //找回密码
+    $this->add_action('user_reset_pwd', 0); //重置新密码
   }
 
   /**
@@ -311,8 +312,8 @@ class Capalot_Ajax
     ));
   }
 
-  // 找回密码
-  public function user_lostpwd()
+  // 找回密码邮件发送
+  public function user_lost_pwd()
   {
     $this->valid_nonce_ajax(); #安全验证
     $user_email   = sanitize_email(get_response_param('user_email'));
@@ -386,6 +387,64 @@ class Capalot_Ajax
     ));
   }
 
+  // 重置密码
+  public function user_reset_pwd()
+  {
+      $this->valid_nonce_ajax(); #安全验证
+
+      $uid              = absint(get_response_param('uid', 0));
+      $key              = wp_unslash(get_response_param('key'));
+      $user_password    = wp_unslash(get_response_param('user_password'));
+      $user_password_ok = wp_unslash(get_response_param('user_password_ok'));
+      $captcha_code     = wp_unslash(trim(get_response_param('captcha_code')));
+
+      if ($user_password !== $user_password_ok || empty($user_password)) {
+          wp_send_json(array(
+              'status' => 0,
+              'msg'    => __('两次密码输入不一致', 'ripro'),
+          ));
+      }
+
+      if (empty($uid) || empty($key)) {
+          wp_send_json(array(
+              'status' => 0,
+              'msg'    => __('页面参数错误', 'ripro'),
+          ));
+      }
+
+      if (is_site_img_captcha() && !verify_captcha_code(strtolower($captcha_code))) {
+          wp_send_json(array(
+              'status' => 0,
+              'msg'    => __('验证码错误，请刷新验证码', 'ripro'),
+          ));
+      }
+
+      $user_data = get_user_by('id', $uid);
+      if (!$user_data) {
+          wp_send_json(array(
+              'status' => 0,
+              'msg'    => __('账号信息获取失败', 'ripro'),
+          ));
+      }
+
+      $user_check = check_password_reset_key($key, $user_data->user_login);
+
+      if (is_wp_error($user_check)) {
+          wp_send_json(array(
+              'status' => 0,
+              'msg'    => __('重置链接无效或已过期', 'ripro'),
+          ));
+      }
+
+      // 验证通过 处理业务逻辑
+      reset_password($user_check, $user_password);
+
+      wp_send_json(array(
+          'status'   => 1,
+          'msg'      => __('密码重置成功,请使用新密码登录', 'ripro'),
+          'back_url' => esc_url(wp_login_url()),
+      ));
+  }
 
   //上传头像
   public function update_avatar()
