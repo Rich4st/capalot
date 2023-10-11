@@ -93,8 +93,6 @@ let ca = {
           }
         }
 
-
-
         ca.ajax({
           data: n,
           beforeSend: () => {
