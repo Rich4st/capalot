@@ -110,7 +110,7 @@ if ($is_login_action && !is_site_user_login()) {
 
 		<div class="login-and-register h-screen flex justify-center items-center bg-cover object-center bg-center bg-no-repeat <?php echo $classex; ?>"
 		style="background-image: url(<?php echo esc_url($args['bg_img']); ?>);">
-			<div class="bg-white shadow rounded-md  text-center md:p-10 p-6 ">
+			<div class="bg-white shadow rounded-md  text-center lg:p-10 md:p-6 p-4 ">
 				<!-- Logo -->
 				<a class="flex justify-center items-center mb-1 md:mb-3" href="<?php echo esc_url(home_url()); ?>">
 					<img class="logo regular  w-10 h-10" src="<?php echo esc_url(_capalot('site_logo', '')); ?>" alt="<?php echo get_bloginfo('name'); ?>">
@@ -130,9 +130,9 @@ if ($is_login_action && !is_site_user_login()) {
 						</div>
 
 						<?php if (is_site_img_captcha()) : ?>
-							<div class="mb-3 flex justify-between items-center">
-								<input type="text" class="form-control mr-10 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="captcha_code" placeholder="验证码">
-								<img id="captcha-img" class="rounded-2 lazy" role="button" data-src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/captcha.png'); ?>" title="<?php _e('点击刷新验证码', 'ripro'); ?>" />
+							<div class="mb-3 flex justify-between w-full items-center">
+								<input type="text" class="form-control w-1/2 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="captcha_code" placeholder="验证码">
+								<img id="captcha-img" class="rounded-2 lazy w-1/2" role="button" data-src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/captcha.png'); ?>" title="<?php _e('点击刷新验证码', 'ripro'); ?>" />
 							</div>
 						<?php endif; ?>
 
@@ -178,9 +178,9 @@ if ($is_login_action && !is_site_user_login()) {
 						<?php endif; ?>
 
 						<?php if (is_site_img_captcha()) : ?>
-							<div class="mb-3 flex justify-between items-center">
-								<input type="text" class="form-control mr-10 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="captcha_code" placeholder="验证码">
-								<img id="captcha-img" class="rounded-2 lazy" role="button" data-src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/captcha.png'); ?>" title="<?php _e('点击刷新验证码', 'ripro'); ?>" />
+							<div class="mb-3 flex justify-between  items-center w-full">
+								<input type="text" class="form-control w-1/2 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="captcha_code" placeholder="验证码">
+								<img id="captcha-img" class="rounded-2 lazy w-1/2" role="button" data-src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/captcha.png'); ?>" title="<?php _e('点击刷新验证码', 'ripro'); ?>" />
 							</div>
 						<?php endif; ?>
 
@@ -215,26 +215,26 @@ if ($is_login_action && !is_site_user_login()) {
 								echo '<input type="hidden" name="' . $key . '" value="' . $value . '">';
 							} ?>
 
-							<p class="mb-3 small text-danger text-center"><?php _e('您正在重新设置账号密码', 'ripro'); ?></p>
-							<div class="mb-3">
-								<label class="form-label"><?php _e('新密码', 'ripro'); ?></label>
-								<input class="form-control" type="password" autocomplete="TRUE" name="user_password" placeholder="<?php _e('密码', 'ripro'); ?>">
+							<!-- <p class="mb-3 small text-danger text-center"><?php _e('您正在重新设置账号密码', 'ripro'); ?></p> -->
+							<div class="flex flex-col">
+								<label class="form-label mb-1 text-gray-500"><?php _e('新密码', 'ripro'); ?></label>
+								<input class="form-control focus:invalid:border-pink-500 focus:invalid:ring-pink-500 p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" type="password" autocomplete="TRUE" name="user_password" placeholder="<?php _e('密码', 'ripro'); ?>">
 							</div>
-							<div class="mb-3">
-								<label class="form-label"><?php _e('确认新密码', 'ripro'); ?></label>
-								<input class="form-control" type="password" name="user_password_ok" placeholder="<?php _e('确认输入密码', 'ripro'); ?>">
+							<div class="flex flex-col">
+								<label class="form-label mb-1 text-gray-500"><?php _e('确认新密码', 'ripro'); ?></label>
+								<input class="form-control focus:invalid:border-pink-500 focus:invalid:ring-pink-500 p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" type="password" name="user_password_ok" placeholder="<?php _e('确认输入密码', 'ripro'); ?>">
 								<input type="hidden" name="action" value="capalot_user_reset_pwd">
 							</div>
-							<div class="mb-3 flex justify-between items-center">
-								<input type="text" class="form-control mr-10 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="captcha_code" placeholder="验证码">
-								<img id="captcha-img" class="rounded-2 lazy" role="button" data-src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/captcha.png'); ?>" title="<?php _e('点击刷新验证码', 'ripro'); ?>" />
+							<div class="mb-3 flex justify-between items-center w-full">
+								<input type="text" class="form-control w-1/2 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="captcha_code" placeholder="验证码">
+								<img id="captcha-img" class="rounded-2 lazy w-1/2" role="button" data-src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/captcha.png'); ?>" title="<?php _e('点击刷新验证码', 'ripro'); ?>" />
 							</div>
 
 							<?php if (is_site_user_login()) : ?>
-								<p class="mb-3"><?php _e('想起密码？', 'ripro'); ?><a class="btn-link text-primary" href="<?php echo esc_url(wp_login_url()); ?>"><?php _e('登录账号', 'ripro'); ?></a></p>
+								<p class="mb-3 text-gray-500"><?php _e('想起密码？', 'ripro'); ?><a class="text-blue-500 hover:underline" href="<?php echo esc_url(wp_login_url()); ?>"><?php _e('登录账号', 'ripro'); ?></a></p>
 							<?php endif; ?>
 
-							<div><button type="submit" id="click-submit" class="btn btn-danger w-100 mb-3"><?php _e('立即重置密码', 'ripro'); ?></button></div>
+							<div><button type="submit" id="click-submit" class="p-2 bg-sky-600 w-full rounded-sm text-white"><?php _e('立即重置密码', 'ripro'); ?></button></div>
 
 						<?php else : ?>
 							<!-- 找回密码表单 -->
@@ -244,9 +244,9 @@ if ($is_login_action && !is_site_user_login()) {
 								<input type="hidden" name="action" value="capalot_user_lost_pwd">
 							</div>
 
-							<div class="mb-3 flex justify-between items-center">
-								<input type="text" class="form-control mr-10 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="captcha_code" placeholder="验证码">
-								<img id="captcha-img" class="rounded-2 lazy" role="button" data-src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/captcha.png'); ?>" title="<?php _e('点击刷新验证码', 'ripro'); ?>" />
+							<div class="mb-3 flex justify-between items-center w-full">
+								<input type="text" class="form-control w-1/2 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="captcha_code" placeholder="验证码">
+								<img id="captcha-img" class="rounded-2 lazy w-1/2" role="button" data-src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/captcha.png'); ?>" title="<?php _e('点击刷新验证码', 'ripro'); ?>" />
 							</div>
 
 							<p class="mb-3 text-sm text-red-600"><?php _e('重置密码链接会发送到您的邮箱，请通过重置链接修改新密码。', 'ripro'); ?></p>
