@@ -490,9 +490,9 @@ class Capalot_UI
       "SELECT aff_uid, COUNT(aff_uid) AS count FROM {$table_name} WHERE 1=1 GROUP BY aff_uid ORDER BY count DESC LIMIT 10"
     );
 
-    echo '<div class="card-body">';
+    echo '<div class=" card_listT">';
     if (!empty($results)) {
-      echo '<ul class="card-body-ul">';
+      echo '<ul class="">';
       $rank_num = 0;
       foreach ($results as $result) {
         $rank_num++;
@@ -501,9 +501,9 @@ class Capalot_UI
         $vip_info = get_user_vip_data($result->aff_uid);
         $avatar = get_avatar($result->aff_uid, 50);
         echo sprintf(
-          '<li class="text-muted">
-          <span class="badge bg-secondary" style="margin-right:10px;">%s</span> %s
-          <span style="margin-right:10px;">%s (%s)</span> <span style="margin-left:auto;">%s (单)</span>
+          '<li class="">
+          <span class=" card_num" style="">%s</span> %s
+          <span style="">%s (%s)</span> <span style="margin-left:auto;">%s (单)</span>
           </li>',
           $rank_num,
           $avatar,
