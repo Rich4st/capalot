@@ -126,6 +126,9 @@ require_once get_template_directory() . '/inc/template-walker.php';
 // seo设置
 require_once get_template_directory() . '/inc/template-seo.php';
 
+// 消息通知
+require_once get_template_directory() . '/inc/template-mail.php';
+
 // domain-check
 require_once get_template_directory() . '/domain-check.php';
 

@@ -65,6 +65,7 @@ class Capalot_Ajax
     $this->add_action('ajax_comment'); //ajax评论
     $this->add_action('vip_cdk_action', 1); //卡密兑换
     $this->add_action('get_site_notify'); //获取全站公告
+    $this->add_action('user_lostpwd', 0); //找回密码
   }
 
   /**
@@ -307,6 +308,89 @@ class Capalot_Ajax
     wp_send_json(array(
       'status' => 1,
       'msg'    => get_captcha_code_img(),
+    ));
+  }
+
+  // 找回密码
+  public function user_lostpwd()
+  {
+    $this->valid_nonce_ajax(); #安全验证
+    $user_email   = sanitize_email(get_response_param('user_email'));
+    $captcha_code = wp_unslash(trim(get_response_param('captcha_code')));
+
+    if (!is_email($user_email)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('邮箱地址格式错误', 'ripro'),
+      ));
+    }
+
+    if (is_site_img_captcha() && !verify_captcha_code(strtolower($captcha_code))) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => '验证码错误，请刷新验证码',
+      ));
+    }
+
+    if (!email_exists($user_email)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('此邮箱无绑定用户', 'ripro'),
+      ));
+    }
+
+    $user_data = get_user_by('email', $user_email);
+
+    if (!$user_data) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('用户查询失败', 'ripro'),
+      ));
+    }
+
+    // Redefining user_login ensures we return the right case in the email.
+    $user_id = $user_data->ID;
+    $key     = get_password_reset_key($user_data);
+    if (is_wp_error($key)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('账号异常，请刷新页面', 'ripro'),
+      ));
+    }
+
+    do_action('lostpassword_post');
+
+    $reset_url = esc_url_raw(
+      add_query_arg(
+        array(
+          'riresetpass'  => 'true',
+          'rifrp_action' => 'rp',
+          'key'          => $key,
+          'uid'          => $user_data->ID,
+        ),
+        wp_lostpassword_url()
+      )
+    );
+
+    $reset_link = '<a href="' . $reset_url . '">' . $reset_url . '</a>';
+
+    // $send = do_action('capalot_send_mail_msg', [
+    //   'email' => $user_data->user_email,
+    //   'title' => __('重置密码链接', 'ripro'),
+    //   'msg'   => sprintf(__('请打开此链接重置您的账号密码: %s', 'ripro'), $reset_link),
+    // ]);
+    wp_mail(
+      $user_data->user_email,
+      __('重置密码链接', 'ripro'),
+      sprintf(__('请打开此链接重置您的账号密码: %s', 'ripro'), $reset_link),
+      array('Content-Type: text/html; charset=UTF-8')
+    );
+
+    wp_send_json(array(
+      'status'   => 1,
+      'msg'      => __('重置密码链接将发送到您的邮箱', 'ripro'),
+      // 'back_url' => esc_url(home_url()),
+      'link' => $reset_link
     ));
   }
 

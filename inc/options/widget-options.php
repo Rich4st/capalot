@@ -592,8 +592,8 @@ CSF::createWidget('capalot_home_division_widget', array(
       'title'       => '图标风格',
       'placeholder' => '',
       'options'     => array(
-        'rounded-2'    => '方形',
-        'rounded-circle'   => '圆形',
+        'rounded-md'    => '方形',
+        'rounded-full'   => '圆形',
       ),
       'default'     => 'rounded-2',
     ),
