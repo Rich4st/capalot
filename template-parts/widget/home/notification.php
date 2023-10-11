@@ -40,7 +40,7 @@ $container = _capalot('site_container_width', '1400');
 ?>
 
 
-<section class="dark:bg-dark py-3 ">
+<section class="dark:bg-dark py-3 px-2 ">
 	<div class="mx-auto " style="max-width: <?php if ($container === '') {
 												echo '1280';
 											} else {
@@ -48,13 +48,13 @@ $container = _capalot('site_container_width', '1400');
 											}
 											?>px;">
 
-		<div class="bg-[#d8d8d8] dark:bg-dark p-2 rounded text-sm">
+		<div class=" bg-<?php echo esc_attr( $args['bg_color'] );?> bg-opacity-10 dark:bg-dark p-2 rounded text-sm">
 			<div class="flex items-center">
-				<div class="w-36  md:w-28 mr-2">
-					<span class="bg-dark dark:bg-dark-card px-2 rounded text-white"><i class="fa fa-volume-up me-1"></i><?php echo esc_html($args['title']); ?></span>
+				<div class=" lg:w-36  md:w-28 mr-2">
+					<span class="  bg-<?php echo esc_attr( $args['bg_color'] );?> dark:bg-dark-card py-1 px-2 rounded text-white"><i class="fa fa-volume-up me-1"></i><span class=" hidden lg:inline-block"><?php echo esc_html($args['title']); ?></span></span>
 				</div>
 
-				<div class="swiper mySwiper w-full text-gray-400 " data-config='<?php echo json_encode($config); ?>'>
+				<div class="swiper mySwiper w-full text-gray-600 " data-config='<?php echo json_encode($config); ?>'>
 					<div class="swiper-wrapper">
 						<?php foreach ($data as $key => $item) : ?>
 							<div class="swiper-slide">
@@ -84,3 +84,5 @@ $container = _capalot('site_container_width', '1400');
 
 	</div>
 </section>
+
+
