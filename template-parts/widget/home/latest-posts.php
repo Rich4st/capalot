@@ -17,7 +17,7 @@ $item_config = get_posts_style_config();
 $container = _capalot('site_container_width', '1400')
 ?>
 
-<section class=" dark:bg-dark">
+<section class=" dark:bg-dark py-3">
   <div class="mx-auto" style="max-width: <?php
                                           if ($container === '') {
                                             echo '1280';
