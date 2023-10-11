@@ -71,8 +71,8 @@ if ($post_format && isset($format_icons[$post_format])) {
             <div>
               <span class="meta-date"><i class="fa-regular fa-clock pr-1"></i>
                 <?php capalot_meta_datetime(); ?></span>
-              <span class="meta-likes d-none md:inline-block hidden"><i class="fa-regular fa-heart pr-1"></i><?php echo capalot_get_post_likes(); ?></span>
-              <span class="meta-fav d-none md:inline-block hidden"><i class="fa-regular fa-star pr-1"></i><?php echo capalot_get_post_favorites(); ?></span>
+              <span class="meta-likes d-none "><i class="fa-regular fa-heart pr-1"></i><?php echo capalot_get_post_likes(); ?></span>
+              <span class="meta-fav d-none "><i class="fa-regular fa-star pr-1"></i><?php echo capalot_get_post_favorites(); ?></span>
               <span class="meta-views"><i class="fa-regular fa-eye pr-1"></i><?php echo capalot_get_post_views(); ?></span>
             </div>
             <?php if (is_site_shop() && post_has_pay($post_id)) : ?>
@@ -175,8 +175,8 @@ if ($post_format && isset($format_icons[$post_format])) {
             <div>
               <span class="meta-date"><i class="fa-regular fa-clock pr-1"></i>
                 <?php capalot_meta_datetime(); ?></span>
-              <span class="meta-likes d-none md:inline-block hidden"><i class="fa-regular fa-heart pr-1"></i><?php echo capalot_get_post_likes(); ?></span>
-              <span class="meta-fav d-none md:inline-block hidden"><i class="fa-regular fa-star pr-1"></i><?php echo capalot_get_post_favorites(); ?></span>
+              <span class="meta-likes d-none"><i class="fa-regular fa-heart pr-1"></i><?php echo capalot_get_post_likes(); ?></span>
+              <span class="meta-fav d-none "><i class="fa-regular fa-star pr-1"></i><?php echo capalot_get_post_favorites(); ?></span>
               <span class="meta-views"><i class="fa-regular fa-eye pr-1"></i><?php echo capalot_get_post_views(); ?></span>
             </div>
             <?php if (is_site_shop() && post_has_pay($post_id)) : ?>
@@ -217,8 +217,8 @@ if ($post_format && isset($format_icons[$post_format])) {
             <div>
               <span class="meta-date"><i class="fa-regular fa-clock pr-1"></i>
                 <?php capalot_meta_datetime(); ?></span>
-              <span class="meta-likes d-none md:inline-block hidden"><i class="fa-regular fa-heart pr-1"></i><?php echo capalot_get_post_likes(); ?></span>
-              <span class="meta-fav d-none md:inline-block hidden"><i class="fa-regular fa-star pr-1"></i><?php echo capalot_get_post_favorites(); ?></span>
+              <span class="meta-likes d-none "><i class="fa-regular fa-heart pr-1"></i><?php echo capalot_get_post_likes(); ?></span>
+              <span class="meta-fav d-none "><i class="fa-regular fa-star pr-1"></i><?php echo capalot_get_post_favorites(); ?></span>
               <span class="meta-views"><i class="fa-regular fa-eye pr-1"></i><?php echo capalot_get_post_views(); ?></span>
             </div>
             <?php if (is_site_shop() && post_has_pay($post_id)) : ?>
