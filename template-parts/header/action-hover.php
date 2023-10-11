@@ -47,85 +47,86 @@ $site_color = get_site_default_color_style();
         </a>
 
         <?php if (is_site_shop()) : ?>
-            <div class="dark:bg-dark text-[#595d69] md:group-hover:block hidden absolute top-8 rounded-lg  shadow-lg right-0  text-sm w-[400px]  z-[9999] bg-white " id="adminC">
-                <div class="flex justify-between bg-[#dfeeff] dark:bg-dark-card">
-                    <div class="hover-info p-2">
-                        <div class="flex items-center ">
-                            <div class="mr-2">
-                                <img class="rounded-full border m-4 h-10 w-10 inline-block border-white border-3 shadow" src="<?php echo get_avatar_url($current_user->ID); ?>" alt="user">
-                            </div>
-                            <div class="mr-2 flex flex-col ">
-                                <div class="rounded px-1">
-                                    <?php echo capalot_get_user_badge($current_user->ID, 'span', 'flex items-center rounded px-1 dark:bg-dark-card'); ?>
+            <div class="text-[#595d69] md:group-hover:block hidden absolute right-0  top-7  w-[400px] z-[9999]" id="adminC">
+                <div class="dark:bg-dark   mt-2 rounded-lg  shadow-lg overflow-hidden   text-sm  bg-white w-full ">
+                    <div class="flex justify-between bg-[#dfeeff] dark:bg-dark-card">
+                        <div class="hover-info p-2">
+                            <div class="flex items-center ">
+                                <div class="mr-2">
+                                    <img class="rounded-full border m-4 h-10 w-10 inline-block border-white border-3 shadow" src="<?php echo get_avatar_url($current_user->ID); ?>" alt="user">
                                 </div>
-                                <b class=" mt-2"><?php echo $current_user->display_name; ?></b>
+                                <div class="mr-2 flex flex-col ">
+                                    <div class="rounded px-1">
+                                        <?php echo capalot_get_user_badge($current_user->ID, 'span', 'flex items-center rounded px-1 dark:bg-dark-card'); ?>
+                                    </div>
+                                    <b class=" mt-2"><?php echo $current_user->display_name; ?></b>
+                                </div>
                             </div>
                         </div>
+                        <div class="flex flex-col m-4 space-y-2">
+                            <?php
+                            printf('<a href="%s"><i class="%s me-1"></i>%s</a>', get_uc_menu_link('logout'), $uc_menus['logout']['icon'], $uc_menus['logout']['title']);
+                            if (in_array('administrator', $current_user->roles)) {
+                                printf('<a target="_blank" href="%s"><i class="fab fa-wordpress me-1 fa-lg"></i>%s</a>', esc_url(home_url('/wp-admin/')), __('后台管理', 'ripro'));
+                            } else {
+                                printf('<a href="%s"><i class="%s me-1"></i>%s</a>', get_uc_menu_link('aff'), $uc_menus['aff']['icon'], $uc_menus['aff']['title']);
+                            }
+
+                            ?>
+                        </div>
                     </div>
-                    <div class="flex flex-col m-4 space-y-2">
-                        <?php
-                        printf('<a href="%s"><i class="%s me-1"></i>%s</a>', get_uc_menu_link('logout'), $uc_menus['logout']['icon'], $uc_menus['logout']['title']);
-                        if (in_array('administrator', $current_user->roles)) {
-                            printf('<a target="_blank" href="%s"><i class="fab fa-wordpress me-1 fa-lg"></i>%s</a>', esc_url(home_url('/wp-admin/')), __('后台管理', 'ripro'));
-                        } else {
-                            printf('<a href="%s"><i class="%s me-1"></i>%s</a>', get_uc_menu_link('aff'), $uc_menus['aff']['icon'], $uc_menus['aff']['title']);
-                        }
 
-                        ?>
-                    </div>
-                </div>
+                    <div class=" p-3 pb-1 ">
 
-                <div class=" p-3 pb-1 ">
+                        <div class="grid grid-cols-2 gap-2">
 
-                    <div class="grid grid-cols-2 gap-2">
+                            <div class="text-center bg-info  text-white bg-opacity-75 rounded-lg p-3 ">
+                                <div class="mb-2"><?php printf('%s%s', get_site_coin_name(), __('余额', 'ripro')); ?></div>
+                                <?php printf('<div class="mb-2"><i class="%s me-1"></i>%s</div>', get_site_coin_icon(), get_user_coin_balance($current_user->ID)); ?>
+                                <button class="text-[#7bb6fa] bg-white w-20 h-6 rounded-xl">
+                                    <a class="w-full h-full" href="<?php echo get_uc_menu_link('coin'); ?>" rel="nofollow noopener noreferrer"><?php _e('充值', 'ripro'); ?></a>
+                                </button>
+                            </div>
 
-                        <div class="text-center bg-info  text-white bg-opacity-75 rounded-lg p-3 ">
-                            <div class="mb-2"><?php printf('%s%s', get_site_coin_name(), __('余额', 'ripro')); ?></div>
-                            <?php printf('<div class="mb-2"><i class="%s me-1"></i>%s</div>', get_site_coin_icon(), get_user_coin_balance($current_user->ID)); ?>
-                            <button class="text-[#7bb6fa] bg-white w-20 h-6 rounded-xl">
-                                <a class="w-full h-full" href="<?php echo get_uc_menu_link('coin'); ?>" rel="nofollow noopener noreferrer"><?php _e('充值', 'ripro'); ?></a>
-                            </button>
+                            <div class="grid grid-row-3 ">
+                                <?php
+                                $vip_options = get_site_vip_options();
+                                $colors = [
+                                    'no'        => 'secondary',
+                                    'vip'     => 'success',
+                                    'boosvip' => 'accent',
+                                ];
+                                foreach ($vip_options as $key => $item) {
+                                    if ($item['key'] != 'no') {
+                                        $color = $colors[$item['key']];
+                                        $link  = get_uc_menu_link('vip');
+                                        echo '<a class="btn btn-sm md:block bg-' . $color . ' text-white bg-opacity-75 rounded-lg p-2 py-3 mb-2" href="' . $link . '"><i class="far fa-gem me-1 fa-lg"></i>' . __('本站', 'ripro') . $item['name'] . '</a>';
+                                    }
+                                }
+                                ?>
+                            </div>
+
                         </div>
 
-                        <div class="grid grid-row-3 ">
+                    </div>
+
+                    <div class="mt-2 p-3 pt-0">
+                        <div class="space-x-4 grid grid-cols-5">
                             <?php
-                            $vip_options = get_site_vip_options();
-                            $colors = [
-                                'no'        => 'secondary',
-                                'vip'     => 'success',
-                                'boosvip' => 'accent',
-                            ];
-                            foreach ($vip_options as $key => $item) {
-                                if ($item['key'] != 'no') {
-                                    $color = $colors[$item['key']];
-                                    $link  = get_uc_menu_link('vip');
-                                    echo '<a class="btn btn-sm md:block bg-' . $color . ' text-white bg-opacity-75 rounded-lg p-2 py-3 mb-2" href="' . $link . '"><i class="far fa-gem me-1 fa-lg"></i>' . __('本站', 'ripro') . $item['name'] . '</a>';
-                                }
+                            $menus_item1 = ['profile', 'coin', 'vip', 'fav', 'order'];
+                            foreach ($menus_item1 as $key) {
+                                printf(
+                                    '<a href="%s"><i class="%s bg-[#eeeeee] p-4 rounded-full fa-lg"></i><div>%s</div></a>',
+                                    get_uc_menu_link($key),
+                                    $uc_menus[$key]['icon'],
+                                    $uc_menus[$key]['title']
+                                );
                             }
                             ?>
                         </div>
-
                     </div>
 
                 </div>
-
-                <div class="mt-2 p-3 pt-0">
-                    <div class="space-x-4 grid grid-cols-5">
-                        <?php
-                        $menus_item1 = ['profile', 'coin', 'vip', 'fav', 'order'];
-                        foreach ($menus_item1 as $key) {
-                            printf(
-                                '<a href="%s"><i class="%s bg-[#eeeeee] p-4 rounded-full fa-lg"></i><div>%s</div></a>',
-                                get_uc_menu_link($key),
-                                $uc_menus[$key]['icon'],
-                                $uc_menus[$key]['title']
-                            );
-                        }
-                        ?>
-                    </div>
-                </div>
-
-
             </div>
         <?php endif; ?>
     </div>

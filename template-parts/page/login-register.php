@@ -110,22 +110,22 @@ if ($is_login_action && !is_site_user_login()) {
 
 		<div class="login-and-register h-screen flex justify-center items-center bg-cover object-center bg-center bg-no-repeat <?php echo $classex; ?>"
 		style="background-image: url(<?php echo esc_url($args['bg_img']); ?>);">
-			<div class="bg-white shadow rounded-md overflow-hidden py-16 px-10 text-center">
+			<div class="bg-white shadow rounded-md  text-center md:p-10 p-6 ">
 				<!-- Logo -->
-				<a class="flex justify-center items-center mb-3" href="<?php echo esc_url(home_url()); ?>">
-					<img class="logo regular mb-2 w-10 h-10" src="<?php echo esc_url(_capalot('site_logo', '')); ?>" alt="<?php echo get_bloginfo('name'); ?>">
+				<a class="flex justify-center items-center mb-1 md:mb-3" href="<?php echo esc_url(home_url()); ?>">
+					<img class="logo regular  w-10 h-10" src="<?php echo esc_url(_capalot('site_logo', '')); ?>" alt="<?php echo get_bloginfo('name'); ?>">
 				</a>
 
-				<form id="account-from" class="text-start account-from space-y-4">
+				<form id="account-from" class="text-start account-from space-y-2">
 
 					<?php if ($is_login_action) : ?>
 						<!-- 登录表单 -->
 						<div class="flex flex-col">
-							<label class="form-label mb-2 text-gray-500">邮箱或用户名</label>
+							<label class="form-label mb-1 text-gray-500">邮箱或用户名</label>
 							<input type="text" class="form-control p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="user_name">
 						</div>
 						<div class="flex flex-col">
-							<label class="form-label text-gray-500 mb-2"><?php _e('密码', 'ripro'); ?><a class="text-gray-500 text-sm hover:underline ml-2" href="<?php echo esc_url(wp_lostpassword_url()); ?>"><?php _e('忘记密码？', 'ripro'); ?></a></label>
+							<label class="form-label text-gray-500 mb-1"><?php _e('密码', 'ripro'); ?><a class="text-gray-500 text-sm hover:underline ml-2" href="<?php echo esc_url(wp_lostpassword_url()); ?>"><?php _e('忘记密码？', 'ripro'); ?></a></label>
 							<input class="form-control p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" type="password" autocomplete="TRUE" name="user_password">
 						</div>
 
@@ -149,21 +149,21 @@ if ($is_login_action && !is_site_user_login()) {
 						<?php endif; ?>
 
 						<div>
-							<button type="submit" id="click-submit" class="p-2 bg-sky-600 w-full rounded-sm text-white">立即登录</button>
+							<button type="submit" id="click-submit" class="p-2 bg-sky-600 w-full rounded-sm text-white ">立即登录</button>
 						</div>
 
 					<?php elseif ($is_reg_action) : ?>
 						<!-- 注册表表单 -->
 						<div class="flex flex-col">
-							<label class="form-label mb-2 text-gray-500"><?php _e('用户名*', 'ripro'); ?></label>
+							<label class="form-label mb-1 text-gray-500"><?php _e('用户名*', 'ripro'); ?></label>
 							<input type="text" class="form-control focus:invalid:border-pink-500 focus:invalid:ring-pink-500 p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="user_name" placeholder="<?php _e('英文名称', 'ripro'); ?>">
 						</div>
 						<div class="flex flex-col">
-							<label class="form-label mb-2 text-gray-500"><?php _e('邮箱*', 'ripro'); ?></label>
+							<label class="form-label mb-1 text-gray-500"><?php _e('邮箱*', 'ripro'); ?></label>
 							<input type="email" class="form-control focus:invalid:border-pink-500 focus:invalid:ring-pink-500 p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="user_email" placeholder="<?php _e('邮箱地址', 'ripro'); ?>">
 						</div>
 						<div class="flex flex-col">
-							<label class="form-label mb-2 text-gray-500"><?php _e('密码*', 'ripro'); ?></label>
+							<label class="form-label mb-1 text-gray-500"><?php _e('密码*', 'ripro'); ?></label>
 							<input class="form-control focus:invalid:border-pink-500 focus:invalid:ring-pink-500 p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" type="password" autocomplete="TRUE" name="user_password" placeholder="<?php _e('密码', 'ripro'); ?>">
 						</div>
 						<div class="flex flex-col">
@@ -172,7 +172,7 @@ if ($is_login_action && !is_site_user_login()) {
 
 						<?php if (is_site_invitecode_register()) : ?>
 							<div class="mb-3 flex flex-col">
-								<label class="form-label mb-2 text-gray-500"><?php _e('邀请码* ', 'ripro'); ?><a target="_blank" class="ms-2 text-sm text-error " href="<?php echo _capalot('site_invitecode_get_url'); ?>"><?php _e('获取邀请码', 'ripro'); ?></a></label>
+								<label class="form-label mb-1 text-gray-500"><?php _e('邀请码* ', 'ripro'); ?><a target="_blank" class="ms-2 text-sm text-error " href="<?php echo _capalot('site_invitecode_get_url'); ?>"><?php _e('获取邀请码', 'ripro'); ?></a></label>
 								<input type="text" class="form-control focus:invalid:border-pink-500 focus:invalid:ring-pink-500 p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="invite_code" placeholder="必填">
 							</div>
 						<?php endif; ?>
@@ -239,7 +239,7 @@ if ($is_login_action && !is_site_user_login()) {
 						<?php else : ?>
 							<!-- 找回密码表单 -->
 							<div class="flex flex-col">
-								<label class="form-label mb-2 text-gray-500"><?php _e('账号绑定的邮箱*', 'ripro'); ?></label>
+								<label class="form-label mb-1 text-gray-500"><?php _e('账号绑定的邮箱*', 'ripro'); ?></label>
 								<input type="email" class="form-control focus:invalid:border-pink-500 focus:invalid:ring-pink-500 p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="user_email" placeholder="<?php _e('邮箱地址', 'ripro'); ?>">
 								<input type="hidden" name="action" value="capalot_user_lost_pwd">
 							</div>
@@ -263,16 +263,16 @@ if ($is_login_action && !is_site_user_login()) {
 					<!-- oauth mode -->
 					<?php if (($is_login_action || $is_reg_action)) : ?>
 						<?php if (_capalot('is_sns_qq', false) || _capalot('is_sns_weixin', false)) : ?>
-							<div class="relative">
+							<div class="relative py-2">
 								<hr>
 								<p class="text-sm w-32 text-gray-500 bg-white text-center absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 -right-1/2"><?php _e('快捷登录/注册', 'ripro'); ?></p>
 							</div>
-							<div class="grid gap-2 md:block py-4  text-white text-center">
+							<div class=" pt-4 pb-2 text-white text-center text-sm">
 								<?php if (_capalot('is_sns_qq', false)) : ?>
-									<a href="<?php echo get_oauth_permalink('qq'); ?>" class="btn bg-info hover:bg-[#4386d3]  cursor-pointer rounded py-2 px-4 mx-2"><i class="fab fa-qq me-1"></i><?php _e('QQ登录', 'ripro'); ?></a>
+									<a href="<?php echo get_oauth_permalink('qq'); ?>" class="btn bg-info hover:bg-[#4386d3]  cursor-pointer rounded py-1 px-4 mx-2"><i class="fab fa-qq me-1"></i><?php _e('QQ登录', 'ripro'); ?></a>
 								<?php endif; ?>
 								<?php if (_capalot('is_sns_weixin', false)) : ?>
-									<a href="<?php echo get_oauth_permalink('weixin'); ?>" class="btn bg-success hover:bg-[#0aa073]  cursor-pointer rounded py-2 px-4 mx-2"><i class="fab fa-weixin me-1"></i><?php _e('微信登录', 'ripro'); ?></a>
+									<a href="<?php echo get_oauth_permalink('weixin'); ?>" class="btn bg-success hover:bg-[#0aa073]  cursor-pointer rounded py-1 px-4  mx-2"><i class="fab fa-weixin me-1"></i><?php _e('微信登录', 'ripro'); ?></a>
 								<?php endif; ?>
 							</div>
 						<?php endif; ?>
