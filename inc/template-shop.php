@@ -697,7 +697,16 @@ function capalot_get_pay_body_html($id, $price, $qrimg)
     }
 
     $desc = __('支付后请等待 5 秒左右，切勿关闭扫码窗口', 'ripro');
-    $html = sprintf('<div class="pay-body-html"><img class="pay-icon" src="%s"><div class="title">%s</div><div class="qrcode"><img src="%s"></div><div class="desc">%s</div></div>', $icon_url, $title, $qrimg, $desc);
+    $html = sprintf('
+    <div class="flex flex-col items-center justify-center gap-2 px-6 py-8 dark:bg-dark">
+    <img class="w-1/2 h-1/2" src="%s">
+    <div class="mt-2">%s</div>
+    <div class="qrcode"><img src="%s">
+    </div>
+    <div class="text-sm text-gray-500">%s
+    </div>
+    </div>
+    ', $icon_url, $title, $qrimg, $desc);
     return apply_filters('ri_pay_body_html', $html);
 }
 
@@ -848,13 +857,12 @@ function capalot_get_request_pay($order_data)
 
             break;
         case 'alipay':
-            // TODO: 支付宝支付
             $config = _capalot('alipay');
             $api_type = (isset($config['api_type'])) ? $config['api_type'] : '';
 
             if ($api_type == 'web') {
                 $result['method'] = 'url';
-                $pay_url          = wp_is_mobile() && !empty($config['is_mobile'])
+                $pay_url = (wp_is_mobile() && !empty($config['is_mobile']))
                     ? $CapalotPay->alipay_app_wap_pay($order_data)
                     : $CapalotPay->alipay_app_web_pay($order_data);
             } elseif ($api_type == 'qr') {

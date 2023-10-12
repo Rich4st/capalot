@@ -304,7 +304,7 @@ let ca = {
   },
 
   // 付款
-  pay_action: function (e) {
+  pay_action: function () {
     let o = null;
     let el = document.querySelector('.js-pay-action');
 
@@ -328,21 +328,26 @@ let ca = {
 
       ca.ajax({
         data: o,
-        complete: ({ responseJSON }) => {
-          const { status, msg } = responseJSON;
-
-          if (status === 1) {
-            ca.notice({ title: msg, icon: 'success' })
-            setTimeout(() => {
-              window.location.reload();
-            }, 2000)
-          } else {
-            ca.notice({ title: msg, icon: 'error' })
-          }
-        }
+        complete: ({ responseJSON }) => ca.pay_callback(responseJSON)
       })
 
     });
+  },
+
+  // 付款回调
+  pay_callback: function (payload = {}) {
+    const { status, msg, method } = payload;
+
+    if (status === 0) {
+      ca.notice({ title: msg, icon: 'error' });
+      return;
+    }
+
+    if(method === 'url') {
+      location.href = msg;
+    } else if(method === 'popup') {
+      ca.popup({ html: msg, showCloseButton: false, width: '16rem' });
+    }
   },
 
   // 获取支付选项

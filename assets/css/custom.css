@@ -355,3 +355,11 @@
 .supports-drag-drop .media-modal-content .screen-reader-text{
     display: none !important;
 }
+
+/* sweetalert2 */
+.swal2-html-container {
+    margin: 0 !important;
+}
+.swal2-popup {
+    padding-bottom: 0 !important;
+}

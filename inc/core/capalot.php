@@ -179,57 +179,87 @@ class Capalot_Shop
  */
 class Capalot_Pay
 {
+
+  private $alipay_params;
+  private $alipay_config;
+
+  public function __construct()
+  {
+    $this->alipay_params = new \Yurun\PaySDK\Alipay\Params\PublicParams;
+    $this->alipay_config = _capalot('alipay');
+    $this->alipay_params->appID = $this->alipay_config['appid'];
+
+    // $wx_params = new \Yurun\PaySDK\Weixin\Params\PublicParams;
+    // $wx_config = _capalot('weixinpay');
+    // $wx_params->appID = $wx_config['appid'];
+    // $wx_params->mch_id = $wx_config['mch_id'];
+    // $wx_params->key = $wx_config['key'];
+  }
+
   public function alipay_app_wap_pay($order_data = null)
   {
-    $params = new \Yurun\PaySDK\AlipayApp\Params\PublicParams;
-    $params->appID = '2016092000554414';
+    $pay = new \Yurun\PaySDK\Alipay\SDK($this->alipay_params);
 
-    $pay = new \Yurun\PaySDK\Alipay\SDK($params);
+    $request = new \Yurun\PaySDK\Alipay\Params\WapPay\Request;
+    $request->notify_url = get_template_directory_uri() . '/inc/shop/alipay/notify.php';
+    $request->return_url = get_template_directory_uri() . '/inc/shop/alipay/return.php';
+    $request->businessParams->seller_id = $this->alipay_params->appID;
+    $request->businessParams->out_trade_no = $order_data['order_trade_no'];
+    $request->businessParams->total_fee = $order_data['order_price'];
+    $request->businessParams->subject = $order_data['order_name'];
+    $request->businessParams->body = $order_data['order_name'];
+    $request->businessParams->show_url = get_permalink($order_data['post_id']);
 
-    // 支付接口
-    $request = new \Yurun\PaySDK\Alipay\Params\Pay\Request;
-    $request->notify_url = ''; // 支付后通知地址（作为支付成功回调，这个可靠）
-    $request->return_url = ''; // 支付后跳转返回地址
-    $request->businessParams->seller_id = $GLOBALS['PAY_CONFIG']['appid']; // 卖家支付宝用户号
-    $request->businessParams->out_trade_no = 'test' . mt_rand(10000000, 99999999); // 商户订单号
-    $request->businessParams->total_fee = 0.01; // 价格
-    $request->businessParams->subject = '测试商品'; // 商品标题
-
-    // 跳转到支付页面
-    // $pay->redirectExecute($request);
-
-    // 获取跳转url
     $pay->prepareExecute($request, $url);
-    var_dump($url);
+
+    return esc_url($url);
   }
 
   public function alipay_app_web_pay($order_data = null)
   {
-    $params = new \Yurun\PaySDK\AlipayApp\Params\PublicParams;
-    $params->appID = '2016092000554414';
+    $pay = new \Yurun\PaySDK\Alipay\SDK($this->alipay_params);
 
-    $pay = new \Yurun\PaySDK\Alipay\SDK($params);
-
-    // 支付接口
     $request = new \Yurun\PaySDK\Alipay\Params\Pay\Request;
-    $request->notify_url = ''; // 支付后通知地址（作为支付成功回调，这个可靠）
-    $request->return_url = ''; // 支付后跳转返回地址
-    $request->businessParams->seller_id = $GLOBALS['PAY_CONFIG']['appid']; // 卖家支付宝用户号
-    $request->businessParams->out_trade_no = 'test' . mt_rand(10000000, 99999999); // 商户订单号
-    $request->businessParams->total_fee = 0.01; // 价格
-    $request->businessParams->subject = '测试商品'; // 商品标题
+    $request->notify_url = get_template_directory_uri() . '/inc/shop/alipay/notify.php';
+    $request->return_url = get_template_directory_uri() . '/inc/shop/alipay/return.php';
+    $request->businessParams->seller_id = $this->alipay_params->appID;
+    $request->businessParams->out_trade_no = $order_data['order_trade_no'];
+    $request->businessParams->total_fee = $order_data['order_price'];
+    $request->businessParams->subject = $order_data['order_name'];
+    $request->businessParams->body = $order_data['order_name'];
 
-    // 跳转到支付页面
-    // $pay->redirectExecute($request);
-
-    // 获取跳转url
     $pay->prepareExecute($request, $url);
-    var_dump($url);
+
+    return $url;
   }
 
   public function alipay_app_qr_pay($order_data = null)
   {
-    return 'alipay_app_qr_pay';
+    $params = new \Yurun\PaySDK\AlipayApp\Params\PublicParams;
+    $params->appID = $this->alipay_config['appid'];
+    $params->appPrivateKey = $this->alipay_config['private_key'];
+    $params->appPublicKey = $this->alipay_config['public_key'];
+
+    $pay = new \Yurun\PaySDK\AlipayApp\SDK($params);
+
+    $request = new \Yurun\PaySDK\AlipayApp\FTF\Params\QR\Request;
+    $request->notify_url = get_template_directory_uri() . '/inc/shop/alipay/notify.php';
+    $request->businessParams->out_trade_no = $order_data['order_trade_no'];
+    $request->businessParams->total_amount = $order_data['order_price'];
+    $request->businessParams->subject = $order_data['order_name'];
+    $request->businessParams->body = $order_data['order_name'];
+
+    // 调用接口
+    try {
+      $data = $pay->execute($request);
+      // var_dump('result:', $data);
+      // var_dump('success:', $pay->checkResult());
+      // var_dump('error:', $pay->getError(), 'error_code:', $pay->getErrorCode());
+    } catch (Exception $e) {
+      // var_dump($pay->response->body());
+    }
+
+    return $pay->response->body();
   }
 }
 
