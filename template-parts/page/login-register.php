@@ -299,7 +299,6 @@ if ($is_login_action && !is_site_user_login()) {
 		<script>
 			$(document).ready(function() {
 				const v_config = <?php echo json_encode($vanta); ?>;
-				console.log(v_config.config);
 				VANTA[v_config.name](v_config.config)
 			})
 		</script>

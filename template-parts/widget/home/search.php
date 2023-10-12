@@ -159,7 +159,6 @@ switch ($type) {
   <script>
     $(document).ready(function() {
       const v_config = <?php echo json_encode($vanta); ?>;
-      console.log(v_config.config);
       VANTA[v_config.name](v_config.config)
     })
   </script>
