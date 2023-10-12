@@ -31,6 +31,8 @@ let ca = {
 
     if (document.querySelector('#delete-icon'))
       ca.delete_post();
+
+    ca.sticky_header();
   },
 
   /**
@@ -596,11 +598,39 @@ let ca = {
 
 
     })
+  },
+
+  // 固定头部
+  sticky_header: function () {
+    var prevScrollpos = window.pageYOffset;
+    var navbar = document.querySelector('.site-header');
+
+    window.addEventListener('scroll', function () {
+      var currentScrollPos = window.pageYOffset;
+
+      console.log(currentScrollPos, '->', prevScrollpos);
+      var scrolled = window.scrollY;
+      if (scrolled >= 80) {
+        if (prevScrollpos > currentScrollPos) {
+          // gsap实现动画从屏幕外移动到屏幕内
+          gsap.to(navbar, { y: 0, duration: 0.5, ease: "power1.out" });
+          navbar.classList.add('fixed');
+        } else {
+          gsap.to(navbar, { y: -100, duration: 0.5, ease: "power1.out" });
+        }
+      } else {
+        navbar.classList.remove('fixed');
+      }
+
+      prevScrollpos = currentScrollPos;
+    });
   }
 
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   ca.init();
+
+  console.log(gsap);
 })
 
