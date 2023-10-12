@@ -9,7 +9,7 @@
 	}
 </style>
 
-<header class=" site-header duration-150 transition-all dark:bg-dark dark:text-gray-400 w-full bg-white z-[99] ">
+<header class=" site-header dark:bg-dark dark:text-gray-400 w-full bg-white z-[99] ">
 
 	<div class=" container lg:max-w-[80rem] m-auto lg:px-0 px-2  py-2">
 		<div class=" navbar relative px-1 " id="hea_bg"> <!-- container-fluid px-lg-5 -->
@@ -78,27 +78,3 @@
 </header>
 
 <div class="header-gap"></div>
-<script>
-	var prevScrollpos = window.pageYOffset;
-
-
-	window.addEventListener('scroll', function() {
-		var currentScrollPos = window.pageYOffset;
-		var navbar = document.querySelector('.site-header');
-		var scrolled = window.scrollY;
-		if (scrolled >= 80) {
-			if (prevScrollpos > currentScrollPos) {
-				navbar.style.opacity = '1';
-				navbar.classList.add('fixed');
-			} else {
-				navbar.style.opacity = '0';
-				navbar.classList.add('fixed');
-			}
-		} else {
-			navbar.classList.remove('fixed');
-
-		}
-
-		prevScrollpos = currentScrollPos;
-	});
-</script>
