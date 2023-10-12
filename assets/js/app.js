@@ -9,6 +9,7 @@ let ca = {
     ca.toggle_dark();
     ca.add_comment();
     ca.post_tougao();
+    ca.add_menus();
     const notification_btn = document.querySelector('.toggle-notify');
     if (notification_btn)
       ca.notification();
@@ -628,13 +629,20 @@ let ca = {
 
       prevScrollpos = currentScrollPos;
     });
-  }
+  },
+// 导航菜单
+  add_menus: function () {
+    let main_menu = document.querySelector('.sidebar-main-menu');
+    let warp_menu = document.querySelector('.sidebar-menu-warp');
 
+    if (body.hasClass("uc-page")) {
+      warp_menu.classList.remove('hidden')
+      main_menu.classList.add('hidden')
+    }
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   ca.init();
-
-  console.log(gsap);
 })
 
