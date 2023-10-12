@@ -608,7 +608,6 @@ let ca = {
     window.addEventListener('scroll', function () {
       var currentScrollPos = window.pageYOffset;
 
-      console.log(currentScrollPos, '->', prevScrollpos);
       var scrolled = window.scrollY;
       if (scrolled >= 80 && prevScrollpos !== 0) {
         if (prevScrollpos > currentScrollPos) {
