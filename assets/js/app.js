@@ -608,9 +608,8 @@ let ca = {
     window.addEventListener('scroll', function () {
       var currentScrollPos = window.pageYOffset;
 
-      console.log(currentScrollPos, '->', prevScrollpos);
       var scrolled = window.scrollY;
-      if (scrolled >= 80) {
+      if (scrolled >= 80 && prevScrollpos !== 0) {
         if (prevScrollpos > currentScrollPos) {
           // gsap实现动画从屏幕外移动到屏幕内
           gsap.to(navbar, { y: 0, duration: 0.5, ease: "power1.out" });
