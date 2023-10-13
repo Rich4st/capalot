@@ -31,7 +31,7 @@ $container = _capalot('site_container_width', '1400')
     ?>
     <?php if ($section_title) : ?>
       <div class="section-title text-center mb-4 dark:text-white  ">
-        <h3 class="text-2xl text-black dark:text-gray-50 transition-all hover:ease-in-out cursor-pointer mb-2"><?php echo $section_title ?></h3>
+        <h3 class="text-2xl text-black dark:text-gray-50 transition-all hover:ease-in-out mb-2"><?php echo $section_title ?></h3>
         <?php if (!empty($section_desc)) : ?>
           <p class="text-muted mb-0 text-gray-400 "><?php echo $section_desc ?></p>
         <?php endif; ?>
