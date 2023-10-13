@@ -544,48 +544,64 @@ let ca = {
 
   // 投稿
   post_tougao: function () {
-    const o = jQuery(".tougao_thumbnail");
-    o.on("click", function () {
-      const n = wp.media({
+    const tougao = jQuery(".tougao_thumbnail");
+    tougao.on("click", function () {
+      const media = wp.media({
         multiple: !1
       });
-      n.on("select", function () {
-        var e = n.state().get("selection").first().toJSON(),
-          t = e.url,
-          e = e.id;
-        jQuery("#_thumbnail_id").val(e), o.empty(), e = jQuery("<img>").attr("src", t), o.append(e)
-      }), n.open()
-    }),
-      body.on("click", ".add-input-file", function () {
-        const t = jQuery(this).closest(".input-group").find(".input-file-url"),
-          n = wp.media({
-            multiple: !1
-          });
-        n.on("select", function () {
-          var e = n.state().get("selection").first().toJSON().url;
-          t.val(e)
-        }), n.open()
+      media.on("select", function () {
+        var selection = media.state().get("selection").first().toJSON();
+        var selection_url = selection.url;
+        var selection = selection.id;
+
+        jQuery("#_thumbnail_id").val(selection), tougao.empty(), selection = jQuery("<img>").attr("src", selection_url),
+          tougao.append(selection)
       });
-    const e = jQuery("#capalot_video_switch"),
-      t = jQuery("#capalot_status_switch"),
-      n = jQuery("#price-input-warp"),
-      a = jQuery("#down-input-warp"),
-      i = jQuery("#video-input-warp");
+      media.open()
+    });
+
+    body.on("click", ".add-input-file", function () {
+      const input_file = jQuery(this).closest(".input-group").find(".input-file-url"),
+        media = wp.media({
+          multiple: !1
+        });
+      media.on("select", function () {
+        var select = media.state().get("selection").first().toJSON().url;
+        input_file.val(select)
+      }), media.open()
+    });
+
+    const video_switch = jQuery("#capalot_video_switch");
+    const status_switch = jQuery("#capalot_status_switch");
+    const price_input = jQuery("#price-input-warp");
+    const down_input = jQuery("#down-input-warp");
+    const video_input = jQuery("#video-input-warp");
 
     function r() {
-      e.is(":checked") || t.is(":checked") ? n.show() : n.hide(), t.is(":checked") ? a.show() : a.hide(), e.is(":checked") ? i.show() : i.hide()
+      video_switch.is(":checked") || status_switch.is(":checked") ? price_input.show() : price_input.hide(),
+        status_switch.is(":checked") ? down_input.show() : down_input.hide(),
+        video_switch.is(":checked") ? video_input.show() : video_input.hide()
     }
-    r(), e.on("change", r), t.on("change", r), jQuery(".meta-input-item-add").on("click", function () {
-      var e = jQuery(this).closest(".meta-input-warp").find(".meta-input-group");
-      let t = e.find(".meta-input-item").length;
-      var n = e.find(".meta-input-item:first").clone();
-      n.find("input").each(function () {
-        var e = jQuery(this).attr("name").replace(/\[\d+\]/g, "[" + t + "]");
+    r();
+    video_switch.on("change", r);
+    status_switch.on("change", r);
+    // 添加
+    jQuery(".meta-input-item-add").on("click", function () {
+      var input_warp = jQuery(this).closest(".meta-input-warp").find(".meta-input-group");
+      let input_item = input_warp.find(".meta-input-item").length;
+      var first_input_item = input_warp.find(".meta-input-item:first").clone();
+
+      first_input_item.find("input").each(function () {
+        var e = jQuery(this).attr("name").replace(/\[\d+\]/g, "[" + input_item + "]");
         jQuery(this).attr("name", e), jQuery(this).val("")
-      }), e.append(n)
-    }), jQuery(".meta-input-group").on("click", ".meta-input-item-remove", function () {
-      var e = jQuery(this).closest(".meta-input-item");
-      0 !== e.index() && e.remove()
+      });
+      input_warp.append(first_input_item)
+    });
+    // 删除
+
+    jQuery(".meta-input-group").on("click", ".meta-input-item-remove", function () {
+      var input_item = jQuery(this).closest(".meta-input-item");
+      0 !== input_item.index() && input_item.remove()
     })
   },
 
@@ -622,7 +638,7 @@ let ca = {
       if (prevScrollpos > currentScrollPos) {//向上
         gsap.to(navbar, { y: 0, duration: 0.3, ease: "power1.out" });
         if (scrolled == 0) {
-        navbar.classList.remove('navbar-sticky');
+          navbar.classList.remove('navbar-sticky');
         } else {
           navbar.classList.add('fixed');
           navbar.classList.add('navbar-sticky');
