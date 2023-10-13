@@ -18,14 +18,14 @@ if ($args['config']) {
 }
 $config['items'] = absint($args['items']);
 
-if($config['nav'] === true) {
+if ($config['nav'] === true) {
   $config['navigation'] = [
     'nextEl' => '.swiper-button-next',
     'prevEl' => '.swiper-button-prev'
   ];
 }
 
-if ($config['dots'] === true){
+if ($config['dots'] === true) {
   $config['pagination'] = [
     'el' => '.swiper-pagination', 'clickable' => true
   ];
@@ -34,7 +34,7 @@ if ($config['dots'] === true){
 ?>
 
 <section class="dark:bg-dark">
-  <div class="swiper mySwiper  <?php echo $args['container']; ?> " data-config='<?php echo json_encode($config); ?>' >
+  <div class="swiper mySwiper  <?php echo $args['container']; ?> " data-config='<?php echo json_encode($config); ?>'>
     <div class="swiper-wrapper  ">
 
       <?php if ($args['data']) :
@@ -61,6 +61,8 @@ if ($config['dots'] === true){
       <div class="swiper-button-next after:text-white"></div>
       <div class="swiper-button-prev after:text-white"></div>
     <?php endif ?>
-    <div class="swiper-pagination"></div>
+    <?php if ($config['dots']) : ?>
+      <div class="swiper-pagination"></div>
+    <?php endif; ?>
   </div>
 </section>
