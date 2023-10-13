@@ -117,11 +117,13 @@
     --tw-bg-opacity: 0.5;
     background-color: rgb(89 93 105 / var(--tw-bg-opacity));
 }
-.bg-error{
+
+.bg-error {
     --tw-bg-opacity: 0.5;
     background-color: rgb(234 67 53 / var(--tw-bg-opacity));
 }
-.text-error{
+
+.text-error {
     --tw-text-opacity: 1;
     color: rgb(234 67 53 / var(--tw-text-opacity));
 }
@@ -342,17 +344,20 @@
 }
 
 /* 视频组件 */
-.wp-video-shortcode{
+.wp-video-shortcode {
     overflow: hidden;
 }
+
 /* 弹窗组件 */
-.supports-drag-drop button .screen-reader-text{
+.supports-drag-drop button .screen-reader-text {
     display: none !important;
 }
-.supports-drag-drop .media-toolbar .screen-reader-text{
+
+.supports-drag-drop .media-toolbar .screen-reader-text {
     display: none !important;
 }
-.supports-drag-drop .media-modal-content .screen-reader-text{
+
+.supports-drag-drop .media-modal-content .screen-reader-text {
     display: none !important;
 }
 
@@ -478,7 +483,7 @@
 }
 
 /* 侧边栏导航 */
-.sidebar-main-menu  {
+.sidebar-main-menu {
     position: relative;
 }
 
@@ -488,7 +493,7 @@
     list-style-type: none;
 }
 
-.sidebar-main-menu  .nav-list {
+.sidebar-main-menu .nav-list {
     padding: 10px;
     width: 100%;
     position: relative;
@@ -497,20 +502,22 @@
     flex-wrap: wrap
 }
 
-.sidebar-main-menu  .nav-list li.menu-item-has-children {
+.sidebar-main-menu .nav-list li.menu-item-has-children {
     flex: 0 0 100%;
     max-width: 100%
 }
-.sidebar-main-menu  .nav-list li .menu-item-has-children>a:after {
+
+.sidebar-main-menu .nav-list li .menu-item-has-children>a:after {
     content: "+";
     font-weight: 600;
     margin-left: 4px
 }
-.sidebar-main-menu  .nav-list li.current-menu-item a {
+
+.sidebar-main-menu .nav-list li.current-menu-item a {
     color: #007bff
 }
 
-.sidebar-main-menu  .nav-list>li {
+.sidebar-main-menu .nav-list>li {
     width: 100%;
     padding: .25rem;
     max-width: 100%;
@@ -518,7 +525,7 @@
     text-overflow: ellipsis;
 }
 
-.sidebar-main-menu  .nav-list .menu-item>a {
+.sidebar-main-menu .nav-list .menu-item>a {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -532,22 +539,22 @@
     background: #f7f7f7;
 }
 
-.sidebar-main-menu  .nav-list .menu-item>a>i {
+.sidebar-main-menu .nav-list .menu-item>a>i {
     margin-left: 0 !important;
     margin-right: 5px !important;
 }
 
-.sidebar-main-menu  .nav-list .menu-item>a .menu-item-has-children a {
+.sidebar-main-menu .nav-list .menu-item>a .menu-item-has-children a {
     margin-left: 10px;
     outline: 0;
 }
 
-.sidebar-main-menu  .nav-list .menu-item>a .menu-item-has-children a i {
+.sidebar-main-menu .nav-list .menu-item>a .menu-item-has-children a i {
     margin-left: 0 !important;
     margin-right: 5px !important;
 }
 
-.sidebar-main-menu  .nav-list .sub-menu {
+.sidebar-main-menu .nav-list .sub-menu {
     border-radius: 0 0 2px 2px;
     overflow: hidden;
     background: #eaeaea;
@@ -555,12 +562,12 @@
     position: relative;
 }
 
-.sidebar-main-menu  .nav-list .sub-menu>li {
+.sidebar-main-menu .nav-list .sub-menu>li {
     width: 100%;
     float: none;
 }
 
-.sidebar-main-menu  .nav-list .sub-menu>li>a {
+.sidebar-main-menu .nav-list .sub-menu>li>a {
     border: none;
     border-radius: 0;
     line-height: 1;
@@ -570,24 +577,48 @@
     padding: 10px 5px;
 }
 
-.sidebar-main-menu  .nav-list .sub-menu .sub-menu {
+.sidebar-main-menu .nav-list .sub-menu .sub-menu {
     width: 100%;
 }
 
-.sidebar-main-menu  .nav-list .sub-menu .sub-menu li {
+.sidebar-main-menu .nav-list .sub-menu .sub-menu li {
     width: 100%;
     float: none;
 }
 
-.sidebar-main-menu  .nav-list hr {
+.sidebar-main-menu .nav-list hr {
     padding: 0;
     margin: 0;
 }
 
-.sidebar-main-menu  .nav-list .nav_arrow {
+.sidebar-main-menu .nav-list .nav_arrow {
     -webkit-box-flex: 1;
     -ms-flex: 1;
     flex: 1;
     text-align: right;
 }
 
+/* 轮播退左右箭头 */
+.swiper-button-prev:after {
+    display: none;
+}
+
+.swiper-button-next:after {
+    display: none;
+}
+
+.swiper-button-prev {
+    width: 20px;
+    height: 20px;
+    border-bottom: 2px solid #cccccc;
+    border-left: 2px solid #cccccc;
+    transform: rotate(45deg);
+}
+
+.swiper-button-next {
+    width: 20px;
+    height: 20px;
+    border-top: 2px solid #cccccc;
+    border-right: 2px solid #cccccc;
+    transform: rotate(45deg);
+}
