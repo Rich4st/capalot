@@ -27,7 +27,6 @@ if (!empty($capalot_downurl_new) && is_array($capalot_downurl_new)) {
 
 ?>
 <div class=" bg-white rounded-md p-4 mb-8  relative overflow-hidden dark:bg-dark-card">
-
   <div class="ri-down-warp" data-resize="<?php echo esc_attr($args['resize_position']); ?>">
     <div class=" bg-teal-500 text-white text-sm text-center leading-6 rotate-45 w-60 absolute right-[-6rem] top-3"><span class="down-msg"><?php _e('下载', 'ripro'); ?></span></div>
     <?php if ($user_pay_post_status && !$is_user_login_get_status) : ?>
@@ -83,7 +82,7 @@ if (!empty($capalot_downurl_new) && is_array($capalot_downurl_new)) {
         <?php else : ?>
           <div class="buy-title text-center text-teal-500 "><i class="fas fa-lock me-1"></i></i><?php _e('本资源需权限下载', 'ripro'); ?></div>
           <div class=" text-center mt-4">
-            <button class=" hover:bg-[#b62335] text-white py-2 px-4 bg-[#d6293e] rounded-full " data-id="<?php echo $post_id; ?>" data-type="1" data-info=""><i class="fab fa-shopify me-1"></i><?php _e('购买下载权限', 'ripro'); ?></button>
+            <button class=" hover:bg-[#b62335] text-white py-2 px-4 bg-[#d6293e] rounded-full js-pay-action" data-id="<?php echo $post_id; ?>" data-type="1" data-info=""><i class="fab fa-shopify me-1"></i><?php _e('购买下载权限', 'ripro'); ?></button>
           </div>
 
 
