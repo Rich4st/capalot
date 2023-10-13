@@ -133,102 +133,107 @@ function get_target_blank()
  * @date   2022-01-22
  * @return [type]
  */
-function get_default_thumbnail_src() {
+function get_default_thumbnail_src()
+{
   return _capalot('default_thumb') ? _capalot('default_thumb') : get_template_directory_uri() . '/assets/img/thumb.jpg';
 }
 
 
-function _capalot_get_default_lazy_img_src() {
+function _capalot_get_default_lazy_img_src()
+{
   return _capalot('default_lazy_thumb') ? _capalot('default_lazy_thumb') : 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
 }
 
 
 
-function _capalot_get_thumbnail_size_type(){
+function _capalot_get_thumbnail_size_type()
+{
   $options = array(
-      'bg-cover',
-      'bg-auto',
-      'bg-contain',
+    'bg-cover',
+    'bg-auto',
+    'bg-contain',
   );
-  $opt = _capalot('site_thumb_size_type','bg-cover');
+  $opt = _capalot('site_thumb_size_type', 'bg-cover');
 
   if (!in_array($opt, $options)) {
-      $opt = $options[0];
+    $opt = $options[0];
   }
   return $opt;
 }
 
-function _capalot_get_thumbnail_fit_type(){
+function _capalot_get_thumbnail_fit_type()
+{
   $options = array(
-      'bg-left-top',
-      'bg-right-top',
-      'bg-center-top',
-      'bg-center',
-      'bg-center-bottom',
-      'bg-left-bottom',
-      'bg-right-bottom',
+    'bg-left-top',
+    'bg-right-top',
+    'bg-center-top',
+    'bg-center',
+    'bg-center-bottom',
+    'bg-left-bottom',
+    'bg-right-bottom',
   );
-  $opt = _capalot('site_thumb_fit_type','bg-center');
+  $opt = _capalot('site_thumb_fit_type', 'bg-center');
 
   if (!in_array($opt, $options)) {
-      $opt = $options[0];
+    $opt = $options[0];
   }
   return $opt;
 }
 
 /**
-* 获取缩略图地址
-* @Author Dadong2g
-* @date   2023-04-19
-* @param  [type]     $post [description]
-* @param  string     $size [description]
-* @return [type]
-*/
-function capalot_get_thumbnail_url($post = null, $size = 'thumbnail') {
+ * 获取缩略图地址
+ * @Author Dadong2g
+ * @date   2023-04-19
+ * @param  [type]     $post [description]
+ * @param  string     $size [description]
+ * @return [type]
+ */
+function capalot_get_thumbnail_url($post = null, $size = 'thumbnail')
+{
 
   if (empty($post)) {
-      global $post;
+    global $post;
   } else {
-      $post = get_post($post);
+    $post = get_post($post);
   }
 
   if (!$post instanceof WP_Post) {
-      return get_default_thumbnail_src();
+    return get_default_thumbnail_src();
   }
 
   if (has_post_thumbnail($post)) {
-      return get_the_post_thumbnail_url($post, $size);
+    return get_the_post_thumbnail_url($post, $size);
   } elseif (_capalot('is_post_one_thumbnail', true) && !empty($post->post_content)) {
-      // Automatically get the first image in the post content
-      ob_start();
-      ob_end_clean();
-      preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $matches);
-      if (!empty($matches[1][0])) {
-          return $matches[1][0];
-      }
+    // Automatically get the first image in the post content
+    ob_start();
+    ob_end_clean();
+    preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $matches);
+    if (!empty($matches[1][0])) {
+      return $matches[1][0];
+    }
   }
 
   return get_default_thumbnail_src();
 }
 
 /**
-* 获取缩略图
-* @Author Dadong2g
-* @date   2022-01-06
-* @param  string     $class [description]
-* @return [type]
-*/
-function capalot_the_thumbnail($post = null, $class = 'thumb lazy', $size = 'thumbnail') {
+ * 获取缩略图
+ * @Author Dadong2g
+ * @date   2022-01-06
+ * @param  string     $class [description]
+ * @return [type]
+ */
+function capalot_the_thumbnail($post = null, $class = 'thumb lazy', $size = 'thumbnail')
+{
   if (empty($post)) {
-      global $post;
+    global $post;
   }
 
   if (is_numeric($post)) {
-      $post = get_post($post);
+    $post = get_post($post);
   }
 
   echo get_the_post_thumbnail($post->ID, $size, array('class' => $class, 'alt' => the_title_attribute(array('echo' => false))));
-
 }
 
 
@@ -390,7 +395,9 @@ function capalot_meta_category($num = 2)
       if ($key == $num) {
         break;
       }
-      $output .= '<a class="hover:text-red-500" href="' . esc_url(get_category_link($category->term_id)) . '"><i class="fa-solid fa-tag pr-2"></i>' . esc_html($category->name) . '</a>' . $separator;
+      $output .= '<a class="hover:text-red-500"' . 'title="' . $category->name . '"' . 'href="' . esc_url(get_category_link($category->term_id)) . '">
+          <i class="fa-solid fa-tag pr-2"></i>' . esc_html($category->name) .
+        '</a>' . $separator;
     }
     echo trim($output, $separator);
   }
@@ -436,7 +443,7 @@ function capalot_get_post_favorites($post_id = null)
     global $post;
     $post_id = $post->ID;
   }
-  $meta_key = 'favorites';
+  $meta_key = 'follow_num';
   $num      = absint(get_post_meta($post_id, $meta_key, true));
   if (1000 <= $num) {
     $num = sprintf('%0.1f', $num / 1000) . 'K';
@@ -501,7 +508,7 @@ function capalot_is_post_like($user_id = null, $post_id = null)
 }
 
 /**
- * 收藏或喜欢点赞
+ * 收藏文章
  */
 function capalot_add_post_fav($user_id = null, $post_id = 0)
 {
@@ -628,7 +635,8 @@ function capalot_delete_post_like($user_id = null, $post_id = null)
  * @date   2022-12-08
  * @return [type]
  */
-function capalot_get_archive_item_config($cat_id = 0) {
+function capalot_get_archive_item_config($cat_id = 0)
+{
 
   $item_col   = _capalot('archive_item_col', '4');
   $item_style = _capalot('archive_item_style', 'grid');
@@ -638,89 +646,91 @@ function capalot_get_archive_item_config($cat_id = 0) {
   $media_fit_type = capalot_get_thumbnail_fit_type();
 
   $item_entry = _capalot('archive_item_entry', array(
-      'category_dot',
-      'entry_desc',
-      'entry_footer',
-      'vip_icon',
+    'category_dot',
+    'entry_desc',
+    'entry_footer',
+    'vip_icon',
   ));
 
   $term_item_style = _capalot('site_term_item_style', array());
 
-  
+
 
   if (!empty($cat_id) && !empty($term_item_style)) {
-      foreach ($term_item_style as $key => $item) {
-          if ($cat_id == $item['cat_id']) {
-              $item_col   = $item['archive_item_col'];
-              $item_style = $item['archive_item_style'];
-              $media_size = $item['post_thumbnail_size'];
-              $item_entry = $item['archive_item_entry'];
-              continue;
-          }
+    foreach ($term_item_style as $key => $item) {
+      if ($cat_id == $item['cat_id']) {
+        $item_col   = $item['archive_item_col'];
+        $item_style = $item['archive_item_style'];
+        $media_size = $item['post_thumbnail_size'];
+        $item_entry = $item['archive_item_entry'];
+        continue;
       }
+    }
   }
 
 
   $row_cols = [
-      '1' => 'row-cols-1 g-2 g-md-3 g-lg-4',
-      '2' => 'row-cols-2 g-2 g-md-3 g-lg-4',
-      '3' => 'row-cols-2 row-cols-md-3 g-2 g-md-3 g-lg-4',
-      '4' => 'row-cols-2 row-cols-md-3 row-cols-lg-4 g-2 g-md-3 g-lg-4',
-      '5' => 'row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-2 g-lg-3',
-      '6' => 'row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-6 g-2 g-lg-3',
+    '1' => 'row-cols-1 g-2 g-md-3 g-lg-4',
+    '2' => 'row-cols-2 g-2 g-md-3 g-lg-4',
+    '3' => 'row-cols-2 row-cols-md-3 g-2 g-md-3 g-lg-4',
+    '4' => 'row-cols-2 row-cols-md-3 row-cols-lg-4 g-2 g-md-3 g-lg-4',
+    '5' => 'row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-2 g-lg-3',
+    '6' => 'row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-6 g-2 g-lg-3',
   ];
 
-  if ($item_style=='list' && $item_col >= 2) {
-      // 列表模式自适应...
-      $row_cols_class = 'row-cols-1 row-cols-md-2 g-2 g-md-3 g-lg-4';
-  }else{
-      $row_cols_class = $row_cols[$item_col];
+  if ($item_style == 'list' && $item_col >= 2) {
+    // 列表模式自适应...
+    $row_cols_class = 'row-cols-1 row-cols-md-2 g-2 g-md-3 g-lg-4';
+  } else {
+    $row_cols_class = $row_cols[$item_col];
   }
 
   $config = array(
-      'type'            => $item_style, //grid grid-overlay list list-icon
-      'row_cols_class'  => $row_cols_class,
-      'media_size_type' => $media_size_type,
-      'media_fit_type'  => $media_fit_type,
-      'media_class'     => $media_size, // media-3x2 media-3x3 media-2x3
-      'is_vip_icon'     => @in_array('vip_icon', $item_entry),
-      'is_entry_desc'   => @in_array('entry_desc', $item_entry),
-      'is_entry_meta' => @in_array('entry_footer', $item_entry),
-      'is_entry_cat' => @in_array('category_dot', $item_entry),
+    'type'            => $item_style, //grid grid-overlay list list-icon
+    'row_cols_class'  => $row_cols_class,
+    'media_size_type' => $media_size_type,
+    'media_fit_type'  => $media_fit_type,
+    'media_class'     => $media_size, // media-3x2 media-3x3 media-2x3
+    'is_vip_icon'     => @in_array('vip_icon', $item_entry),
+    'is_entry_desc'   => @in_array('entry_desc', $item_entry),
+    'is_entry_meta' => @in_array('entry_footer', $item_entry),
+    'is_entry_cat' => @in_array('category_dot', $item_entry),
   );
   return $config;
 }
 
 
 
-function capalot_get_thumbnail_size_type(){
+function capalot_get_thumbnail_size_type()
+{
   $options = array(
-      'bg-cover',
-      'bg-auto',
-      'bg-contain',
+    'bg-cover',
+    'bg-auto',
+    'bg-contain',
   );
-  $opt = _capalot('site_thumb_size_type','bg-cover');
+  $opt = _capalot('site_thumb_size_type', 'bg-cover');
 
   if (!in_array($opt, $options)) {
-      $opt = $options[0];
+    $opt = $options[0];
   }
   return $opt;
 }
 
-function capalot_get_thumbnail_fit_type(){
+function capalot_get_thumbnail_fit_type()
+{
   $options = array(
-      'bg-left-top',
-      'bg-right-top',
-      'bg-center-top',
-      'bg-center',
-      'bg-center-bottom',
-      'bg-left-bottom',
-      'bg-right-bottom',
+    'bg-left-top',
+    'bg-right-top',
+    'bg-center-top',
+    'bg-center',
+    'bg-center-bottom',
+    'bg-left-bottom',
+    'bg-right-bottom',
   );
-  $opt = _capalot('site_thumb_fit_type','bg-center');
+  $opt = _capalot('site_thumb_fit_type', 'bg-center');
 
   if (!in_array($opt, $options)) {
-      $opt = $options[0];
+    $opt = $options[0];
   }
   return $opt;
 }
