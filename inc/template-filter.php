@@ -106,6 +106,12 @@ function capalot_archive_description($description)
 }
 add_filter('get_the_archive_description', 'capalot_archive_description');
 
+// 在后台更新菜单时删除缓存
+function capalot_update_menu_callback() {
+    delete_transient('main-menu-cache');
+}
+add_action('wp_update_nav_menu', 'capalot_update_menu_callback', 10);
+
 // 重写登录页面url
 function capalot_login_url($url, $redirect)
 {
