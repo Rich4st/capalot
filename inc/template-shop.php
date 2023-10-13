@@ -686,7 +686,7 @@ function capalot_get_pay_body_html($id, $price, $qrimg)
     if (in_array($id, $alipay_group)) {
         # alipay
         $icon_url = get_template_directory_uri() . '/assets/img/alipay.png';
-        $title    = sprintf(__('支付宝扫码支付 %s 元', 'ripro'), $price);
+        $title    = sprintf(__('支付宝扫码支付<strong class="font-semibold text-red-500"> %s </strong>元', 'ripro'), $price);
     } elseif (in_array($id, $weixinpay_group)) {
         # weixinpay
         $icon_url = get_template_directory_uri() . '/assets/img/weixinpay.png';
@@ -696,9 +696,9 @@ function capalot_get_pay_body_html($id, $price, $qrimg)
         $title    = sprintf(__('扫码支付 %s 元', 'ripro'), $price);
     }
 
-    $desc = __('支付后请等待 5 秒左右，切勿关闭扫码窗口', 'ripro');
+    $desc = __('支付后请等待<strong class="text-red-500 font-bold"> 5 </strong>秒左右，切勿关闭扫码窗口', 'ripro');
     $html = sprintf('
-    <div class="flex flex-col items-center justify-center gap-2 px-6 py-8 dark:bg-dark">
+    <div class="flex flex-col items-center justify-center gap-2 dark:bg-dark-card">
     <img class="w-1/2 h-1/2" src="%s">
     <div class="mt-2">%s</div>
     <div class="qrcode"><img src="%s">
@@ -714,7 +714,7 @@ function capalot_get_pay_body_html($id, $price, $qrimg)
 function capalot_get_pay_select_html($order_type = 0)
 {
     $data = capalot_get_pay_options();
-    $html = '<ul class="px-4 py-6 dark:bg-dark-card space-y-2">';
+    $html = '<ul class="space-y-2">';
     $str = array('虎皮椒-', '讯虎-', 'PayJS-', '易支付-', '码支付-', '官方-');
 
     // 充值订单或是未登录用户，去掉余额支付
