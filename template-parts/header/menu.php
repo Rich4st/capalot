@@ -12,9 +12,9 @@
 $container = _capalot('site_container_width', '1400');
 ?>
 
-<header class="h-[72px]  dark:bg-dark dark:text-gray-400 w-full">
-	<div class="site-header z-[99] w-full ">
-		<div class="container   mx-auto lg:px-0 px-2  py-2" style="max-width: <?php
+<header class="h-[72px] dark:bg-dark dark:text-gray-400 w-full ">
+	<div class="site-header z-[99] w-full dark:bg-dark ">
+		<div class="container  mx-auto lg:px-0 px-2  py-2" style="max-width: <?php
 																				if ($container === '') {
 																					echo '1280';
 																				} else {
