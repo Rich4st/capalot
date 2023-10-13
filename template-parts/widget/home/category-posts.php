@@ -22,26 +22,29 @@ $container = _capalot('site_container_width', '1400')
 <!-- 文章展示页 -->
 <section class=" dark:bg-dark">
   <div class="mx-auto py-3" style="max-width: <?php
-                                          if ($container === '') {
-                                            echo '1280';
-                                          } else {
-                                            echo $container;
-                                          }
-                                          ?>px;">
+                                              if ($container === '') {
+                                                echo '1280';
+                                              } else {
+                                                echo $container;
+                                              }
+                                              ?>px;">
     <?php
     $section_title = get_cat_name($cat_id);
     $section_desc  = category_description($cat_id);
     ?>
     <?php if ($section_title) : ?>
-      <div class="section-title text-center mb-4   dark:text-white  ">
-        <h3 class="text-2xl text-black dark:text-gray-50 transition-all hover:ease-in-out cursor-pointer mb-2"><a href="<?php echo get_category_link($cat_id) ?>"><?php echo $section_title ?></a></h3>
+      <div class="section-title text-center mb-4 dark:text-white  ">
+        <a class="text-2xl text-black hover:text-opacity-60 dark:text-gray-50" href="<?php echo get_category_link($cat_id) ?>"
+          title="<?php echo get_cat_name($cat_id); ?>">
+          <?php echo $section_title ?>
+        </a>
         <?php if (!empty($section_desc)) : ?>
-          <p class="text-muted mb-0 text-gray-400"><?php echo $section_desc ?></p>
+          <p class="text-muted mt-4 text-gray-400"><?php echo $section_desc ?></p>
         <?php endif; ?>
       </div>
     <?php endif; ?>
 
-    <ul class="row  dark:bg-dark list-none grid p-2 <?php echo esc_attr($config['row_cols_class']); ?>">
+    <ul class="dark:bg-dark list-none grid p-2 <?php echo esc_attr($config['row_cols_class']); ?>">
       <?php if ($PostData->have_posts()) :
         while ($PostData->have_posts()) : $PostData->the_post();
           get_template_part('template-parts/loop/item', '', $config);
