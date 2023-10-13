@@ -690,7 +690,7 @@ function capalot_get_pay_body_html($id, $price, $qrimg)
     } elseif (in_array($id, $weixinpay_group)) {
         # weixinpay
         $icon_url = get_template_directory_uri() . '/assets/img/weixinpay.png';
-        $title    = sprintf(__('微信扫码支付 %s 元', 'ripro'), $price);
+        $title    = sprintf(__('微信扫码支付<strong class="font-semibold text-red-500"> %s </strong>元', 'ripro'), $price);
     } else {
         $icon_url = '';
         $title    = sprintf(__('扫码支付 %s 元', 'ripro'), $price);
@@ -707,7 +707,7 @@ function capalot_get_pay_body_html($id, $price, $qrimg)
     </div>
     </div>
     ', $icon_url, $title, $qrimg, $desc);
-    return apply_filters('ri_pay_body_html', $html);
+    return $html;
 }
 
 // 获取支付方式选项模板
@@ -870,6 +870,16 @@ function capalot_get_request_pay($order_data)
                 $pay_url = capalot_get_pay_body_html($order_data['pay_type'], $order_data['pay_price'], get_qrcode_url($pay_url));
             }
 
+            break;
+        case 'weixinpay':
+            $config = _capalot('weixinpay');
+
+            if(wp_is_mobile() && !empty($config['is_mobile']) && is_weixin_visit()) {
+                $pay_url = $CapalotPay->weixin_h5_pay($order_data);
+            } else {
+                $pay_url = $CapalotPay->weixin_qr_pay($order_data);
+                $pay_url = capalot_get_pay_body_html($order_data['pay_type'], $order_data['pay_price'], get_qrcode_url($pay_url));
+            }
             break;
         default:
             break;
