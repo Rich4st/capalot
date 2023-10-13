@@ -491,15 +491,16 @@ let ca = {
 
   // 新增评论
   add_comment: function () {
-    const o = jQuery("#commentform");
-    o.find('input[type="submit"]'), o.submit(function (e) {
+    const commentform = jQuery("#commentform");
+    commentform.find('input[type="submit"]');
+    commentform.submit(function (e) {
       e.preventDefault();
-      const t = jQuery("#submit"),
-        n = t.val();
+      const t = jQuery("#submit");
+      const n = t.val();
       jQuery.ajax({
         type: "POST",
         url: capalot.ajax_url,
-        data: o.serialize() + "&action=capalot_ajax_comment&nonce=" + capalot.ajax_nonce,
+        data: commentform.serialize() + "&action=capalot_ajax_comment&nonce=" + capalot.ajax_nonce,
         beforeSend: function (e) {
           t.prop("disabled", !0).val(capalot.get_text.__commiting)
         },
@@ -516,26 +517,31 @@ let ca = {
         }
       })
     });
-    var e = jQuery(".comments-list");
-    const a = jQuery(".infinite-scroll-button"),
-      i = jQuery(".infinite-scroll-status"),
-      r = jQuery(".infinite-scroll-msg");
-    a.length && (e.on("request.infiniteScroll", function (e, t) {
-      i.show()
-    }), e.on("load.infiniteScroll", function (e, t, n) {
-      i.hide()
-    }), e.on("last.infiniteScroll", function (e, t, n) {
-      a.hide(), r.show()
-    }), e.infiniteScroll({
-      append: ".comments-list > *",
-      debug: !1,
-      hideNav: ".comments-pagination",
-      history: !1,
-      path: ".comments-pagination a.next",
-      prefill: !1,
-      scrollThreshold: !1,
-      button: ".infinite-scroll-button"
-    }))
+    var comments_list = jQuery(".comments-list");
+    const scroll_button = jQuery(".infinite-scroll-button");
+    const scroll_status = jQuery(".infinite-scroll-status");
+    const scroll_msg = jQuery(".infinite-scroll-msg");
+    scroll_button.length && (
+      comments_list.on("request.infiniteScroll", function (e, t) {
+        scroll_status.show()
+      }),
+      comments_list.on("load.infiniteScroll", function (e, t, n) {
+        scroll_status.hide()
+      }),
+      comments_list.on("last.infiniteScroll", function (e, t, n) {
+        scroll_button.hide(), scroll_msg.show()
+      }),
+      comments_list.infiniteScroll({
+        append: ".comments-list > *",
+        debug: !1,
+        hideNav: ".comments-pagination",
+        history: !1,
+        path: ".comments-pagination a.next",
+        prefill: !1,
+        scrollThreshold: !1,
+        button: ".infinite-scroll-button"
+      })
+    )
   },
 
   // 防抖
