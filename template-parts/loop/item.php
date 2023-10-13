@@ -55,7 +55,7 @@ if ($post_format && isset($format_icons[$post_format])) {
 
       <div class="entry-wrapper   text-gray-400  p-2  text-[0.75rem]">
         <?php if ($args['is_entry_cat']) : ?>
-          <div class="entry-cat-dot   mb-1 whitespace-nowrap text-ellipsis overflow-hidden"><?php capalot_meta_category(2); ?></div>
+          <div class="entry-cat-dot   mb-1 line-clamp-1"><?php capalot_meta_category(2); ?></div>
         <?php endif; ?>
 
         <h2 class="font-bold text-gray-700  dark:text-gray-50  text-base whitespace-nowrap text-ellipsis overflow-hidden">
@@ -71,8 +71,8 @@ if ($post_format && isset($format_icons[$post_format])) {
             <div>
               <span class="meta-date"><i class="fa-regular fa-clock pr-1"></i>
                 <?php capalot_meta_datetime(); ?></span>
-              <span class="meta-likes d-none "><i class="fa-regular fa-heart pr-1"></i><?php echo capalot_get_post_likes(); ?></span>
-              <span class="meta-fav d-none "><i class="fa-regular fa-star pr-1"></i><?php echo capalot_get_post_favorites(); ?></span>
+              <span class="meta-likes"><i class="fa-regular fa-heart pr-1"></i><?php echo capalot_get_post_likes(); ?></span>
+              <span class="meta-fav"><i class="fa-regular fa-star pr-1"></i><?php echo capalot_get_post_favorites(); ?></span>
               <span class="meta-views"><i class="fa-regular fa-eye pr-1"></i><?php echo capalot_get_post_views(); ?></span>
             </div>
             <?php if (is_site_shop() && post_has_pay($post_id)) : ?>
@@ -121,7 +121,7 @@ if ($post_format && isset($format_icons[$post_format])) {
         <div class="absolute text-gray-50 bottom-0 left-0 top-0 right-0 hidden group-hover:flex items-center justify-between px-2 w-full h-full  bg-opacity-10 transition-opacity" style="background: linear-gradient(180deg,transparent 62%,rgba(0, 0, 0, 0.00345888) 63.94%,rgba(0, 0, 0, 0.014204) 65.89%,rgba(0, 0, 0, 0.0326639) 67.83%,rgba(0, 0, 0, 0.0589645) 69.78%,rgba(0, 0, 0, 0.0927099) 71.72%,rgba(0, 0, 0, 0.132754) 73.67%,rgba(0, 0, 0, 0.177076) 75.61%,rgba(0, 0, 0, 0.222924) 77.56%,rgba(0, 0, 0, 0.267246) 79.5%,rgba(0, 0, 0, 0.30729) 81.44%,rgba(0, 0, 0, 0.341035) 83.39%,rgba(0, 0, 0, 0.367336) 85.33%,rgba(0, 0, 0, 0.385796) 87.28%,rgba(0, 0, 0, 0.396541) 89.22%,rgba(0, 0, 0, 0.4) 91.17%);border-radius:0 0 0.5rem 0.5rem;">
           <a class="w-full h-full" target="<?php echo get_target_blank(); ?>" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
             <div class="absolute bottom-8 left-2 w-full pr-2">
-              <div class="mb-1 whitespace-nowrap  text-ellipsis overflow-hidden">
+              <div class="mb-1 line-clamp-1">
                 <?php if ($args['is_entry_cat']) : ?>
                   <?php capalot_meta_category(2); ?>
                 <?php endif; ?>
@@ -163,11 +163,11 @@ if ($post_format && isset($format_icons[$post_format])) {
             <div class=" mb-1 whitespace-nowrap text-ellipsis overflow-hidden"><?php capalot_meta_category(2); ?></div>
           <?php endif; ?>
 
-          <h2 class=" text-black text-base dark:text-gray-50  font-bold  whitespace-nowrap text-ellipsis overflow-hidden">
+          <h2 class=" text-black text-base dark:text-gray-50  font-bold line-clamp-1">
             <a target="<?php echo get_target_blank(); ?>" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a>
           </h2>
           <?php if ($args['is_entry_desc']) : ?>
-            <div class=" whitespace-normal text-ellipsis overflow-hidden"><?php echo capalot_get_post_excerpt(40); ?></div>
+            <div class="line-clamp-1 min-h-[1.25rem]"><?php echo capalot_get_post_excerpt(40); ?></div>
           <?php endif; ?>
         </div>
         <?php if ($args['is_entry_meta']) : ?>
@@ -189,7 +189,7 @@ if ($post_format && isset($format_icons[$post_format])) {
   </li>
 
 <?php elseif ($args['type'] == 'title') : ?>
-  <li class="dark:bg-dark-card  rounded-lg bg-white  cursor-pointer shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]  h-32 transition-all duration-300 hover:shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)] ">
+  <li class="dark:bg-dark-card  rounded-lg bg-white  cursor-pointer shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]  transition-all duration-300 hover:shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)] ">
     <article class="item-list relative p-2">
 
       <div class="absolute w-10 text-center top-0 right-0 z-50 m-2 bg-[#b0adac]  rounded-xl">
@@ -199,17 +199,17 @@ if ($post_format && isset($format_icons[$post_format])) {
       </div>
 
       <div class="entry-wrapper text-gray-400 text-[0.75rem]">
-        <div class="entry-body h-24">
+        <div class="entry-body">
 
           <?php if ($args['is_entry_cat']) : ?>
             <div class="entry-cat-dot mb-1 whitespace-nowrap text-ellipsis overflow-hidden"><?php capalot_meta_category(2); ?></div>
           <?php endif; ?>
 
-          <h2 class=" text-base text-black dark:text-gray-50  font-bold  whitespace-nowrap text-ellipsis overflow-hidden">
+          <h2 class=" text-base text-black dark:text-gray-50  font-bold line-clamp-1">
             <a target="<?php echo get_target_blank(); ?>" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a>
           </h2>
           <?php if ($args['is_entry_desc']) : ?>
-            <div class="entry-desc whitespace-normal text-ellipsis overflow-hidden"><?php echo capalot_get_post_excerpt(40); ?></div>
+            <div class="entry-desc line-clamp-1 min-h-[1.25rem]"><?php echo capalot_get_post_excerpt(40); ?></div>
           <?php endif; ?>
         </div>
         <?php if ($args['is_entry_meta']) : ?>
@@ -217,8 +217,8 @@ if ($post_format && isset($format_icons[$post_format])) {
             <div>
               <span class="meta-date"><i class="fa-regular fa-clock pr-1"></i>
                 <?php capalot_meta_datetime(); ?></span>
-              <span class="meta-likes d-none "><i class="fa-regular fa-heart pr-1"></i><?php echo capalot_get_post_likes(); ?></span>
-              <span class="meta-fav d-none "><i class="fa-regular fa-star pr-1"></i><?php echo capalot_get_post_favorites(); ?></span>
+              <span class="meta-likes  "><i class="fa-regular fa-heart pr-1"></i><?php echo capalot_get_post_likes(); ?></span>
+              <span class="meta-fav "><i class="fa-regular fa-star pr-1"></i><?php echo capalot_get_post_favorites(); ?></span>
               <span class="meta-views"><i class="fa-regular fa-eye pr-1"></i><?php echo capalot_get_post_views(); ?></span>
             </div>
             <?php if (is_site_shop() && post_has_pay($post_id)) : ?>
