@@ -30,11 +30,17 @@ if ($config['dots'] === true) {
     'el' => '.swiper-pagination', 'clickable' => true
   ];
 }
+$container = _capalot('site_container_width', '1400');
 
 ?>
 
 <section class="dark:bg-dark py-3">
-  <div class="swiper mySwiper  <?php echo $args['container']; ?> " data-config='<?php echo json_encode($config); ?>'>
+  <div class="swiper mySwiper mx-auto" style="max-width:
+   <?php if ($container === '') {
+      echo ($args['container'] == 'container-normal') ?   '1280px' : '100%';
+    } else {
+      echo ($args['container'] == 'container-normal') ?   $container . 'px' : '100%';
+    } ?>" data-config='<?php echo json_encode($config); ?>'>
     <div class="swiper-wrapper  ">
 
       <?php if ($args['data']) :
