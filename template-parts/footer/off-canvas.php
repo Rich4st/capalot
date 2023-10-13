@@ -69,7 +69,7 @@
   // 移动端侧边菜单
   window.onload = function() {
     var has = document.querySelectorAll('.menu-item-has-children');
-    
+
     for (var j = 0; j < has.length; j++) {
       var lis = document.createElement("i");
       lis.classList.add('fa-solid')
@@ -83,12 +83,20 @@
       jd.onclick = function() {
         $(this).next().slideToggle(200);
         var icon_css = $(this).siblings()[0];
-        if(icon_css.style.transform != 'rotate(90deg)'){
-          icon_css.setAttribute("style","transform:rotate(90deg);");
-        }else{
-          icon_css.setAttribute("style","transform:rotate(0deg);");
+        if (icon_css.style.transform != 'rotate(90deg)') {
+          icon_css.setAttribute("style", "transform:rotate(90deg);");
+        } else {
+          icon_css.setAttribute("style", "transform:rotate(0deg);");
         }
       }
     }
+
+    var li_menu = document.querySelectorAll('#header-navbar .menu-item');
+    console.log(li_menu);
+    li_menu.forEach(el => {
+      const atag = el.querySelector('a');
+      atag.classList.add('dark:!bg-dark');
+      atag.classList.add('dark:!text-gray-400');
+    });
   }
 </script>

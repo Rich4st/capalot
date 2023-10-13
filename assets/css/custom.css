@@ -379,8 +379,9 @@
     position: relative;
 }
 
-.navbar .nav-list .menu-item>a {
+.navbar .nav-list .menu-item a {
     display: block;
+    opacity: .9;
 }
 
 .navbar .nav-list .menu-item>a .emoji {
@@ -421,7 +422,6 @@
     list-style-type: none;
     visibility: hidden;
     width: auto;
-    padding: .5rem;
     margin: -1px 0 0 0;
     border-radius: .3rem;
     box-shadow: 0 0 30px rgba(0, 0, 0, .07);
@@ -523,6 +523,8 @@
     max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
+    margin-bottom: 10px;
+
 }
 
 .sidebar-main-menu .nav-list .menu-item>a {
@@ -536,7 +538,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    background: #f7f7f7;
 }
 
 .sidebar-main-menu .nav-list .menu-item>a>i {
@@ -557,7 +558,6 @@
 .sidebar-main-menu .nav-list .sub-menu {
     border-radius: 0 0 2px 2px;
     overflow: hidden;
-    background: #eaeaea;
     padding: 5px;
     position: relative;
     display: none;
@@ -572,8 +572,7 @@
     border: none;
     border-radius: 0;
     line-height: 1;
-    background: #f7f7f7;
-    margin: 10px 5px;
+    margin:5px;
     border-radius: 4px;
     padding: 12px 5px;
     display: block;
@@ -602,6 +601,24 @@
 }
 
 /* 轮播退左右箭头 */
-.category-swiper{
+.category-swiper {
     --swiper-navigation-size: 20px;
-  }
+}
+
+#header-navbar .menu-item-has-children svg {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+}
+.nav-list .menu-item a{
+    background: #eee;
+    color: #333;
+}
+@media (min-width:1024px) {
+    #header-navbar svg {
+        display: none !important;
+    }
+    .nav-list .menu-item a{
+        background: none;
+    }
+}
