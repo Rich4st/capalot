@@ -11,6 +11,13 @@ $config = [
     'el' => '.swiper-pagination',
     'clickable' => true
   ],
+  'lazy' => true,
+  'autoplay' => true,
+  'loop'     => true,
+  'navigation' => [
+    'nextEl' => ".swiper-button-next",
+    'prevEl' => ".swiper-button-prev",
+  ],
 ];
 
 $cat_ids = (array) $args['category'];
@@ -35,14 +42,14 @@ $def_bg_img = get_template_directory_uri() . '/assets/img/bg.jpg'; //默认缩�
 $container = _capalot('site_container_width', '1400');
 ?>
 
-<section class="dark:bg-dark">
+<section class="dark:bg-dark py-3">
   <div class="swiper mySwiper   mx-auto" data-config='<?php echo json_encode($config); ?>' style="max-width: <?php
-                                                                                                                          if ($container === '') {
-                                                                                                                            echo '1280';
-                                                                                                                          } else {
-                                                                                                                            echo $container;
-                                                                                                                          }
-                                                                                                                          ?>px;">
+                                                                                                              if ($container === '') {
+                                                                                                                echo '1280';
+                                                                                                              } else {
+                                                                                                                echo $container;
+                                                                                                              }
+                                                                                                              ?>px;">
     <div class="swiper-wrapper">
 
       <?php foreach ($terms as $key => $item) :
@@ -69,6 +76,8 @@ $container = _capalot('site_container_width', '1400');
 
       <?php endforeach; ?>
     </div>
+    <div class="swiper-button-next after:text-white"></div>
+    <div class="swiper-button-prev after:text-white"></div>
   </div>
 
 </section>

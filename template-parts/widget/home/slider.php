@@ -33,7 +33,7 @@ if ($config['dots'] === true) {
 
 ?>
 
-<section class="dark:bg-dark">
+<section class="dark:bg-dark py-3">
   <div class="swiper mySwiper  <?php echo $args['container']; ?> " data-config='<?php echo json_encode($config); ?>'>
     <div class="swiper-wrapper  ">
 
