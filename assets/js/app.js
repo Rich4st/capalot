@@ -286,6 +286,10 @@ let ca = {
     width = '240px',
     customClass = {},
   }) {
+    const defaultClass = {
+      popup: 'dark:bg-dark-card',
+      htmlContainer: 'dark:bg-dark-card'
+    }
 
     Swal.fire({
       title,
@@ -299,7 +303,7 @@ let ca = {
       showCancelButton,
       cancelButtonText,
       width,
-      customClass,
+      customClass: Object.assign(defaultClass, customClass),
     }).then(callback);
 
   },
@@ -344,10 +348,10 @@ let ca = {
       return;
     }
 
-    if(method === 'url') {
+    if (method === 'url') {
       location.href = msg;
-    } else if(method === 'popup') {
-      ca.popup({ html: msg, showCloseButton: false, width: '16rem' });
+    } else if (method === 'popup') {
+      ca.popup({ html: msg, showCloseButton: false, width: '17rem' });
     }
   },
 
@@ -359,7 +363,7 @@ let ca = {
       data: e,
       success: ({ status, msg, data }) => {
         const customClass = {
-          closeButton: 'w-8 h-8 absolute -bottom-3 left-0 right-0 mx-auto bg-white hover:bg-white rounded-full text-lg dark:bg-dark-card'
+          closeButton: 'w-8 h-8 absolute -bottom-3 left-0 right-0 mx-auto bg-white hover:bg-white rounded-full text-lg dark:bg-dark-card',
         }
 
         status == 1
