@@ -10,17 +10,22 @@
 </style>
 <?php
 $container = _capalot('site_container_width', '1400');
+
+if(_capalot('is_site_home_header_transparent', false)) {
+	$header_css = 'absolute';
+}
+
 ?>
 
-<header class="h-[72px] dark:bg-dark dark:text-gray-400 w-full ">
+<header class="h-[72px] dark:bg-dark dark:text-gray-400 w-full <?php echo $header_css; ?>">
 	<div class="site-header z-[99] w-full dark:bg-dark ">
 		<div class="container  mx-auto lg:px-0 px-2  py-2" style="max-width: <?php
-																				if ($container === '') {
-																					echo '1280';
-																				} else {
-																					echo $container;
-																				}
-																				?>px;">
+																																					if ($container === '') {
+																																						echo '1280';
+																																					} else {
+																																						echo $container;
+																																					}
+																																					?>px;">
 			<div class=" navbar relative px-1 " id="hea_bg"> <!-- container-fluid px-lg-5 -->
 				<div class="flex items-center ">
 					<div class="mr-4  flex items-center">
