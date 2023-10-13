@@ -1,4 +1,4 @@
-<?php do_action('ripro_ads', 'ad_single_top'); ?>
+<?php do_action('capalot_ads', 'ad_single_top'); ?>
 <article <?php post_class('post-content'); ?>>
   <?php
   the_content(
@@ -27,7 +27,7 @@
 
 </article>
 
-<?php do_action('ripro_ads', 'ad_single_bottom'); ?>
+<?php do_action('capalot_ads', 'ad_single_bottom'); ?>
 
 <?php get_template_part('template-parts/single/tags') ?>
 

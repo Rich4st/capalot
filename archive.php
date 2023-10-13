@@ -14,7 +14,7 @@ $archive_item_config = get_posts_style_config();
 <section class="  dark:bg-dark">
 	<div class=" container max-w-[80rem] m-auto py-8 lg:px-0 px-4">
 
-		<?php do_action('ripro_ads', 'ad_archive_top'); ?>
+		<?php do_action('capalot_ads', 'ad_archive_top'); ?>
 
 		<ul class="posts-wrap grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-cols-1 md:gap-8 gap-2 mb-4  <?php echo esc_attr($archive_item_config['row_cols_class']); ?>">
 			<?php if (have_posts()) :
@@ -26,11 +26,11 @@ $archive_item_config = get_posts_style_config();
 			endif;
 			?>
 		</ul>
-		
-		<?php do_action('ripro_ads', 'ad_archive_bottom'); ?>
 
-		
-		
+		<?php do_action('capalot_ads', 'ad_archive_bottom'); ?>
+
+
+
 	</div>
 </section>
 <?php

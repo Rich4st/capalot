@@ -1,11 +1,6 @@
 <?php
 
-/**
- * 自定义顶部css
- * @Author Dadong2g
- * @date   2023-03-14
- * @return [type]
- */
+// 自定义顶部css
 function custom_head_css()
 {
     $css = '';
@@ -20,7 +15,7 @@ function custom_head_css()
     //背景颜色配置
     $body_background = _capalot('site_background', array());
     $__css           = '';
-    if( is_array ($body_background) || is_object ($body_background)){
+    if (is_array($body_background) || is_object($body_background)) {
         foreach ($body_background as $property => $value) {
             if (!empty($value)) {
                 if (is_array($value)) {
@@ -34,7 +29,6 @@ function custom_head_css()
             }
         }
     }
-    
 
     if (!empty($__css)) {
         $css .= "body{{$__css}}\n";
@@ -74,17 +68,11 @@ function custom_head_css()
 }
 add_action('wp_head', 'custom_head_css');
 
-
-
-
-/**
- * Adds custom classes to the array of body classes.
- *
- * @param array $classes Classes for the body element.
- * @return array
- */
+// 为body添加自定义样式
 function custom_body_classes($classes)
 {
+
+    $classes[] = 'dark:bg-dark';
 
     if (get_query_var('uc-page')) {
         $classes[] = 'uc-page';
@@ -184,8 +172,6 @@ function _get_avatar_url($url, $id_or_email, $args)
 
             if (strpos($custom_avatar, '/') === 0) {
                 // 相对路径，添加网站目录前缀
-                //兼容老款相对地址
-                $uploads = wp_upload_dir();
                 if (file_exists(WP_CONTENT_DIR . '/uploads' . $custom_avatar)) {
                     $custom_avatar = WP_CONTENT_URL . '/uploads' . $custom_avatar;
                 }
@@ -204,25 +190,15 @@ function _get_avatar_url($url, $id_or_email, $args)
 }
 add_filter('get_avatar_url', '_get_avatar_url', 10, 3);
 
-
-
-
-/**
- * 搜素功能过滤器
- * @Author Dadong2g
- * @date   2023-02-13
- * @param  [type]     $search   [description]
- * @param  [type]     $wp_query [description]
- * @return [type]
- */
-function site_search_by_title_only($search, $wp_query) {
+// 搜素功能过滤器
+function site_search_by_title_only($search, $wp_query)
+{
     global $wpdb;
 
     if (empty($search) || empty(_capalot('is_site_pro_search_title', false))) {
-        return $search; // skip processing - no search term in query
+        return $search;
     }
 
-    // skip processing - no search term in query
     $q      = $wp_query->query_vars;
     $n      = !empty($q['exact']) ? '' : '%';
     $search = $searchand = '';
@@ -236,23 +212,14 @@ function site_search_by_title_only($search, $wp_query) {
         if (!is_user_logged_in()) {
             $search .= " AND ($wpdb->posts.post_password = '') ";
         }
-
     }
     return $search;
-
 }
 add_filter('posts_search', 'site_search_by_title_only', 99, 2);
 
-
-
-/**
- * 广告代码
- * @Author Dadong2g
- * @date   2023-06-26
- * @param  [type]     $slug [description]
- * @return [type]
- */
-function capalot_ripro_ads_filter($slug) {
+// 广告代码
+function capalot_ads_filter($slug)
+{
 
     if (defined('DOING_AJAX') && DOING_AJAX) {
         return false;
@@ -275,6 +242,4 @@ function capalot_ripro_ads_filter($slug) {
     }
     echo $html;
 }
-
-add_action('ripro_ads', 'capalot_ripro_ads_filter', 10, 1);
-
+add_action('capalot_ads', 'capalot_ads_filter', 10, 1);

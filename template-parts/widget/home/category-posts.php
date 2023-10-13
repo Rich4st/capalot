@@ -33,10 +33,13 @@ $container = _capalot('site_container_width', '1400')
     $section_desc  = category_description($cat_id);
     ?>
     <?php if ($section_title) : ?>
-      <div class="section-title text-center mb-4   dark:text-white  ">
-        <h3 class="text-2xl text-black dark:text-gray-50 transition-all hover:ease-in-out cursor-pointer mb-2"><a href="<?php echo get_category_link($cat_id) ?>"><?php echo $section_title ?></a></h3>
+      <div class="section-title text-center mb-4 dark:text-white  ">
+        <a class="text-2xl text-black hover:text-opacity-60 dark:text-gray-50" href="<?php echo get_category_link($cat_id) ?>"
+          title="<?php echo get_cat_name($cat_id); ?>">
+          <?php echo $section_title ?>
+        </a>
         <?php if (!empty($section_desc)) : ?>
-          <p class="text-muted mb-0 text-gray-400"><?php echo $section_desc ?></p>
+          <p class="text-muted mt-4 text-gray-400"><?php echo $section_desc ?></p>
         <?php endif; ?>
       </div>
     <?php endif; ?>
