@@ -436,7 +436,7 @@ function capalot_get_post_favorites($post_id = null)
     global $post;
     $post_id = $post->ID;
   }
-  $meta_key = 'favorites';
+  $meta_key = 'follow_num';
   $num      = absint(get_post_meta($post_id, $meta_key, true));
   if (1000 <= $num) {
     $num = sprintf('%0.1f', $num / 1000) . 'K';
