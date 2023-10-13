@@ -112,6 +112,7 @@ function capalot_update_menu_callback() {
 }
 add_action('wp_update_nav_menu', 'capalot_update_menu_callback', 10);
 
+
 // 重写登录页面url
 function capalot_login_url($url, $redirect)
 {

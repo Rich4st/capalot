@@ -69,8 +69,11 @@
   // 移动端侧边菜单
   window.onload = function() {
     var has = document.querySelectorAll('.menu-item-has-children');
+    
     for (var j = 0; j < has.length; j++) {
       var lis = document.createElement("i");
+      lis.classList.add('fa-solid')
+      lis.classList.add('fa-angle-right')
       has[j].insertBefore(lis, has[j].children[0]);
     }
     var lis_ul = document.querySelectorAll('#header-navbar .sub-menu');

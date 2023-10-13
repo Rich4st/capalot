@@ -628,14 +628,8 @@
 
 
 
-.sidebar-main-menu .menu-item-has-children i {
-    display: block;
-    width: 10px;
-    height: 10px;
-    background: url(../img/icon_y.png) no-repeat center;
+.sidebar-main-menu .menu-item-has-children svg {
     position: absolute;
-    background-size: cover;
-    right: 10%;
-    top: 15px;
-    z-index: 98;
+    top: 12px;
+    right: 12px;
 }
