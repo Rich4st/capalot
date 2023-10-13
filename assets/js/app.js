@@ -615,22 +615,20 @@ let ca = {
       var currentScrollPos = window.pageYOffset;
 
       var scrolled = window.scrollY;
-      if (scrolled >= 80 && prevScrollpos !== 0) {
-        if (prevScrollpos > currentScrollPos) {
-          // gsap实现动画从屏幕外移动到屏幕内
-          gsap.to(navbar, { y: 0, duration: 0.5, ease: "power1.out" });
-          navbar.classList.add('fixed');
+      if (prevScrollpos > currentScrollPos) {//向上
+        gsap.to(navbar, { y: 0, duration: 0.3, ease: "power1.out" });
+        if (scrolled == 0) {
         } else {
-          gsap.to(navbar, { y: -100, duration: 0.5, ease: "power1.out" });
+          navbar.classList.add('fixed');
         }
       } else {
+        gsap.to(navbar, { y: -100, duration: 0.3, ease: "power1.out" });
         navbar.classList.remove('fixed');
       }
-
       prevScrollpos = currentScrollPos;
     });
   },
-// 导航菜单
+  // 导航菜单
   add_menus: function () {
     let main_menu = document.querySelector('.sidebar-main-menu');
     let warp_menu = document.querySelector('.sidebar-menu-warp');
