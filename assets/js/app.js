@@ -627,8 +627,10 @@ let ca = {
       if (prevScrollpos > currentScrollPos) {//向上
         gsap.to(navbar, { y: 0, duration: 0.3, ease: "power1.out" });
         if (scrolled == 0) {
+        navbar.classList.remove('navbar-sticky');
         } else {
           navbar.classList.add('fixed');
+          navbar.classList.add('navbar-sticky');
         }
       } else {
         gsap.to(navbar, { y: -100, duration: 0.3, ease: "power1.out" });
