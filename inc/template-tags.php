@@ -414,7 +414,7 @@ function capalot_get_post_excerpt($limit = '48')
     $excerpt = get_the_content();
   }
 
-  return wp_trim_words(strip_shortcodes($excerpt), $limit, '...');
+  echo wp_trim_words(strip_shortcodes($excerpt), $limit, '...');
 }
 
 /**
