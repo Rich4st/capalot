@@ -32,9 +32,9 @@ $price_shape = get_template_directory_uri() . '/assets/img/price_shape.png';
 
 
 <section class=" bg-[#eee] dark:bg-dark ">
-	<div class=" max-w-[80rem] m-auto lg:px-0 px-4 py-8">
+	<div class="max-w-7xl m-auto lg:px-0 px-4 py-8">
 
-		<div class=" grid lg:grid-cols-3 grid-cols-1 gap-4">
+		<div class="grid md:grid-cols-3 grid-cols-1 gap-4">
 			<?php foreach ($site_vip_buy_options as $day => $item) :
 				if ($item['day_num'] == 9999) {
 					$day_title = __('永久', 'ripro');
@@ -59,7 +59,7 @@ $price_shape = get_template_directory_uri() . '/assets/img/price_shape.png';
 								<!-- <?php foreach ($item['desc'] as $text) : ?> -->
 			        			<li><?php echo $text; ?></li>
 			        			<!-- <?php endforeach; ?> -->
-								
+
 							</ul>
 						</div>
 						<div class=" pb-8 pt-4 px-4 ">
