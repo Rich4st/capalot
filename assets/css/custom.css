@@ -599,26 +599,6 @@
 }
 
 /* 轮播退左右箭头 */
-.swiper-button-prev:after {
-    display: none;
-}
-
-.swiper-button-next:after {
-    display: none;
-}
-
-.swiper-button-prev {
-    width: 20px;
-    height: 20px;
-    border-bottom: 2px solid #cccccc;
-    border-left: 2px solid #cccccc;
-    transform: rotate(45deg);
-}
-
-.swiper-button-next {
-    width: 20px;
-    height: 20px;
-    border-top: 2px solid #cccccc;
-    border-right: 2px solid #cccccc;
-    transform: rotate(45deg);
-}
+.category-swiper{
+    --swiper-navigation-size: 20px;
+  }

@@ -43,7 +43,7 @@ $container = _capalot('site_container_width', '1400');
 ?>
 
 <section class="dark:bg-dark py-3">
-  <div class="swiper mySwiper   mx-auto" data-config='<?php echo json_encode($config); ?>' style="max-width: <?php
+  <div class="swiper mySwiper category-swiper mx-auto" data-config='<?php echo json_encode($config); ?>' style="max-width: <?php
                                                                                                               if ($container === '') {
                                                                                                                 echo '1280';
                                                                                                               } else {
