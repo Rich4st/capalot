@@ -49,14 +49,14 @@ $container = _capalot('site_container_width', '1400');
 
 ?>
 
-<section class="dark:bg-dark">
-  <div class="mx-auto py-3" style="max-width: <?php
-                                              if ($container === '') {
-                                                echo '1280';
-                                              } else {
-                                                echo $container;
-                                              }
-                                              ?>px;">
+<section class="dark:bg-dark py-3">
+  <div class="mx-auto " style="max-width: <?php
+                                          if ($container === '') {
+                                            echo '1280';
+                                          } else {
+                                            echo $container;
+                                          }
+                                          ?>px;">
     <?php
     $section_title = (!empty($args['title'])) ? $args['title'] : get_cat_name($cat_id);
     $section_desc = (!empty($args['desc'])) ? $args['desc'] : category_description($cat_id);
@@ -71,7 +71,7 @@ $container = _capalot('site_container_width', '1400');
     <?php endif; ?>
 
 
-    <div class="<?php echo esc_attr($cms_style); ?>  grid lg:grid-cols-2 grid-cols-1 gap-4 p-2">
+    <div class="<?php echo esc_attr($cms_style); ?>  grid lg:grid-cols-2 grid-cols-1 gap-4 p-2 lg:p-0">
 
       <?php if ($PostData->have_posts()) : $counter = 0; ?>
 

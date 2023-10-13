@@ -20,14 +20,14 @@ $config = get_posts_style_config();
 $container = _capalot('site_container_width', '1400')
 ?>
 <!-- 文章展示页 -->
-<section class=" dark:bg-dark">
-  <div class="mx-auto py-3" style="max-width: <?php
-                                              if ($container === '') {
-                                                echo '1280';
-                                              } else {
-                                                echo $container;
-                                              }
-                                              ?>px;">
+<section class=" dark:bg-dark py-3">
+  <div class="mx-auto " style="max-width: <?php
+                                          if ($container === '') {
+                                            echo '1280';
+                                          } else {
+                                            echo $container;
+                                          }
+                                          ?>px;">
     <?php
     $section_title = get_cat_name($cat_id);
     $section_desc  = category_description($cat_id);
@@ -44,7 +44,7 @@ $container = _capalot('site_container_width', '1400')
       </div>
     <?php endif; ?>
 
-    <ul class="dark:bg-dark list-none grid p-2 <?php echo esc_attr($config['row_cols_class']); ?>">
+    <ul class="row  dark:bg-dark list-none grid p-2 lg:p-0 <?php echo esc_attr($config['row_cols_class']); ?>">
       <?php if ($PostData->have_posts()) :
         while ($PostData->have_posts()) : $PostData->the_post();
           get_template_part('template-parts/loop/item', '', $config);

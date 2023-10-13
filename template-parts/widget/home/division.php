@@ -8,7 +8,7 @@ $container = _capalot('site_container_width', '1400');
 
 
 <section class=" dark:bg-dark py-3">
-  <div class="mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-4" style="max-width: <?php
+  <div class="mx-auto  grid grid-cols-2 md:grid-cols-4 gap-4" style="max-width: <?php
                                                                                     if ($container === '') {
                                                                                       echo '1280';
                                                                                     } else {
