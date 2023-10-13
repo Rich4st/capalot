@@ -183,19 +183,23 @@ class Capalot_Pay
   private $alipay_params;
   private $alipay_config;
 
+  private $wx_params;
+  private $wx_config;
+
   public function __construct()
   {
     $this->alipay_params = new \Yurun\PaySDK\Alipay\Params\PublicParams;
     $this->alipay_config = _capalot('alipay');
     $this->alipay_params->appID = $this->alipay_config['appid'];
 
-    // $wx_params = new \Yurun\PaySDK\Weixin\Params\PublicParams;
-    // $wx_config = _capalot('weixinpay');
-    // $wx_params->appID = $wx_config['appid'];
-    // $wx_params->mch_id = $wx_config['mch_id'];
-    // $wx_params->key = $wx_config['key'];
+    $this->wx_params = new \Yurun\PaySDK\Weixin\Params\PublicParams;
+    $this->wx_config = _capalot('weixinpay');
+    $this->wx_params->appID = $this->wx_config['appid'];
+    $this->wx_params->mch_id = $this->wx_config['mch_id'];
+    $this->wx_params->key = $this->wx_config['key'];
   }
 
+  // 支付宝手机支付
   public function alipay_app_wap_pay($order_data = null)
   {
     $pay = new \Yurun\PaySDK\Alipay\SDK($this->alipay_params);
@@ -215,6 +219,7 @@ class Capalot_Pay
     return esc_url($url);
   }
 
+  // 支付宝网页支付
   public function alipay_app_web_pay($order_data = null)
   {
     $pay = new \Yurun\PaySDK\Alipay\SDK($this->alipay_params);
@@ -233,6 +238,7 @@ class Capalot_Pay
     return $url;
   }
 
+  // 支付宝当面付
   public function alipay_app_qr_pay($order_data = null)
   {
     $params = new \Yurun\PaySDK\AlipayApp\Params\PublicParams;
@@ -260,6 +266,40 @@ class Capalot_Pay
     }
 
     return $pay->response->body();
+  }
+
+  // 微信网页支付
+  public function weixin_h5_pay($order_data = null)
+  {
+    $pay = new \Yurun\PaySDK\Weixin\SDK($this->wx_params);
+
+    $request = new \Yurun\PaySDK\Weixin\H5\Params\Pay\Request;
+    $request->notify_url = get_template_directory_uri() . '/inc/shop/weixinpay/notify.php';
+    $request->body = $order_data['order_name'];
+    $request->out_trade_no = $order_data['order_trade_no'];
+    $request->total_fee = $order_data['order_price'];
+    $request->spbill_create_ip = $_SERVER['REMOTE_ADDR'];
+
+    $result = $pay->execute($request);
+
+    return $result;
+  }
+
+  // 微信当面付
+  public function weixin_qr_pay($order_data  = null)
+  {
+    $pay = new \Yurun\PaySDK\Weixin\SDK($this->wx_params);
+
+    $request = new \Yurun\PaySDK\Weixin\H5\Params\Pay\Request;
+    $request->body = $order_data['order_name'];
+    $request->out_trade_no = $order_data['order_trade_no'];
+    $request->total_fee = $order_data['order_price'];
+    $request->spbill_create_ip = $_SERVER['REMOTE_ADDR'];
+    $request->notify_url = get_template_directory_uri() . '/inc/shop/weixinpay/notify.php';
+
+    $result = $pay->execute($request);
+
+    return $result['code_url'];
   }
 }
 
