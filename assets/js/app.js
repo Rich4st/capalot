@@ -352,6 +352,11 @@ let ca = {
       location.href = msg;
     } else if (method === 'popup') {
       ca.popup({ html: msg, showCloseButton: false, width: '17rem' });
+    } else if (method === 'reload') {
+      ca.notice({ title: msg, icon: 'success' });
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     }
   },
 
