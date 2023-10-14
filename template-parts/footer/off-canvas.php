@@ -2,7 +2,7 @@
       $menu_class = 'mobile-menu block  lg:hidden';
       ?> -->
 
-<div class="off-canvas fixed right-0 top-0 w-[16rem] bg-white h-full z-[999] p-4 hidden dark:bg-dark-card dark:text-gray-400 " id="navBg">
+<div class="off-canvas overflow-y-scroll fixed right-0 top-0 w-[16rem] bg-white h-full z-[999] p-4 hidden dark:bg-dark-card dark:text-gray-400 " id="navBg">
   <div class="canvas-close flex justify-end " id="closeNav"><i class="fas fa-times"></i></div>
 
   <div class="logo-wrapper flex items-center justify-center mt-2  ">

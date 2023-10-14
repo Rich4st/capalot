@@ -38,51 +38,36 @@ if (!empty($capalot_downurl_new) && is_array($capalot_downurl_new)) {
             <?php foreach ($capalot_downurl_new as $item) : ?>
               <a target="_blank" href="<?php echo esc_attr($item['url']); ?>" class="btn btn-lg btn-success rounded-2 text-xl text-center rounded-md py-3 px-2 bg-teal-500 text-white block hover:bg-teal-600" rel="nofollow noopener noreferrer"><i class="fas fa-cloud-download-alt me-1"></i><?php echo $item['name']; ?></a>
               <?php if (!empty($item['pwd'])) : ?>
-                <div class=" py-2 text-center cursor-pointer">
-                  <span class="  text-gray-400">密码：</span><span id="copy_span" class="  text-muted user-select-all copy-pwd copy_p    text-gray-400" pwd="<?php echo esc_attr($item['pwd']); ?>"><?php _e('', 'ripro'); ?><?php echo esc_attr($item['pwd']); ?><i class="far fa-copy ms-1"></i></span>
+                <div class=" py-2 text-center text-gray-400">
+                  密码:
+                  <span id="copy_span" class="copy-pwd copy_p cursor-pointer" data-pwd="<?php echo esc_attr($item['pwd']); ?>">
+                    <?php echo esc_attr($item['pwd']); ?>
+                  </span>
+                  <i id="copy_btn" class="fa-regular fa-copy cursor-pointer"></i>
                 </div>
               <?php endif; ?>
             <?php endforeach ?>
           </div>
         <?php endif; ?>
       </div>
-      <script>
-        // 复制密码
-        let copy_t = document.getElementById('copy_t');
-        let copy_p = document.getElementsByClassName('copy_p');
-        for (let i = 0; i <= copy_p.length; i++) {
-          copy_p[i].onclick = function() {
-            navigator.clipboard
-              .writeText(copy_p[i].innerText)
-              .then(() => {
-                console.log('复制成功：' + copy_p[i].innerText);
-                copy_t.style.display = 'block';
-                setTimeout(function() {
-                  copy_t.style.display = 'none';
-                }, 1500);
-
-              })
-              .catch(() => {
-                alert('复制失败');
-              })
-          }
-        }
-      </script>
-
-
 
     <?php else : ?>
       <div class="down-buy-warp">
         <?php if ($is_user_login_get_status) : ?>
-          <div class=" text-center "><i class="fas fa-lock me-1"></i><?php _e('本资源登录后免费下载', 'ripro'); ?></div>
+          <div class="text-center">
+            <i class="fa-solid fa-lock"></i>
+            <?php _e('本资源登录后免费下载', 'ripro'); ?>
+          </div>
           <div class="buy-btns">
-            <a rel="nofollow noopener noreferrer" href="<?php echo esc_url(wp_login_url(get_current_url())); ?>" class="btn btn-info px-4 rounded-pill"><i class="far fa-user me-1"></i><?php _e('登录后下载', 'ripro'); ?></a>
+            <a rel="nofollow noopener noreferrer" href="<?php echo esc_url(wp_login_url(get_current_url())); ?>" class="btn btn-info px-4 rounded-pill"><i class="fa-solid fa-user"></i><?php _e('登录后下载', 'ripro'); ?></a>
           </div>
 
         <?php else : ?>
-          <div class="buy-title text-center text-teal-500 "><i class="fas fa-lock me-1"></i></i><?php _e('本资源需权限下载', 'ripro'); ?></div>
+          <div class="buy-title text-center text-teal-500 ">
+            <i class="fa-solid fa-lock"></i><?php _e('本资源需权限下载', 'ripro'); ?>
+          </div>
           <div class=" text-center mt-4">
-            <button class=" hover:bg-[#b62335] text-white py-2 px-4 bg-[#d6293e] rounded-full js-pay-action" data-id="<?php echo $post_id; ?>" data-type="1" data-info=""><i class="fab fa-shopify me-1"></i><?php _e('购买下载权限', 'ripro'); ?></button>
+            <button class=" hover:bg-[#b62335] text-white py-2 px-4 bg-[#d6293e] rounded-full js-pay-action" data-id="<?php echo $post_id; ?>" data-type="1" data-info=""><i class="fa-brands fa-shopify"></i><?php _e('购买下载权限', 'ripro'); ?></button>
           </div>
 
 

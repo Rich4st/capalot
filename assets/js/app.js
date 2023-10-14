@@ -10,30 +10,18 @@ let ca = {
     ca.add_comment();
     ca.post_tougao();
     ca.add_menus();
-    const notification_btn = document.querySelector('.toggle-notify');
-    if (notification_btn)
-      ca.notification();
-
-    const swiperEl = document.querySelector('.swiper');
-    if (swiperEl)
-      ca.swiper();
-
+    ca.notification();
+    ca.swiper();
     ca.account_action();
     ca.social_action();
-
-    const captcha_code = document.querySelector('#captcha-img');
-    if (captcha_code) {
-      ca.captcha_action();
-      captcha_code.addEventListener('click', ca.captcha_action);
-    }
-
-    if (capalot.singular_id !== '0')
-      ca.add_post_views();
-
-    if (document.querySelector('#delete-icon'))
-      ca.delete_post();
-
+    ca.captcha_action();
+    ca.delete_post();
     ca.sticky_header();
+
+    if (capalot.singular_id !== '0') {
+      ca.add_post_views();
+      ca.copy_password();
+    }
   },
 
   /**
@@ -231,18 +219,26 @@ let ca = {
 
   // 获取验证码
   captcha_action: function () {
-    ca.ajax({
-      data: {
-        action: 'capalot_get_captcha_code',
-        nonce: capalot.ajax_nonce,
-      },
-      success: ({ status, msg }) => {
-        if (status == 1) {
-          let img = document.querySelector('#captcha-img');
+    const captcha_code = document.querySelector('#captcha-img');
 
-          img.setAttribute('src', msg)
+    if (!captcha_code) return;
+
+    captcha_code.addEventListener('click', function () {
+      ca.ajax({
+        data: {
+          action: 'capalot_get_captcha_code',
+          nonce: capalot.ajax_nonce,
+        },
+        success: ({ status, msg }) => {
+          if (status != 1) {
+            ca.notice({ title: msg, icon: 'error' });
+            return;
+          }
+
+          ca.notice({ title: msg, icon: 'success' });
+          captcha_code.setAttribute('src', msg)
         }
-      }
+      })
     })
   },
 
@@ -447,6 +443,8 @@ let ca = {
   swiper: function () {
     const swipers = document.querySelectorAll('.mySwiper');
 
+    if (swipers.length <= 0) return;
+
     swipers.forEach((el) => {
       new Swiper(el, JSON.parse(el.dataset.config));
     })
@@ -620,6 +618,8 @@ let ca = {
   notification: function () {
     const notification_btn = document.querySelector('.toggle-notify');
 
+    if (!notification_btn) return;
+
     notification_btn.addEventListener('click', function () {
       ca.ajax({
         data: {
@@ -661,6 +661,7 @@ let ca = {
       prevScrollpos = currentScrollPos;
     });
   },
+
   // 导航菜单
   add_menus: function () {
     let main_menu = document.querySelector('.sidebar-main-menu');
@@ -670,6 +671,40 @@ let ca = {
       warp_menu.classList.remove('hidden')
       main_menu.classList.add('hidden')
     }
+  },
+
+  // 复制密码
+  copy_password: function () {
+    const copy_buttons = document.querySelectorAll('#copy_btn');
+    const copy_spans = document.querySelectorAll('#copy_span');
+
+    if (copy_buttons.length <= 0) return;
+
+    copy_buttons.forEach(btn => {
+      btn.addEventListener('click', this.debounce(this.copy.bind(this, btn), 300));
+    })
+
+    copy_spans.forEach(span => {
+      span.addEventListener('click', this.debounce(this.copy.bind(this, span), 300));
+    })
+  },
+  copy: function(el) {
+    let content = '';
+
+    if (el.dataset.pwd) {
+      content = el.dataset.pwd;
+    } else {
+      const span = el.previousElementSibling;
+      content = span.dataset.pwd
+    }
+
+    navigator.clipboard.writeText(content)
+      .then(() => {
+        ca.notice({ title: '复制成功', icon: 'success' });
+      })
+      .catch(() => {
+        ca.notice({ title: '复制失败', icon: 'error' });
+      })
   }
 }
 
