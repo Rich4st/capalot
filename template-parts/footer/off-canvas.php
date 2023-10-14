@@ -69,24 +69,24 @@
   // 移动端侧边菜单
   window.onload = function() {
     var has = document.querySelectorAll('.menu-item-has-children');
-
     for (var j = 0; j < has.length; j++) {
       var lis = document.createElement("i");
-      lis.classList.add('fa-solid')
-      lis.classList.add('fa-angle-right')
+      lis.classList.add('fa-solid');
+      lis.classList.add('fa-angle-right');
       has[j].insertBefore(lis, has[j].children[0]);
+      var lis_span = document.createElement('span');
+      has[j].insertBefore(lis_span,has[j].children[0]);
+      lis_span.appendChild(lis);
     }
     var lis_ul = document.querySelectorAll('#header-navbar .sub-menu');
     for (var i = 0; i < lis_ul.length; i++) {
-      var jd = lis_ul[i].previousElementSibling;
-      jd.setAttribute("href", "javascript:;");
+      var jd = lis_ul[i].parentNode.children[0];
       jd.onclick = function() {
-        $(this).next().slideToggle(200);
-        var icon_css = $(this).siblings()[0];
-        if (icon_css.style.transform != 'rotate(90deg)') {
-          icon_css.setAttribute("style", "transform:rotate(90deg);");
+        $(this).next().next().slideToggle(200);
+        if (this.style.transform != 'rotate(90deg)') {
+          this.setAttribute("style", "transform:rotate(90deg);");
         } else {
-          icon_css.setAttribute("style", "transform:rotate(0deg);");
+          this.setAttribute("style", "transform:rotate(0deg);");
         }
       }
     }
