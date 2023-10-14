@@ -369,16 +369,13 @@ class Capalot_Aff
    */
   public static function get_user_aff_info($user_id)
   {
-    $total = self::get_total($user_id);
-    $can_be_withdraw = self::can_be_withdraw($user_id);
-    $withdrawing = self::withdrawing($user_id);
-    $withdrawed = self::withdrawed($user_id);
 
     $user_aff_info = [
-      'total' => $total,
-      'can_be_withdraw' => $can_be_withdraw,
-      'withdrawing' => $withdrawing,
-      'withdrawed' => $withdrawed,
+      'total' => self::get_total($user_id),
+      'can_be_withdraw' => self::withdrawing($user_id),
+      'withdrawing' => self::withdrawing($user_id),
+      'withdrawed' => self::withdrawed($user_id),
+      'ref_uids' => self::get_ref_ids($user_id),
     ];
 
     return $user_aff_info;
@@ -445,6 +442,23 @@ class Capalot_Aff
     $sum = $wpdb->get_var($wpdb->prepare($sql, $user_id));
 
     return $sum ? (float) $sum : 0;
+  }
+
+  // 已经推广的人的id
+  public static function get_ref_ids($user_id)
+  {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'capalot_aff';
+
+    $sql = "SELECT order_id FROM $table_name WHERE aff_uid = %d";
+
+    $ids = $wpdb->get_col($wpdb->prepare($sql, $user_id));
+
+    $ids = array_map(function ($id) {
+      return intval($id);
+    }, $ids);
+
+    return array_unique($ids);
   }
 }
 

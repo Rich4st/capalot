@@ -51,9 +51,11 @@ global $current_user;
 		<div class="my-3">
 			<h6 class="flex  mb-2">
 				<?php _e('已成功推广注册', 'ripro'); ?>
-				<span class="badge me-1 bg-success ms-2">
-					<?php echo $user_aff_info['ref_uids']; ?>
-				</span></h6>
+				<span class="badge me-1 bg-success px-1">
+					<?php echo count($user_aff_info['ref_uids']); ?>
+				</span>
+				人
+			</h6>
 			<?php
 			if (!empty($user_aff_info['ref_uids'])) {
 				$user_i = 0;
@@ -61,7 +63,7 @@ global $current_user;
 					$user_i++;
 					if ($user_i <= 20) {
 						$s = capalot_substr_cut(get_user_meta(intval($uid), 'nickname', 1));
-						printf('<div class="avatar avatar-sm m-1"><img class="avatar-img rounded-full border border-white border-3 shadow" src="%s" title="%s"></div>', get_avatar_url($uid), $s);
+						printf('<div class="avatar w-10 h-10"><img class="avatar-img rounded-full border border-white" src="%s" title="%s"></div>', get_avatar_url($uid), $s);
 					}
 				}
 			} else {
@@ -84,7 +86,9 @@ global $current_user;
 </div>
 
 <div class="mb-4 bg-white dark:bg-dark-card p-4 mx-2 rounded">
-	<div class="card-header mb-2"><h5 class="fw-bold mb-0"><?php _e('佣金记录','ripro' );?></h5></div>
+	<div class="card-header mb-2">
+		<h5 class="fw-bold mb-0"><?php _e('佣金记录', 'ripro'); ?></h5>
+	</div>
 
 	<div class="card-body">
 		<div class="card-header mb-2"><?php _e('最近20条', 'ripro'); ?></div>
@@ -96,13 +100,7 @@ global $current_user;
 
 		// 查询语句
 		$query = $wpdb->prepare(
-			"SELECT a.*, CONVERT(a.aff_rate * b.pay_price, DECIMAL(10,2)) AS aff_money,
-		            b.pay_price, b.user_id AS pay_user, b.post_id, b.order_type, b.order_trade_no
-		     FROM $table_aff AS a
-		     LEFT JOIN $table_order AS b ON a.order_id = b.id
-		     WHERE b.id IS NOT NULL AND a.aff_uid = %d
-		     ORDER BY a.create_time DESC
-		     LIMIT 20",
+			"SELECT a.*, CONVERT(a.aff_rate * b.pay_price, DECIMAL(10,2)) AS aff_money, b.pay_price, b.user_id AS pay_user, b.post_id, b.order_type, b.order_trade_no FROM $table_aff AS a LEFT JOIN $table_order AS b ON a.order_id = b.id WHERE b.id IS NOT NULL AND a.aff_uid = %d ORDER BY a.create_time DESC LIMIT 20",
 			$current_user->ID
 		);
 
@@ -151,7 +149,7 @@ global $current_user;
 					msg
 				}) => {
 					ca.notice(msg);
-				if (status == 1) {
+					if (status == 1) {
 						setTimeout(function() {
 							window.location.reload()
 						}, 2000)
