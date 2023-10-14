@@ -22,7 +22,7 @@
     )
   );
   ?>
-
+  
   <?php get_template_part('template-parts/single/entry-copyright'); ?>
 
 </article>

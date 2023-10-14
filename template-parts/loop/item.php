@@ -34,7 +34,7 @@ if ($post_format && isset($format_icons[$post_format])) {
 
 ?>
 <?php if ($args['type'] == 'grid') : ?>
-  <li class="dark:bg-dark-card rounded-lg overflow-hidden list-none bg-white border dark:border-[#222] transition  hover:-translate-y-1 hover:shadow-2xl  duration-500">
+  <li class="dark:bg-dark-card rounded-lg overflow-hidden cursor-pointer list-none bg-white border dark:border-[#222] transition  hover:-translate-y-1 hover:shadow-2xl  duration-500">
     <article class="post-item item-grid relative">
 
       <div class="tips-badge absolute w-10 text-center top-0 start-0 z-50 m-2 bg-[#b0adac]  rounded-xl">
@@ -65,7 +65,7 @@ if ($post_format && isset($format_icons[$post_format])) {
         <?php endif; ?>
 
         <?php if ($args['is_entry_meta']) : ?>
-          <div class="entry-meta flex flex-row justify-between text-sm">
+          <div class="entry-meta flex flex-row justify-between text-xs">
             <div>
               <span class="meta-date"><i class="fa-regular fa-clock pr-1"></i>
                 <?php capalot_meta_datetime(); ?></span>
@@ -92,7 +92,7 @@ if ($post_format && isset($format_icons[$post_format])) {
         </div>
       <?php endif; ?>
 
-      <div class=" p-2 text-white absolute bottom-0 z-50 w-full">
+      <div class=" p-2 text-white absolute bottom-0 z-50 w-full text-xs">
         <?php if ($args['is_entry_meta']) : ?>
           <div class="entry-meta flex flex-row justify-between">
             <div class="space-x-1">
@@ -134,7 +134,7 @@ if ($post_format && isset($format_icons[$post_format])) {
     </article>
   </li>
 <?php elseif ($args['type'] == 'list') : ?>
-  <li class="dark:bg-dark-card rounded-lg bg-white cursor-pointer shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]  <?php echo $card_size; ?> transition-all duration-300 hover:shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)]  ">
+  <li class="dark:bg-dark-card rounded-lg bg-white cursor-pointer <?php echo $card_size; ?> dark:border-[#222] transition  hover:-translate-y-1 hover:shadow-2xl  duration-500 ">
     <article class="relative flex flex-row p-2">
 
       <?php if (is_sticky()) : ?>
@@ -165,7 +165,7 @@ if ($post_format && isset($format_icons[$post_format])) {
           <?php endif; ?>
         </div>
         <?php if ($args['is_entry_meta']) : ?>
-          <div class="entry-meta flex justify-between ">
+          <div class="entry-meta flex justify-between text-xs">
             <div class="space-x-1">
               <span class="meta-date"><i class="fa-regular fa-clock"></i>
                 <?php capalot_meta_datetime(); ?></span>
@@ -183,7 +183,7 @@ if ($post_format && isset($format_icons[$post_format])) {
   </li>
 
 <?php elseif ($args['type'] == 'title') : ?>
-  <li class="dark:bg-dark-card  rounded-lg bg-white  cursor-pointer shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]  transition-all duration-300 hover:shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)] ">
+  <li class="dark:bg-dark-card rounded-lg overflow-hidden cursor-pointer list-none bg-white border dark:border-[#222] transition  hover:-translate-y-1 hover:shadow-2xl  duration-500">
     <article class="item-list relative p-2">
 
       <?php if (is_sticky()) : ?>
@@ -212,7 +212,7 @@ if ($post_format && isset($format_icons[$post_format])) {
               <span class="meta-date"><i class="fa-regular fa-clock pr-1"></i>
                 <?php capalot_meta_datetime(); ?></span>
               <span class="meta-likes  ">
-                <i class="fa-regular fa-heart"></i><?php echo capalot_get_post_likes(); ?>
+                <i class="fa-regular fa-heart pr-1"></i><?php echo capalot_get_post_likes(); ?>
               </span>
               <span class="meta-fav ">
                 <i class="fa-regular fa-star pr-1"></i><?php echo capalot_get_post_favorites(); ?>

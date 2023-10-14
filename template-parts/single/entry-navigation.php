@@ -5,7 +5,7 @@ if (empty(_capalot('is_single_bottom_navigation', true))) {
 ?>
 
 
-<div class=" mb-8 ">
+<div class="py-3">
     <div class=" grid lg:grid-cols-2 gap-4">
         <?php if ($pre = get_previous_post()) : ?>
             <div class=" bg-white dark:bg-dark-card p-4 transition  hover:shadow-2xl hover:-translate-y-1 duration-300">
