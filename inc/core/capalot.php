@@ -388,8 +388,6 @@ class Capalot_Aff
       'ref_uids' => self::get_ref_ids($user_id),
     ];
 
-    var_dump($user_aff_info);
-
     return $user_aff_info;
   }
 
