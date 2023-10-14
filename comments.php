@@ -4,7 +4,7 @@ if (post_password_required() || !comments_open() || !is_site_comments()) return;
 
 ?>
 
-<div id="comments" class="entry-comments mb-4 bg-white dark:bg-dark-card rounded p-2 lg:p-4">
+<div id="comments" class="entry-comments my-3 bg-white dark:bg-dark-card rounded p-2 lg:p-4">
 	<?php $fields =  array(
 		'author' => '<div class="comment-form-author"><input id="author" class="w-full mb-4  dark:border-gray-500 dark:bg-dark form-control p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="author" type="text" placeholder="' . __('*昵称:', 'ripro') . '" value="' . esc_attr($commenter['comment_author']) . '" size="30"' . ($req ? ' class="required "' : '') . '></div>',
 		'email'  => '<div class="comment-form-email"><input id="email" class="w-full mb-4 dark:border-gray-500 dark:bg-dark form-control p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="email" type="text" placeholder="' . __('*邮箱:', 'ripro') . '" value="' . esc_attr($commenter['comment_author_email']) . '"' . ($req ? ' class="required"' : '') . '></div>',
