@@ -92,7 +92,6 @@
     }
 
     var li_menu = document.querySelectorAll('#header-navbar .menu-item');
-    console.log(li_menu);
     li_menu.forEach(el => {
       const atag = el.querySelector('a');
       atag.classList.add('dark:!bg-dark');
