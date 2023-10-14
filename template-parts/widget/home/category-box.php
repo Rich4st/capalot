@@ -7,10 +7,6 @@ if (empty($args)) {
 $config = [
   'slidesPerView' => capalot_is_mobile() ? 2 : 4,
   'spaceBetween' => 30,
-  'pagination' => [
-    'el' => '.swiper-pagination',
-    'clickable' => true
-  ],
   'lazy' => true,
   'autoplay' => true,
   'loop'     => true,
