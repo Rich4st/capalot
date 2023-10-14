@@ -64,7 +64,7 @@ Footer END -->
 
 
 
-<div class=" fixed top-0 left-0 right-0 bottom-0  bg-black/80 z-[99] hidden" id="fixedB"></div>
+<div class=" fixed top-0 left-0 right-0 bottom-0 backdrop-blur-lg   bg-black/80 z-[99] hidden" id="fixedB"></div>
 <?php get_template_part('template-parts/footer/off-canvas'); ?>
 
 <script>
@@ -82,6 +82,7 @@ Footer END -->
     $('#navBg').animate({
       width: 'toggle'
     }, 100);
+    document.body.style.overflowY = 'hidden';
   });
   fixedB.addEventListener('click', function() {
     fixedB.classList.add('hidden');
@@ -89,6 +90,8 @@ Footer END -->
     $('#navBg').animate({
       width: 'toggle'
     }, 100);
+    document.body.style.overflowY = 'auto';
+
   });
   closeNav.addEventListener('click', function() {
     fixedB.classList.add('hidden');
@@ -96,6 +99,7 @@ Footer END -->
     $('#navBg').animate({
       width: 'toggle'
     }, 100);
+    document.body.style.overflowY = 'auto';
   });
   window.addEventListener('load', function() {
     window.addEventListener('resize', function() {
@@ -103,6 +107,7 @@ Footer END -->
       if (widthA >= 1024) {
         navBg.style.display = 'none';
         fixedB.classList.add('hidden');
+        document.body.style.overflowY = 'auto';
       }
     });
   });
@@ -113,7 +118,7 @@ Footer END -->
 
 <div class=" lg:hidden fixed bottom-0 w-full left-0 z-[9988899] bg-white dark:bg-dark-card shadow-[0_-3px_10px_0_rgba(0,0,0,0.05)] border-t dark:border-t-[#222] ">
   <ul class=" flex text-center py-2 justify-around text-gray-600 dark:text-gray-50 ">
-    <li><a target="" href="/" ><i class="fas fa-home text-lg "></i><span class=" block text-sm ">首页</span></a></li>
+    <li><a target="" href="/"><i class="fas fa-home text-lg "></i><span class=" block text-sm ">首页</span></a></li>
     <?php foreach (_capalot('site_footer_widget_link1', array()) as $item) {
       $link_item = '<li><a href="' . $item['href'] . '"  ><i class="fas fa-layer-group text-lg "></i><span class=" block text-sm ">分类</span></a></li>';
 
@@ -128,8 +133,8 @@ Footer END -->
         echo  $link_item;
       }
     } ?>
-    <li><a target="" href="/user" ><i class="fas fa-user text-lg "></i><span class=" block text-sm ">我的</span></a></li>
-    <li><a target="" href="https://ritheme.com/" ><i class="fab fa-wordpress text-lg "></i><span class=" block text-sm ">同款</span></a></li>
+    <li><a target="" href="/user"><i class="fas fa-user text-lg "></i><span class=" block text-sm ">我的</span></a></li>
+    <li><a target="" href="https://ritheme.com/"><i class="fab fa-wordpress text-lg "></i><span class=" block text-sm ">同款</span></a></li>
   </ul>
 </div>
 
