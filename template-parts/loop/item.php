@@ -54,14 +54,14 @@ if ($post_format && isset($format_icons[$post_format])) {
 
       <div class="entry-wrapper text-gray-400 p-2">
         <?php if ($args['is_entry_cat']) : ?>
-          <div class="entry-cat-dot   mb-1 line-clamp-1"><?php capalot_meta_category(2); ?></div>
+          <div class="entry-cat-dot mb-1 line-clamp-1 min-h-[1rem]"><?php capalot_meta_category(2); ?></div>
         <?php endif; ?>
 
-        <a class="font-bold text-gray-600 dark:text-gray-300 whitespace-nowrap text-ellipsis overflow-hidden
-        hover:text-orange-600 dark:hover:text-gray-100" target="<?php echo get_target_blank(); ?>" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a>
+        <a class="font-bold min-h-[1.25rem] text-gray-600 dark:text-gray-300 line-clamp-1
+        hover:text-orange-600 dark:hover:text-gray-100 " target="<?php echo get_target_blank(); ?>" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a>
 
         <?php if ($args['is_entry_desc']) : ?>
-          <p class=" text-gray-400 text-xs min-h-[1.25rem] line-clamp-1 my-1" title="<?php capalot_get_post_excerpt(40); ?>"><?php capalot_get_post_excerpt(40); ?></p>
+          <p class=" text-gray-400 text-xs min-h-[1rem] line-clamp-1 overflow-hidden" title="<?php capalot_get_post_excerpt(40); ?>"><?php capalot_get_post_excerpt(40); ?></p>
         <?php endif; ?>
 
         <?php if ($args['is_entry_meta']) : ?>
@@ -152,16 +152,16 @@ if ($post_format && isset($format_icons[$post_format])) {
         </a>
       </div>
       <div class="entry-wrapper  w-full text-gray-400 text-xs">
-        <div class="entry-body h-5/6  ">
+        <div class="entry-body ">
 
           <?php if ($args['is_entry_cat']) : ?>
-            <div class=" mb-1 whitespace-nowrap text-ellipsis overflow-hidden"><?php capalot_meta_category(2); ?></div>
+            <div class=" mb-1 min-h-[1rem] line-clamp-1"><?php capalot_meta_category(2); ?></div>
           <?php endif; ?>
 
-          <a class=" text-gray-700 text-base hover:text-black dark:text-gray-50 dark:hover:text-gray-400 font-bold line-clamp-1" target="<?php echo get_target_blank(); ?>" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a>
+          <a class=" text-gray-700 text-base hover:text-black dark:text-gray-50 dark:hover:text-gray-400 font-bold line-clamp-1 min-h-[1.25rem]" target="<?php echo get_target_blank(); ?>" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a>
 
           <?php if ($args['is_entry_desc']) : ?>
-            <div class="line-clamp-1 min-h-[1.25rem]"><?php capalot_get_post_excerpt(40); ?></div>
+            <div class="line-clamp-1 min-h-[1rem]"><?php capalot_get_post_excerpt(40); ?></div>
           <?php endif; ?>
         </div>
         <?php if ($args['is_entry_meta']) : ?>
@@ -196,14 +196,14 @@ if ($post_format && isset($format_icons[$post_format])) {
         <div class="entry-body">
 
           <?php if ($args['is_entry_cat']) : ?>
-            <div class="entry-cat-dot mb-1 whitespace-nowrap text-ellipsis overflow-hidden"><?php capalot_meta_category(2); ?></div>
+            <div class="entry-cat-dot mb-1 line-clamp-1 min-h-[1rem]"><?php capalot_meta_category(2); ?></div>
           <?php endif; ?>
 
-          <h2 class=" text-base text-gray-700 hover:text-black dark:text-gray-100 dark:hover:text-gray-400 font-bold line-clamp-1">
+          <h2 class=" text-base text-gray-700 hover:text-black dark:text-gray-100 dark:hover:text-gray-400 font-bold line-clamp-1 min-h-[1.25rem]">
             <a target="<?php echo get_target_blank(); ?>" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a>
           </h2>
           <?php if ($args['is_entry_desc']) : ?>
-            <div class="entry-desc line-clamp-1 min-h-[1.25rem]"><?php capalot_get_post_excerpt(40); ?></div>
+            <div class="entry-desc line-clamp-1 min-h-[1rem]"><?php capalot_get_post_excerpt(40); ?></div>
           <?php endif; ?>
         </div>
         <?php if ($args['is_entry_meta']) : ?>
