@@ -505,6 +505,10 @@ class Capalot_Cdk
       case '2':
         return '会员兑换卡';
         break;
+      case 3:
+      case '3':
+        return '注册邀请码';
+        break;
     }
   }
 
