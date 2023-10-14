@@ -371,8 +371,8 @@ class Capalot_Aff
   {
 
     $user_aff_info = [
-      'total' => self::withdrawing($user_id) + self::withdrawing($user_id) + self::withdrawed($user_id),
-      'can_be_withdraw' => self::withdrawing($user_id),
+      'total' => self::can_be_withdraw($user_id) + self::withdrawing($user_id) + self::withdrawed($user_id),
+      'can_be_withdraw' => self::can_be_withdraw($user_id),
       'withdrawing' => self::withdrawing($user_id),
       'withdrawed' => self::withdrawed($user_id),
       'ref_uids' => self::get_ref_ids($user_id),
@@ -381,49 +381,34 @@ class Capalot_Aff
     return $user_aff_info;
   }
 
-  // 获取用户累计佣金
-  public static function get_total($user_id)
-  {
-    return get_user_meta($user_id, 'capalot_aff_total', 1);
-  }
-
-  /**
-   * 更新用户累计佣金
-   *
-   * @param int $user_id 用户ID
-   * @param int $num 佣金数额
-   */
-  public static function update_total($user_id, $num)
-  {
-    $total = get_user_meta($user_id, 'capalot_aff_total', 1);
-
-    $total += $num;
-
-    update_user_meta($user_id, 'capalot_aff_total', $total);
-  }
-
   // 可提现金额
   public static function can_be_withdraw($user_id)
   {
-    // 累计佣金 - 提现中金额 - 已提现金额
-    $total = self::get_total($user_id);
-    $withdrawing = self::withdrawing($user_id);
-    $withdrawed = self::withdrawed($user_id);
+    global $wpdb;
+    $aff_table = $wpdb->prefix . 'capalot_aff';
+    $order_table = $wpdb->prefix . 'capalot_order';
 
-    // 转换为浮点数并相减，空则为0
-    $can_be_withdraw = floatval($total) - floatval($withdrawing) - floatval($withdrawed);
+    $sql = "SELECT SUM(b.pay_price)
+    FROM $aff_table AS a
+    LEFT JOIN $order_table AS b ON a.order_id = b.id
+    WHERE a.aff_uid = %d AND a.status = 0";
 
-    return $can_be_withdraw;
+    $sum = $wpdb->get_var($wpdb->prepare($sql, $user_id));
+
+    return $sum ? (float) $sum : 0;
   }
 
   // 提现中金额
   public static function withdrawing($user_id)
   {
     global $wpdb;
-    $table_name = $wpdb->prefix . 'capalot_aff';
+    $aff_table = $wpdb->prefix . 'capalot_aff';
+    $order_table = $wpdb->prefix . 'capalot_order';
 
-    // 获取所有status为0，aff_uid为$user_id的数据并将他们的aff_rate相加
-    $sql = "SELECT SUM(aff_rate) FROM $table_name WHERE aff_uid = %d AND status = 0";
+    $sql = "SELECT SUM(b.pay_price)
+    FROM $aff_table AS a
+    LEFT JOIN $order_table AS b ON a.order_id = b.id
+    WHERE a.aff_uid = %d AND a.status = 1";
 
     $sum = $wpdb->get_var($wpdb->prepare($sql, $user_id));
 
@@ -434,10 +419,13 @@ class Capalot_Aff
   public static function withdrawed($user_id)
   {
     global $wpdb;
-    $table_name = $wpdb->prefix . 'capalot_aff';
+    $aff_table = $wpdb->prefix . 'capalot_aff';
+    $order_table = $wpdb->prefix . 'capalot_order';
 
-    // 获取所有status为1，aff_uid为$user_id的数据并将他们的aff_rate相加
-    $sql = "SELECT SUM(aff_rate) FROM $table_name WHERE aff_uid = %d AND status = 1";
+    $sql = "SELECT SUM(b.pay_price)
+    FROM $aff_table AS a
+    LEFT JOIN $order_table AS b ON a.order_id = b.id
+    WHERE a.aff_uid = %d AND a.status = 2";
 
     $sum = $wpdb->get_var($wpdb->prepare($sql, $user_id));
 
@@ -448,17 +436,18 @@ class Capalot_Aff
   public static function get_ref_ids($user_id)
   {
     global $wpdb;
-    $table_name = $wpdb->prefix . 'capalot_aff';
+    $aff_table = $wpdb->prefix . 'capalot_aff';
+    $order_table = $wpdb->prefix . 'capalot_order';
 
-    $sql = "SELECT order_id FROM $table_name WHERE aff_uid = %d";
+    // 通过$aff_table中的aff_uid = $user_id获取order_id，再通过$order_table中的id = $order_id获取user_id
+    $sql = "SELECT b.user_id
+    FROM $aff_table AS a
+    LEFT JOIN $order_table AS b ON a.order_id = b.id
+    WHERE a.aff_uid = %d";
 
-    $ids = $wpdb->get_col($wpdb->prepare($sql, $user_id));
+    $user_ids = $wpdb->get_col($wpdb->prepare($sql, $user_id));
 
-    $ids = array_map(function ($id) {
-      return intval($id);
-    }, $ids);
-
-    return array_unique($ids);
+    return array_unique($user_ids);
   }
 }
 
