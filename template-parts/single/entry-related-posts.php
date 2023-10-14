@@ -47,7 +47,7 @@ $item_config['type'] = 'grid';
 
 <div class=" mb-8">
    <h2 class=" mb-4"><i class="fab fa-hive me-1"></i><?php _e('相关文章', 'ripro'); ?></h2>
-   <div class=" grid lg:grid-cols-4 gap-4">
+   <div class=" grid lg:grid-cols-3 md:grid-cols-2 gap-4">
     <?php 
     while ($PostData->have_posts()): $PostData->the_post();
         get_template_part('template-parts/loop/item', '', $item_config);
