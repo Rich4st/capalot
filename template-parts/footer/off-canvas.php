@@ -51,7 +51,7 @@
     foreach ($uc_menus as $key => $item) {
       $class = ($uc_action === $key) ? 'menu-item current-menu-item text-red-500 ' : 'menu-item';
       $menu_items .= sprintf(
-        '<li class="%s p-2 my-2 dark:bg-dark "><a href="%s "><i class="%s me-1"></i>%s</a></li>',
+        '<li class="%s p-2 my-2 dark:bg-dark hover:text-red-500"><a href="%s "><i class="%s me-1"></i>%s</a></li>',
         esc_attr($class),
         esc_url(get_uc_menu_link($key)),
         esc_attr($item['icon']),
