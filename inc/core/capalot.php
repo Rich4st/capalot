@@ -317,7 +317,17 @@ class Capalot_Aff
    */
   public static function get_aff_status($param)
   {
-    echo $param . '11111111';
+    switch ($param) {
+      case '0':
+        return '可提现';
+        break;
+      case '1':
+        return '提现中';
+        break;
+      case '2':
+        return '已提现';
+        break;
+    }
   }
 
   /**
