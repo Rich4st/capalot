@@ -13,7 +13,7 @@ global $current_user;
 		<div class="text-center mb-4">
 			<h5 class="h5 text-muted mb-3"><i class="fa-solid fa-link me-1"></i><?php _e('您的推广链接', 'ripro'); ?></h5>
 			<div class=" bg-success bg-opacity-10 border-2  border-dashed rounded-full p-2">
-				<h5 class="user-select-all  text-[#2e67e8]"><?php echo get_user_aff_permalink(home_url(), $current_user->ID); ?></h5>
+				<h5 class="user-select-all  text-[#2e67e8]"><?php echo get_user_aff_permalink(home_url() . '/register\/', $current_user->ID); ?></h5>
 			</div>
 		</div>
 

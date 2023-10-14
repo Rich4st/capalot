@@ -906,6 +906,34 @@ function get_default_lazy_img_src()
   return _capalot('default_lazy_thumb') ? _capalot('default_lazy_thumb') : 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
 }
 
+/**
+ * 判断邮件服务是否开启
+ *
+ * @param string $role admin | user
+ * @param string $key 邮件服务key
+ */
+function site_push_server($role = 'admin', $key)
+{
+  switch ($role) {
+    case 'admin':
+      $opt_key = 'site_admin_push_server';
+      break;
+    case 'user':
+      $opt_key = 'site_user_push_server';
+      break;
+    default:
+      $opt_key = 'null';
+      break;
+  }
+  $data = _capalot($opt_key);
+  if (empty($data) || !is_array($data)) {
+    return false;
+  }
+  if (!in_array($key, $data)) {
+    return false;
+  }
+  return true;
+}
 
 //全站弹窗报错
 function capalot_wp_die($title = '', $msg = '', $back_link = '')
