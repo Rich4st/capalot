@@ -9,12 +9,12 @@ $container = _capalot('site_container_width', '1400');
 
 <section class=" dark:bg-dark py-3">
   <div class="mx-auto  grid grid-cols-2 md:grid-cols-4 gap-4 p-2 lg:p-0" style="max-width: <?php
-                                                                                    if ($container === '') {
-                                                                                      echo '1280';
-                                                                                    } else {
-                                                                                      echo $container;
-                                                                                    }
-                                                                                    ?>px;">
+                                                                                            if ($container === '') {
+                                                                                              echo '1280';
+                                                                                            } else {
+                                                                                              echo $container;
+                                                                                            }
+                                                                                            ?>px;">
 
     <?php if ($args['div_data']) :
       foreach ($args['div_data'] as $key => $item) : ?>
@@ -24,10 +24,10 @@ $container = _capalot('site_container_width', '1400');
 
           <!-- <lord-icon src="<?php echo esc_attr($item['icon']); ?>" trigger="hover" colors="primary:#4be1ec,secondary:#cb5eee" style="width:75px;height:75px">
         </lord-icon> -->
-          <div class="<?php echo esc_attr($args['icon_style']); ?> flex items-center justify-center rounded" style="width:5rem;height:5rem;background-color:<?php echo $item['color']; ?>">
-            <i class="<?php echo esc_attr($item['icon']); ?> w-10 h-10 text-white"></i>
+          <div class="<?php echo esc_attr($args['icon_style']); ?> flex items-center justify-center rounded lg:w-16 lg:h-16  w-12 h-12" style="background-color:<?php echo $item['color']; ?>">
+            <i class="<?php echo esc_attr($item['icon']); ?> w-8 h-8  text-white"></i>
           </div>
-          <div class="md:ml-2 ml-0 md:w-[70%] w-full">
+          <div class="md:ml-2 ml-0 lg:w-[70%] md:w-[60%] w-full">
             <h4 class="font-semibold dark:text-gray-50 truncate">
               <?php if (!empty($item['link'])) :
                 if (strpos($item['link'], 'http') === false) :
