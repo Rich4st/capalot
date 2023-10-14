@@ -317,7 +317,17 @@ class Capalot_Aff
    */
   public static function get_aff_status($param)
   {
-    echo $param . '11111111';
+    switch ($param) {
+      case '0':
+        return '可提现';
+        break;
+      case '1':
+        return '提现中';
+        break;
+      case '2':
+        return '已提现';
+        break;
+    }
   }
 
   /**
@@ -378,6 +388,8 @@ class Capalot_Aff
       'ref_uids' => self::get_ref_ids($user_id),
     ];
 
+    var_dump($user_aff_info);
+
     return $user_aff_info;
   }
 
@@ -436,18 +448,14 @@ class Capalot_Aff
   public static function get_ref_ids($user_id)
   {
     global $wpdb;
-    $aff_table = $wpdb->prefix . 'capalot_aff';
-    $order_table = $wpdb->prefix . 'capalot_order';
 
-    // 通过$aff_table中的aff_uid = $user_id获取order_id，再通过$order_table中的id = $order_id获取user_id
-    $sql = "SELECT b.user_id
-    FROM $aff_table AS a
-    LEFT JOIN $order_table AS b ON a.order_id = b.id
-    WHERE a.aff_uid = %d";
+    $ref_ids = $wpdb->get_col(
+      $wpdb->prepare("SELECT user_id
+      FROM $wpdb->usermeta
+      WHERE meta_key = %s AND meta_value = %d", 'capalot_ref_from', $user_id)
+    );
 
-    $user_ids = $wpdb->get_col($wpdb->prepare($sql, $user_id));
-
-    return array_unique($user_ids);
+    return array_unique($ref_ids);
   }
 }
 

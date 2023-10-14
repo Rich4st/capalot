@@ -70,7 +70,16 @@ class Capalot_Admin
         $retVal = (empty(get_user_meta($user_id, 'capalot_banned', true))) ? '<span style="color: green;">正常</span>' : '<span style="color: red;">封禁</span>';
         return $retVal;
         break;
-        // TODO: 推荐人
+      case 'user_bind_ref':
+        $refuid = absint(get_user_meta($user_id, 'capalot_ref_from', true));
+        if (!empty($refuid)) {
+          $refuser    = get_userdata($refuid);
+          $user_login = (!empty($refuser->user_login))
+            ? $refuser->user_login
+            : 'NULL';
+          return sprintf('%s<small style="display:block;color: green;">UID：%s</small>', $user_login, $refuid);
+        }
+        break;
     }
   }
 
