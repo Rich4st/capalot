@@ -371,7 +371,7 @@ class Capalot_Aff
   {
 
     $user_aff_info = [
-      'total' => self::get_total($user_id),
+      'total' => self::withdrawing($user_id) + self::withdrawing($user_id) + self::withdrawed($user_id),
       'can_be_withdraw' => self::withdrawing($user_id),
       'withdrawing' => self::withdrawing($user_id),
       'withdrawed' => self::withdrawed($user_id),
