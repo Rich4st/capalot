@@ -19,7 +19,7 @@ $query_args = array(
 $PostData = new WP_Query($query_args);
 
 ?>
-<div class=" bg-white p-4 rounded-md mb-8 dark:bg-dark-card">
+<div class=" bg-white p-4 rounded-md my-3 dark:bg-dark-card">
 
   <h5 class="widget-title mb-4 dark:text-gray-50"><?php echo $args['title']; ?></h5>
 

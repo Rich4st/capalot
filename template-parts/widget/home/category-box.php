@@ -38,7 +38,7 @@ $def_bg_img = get_template_directory_uri() . '/assets/img/bg.jpg'; //默认缩�
 $container = _capalot('site_container_width', '1400');
 ?>
 
-<section class="dark:bg-dark py-3">
+<section class="dark:bg-dark py-3 md:px-8 px-0">
   <div class="swiper mySwiper category-swiper mx-auto" data-config='<?php echo json_encode($config); ?>' style="max-width: <?php
                                                                                                               if ($container === '') {
                                                                                                                 echo '1280';

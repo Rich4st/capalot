@@ -628,12 +628,18 @@ let ca = {
   sticky_header: function () {
     var prevScrollpos = window.pageYOffset;
     var navbar = document.querySelector('.site-header');
+    // 侧边固定滚轴
+    var footer_rollbar = document.querySelector('.site-footer-rollbar');
 
     window.addEventListener('scroll', function () {
       var currentScrollPos = window.pageYOffset;
-
       var scrolled = window.scrollY;
       if (prevScrollpos > currentScrollPos) {//向上
+
+        if (this.window.innerWidth > 768) {
+          footer_rollbar.classList.add('md:block');
+          footer_rollbar.classList.remove('hidden');
+        }
         gsap.to(navbar, { y: 0, duration: 0.3, ease: "power1.out" });
         if (scrolled == 0) {
           navbar.classList.remove('navbar-sticky');
@@ -644,6 +650,8 @@ let ca = {
       } else {
         gsap.to(navbar, { y: -100, duration: 0.3, ease: "power1.out" });
         navbar.classList.remove('fixed');
+        footer_rollbar.classList.add('hidden');
+        footer_rollbar.classList.remove('md:block');
       }
       prevScrollpos = currentScrollPos;
     });
@@ -675,7 +683,7 @@ let ca = {
       span.addEventListener('click', this.debounce(this.copy.bind(this, span), 300));
     })
   },
-  copy: function(el) {
+  copy: function (el) {
     let content = '';
 
     if (el.dataset.pwd) {

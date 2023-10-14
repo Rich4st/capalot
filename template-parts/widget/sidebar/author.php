@@ -21,8 +21,7 @@ $comment_count = get_comments(array(
 ));
 ?>
 
-<div class=" mb-8 bg-white  rounded-md p-4 dark:bg-dark-card">
-
+<div class="my-3 bg-white  rounded-md p-4 dark:bg-dark-card">
   <?php if (!empty($args['title'])) : ?>
     <h5 class="widget-title mb-4 dark:text-gray-50"><?php echo $args['title']; ?></h5>
   <?php endif; ?>
