@@ -872,11 +872,27 @@ CSF::createSection($prefix, array(
     ),
 
     array(
+      'id'         => 'site_footer_QRCodeA',
+      'type'       => 'upload',
+      'title'      => '底部二维码-01：',
+      'default'    => _capalot('site_footer_QRCodeA', get_template_directory_uri() . '/assets/img/Capalot-qr.png'),
+      'dependency' => array('is_site_footer_widget', '==', 'true'),
+    ),
+
+    array(
+      'id'         => 'site_footer_QRCodeB',
+      'type'       => 'upload',
+      'title'      => '底部二维码-02：',
+      'default'    => _capalot('site_footer_QRCodeB', get_template_directory_uri() . '/assets/img/Capalot-qr.png'),
+      'dependency' => array('is_site_footer_widget', '==', 'true'),
+    ),
+
+    array(
       'id'       => 'site_contact_desc',
       'type'     => 'textarea',
       'title'    => '底部联系我们介绍',
       'sanitize' => false,
-      'default'  => '<img width="80" height="80" src="' . get_template_directory_uri() . '/assets/img/Capalot-qr.png' . '" style="float: left;" title="二维码"><img width="80" height="80" src="' . get_template_directory_uri() . '/assets/img/Capalot-qr.png' . '" style="float: left;" title="二维码">如有BUG或建议可与我们在线联系或登录本站账号进入个人中心提交工单。',
+      'default'  => '如有BUG或建议可与我们在线联系或登录本站账号进入个人中心提交工单。',
       'dependency' => array('is_site_footer_widget', '==', 'true'),
     ),
 
@@ -1122,16 +1138,16 @@ CSF::createSection($prefix, array(
 ));
 function _get_custom_taxonomy_option()
 {
-    $data = _capalot('site_custom_taxonomy', array());
-    $option = array();
-    if (empty($data) || !is_array($data)) {
-        return array();
-    }
-    foreach ($data as $key => $value) {
-        $custom_taxonomy          = trim($value['taxonomy']);
-        $option[$custom_taxonomy] = $value['name'];
-    }
-    return $option;
+  $data = _capalot('site_custom_taxonomy', array());
+  $option = array();
+  if (empty($data) || !is_array($data)) {
+    return array();
+  }
+  foreach ($data as $key => $value) {
+    $custom_taxonomy          = trim($value['taxonomy']);
+    $option[$custom_taxonomy] = $value['name'];
+  }
+  return $option;
 }
 
 /**

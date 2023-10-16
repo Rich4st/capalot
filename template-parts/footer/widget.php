@@ -32,9 +32,9 @@ if (empty(_capalot('is_site_footer_widget', true))) {
 
           if ($item['title'] === '标签云' &&  _capalot('is_site_tags_page')) {
             echo  $link_item;
-          } elseif($item['title'] === '网址导航' && _capalot('is_site_link_manager_page')){
+          } elseif ($item['title'] === '网址导航' && _capalot('is_site_link_manager_page')) {
             echo $link_item;
-          } elseif($item['title'] === '个人中心'){
+          } elseif ($item['title'] === '个人中心') {
             echo $link_item;
           }
         } ?>
@@ -49,11 +49,11 @@ if (empty(_capalot('is_site_footer_widget', true))) {
           <a href="' . $item['href'] . '" class=" hover:text-gray-950 hover:dark:text-gray-200 line-clamp-1">
           ' .  $item['title'] . '</a>
           </li>';
-          if($item['title'] === 'VIP介绍' && _capalot('is_site_vip_price_page')){
+          if ($item['title'] === 'VIP介绍' && _capalot('is_site_vip_price_page')) {
             echo $link_item;
-          }elseif($item['title'] === '客服咨询'){
+          } elseif ($item['title'] === '客服咨询') {
             echo $link_item;
-          }elseif($item['title'] === '推广计划'){
+          } elseif ($item['title'] === '推广计划') {
             echo $link_item;
           }
         } ?>
@@ -61,8 +61,28 @@ if (empty(_capalot('is_site_footer_widget', true))) {
     </div>
 
     <div class=" col-span-2">
-      <h4 class="widget-title dark:text-gray-50"><?php _e('联系我们', 'ripro'); ?></h4>
-      <div class=" text-sm text-gray-600 dark:text-gray-400"><?php echo _capalot('site_contact_desc'); ?></div>
+      <h4 class="widget-title text-lg dark:text-gray-50"><?php _e('联系我们', 'ripro'); ?></h4>
+      <div class=" my-2 flex gap-2">
+        <?php
+        $code_imgA  = _capalot('site_footer_QRCodeA', get_template_directory_uri() . '/assets/img/Capalot-qr.png');
+        if ($code_imgA != '') {
+          echo '<img class=" max-h-20 inline-block" src="' . esc_url($code_imgA) . '" alt="' . esc_attr(get_bloginfo('name')) . '">';
+        } else {
+          echo '';
+        }
+        ?>
+        <?php
+        $code_imgB  = _capalot('site_footer_QRCodeB', get_template_directory_uri() . '/assets/img/Capalot-qr.png');
+        if ($code_imgB != '') {
+          echo '<img class=" max-h-20 inline-block" src="' . esc_url($code_imgB) . '" alt="' . esc_attr(get_bloginfo('name')) . '">';
+        } else {
+          echo '';
+        }
+        ?>
+      </div>
+      <div class=" text-sm text-gray-600 dark:text-gray-400">
+        <?php echo _capalot('site_contact_desc'); ?>
+      </div>
     </div>
   </div>
 </div>
