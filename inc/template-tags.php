@@ -810,6 +810,25 @@ function capalot_add_post_likes($post_id = null, $num = 1)
 }
 
 /**
+ * 获取文章购买量
+ */
+function capalot_get_post_paynum($post_id = null)
+{
+  if (empty($post_id)) {
+    global $post;
+    $post_id = $post->ID;
+  }
+
+  $meta_key = 'capalot_paynum';
+
+  $this_num = absint(get_post_meta($post_id, $meta_key, true));
+  if (1000 <= $this_num) {
+    $this_num = sprintf('%0.1f', $this_num / 1000) . 'K';
+  }
+  return $this_num;
+}
+
+/**
  * 获取时间戳
  */
 function capalot_meta_datetime()
