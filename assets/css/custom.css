@@ -635,3 +635,24 @@
         background: none;
     }
 }
+/* 高级筛选：分类 */
+.filter-warp ::-webkit-scrollbar,
+.filter-warp ::-webkit-scrollbar-thumb,
+.filter-warp ::-webkit-scrollbar-track {
+    display: none
+}
+.filter-warp .filter-item .filter-link.active>a,
+.filter-warp .filter-item .filter-link:hover>a {
+    color: #ff6022
+}
+.filter-warp .filter-item .filter-link.active>a::after,
+.filter-warp .filter-item .filter-link:hover>a::after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 12px;
+    margin-left: -6px;
+    border-bottom: 2px solid #ff6022
+}

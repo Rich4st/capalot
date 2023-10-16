@@ -40,6 +40,10 @@ function is_site_tougao()
     return !empty(_capalot('is_site_tougao', 1));
 }
 
+//是否开启了分类筛选
+function is_site_term_filter() {
+    return (bool) _capalot('is_site_term_filter', true);
+}
 
 //是否开启签到功能
 function is_site_qiandao()
