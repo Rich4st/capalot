@@ -71,11 +71,11 @@ $container = _capalot('site_container_width', '1400');
     <?php endif; ?>
 
 
-    <div class="<?php echo esc_attr($cms_style); ?>  grid lg:grid-cols-2 grid-cols-1 gap-4 p-2 lg:p-0">
+    <div class="<?php echo esc_attr($cms_style); ?>  grid md:grid-cols-2 grid-cols-1 gap-4 p-2 lg:p-0">
 
       <?php if ($PostData->have_posts()) : $counter = 0; ?>
 
-        <ul>
+        <ul class="max-h-[15rem] md:max-h-full">
           <?php while ($PostData->have_posts() && $counter == 0) : $PostData->the_post(); ?>
             <?php get_template_part('template-parts/loop/item', '', $cms_box_item_config); ?>
           <?php $counter++;
