@@ -116,7 +116,7 @@ Footer END -->
 
 
 
-<div class=" lg:hidden fixed bottom-0 w-full left-0 z-[9988899] bg-white dark:bg-dark-card shadow-[0_-3px_10px_0_rgba(0,0,0,0.05)] border-t dark:border-t-[#222] ">
+<div class=" md:hidden fixed bottom-0 w-full left-0 z-[9988899] bg-white dark:bg-dark-card shadow-[0_-3px_10px_0_rgba(0,0,0,0.05)] border-t dark:border-t-[#222] ">
   <ul class=" flex text-center py-2 justify-around text-gray-600 dark:text-gray-50 ">
     <li><a target="" href="/"><i class="fas fa-home text-lg "></i><span class=" block text-sm ">首页</span></a></li>
     <?php foreach (_capalot('site_footer_widget_link1', array()) as $item) {

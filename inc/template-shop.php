@@ -774,7 +774,19 @@ function get_user_aff_permalink($link_url, $user_id = null)
 // 获取网站当前推荐人信息
 function capalot_get_current_aff_id($user_id = 0)
 {
-    // TODO:
+    $aff_id = (int) Capalot_Cookie::get('aff');
+    $ref_id = (int) get_user_meta($user_id, 'capalot_ref_from', true);
+
+    if ($aff_id > 0) {
+        $return_id = $aff_id;
+    } elseif ($ref_id > 0) {
+        $return_id = $ref_id;
+    }
+
+    if($return_id === $user_id)
+        $return_id = 0;
+
+    return absint($return_id);
 }
 
 /**

@@ -603,6 +603,9 @@
     flex: 1;
     text-align: right;
 }
+.sidebar-main-menu .menu-item-has-children span:hover{
+    background-color: #c2c2c2;
+}
 
 /* 轮播退左右箭头 */
 .category-swiper {

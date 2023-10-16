@@ -26,7 +26,7 @@ if (!empty($capalot_downurl_new) && is_array($capalot_downurl_new)) {
 }
 
 ?>
-<div class=" bg-white rounded-md p-4 mb-8  relative overflow-hidden dark:bg-dark-card">
+<div class=" bg-white rounded-md p-4 my-3  relative overflow-hidden dark:bg-dark-card">
   <div class="ri-down-warp" data-resize="<?php echo esc_attr($args['resize_position']); ?>">
     <div class=" bg-teal-500 text-white text-sm text-center leading-6 rotate-45 w-60 absolute right-[-6rem] top-3"><span class="down-msg"><?php _e('下载', 'ripro'); ?></span></div>
     <?php if ($user_pay_post_status && !$is_user_login_get_status) : ?>
