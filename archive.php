@@ -29,7 +29,11 @@ $archive_item_config = get_posts_style_config();
 
 		<?php do_action('capalot_ads', 'ad_archive_bottom'); ?>
 
-
+		<?php Capalot_pagination(array(
+		'range'     => 4,
+		'nav_class' => 'page-nav mt-4',
+		'nav_type'  => _capalot('site_page_nav_type', 'click'),
+	));?>
 
 	</div>
 </section>
