@@ -36,12 +36,12 @@ $site_color = get_site_default_color_style();
     <span class="cursor-pointer toggle-language " rel="nofollow noopener noreferrer" title='多语言'>
         <i class="fa-solid fa-language text-xl"></i>
     </span>
-    <div class="group-hover:block hidden  absolute rounded-lg  shadow-lg dark:bg-dark-card top-6 right-0 w-[120px] z-[9999]">
+    <div class="group-hover:block hidden  absolute rounded-lg  shadow-lg dark:bg-dark-card top-6 right-0 w-28 z-[9999]">
         <div class="dark:bg-dark rounded-lg shadow-lg overflow-hidden text-sm cursor-pointer  bg-white w-full space-y-2 py-2">
-          <div class="hover:text-[#646cff]">简体中文</div>
-          <div  class="hover:text-[#646cff]">English</div>
-          <div  class="hover:text-[#646cff]">俄语</div>
-          <div  class="hover:text-[#646cff]">西班牙语</div>
+            <div class="hover:text-indigo-400">简体中文</div>
+            <div class="hover:text-indigo-400">English</div>
+            <div class="hover:text-indigo-400">俄语</div>
+            <div class="hover:text-indigo-400">西班牙语</div>
         </div>
     </div>
 </div>
