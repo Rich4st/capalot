@@ -11,7 +11,7 @@
 <?php
 $container = _capalot('site_container_width', '1400');
 
-if(_capalot('is_site_home_header_transparent', false)) {
+if(_capalot('is_site_home_header_transparent', false) && is_home()) {
 	$header_css = 'absolute';
 }
 
