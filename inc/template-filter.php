@@ -107,7 +107,8 @@ function capalot_archive_description($description)
 add_filter('get_the_archive_description', 'capalot_archive_description');
 
 // 在后台更新菜单时删除缓存
-function capalot_update_menu_callback() {
+function capalot_update_menu_callback()
+{
     delete_transient('main-menu-cache');
 }
 add_action('wp_update_nav_menu', 'capalot_update_menu_callback', 10);
@@ -196,6 +197,85 @@ function _get_avatar_url($url, $id_or_email, $args)
     return preg_replace('/^(http|https):/i', '', $avatar_url);
 }
 add_filter('get_avatar_url', '_get_avatar_url', 10, 3);
+
+// 自定义筛选字段过滤器
+function capalot_archive_pre_posts_filter($query)
+{
+
+    //后台不过滤
+    if (is_admin()) {
+        return $query;
+    }
+
+    //不是主查询排除过滤器
+    if (!$query->is_main_query()) {
+        return $query;
+    }
+
+    //搜索仅限搜索文章类型
+    if (is_search()) {
+        $query->set('post_type', 'post');
+    }
+
+    //高级筛选过滤器
+    if (is_archive()) {
+
+        //价格筛选free
+        $price      = sanitize_text_field(get_response_param('price', null, 'get'));
+        $price_meta = ['free', 'vip_only', 'vip_free', 'vip_rate', 'boosvip_free'];
+        if (in_array($price, $price_meta)) {
+
+            $meta_query       = [];
+            $price_key        = 'capalot_price';
+            $vip_rate_key     = 'capalot_vip_rate';
+            $boosvip_free_key = 'capalot_is_boosvip';
+            $vip_only_key     = 'capalot_close_novip_pay';
+
+            switch ($price) {
+                case 'free':
+                    $meta_query[] = ['key' => $price_key, 'compare' => '=', 'value' => '0'];
+                    $meta_query[] = ['key' => $vip_only_key, 'compare' => '!=', 'value' => '1'];
+                    break;
+                case 'vip_only':
+                    $meta_query[] = ['key' => $vip_only_key, 'compare' => '=', 'value' => '1'];
+                    break;
+                case 'vip_free':
+                    $meta_query[] = ['key' => $price_key, 'compare' => '>', 'value' => '0'];
+                    $meta_query[] = ['key' => $vip_rate_key, 'compare' => '=', 'value' => '0'];
+                    break;
+                case 'vip_rate':
+                    $meta_query[] = [
+                        'relation' => 'AND',
+                        ['key' => $price_key, 'compare' => '>', 'value' => '0'],
+                        ['key' => $vip_rate_key, 'compare' => '>', 'value' => '0'],
+                        ['key' => $vip_rate_key, 'compare' => '<', 'value' => '1'],
+                    ];
+                    break;
+                case 'boosvip_free':
+                    $meta_query[] = [
+                        'relation'            => 'OR',
+                        'boosvip_free_clause' => ['key' => $boosvip_free_key, 'compare' => '=', 'value' => '1'],
+                        'vip_rate_clause'     => ['key' => $vip_rate_key, 'compare' => '=', 'value' => '0'],
+                    ];
+                    break;
+            }
+
+            $query->set('meta_query', $meta_query);
+        }
+
+        // 排序：
+        $orderby     = sanitize_text_field(get_response_param('orderby', null, 'get'));
+        $orders_meta = ['views', 'likes', 'follow_num'];
+        if (in_array($orderby, $orders_meta)) {
+            $query->set('meta_key', $orderby);
+            $query->set('orderby', 'meta_value_num');
+            $query->set('order', 'DESC');
+        }
+    }
+
+    return $query;
+}
+add_filter('pre_get_posts', 'capalot_archive_pre_posts_filter', 99);
 
 // 搜素功能过滤器
 function site_search_by_title_only($search, $wp_query)
