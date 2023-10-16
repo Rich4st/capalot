@@ -11,12 +11,17 @@ class Capalot_Admin
   public function __construct()
   {
 
+    // 用户管理页面
     add_action('admin_menu', array($this, 'admin_menu'));
     add_filter('manage_users_columns', array($this, 'custom_user_columns'));
     add_action('manage_users_custom_column', array($this, 'output_user_columns'), 10, 3);
 
+    // 文章管理页面
     add_filter('manage_posts_columns', array($this, 'manage_posts_columns'));
     add_action('manage_posts_custom_column', array($this, 'manage_posts_custom_column'), 10, 2);
+
+    // 用户注册时触发
+    add_action('user_register', array($this, 'register_hook'), 10, 1);
   }
 
   /**
@@ -306,5 +311,32 @@ class Capalot_Admin
   public function admin_page_clean()
   {
     $this->load_page('clean');
+  }
+
+  //用户注册时触发
+  public function register_hook($user_id)
+  {
+
+    $ref_id = capalot_get_current_aff_id($user_id);
+    if (!empty($ref_id)) {
+      update_user_meta($user_id, 'capalot_ref_from', $ref_id);
+    }
+
+    $ip = get_ip_address();
+    update_user_meta($user_id, 'register_ip', $ip);
+    $user = get_user_by('id', $user_id);
+
+    if (site_push_server('admin', 'register')) {
+      do_action('capalot_send_mail_msg', [
+        'email' => get_bloginfo('admin_email'),
+        'title' => '新用户注册通知',
+        'msg'   => sprintf('新用户注册通知：<br>用户：%s<br>邮箱：%s<br>IP：%s', $user->user_login, $user->user_email, $ip)
+      ]);
+    }
+
+    Capalot_Notification::add([
+      'info' => '成功注册加入本站',
+      'uid'  => $user_id,
+    ]);
   }
 }
