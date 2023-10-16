@@ -49,6 +49,7 @@ function capalot_assets()
     'theme_url' => esc_url(get_template_directory_uri()),
     'singular_id' => 0,
     // 'post_content_nav' => intval(_capalot('site_post_content_nav', 0)),
+    'category_base' => capalot_get_category_base(),
     'current_user_id' => get_current_user_id(),
     'ajax_nonce' => wp_create_nonce("capalot_ajax"),
     'get_text' => array(

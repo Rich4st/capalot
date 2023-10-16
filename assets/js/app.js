@@ -367,7 +367,13 @@ let ca = {
       const icon = document.querySelector('.more_icon')
 
       currentPage++;
-      const cat = new URL(window.location.href).searchParams.get('cat') ?? new URL(window.location.href).pathname.split('/')[2];
+
+      let cat = '';
+      if (capalot.category_base === '') {
+        cat = new URL(window.location.href).pathname.split('/')[1] === ''
+          ? new URL(window.location.href).searchParams.get('cat')
+          : new URL(window.location.href).pathname.split('/')[1];
+      }
       const s = new URL(window.location.href).searchParams.get('s');
 
       $.ajax({
