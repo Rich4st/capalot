@@ -7,7 +7,7 @@ $query_args = array(
   'paged' => get_query_var('paged', 1),
   'ignore_sticky_posts' => false,
   'post_status' => 'publish',
-  // 'category__not_in' => $args['no_cat'] ?? [],
+  'category__not_in' => $args['no_cat'] ?? [],
 );
 
 $PostData = new WP_Query($query_args);

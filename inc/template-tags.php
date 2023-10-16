@@ -11,14 +11,11 @@ function Capalot_Pagination($args = array())
     'custom_query' => false,
     'previous_string' => '«',
     'next_string' => '»',
-    'nav_type' => _capalot('site_pagination_type', 'click'),
+    'nav_type' => _capalot('site_page_nav_type', 'click'),
     'nav_class' => 'pagination justify-content-center',
   );
 
-  $args = wp_parse_args(
-    $args,
-    $default
-  );
+  $args = wp_parse_args($args, $default);
 
   $args['range'] = (int) $args['range'] - 1;
 
