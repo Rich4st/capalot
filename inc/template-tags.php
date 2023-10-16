@@ -348,6 +348,19 @@ function capalot_get_term_parents_link($id, $taxonomy, $visited = array())
   return $chain;
 }
 
+//  获取分类ID的顶级分类id
+
+function capalot_get_term_top_id($term_id, $taxonomy='category') {
+  $ancestors = get_ancestors($term_id, $taxonomy);
+  if ($ancestors) {
+      $top_level_id = end($ancestors);
+  } else {
+      $top_level_id = $term_id;
+  }
+  return $top_level_id;
+}
+
+
 
 /**
  * 分页
@@ -1253,4 +1266,50 @@ function capalot_is_mobile()
   }
 
   return false;
+}
+
+
+//  获取自定义分类法筛选配置
+
+function get_site_custom_taxonomy() {
+
+  $data   = _capalot('site_custom_taxonomy', array());
+  $config = array();
+  if (empty($data) || !is_array($data)) {
+      return array();
+  }
+
+  foreach ($data as $key => $value) {
+
+      $custom_taxonomy = trim($value['taxonomy']);
+
+      if (!preg_match("/^[a-zA-Z\s]+$/", $custom_taxonomy)) {
+          continue; //不是英文标识
+      }
+
+      $config[$custom_taxonomy] = $value;
+  }
+
+  return $config;
+}
+
+//  根据分类id获取当前分类筛选配置
+
+function get_cat_filter_config($cat_id) {
+
+  $data   = _capalot('site_term_filter_config', array());
+
+  if (empty($cat_id) || empty($data)) {
+      return array();
+  }
+
+  $config = array();
+
+  foreach ($data as $item) {
+      if ($item['cat_id'] == $cat_id) {
+          $config = $item;
+      }
+  }
+
+  return $config;
 }

@@ -4,7 +4,7 @@ get_header();
 
 $cat_id = get_queried_object_id();
 
-$archive_item_config = get_posts_style_config();
+$archive_item_config = get_posts_style_config($cat_id);
 
 ?>
 
