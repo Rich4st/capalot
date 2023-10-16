@@ -367,7 +367,7 @@ let ca = {
       const icon = document.querySelector('.more_icon')
 
       currentPage++;
-      const cat = new URL(window.location.href).searchParams.get('cat');
+      const cat = new URL(window.location.href).searchParams.get('cat') ?? new URL(window.location.href).pathname.split('/')[2];
       const s = new URL(window.location.href).searchParams.get('s');
 
       $.ajax({
