@@ -83,8 +83,8 @@ if ($post_format && isset($format_icons[$post_format])) {
   </li>
 
 <?php elseif ($args['type'] == 'grid-overlay') : ?>
-  <li class="col cursor-pointer rounded-lg overflow-hidden text-sm">
-    <article class="post-item relative group ">
+  <li class="col cursor-pointer rounded-lg overflow-hidden h-full text-sm">
+    <article class="post-item relative group h-full">
 
       <?php if (is_sticky()) : ?>
         <div class="tips-badge absolute w-10 text-center top-0 start-0 z-50 m-2 bg-gray-400  rounded-xl text-white bg-opacity-40">
@@ -109,8 +109,8 @@ if ($post_format && isset($format_icons[$post_format])) {
         <?php endif; ?>
       </div>
 
-      <div class="entry-media ratio  <?php echo esc_attr($args['media_class']); ?>">
-        <a target="<?php echo get_target_blank(); ?>" style="background-image: url(<?php echo capalot_get_thumbnail_url(); ?>);" class="block  bg-no-repeat overflow-hidden  <?php echo esc_attr($args['media_size_type']); ?>
+      <div class="entry-media ratio h-full <?php echo esc_attr($args['media_class']); ?>">
+        <a target="<?php echo get_target_blank(); ?>" style="background-image: url(<?php echo capalot_get_thumbnail_url(); ?>);" class="block h-full  bg-no-repeat overflow-hidden  <?php echo esc_attr($args['media_size_type']); ?>
         <?php echo esc_attr($args['media_fit_type']); ?>" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" data-bg="<?php echo capalot_get_thumbnail_url(); ?>">
           <?php if ($post_format_icon) : ?>
             <div class="post-format-icon "><i class="<?php echo $post_format_icon; ?>"></i></div>
@@ -134,7 +134,7 @@ if ($post_format && isset($format_icons[$post_format])) {
     </article>
   </li>
 <?php elseif ($args['type'] == 'list') : ?>
-  <li class="dark:bg-dark-card rounded-lg bg-white cursor-pointer <?php echo $card_size; ?> dark:border-[#222] transition  hover:-translate-y-1 hover:shadow-2xl  duration-500 ">
+  <li class="dark:bg-dark-card rounded-lg bg-white cursor-pointer h-full <?php echo $card_size; ?> dark:border-[#222] transition  hover:-translate-y-1 hover:shadow-2xl  duration-500 ">
     <article class="relative flex flex-row p-2">
 
       <?php if (is_sticky()) : ?>
@@ -143,7 +143,7 @@ if ($post_format && isset($format_icons[$post_format])) {
         </div>
       <?php endif; ?>
 
-      <div class="max-w-[8rem] ratio ratio-16x9 col-auto mr-2 ">
+      <div class="max-w-[8rem] ratio ratio-16x9 col-auto mr-2 h-full ">
         <a target="<?php echo get_target_blank(); ?>" style="background-image: url(<?php echo capalot_get_thumbnail_url(); ?>);" class="block  bg-no-repeat  <?php echo esc_attr($args['media_size_type']); ?>
         <?php echo esc_attr($args['media_fit_type']); ?>" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" data-bg="<?php echo capalot_get_thumbnail_url(); ?>">
           <?php if ($post_format_icon) : ?>
@@ -151,18 +151,19 @@ if ($post_format && isset($format_icons[$post_format])) {
           <?php endif; ?>
         </a>
       </div>
-      <div class="entry-wrapper  w-full text-gray-400 text-xs">
+      <div class="entry-wrapper  w-full  text-gray-400 text-xs">
         <div class="entry-body ">
 
           <?php if ($args['is_entry_cat']) : ?>
             <div class=" mb-1 min-h-[1rem] line-clamp-1"><?php capalot_meta_category(2); ?></div>
           <?php endif; ?>
 
-          <a class=" text-gray-700 text-base hover:text-black dark:text-gray-50 dark:hover:text-gray-400 font-bold line-clamp-1 min-h-[1.25rem]" target="<?php echo get_target_blank(); ?>" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a>
-
-          <?php if ($args['is_entry_desc']) : ?>
-            <div class="line-clamp-1 min-h-[1rem]"><?php capalot_get_post_excerpt(40); ?></div>
-          <?php endif; ?>
+          <a class=" text-gray-700 text-base hover:text-black dark:text-gray-50 dark:hover:text-gray-400 font-bold line-clamp-1 min-h-[1.25rem] " target="<?php echo get_target_blank(); ?>" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a>
+          <div class="line-clamp-1  min-h-[1rem]">
+            <?php if ($args['is_entry_desc']) : ?>
+              <?php capalot_get_post_excerpt(40); ?>
+            <?php endif; ?>
+          </div>
         </div>
         <?php if ($args['is_entry_meta']) : ?>
           <div class="entry-meta flex justify-between text-xs">

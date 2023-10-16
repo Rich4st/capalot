@@ -65,13 +65,16 @@ class Capalot_Shop
     global $wpdb;
     $table_name = $wpdb->prefix . 'capalot_order';
 
+    $order_data['pay_time'] = time();
+    $order_data['pay_trade_no'] = '2023-' . time();
+
     // 更新$order_trade_no对应的订单状态
     $update = $wpdb->update(
       $table_name,
       [
-        'pay_time' => time(),
+        'pay_time' => $order_data['pay_time'],
         'pay_price' => $order_data['pay_price'] ?? '0',
-        'pay_trade_no' => '999-' . time(),
+        'pay_trade_no' => $order_data['pay_trade_no'],
         'order_info' => $order_data['order_info'] ?? $cdk_code,
         'pay_status' => 1,
       ],
@@ -79,6 +82,18 @@ class Capalot_Shop
         'order_trade_no' => $order_data['order_trade_no'],
       ]
     );
+
+    if ($update) {
+      $order_data['pay_status'] = 1;
+
+      $order_id = $wpdb->get_var($wpdb->prepare("SELECT id FROM $table_name WHERE order_trade_no = %s", $order_data['order_trade_no']));
+      $order_data['order_id'] = $order_id;
+
+      $post = get_post($order_data['post_id']);
+      $order_data['author_id'] = $post->post_author;
+
+      do_action('capalot_pay_success', $order_data);
+    }
 
     return $update ? true : false;
   }
@@ -312,9 +327,7 @@ class Capalot_Aff
   {
   }
 
-  /**
-   * 获取推广状态
-   */
+  // 获取推广状态
   public static function get_aff_status($param)
   {
     switch ($param) {
@@ -330,39 +343,46 @@ class Capalot_Aff
     }
   }
 
-  /**
-   * 更新推广记录
-   */
+  // 添加推广记录
+  public static function add_aff_log($param)
+  {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'capalot_aff';
+
+    $param['create_time'] = time();
+
+    $insert = $wpdb->insert(
+      $table_name,
+      $param
+    );
+
+    return $insert ? true : false;
+  }
+
+  // 更新推广记录
   public static function update_aff_log($data, $where, $data_format, $where_format)
   {
     global $wpdb;
+    $table_name = $wpdb->prefix . 'aff';
 
-    // 检查 $wpdb 是否已经初始化，如果没有，可以根据您的需求进行初始化
-
-    // 确保 $data 和 $where 数组的键值对数量匹配
     if (count($data) !== count($data_format) || count($where) !== count($where_format)) {
-      return false; // 键值对数量不匹配，操作失败
+      return false;
     }
 
-    // 构建 SQL 更新语句
-    $table_name = $wpdb->prefix . 'aff'; // 表名
     $sql = "UPDATE $table_name SET ";
 
-    // 构建 SET 子句
     $set_clause = array();
     foreach ($data as $key => $value) {
       $set_clause[] = "$key = %{$data_format[$key]}";
     }
     $sql .= implode(', ', $set_clause);
 
-    // 构建 WHERE 子句
     $where_clause = array();
     foreach ($where as $key => $value) {
       $where_clause[] = "$key = %{$where_format[$key]}";
     }
     $sql .= " WHERE " . implode(' AND ', $where_clause);
 
-    // 执行 SQL 更新语句
     $result = $wpdb->query($wpdb->prepare($sql, $data, $data_format));
 
     if ($result === false) {
@@ -372,11 +392,7 @@ class Capalot_Aff
     }
   }
 
-  /**
-   * 获取用户推广信息
-   *
-   * @param int $user_id 用户ID
-   */
+  // 获取用户推广信息
   public static function get_user_aff_info($user_id)
   {
 
@@ -442,7 +458,7 @@ class Capalot_Aff
     return $sum ? (float) $sum : 0;
   }
 
-  // 已经推广的人的id
+  // 已推广的人的id
   public static function get_ref_ids($user_id)
   {
     global $wpdb;

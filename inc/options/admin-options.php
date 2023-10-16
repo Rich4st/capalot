@@ -958,6 +958,183 @@ CSF::createSection($prefix, array(
 ));
 
 /**
+ * 高级筛选
+ */
+CSF::createSection($prefix, array(
+  'title'  => '高级筛选',
+  'icon'   => 'dashicons dashicons-filter',
+  'fields' => array(
+
+    array(
+      'id'      => 'is_site_term_filter',
+      'type'    => 'switcher',
+      'title'   => '分类页高级筛选功能',
+      'desc'    => '总开关，开启后在文章分类内页顶部显示高级筛选组件，关闭则不显示',
+      'default' => true,
+    ),
+
+    array(
+      'id'                     => 'site_term_filter_config',
+      'type'                   => 'group',
+      'title'                  => '高级筛选显示设置',
+      'subtitle'               => '控制筛选功能在某个分类中显示哪些按钮，不配置则不显示',
+      'accordion_title_number' => true,
+      'fields'                 => array(
+        array(
+          'id'         => 'cat_id',
+          'type'       => 'select',
+          'title'      => '关联分类',
+          'desc'       => '配置此分类页面下显示的筛选条目',
+          'options'    => 'categories',
+          'inline'     => true,
+          'query_args' => array(
+            'orderby' => 'count',
+            'order'   => 'DESC',
+            'parent'  => 0,
+          ),
+        ),
+
+        array(
+          'id'          => 'top_cats',
+          'type'        => 'checkbox',
+          'title'       => '主分类筛选显示',
+          'desc'        => '排序规则以设置的顺序为准',
+          'placeholder' => '选择分类',
+          'inline'      => true,
+          'multiple'    => true,
+          'options'     => 'categories',
+          'query_args'  => array(
+            'orderby' => 'count',
+            'order'   => 'DESC',
+            'parent'  => 0,
+          ),
+        ),
+        array(
+          'id'      => 'is_child_cat',
+          'type'    => 'checkbox',
+          'title'   => '子分类筛选',
+          'label'   => '是否显示子分类筛选条目（支持无限子分类）',
+          'default' => true,
+        ),
+
+        array(
+          'id'         => 'child_cat_orderby',
+          'type'       => 'radio',
+          'title'      => '子分类筛选排序规则',
+          'inline'     => true,
+          'options'    => array(
+            'none' => '不排序',
+            'id'    => '分类ID',
+            'name'  => '分类名称',
+            'slug'  => '分类别名',
+            'count' => '文章数量',
+            // 'include' => '自定义ID排序',
+          ),
+          'default'    => 'none',
+        ),
+
+        // array(
+        //     'id'      => 'orderby_include',
+        //     'type'    => 'text',
+        //     'title'   => '子分类自定义排序ID',
+        //     'desc' => '填写要排序的分类ID，用英文逗号隔开，例如： 1,3,55,25',
+        //     'default' => '',
+        //     'dependency' => array('child_cat_orderby', '==', 'include'),
+        // ),
+
+        array(
+          'id'         => 'child_cat_order',
+          'type'       => 'radio',
+          'title'      => '子分类筛选排序方式',
+          'inline'     => true,
+          'options'    => array(
+            'ASC'    => '升序排序',
+            'DESC'  => '降序排序',
+          ),
+          'default'    => 'ASC',
+        ),
+
+
+
+        array(
+          'id'      => 'is_price',
+          'type'    => 'checkbox',
+          'title'   => '价格筛选',
+          'label'   => '是否显示价格筛选条目，可筛选全部文章，免费资源，VIP资源',
+          'default' => true,
+        ),
+        array(
+          'id'      => 'custom_taxonomy',
+          'type'    => 'checkbox',
+          'title'   => '自定义筛选字段',
+          'inline'  => true,
+          'options' => _get_custom_taxonomy_option(),
+          'desc'    => '显示哪些自定义字段筛选条目',
+          'default' => '',
+        ),
+      ),
+    ),
+
+    array(
+      'id'                     => 'site_custom_taxonomy',
+      'type'                   => 'group',
+      'title'                  => '高级自定义筛选字段配置',
+      'subtitle'               => '（按需选用）采用WP原生高效率的高级定义分类法开发，在编辑发布文章得时候按需选择，一般用于复杂的网站内容，大部分网站不需要配置此功能',
+      'accordion_title_number' => true,
+      'fields'                 => array(
+        array(
+          'id'      => 'name',
+          'type'    => 'text',
+          'title'   => '筛选名称',
+          'desc'    => '例如：格式，颜色，大小，尺寸，设置后中途可修改名称',
+          'default' => '颜色',
+        ),
+        array(
+          'id'      => 'taxonomy',
+          'type'    => 'text',
+          'title'   => '分类字段唯一标识',
+          'desc'    => '必须是纯英文，例如geshhi，yanse，szie，color，<b style="color:red;">设置后如果已经有文章关联选中，则不可以中途修改此标识</b>',
+          'default' => 'yanse',
+        ),
+        // array(
+        //     'id'    => 'slug',
+        //     'type'  => 'text',
+        //     'title' => '链接别名',
+        //     'desc'   => 'URL链接中显示的别名',
+        // ),
+        array(
+          'id'      => 'type',
+          'type'    => 'radio',
+          'title'   => '选项类型',
+          'inline'  => true,
+          'options' => array(
+            'simple'   => '多选',
+            'dropdown' => '下拉单选',
+            'radio'    => '单选',
+          ),
+          'desc'    => '后台发布文章时选项类型',
+          'default' => 'simple',
+        ),
+      ),
+    ),
+
+  ),
+));
+function _get_custom_taxonomy_option()
+{
+    $data = _capalot('site_custom_taxonomy', array());
+    $option = array();
+    if (empty($data) || !is_array($data)) {
+        return array();
+    }
+    foreach ($data as $key => $value) {
+        $custom_taxonomy          = trim($value['taxonomy']);
+        $option[$custom_taxonomy] = $value['name'];
+    }
+    return $option;
+}
+
+/**
  * 高级搜索
  */
 CSF::createSection($prefix, array(

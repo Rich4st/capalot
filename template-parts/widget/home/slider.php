@@ -34,7 +34,7 @@ $container = _capalot('site_container_width', '1400');
 
 ?>
 
-<section class="dark:bg-dark py-3">
+<section class="dark:bg-dark">
   <div class="swiper mySwiper mx-auto" style="max-width:
    <?php if ($container === '') {
       echo ($args['container'] == 'container-normal') ?   '1280px' : '100%';

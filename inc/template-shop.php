@@ -783,7 +783,7 @@ function capalot_get_current_aff_id($user_id = 0)
         $return_id = $ref_id;
     }
 
-    if($return_id === $user_id)
+    if ($return_id === $user_id)
         $return_id = 0;
 
     return absint($return_id);
@@ -846,24 +846,21 @@ function capalot_get_request_pay($order_data)
                 return $result;
             }
 
+            $pay_trade_no = '2023-' . time();
             // 处理支付回调
             $update_order = Capalot_Shop::pay_notify_callback($order_data);
 
             if (!$update_order) {
                 $result['msg'] = '订单状态处理异常';
+                $result['foo'] = $update_order;
                 return $result;
             } else {
-                $uc_vip_info = get_user_vip_data($order_data['user_id']);
-
-                if ($uc_vip_info['type'] != 'boosvip') {
-                    $update = update_user_vip_data($order_data['user_id'], $order_data['order_price']);
-                }
-
                 return [
                     'status' => 1, //状态
                     'method' => 'reload', // popup|弹窗  url|跳转 reload|刷新 jsapi|js方法
                     'num'    => $order_data['order_trade_no'], //订单号
                     'msg'    => '支付成功',
+                    'foo'    => $update_order
                 ];
             }
 
@@ -886,7 +883,7 @@ function capalot_get_request_pay($order_data)
         case 'weixinpay':
             $config = _capalot('weixinpay');
 
-            if(wp_is_mobile() && !empty($config['is_mobile']) && is_weixin_visit()) {
+            if (wp_is_mobile() && !empty($config['is_mobile']) && is_weixin_visit()) {
                 $pay_url = $CapalotPay->weixin_h5_pay($order_data);
             } else {
                 $pay_url = $CapalotPay->weixin_qr_pay($order_data);
@@ -904,7 +901,7 @@ function capalot_get_request_pay($order_data)
         $result['msg']    = $pay_url;
     }
 
-    return apply_filters('capalot_get_request_pay', $result, $order_data);
+    return $result;
 }
 
 /**
@@ -912,30 +909,52 @@ function capalot_get_request_pay($order_data)
  *
  * 处理订单业务逻辑 1 => 'Post',2 => 'VIP',3 => 'Other'
  */
-function capalot_pay_success_callback($order)
+function capalot_pay_callback($order)
 {
-    if (empty($order) || empty($order->pay_status))
+    if (empty($order) || empty($order['pay_status']))
         return false;
 
-    $order_info = maybe_unserialize($order->order_info);
+    $post_id = $order['post_id'];
+    $order_info = maybe_unserialize($post_id);
 
-    if ($order->order_type == 1) {
-        // TODO: 文章订单
-    } elseif ($order->order_type == 2) {
-        // TODO: 充值订单
-    } elseif ($order->order_type == 3 && isset($order_info['vip_type'])) {
-        $uc_vip_info = get_user_vip_data($order->user_id);
+    if ($order['order_type'] == 1) {
+        $sales_count = absint(get_post_meta($post_id, 'capalot_paynum', true));
 
-        if ($uc_vip_info['type'] != 'boosvip') {
+        update_post_meta($post_id, 'capalot_paynum', $sales_count + 1);
 
-            //更新用户会员状态
-            $update = update_user_vip_data($order->user_id, $order_info['vip_day']);
+        // 作者佣金
+        $author_id = $order['author_id'];
+
+        if (is_site_author_aff() && $author_id) {
+            $aff_rate = get_site_author_aff_rate();
+
+            $param = [
+                'order_id' => $order['order_id'],
+                'aff_uid'  => $author_id,
+                'aff_rate' => $aff_rate,
+                'note'     => '作者佣金',
+                'status'   => 0
+            ];
+
+            Capalot_Aff::add_aff_log($param);
         }
 
-        $site_vip_options = get_site_vip_options();
+        Capalot_Notification::add([
+            'info' => sprintf('成功购买了%s', get_the_title($post_id)),
+            'uid'  => $order['user_id'],
+            'href' => get_permalink($post_id),
+        ]);
+    } elseif ($order['order_type'] == 2) {
+        // TODO:充值订单
+    } else {
+        $uc_vip_info = get_user_vip_data($order['user_id']);
+
+        if ($uc_vip_info['type'] != 'boosvip') {
+            $update = update_user_vip_data($order['user_id'], $order['order_price']);
+        }
     }
 }
-add_action('site_pay_order_success', 'capalot_pay_success_callback', 10, 1);
+add_action('capalot_pay_success', 'capalot_pay_callback', 10, 1);
 
 /**
  * 获取第三方登录地址
@@ -980,7 +999,7 @@ function capalot_oauth_callback_event($data)
         // 该开放平台账号已连接过WP系统，再次使用它直接登录
         $user = get_user_by('id', $search_uid);
         if ($user) {
-            capalot_updete_user_oauth_info($user->ID, $data);
+            capalot_update_user_oauth_info($user->ID, $data);
 
             wp_set_current_user($user->ID, $user->user_login);
             wp_set_auth_cookie($user->ID, true);
@@ -990,7 +1009,7 @@ function capalot_oauth_callback_event($data)
         }
     } elseif (!empty($current_uid) && empty($search_uid)) {
         //当前已登录了本地账号, 直接绑定该账号
-        capalot_updete_user_oauth_info($current_uid, $data);
+        capalot_update_user_oauth_info($current_uid, $data);
         wp_safe_redirect(get_uc_menu_link());
         exit;
     } elseif (empty($search_uid) && empty($current_uid)) {
@@ -1012,7 +1031,7 @@ function capalot_oauth_callback_event($data)
             //登陆当前用户
             $user = get_user_by('id', $new_user);
             if ($user) {
-                capalot_updete_user_oauth_info($user->ID, $data);
+                capalot_update_user_oauth_info($user->ID, $data);
                 update_user_meta($user->ID, 'user_avatar_type', $data['method']); //更新默认头像
 
                 wp_set_current_user($user->ID, $user->user_login);
@@ -1026,7 +1045,7 @@ function capalot_oauth_callback_event($data)
 }
 
 // 更新用户oauth信息
-function capalot_updete_user_oauth_info($user_id, $data)
+function capalot_update_user_oauth_info($user_id, $data)
 {
     $meta = 'open_' . $data['method'];
     unset($data['method']);
@@ -1056,7 +1075,6 @@ function user_is_oauth_password($user_id)
         }
     }
 }
-
 
 /**
  * 获取个人中心菜单
