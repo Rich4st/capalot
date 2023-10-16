@@ -1211,7 +1211,7 @@ class Capalot_Ajax
       'post_status' => 'publish',
       'paged' => $_POST['paged'],
       's' => $s,
-      'cat' => $cat,
+      'category_name' => $cat,
     ]);
 
     $response = '';
