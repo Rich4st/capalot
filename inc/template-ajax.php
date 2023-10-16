@@ -893,7 +893,7 @@ class Capalot_Ajax
       'order_name' => '商城自助购买',
       'callback_url' => esc_url(home_url()),
       'order_info' => [
-        'aff_id' => 1, // TODO: 获取推荐人信息
+        'aff_id' => capalot_get_current_aff_id($user_id),
         'ip' => get_ip_address(), // ip
       ],
     ];
