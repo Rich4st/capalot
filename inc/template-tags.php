@@ -382,6 +382,23 @@ function is_weixin_visit()
   }
 }
 
+// 获取分类前缀
+function capalot_get_category_base()
+{
+  if(_capalot('site_no_category', false)) {
+    $category_base = '';
+  } else {
+    // 获取用户在固定链接中设置的分类前缀
+    $category_base = get_option('category_base');
+
+    if (empty($category_base)) {
+      $category_base = 'category';
+    }
+  }
+
+  return $category_base;
+}
+
 /**
  * 获取分类信息
  */
