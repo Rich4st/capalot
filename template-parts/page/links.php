@@ -54,8 +54,8 @@ $bg_image = get_template_directory_uri() . '/assets/img/bg.jpg';
 											</div>
 										</div>
 										<div class=" col-span-4">
-											<b class=" text-lg text-gray-950 dark:text-gray-50 hover:underline font-normal"><?php echo $bookmark->link_name; ?></b>
-											<p class=" text-sm text-gray-600 dark:text-gray-400"><?php echo $bookmark->link_description; ?></p>
+											<b class=" text-lg line-clamp-1 text-gray-950 dark:text-gray-50 hover:underline font-normal"><?php echo $bookmark->link_name; ?></b>
+											<p class=" text-sm line-clamp-2 text-gray-600 dark:text-gray-400"><?php echo $bookmark->link_description; ?></p>
 										</div>
 									</div>
 								</a>

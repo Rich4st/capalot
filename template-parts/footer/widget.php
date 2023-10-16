@@ -26,7 +26,7 @@ if (empty(_capalot('is_site_footer_widget', true))) {
       <ul class=" text-gray-600 text-sm leading-6 dark:text-gray-400">
         <?php foreach (_capalot('site_footer_widget_link1', array()) as $item) {
           $link_item = '<li>
-          <a href="' . $item['href'] . '" class=" hover:text-gray-950 hover:dark:text-gray-200">
+          <a href="' . $item['href'] . '" class=" hover:text-gray-950 hover:dark:text-gray-200 line-clamp-1">
           ' .  $item['title'] . '</a>
           </li>';
 
@@ -46,7 +46,7 @@ if (empty(_capalot('is_site_footer_widget', true))) {
       <ul class=" text-gray-600 text-sm leading-6 dark:text-gray-400">
         <?php foreach (_capalot('site_footer_widget_link2', array()) as $item) {
           $link_item = '<li>
-          <a href="' . $item['href'] . '" class=" hover:text-gray-950 hover:dark:text-gray-200">
+          <a href="' . $item['href'] . '" class=" hover:text-gray-950 hover:dark:text-gray-200 line-clamp-1">
           ' .  $item['title'] . '</a>
           </li>';
           if($item['title'] === 'VIP介绍' && _capalot('is_site_vip_price_page')){

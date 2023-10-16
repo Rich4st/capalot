@@ -62,7 +62,7 @@ $bg_image = get_template_directory_uri() . '/assets/img/bg.jpg';
 									<div class=" lg:text-2xl text-xl dark:text-gray-400 transition hover:rotate-[360deg] lg:w-12 lg:h-12 lg:leading-[3rem] w-10 h-10 leading-10 rounded-full  tag-substr bg-opacity-10 bg-<?php echo esc_attr($color); ?> text-<?php echo esc_attr($color); ?>"><?php echo mb_substr($tag->name, 0, 1); ?></div>
 								</div>
 								<div class=" lg:col-span-5 col-span-4">
-									<b class=" text-md font-normal text-gray-600  hover:underline dark:text-gray-50"><?php echo $tag->name; ?></b>
+									<b class=" text-md font-normal text-gray-600 line-clamp-1  hover:underline dark:text-gray-50"><?php echo $tag->name; ?></b>
 									<p class=" text-sm text-gray-500 dark:text-gray-400"><span class="mr-2"><b class="b mr-1"><?php echo $tag->count; ?></b>个文章</span></p>
 								</div>
 							</div>
