@@ -95,7 +95,13 @@
     li_menu.forEach(el => {
       const atag = el.querySelector('a');
       atag.classList.add('dark:!bg-dark');
+      atag.classList.add('lg:dark:!bg-dark/0');
       atag.classList.add('dark:!text-gray-400');
     });
+    var ul_menu = document.querySelectorAll('#header-navbar .sub-menu');
+    for(var i = 0; i < ul_menu.length; i++){
+      ul_menu[i].classList.add('lg:dark:!bg-dark');
+    }
+
   }
 </script>
