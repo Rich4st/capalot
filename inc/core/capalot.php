@@ -360,36 +360,28 @@ class Capalot_Aff
   }
 
   // 更新推广记录
-  public static function update_aff_log($data, $where, $data_format, $where_format)
+  public static function update_aff_log($data, $where)
   {
     global $wpdb;
-    $table_name = $wpdb->prefix . 'aff';
-
-    if (count($data) !== count($data_format) || count($where) !== count($where_format)) {
-      return false;
-    }
+    $table_name = $wpdb->prefix . 'capalot_aff';
 
     $sql = "UPDATE $table_name SET ";
 
     $set_clause = array();
     foreach ($data as $key => $value) {
-      $set_clause[] = "$key = %{$data_format[$key]}";
+      $set_clause[] = "$key = $value";
     }
     $sql .= implode(', ', $set_clause);
 
     $where_clause = array();
     foreach ($where as $key => $value) {
-      $where_clause[] = "$key = %{$where_format[$key]}";
+      $where_clause[] = "$key = $key";
     }
     $sql .= " WHERE " . implode(' AND ', $where_clause);
 
-    $result = $wpdb->query($wpdb->prepare($sql, $data, $data_format));
+    $result = $wpdb->query($wpdb->prepare($sql, $data));
 
-    if ($result === false) {
-      return false; // 更新失败
-    } else {
-      return true; // 更新成功
-    }
+    return $result;
   }
 
   // 获取用户推广信息
