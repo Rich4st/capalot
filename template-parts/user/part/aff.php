@@ -44,7 +44,7 @@ global $current_user;
 
 		</div>
 		<div class="w-full text-center my-2">
-			<button id="user-aff-submit" data-action="capalot_user_aff_action" class="bg-black text-white py-1  px-5 rounded"><?php _e('申请提现', 'ripro'); ?></button>
+			<button id="user-aff-submit" data-action="capalot_user_aff_action" class="bg-black hover:bg-[#3c3c41] text-white py-1  px-5 rounded"><?php _e('申请提现', 'ripro'); ?></button>
 		</div>
 
 		<hr class="mb-2">
@@ -63,7 +63,7 @@ global $current_user;
 					$user_i++;
 					if ($user_i <= 20) {
 						$s = capalot_substr_cut(get_user_meta(intval($uid), 'nickname', 1));
-						printf('<div class="avatar w-10 h-10"><img class="avatar-img rounded-full border border-white" src="%s" title="%s"></div>', get_avatar_url($uid), $s);
+						printf('<div class="avatar w-10 h-10 inline-block"><img class="avatar-img rounded-full border border-white" src="%s" title="%s"></div>', get_avatar_url($uid), $s);
 					}
 				}
 			} else {
@@ -141,18 +141,26 @@ global $current_user;
 			};
 			ca.ajax({
 				data,
-				before: () => {
+				beforeSend: () => {
 					_this.attr("disabled", "true")
 				},
-				result: ({
+				success: ({
 					status,
 					msg
 				}) => {
-					ca.notice(msg);
-					if (status == 1) {
+					if (status === 1) {
+						ca.notice({
+							title: msg,
+							icon: 'success',
+						});
 						setTimeout(function() {
 							window.location.reload()
 						}, 2000)
+					} else {
+						ca.notice({
+							title: msg,
+							icon: 'error',
+						});
 					}
 				},
 				complete: () => {

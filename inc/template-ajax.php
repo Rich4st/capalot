@@ -67,6 +67,7 @@ class Capalot_Ajax
     $this->add_action('get_site_notify'); //获取全站公告
     $this->add_action('user_lost_pwd', 0); //找回密码
     $this->add_action('user_reset_pwd', 0); //重置新密码
+    $this->add_action('user_aff_action', 1); //提现申请
   }
 
   /**
@@ -390,60 +391,60 @@ class Capalot_Ajax
   // 重置密码
   public function user_reset_pwd()
   {
-      $this->valid_nonce_ajax(); #安全验证
+    $this->valid_nonce_ajax(); #安全验证
 
-      $uid              = absint(get_response_param('uid', 0));
-      $key              = wp_unslash(get_response_param('key'));
-      $user_password    = wp_unslash(get_response_param('user_password'));
-      $user_password_ok = wp_unslash(get_response_param('user_password_ok'));
-      $captcha_code     = wp_unslash(trim(get_response_param('captcha_code')));
+    $uid              = absint(get_response_param('uid', 0));
+    $key              = wp_unslash(get_response_param('key'));
+    $user_password    = wp_unslash(get_response_param('user_password'));
+    $user_password_ok = wp_unslash(get_response_param('user_password_ok'));
+    $captcha_code     = wp_unslash(trim(get_response_param('captcha_code')));
 
-      if ($user_password !== $user_password_ok || empty($user_password)) {
-          wp_send_json(array(
-              'status' => 0,
-              'msg'    => __('两次密码输入不一致', 'ripro'),
-          ));
-      }
-
-      if (empty($uid) || empty($key)) {
-          wp_send_json(array(
-              'status' => 0,
-              'msg'    => __('页面参数错误', 'ripro'),
-          ));
-      }
-
-      if (is_site_img_captcha() && !verify_captcha_code(strtolower($captcha_code))) {
-          wp_send_json(array(
-              'status' => 0,
-              'msg'    => __('验证码错误，请刷新验证码', 'ripro'),
-          ));
-      }
-
-      $user_data = get_user_by('id', $uid);
-      if (!$user_data) {
-          wp_send_json(array(
-              'status' => 0,
-              'msg'    => __('账号信息获取失败', 'ripro'),
-          ));
-      }
-
-      $user_check = check_password_reset_key($key, $user_data->user_login);
-
-      if (is_wp_error($user_check)) {
-          wp_send_json(array(
-              'status' => 0,
-              'msg'    => __('重置链接无效或已过期', 'ripro'),
-          ));
-      }
-
-      // 验证通过 处理业务逻辑
-      reset_password($user_check, $user_password);
-
+    if ($user_password !== $user_password_ok || empty($user_password)) {
       wp_send_json(array(
-          'status'   => 1,
-          'msg'      => __('密码重置成功,请使用新密码登录', 'ripro'),
-          'back_url' => esc_url(wp_login_url()),
+        'status' => 0,
+        'msg'    => __('两次密码输入不一致', 'ripro'),
       ));
+    }
+
+    if (empty($uid) || empty($key)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('页面参数错误', 'ripro'),
+      ));
+    }
+
+    if (is_site_img_captcha() && !verify_captcha_code(strtolower($captcha_code))) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('验证码错误，请刷新验证码', 'ripro'),
+      ));
+    }
+
+    $user_data = get_user_by('id', $uid);
+    if (!$user_data) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('账号信息获取失败', 'ripro'),
+      ));
+    }
+
+    $user_check = check_password_reset_key($key, $user_data->user_login);
+
+    if (is_wp_error($user_check)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('重置链接无效或已过期', 'ripro'),
+      ));
+    }
+
+    // 验证通过 处理业务逻辑
+    reset_password($user_check, $user_password);
+
+    wp_send_json(array(
+      'status'   => 1,
+      'msg'      => __('密码重置成功,请使用新密码登录', 'ripro'),
+      'back_url' => esc_url(wp_login_url()),
+    ));
   }
 
   //上传头像
@@ -1418,6 +1419,53 @@ class Capalot_Ajax
     wp_send_json(array(
       'status' => 1,
       'msg'    => __('兑换成功，即将刷新页面', 'ripro'),
+    ));
+  }
+
+  //申请提现按钮
+  public function user_aff_action()
+  {
+    $this->valid_nonce_ajax(); #安全验证
+    $user_id = get_current_user_id();
+
+    if (empty($user_id)) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('请登录后申请', 'ripro'),
+      ));
+    }
+
+    if (!is_site_user_aff()) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('网站推广功能暂未开启', 'ripro'),
+      ));
+    }
+
+    $user_aff_info = Capalot_Aff::get_user_aff_info($user_id);
+    $min_price     = absint(_capalot('site_min_tixin_price', 10));
+
+    if ($user_aff_info['can_be_withdraw'] < $min_price) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => sprintf(__('可提现金额须大于 %s 才可申请', 'ripro'), $min_price),
+      ));
+    }
+
+    $update_aff = Capalot_Aff::update_aff_log(
+      array('status' => 1, 'apply_time' => time()),
+      array('aff_uid' => $user_id, 'status' => 0),
+    );
+
+    if (!$update_aff) {
+      wp_send_json(array(
+        'status' => 0,
+        'msg'    => __('申请提现失败，请联系客服处理', 'ripro'),
+      ));
+    }
+    wp_send_json(array(
+      'status' => 1,
+      'msg'    => __('申请提现成功，请联系网站客服人工处理', 'ripro'),
     ));
   }
 }
