@@ -1,0 +1,2041 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: 1111\n"
+"Language: th\n"
+
+#: 404.php:8
+msgid "404"
+msgstr "404"
+
+#: 404.php:9
+msgid "找不到页面！"
+msgstr "หน้าหาย!"
+
+#: 404.php:10
+msgid "页面出了问题或已经不存在了。"
+msgstr "ปัญหาที่เกิดจากเพจอาจไม่มีอยู่อีกต่อไป"
+
+#: comments.php:5
+msgid "*昵称:"
+msgstr "*ชื่อเล่น:"
+
+#: comments.php:6
+msgid "*邮箱:"
+msgstr "*จดหมาย:"
+
+#: comments.php:7
+msgid "网址:"
+msgstr "URL:"
+
+#: comments.php:12
+msgid "评论(%s)"
+msgstr "ความคิดเห็น(%s)"
+
+#: comments.php:15
+msgid "提示：请文明发言"
+msgstr "เคล็ดลับ: กรุณาพูดอย่างสุภาพ"
+
+#: comments.php:18
+msgid "请输入评论内容..."
+msgstr "กรุณาใส่ความคิดเห็นของคุณ..."
+
+#: comments.php:19
+msgid "登录后评论"
+msgstr "เข้าสู่ระบบเพื่อแสดงความคิดเห็น"
+
+#: comments.php:21
+msgid "提交评论"
+msgstr "ส่งความคิดเห็น"
+
+#: functions.php:43
+msgid "全站顶部菜单"
+msgstr "เมนูด้านบนของเว็บไซต์"
+
+#: functions.php:96
+msgid "首页模块"
+msgstr "โมดูลบ้าน"
+
+#: functions.php:98
+msgid "首页模块主内容区域"
+msgstr "พื้นที่เนื้อหาหลักของโมดูลโฮม"
+
+#: functions.php:117
+msgid "自定义模块主内容区域"
+msgstr "พื้นที่เนื้อหาหลักของโมดูลที่กำหนดเอง"
+
+#: functions.php:126
+msgid "文章侧边栏"
+msgstr "แถบด้านข้างบทความ"
+
+#: inc/goto.php:21
+msgid "安全性未知，点击Url跳转"
+msgstr "ไม่ทราบความปลอดภัย คลิก URL เพื่อข้าม"
+
+#: inc/goto.php:22
+msgid "即将跳转到外部网站"
+msgstr "จะถูกเปลี่ยนเส้นทางไปยังเว็บไซต์ภายนอก"
+
+#: inc/goto.php:42, inc/template-ajax.php:41, template-parts/page/tougao.php:126
+msgid "非法请求"
+msgstr "คำขอที่ผิดกฎหมาย"
+
+#: inc/goto.php:43
+msgid "非法访问"
+msgstr "การเข้าถึงที่ไม่ได้รับอนุญาต"
+
+#: inc/goto.php:54
+msgid "资源不存在或维护中"
+msgstr "ไม่มีทรัพยากรอยู่หรืออยู่ระหว่างการบำรุงรักษา"
+
+#: inc/goto.php:55
+msgid "请返回其他页面重试"
+msgstr "โปรดกลับไปที่หน้าอื่นแล้วลองอีกครั้ง"
+
+#: inc/goto.php:68
+msgid "暂无下载权限"
+msgstr "ยังไม่มีการอนุญาตให้ดาวน์โหลด"
+
+#: inc/goto.php:69
+msgid "请购买后下载本资源"
+msgstr "โปรดดาวน์โหลดแหล่งข้อมูลนี้หลังจากซื้อ"
+
+#: inc/goto.php:90
+msgid "下载次数超限"
+msgstr "เกินจำนวนการดาวน์โหลด"
+
+#: inc/goto.php:91
+msgid "请明日再来或升级套餐"
+msgstr "โปรดกลับมาใหม่พรุ่งนี้หรืออัพเกรดแพ็คเกจของคุณ"
+
+#: inc/goto.php:104
+msgid "下载链接丢失"
+msgstr "ลิงค์ดาวน์โหลดหายไป"
+
+#: inc/goto.php:105
+msgid "请联系管理员检查下载地址"
+msgstr "โปรดติดต่อผู้ดูแลระบบเพื่อตรวจสอบที่อยู่ดาวน์โหลด"
+
+#: inc/goto.php:121
+msgid "下载记录添加失败"
+msgstr "ไม่สามารถเพิ่มบันทึกการดาวน์โหลด"
+
+#: inc/goto.php:122
+msgid "请返回刷新重试"
+msgstr "โปรดย้อนกลับและรีเฟรชเพื่อลองอีกครั้ง"
+
+#: inc/goto.php:129
+msgid "下载了%s"
+msgstr "ดาวน์โหลด %s แล้ว"
+
+#: inc/goto.php:160
+msgid "下载文件丢失"
+msgstr "ดาวน์โหลดไฟล์หาย"
+
+#: inc/goto.php:161
+msgid "请联系管理员检查文件是否存在"
+msgstr "โปรดติดต่อผู้ดูแลระบบเพื่อตรวจสอบว่ามีไฟล์อยู่หรือไม่"
+
+#: inc/template-admin.php:557
+msgid "成功登录本站"
+msgstr "เข้าสู่ระบบไซต์นี้สำเร็จแล้ว"
+
+#: inc/template-admin.php:588
+msgid "成功注册加入本站"
+msgstr "ลงทะเบียนเพื่อเข้าร่วมไซต์นี้สำเร็จแล้ว"
+
+#: inc/template-ajax.php:84
+msgid "暂无公告"
+msgstr "ยังไม่มีประกาศ"
+
+#: inc/template-ajax.php:109
+msgid "暂未开启兑换"
+msgstr "ยังไม่ได้เปิดใช้งานการแลกรางวัล"
+
+#: inc/template-ajax.php:116
+msgid "请登录后兑换"
+msgstr "กรุณาเข้าสู่ระบบเพื่อแลก"
+
+#: inc/template-ajax.php:123
+msgid "请输入兑换码"
+msgstr "กรุณากรอกรหัสแลกรางวัล"
+
+#: inc/template-ajax.php:130, inc/template-ajax.php:1130, inc/template-ajax.php:1222, inc/template-ajax.php:1345, inc/template-ajax.php:1430
+msgid "验证码错误，请刷新验证码"
+msgstr "รหัสยืนยันไม่ถูกต้อง โปรดรีเฟรชรหัสยืนยัน"
+
+#: inc/template-ajax.php:139
+msgid "兑换码错误"
+msgstr "ข้อผิดพลาดรหัสแลกรางวัล"
+
+#: inc/template-ajax.php:146
+msgid "兑换码无效"
+msgstr "รหัสแลกรับรางวัลไม่ถูกต้อง"
+
+#: inc/template-ajax.php:153
+msgid "兑换码已到期"
+msgstr "รหัสแลกรางวัลหมดอายุแล้ว"
+
+#: inc/template-ajax.php:181
+msgid "兑换类型错误"
+msgstr "ประเภทการแลกรางวัลไม่ถูกต้อง"
+
+#: inc/template-ajax.php:190, inc/template-ajax.php:420
+msgid "您已获得最高特权，无需重复开通"
+msgstr "คุณได้รับสิทธิพิเศษสูงสุดไม่ต้องเปิดใช้งานอีกครั้ง"
+
+#: inc/template-ajax.php:163
+msgid "兑换金额错误"
+msgstr "จำนวนการแลกเปลี่ยนไม่ถูกต้อง"
+
+#: inc/template-ajax.php:219, inc/template-ajax.php:453
+msgid "订单创建失败"
+msgstr "การสร้างคำสั่งซื้อล้มเหลว"
+
+#: inc/template-ajax.php:234
+msgid "兑换失败，请更换重试"
+msgstr "การแลกสิทธิ์ล้มเหลว โปรดเปลี่ยนและลองอีกครั้ง"
+
+#: inc/template-ajax.php:244, inc/template-shop.php:1238
+msgid "订单状态处理异常"
+msgstr "ข้อยกเว้นในการประมวลผลสถานะคำสั่งซื้อ"
+
+#: inc/template-ajax.php:250
+msgid "兑换成功，即将刷新页面"
+msgstr "แลกสำเร็จแล้ว เพจจะรีเฟรชเร็วๆ นี้"
+
+#: inc/template-ajax.php:268, inc/template-ajax.php:308
+msgid "商城功能未开启"
+msgstr "ไม่ได้เปิดใช้งานฟังก์ชั่นห้างสรรพสินค้า"
+
+#: inc/template-ajax.php:275, inc/template-ajax.php:315
+msgid "请登录后购买"
+msgstr "กรุณาเข้าสู่ระบบเพื่อซื้อ"
+
+#: inc/template-ajax.php:284, inc/template-ajax.php:358
+msgid "暂无购买权限"
+msgstr "ยังไม่มีใบอนุญาตในการซื้อ"
+
+#: inc/template-ajax.php:322
+msgid "订单类型错误"
+msgstr "ประเภทการสั่งซื้อไม่ถูกต้อง"
+
+#: inc/template-ajax.php:412
+msgid "VIP套餐不存在"
+msgstr "ไม่มีแพ็คเกจวีไอพี"
+
+#: inc/template-ajax.php:381
+msgid "充值数量不能为0"
+msgstr "จำนวนการเติมต้องไม่เป็น 0"
+
+#: inc/template-ajax.php:388
+msgid "最低充值限制"
+msgstr "วงเงินการเติมขั้นต่ำ"
+
+#: inc/template-ajax.php:395
+msgid "最高充值限制"
+msgstr "ขีดจำกัดการเติมเงินสูงสุด"
+
+#: inc/template-ajax.php:348
+msgid "文章不存在"
+msgstr "ไม่มีบทความอยู่"
+
+#: inc/template-ajax.php:444
+msgid "订单价格错误"
+msgstr "ข้อผิดพลาดราคาสั่งซื้อ"
+
+#: inc/template-ajax.php:488, inc/template-shop.php:1055, inc/template-shop.php:1245
+msgid "支付成功"
+msgstr "การชำระเงินสำเร็จ"
+
+#: inc/template-ajax.php:494, inc/template-shop.php:1052
+msgid "未支付"
+msgstr "ค้างชำระ"
+
+#: inc/template-ajax.php:507
+msgid "请登录后申请"
+msgstr "กรุณาเข้าสู่ระบบเพื่อสมัคร"
+
+#: inc/template-ajax.php:514
+msgid "网站推广功能暂未开启"
+msgstr "ยังไม่ได้เปิดใช้งานฟังก์ชันการโปรโมตเว็บไซต์"
+
+#: inc/template-ajax.php:524
+msgid "可提现金额须大于 %s 才可申请"
+msgstr "จำนวนเงินที่สามารถถอนออกได้จะต้องมากกว่า %s ก่อนจึงจะสามารถสมัครได้"
+
+#: inc/template-ajax.php:538
+msgid "申请提现失败，请联系客服处理"
+msgstr "การสมัครถอนเงินล้มเหลว โปรดติดต่อฝ่ายบริการลูกค้าเพื่อดำเนินการ"
+
+#: inc/template-ajax.php:544
+msgid "成功申请提现金额%s"
+msgstr "สมัครถอนเงินจำนวน %s สำเร็จแล้ว"
+
+#: inc/template-ajax.php:552
+msgid "申请提现成功，请联系网站客服人工处理"
+msgstr "การสมัครถอนเงินสำเร็จ โปรดติดต่อฝ่ายบริการลูกค้าของเว็บไซต์เพื่อดำเนินการด้วยตนเอง"
+
+#: inc/template-ajax.php:565
+msgid "签到功能暂未开启"
+msgstr "ยังไม่ได้เปิดใช้งานฟังก์ชันการลงชื่อเข้าใช้"
+
+#: inc/template-ajax.php:572
+msgid "今日已签到，请明日再来"
+msgstr "วันนี้คุณได้ลงชื่อเข้าใช้แล้ว โปรดกลับมาใหม่พรุ่งนี้"
+
+#: inc/template-ajax.php:581
+msgid "签到失败"
+msgstr "การลงชื่อเข้าใช้ล้มเหลว"
+
+#: inc/template-ajax.php:587
+msgid "签到成功，领取(%s)%s"
+msgstr "เข้าสู่ระบบสำเร็จ รับ (%s)%s"
+
+#: inc/template-ajax.php:607
+msgid "网站工单功能暂未开启"
+msgstr "ยังไม่ได้เปิดใช้งานฟังก์ชันใบสั่งงานเว็บไซต์"
+
+#: inc/template-ajax.php:614, inc/template-ajax.php:622
+msgid "请输入工单标题"
+msgstr "กรุณากรอกชื่อเรื่องของใบสั่งงาน"
+
+#: inc/template-ajax.php:629
+msgid "请输入工单内容"
+msgstr "กรุณากรอกเนื้อหาใบสั่งงาน"
+
+#: inc/template-ajax.php:639
+msgid "图片大小超出1MB限制"
+msgstr "ขนาดรูปภาพเกินขีดจำกัด 1MB"
+
+#: inc/template-ajax.php:646
+msgid "仅支持上传图片附件"
+msgstr "รองรับการอัพโหลดไฟล์แนบรูปภาพเท่านั้น"
+
+#: inc/template-ajax.php:655, inc/template-ajax.php:876
+msgid "图片格式错误"
+msgstr "ข้อผิดพลาดของรูปแบบภาพ"
+
+#: inc/template-ajax.php:689
+msgid "工单提交失败，请重试"
+msgstr "การส่งใบสั่งงานล้มเหลว โปรดลองอีกครั้ง"
+
+#: inc/template-ajax.php:695
+msgid "工单提交成功，客服会尽快处理"
+msgstr "ส่งใบสั่งงานเรียบร้อยแล้ว และฝ่ายบริการลูกค้าจะจัดการโดยเร็วที่สุด"
+
+#: inc/template-ajax.php:740
+msgid "点赞失败"
+msgstr "ไม่สามารถชอบได้"
+
+#: inc/template-ajax.php:735
+msgid "点赞成功"
+msgstr "เหมือนสำเร็จ"
+
+#: inc/template-ajax.php:754
+msgid "请登录后收藏"
+msgstr "กรุณาเข้าสู่ระบบเพื่อรวบรวม"
+
+#: inc/template-ajax.php:781
+msgid "已取消收藏"
+msgstr "ยกเลิกรายการโปรดแล้ว"
+
+#: inc/template-ajax.php:764
+msgid "您已收藏过"
+msgstr "คุณได้รายการโปรด"
+
+#: inc/template-ajax.php:771
+msgid "收藏成功"
+msgstr "รวบรวมสำเร็จ"
+
+#: inc/template-ajax.php:794
+msgid "手机扫码或复制链接分享"
+msgstr "สแกนรหัส QR ด้วยโทรศัพท์มือถือของคุณหรือคัดลอกลิงก์เพื่อแชร์"
+
+#: inc/template-ajax.php:851
+msgid "请选择头像上传"
+msgstr "โปรดเลือกรูปประจำตัวที่จะอัปโหลด"
+
+#: inc/template-ajax.php:860
+msgid "图片大小超出500KB限制"
+msgstr "ขนาดรูปภาพเกินขีดจำกัด 500KB"
+
+#: inc/template-ajax.php:867
+msgid "仅支持上传图片"
+msgstr "รองรับการอัพโหลดรูปภาพเท่านั้น"
+
+#: inc/template-ajax.php:889
+msgid "只允许上传图片文件"
+msgstr "อนุญาตให้อัพโหลดไฟล์รูปภาพเท่านั้น"
+
+#: inc/template-ajax.php:908
+msgid "未知的文件类型"
+msgstr "ประเภทไฟล์ที่ไม่รู้จัก"
+
+#: inc/template-ajax.php:962
+msgid "上传失败请重试"
+msgstr "การอัปโหลดล้มเหลว โปรดลองอีกครั้ง"
+
+#: inc/template-ajax.php:971
+msgid "头像上传成功"
+msgstr "อัปโหลดอวาตาร์เรียบร้อยแล้ว"
+
+#: inc/template-ajax.php:1004
+msgid "保存失败"
+msgstr "บันทึกล้มเหลว"
+
+#: inc/template-ajax.php:1010
+msgid "保存成功"
+msgstr "บันทึกเรียบร้อยแล้ว"
+
+#: inc/template-ajax.php:1025, inc/template-ajax.php:1201, inc/template-ajax.php:1338
+msgid "邮箱地址格式错误"
+msgstr "ข้อผิดพลาดรูปแบบที่อยู่อีเมล"
+
+#: inc/template-ajax.php:1032
+msgid "此邮箱已被使用"
+msgstr "อีเมลนี้มีการใช้งานแล้ว"
+
+#: inc/template-ajax.php:1044
+msgid "邮箱修改失败"
+msgstr "การแก้ไขอีเมลล้มเหลว"
+
+#: inc/template-ajax.php:1050
+msgid "邮箱修改成功"
+msgstr "แก้ไขอีเมลเรียบร้อยแล้ว"
+
+#: inc/template-ajax.php:1067
+msgid "请输入完整密码修改信息"
+msgstr "กรุณากรอกข้อมูลการเปลี่ยนรหัสผ่านให้ครบถ้วน"
+
+#: inc/template-ajax.php:1073
+msgid "新密码不能与旧密码相同"
+msgstr "รหัสผ่านใหม่ต้องไม่เหมือนกับรหัสผ่านเก่า"
+
+#: inc/template-ajax.php:1079
+msgid "两次输入的密码不一致"
+msgstr "รหัสผ่านที่ป้อนสองครั้งไม่สอดคล้องกัน"
+
+#: inc/template-ajax.php:1086
+msgid "旧密码错误，请输入正确的密码"
+msgstr "รหัสผ่านเก่าไม่ถูกต้อง กรุณากรอกรหัสผ่านให้ถูกต้อง"
+
+#: inc/template-ajax.php:1094
+msgid "密码修改成功，请使用新密码重新登录"
+msgstr "เปลี่ยนรหัสผ่านเรียบร้อยแล้ว กรุณาเข้าสู่ระบบอีกครั้งโดยใช้รหัสผ่านใหม่"
+
+#: inc/template-ajax.php:1111
+msgid "本站未开启登录功能"
+msgstr "ไม่ได้เปิดใช้งานฟังก์ชันการเข้าสู่ระบบบนไซต์นี้"
+
+#: inc/template-ajax.php:1123
+msgid "请输入账号或密码"
+msgstr "กรุณากรอกบัญชีหรือรหัสผ่านของคุณ"
+
+#: inc/template-ajax.php:1144
+msgid "用户名或密码不正确"
+msgstr "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง"
+
+#: inc/template-ajax.php:1152
+msgid "此账号已被封禁（ %s ）"
+msgstr "บัญชีนี้ถูกแบน (%s)"
+
+#: inc/template-ajax.php:1161
+msgid "登录成功"
+msgstr "เข้าสู่ระบบสำเร็จ"
+
+#: inc/template-ajax.php:1180
+msgid "本站未开启注册功能"
+msgstr "ฟังก์ชั่นการลงทะเบียนไม่ได้เปิดใช้งานบนไซต์นี้"
+
+#: inc/template-ajax.php:1194
+msgid "用户名格式错误"
+msgstr "ข้อผิดพลาดรูปแบบชื่อผู้ใช้"
+
+#: inc/template-ajax.php:1208
+msgid "请输入完整注册信息"
+msgstr "กรุณากรอกข้อมูลการลงทะเบียนให้ครบถ้วน"
+
+#: inc/template-ajax.php:1215, inc/template-ajax.php:1416
+msgid "两次密码输入不一致"
+msgstr "การป้อนรหัสผ่านทั้งสองไม่สอดคล้องกัน"
+
+#: inc/template-ajax.php:1229
+msgid "此用户名已被注册"
+msgstr "ชื่อผู้ใช้นี้ได้ถูกลงทะเบียนแล้ว"
+
+#: inc/template-ajax.php:1236
+msgid "此邮箱已被注册"
+msgstr "ที่อยู่อีเมลนี้ได้ถูกลงทะเบียนแล้ว"
+
+#: inc/template-ajax.php:1247
+msgid "请输入邀请码"
+msgstr "กรุณากรอกรหัสเชิญ"
+
+#: inc/template-ajax.php:1257
+msgid "邀请码错误"
+msgstr "รหัสคำเชิญเกิดข้อผิดพลาด"
+
+#: inc/template-ajax.php:1264
+msgid "邀请码已失效"
+msgstr "รหัสเชิญหมดอายุแล้ว"
+
+#: inc/template-ajax.php:1271
+msgid "邀请码已到期"
+msgstr "รหัสเชิญหมดอายุแล้ว"
+
+#: inc/template-ajax.php:1286
+msgid "邀请码状态异常，请刷新重试"
+msgstr "สถานะของรหัสเชิญผิดปกติ โปรดรีเฟรชและลองอีกครั้ง"
+
+#: inc/template-ajax.php:1319
+msgid "注册成功，即将自动登录"
+msgstr "การลงทะเบียนสำเร็จ คุณจะเข้าสู่ระบบโดยอัตโนมัติ"
+
+#: inc/template-ajax.php:1352
+msgid "此邮箱无绑定用户"
+msgstr "ไม่มีผู้ใช้ที่ถูกผูกไว้กับที่อยู่อีเมลนี้"
+
+#: inc/template-ajax.php:1361
+msgid "用户查询失败"
+msgstr "แบบสอบถามผู้ใช้ล้มเหลว"
+
+#: inc/template-ajax.php:1371
+msgid "账号异常，请刷新页面"
+msgstr "บัญชีมีความผิดปกติ โปรดรีเฟรชหน้านี้"
+
+#: inc/template-ajax.php:1393
+msgid "重置密码链接"
+msgstr "ลิงค์รีเซ็ตรหัสผ่าน"
+
+#: inc/template-ajax.php:1394
+msgid "请打开此链接重置您的账号密码: %s"
+msgstr "โปรดเปิดลิงก์นี้เพื่อรีเซ็ตรหัสผ่านบัญชีของคุณ: %s"
+
+#: inc/template-ajax.php:1399
+msgid "重置密码链接将发送到您的邮箱"
+msgstr "ลิงก์รีเซ็ตรหัสผ่านจะถูกส่งไปยังอีเมลของคุณ"
+
+#: inc/template-ajax.php:1423
+msgid "页面参数错误"
+msgstr "ข้อผิดพลาดของพารามิเตอร์หน้า"
+
+#: inc/template-ajax.php:1438
+msgid "账号信息获取失败"
+msgstr "ไม่สามารถรับข้อมูลบัญชีได้"
+
+#: inc/template-ajax.php:1447
+msgid "重置链接无效或已过期"
+msgstr "ลิงก์รีเซ็ตไม่ถูกต้องหรือหมดอายุ"
+
+#: inc/template-ajax.php:1456
+msgid "密码重置成功,请使用新密码登录"
+msgstr "รีเซ็ตรหัสผ่านสำเร็จ โปรดใช้รหัสผ่านใหม่เพื่อเข้าสู่ระบบ"
+
+#: inc/template-assets.php:129
+msgid "密码已复制剪贴板"
+msgstr "คัดลอกรหัสผ่านไปยังคลิปบอร์ดแล้ว"
+
+#: inc/template-assets.php:130
+msgid "复制"
+msgstr "สำเนา"
+
+#: inc/template-assets.php:131
+msgid "复制成功"
+msgstr "คัดลอกเรียบร้อยแล้ว"
+
+#: inc/template-assets.php:132
+msgid "提交中..."
+msgstr "กำลังส่ง..."
+
+#: inc/template-assets.php:133
+msgid "评论成功"
+msgstr "แสดงความคิดเห็นสำเร็จ"
+
+#: inc/template-assets.php:134
+msgid "评论成功，即将刷新页面"
+msgstr "แสดงความคิดเห็นสำเร็จ เพจจะรีเฟรชเร็วๆ นี้"
+
+#: inc/template-assets.php:135
+msgid "请求支付中···"
+msgstr "กำลังขอชำระเงิน..."
+
+#: inc/template-assets.php:136
+msgid "支付已取消"
+msgstr "ยกเลิกการชำระเงินแล้ว"
+
+#: inc/template-assets.php:137
+msgid "确定删除此记录？"
+msgstr "คุณแน่ใจหรือไม่ว่าต้องการลบบันทึกนี้"
+
+#: inc/template-filter.php:117
+msgid "搜索到 %1$s 个与 \"%2$s\" 相关的结果"
+msgstr "พบผลลัพธ์ %1$s สำหรับ \"%2$s\""
+
+#: inc/template-post-type.php:84
+msgid "搜索"
+msgstr "ค้นหา"
+
+#: inc/template-post-type.php:85, template-parts/archive-filter.php:107, template-parts/archive-filter.php:136, template-parts/archive-filter.php:155
+msgid "全部"
+msgstr "ทั้งหมด"
+
+#: inc/template-post-type.php:86
+msgid "查看"
+msgstr "ตรวจสอบ"
+
+#: inc/template-post-type.php:87, template-parts/user/part/tougao.php:125
+msgid "编辑"
+msgstr "แก้ไข"
+
+#: inc/template-post-type.php:88, template-parts/archive-filter.php:183
+msgid "更新"
+msgstr "ต่ออายุ"
+
+#: inc/template-post-type.php:89
+msgid "添加新"
+msgstr "เพิ่มใหม่"
+
+#: inc/template-post-type.php:90
+msgid "新增"
+msgstr "ใหม่"
+
+#: inc/template-post-type.php:115
+msgid "发卡商店"
+msgstr "ร้านที่ออกบัตร"
+
+#: inc/template-post-type.php:116, inc/template-post-type.php:117
+msgid "发卡"
+msgstr "ออกบัตร"
+
+#: inc/template-post-type.php:118
+msgid "发卡商品"
+msgstr "ผลิตภัณฑ์ที่ออกบัตร"
+
+#: inc/template-post-type.php:119, inc/template-post-type.php:120
+msgid "新增发卡"
+msgstr "เพิ่มการออกบัตรใหม่"
+
+#: inc/template-post-type.php:121
+msgid "新发卡"
+msgstr "ออกบัตรใหม่แล้ว"
+
+#: inc/template-post-type.php:122
+msgid "编辑发卡"
+msgstr "แก้ไขปัญหาบัตร"
+
+#: inc/template-post-type.php:123
+msgid "查看发卡"
+msgstr "ดูการออกบัตร"
+
+#: inc/template-post-type.php:124
+msgid "全部发卡"
+msgstr "ออกบัตรทั้งหมดแล้ว"
+
+#: inc/template-post-type.php:125
+msgid "搜索发卡"
+msgstr "การออกบัตรค้นหา"
+
+#: inc/template-post-type.php:126, inc/template-post-type.php:127
+msgid "未找到发卡."
+msgstr "ไม่พบบัตรออก"
+
+#: inc/template-post-type.php:128
+msgid "发卡存档"
+msgstr "เอกสารการออกบัตร"
+
+#: inc/template-post-type.php:129
+msgid "插入发卡"
+msgstr "ใส่กิ๊บ"
+
+#: inc/template-post-type.php:130
+msgid "上传到此发卡"
+msgstr "อัปโหลดไปยังการออกบัตรนี้"
+
+#: inc/template-post-type.php:131
+msgid "筛选发卡列表"
+msgstr "กรองรายชื่อผู้ออกบัตร"
+
+#: inc/template-post-type.php:132
+msgid "发卡列表导航"
+msgstr "การนำทางรายการการออกบัตร"
+
+#: inc/template-post-type.php:133
+msgid "发卡列表"
+msgstr "รายการออกบัตร"
+
+#: inc/template-seo.php:53
+msgid "投稿发布"
+msgstr "การส่งผลงานเพื่อตีพิมพ์"
+
+#: inc/template-seo.php:51
+msgid "VIP介绍"
+msgstr "การแนะนำวีไอพี"
+
+#: inc/template-seo.php:49, template-parts/page/links.php:21
+msgid "网址导航"
+msgstr "การนำทางไซต์"
+
+#: inc/template-seo.php:47, template-parts/page/tags.php:30
+msgid "标签云"
+msgstr "แท็กคลาวด์"
+
+#: inc/template-seo.php:45, template-parts/page/login-register.php:274
+msgid "找回密码"
+msgstr "ดึงรหัสผ่าน"
+
+#: inc/template-seo.php:43
+msgid "用户注册"
+msgstr "การลงทะเบียนผู้ใช้"
+
+#: inc/template-seo.php:41
+msgid "用户登录"
+msgstr "เข้าสู่ระบบของผู้ใช้"
+
+#: inc/template-seo.php:39
+msgid "个人中心"
+msgstr "ศูนย์ส่วนบุคคล"
+
+#: inc/template-shop.php:671, template-parts/user/part/vip.php:41
+msgid "到期"
+msgstr "วุฒิภาวะ"
+
+#: inc/template-shop.php:756
+msgid "绑定失败"
+msgstr "การเชื่อมโยงล้มเหลว"
+
+#: inc/template-shop.php:757
+msgid "当前用户之前已有其他账号绑定，请先登录其他账户解绑，或者激活已经使用该方式登录的账号！"
+msgstr "ผู้ใช้ปัจจุบันเคยถูกผูกไว้กับบัญชีอื่นมาก่อน โปรดเข้าสู่ระบบบัญชีอื่นเพื่อเลิกผูกหรือเปิดใช้งานบัญชีที่เข้าสู่ระบบด้วยวิธีนี้!"
+
+#: inc/template-shop.php:791
+msgid "新用户注册失败"
+msgstr "การลงทะเบียนผู้ใช้ใหม่ล้มเหลว"
+
+#: inc/template-shop.php:861, template-parts/user/part/profile.php:20
+msgid "基本信息"
+msgstr "ข้อมูลพื้นฐาน"
+
+#: inc/template-shop.php:862
+msgid "我的余额"
+msgstr "ความสมดุลของฉัน"
+
+#: inc/template-shop.php:863
+msgid "我的会员"
+msgstr "สมาชิกของฉัน"
+
+#: inc/template-shop.php:864
+msgid "我的订单"
+msgstr "คำสั่งซื้อของฉัน"
+
+#: inc/template-shop.php:865, template-parts/user/part/down.php:8
+msgid "下载记录"
+msgstr "ประวัติการดาวน์โหลด"
+
+#: inc/template-shop.php:866
+msgid "我的收藏"
+msgstr "คอลเลกชันของฉัน"
+
+#: inc/template-shop.php:867
+msgid "我的推广"
+msgstr "โปรโมชั่นของฉัน"
+
+#: inc/template-shop.php:868
+msgid "我的工单"
+msgstr "สั่งงานของฉัน"
+
+#: inc/template-shop.php:869
+msgid "我的投稿"
+msgstr "ผลงานของฉัน"
+
+#: inc/template-shop.php:870
+msgid "退出登录"
+msgstr "ออกจากระบบ"
+
+#: inc/template-shop.php:939, inc/template-shop.php:986, inc/template-shop.php:1026, inc/template-shop.php:1049
+msgid "失效"
+msgstr "ไม่ถูกต้อง"
+
+#: inc/template-shop.php:942
+msgid "待回复"
+msgstr "รอการตอบกลับ"
+
+#: inc/template-shop.php:945
+msgid "处理中"
+msgstr "กำลังประมวลผล"
+
+#: inc/template-shop.php:948
+msgid "已回复"
+msgstr "ตอบกลับ"
+
+#: inc/template-shop.php:951
+msgid "已关闭"
+msgstr "ปิด"
+
+#: inc/template-shop.php:954, inc/template-shop.php:976
+msgid "其他"
+msgstr "อื่น"
+
+#: inc/template-shop.php:964
+msgid "资源问题"
+msgstr "ปัญหาทรัพยากร"
+
+#: inc/template-shop.php:967
+msgid "会员问题"
+msgstr "ปัญหาการเป็นสมาชิก"
+
+#: inc/template-shop.php:970
+msgid "网站BUG"
+msgstr "ข้อผิดพลาดของเว็บไซต์"
+
+#: inc/template-shop.php:973
+msgid "其他问题"
+msgstr "ปัญหาอื่น ๆ"
+
+#: inc/template-shop.php:989
+msgid "未使用"
+msgstr "ไม่ได้ใช้"
+
+#: inc/template-shop.php:992
+msgid "已使用"
+msgstr "ใช้แล้ว"
+
+#: inc/template-shop.php:995, inc/template-shop.php:1038, inc/template-shop.php:1058
+msgid "异常"
+msgstr "ผิดปกติ"
+
+#: inc/template-shop.php:1005, inc/template-shop.php:1016, inc/template-shop.php:1082
+msgid "无"
+msgstr "ไม่มี"
+
+#: inc/template-shop.php:1008
+msgid "余额充值卡"
+msgstr "บัตรเติมเงินยอดคงเหลือ"
+
+#: inc/template-shop.php:1010
+msgid "会员兑换卡"
+msgstr "บัตรกำนัลสมาชิก"
+
+#: inc/template-shop.php:1013
+msgid "注册邀请码"
+msgstr "ลงทะเบียนรหัสเชิญ"
+
+#: inc/template-shop.php:1029
+msgid "未提现"
+msgstr "ไม่ถอนออก"
+
+#: inc/template-shop.php:1032, template-parts/user/part/aff.php:26
+msgid "提现中"
+msgstr "การถอนตัว"
+
+#: inc/template-shop.php:1035, template-parts/user/part/aff.php:27
+msgid "已提现"
+msgstr "ถอนออกแล้ว"
+
+#: inc/template-shop.php:1067, inc/template-shop.php:1079
+msgid "其他订单"
+msgstr "คำสั่งอื่นๆ"
+
+#: inc/template-shop.php:1070
+msgid "文章订单"
+msgstr "ลำดับบทความ"
+
+#: inc/template-shop.php:1073
+msgid "充值订单"
+msgstr "สั่งเติมเงิน"
+
+#: inc/template-shop.php:1076
+msgid "VIP订单"
+msgstr "ออเดอร์วีไอพี"
+
+#: inc/template-shop.php:1109
+msgid "后台充值"
+msgstr "เติมเงินแบ็กเอนด์"
+
+#: inc/template-shop.php:1110
+msgid "卡密支付"
+msgstr "ชำระเงินด้วยบัตร"
+
+#: inc/template-shop.php:1111
+msgid "余额支付"
+msgstr "ยอดเงินคงเหลือ"
+
+#: inc/template-shop.php:1167
+msgid "扫码支付 %s 元"
+msgstr "สแกนโค้ด QR เพื่อจ่าย %s หยวน"
+
+#: inc/template-shop.php:1164
+msgid "微信扫码支付 %s 元"
+msgstr "สแกนโค้ด QR บน WeChat เพื่อจ่าย %s หยวน"
+
+#: inc/template-shop.php:1160
+msgid "支付宝扫码支付 %s 元"
+msgstr "สแกนโค้ด QR ด้วย Alipay เพื่อจ่าย %s หยวน"
+
+#: inc/template-shop.php:1170
+msgid "支付后请等待 5 秒左右，切勿关闭扫码窗口"
+msgstr "โปรดรอประมาณ 5 วินาทีหลังการชำระเงิน และอย่าปิดหน้าต่างสแกนโค้ด QR"
+
+#: inc/template-shop.php:1190
+msgid "支付接口未配置"
+msgstr "ไม่ได้กำหนดค่าอินเทอร์เฟซการชำระเงิน"
+
+#: inc/template-shop.php:1196, inc/template-shop.php:1202
+msgid "支付接口暂未开启"
+msgstr "อินเทอร์เฟซการชำระเงินยังไม่เปิด"
+
+#: inc/template-shop.php:1224
+msgid "余额不足"
+msgstr "ยอดคงเหลือไม่เพียงพอ"
+
+#: inc/template-shop.php:1229
+msgid "余额支付失败"
+msgstr "การชำระยอดคงเหลือล้มเหลว"
+
+#: inc/template-shop.php:1428
+msgid "成功开通了本站%s"
+msgstr "เปิดไซต์นี้ %s สำเร็จแล้ว"
+
+#: inc/template-shop.php:1406
+msgid "成功充值%s%s"
+msgstr "ชาร์จ %s%s สำเร็จแล้ว"
+
+#: inc/template-shop.php:1386
+msgid "成功购买了%s"
+msgstr "ซื้อ %s สำเร็จแล้ว"
+
+#: inc/template-shop.php:1454
+msgid "推广成功，获得佣金奖励%s"
+msgstr "โปรโมชั่นนี้ประสบความสำเร็จและคุณได้รับรางวัลคอมมิชชั่น %s"
+
+#: inc/template-shop.php:1467
+msgid "新订单付款成功提醒"
+msgstr "การแจ้งเตือนความสำเร็จในการชำระเงินคำสั่งซื้อใหม่"
+
+#: inc/template-shop.php:1468
+msgid "订单金额：%s，</br>详细信息请在网站后台查看订单信息"
+msgstr "จำนวนการสั่งซื้อ: %s</br>สำหรับรายละเอียด โปรดตรวจสอบข้อมูลการสั่งซื้อในส่วนหลังของเว็บไซต์"
+
+#: inc/template-tags.php:122, template-parts/widget/home-dynamic.php:65
+msgid "游客"
+msgstr "นักท่องเที่ยว"
+
+#: inc/template-tags.php:287, inc/template-tags.php:297
+msgid "前"
+msgstr "ซึ่งไปข้างหน้า"
+
+#: inc/template-tags.php:735
+msgid "首页"
+msgstr "หน้าแรก"
+
+#: inc/template-tags.php:793
+msgid "搜索: %s"
+msgstr "ค้นหา: %s"
+
+#: inc/template-tags.php:767
+msgid "正文"
+msgstr "ข้อความ"
+
+#: inc/template-tags.php:807
+msgid "第%s页"
+msgstr "หน้า %s"
+
+#: inc/template-tags.php:865
+msgid "加载更多"
+msgstr "โหลดเพิ่มเติม"
+
+#: inc/template-tags.php:866
+msgid "已全部加载完毕"
+msgstr "โหลดทั้งหมดแล้ว"
+
+#: inc/template-tags.php:879, inc/template-tags.php:990
+msgid "<i class=\"fas fa-angle-left me-1\"></i>上一页"
+msgstr "<i class=\"fas fa-angle-left me-1\"></i>หน้าก่อนหน้า"
+
+#: inc/template-tags.php:880, inc/template-tags.php:991
+msgid "下一页<i class=\"fas fa-angle-right ms-1\"></i>"
+msgstr "หน้าถัดไป<i class=\"fas fa-angle-right ms-1\"></i>"
+
+#: inc/template-tags.php:928
+msgid "最新一页"
+msgstr "หน้าล่าสุด"
+
+#: inc/template-tags.php:960
+msgid "最后一页"
+msgstr "หน้าสุดท้าย"
+
+#: inc/template-tags.php:1000
+msgid "分页"
+msgstr "การแบ่งหน้า"
+
+#: inc/template-walker.php:160
+msgid "您的评论正在等待审核。"
+msgstr "ความคิดเห็นของคุณกำลังรอการกลั่นกรอง"
+
+#: inc/template-walker.php:166, template-parts/widget/home-dynamic.php:60
+msgid "%s前"
+msgstr "%s ที่แล้ว"
+
+#: page-templates/page-full.php:3
+msgid "全宽页面"
+msgstr "หน้ากว้างเต็ม"
+
+#: page-templates/page-html.php:3
+msgid "Html页面"
+msgstr "หน้า HTML"
+
+#: page-templates/page-widget.php:3
+msgid "模块化页面"
+msgstr "หน้าโมดูลาร์"
+
+#: searchform.php:9
+msgid "全站"
+msgstr "เว็บไซต์เต็มรูปแบบ"
+
+#: searchform.php:22
+msgid "输入关键词 回车..."
+msgstr "ใส่คำสำคัญแล้วกด Enter..."
+
+#: template-parts/archive-filter.php:64
+msgid "分类"
+msgstr "การจัดหมวดหมู่"
+
+#: template-parts/archive-filter.php:156, template-parts/shortcode/rihide.php:61, template-parts/single/video-hero.php:112, template-parts/widget/sidebar-post-pay.php:93
+msgid "免费"
+msgstr "ฟรี"
+
+#: template-parts/archive-filter.php:157, template-parts/archive-filter.php:160
+msgid "%s免费"
+msgstr "%s ฟรี"
+
+#: template-parts/archive-filter.php:158
+msgid "%s折扣"
+msgstr "ส่วนลด %s"
+
+#: template-parts/archive-filter.php:159
+msgid "%s专属"
+msgstr "สิทธิพิเศษสำหรับ %s"
+
+#: template-parts/archive-filter.php:166, template-parts/page/tougao.php:227
+msgid "价格"
+msgstr "ราคา"
+
+#: template-parts/archive-filter.php:179
+msgid "最新"
+msgstr "ปัจจุบัน"
+
+#: template-parts/archive-filter.php:180
+msgid "热度"
+msgstr "ความร้อน"
+
+#: template-parts/archive-filter.php:181, template-parts/single/entry-social.php:43
+msgid "点赞"
+msgstr "ชอบ"
+
+#: template-parts/archive-filter.php:182, template-parts/single/entry-social.php:37, template-parts/widget/sidebar-author-info.php:59
+msgid "收藏"
+msgstr "เก็บรวบรวม"
+
+#: template-parts/archive-filter.php:184
+msgid "随机"
+msgstr "สุ่ม"
+
+#: template-parts/archive-filter.php:189
+msgid "排序"
+msgstr "เรียงลำดับ"
+
+#: template-parts/footer/links.php:7
+msgid "友情链接："
+msgstr "ลิงค์:"
+
+#: template-parts/footer/widget.php:25
+msgid "快速导航"
+msgstr "การนำทางอย่างรวดเร็ว"
+
+#: template-parts/footer/widget.php:34
+msgid "关于本站"
+msgstr "เกี่ยวกับเว็บไซต์นี้"
+
+#: template-parts/footer/widget.php:43
+msgid "联系我们"
+msgstr "ติดต่อเรา"
+
+#: template-parts/header/action-hover.php:11
+msgid "亮色模式"
+msgstr "โหมดแสง"
+
+#: template-parts/header/action-hover.php:12
+msgid "深色模式"
+msgstr "โหมดมืด"
+
+#: template-parts/header/action-hover.php:17
+msgid "站内搜索"
+msgstr "ค้นหาไซต์"
+
+#: template-parts/header/action-hover.php:21
+msgid "网站公告"
+msgstr "ประกาศทางเว็บไซต์"
+
+#: template-parts/header/action-hover.php:118
+msgid "登录"
+msgstr "เข้าสู่ระบบ"
+
+#: template-parts/header/action-hover.php:56
+msgid "余额"
+msgstr "สมดุล"
+
+#: template-parts/header/action-hover.php:59, template-parts/user/part/coin.php:52
+msgid "充值"
+msgstr "เติม"
+
+#: template-parts/header/action-hover.php:76
+msgid "本站"
+msgstr "เว็บไซต์นี้"
+
+#: template-parts/header/action-hover.php:105
+msgid "后台管理"
+msgstr "การจัดการหลังเวที"
+
+#: template-parts/loop/item-none.php:2, template-parts/user/part/fav.php:61, template-parts/user/part/tougao.php:145
+msgid "暂无内容"
+msgstr "ยังไม่มีเนื้อหา"
+
+#: template-parts/loop/item.php:182, template-parts/loop/item.php:134, template-parts/loop/item.php:87, template-parts/loop/item.php:41, template-parts/user/part/tougao.php:100
+msgid "置顶"
+msgstr "ปักหมุดไว้ด้านบน"
+
+#: template-parts/page.php:41, template-parts/single-cdk.php:31, template-parts/single/post-content.php:8
+msgid "继续阅读<span class=\"screen-reader-text\"> \"%s\"</span>"
+msgstr "อ่านต่อ<span class=\"screen-reader-text\"> \"%s\"</span>"
+
+#: template-parts/page/login-register.php:24, template-parts/page/login-register.php:24
+msgid "本站注册功能暂时关闭"
+msgstr "ฟังก์ชั่นการลงทะเบียนของเว็บไซต์นี้ถูกปิดชั่วคราว"
+
+#: template-parts/page/login-register.php:24, template-parts/page/login-register.php:22
+msgid "返回首页"
+msgstr "กลับไปที่หน้าแรก"
+
+#: template-parts/page/login-register.php:22, template-parts/page/login-register.php:22
+msgid "本站登录功能暂时关闭"
+msgstr "ฟังก์ชั่นการเข้าสู่ระบบของเว็บไซต์นี้ถูกปิดชั่วคราว"
+
+#: template-parts/page/login-register.php:262
+msgid "账号绑定的邮箱*"
+msgstr "ที่อยู่อีเมลที่ผูกกับบัญชี*"
+
+#: template-parts/page/login-register.php:263, template-parts/page/login-register.php:186
+msgid "邮箱地址"
+msgstr "ที่อยู่อีเมล"
+
+#: template-parts/page/login-register.php:268, template-parts/page/login-register.php:248, template-parts/page/login-register.php:205, template-parts/page/login-register.php:157
+msgid "验证码"
+msgstr "รหัสยืนยัน"
+
+#: template-parts/page/login-register.php:269, template-parts/page/login-register.php:249, template-parts/page/login-register.php:206, template-parts/page/login-register.php:158, template-parts/user/part/coin.php:90, template-parts/user/part/vip.php:157
+msgid "点击刷新验证码"
+msgstr "คลิกรีเฟรชรหัสยืนยัน"
+
+#: template-parts/page/login-register.php:272
+msgid "重置密码链接会发送到您的邮箱，请通过重置链接修改新密码。"
+msgstr "ลิงก์รีเซ็ตรหัสผ่านจะถูกส่งไปยังอีเมลของคุณ โปรดใช้ลิงก์รีเซ็ตเพื่อเปลี่ยนรหัสผ่านใหม่"
+
+#: template-parts/page/login-register.php:273, template-parts/page/login-register.php:253
+msgid "想起密码？"
+msgstr "จำรหัสผ่านของคุณ?"
+
+#: template-parts/page/login-register.php:273, template-parts/page/login-register.php:253, template-parts/page/login-register.php:213
+msgid "登录账号"
+msgstr "บัญชีเข้าสู่ระบบ"
+
+#: template-parts/page/login-register.php:237
+msgid "您正在重新设置账号密码"
+msgstr "คุณกำลังรีเซ็ตรหัสผ่านบัญชีของคุณ"
+
+#: template-parts/page/login-register.php:239, template-parts/user/part/profile.php:146
+msgid "新密码"
+msgstr "รหัสผ่านใหม่"
+
+#: template-parts/page/login-register.php:240, template-parts/page/login-register.php:190, template-parts/page/login-register.php:151
+msgid "密码"
+msgstr "รหัสผ่าน"
+
+#: template-parts/page/login-register.php:243, template-parts/user/part/profile.php:150
+msgid "确认新密码"
+msgstr "ยืนยันรหัสผ่านใหม่"
+
+#: template-parts/page/login-register.php:244, template-parts/page/login-register.php:193
+msgid "确认输入密码"
+msgstr "ยืนยันรหัสผ่าน"
+
+#: template-parts/page/login-register.php:256
+msgid "立即重置密码"
+msgstr "รีเซ็ตรหัสผ่านทันที"
+
+#: template-parts/page/login-register.php:181
+msgid "用户名*"
+msgstr "ชื่อผู้ใช้*"
+
+#: template-parts/page/login-register.php:182
+msgid "英文名称"
+msgstr "ชื่อภาษาอังกฤษ"
+
+#: template-parts/page/login-register.php:185
+msgid "邮箱*"
+msgstr "จดหมาย*"
+
+#: template-parts/page/login-register.php:189
+msgid "密码*"
+msgstr "รหัสผ่าน*"
+
+#: template-parts/page/login-register.php:198
+msgid "邀请码* "
+msgstr "รหัสเชิญ*␣"
+
+#: template-parts/page/login-register.php:198
+msgid "获取邀请码"
+msgstr "รับรหัสเชิญ"
+
+#: template-parts/page/login-register.php:213
+msgid "已有账号？"
+msgstr "มีบัญชีอยู่แล้ว?"
+
+#: template-parts/page/login-register.php:217
+msgid "立即注册"
+msgstr "สมัครตอนนี้เลย"
+
+#: template-parts/page/login-register.php:147
+msgid "邮箱或用户名"
+msgstr "อีเมล์หรือชื่อผู้ใช้"
+
+#: template-parts/page/login-register.php:151
+msgid "忘记密码？"
+msgstr "ลืมรหัสผ่านเหรอ?"
+
+#: template-parts/page/login-register.php:165
+msgid "记住登录状态？"
+msgstr "จำสถานะการเข้าสู่ระบบได้หรือไม่?"
+
+#: template-parts/page/login-register.php:171
+msgid "新用户？"
+msgstr "ผู้ใช้ใหม่?"
+
+#: template-parts/page/login-register.php:171
+msgid "注册账号"
+msgstr "ลงทะเบียนบัญชี"
+
+#: template-parts/page/login-register.php:175
+msgid "立即登录"
+msgstr "เข้าสู่ระบบทันที"
+
+#: template-parts/page/login-register.php:287
+msgid "快捷登录/注册"
+msgstr "เข้าสู่ระบบ / ลงทะเบียนด่วน"
+
+#: template-parts/page/login-register.php:291
+msgid "QQ登录"
+msgstr "เข้าสู่ระบบ QQ"
+
+#: template-parts/page/login-register.php:294
+msgid "微信登录"
+msgstr "เข้าสู่ระบบ WeChat"
+
+#: template-parts/page/login-register.php:303
+msgid "注册&登录即表示同意本站"
+msgstr "การลงทะเบียนและเข้าสู่ระบบหมายความว่าคุณยอมรับไซต์นี้"
+
+#: template-parts/page/login-register.php:304
+msgid "用户协议"
+msgstr "ข้อตกลงการใช้"
+
+#: template-parts/page/login-register.php:304
+msgid "隐私政策"
+msgstr "นโยบายความเป็นส่วนตัว"
+
+#: template-parts/page/tags.php:40
+msgid "按数量排序"
+msgstr "เรียงตามปริมาณ"
+
+#: template-parts/page/tags.php:41
+msgid "按名称排序"
+msgstr "เรียงตามชื่อ"
+
+#: template-parts/page/tougao.php:24
+msgid "无权限编辑"
+msgstr "ไม่มีสิทธิ์ในการแก้ไข"
+
+#: template-parts/page/tougao.php:25
+msgid "仅限编辑作者本人文章"
+msgstr "เฉพาะบทความของผู้เขียนเท่านั้นที่สามารถแก้ไขได้"
+
+#: template-parts/page/tougao.php:133
+msgid "更新成功"
+msgstr "การอัปเดตเสร็จสมบูรณ์"
+
+#: template-parts/page/tougao.php:163
+msgid "编辑文章"
+msgstr "แก้ไขบทความ"
+
+#: template-parts/page/tougao.php:163, template-parts/page/tougao.php:429
+msgid "发布文章"
+msgstr "โพสต์บทความ"
+
+#: template-parts/page/tougao.php:165
+msgid "如遇无法添加附件到本文章提示，请先将文章发布文后添加。"
+msgstr "หากคุณไม่สามารถเพิ่มไฟล์แนบในบทความนี้ได้ โปรดเผยแพร่บทความก่อนแล้วจึงเพิ่ม"
+
+#: template-parts/page/tougao.php:167
+msgid "本站已开启作者分成奖励，您发布的资源有人购买时，成交价的(%s%%)收入将发放至您的佣金。"
+msgstr "ไซต์นี้ได้เปิดใช้งานการแบ่งปันรางวัลของผู้เขียน เมื่อมีคนซื้อทรัพยากรที่คุณเผยแพร่ (%s%%) ของราคาการทำธุรกรรมจะถูกแบ่งให้กับค่าคอมมิชชั่นของคุณ"
+
+#: template-parts/page/tougao.php:175
+msgid "文章标题"
+msgstr "ชื่อบทความ"
+
+#: template-parts/page/tougao.php:176
+msgid "请输入文章标题"
+msgstr "กรุณากรอกชื่อบทความ"
+
+#: template-parts/page/tougao.php:180
+msgid "文章内容"
+msgstr "เนื้อหาบทความ"
+
+#: template-parts/page/tougao.php:199
+msgid "启用付费下载"
+msgstr "เปิดใช้งานการดาวน์โหลดแบบชำระเงิน"
+
+#: template-parts/page/tougao.php:204
+msgid "启用付费音视频"
+msgstr "เปิดใช้งานเสียงและวิดีโอแบบชำระเงิน"
+
+#: template-parts/page/tougao.php:213
+msgid "价格信息"
+msgstr "ข้อมูลราคา"
+
+#: template-parts/page/tougao.php:218
+msgid "免费购买"
+msgstr "ซื้อฟรี"
+
+#: template-parts/page/tougao.php:222
+msgid "禁止购买"
+msgstr "ห้ามซื้อ"
+
+#: template-parts/page/tougao.php:235
+msgid "优惠折扣"
+msgstr "การลดราคา"
+
+#: template-parts/page/tougao.php:237
+msgid "0.N折"
+msgstr "ส่วนลด 0.N"
+
+#: template-parts/page/tougao.php:247
+msgid "下载信息"
+msgstr "ดาวน์โหลดข้อมูล"
+
+#: template-parts/page/tougao.php:264
+msgid "资源名称"
+msgstr "ชื่อทรัพยากร"
+
+#: template-parts/page/tougao.php:269
+msgid "下载密码"
+msgstr "ดาวน์โหลดรหัสผ่าน"
+
+#: template-parts/page/tougao.php:274, template-parts/widget/sidebar-post-pay.php:24
+msgid "下载地址"
+msgstr "ลิ้งค์ดาวน์โหลด"
+
+#: template-parts/page/tougao.php:293
+msgid "预览地址"
+msgstr "ดูตัวอย่างที่อยู่"
+
+#: template-parts/page/tougao.php:299
+msgid "自定义按钮"
+msgstr "ปุ่มกำหนดเอง"
+
+#: template-parts/page/tougao.php:300
+msgid "选填,格式:按钮名称|Url地址"
+msgstr "ไม่บังคับ รูปแบบ: ชื่อปุ่ม|ที่อยู่ URL"
+
+#: template-parts/page/tougao.php:312
+msgid "音视频信息"
+msgstr "ข้อมูลเสียงและวิดีโอ"
+
+#: template-parts/page/tougao.php:317
+msgid "免费播放"
+msgstr "เล่นฟรี"
+
+#: template-parts/page/tougao.php:333
+msgid "媒体名称"
+msgstr "ชื่อสื่อ"
+
+#: template-parts/page/tougao.php:338
+msgid "封面地址"
+msgstr "ที่อยู่ปก"
+
+#: template-parts/page/tougao.php:343
+msgid "播放地址"
+msgstr "ที่อยู่เล่น"
+
+#: template-parts/page/tougao.php:370
+msgid "发布"
+msgstr "ปล่อย"
+
+#: template-parts/page/tougao.php:374
+msgid "状态"
+msgstr "สถานะ"
+
+#: template-parts/page/tougao.php:377, template-parts/user/part/tougao.php:46
+msgid "已发布"
+msgstr "ที่ตีพิมพ์"
+
+#: template-parts/page/tougao.php:379
+msgid "等待审核"
+msgstr "กลั่นกรอง"
+
+#: template-parts/page/tougao.php:380, template-parts/user/part/tougao.php:47
+msgid "草稿"
+msgstr "ร่าง"
+
+#: template-parts/page/tougao.php:384
+msgid "文章形式"
+msgstr "รูปแบบของบทความ"
+
+#: template-parts/page/tougao.php:386
+msgid "标准"
+msgstr "มาตรฐาน"
+
+#: template-parts/page/tougao.php:387
+msgid "图片"
+msgstr "รูปภาพ"
+
+#: template-parts/page/tougao.php:388
+msgid "视频"
+msgstr "วิดีโอ"
+
+#: template-parts/page/tougao.php:389
+msgid "音频"
+msgstr "เสียง"
+
+#: template-parts/page/tougao.php:393
+msgid "分类栏目"
+msgstr "คอลัมน์การจำแนกประเภท"
+
+#: template-parts/page/tougao.php:401
+msgid "选择分类"
+msgstr "เลือกหมวดหมู่"
+
+#: template-parts/page/tougao.php:407
+msgid "文章标签"
+msgstr "แท็กบทความ"
+
+#: template-parts/page/tougao.php:408
+msgid "多个标签用,隔开"
+msgstr "ใช้ป้ายกำกับหลายอันเพื่อแยกออกจากกัน"
+
+#: template-parts/page/tougao.php:413
+msgid "缩略图"
+msgstr "ภาพขนาดย่อ"
+
+#: template-parts/page/tougao.php:429
+msgid "更新文章"
+msgstr "อัปเดตบทความ"
+
+#: template-parts/page/tougao.php:430
+msgid "返回投稿管理"
+msgstr "กลับไปที่การจัดการการส่ง"
+
+#: template-parts/page/vip-prices.php:25
+msgid "本站VIP"
+msgstr "VIP ของเว็บไซต์นี้"
+
+#: template-parts/page/vip-prices.php:26
+msgid "加入本站VIP，畅享海量资源"
+msgstr "เข้าร่วมวีไอพีของไซต์นี้และเพลิดเพลินไปกับทรัพยากรมหาศาล"
+
+#: template-parts/page/vip-prices.php:39, template-parts/user/part/vip.php:93
+msgid "%s天"
+msgstr "%s วัน"
+
+#: template-parts/page/vip-prices.php:37, template-parts/user/part/vip.php:91
+msgid "永久"
+msgstr "ถาวร"
+
+#: template-parts/page/vip-prices.php:55, template-parts/user/part/vip.php:111
+msgid "尊享%s特权%s"
+msgstr "เพลิดเพลินไปกับ %s สิทธิพิเศษ %s"
+
+#: template-parts/page/vip-prices.php:78
+msgid "登录后升级"
+msgstr "อัปเกรดหลังจากเข้าสู่ระบบ"
+
+#: template-parts/page/vip-prices.php:64, template-parts/user/part/vip.php:119
+msgid "立即开通"
+msgstr "เปิดใช้งานทันที"
+
+#: template-parts/page/vip-prices.php:72, template-parts/user/part/vip.php:127
+msgid "立即升级"
+msgstr "อัพเกรดทันที"
+
+#: template-parts/page/vip-prices.php:70, template-parts/user/part/vip.php:125
+msgid "立即续费"
+msgstr "ต่ออายุตอนนี้"
+
+#: template-parts/page/vip-prices.php:67, template-parts/user/part/vip.php:122
+msgid "已获得权限"
+msgstr "ได้รับอนุญาต"
+
+#: template-parts/page/vip-prices.php:95
+msgid "VIP会员说明"
+msgstr "คำแนะนำสำหรับสมาชิกวีไอพี"
+
+#: template-parts/page/vip-prices.php:96
+msgid "开通会员常见问题说明及介绍"
+msgstr "คำอธิบายและแนะนำคำถามที่พบบ่อยเกี่ยวกับการเปิดใช้งานการเป็นสมาชิก"
+
+#: template-parts/shortcode/ri-login-hide.php:19, template-parts/shortcode/ri-reply-hide.php:19, template-parts/shortcode/rihide.php:21
+msgid "隐藏内容"
+msgstr "ซ่อนเนื้อหา"
+
+#: template-parts/shortcode/ri-login-hide.php:21
+msgid "本内容需登录后查看"
+msgstr "คุณต้องเข้าสู่ระบบเพื่อดูเนื้อหานี้"
+
+#: template-parts/shortcode/ri-login-hide.php:23, template-parts/shortcode/rihide.php:26
+msgid "登录后查看"
+msgstr "เข้าสู่ระบบเพื่อดู"
+
+#: template-parts/shortcode/ri-login-hide.php:16, template-parts/shortcode/ri-reply-hide.php:16, template-parts/shortcode/rihide.php:18
+msgid "已获得查看权限"
+msgstr "ดูสิทธิ์ที่ได้รับ"
+
+#: template-parts/shortcode/ri-reply-hide.php:21
+msgid "本内容需评论后查看"
+msgstr "เนื้อหานี้จะต้องดูหลังจากการแสดงความคิดเห็น"
+
+#: template-parts/shortcode/ri-reply-hide.php:23
+msgid "评论后查看"
+msgstr "ดูหลังจากแสดงความคิดเห็น"
+
+#: template-parts/shortcode/rihide.php:30
+msgid "本内容需权限查看"
+msgstr "เนื้อหานี้ต้องได้รับอนุญาตในการดู"
+
+#: template-parts/shortcode/rihide.php:32
+msgid "购买查看权限"
+msgstr "ซื้อสิทธิ์ในการรับชม"
+
+#: template-parts/shortcode/rihide.php:41, template-parts/single/video-hero.php:92, template-parts/widget/sidebar-post-pay.php:73
+msgid "原价"
+msgstr "ราคาเดิม"
+
+#: template-parts/shortcode/rihide.php:65, template-parts/single/video-hero.php:116, template-parts/widget/sidebar-post-pay.php:97
+msgid "%s折"
+msgstr "ส่วนลด %s"
+
+#: template-parts/shortcode/rihide.php:58, template-parts/single/video-hero.php:109, template-parts/widget/sidebar-post-pay.php:90
+msgid "不可购买"
+msgstr "ไม่สามารถซื้อได้"
+
+#: template-parts/shortcode/rihide.php:82
+msgid "已有<span>%d</span>人解锁查看"
+msgstr "<span>%d</span> คนได้ปลดล็อคและดูมันแล้ว"
+
+#: template-parts/shortcode/rihide.php:24
+msgid "本内容登录后免费查看"
+msgstr "เนื้อหานี้สามารถดูได้ฟรีหลังจากเข้าสู่ระบบ"
+
+#: template-parts/single-cdk.php:44, template-parts/single/post-content.php:21
+msgid "内容分页"
+msgstr "การแบ่งหน้าเนื้อหา"
+
+#: template-parts/single/entry-meta.php:41
+msgid "[编辑]"
+msgstr "[แก้ไข]"
+
+#: template-parts/single/entry-related-posts.php:49
+msgid "相关文章"
+msgstr "บทความที่เกี่ยวข้อง"
+
+#: template-parts/single/entry-social.php:32
+msgid "分享"
+msgstr "แบ่งปัน"
+
+#: template-parts/single/entry-social.php:37
+msgid "取消收藏"
+msgstr "ยกเลิกรายการโปรด"
+
+#: template-parts/single/video-hero.php:32
+msgid "第%d集"
+msgstr "ตอนที่ %d"
+
+#: template-parts/single/video-hero.php:80
+msgid "本内容需权限播放"
+msgstr "เนื้อหานี้ต้องได้รับอนุญาตในการเล่น"
+
+#: template-parts/single/video-hero.php:82
+msgid "购买播放权限"
+msgstr "ซื้อสิทธิ์ในการเล่น"
+
+#: template-parts/single/video-hero.php:133
+msgid "已有<span>%d</span>人解锁播放"
+msgstr "<span>%d</span> คนได้ปลดล็อคการเล่นแล้ว"
+
+#: template-parts/single/video-hero.php:74
+msgid "本内容登录后免费播放"
+msgstr "เนื้อหานี้เล่นได้ฟรีหลังจากเข้าสู่ระบบ"
+
+#: template-parts/single/video-hero.php:76
+msgid "登录后播放"
+msgstr "เล่นหลังจากเข้าสู่ระบบ"
+
+#: template-parts/single/video-hero.php:157
+msgid "(共%d集)"
+msgstr "(ทั้งหมด %d ตอน)"
+
+#: template-parts/user/part/aff.php:8
+msgid "推广中心"
+msgstr "ศูนย์ส่งเสริม"
+
+#: template-parts/user/part/aff.php:12
+msgid "您的推广链接"
+msgstr "ลิงค์ส่งเสริมการขายของคุณ"
+
+#: template-parts/user/part/aff.php:24
+msgid "累计佣金"
+msgstr "ค่าคอมมิชชั่นสะสม"
+
+#: template-parts/user/part/aff.php:25
+msgid "可提现"
+msgstr "สามารถถอนออกได้"
+
+#: template-parts/user/part/aff.php:43
+msgid "申请提现"
+msgstr "สมัครเพื่อถอนเงิน"
+
+#: template-parts/user/part/aff.php:48
+msgid "已成功推广注册"
+msgstr "เลื่อนขั้นการลงทะเบียนเรียบร้อยแล้ว"
+
+#: template-parts/user/part/aff.php:60
+msgid "暂无用户通过您的推广链接注册"
+msgstr "ยังไม่มีผู้ใช้ที่ลงทะเบียนผ่านลิงก์โปรโมชั่นของคุณ"
+
+#: template-parts/user/part/aff.php:64
+msgid "推广说明："
+msgstr "คำอธิบายโปรโมชั่น:"
+
+#: template-parts/user/part/aff.php:79
+msgid "佣金记录"
+msgstr "บันทึกค่าคอมมิชชั่น"
+
+#: template-parts/user/part/aff.php:82, template-parts/user/part/down.php:11, template-parts/user/part/order.php:11, template-parts/user/part/ticket.php:181
+msgid "最近20条"
+msgstr "20รายการสุดท้าย"
+
+#: template-parts/user/part/aff.php:108
+msgid "推广类型"
+msgstr "ประเภทโปรโมชั่น"
+
+#: template-parts/user/part/aff.php:108
+msgid "购买人："
+msgstr "ผู้ซื้อ:"
+
+#: template-parts/user/part/aff.php:111
+msgid "订单金额：￥"
+msgstr "จำนวนสั่งซื้อ:￥"
+
+#: template-parts/user/part/aff.php:112
+msgid "佣金收益："
+msgstr "รายได้ค่าคอมมิชชั่น:"
+
+#: template-parts/user/part/aff.php:113
+msgid "状态："
+msgstr "สถานะ:"
+
+#: template-parts/user/part/aff.php:101, template-parts/user/part/coin.php:114, template-parts/user/part/down.php:21, template-parts/user/part/order.php:18, template-parts/user/part/ticket.php:185, template-parts/user/part/vip.php:181
+msgid "暂无记录"
+msgstr "ไม่มีบันทึก"
+
+#: template-parts/user/part/coin.php:15
+msgid "今日已签到"
+msgstr "ลงชื่อเข้าใช้วันนี้"
+
+#: template-parts/user/part/coin.php:13
+msgid "签到领取"
+msgstr "ลงชื่อเข้าใช้และรวบรวม"
+
+#: template-parts/user/part/coin.php:21
+msgid "当前账户余额"
+msgstr "ยอดเงินในบัญชีปัจจุบัน"
+
+#: template-parts/user/part/coin.php:31
+msgid "充值余额"
+msgstr "เติมเงินยอดคงเหลือ"
+
+#: template-parts/user/part/coin.php:52
+msgid "请选择充值数量"
+msgstr "กรุณาเลือกจำนวนเงินที่เติม"
+
+#: template-parts/user/part/coin.php:59
+msgid "充值说明"
+msgstr "คำแนะนำการเติมเงิน"
+
+#: template-parts/user/part/coin.php:79
+msgid "兑换"
+msgstr "แลกเปลี่ยน"
+
+#: template-parts/user/part/coin.php:83
+msgid "使用CDK码兑换站内币"
+msgstr "ใช้รหัส CDK เพื่อแลกสกุลเงินของไซต์"
+
+#: template-parts/user/part/coin.php:94, template-parts/user/part/vip.php:161
+msgid "立即兑换"
+msgstr "แลกเลย"
+
+#: template-parts/user/part/coin.php:95, template-parts/user/part/vip.php:162
+msgid "购买CDK"
+msgstr "ซื้อซีดีเค"
+
+#: template-parts/user/part/coin.php:105
+msgid "获取记录（最近10条）"
+msgstr "รับบันทึก (10 รายการล่าสุด)"
+
+#: template-parts/user/part/coin.php:120
+msgid "充值金额：￥%1$s（%2$s）"
+msgstr "จำนวนการเติมเงิน: ￥%1$s (%2$s)"
+
+#: template-parts/user/part/coin.php:122, template-parts/user/part/vip.php:195
+msgid "支付方式：%s"
+msgstr "วิธีการชำระเงิน"
+
+#: template-parts/user/part/down.php:31
+msgid "下载IP："
+msgstr "ดาวน์โหลดไอพี:"
+
+#: template-parts/user/part/down.php:32
+msgid "下载次数："
+msgstr "เวลาในการดาวน์โหลด:"
+
+#: template-parts/user/part/fav.php:44
+msgid "收藏列表"
+msgstr "รายการโปรด"
+
+#: template-parts/user/part/menu.php:24
+msgid "注册时间：%s"
+msgstr "เวลาลงทะเบียน: %s"
+
+#: template-parts/user/part/menu.php:22
+msgid "到期时间：%s"
+msgstr "เวลาหมดอายุ: %s"
+
+#: template-parts/user/part/menu.php:30
+msgid "每天可下载数(%d)"
+msgstr "จำนวนการดาวน์โหลดต่อวัน (%d)"
+
+#: template-parts/user/part/menu.php:31
+msgid "今日已用(%d)"
+msgstr "ใช้วันนี้ (%d)"
+
+#: template-parts/user/part/menu.php:32
+msgid "今日剩余(%d)"
+msgstr "เหลือวันนี้ (%d)"
+
+#: template-parts/user/part/order.php:8
+msgid "订单记录"
+msgstr "บันทึกการสั่งซื้อ"
+
+#: template-parts/user/part/order.php:28
+msgid "订单号："
+msgstr "หมายเลขคำสั่งซื้อ:"
+
+#: template-parts/user/part/order.php:29
+msgid "支付金额："
+msgstr "จำนวนเงินที่ชำระ:"
+
+#: template-parts/user/part/order.php:30
+msgid "支付方式："
+msgstr "วิธีการชำระเงิน:"
+
+#: template-parts/user/part/profile.php:33
+msgid "上传头像"
+msgstr "อัพโหลดรูปประจำตัว"
+
+#: template-parts/user/part/profile.php:43
+msgid "显示昵称"
+msgstr "แสดงชื่อเล่น"
+
+#: template-parts/user/part/profile.php:48
+msgid "联系QQ"
+msgstr "ติดต่อคิวคิว"
+
+#: template-parts/user/part/profile.php:53
+msgid "个人介绍"
+msgstr "การแนะนำตัวเอง"
+
+#: template-parts/user/part/profile.php:59
+msgid "保存资料"
+msgstr "บันทึกข้อมูล"
+
+#: template-parts/user/part/profile.php:70
+msgid "账户绑定"
+msgstr "การผูกบัญชี"
+
+#: template-parts/user/part/profile.php:76
+msgid "当前邮箱"
+msgstr "อีเมลปัจจุบัน"
+
+#: template-parts/user/part/profile.php:81
+msgid "新邮箱地址"
+msgstr "ที่อยู่อีเมลใหม่"
+
+#: template-parts/user/part/profile.php:89
+msgid "快捷登录绑定信息"
+msgstr "ข้อมูลการผูกเข้าสู่ระบบด่วน"
+
+#: template-parts/user/part/profile.php:97
+msgid "绑定QQ登录"
+msgstr "ผูกข้อมูลเข้าสู่ระบบ QQ"
+
+#: template-parts/user/part/profile.php:95
+msgid "解绑QQ登录"
+msgstr "ยกเลิกการผูกข้อมูลเข้าสู่ระบบ QQ"
+
+#: template-parts/user/part/profile.php:102
+msgid "绑定微信登录"
+msgstr "ผูกข้อมูลเข้าสู่ระบบ WeChat"
+
+#: template-parts/user/part/profile.php:100
+msgid "解绑微信登录"
+msgstr "ยกเลิกการผูกข้อมูลเข้าสู่ระบบ WeChat"
+
+#: template-parts/user/part/profile.php:113
+msgid "确认修改邮箱"
+msgstr "ยืนยันอีเมลที่แก้ไข"
+
+#: template-parts/user/part/profile.php:127
+msgid "密码修改"
+msgstr "เปลี่ยนรหัสผ่าน"
+
+#: template-parts/user/part/profile.php:133
+msgid "邮箱信息"
+msgstr "ข้อมูลอีเมล์"
+
+#: template-parts/user/part/profile.php:138
+msgid "旧密码"
+msgstr "รหัสผ่านเก่า"
+
+#: template-parts/user/part/profile.php:156
+msgid "确认修改密码"
+msgstr "ยืนยันการเปลี่ยนรหัสผ่าน"
+
+#: template-parts/user/part/ticket.php:143
+msgid "工单列表"
+msgstr "รายการสั่งงาน"
+
+#: template-parts/user/part/ticket.php:144, template-parts/user/part/ticket.php:18
+msgid "新建工单"
+msgstr "สร้างใบสั่งงานใหม่"
+
+#: template-parts/user/part/ticket.php:65
+msgid "工单详情"
+msgstr "รายละเอียดการสั่งงาน"
+
+#: template-parts/user/part/ticket.php:66, template-parts/user/part/ticket.php:19
+msgid "返回工单列表"
+msgstr "กลับไปยังรายการสั่งงาน"
+
+#: template-parts/user/part/ticket.php:107
+msgid "查看附件"
+msgstr "ดูเอกสารแนบ"
+
+#: template-parts/user/part/ticket.php:120
+msgid "工单回复内容："
+msgstr "เนื้อหาตอบกลับใบสั่งงาน:"
+
+#: template-parts/user/part/ticket.php:129
+msgid "删除工单"
+msgstr "ลบตั๋ว"
+
+#: template-parts/user/part/ticket.php:76
+msgid "获取工单信息失败"
+msgstr "ไม่สามารถรับข้อมูลใบสั่งงานได้"
+
+#: template-parts/user/part/ticket.php:27
+msgid "创建人"
+msgstr "ผู้สร้าง"
+
+#: template-parts/user/part/ticket.php:32
+msgid "工单类型"
+msgstr "ชนิดใบสั่งงาน"
+
+#: template-parts/user/part/ticket.php:42
+msgid "工单标题"
+msgstr "ชื่อใบสั่งงาน"
+
+#: template-parts/user/part/ticket.php:47
+msgid "描述"
+msgstr "อธิบาย"
+
+#: template-parts/user/part/ticket.php:54
+msgid "提交工单"
+msgstr "ส่งงานสั่งทำ"
+
+#: template-parts/user/part/tougao.php:40
+msgid "投稿管理"
+msgstr "การจัดการการส่ง"
+
+#: template-parts/user/part/tougao.php:41
+msgid "新建投稿"
+msgstr "ยื่นใหม่"
+
+#: template-parts/user/part/tougao.php:48
+msgid "待审核"
+msgstr "รอการตรวจสอบ"
+
+#: template-parts/user/part/tougao.php:49
+msgid "回收站"
+msgstr "ถังขยะรีไซเคิล"
+
+#: template-parts/user/part/tougao.php:128
+msgid "删除"
+msgstr "ลบ"
+
+#: template-parts/user/part/vip.php:23
+msgid "会员中心"
+msgstr "ศูนย์สมาชิก"
+
+#: template-parts/user/part/vip.php:43
+msgid "加入"
+msgstr "เข้าร่วม"
+
+#: template-parts/user/part/vip.php:53
+msgid "每天可下载数"
+msgstr "จำนวนการดาวน์โหลดต่อวัน"
+
+#: template-parts/user/part/vip.php:54
+msgid "今日已用次数"
+msgstr "จำนวนครั้งที่ใช้ในวันนี้"
+
+#: template-parts/user/part/vip.php:55
+msgid "今日剩余次数"
+msgstr "เวลาที่เหลืออยู่ของวันนี้"
+
+#: template-parts/user/part/vip.php:56
+msgid "下载使用率"
+msgstr "ดาวน์โหลดการใช้งาน"
+
+#: template-parts/user/part/vip.php:77
+msgid "会员开通"
+msgstr "การเปิดใช้งานสมาชิก"
+
+#: template-parts/user/part/vip.php:147
+msgid "会员兑换"
+msgstr "การไถ่ถอนสมาชิก"
+
+#: template-parts/user/part/vip.php:150
+msgid "使用CDK码兑换VIP特权"
+msgstr "ใช้รหัส CDK เพื่อแลกสิทธิ์ VIP"
+
+#: template-parts/user/part/vip.php:172
+msgid "VIP获取记录（最近10条）"
+msgstr "บันทึกการได้มาของ VIP (10 รายการล่าสุด)"
+
+#: template-parts/user/part/vip.php:190
+msgid "订单类型：%s"
+msgstr "ประเภทคำสั่ง: %s"
+
+#: template-parts/user/part/vip.php:193
+msgid "支付金额：￥%1$s（%2$s）"
+msgstr "จำนวนเงินที่ชำระ: ￥%1$s (%2$s)"
+
+#: template-parts/widget/home-dynamic.php:22, template-parts/widget/home-dynamic.php:28, template-parts/widget/home-dynamic.php:34
+msgid "欢迎访问%s，网址：%s"
+msgstr "ยินดีต้อนรับสู่ %s URL: %s"
+
+#: template-parts/widget/home-scratch-card.php:34
+msgid "已被领取使用"
+msgstr "ได้รับและใช้แล้ว"
+
+#: template-parts/widget/home-search-box.php:114
+msgid "搜索热词"
+msgstr "ค้นหาคำร้อนแรง"
+
+#: template-parts/widget/sidebar-author-info.php:42
+msgid "等级"
+msgstr "ระดับ"
+
+#: template-parts/widget/sidebar-author-info.php:51
+msgid "文章"
+msgstr "บทความ"
+
+#: template-parts/widget/sidebar-author-info.php:55
+msgid "评论"
+msgstr "ความคิดเห็น"
+
+#: template-parts/widget/sidebar-author-info.php:66
+msgid "查看作者其他文章"
+msgstr "ดูบทความอื่นๆ ของผู้เขียน"
+
+#: template-parts/widget/sidebar-post-pay.php:36
+msgid "下载"
+msgstr "ดาวน์โหลด"
+
+#: template-parts/widget/sidebar-post-pay.php:62
+msgid "本资源需权限下载"
+msgstr "ทรัพยากรนี้ต้องได้รับอนุญาตในการดาวน์โหลด"
+
+#: template-parts/widget/sidebar-post-pay.php:64
+msgid "购买下载权限"
+msgstr "ซื้อสิทธิ์การดาวน์โหลด"
+
+#: template-parts/widget/sidebar-post-pay.php:114
+msgid "已有<span>%d</span>人解锁下载"
+msgstr "<span>%d</span> คนได้ปลดล็อคและดาวน์โหลดแล้ว"
+
+#: template-parts/widget/sidebar-post-pay.php:56
+msgid "本资源登录后免费下载"
+msgstr "ทรัพยากรนี้สามารถดาวน์โหลดได้ฟรีหลังจากเข้าสู่ระบบ"
+
+#: template-parts/widget/sidebar-post-pay.php:58
+msgid "登录后下载"
+msgstr "ดาวน์โหลดหลังจากเข้าสู่ระบบ"
+
+#: template-parts/widget/sidebar-post-pay.php:40
+msgid "免费下载"
+msgstr "ดาวน์โหลดฟรี"
+
+#: template-parts/widget/sidebar-post-pay.php:40
+msgid "已获得下载权限"
+msgstr "ดาวน์โหลดสิทธิ์ที่ได้รับ"
+
+#: template-parts/widget/sidebar-post-pay.php:46
+msgid "密码: "
+msgstr "รหัสผ่าน:␣"
+
+#: template-parts/widget/sidebar-post-pay.php:134
+msgid "查看预览"
+msgstr "ดูตัวอย่าง"
+
+#: template-parts/widget/sidebar-post-pay.php:144
+msgid "累计销量"
+msgstr "ยอดขายสะสม"
+
+#: template-parts/widget/sidebar-post-pay.php:147
+msgid "最近更新"
+msgstr "อัพเดทล่าสุด"
+
+#: template-parts/widget/sidebar-post-pay.php:150
+msgid "包含资源"
+msgstr "ประกอบด้วยทรัพยากร"
+
+#: template-parts/widget/sidebar-post-pay.php:150
+msgid "(%d个)"
+msgstr "(%d รายการ)"
+
+#: template-parts/widget/sidebar-ranking-list.php:69
+msgid "暂无排行"
+msgstr "ยังไม่มีอันดับ."
+
