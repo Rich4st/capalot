@@ -1,0 +1,2041 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: 11\n"
+"Language: vi\n"
+
+#: 404.php:8
+msgid "404"
+msgstr "404"
+
+#: 404.php:9
+msgid "找不到页面！"
+msgstr "Trang không tìm thấy!"
+
+#: 404.php:10
+msgid "页面出了问题或已经不存在了。"
+msgstr "Có điều gì đó không ổn với trang này hoặc nó không còn tồn tại."
+
+#: comments.php:5
+msgid "*昵称:"
+msgstr "*Tên nick:"
+
+#: comments.php:6
+msgid "*邮箱:"
+msgstr "*Thư:"
+
+#: comments.php:7
+msgid "网址:"
+msgstr "*Trang mạng:"
+
+#: comments.php:12
+msgid "评论(%s)"
+msgstr "Bình luận (%s)"
+
+#: comments.php:15
+msgid "提示：请文明发言"
+msgstr "Mẹo: Hãy nói chuyện một cách văn minh"
+
+#: comments.php:18
+msgid "请输入评论内容..."
+msgstr "Hãy nhập bình luận của bạn..."
+
+#: comments.php:19
+msgid "登录后评论"
+msgstr "Đăng nhập để bình luận"
+
+#: comments.php:21
+msgid "提交评论"
+msgstr "gửi ý kiến"
+
+#: functions.php:43
+msgid "全站顶部菜单"
+msgstr "Menu trên cùng của trang web"
+
+#: functions.php:96
+msgid "首页模块"
+msgstr "mô-đun trang chủ"
+
+#: functions.php:98
+msgid "首页模块主内容区域"
+msgstr "Khu vực nội dung chính của mô-đun trang chủ"
+
+#: functions.php:117
+msgid "自定义模块主内容区域"
+msgstr "Khu vực nội dung chính của mô-đun tùy chỉnh"
+
+#: functions.php:126
+msgid "文章侧边栏"
+msgstr "Thanh bên bài viết"
+
+#: inc/goto.php:21
+msgid "安全性未知，点击Url跳转"
+msgstr "Không rõ bảo mật, nhấp vào Url để chuyển"
+
+#: inc/goto.php:22
+msgid "即将跳转到外部网站"
+msgstr "Sẽ được chuyển hướng đến một trang web bên ngoài"
+
+#: inc/goto.php:42, inc/template-ajax.php:41, template-parts/page/tougao.php:126
+msgid "非法请求"
+msgstr "Yêu cầu bất hợp pháp"
+
+#: inc/goto.php:43
+msgid "非法访问"
+msgstr "Truy cập trái phép"
+
+#: inc/goto.php:54
+msgid "资源不存在或维护中"
+msgstr "Tài nguyên không tồn tại hoặc đang được bảo trì"
+
+#: inc/goto.php:55
+msgid "请返回其他页面重试"
+msgstr "Vui lòng quay lại trang khác và thử lại"
+
+#: inc/goto.php:68
+msgid "暂无下载权限"
+msgstr "Chưa có quyền tải xuống"
+
+#: inc/goto.php:69
+msgid "请购买后下载本资源"
+msgstr "Vui lòng tải xuống tài nguyên này sau khi mua"
+
+#: inc/goto.php:90
+msgid "下载次数超限"
+msgstr "Đã vượt quá số lượt tải xuống"
+
+#: inc/goto.php:91
+msgid "请明日再来或升级套餐"
+msgstr "Vui lòng quay lại vào ngày mai hoặc nâng cấp gói của bạn"
+
+#: inc/goto.php:104
+msgid "下载链接丢失"
+msgstr "Liên kết tải xuống bị thiếu"
+
+#: inc/goto.php:105
+msgid "请联系管理员检查下载地址"
+msgstr "Vui lòng liên hệ với quản trị viên để kiểm tra địa chỉ tải xuống"
+
+#: inc/goto.php:121
+msgid "下载记录添加失败"
+msgstr "Không thể thêm bản ghi tải xuống"
+
+#: inc/goto.php:122
+msgid "请返回刷新重试"
+msgstr "Vui lòng quay lại và làm mới để thử lại"
+
+#: inc/goto.php:129
+msgid "下载了%s"
+msgstr "Đã tải xuống %s"
+
+#: inc/goto.php:160
+msgid "下载文件丢失"
+msgstr "Tập tin tải xuống bị mất"
+
+#: inc/goto.php:161
+msgid "请联系管理员检查文件是否存在"
+msgstr "Vui lòng liên hệ với quản trị viên để kiểm tra xem tập tin có tồn tại không"
+
+#: inc/template-admin.php:557
+msgid "成功登录本站"
+msgstr "Đăng nhập thành công vào trang web này"
+
+#: inc/template-admin.php:588
+msgid "成功注册加入本站"
+msgstr "Đã đăng ký thành công để tham gia trang web này"
+
+#: inc/template-ajax.php:84
+msgid "暂无公告"
+msgstr "Chưa có thông báo nào"
+
+#: inc/template-ajax.php:109
+msgid "暂未开启兑换"
+msgstr "Quy đổi chưa được kích hoạt"
+
+#: inc/template-ajax.php:116
+msgid "请登录后兑换"
+msgstr "Vui lòng đăng nhập để đổi quà"
+
+#: inc/template-ajax.php:123
+msgid "请输入兑换码"
+msgstr "Vui lòng nhập mã đổi thưởng"
+
+#: inc/template-ajax.php:130, inc/template-ajax.php:1130, inc/template-ajax.php:1222, inc/template-ajax.php:1345, inc/template-ajax.php:1430
+msgid "验证码错误，请刷新验证码"
+msgstr "Mã xác minh bị sai, vui lòng làm mới mã xác minh"
+
+#: inc/template-ajax.php:139
+msgid "兑换码错误"
+msgstr "Lỗi mã đổi quà"
+
+#: inc/template-ajax.php:146
+msgid "兑换码无效"
+msgstr "Mã đổi quà không hợp lệ"
+
+#: inc/template-ajax.php:153
+msgid "兑换码已到期"
+msgstr "Mã đổi quà đã hết hạn"
+
+#: inc/template-ajax.php:181
+msgid "兑换类型错误"
+msgstr "Loại quy đổi sai"
+
+#: inc/template-ajax.php:190, inc/template-ajax.php:420
+msgid "您已获得最高特权，无需重复开通"
+msgstr "Bạn đã có được đặc quyền cao nhất, không cần kích hoạt lại"
+
+#: inc/template-ajax.php:163
+msgid "兑换金额错误"
+msgstr "Số tiền quy đổi sai"
+
+#: inc/template-ajax.php:219, inc/template-ajax.php:453
+msgid "订单创建失败"
+msgstr "Tạo đơn hàng không thành công"
+
+#: inc/template-ajax.php:234
+msgid "兑换失败，请更换重试"
+msgstr "Quy đổi không thành công, vui lòng thay đổi và thử lại"
+
+#: inc/template-ajax.php:244, inc/template-shop.php:1238
+msgid "订单状态处理异常"
+msgstr "Ngoại lệ xử lý trạng thái đơn hàng"
+
+#: inc/template-ajax.php:250
+msgid "兑换成功，即将刷新页面"
+msgstr "Quy đổi thành công, trang sẽ sớm được làm mới"
+
+#: inc/template-ajax.php:268, inc/template-ajax.php:308
+msgid "商城功能未开启"
+msgstr "Chức năng trung tâm mua sắm không được kích hoạt"
+
+#: inc/template-ajax.php:275, inc/template-ajax.php:315
+msgid "请登录后购买"
+msgstr "Vui lòng đăng nhập để mua hàng"
+
+#: inc/template-ajax.php:284, inc/template-ajax.php:358
+msgid "暂无购买权限"
+msgstr "Chưa có quyền mua"
+
+#: inc/template-ajax.php:322
+msgid "订单类型错误"
+msgstr "Loại lệnh sai"
+
+#: inc/template-ajax.php:412
+msgid "VIP套餐不存在"
+msgstr "Gói VIP không tồn tại"
+
+#: inc/template-ajax.php:381
+msgid "充值数量不能为0"
+msgstr "Số tiền nạp không được bằng 0"
+
+#: inc/template-ajax.php:388
+msgid "最低充值限制"
+msgstr "Giới hạn nạp tiền tối thiểu"
+
+#: inc/template-ajax.php:395
+msgid "最高充值限制"
+msgstr "Giới hạn nạp tiền tối đa"
+
+#: inc/template-ajax.php:348
+msgid "文章不存在"
+msgstr "Bài viết không tồn tại"
+
+#: inc/template-ajax.php:444
+msgid "订单价格错误"
+msgstr "Lỗi giá lệnh"
+
+#: inc/template-ajax.php:488, inc/template-shop.php:1055, inc/template-shop.php:1245
+msgid "支付成功"
+msgstr "thanh toán thành công"
+
+#: inc/template-ajax.php:494, inc/template-shop.php:1052
+msgid "未支付"
+msgstr "Chưa thanh toán"
+
+#: inc/template-ajax.php:507
+msgid "请登录后申请"
+msgstr "Vui lòng đăng nhập để áp dụng"
+
+#: inc/template-ajax.php:514
+msgid "网站推广功能暂未开启"
+msgstr "Chức năng quảng bá website chưa được kích hoạt"
+
+#: inc/template-ajax.php:524
+msgid "可提现金额须大于 %s 才可申请"
+msgstr "Số tiền có thể rút phải lớn hơn %s trước khi bạn có thể đăng ký"
+
+#: inc/template-ajax.php:538
+msgid "申请提现失败，请联系客服处理"
+msgstr "Ứng dụng rút tiền không thành công, vui lòng liên hệ bộ phận chăm sóc khách hàng để xử lý"
+
+#: inc/template-ajax.php:544
+msgid "成功申请提现金额%s"
+msgstr "Đã đăng ký thành công số tiền rút %s"
+
+#: inc/template-ajax.php:552
+msgid "申请提现成功，请联系网站客服人工处理"
+msgstr "Đơn đăng ký rút tiền thành công, vui lòng liên hệ với bộ phận chăm sóc khách hàng của trang web để được xử lý thủ công."
+
+#: inc/template-ajax.php:565
+msgid "签到功能暂未开启"
+msgstr "Chức năng đăng nhập chưa được kích hoạt"
+
+#: inc/template-ajax.php:572
+msgid "今日已签到，请明日再来"
+msgstr "Bạn đã đăng nhập hôm nay, vui lòng quay lại vào ngày mai"
+
+#: inc/template-ajax.php:581
+msgid "签到失败"
+msgstr "Đăng nhập không thành công"
+
+#: inc/template-ajax.php:587
+msgid "签到成功，领取(%s)%s"
+msgstr "Đăng nhập thành công, nhận (%s)%s"
+
+#: inc/template-ajax.php:607
+msgid "网站工单功能暂未开启"
+msgstr "Chức năng đặt hàng công việc trên trang web chưa được kích hoạt"
+
+#: inc/template-ajax.php:614, inc/template-ajax.php:622
+msgid "请输入工单标题"
+msgstr "Vui lòng nhập tiêu đề lệnh công việc"
+
+#: inc/template-ajax.php:629
+msgid "请输入工单内容"
+msgstr "Vui lòng nhập nội dung lệnh sản xuất"
+
+#: inc/template-ajax.php:639
+msgid "图片大小超出1MB限制"
+msgstr "Kích thước hình ảnh vượt quá giới hạn 1MB"
+
+#: inc/template-ajax.php:646
+msgid "仅支持上传图片附件"
+msgstr "Chỉ hỗ trợ tải lên tệp đính kèm hình ảnh"
+
+#: inc/template-ajax.php:655, inc/template-ajax.php:876
+msgid "图片格式错误"
+msgstr "Lỗi định dạng hình ảnh"
+
+#: inc/template-ajax.php:689
+msgid "工单提交失败，请重试"
+msgstr "Gửi lệnh sản xuất không thành công, vui lòng thử lại"
+
+#: inc/template-ajax.php:695
+msgid "工单提交成功，客服会尽快处理"
+msgstr "Lệnh sản xuất được gửi thành công và bộ phận chăm sóc khách hàng sẽ xử lý trong thời gian sớm nhất."
+
+#: inc/template-ajax.php:740
+msgid "点赞失败"
+msgstr "Không thể thích"
+
+#: inc/template-ajax.php:735
+msgid "点赞成功"
+msgstr "Like thành công"
+
+#: inc/template-ajax.php:754
+msgid "请登录后收藏"
+msgstr "Vui lòng đăng nhập để thu thập"
+
+#: inc/template-ajax.php:781
+msgid "已取消收藏"
+msgstr "Đã hủy yêu thích"
+
+#: inc/template-ajax.php:764
+msgid "您已收藏过"
+msgstr "Bạn đã yêu thích"
+
+#: inc/template-ajax.php:771
+msgid "收藏成功"
+msgstr "Bộ sưu tập thành công"
+
+#: inc/template-ajax.php:794
+msgid "手机扫码或复制链接分享"
+msgstr "Quét mã QR bằng điện thoại di động hoặc sao chép liên kết để chia sẻ"
+
+#: inc/template-ajax.php:851
+msgid "请选择头像上传"
+msgstr "Vui lòng chọn hình đại diện để tải lên"
+
+#: inc/template-ajax.php:860
+msgid "图片大小超出500KB限制"
+msgstr "Kích thước hình ảnh vượt quá giới hạn 500KB"
+
+#: inc/template-ajax.php:867
+msgid "仅支持上传图片"
+msgstr "Chỉ hỗ trợ tải lên hình ảnh"
+
+#: inc/template-ajax.php:889
+msgid "只允许上传图片文件"
+msgstr "Chỉ được phép tải lên tập tin hình ảnh"
+
+#: inc/template-ajax.php:908
+msgid "未知的文件类型"
+msgstr "Loại tệp không xác định"
+
+#: inc/template-ajax.php:962
+msgid "上传失败请重试"
+msgstr "Tải lên không thành công, vui lòng thử lại"
+
+#: inc/template-ajax.php:971
+msgid "头像上传成功"
+msgstr "Hình đại diện đã được tải lên thành công"
+
+#: inc/template-ajax.php:1004
+msgid "保存失败"
+msgstr "Lưu không thành công"
+
+#: inc/template-ajax.php:1010
+msgid "保存成功"
+msgstr "đã lưu thành công"
+
+#: inc/template-ajax.php:1025, inc/template-ajax.php:1201, inc/template-ajax.php:1338
+msgid "邮箱地址格式错误"
+msgstr "Lỗi định dạng địa chỉ email"
+
+#: inc/template-ajax.php:1032
+msgid "此邮箱已被使用"
+msgstr "Email này đã được sử dụng"
+
+#: inc/template-ajax.php:1044
+msgid "邮箱修改失败"
+msgstr "Sửa đổi email không thành công"
+
+#: inc/template-ajax.php:1050
+msgid "邮箱修改成功"
+msgstr "Email được sửa đổi thành công"
+
+#: inc/template-ajax.php:1067
+msgid "请输入完整密码修改信息"
+msgstr "Vui lòng nhập đầy đủ thông tin đổi mật khẩu"
+
+#: inc/template-ajax.php:1073
+msgid "新密码不能与旧密码相同"
+msgstr "Mật khẩu mới không được giống mật khẩu cũ"
+
+#: inc/template-ajax.php:1079
+msgid "两次输入的密码不一致"
+msgstr "Mật khẩu nhập hai lần không nhất quán"
+
+#: inc/template-ajax.php:1086
+msgid "旧密码错误，请输入正确的密码"
+msgstr "Mật khẩu cũ sai, vui lòng nhập đúng mật khẩu"
+
+#: inc/template-ajax.php:1094
+msgid "密码修改成功，请使用新密码重新登录"
+msgstr "Mật khẩu đã được thay đổi thành công, vui lòng đăng nhập lại bằng mật khẩu mới"
+
+#: inc/template-ajax.php:1111
+msgid "本站未开启登录功能"
+msgstr "Chức năng đăng nhập không được kích hoạt trên trang web này"
+
+#: inc/template-ajax.php:1123
+msgid "请输入账号或密码"
+msgstr "Vui lòng nhập tài khoản hoặc mật khẩu của bạn"
+
+#: inc/template-ajax.php:1144
+msgid "用户名或密码不正确"
+msgstr "Tên đăng nhập hoặc mật khẩu không chính xác"
+
+#: inc/template-ajax.php:1152
+msgid "此账号已被封禁（ %s ）"
+msgstr "Tài khoản này đã bị cấm (%s)"
+
+#: inc/template-ajax.php:1161
+msgid "登录成功"
+msgstr "đăng nhập thành công"
+
+#: inc/template-ajax.php:1180
+msgid "本站未开启注册功能"
+msgstr "Chức năng đăng ký không được kích hoạt trên trang web này"
+
+#: inc/template-ajax.php:1194
+msgid "用户名格式错误"
+msgstr "Lỗi định dạng tên người dùng"
+
+#: inc/template-ajax.php:1208
+msgid "请输入完整注册信息"
+msgstr "Vui lòng nhập đầy đủ thông tin đăng ký"
+
+#: inc/template-ajax.php:1215, inc/template-ajax.php:1416
+msgid "两次密码输入不一致"
+msgstr "Hai lần nhập mật khẩu không nhất quán"
+
+#: inc/template-ajax.php:1229
+msgid "此用户名已被注册"
+msgstr "Tên người dùng này đã được đăng ký"
+
+#: inc/template-ajax.php:1236
+msgid "此邮箱已被注册"
+msgstr "Địa chỉ email này đã được đăng ký"
+
+#: inc/template-ajax.php:1247
+msgid "请输入邀请码"
+msgstr "Vui lòng nhập mã mời"
+
+#: inc/template-ajax.php:1257
+msgid "邀请码错误"
+msgstr "Lỗi mã lời mời"
+
+#: inc/template-ajax.php:1264
+msgid "邀请码已失效"
+msgstr "Mã mời đã hết hạn"
+
+#: inc/template-ajax.php:1271
+msgid "邀请码已到期"
+msgstr "Mã mời đã hết hạn"
+
+#: inc/template-ajax.php:1286
+msgid "邀请码状态异常，请刷新重试"
+msgstr "Trạng thái của mã mời không bình thường, vui lòng làm mới và thử lại."
+
+#: inc/template-ajax.php:1319
+msgid "注册成功，即将自动登录"
+msgstr "Đăng ký thành công, bạn sẽ tự động đăng nhập"
+
+#: inc/template-ajax.php:1352
+msgid "此邮箱无绑定用户"
+msgstr "Không có người dùng nào bị ràng buộc với địa chỉ email này"
+
+#: inc/template-ajax.php:1361
+msgid "用户查询失败"
+msgstr "Truy vấn của người dùng không thành công"
+
+#: inc/template-ajax.php:1371
+msgid "账号异常，请刷新页面"
+msgstr "Tài khoản có vấn đề bất thường, vui lòng làm mới trang."
+
+#: inc/template-ajax.php:1393
+msgid "重置密码链接"
+msgstr "Liên kết đặt lại mật khẩu"
+
+#: inc/template-ajax.php:1394
+msgid "请打开此链接重置您的账号密码: %s"
+msgstr "Vui lòng mở liên kết này để đặt lại mật khẩu tài khoản của bạn: %s"
+
+#: inc/template-ajax.php:1399
+msgid "重置密码链接将发送到您的邮箱"
+msgstr "Một liên kết đặt lại mật khẩu sẽ được gửi đến email của bạn"
+
+#: inc/template-ajax.php:1423
+msgid "页面参数错误"
+msgstr "Lỗi tham số trang"
+
+#: inc/template-ajax.php:1438
+msgid "账号信息获取失败"
+msgstr "Không thể lấy được thông tin tài khoản"
+
+#: inc/template-ajax.php:1447
+msgid "重置链接无效或已过期"
+msgstr "Liên kết đặt lại không hợp lệ hoặc đã hết hạn"
+
+#: inc/template-ajax.php:1456
+msgid "密码重置成功,请使用新密码登录"
+msgstr "Đặt lại mật khẩu thành công, vui lòng sử dụng mật khẩu mới để đăng nhập"
+
+#: inc/template-assets.php:129
+msgid "密码已复制剪贴板"
+msgstr "Đã sao chép mật khẩu vào bảng nhớ tạm"
+
+#: inc/template-assets.php:130
+msgid "复制"
+msgstr "sao chép"
+
+#: inc/template-assets.php:131
+msgid "复制成功"
+msgstr "Đã sao chép thành công"
+
+#: inc/template-assets.php:132
+msgid "提交中..."
+msgstr "đang gửi..."
+
+#: inc/template-assets.php:133
+msgid "评论成功"
+msgstr "Bình luận thành công"
+
+#: inc/template-assets.php:134
+msgid "评论成功，即将刷新页面"
+msgstr "Bình luận thành công, trang sẽ sớm được làm mới"
+
+#: inc/template-assets.php:135
+msgid "请求支付中···"
+msgstr "Yêu cầu thanh toán..."
+
+#: inc/template-assets.php:136
+msgid "支付已取消"
+msgstr "Đã hủy thanh toán"
+
+#: inc/template-assets.php:137
+msgid "确定删除此记录？"
+msgstr "Bạn có chắc chắn muốn xóa bản ghi này không?"
+
+#: inc/template-filter.php:117
+msgid "搜索到 %1$s 个与 \"%2$s\" 相关的结果"
+msgstr "Đã tìm thấy %1$s kết quả cho \"%2$s\""
+
+#: inc/template-post-type.php:84
+msgid "搜索"
+msgstr "tìm kiếm"
+
+#: inc/template-post-type.php:85, template-parts/archive-filter.php:107, template-parts/archive-filter.php:136, template-parts/archive-filter.php:155
+msgid "全部"
+msgstr "tất cả"
+
+#: inc/template-post-type.php:86
+msgid "查看"
+msgstr "Kiểm tra"
+
+#: inc/template-post-type.php:87, template-parts/user/part/tougao.php:125
+msgid "编辑"
+msgstr "biên tập"
+
+#: inc/template-post-type.php:88, template-parts/archive-filter.php:183
+msgid "更新"
+msgstr "thay mới"
+
+#: inc/template-post-type.php:89
+msgid "添加新"
+msgstr "thêm mới"
+
+#: inc/template-post-type.php:90
+msgid "新增"
+msgstr "Mới"
+
+#: inc/template-post-type.php:115
+msgid "发卡商店"
+msgstr "cửa hàng phát hành thẻ"
+
+#: inc/template-post-type.php:116, inc/template-post-type.php:117
+msgid "发卡"
+msgstr "phát hành thẻ"
+
+#: inc/template-post-type.php:118
+msgid "发卡商品"
+msgstr "Sản phẩm phát hành thẻ"
+
+#: inc/template-post-type.php:119, inc/template-post-type.php:120
+msgid "新增发卡"
+msgstr "Thêm phát hành thẻ mới"
+
+#: inc/template-post-type.php:121
+msgid "新发卡"
+msgstr "Thẻ mới được phát hành"
+
+#: inc/template-post-type.php:122
+msgid "编辑发卡"
+msgstr "Chỉnh sửa vấn đề về thẻ"
+
+#: inc/template-post-type.php:123
+msgid "查看发卡"
+msgstr "Xem phát hành thẻ"
+
+#: inc/template-post-type.php:124
+msgid "全部发卡"
+msgstr "Tất cả các thẻ được phát hành"
+
+#: inc/template-post-type.php:125
+msgid "搜索发卡"
+msgstr "Phát hành thẻ tìm kiếm"
+
+#: inc/template-post-type.php:126, inc/template-post-type.php:127
+msgid "未找到发卡."
+msgstr "Không tìm thấy thẻ phát hành."
+
+#: inc/template-post-type.php:128
+msgid "发卡存档"
+msgstr "Kho lưu trữ phát hành thẻ"
+
+#: inc/template-post-type.php:129
+msgid "插入发卡"
+msgstr "Chèn kẹp tóc"
+
+#: inc/template-post-type.php:130
+msgid "上传到此发卡"
+msgstr "Tải lên đợt phát hành thẻ này"
+
+#: inc/template-post-type.php:131
+msgid "筛选发卡列表"
+msgstr "Danh sách nhà phát hành thẻ lọc"
+
+#: inc/template-post-type.php:132
+msgid "发卡列表导航"
+msgstr "Điều hướng danh sách phát hành thẻ"
+
+#: inc/template-post-type.php:133
+msgid "发卡列表"
+msgstr "Danh sách phát hành thẻ"
+
+#: inc/template-seo.php:53
+msgid "投稿发布"
+msgstr "Đệ trình để xuất bản"
+
+#: inc/template-seo.php:51
+msgid "VIP介绍"
+msgstr "Giới thiệu VIP"
+
+#: inc/template-seo.php:49, template-parts/page/links.php:21
+msgid "网址导航"
+msgstr "Điều hướng Trang web"
+
+#: inc/template-seo.php:47, template-parts/page/tags.php:30
+msgid "标签云"
+msgstr "Gắn thẻ đám mây"
+
+#: inc/template-seo.php:45, template-parts/page/login-register.php:274
+msgid "找回密码"
+msgstr "Lấy lại mật khẩu"
+
+#: inc/template-seo.php:43
+msgid "用户注册"
+msgstr "Đăng ký người dùng"
+
+#: inc/template-seo.php:41
+msgid "用户登录"
+msgstr "Đăng nhập người dùng"
+
+#: inc/template-seo.php:39
+msgid "个人中心"
+msgstr "Trung tâm cá nhân"
+
+#: inc/template-shop.php:671, template-parts/user/part/vip.php:41
+msgid "到期"
+msgstr "trưởng thành"
+
+#: inc/template-shop.php:756
+msgid "绑定失败"
+msgstr "Ràng buộc không thành công"
+
+#: inc/template-shop.php:757
+msgid "当前用户之前已有其他账号绑定，请先登录其他账户解绑，或者激活已经使用该方式登录的账号！"
+msgstr "Người dùng hiện tại đã bị ràng buộc với các tài khoản khác trước đó. Vui lòng đăng nhập vào các tài khoản khác để hủy liên kết hoặc kích hoạt tài khoản đã đăng nhập bằng phương pháp này!"
+
+#: inc/template-shop.php:791
+msgid "新用户注册失败"
+msgstr "Đăng ký người dùng mới không thành công"
+
+#: inc/template-shop.php:861, template-parts/user/part/profile.php:20
+msgid "基本信息"
+msgstr "Thông tin cơ bản"
+
+#: inc/template-shop.php:862
+msgid "我的余额"
+msgstr "số dư của tôi"
+
+#: inc/template-shop.php:863
+msgid "我的会员"
+msgstr "các thành viên của tôi"
+
+#: inc/template-shop.php:864
+msgid "我的订单"
+msgstr "Đơn hàng của tôi"
+
+#: inc/template-shop.php:865, template-parts/user/part/down.php:8
+msgid "下载记录"
+msgstr "Lịch sử tải xuống"
+
+#: inc/template-shop.php:866
+msgid "我的收藏"
+msgstr "bộ sưu tập của tôi"
+
+#: inc/template-shop.php:867
+msgid "我的推广"
+msgstr "sự thăng tiến của tôi"
+
+#: inc/template-shop.php:868
+msgid "我的工单"
+msgstr "Lệnh làm việc của tôi"
+
+#: inc/template-shop.php:869
+msgid "我的投稿"
+msgstr "Đóng góp của tôi"
+
+#: inc/template-shop.php:870
+msgid "退出登录"
+msgstr "đăng xuất"
+
+#: inc/template-shop.php:939, inc/template-shop.php:986, inc/template-shop.php:1026, inc/template-shop.php:1049
+msgid "失效"
+msgstr "Không hợp lệ"
+
+#: inc/template-shop.php:942
+msgid "待回复"
+msgstr "Đang chờ trả lời"
+
+#: inc/template-shop.php:945
+msgid "处理中"
+msgstr "Xử lý"
+
+#: inc/template-shop.php:948
+msgid "已回复"
+msgstr "đã trả lời"
+
+#: inc/template-shop.php:951
+msgid "已关闭"
+msgstr "đóng cửa"
+
+#: inc/template-shop.php:954, inc/template-shop.php:976
+msgid "其他"
+msgstr "khác"
+
+#: inc/template-shop.php:964
+msgid "资源问题"
+msgstr "vấn đề tài nguyên"
+
+#: inc/template-shop.php:967
+msgid "会员问题"
+msgstr "Vấn đề về thành viên"
+
+#: inc/template-shop.php:970
+msgid "网站BUG"
+msgstr "các vấn đề khác"
+
+#: inc/template-shop.php:973
+msgid "其他问题"
+msgstr "các vấn đề khác"
+
+#: inc/template-shop.php:989
+msgid "未使用"
+msgstr "Chưa sử dụng"
+
+#: inc/template-shop.php:992
+msgid "已使用"
+msgstr "Đã sử dụng"
+
+#: inc/template-shop.php:995, inc/template-shop.php:1038, inc/template-shop.php:1058
+msgid "异常"
+msgstr "bất thường"
+
+#: inc/template-shop.php:1005, inc/template-shop.php:1016, inc/template-shop.php:1082
+msgid "无"
+msgstr "không có"
+
+#: inc/template-shop.php:1008
+msgid "余额充值卡"
+msgstr "thẻ nạp số dư"
+
+#: inc/template-shop.php:1010
+msgid "会员兑换卡"
+msgstr "Thẻ đổi thưởng thành viên"
+
+#: inc/template-shop.php:1013
+msgid "注册邀请码"
+msgstr "Đăng ký mã mời"
+
+#: inc/template-shop.php:1029
+msgid "未提现"
+msgstr "Chưa rút"
+
+#: inc/template-shop.php:1032, template-parts/user/part/aff.php:26
+msgid "提现中"
+msgstr "Rút tiền"
+
+#: inc/template-shop.php:1035, template-parts/user/part/aff.php:27
+msgid "已提现"
+msgstr "Rút tiền"
+
+#: inc/template-shop.php:1067, inc/template-shop.php:1079
+msgid "其他订单"
+msgstr "Các đơn hàng khác"
+
+#: inc/template-shop.php:1070
+msgid "文章订单"
+msgstr "Các đơn hàng khác"
+
+#: inc/template-shop.php:1073
+msgid "充值订单"
+msgstr "Lệnh nạp tiền"
+
+#: inc/template-shop.php:1076
+msgid "VIP订单"
+msgstr "Đơn hàng VIP"
+
+#: inc/template-shop.php:1109
+msgid "后台充值"
+msgstr "Nạp tiền phụ trợ"
+
+#: inc/template-shop.php:1110
+msgid "卡密支付"
+msgstr "Thanh toán thẻ"
+
+#: inc/template-shop.php:1111
+msgid "余额支付"
+msgstr "bản cân đối chi thu"
+
+#: inc/template-shop.php:1167
+msgid "扫码支付 %s 元"
+msgstr "Quét mã QR để thanh toán %s nhân dân tệ"
+
+#: inc/template-shop.php:1164
+msgid "微信扫码支付 %s 元"
+msgstr "Quét mã QR trên WeChat để thanh toán %s nhân dân tệ"
+
+#: inc/template-shop.php:1160
+msgid "支付宝扫码支付 %s 元"
+msgstr "Quét mã QR bằng Alipay để thanh toán %s nhân dân tệ"
+
+#: inc/template-shop.php:1170
+msgid "支付后请等待 5 秒左右，切勿关闭扫码窗口"
+msgstr "Vui lòng đợi khoảng 5 giây sau khi thanh toán và không đóng cửa sổ quét mã QR"
+
+#: inc/template-shop.php:1190
+msgid "支付接口未配置"
+msgstr "Giao diện thanh toán chưa được cấu hình"
+
+#: inc/template-shop.php:1196, inc/template-shop.php:1202
+msgid "支付接口暂未开启"
+msgstr "Giao diện thanh toán vẫn chưa mở"
+
+#: inc/template-shop.php:1224
+msgid "余额不足"
+msgstr "Thiếu cân bằng"
+
+#: inc/template-shop.php:1229
+msgid "余额支付失败"
+msgstr "Thanh toán số dư không thành công"
+
+#: inc/template-shop.php:1428
+msgid "成功开通了本站%s"
+msgstr "Đã mở thành công trang web này %s"
+
+#: inc/template-shop.php:1406
+msgid "成功充值%s%s"
+msgstr "Đã sạc lại thành công %s%s"
+
+#: inc/template-shop.php:1386
+msgid "成功购买了%s"
+msgstr "Đã mua thành công %s"
+
+#: inc/template-shop.php:1454
+msgid "推广成功，获得佣金奖励%s"
+msgstr "Khuyến mãi đã thành công và bạn đã nhận được phần thưởng hoa hồng %s"
+
+#: inc/template-shop.php:1467
+msgid "新订单付款成功提醒"
+msgstr "Nhắc nhở thành công thanh toán đơn hàng mới"
+
+#: inc/template-shop.php:1468
+msgid "订单金额：%s，</br>详细信息请在网站后台查看订单信息"
+msgstr "Số tiền đặt hàng: %s,</br>Để biết chi tiết, vui lòng kiểm tra thông tin đặt hàng ở phần phụ trợ của trang web"
+
+#: inc/template-tags.php:122, template-parts/widget/home-dynamic.php:65
+msgid "游客"
+msgstr "khách du lịch"
+
+#: inc/template-tags.php:287, inc/template-tags.php:297
+msgid "前"
+msgstr "phía trước"
+
+#: inc/template-tags.php:735
+msgid "首页"
+msgstr "trang đầu"
+
+#: inc/template-tags.php:793
+msgid "搜索: %s"
+msgstr "Tìm kiếm: %s"
+
+#: inc/template-tags.php:767
+msgid "正文"
+msgstr "chữ"
+
+#: inc/template-tags.php:807
+msgid "第%s页"
+msgstr "Trang %s"
+
+#: inc/template-tags.php:865
+msgid "加载更多"
+msgstr "tải thêm"
+
+#: inc/template-tags.php:866
+msgid "已全部加载完毕"
+msgstr "Tất cả đã được tải"
+
+#: inc/template-tags.php:879, inc/template-tags.php:990
+msgid "<i class=\"fas fa-angle-left me-1\"></i>上一页"
+msgstr "<i class=\"fas fa-angle-left me-1\"></i>Trang trước"
+
+#: inc/template-tags.php:880, inc/template-tags.php:991
+msgid "下一页<i class=\"fas fa-angle-right ms-1\"></i>"
+msgstr "Trang tiếp theo<i class=\"fas fa-angle-right ms-1\"></i>"
+
+#: inc/template-tags.php:928
+msgid "最新一页"
+msgstr "trang mới nhất"
+
+#: inc/template-tags.php:960
+msgid "最后一页"
+msgstr "trang cuối cùng"
+
+#: inc/template-tags.php:1000
+msgid "分页"
+msgstr "Phân trang"
+
+#: inc/template-walker.php:160
+msgid "您的评论正在等待审核。"
+msgstr "Bình luận của bạn đang chờ kiểm duyệt."
+
+#: inc/template-walker.php:166, template-parts/widget/home-dynamic.php:60
+msgid "%s前"
+msgstr "%s trước"
+
+#: page-templates/page-full.php:3
+msgid "全宽页面"
+msgstr "trang có chiều rộng đầy đủ"
+
+#: page-templates/page-html.php:3
+msgid "Html页面"
+msgstr "trang html"
+
+#: page-templates/page-widget.php:3
+msgid "模块化页面"
+msgstr "Trang mô-đun"
+
+#: searchform.php:9
+msgid "全站"
+msgstr "Trang web đầy đủ"
+
+#: searchform.php:22
+msgid "输入关键词 回车..."
+msgstr "Nhập từ khóa và nhấn Enter..."
+
+#: template-parts/archive-filter.php:64
+msgid "分类"
+msgstr "Phân loại"
+
+#: template-parts/archive-filter.php:156, template-parts/shortcode/rihide.php:61, template-parts/single/video-hero.php:112, template-parts/widget/sidebar-post-pay.php:93
+msgid "免费"
+msgstr "miễn phí"
+
+#: template-parts/archive-filter.php:157, template-parts/archive-filter.php:160
+msgid "%s免费"
+msgstr "%sfree"
+
+#: template-parts/archive-filter.php:158
+msgid "%s折扣"
+msgstr "giảm giá %s"
+
+#: template-parts/archive-filter.php:159
+msgid "%s专属"
+msgstr "Dành riêng cho %s"
+
+#: template-parts/archive-filter.php:166, template-parts/page/tougao.php:227
+msgid "价格"
+msgstr "giá"
+
+#: template-parts/archive-filter.php:179
+msgid "最新"
+msgstr "cập nhật"
+
+#: template-parts/archive-filter.php:180
+msgid "热度"
+msgstr "nhiệt"
+
+#: template-parts/archive-filter.php:181, template-parts/single/entry-social.php:43
+msgid "点赞"
+msgstr "giống"
+
+#: template-parts/archive-filter.php:182, template-parts/single/entry-social.php:37, template-parts/widget/sidebar-author-info.php:59
+msgid "收藏"
+msgstr "sưu tầm"
+
+#: template-parts/archive-filter.php:184
+msgid "随机"
+msgstr "ngẫu nhiên"
+
+#: template-parts/archive-filter.php:189
+msgid "排序"
+msgstr "loại"
+
+#: template-parts/footer/links.php:7
+msgid "友情链接："
+msgstr "Liên kết:"
+
+#: template-parts/footer/widget.php:25
+msgid "快速导航"
+msgstr "Điều hướng nhanh"
+
+#: template-parts/footer/widget.php:34
+msgid "关于本站"
+msgstr "Giới thiệu về trang web này"
+
+#: template-parts/footer/widget.php:43
+msgid "联系我们"
+msgstr "liên hệ chúng tôi"
+
+#: template-parts/header/action-hover.php:11
+msgid "亮色模式"
+msgstr "chế độ sáng"
+
+#: template-parts/header/action-hover.php:12
+msgid "深色模式"
+msgstr "chế độ tối"
+
+#: template-parts/header/action-hover.php:17
+msgid "站内搜索"
+msgstr "Tìm trang"
+
+#: template-parts/header/action-hover.php:21
+msgid "网站公告"
+msgstr "Thông báo trang web"
+
+#: template-parts/header/action-hover.php:118
+msgid "登录"
+msgstr "Đăng nhập"
+
+#: template-parts/header/action-hover.php:56
+msgid "余额"
+msgstr "Sự cân bằng"
+
+#: template-parts/header/action-hover.php:59, template-parts/user/part/coin.php:52
+msgid "充值"
+msgstr "nạp tiền"
+
+#: template-parts/header/action-hover.php:76
+msgid "本站"
+msgstr "Trang web này"
+
+#: template-parts/header/action-hover.php:105
+msgid "后台管理"
+msgstr "Quản lý hậu trường"
+
+#: template-parts/loop/item-none.php:2, template-parts/user/part/fav.php:61, template-parts/user/part/tougao.php:145
+msgid "暂无内容"
+msgstr "chưa có nội dung"
+
+#: template-parts/loop/item.php:182, template-parts/loop/item.php:134, template-parts/loop/item.php:87, template-parts/loop/item.php:41, template-parts/user/part/tougao.php:100
+msgid "置顶"
+msgstr "ghim đầu trang"
+
+#: template-parts/page.php:41, template-parts/single-cdk.php:31, template-parts/single/post-content.php:8
+msgid "继续阅读<span class=\"screen-reader-text\"> \"%s\"</span>"
+msgstr "Tiếp tục đọc<span class=\"screen-reader-text\"> \"%s\"</span>"
+
+#: template-parts/page/login-register.php:24, template-parts/page/login-register.php:24
+msgid "本站注册功能暂时关闭"
+msgstr "Chức năng đăng ký của trang này tạm thời bị đóng"
+
+#: template-parts/page/login-register.php:24, template-parts/page/login-register.php:22
+msgid "返回首页"
+msgstr "Trở về trang chủ"
+
+#: template-parts/page/login-register.php:22, template-parts/page/login-register.php:22
+msgid "本站登录功能暂时关闭"
+msgstr "Chức năng đăng nhập của trang này tạm thời bị đóng"
+
+#: template-parts/page/login-register.php:262
+msgid "账号绑定的邮箱*"
+msgstr "Địa chỉ email được liên kết với tài khoản*"
+
+#: template-parts/page/login-register.php:263, template-parts/page/login-register.php:186
+msgid "邮箱地址"
+msgstr "địa chỉ email"
+
+#: template-parts/page/login-register.php:268, template-parts/page/login-register.php:248, template-parts/page/login-register.php:205, template-parts/page/login-register.php:157
+msgid "验证码"
+msgstr "Mã xác nhận"
+
+#: template-parts/page/login-register.php:269, template-parts/page/login-register.php:249, template-parts/page/login-register.php:206, template-parts/page/login-register.php:158, template-parts/user/part/coin.php:90, template-parts/user/part/vip.php:157
+msgid "点击刷新验证码"
+msgstr "Nhấp vào Làm mới mã xác minh"
+
+#: template-parts/page/login-register.php:272
+msgid "重置密码链接会发送到您的邮箱，请通过重置链接修改新密码。"
+msgstr "Liên kết đặt lại mật khẩu sẽ được gửi đến email của bạn. Vui lòng sử dụng liên kết đặt lại để thay đổi mật khẩu mới của bạn."
+
+#: template-parts/page/login-register.php:273, template-parts/page/login-register.php:253
+msgid "想起密码？"
+msgstr "Ghi nhớ mật khẩu của bạn?"
+
+#: template-parts/page/login-register.php:273, template-parts/page/login-register.php:253, template-parts/page/login-register.php:213
+msgid "登录账号"
+msgstr "Đăng nhập tài khoản"
+
+#: template-parts/page/login-register.php:237
+msgid "您正在重新设置账号密码"
+msgstr "Bạn đang đặt lại mật khẩu tài khoản của mình"
+
+#: template-parts/page/login-register.php:239, template-parts/user/part/profile.php:146
+msgid "新密码"
+msgstr "mật khẩu mới"
+
+#: template-parts/page/login-register.php:240, template-parts/page/login-register.php:190, template-parts/page/login-register.php:151
+msgid "密码"
+msgstr "mật khẩu"
+
+#: template-parts/page/login-register.php:243, template-parts/user/part/profile.php:150
+msgid "确认新密码"
+msgstr "Xác nhận mật khẩu mới"
+
+#: template-parts/page/login-register.php:244, template-parts/page/login-register.php:193
+msgid "确认输入密码"
+msgstr "Xác nhận mật khẩu"
+
+#: template-parts/page/login-register.php:256
+msgid "立即重置密码"
+msgstr "Đặt lại mật khẩu ngay bây giờ"
+
+#: template-parts/page/login-register.php:181
+msgid "用户名*"
+msgstr "tên tài khoản*"
+
+#: template-parts/page/login-register.php:182
+msgid "英文名称"
+msgstr "tên tiêng Anh"
+
+#: template-parts/page/login-register.php:185
+msgid "邮箱*"
+msgstr "Thư*"
+
+#: template-parts/page/login-register.php:189
+msgid "密码*"
+msgstr "mật khẩu*"
+
+#: template-parts/page/login-register.php:198
+msgid "邀请码* "
+msgstr "Mã lời mời*␣"
+
+#: template-parts/page/login-register.php:198
+msgid "获取邀请码"
+msgstr "Nhận mã mời"
+
+#: template-parts/page/login-register.php:213
+msgid "已有账号？"
+msgstr "Bạn co săn san để tạo một tai khoản?"
+
+#: template-parts/page/login-register.php:217
+msgid "立即注册"
+msgstr "Đăng ký ngay"
+
+#: template-parts/page/login-register.php:147
+msgid "邮箱或用户名"
+msgstr "Thư điện tử hoặc tên người dùng"
+
+#: template-parts/page/login-register.php:151
+msgid "忘记密码？"
+msgstr "quên mật khẩu?"
+
+#: template-parts/page/login-register.php:165
+msgid "记住登录状态？"
+msgstr "nhớ trạng thái đăng nhập?"
+
+#: template-parts/page/login-register.php:171
+msgid "新用户？"
+msgstr "người dùng mới?"
+
+#: template-parts/page/login-register.php:171
+msgid "注册账号"
+msgstr "Đăng ký tài khoản"
+
+#: template-parts/page/login-register.php:175
+msgid "立即登录"
+msgstr "đăng nhập ngay lập tức"
+
+#: template-parts/page/login-register.php:287
+msgid "快捷登录/注册"
+msgstr "Đăng nhập/đăng ký nhanh"
+
+#: template-parts/page/login-register.php:291
+msgid "QQ登录"
+msgstr "đăng nhập QQ"
+
+#: template-parts/page/login-register.php:294
+msgid "微信登录"
+msgstr "đăng nhập WeChat"
+
+#: template-parts/page/login-register.php:303
+msgid "注册&登录即表示同意本站"
+msgstr "Đăng ký và đăng nhập có nghĩa là bạn đồng ý với trang này"
+
+#: template-parts/page/login-register.php:304
+msgid "用户协议"
+msgstr "sự thỏa thuận của người dùng"
+
+#: template-parts/page/login-register.php:304
+msgid "隐私政策"
+msgstr "Chính sách bảo mật"
+
+#: template-parts/page/tags.php:40
+msgid "按数量排序"
+msgstr "Sắp xếp theo số lượng"
+
+#: template-parts/page/tags.php:41
+msgid "按名称排序"
+msgstr "Sắp xếp theo tên"
+
+#: template-parts/page/tougao.php:24
+msgid "无权限编辑"
+msgstr "Không có quyền chỉnh sửa"
+
+#: template-parts/page/tougao.php:25
+msgid "仅限编辑作者本人文章"
+msgstr "Chỉ có thể chỉnh sửa bài viết của tác giả"
+
+#: template-parts/page/tougao.php:133
+msgid "更新成功"
+msgstr "hoàn thành cập nhật"
+
+#: template-parts/page/tougao.php:163
+msgid "编辑文章"
+msgstr "Chỉnh sửa bài viết"
+
+#: template-parts/page/tougao.php:163, template-parts/page/tougao.php:429
+msgid "发布文章"
+msgstr "đăng bài viết"
+
+#: template-parts/page/tougao.php:165
+msgid "如遇无法添加附件到本文章提示，请先将文章发布文后添加。"
+msgstr "Nếu bạn không thể thêm tệp đính kèm vào bài viết này, vui lòng xuất bản bài viết trước rồi thêm nó."
+
+#: template-parts/page/tougao.php:167
+msgid "本站已开启作者分成奖励，您发布的资源有人购买时，成交价的(%s%%)收入将发放至您的佣金。"
+msgstr "Trang web này đã bật phần thưởng chia sẻ tác giả. Khi ai đó mua tài nguyên mà bạn xuất bản, (%s%%) giá giao dịch sẽ được phân phối cho hoa hồng của bạn."
+
+#: template-parts/page/tougao.php:175
+msgid "文章标题"
+msgstr "Tiêu đề bài viết"
+
+#: template-parts/page/tougao.php:176
+msgid "请输入文章标题"
+msgstr "Vui lòng nhập tiêu đề bài viết"
+
+#: template-parts/page/tougao.php:180
+msgid "文章内容"
+msgstr "Nội dung bài viết"
+
+#: template-parts/page/tougao.php:199
+msgid "启用付费下载"
+msgstr "Cho phép tải xuống trả phí"
+
+#: template-parts/page/tougao.php:204
+msgid "启用付费音视频"
+msgstr "Bật âm thanh và video trả phí"
+
+#: template-parts/page/tougao.php:213
+msgid "价格信息"
+msgstr "thông tin giá cả"
+
+#: template-parts/page/tougao.php:218
+msgid "免费购买"
+msgstr "Miễn phí mua"
+
+#: template-parts/page/tougao.php:222
+msgid "禁止购买"
+msgstr "Mua bị cấm"
+
+#: template-parts/page/tougao.php:235
+msgid "优惠折扣"
+msgstr "Giảm giá"
+
+#: template-parts/page/tougao.php:237
+msgid "0.N折"
+msgstr "giảm giá 0.N"
+
+#: template-parts/page/tougao.php:247
+msgid "下载信息"
+msgstr "Tải thông tin"
+
+#: template-parts/page/tougao.php:264
+msgid "资源名称"
+msgstr "Tên tài nguyên"
+
+#: template-parts/page/tougao.php:269
+msgid "下载密码"
+msgstr "Tải mật khẩu xuống"
+
+#: template-parts/page/tougao.php:274, template-parts/widget/sidebar-post-pay.php:24
+msgid "下载地址"
+msgstr "Liên kết tải xuống"
+
+#: template-parts/page/tougao.php:293
+msgid "预览地址"
+msgstr "Xem trước địa chỉ"
+
+#: template-parts/page/tougao.php:299
+msgid "自定义按钮"
+msgstr "Nút tùy chỉnh"
+
+#: template-parts/page/tougao.php:300
+msgid "选填,格式:按钮名称|Url地址"
+msgstr "Tùy chọn, định dạng: tên nút|Địa chỉ Url"
+
+#: template-parts/page/tougao.php:312
+msgid "音视频信息"
+msgstr "Thông tin âm thanh và video"
+
+#: template-parts/page/tougao.php:317
+msgid "免费播放"
+msgstr "Chơi miễn phí"
+
+#: template-parts/page/tougao.php:333
+msgid "媒体名称"
+msgstr "Tên phương tiện"
+
+#: template-parts/page/tougao.php:338
+msgid "封面地址"
+msgstr "địa chỉ bìa"
+
+#: template-parts/page/tougao.php:343
+msgid "播放地址"
+msgstr "Chơi địa chỉ"
+
+#: template-parts/page/tougao.php:370
+msgid "发布"
+msgstr "giải phóng"
+
+#: template-parts/page/tougao.php:374
+msgid "状态"
+msgstr "tình trạng"
+
+#: template-parts/page/tougao.php:377, template-parts/user/part/tougao.php:46
+msgid "已发布"
+msgstr "Được phát hành"
+
+#: template-parts/page/tougao.php:379
+msgid "等待审核"
+msgstr "Đã kiểm duyệt"
+
+#: template-parts/page/tougao.php:380, template-parts/user/part/tougao.php:47
+msgid "草稿"
+msgstr "bản nháp"
+
+#: template-parts/page/tougao.php:384
+msgid "文章形式"
+msgstr "tiêu chuẩn"
+
+#: template-parts/page/tougao.php:386
+msgid "标准"
+msgstr "tiêu chuẩn"
+
+#: template-parts/page/tougao.php:387
+msgid "图片"
+msgstr "hình ảnh"
+
+#: template-parts/page/tougao.php:388
+msgid "视频"
+msgstr "băng hình"
+
+#: template-parts/page/tougao.php:389
+msgid "音频"
+msgstr "Âm thanh"
+
+#: template-parts/page/tougao.php:393
+msgid "分类栏目"
+msgstr "Cột phân loại"
+
+#: template-parts/page/tougao.php:401
+msgid "选择分类"
+msgstr "Chọn danh mục"
+
+#: template-parts/page/tougao.php:407
+msgid "文章标签"
+msgstr "Thẻ bài viết"
+
+#: template-parts/page/tougao.php:408
+msgid "多个标签用,隔开"
+msgstr "Sử dụng nhiều nhãn để phân tách chúng"
+
+#: template-parts/page/tougao.php:413
+msgid "缩略图"
+msgstr "hình nhỏ"
+
+#: template-parts/page/tougao.php:429
+msgid "更新文章"
+msgstr "Cập nhật bài viết"
+
+#: template-parts/page/tougao.php:430
+msgid "返回投稿管理"
+msgstr "Quay lại quản lý gửi bài"
+
+#: template-parts/page/vip-prices.php:25
+msgid "本站VIP"
+msgstr "VIP của trang này"
+
+#: template-parts/page/vip-prices.php:26
+msgid "加入本站VIP，畅享海量资源"
+msgstr "Tham gia VIP của trang web này và tận hưởng nguồn tài nguyên khổng lồ"
+
+#: template-parts/page/vip-prices.php:39, template-parts/user/part/vip.php:93
+msgid "%s天"
+msgstr "%s ngày"
+
+#: template-parts/page/vip-prices.php:37, template-parts/user/part/vip.php:91
+msgid "永久"
+msgstr "Vĩnh viễn"
+
+#: template-parts/page/vip-prices.php:55, template-parts/user/part/vip.php:111
+msgid "尊享%s特权%s"
+msgstr "Tận hưởng đặc quyền %s %s"
+
+#: template-parts/page/vip-prices.php:78
+msgid "登录后升级"
+msgstr "Nâng cấp sau khi đăng nhập"
+
+#: template-parts/page/vip-prices.php:64, template-parts/user/part/vip.php:119
+msgid "立即开通"
+msgstr "Kích hoạt ngay"
+
+#: template-parts/page/vip-prices.php:72, template-parts/user/part/vip.php:127
+msgid "立即升级"
+msgstr "nâng cấp ngay lập tức"
+
+#: template-parts/page/vip-prices.php:70, template-parts/user/part/vip.php:125
+msgid "立即续费"
+msgstr "Gia hạn ngay bây giờ"
+
+#: template-parts/page/vip-prices.php:67, template-parts/user/part/vip.php:122
+msgid "已获得权限"
+msgstr "Đã được cho phép"
+
+#: template-parts/page/vip-prices.php:95
+msgid "VIP会员说明"
+msgstr "Hướng dẫn dành cho thành viên VIP"
+
+#: template-parts/page/vip-prices.php:96
+msgid "开通会员常见问题说明及介绍"
+msgstr "Giải thích và giới thiệu các câu hỏi thường gặp về kích hoạt thành viên"
+
+#: template-parts/shortcode/ri-login-hide.php:19, template-parts/shortcode/ri-reply-hide.php:19, template-parts/shortcode/rihide.php:21
+msgid "隐藏内容"
+msgstr "Ẩn nội dung"
+
+#: template-parts/shortcode/ri-login-hide.php:21
+msgid "本内容需登录后查看"
+msgstr "Bạn cần đăng nhập để xem nội dung này"
+
+#: template-parts/shortcode/ri-login-hide.php:23, template-parts/shortcode/rihide.php:26
+msgid "登录后查看"
+msgstr "Đăng nhập để xem"
+
+#: template-parts/shortcode/ri-login-hide.php:16, template-parts/shortcode/ri-reply-hide.php:16, template-parts/shortcode/rihide.php:18
+msgid "已获得查看权限"
+msgstr "Xem quyền được cấp"
+
+#: template-parts/shortcode/ri-reply-hide.php:21
+msgid "本内容需评论后查看"
+msgstr "Nội dung này cần được xem sau khi bình luận"
+
+#: template-parts/shortcode/ri-reply-hide.php:23
+msgid "评论后查看"
+msgstr "Xem sau bình luận"
+
+#: template-parts/shortcode/rihide.php:30
+msgid "本内容需权限查看"
+msgstr "Nội dung này cần có sự cho phép để xem"
+
+#: template-parts/shortcode/rihide.php:32
+msgid "购买查看权限"
+msgstr "Mua quyền xem"
+
+#: template-parts/shortcode/rihide.php:41, template-parts/single/video-hero.php:92, template-parts/widget/sidebar-post-pay.php:73
+msgid "原价"
+msgstr "giá gốc"
+
+#: template-parts/shortcode/rihide.php:65, template-parts/single/video-hero.php:116, template-parts/widget/sidebar-post-pay.php:97
+msgid "%s折"
+msgstr "giảm giá %s"
+
+#: template-parts/shortcode/rihide.php:58, template-parts/single/video-hero.php:109, template-parts/widget/sidebar-post-pay.php:90
+msgid "不可购买"
+msgstr "Không có sẵn để mua"
+
+#: template-parts/shortcode/rihide.php:82
+msgid "已有<span>%d</span>人解锁查看"
+msgstr "<span>%d</span> người đã mở khóa và xem nó"
+
+#: template-parts/shortcode/rihide.php:24
+msgid "本内容登录后免费查看"
+msgstr "Nội dung này có thể được xem miễn phí sau khi đăng nhập"
+
+#: template-parts/single-cdk.php:44, template-parts/single/post-content.php:21
+msgid "内容分页"
+msgstr "Phân trang nội dung"
+
+#: template-parts/single/entry-meta.php:41
+msgid "[编辑]"
+msgstr "[biên tập]"
+
+#: template-parts/single/entry-related-posts.php:49
+msgid "相关文章"
+msgstr "Những bài viết liên quan"
+
+#: template-parts/single/entry-social.php:32
+msgid "分享"
+msgstr "chia sẻ"
+
+#: template-parts/single/entry-social.php:37
+msgid "取消收藏"
+msgstr "Hủy yêu thích"
+
+#: template-parts/single/video-hero.php:32
+msgid "第%d集"
+msgstr "Tập %d"
+
+#: template-parts/single/video-hero.php:80
+msgid "本内容需权限播放"
+msgstr "Nội dung này cần có sự cho phép để chơi"
+
+#: template-parts/single/video-hero.php:82
+msgid "购买播放权限"
+msgstr "Mua quyền phát lại"
+
+#: template-parts/single/video-hero.php:133
+msgid "已有<span>%d</span>人解锁播放"
+msgstr "<span>%d</span> mọi người đã mở khóa tính năng phát lại"
+
+#: template-parts/single/video-hero.php:74
+msgid "本内容登录后免费播放"
+msgstr "Nội dung này được phát miễn phí sau khi đăng nhập"
+
+#: template-parts/single/video-hero.php:76
+msgid "登录后播放"
+msgstr "Chơi sau khi đăng nhập"
+
+#: template-parts/single/video-hero.php:157
+msgid "(共%d集)"
+msgstr "(tổng cộng %d tập)"
+
+#: template-parts/user/part/aff.php:8
+msgid "推广中心"
+msgstr "Trung tâm khuyến mãi"
+
+#: template-parts/user/part/aff.php:12
+msgid "您的推广链接"
+msgstr "liên kết quảng cáo của bạn"
+
+#: template-parts/user/part/aff.php:24
+msgid "累计佣金"
+msgstr "Hoa hồng tích lũy"
+
+#: template-parts/user/part/aff.php:25
+msgid "可提现"
+msgstr "Có thể rút"
+
+#: template-parts/user/part/aff.php:43
+msgid "申请提现"
+msgstr "Đăng ký rút tiền"
+
+#: template-parts/user/part/aff.php:48
+msgid "已成功推广注册"
+msgstr "Đăng ký quảng cáo thành công"
+
+#: template-parts/user/part/aff.php:60
+msgid "暂无用户通过您的推广链接注册"
+msgstr "Chưa có người dùng nào đăng ký qua liên kết khuyến mãi của bạn"
+
+#: template-parts/user/part/aff.php:64
+msgid "推广说明："
+msgstr "Mô tả khuyến mãi:"
+
+#: template-parts/user/part/aff.php:79
+msgid "佣金记录"
+msgstr "hồ sơ ủy ban"
+
+#: template-parts/user/part/aff.php:82, template-parts/user/part/down.php:11, template-parts/user/part/order.php:11, template-parts/user/part/ticket.php:181
+msgid "最近20条"
+msgstr "20 mục cuối cùng"
+
+#: template-parts/user/part/aff.php:108
+msgid "推广类型"
+msgstr "Loại khuyến mãi"
+
+#: template-parts/user/part/aff.php:108
+msgid "购买人："
+msgstr "Chủ đầu tư:"
+
+#: template-parts/user/part/aff.php:111
+msgid "订单金额：￥"
+msgstr "Số tiền đặt hàng:￥"
+
+#: template-parts/user/part/aff.php:112
+msgid "佣金收益："
+msgstr "Thu nhập hoa hồng:"
+
+#: template-parts/user/part/aff.php:113
+msgid "状态："
+msgstr "tình trạng:"
+
+#: template-parts/user/part/aff.php:101, template-parts/user/part/coin.php:114, template-parts/user/part/down.php:21, template-parts/user/part/order.php:18, template-parts/user/part/ticket.php:185, template-parts/user/part/vip.php:181
+msgid "暂无记录"
+msgstr "Không có hồ sơ"
+
+#: template-parts/user/part/coin.php:15
+msgid "今日已签到"
+msgstr "Đã đăng nhập hôm nay"
+
+#: template-parts/user/part/coin.php:13
+msgid "签到领取"
+msgstr "Đăng nhập và thu thập"
+
+#: template-parts/user/part/coin.php:21
+msgid "当前账户余额"
+msgstr "Số dư tài khoản vãng lai"
+
+#: template-parts/user/part/coin.php:31
+msgid "充值余额"
+msgstr "Nạp lại số dư"
+
+#: template-parts/user/part/coin.php:52
+msgid "请选择充值数量"
+msgstr "Vui lòng chọn số tiền nạp"
+
+#: template-parts/user/part/coin.php:59
+msgid "充值说明"
+msgstr "Hướng dẫn nạp tiền"
+
+#: template-parts/user/part/coin.php:79
+msgid "兑换"
+msgstr "trao đổi"
+
+#: template-parts/user/part/coin.php:83
+msgid "使用CDK码兑换站内币"
+msgstr "Sử dụng mã CDK để đổi tiền tệ của trang web"
+
+#: template-parts/user/part/coin.php:94, template-parts/user/part/vip.php:161
+msgid "立即兑换"
+msgstr "Đổi ngay bây giờ"
+
+#: template-parts/user/part/coin.php:95, template-parts/user/part/vip.php:162
+msgid "购买CDK"
+msgstr "Mua CDK"
+
+#: template-parts/user/part/coin.php:105
+msgid "获取记录（最近10条）"
+msgstr "Nhận hồ sơ (10 hồ sơ cuối cùng)"
+
+#: template-parts/user/part/coin.php:120
+msgid "充值金额：￥%1$s（%2$s）"
+msgstr "Số tiền nạp: ￥%1$s (%2$s)"
+
+#: template-parts/user/part/coin.php:122, template-parts/user/part/vip.php:195
+msgid "支付方式：%s"
+msgstr "Phương thức thanh toán: %s"
+
+#: template-parts/user/part/down.php:31
+msgid "下载IP："
+msgstr "Tải xuống IP:"
+
+#: template-parts/user/part/down.php:32
+msgid "下载次数："
+msgstr "lần tải xuống:"
+
+#: template-parts/user/part/fav.php:44
+msgid "收藏列表"
+msgstr "Danh sách yêu thích"
+
+#: template-parts/user/part/menu.php:24
+msgid "注册时间：%s"
+msgstr "Thời gian đăng ký: %s"
+
+#: template-parts/user/part/menu.php:22
+msgid "到期时间：%s"
+msgstr "Thời gian hết hạn: %s"
+
+#: template-parts/user/part/menu.php:30
+msgid "每天可下载数(%d)"
+msgstr "Số lượt tải xuống mỗi ngày (%d)"
+
+#: template-parts/user/part/menu.php:31
+msgid "今日已用(%d)"
+msgstr "Đã sử dụng hôm nay (%d)"
+
+#: template-parts/user/part/menu.php:32
+msgid "今日剩余(%d)"
+msgstr "Còn lại hôm nay (%d)"
+
+#: template-parts/user/part/order.php:8
+msgid "订单记录"
+msgstr "Hồ sơ đặt hàng"
+
+#: template-parts/user/part/order.php:28
+msgid "订单号："
+msgstr "số thứ tự:"
+
+#: template-parts/user/part/order.php:29
+msgid "支付金额："
+msgstr "Số tiền thanh toán:"
+
+#: template-parts/user/part/order.php:30
+msgid "支付方式："
+msgstr "phương thức thanh toán:"
+
+#: template-parts/user/part/profile.php:33
+msgid "上传头像"
+msgstr "Tải hình đại diện lên"
+
+#: template-parts/user/part/profile.php:43
+msgid "显示昵称"
+msgstr "Hiển thị biệt hiệu"
+
+#: template-parts/user/part/profile.php:48
+msgid "联系QQ"
+msgstr "Liên hệ QQ"
+
+#: template-parts/user/part/profile.php:53
+msgid "个人介绍"
+msgstr "tự giới thiệu"
+
+#: template-parts/user/part/profile.php:59
+msgid "保存资料"
+msgstr "lưu dữ liệu"
+
+#: template-parts/user/part/profile.php:70
+msgid "账户绑定"
+msgstr "Ràng buộc tài khoản"
+
+#: template-parts/user/part/profile.php:76
+msgid "当前邮箱"
+msgstr "Email hiện tại"
+
+#: template-parts/user/part/profile.php:81
+msgid "新邮箱地址"
+msgstr "Địa chỉ thư điện tử mới"
+
+#: template-parts/user/part/profile.php:89
+msgid "快捷登录绑定信息"
+msgstr "Thông tin ràng buộc đăng nhập nhanh"
+
+#: template-parts/user/part/profile.php:97
+msgid "绑定QQ登录"
+msgstr "Ràng buộc đăng nhập QQ"
+
+#: template-parts/user/part/profile.php:95
+msgid "解绑QQ登录"
+msgstr "Hủy liên kết đăng nhập QQ"
+
+#: template-parts/user/part/profile.php:102
+msgid "绑定微信登录"
+msgstr "Ràng buộc đăng nhập WeChat"
+
+#: template-parts/user/part/profile.php:100
+msgid "解绑微信登录"
+msgstr "Hủy liên kết đăng nhập WeChat"
+
+#: template-parts/user/part/profile.php:113
+msgid "确认修改邮箱"
+msgstr "Xác nhận email đã sửa đổi"
+
+#: template-parts/user/part/profile.php:127
+msgid "密码修改"
+msgstr "đổi mật khẩu"
+
+#: template-parts/user/part/profile.php:133
+msgid "邮箱信息"
+msgstr "Thông tin email"
+
+#: template-parts/user/part/profile.php:138
+msgid "旧密码"
+msgstr "Mật khẩu cũ"
+
+#: template-parts/user/part/profile.php:156
+msgid "确认修改密码"
+msgstr "Xác nhận thay đổi mật khẩu"
+
+#: template-parts/user/part/ticket.php:143
+msgid "工单列表"
+msgstr "Danh sách lệnh làm việc"
+
+#: template-parts/user/part/ticket.php:144, template-parts/user/part/ticket.php:18
+msgid "新建工单"
+msgstr "Tạo lệnh làm việc mới"
+
+#: template-parts/user/part/ticket.php:65
+msgid "工单详情"
+msgstr "Chi tiết lệnh làm việc"
+
+#: template-parts/user/part/ticket.php:66, template-parts/user/part/ticket.php:19
+msgid "返回工单列表"
+msgstr "Quay lại danh sách lệnh làm việc"
+
+#: template-parts/user/part/ticket.php:107
+msgid "查看附件"
+msgstr "Xem tệp đính kèm"
+
+#: template-parts/user/part/ticket.php:120
+msgid "工单回复内容："
+msgstr "Nội dung trả lời lệnh làm việc:"
+
+#: template-parts/user/part/ticket.php:129
+msgid "删除工单"
+msgstr "Xóa vé"
+
+#: template-parts/user/part/ticket.php:76
+msgid "获取工单信息失败"
+msgstr "Không thể lấy được thông tin lệnh sản xuất"
+
+#: template-parts/user/part/ticket.php:27
+msgid "创建人"
+msgstr "người sáng lập"
+
+#: template-parts/user/part/ticket.php:32
+msgid "工单类型"
+msgstr "Loại lệnh làm việc"
+
+#: template-parts/user/part/ticket.php:42
+msgid "工单标题"
+msgstr "Tiêu đề lệnh làm việc"
+
+#: template-parts/user/part/ticket.php:47
+msgid "描述"
+msgstr "mô tả"
+
+#: template-parts/user/part/ticket.php:54
+msgid "提交工单"
+msgstr "Gửi lệnh làm việc"
+
+#: template-parts/user/part/tougao.php:40
+msgid "投稿管理"
+msgstr "Quản lý bài nộp"
+
+#: template-parts/user/part/tougao.php:41
+msgid "新建投稿"
+msgstr "Đệ trình mới; đơn nộp mới"
+
+#: template-parts/user/part/tougao.php:48
+msgid "待审核"
+msgstr "Đang chờ xem xét"
+
+#: template-parts/user/part/tougao.php:49
+msgid "回收站"
+msgstr "thùng rác"
+
+#: template-parts/user/part/tougao.php:128
+msgid "删除"
+msgstr "xóa bỏ"
+
+#: template-parts/user/part/vip.php:23
+msgid "会员中心"
+msgstr "Trung tâm thành viên"
+
+#: template-parts/user/part/vip.php:43
+msgid "加入"
+msgstr "tham gia vào"
+
+#: template-parts/user/part/vip.php:53
+msgid "每天可下载数"
+msgstr "Số lượt tải xuống mỗi ngày"
+
+#: template-parts/user/part/vip.php:54
+msgid "今日已用次数"
+msgstr "Số lần sử dụng hôm nay"
+
+#: template-parts/user/part/vip.php:55
+msgid "今日剩余次数"
+msgstr "Thời gian còn lại của ngày hôm nay"
+
+#: template-parts/user/part/vip.php:56
+msgid "下载使用率"
+msgstr "Tải xuống cách sử dụng"
+
+#: template-parts/user/part/vip.php:77
+msgid "会员开通"
+msgstr "Kích hoạt thành viên"
+
+#: template-parts/user/part/vip.php:147
+msgid "会员兑换"
+msgstr "Đổi thưởng thành viên"
+
+#: template-parts/user/part/vip.php:150
+msgid "使用CDK码兑换VIP特权"
+msgstr "Sử dụng mã CDK để đổi đặc quyền VIP"
+
+#: template-parts/user/part/vip.php:172
+msgid "VIP获取记录（最近10条）"
+msgstr "Hồ sơ mua lại VIP (10 hồ sơ gần đây nhất)"
+
+#: template-parts/user/part/vip.php:190
+msgid "订单类型：%s"
+msgstr "Loại lệnh: %s"
+
+#: template-parts/user/part/vip.php:193
+msgid "支付金额：￥%1$s（%2$s）"
+msgstr "Số tiền thanh toán: ￥%1$s (%2$s)"
+
+#: template-parts/widget/home-dynamic.php:22, template-parts/widget/home-dynamic.php:28, template-parts/widget/home-dynamic.php:34
+msgid "欢迎访问%s，网址：%s"
+msgstr "Chào mừng đến với %s, URL: %s"
+
+#: template-parts/widget/home-scratch-card.php:34
+msgid "已被领取使用"
+msgstr "Đã nhận và sử dụng"
+
+#: template-parts/widget/home-search-box.php:114
+msgid "搜索热词"
+msgstr "Tìm kiếm từ nóng"
+
+#: template-parts/widget/sidebar-author-info.php:42
+msgid "等级"
+msgstr "cấp"
+
+#: template-parts/widget/sidebar-author-info.php:51
+msgid "文章"
+msgstr "bài báo"
+
+#: template-parts/widget/sidebar-author-info.php:55
+msgid "评论"
+msgstr "Bình luận"
+
+#: template-parts/widget/sidebar-author-info.php:66
+msgid "查看作者其他文章"
+msgstr "Xem các bài viết khác của tác giả"
+
+#: template-parts/widget/sidebar-post-pay.php:36
+msgid "下载"
+msgstr "Tải xuống"
+
+#: template-parts/widget/sidebar-post-pay.php:62
+msgid "本资源需权限下载"
+msgstr "Tài nguyên này yêu cầu quyền để tải xuống"
+
+#: template-parts/widget/sidebar-post-pay.php:64
+msgid "购买下载权限"
+msgstr "Mua quyền tải xuống"
+
+#: template-parts/widget/sidebar-post-pay.php:114
+msgid "已有<span>%d</span>人解锁下载"
+msgstr "<span>%d</span> mọi người đã mở khóa và tải xuống"
+
+#: template-parts/widget/sidebar-post-pay.php:56
+msgid "本资源登录后免费下载"
+msgstr "Tài nguyên này được tải xuống miễn phí sau khi đăng nhập"
+
+#: template-parts/widget/sidebar-post-pay.php:58
+msgid "登录后下载"
+msgstr "Tải xuống sau khi đăng nhập"
+
+#: template-parts/widget/sidebar-post-pay.php:40
+msgid "免费下载"
+msgstr "tải xuống miễn phí"
+
+#: template-parts/widget/sidebar-post-pay.php:40
+msgid "已获得下载权限"
+msgstr "Đã có được quyền tải xuống"
+
+#: template-parts/widget/sidebar-post-pay.php:46
+msgid "密码: "
+msgstr "Mật khẩu:␣"
+
+#: template-parts/widget/sidebar-post-pay.php:134
+msgid "查看预览"
+msgstr "Xem bản xem trước"
+
+#: template-parts/widget/sidebar-post-pay.php:144
+msgid "累计销量"
+msgstr "Doanh số tích lũy"
+
+#: template-parts/widget/sidebar-post-pay.php:147
+msgid "最近更新"
+msgstr "Cập nhật mới nhất"
+
+#: template-parts/widget/sidebar-post-pay.php:150
+msgid "包含资源"
+msgstr "Chứa tài nguyên"
+
+#: template-parts/widget/sidebar-post-pay.php:150
+msgid "(%d个)"
+msgstr "(%d mục)"
+
+#: template-parts/widget/sidebar-ranking-list.php:69
+msgid "暂无排行"
+msgstr "Chưa có thứ hạng"
+

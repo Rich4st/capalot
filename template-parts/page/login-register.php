@@ -116,12 +116,12 @@ if ($is_login_action && !is_site_user_login()) {
 					<img class="logo regular  w-10 h-10" src="<?php echo esc_url(_capalot('site_logo', '')); ?>" alt="<?php echo get_bloginfo('name'); ?>">
 				</a>
 
-				<form id="account-from" class="text-start account-from space-y-2">
+				<form id="account-from" class="text-start account-from space-y-2 md:w-96 w-80 ">
 
 					<?php if ($is_login_action) : ?>
 						<!-- 登录表单 -->
 						<div class="flex flex-col">
-							<label class="form-label mb-1 text-gray-500">邮箱或用户名</label>
+							<label class="form-label mb-1 text-gray-500"><?php _e('邮箱或用户名','ripro');?></label>
 							<input type="text" class="form-control p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="user_name">
 						</div>
 						<div class="flex flex-col">
@@ -131,25 +131,25 @@ if ($is_login_action && !is_site_user_login()) {
 
 						<?php if (is_site_img_captcha()) : ?>
 							<div class="mb-3 flex justify-between w-full items-center">
-								<input type="text" class="form-control w-1/2 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="captcha_code" placeholder="验证码">
+								<input type="text" class="form-control w-1/2 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="captcha_code" placeholder="<?php _e('验证码', 'ripro'); ?>">
 								<img id="captcha-img" class="rounded-2 lazy w-1/2" role="button" data-src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/captcha.png'); ?>" title="<?php _e('点击刷新验证码', 'ripro'); ?>" />
 							</div>
 						<?php endif; ?>
 
 						<div class="mb-3 flex items-center">
 							<input id="rememberCheck" type="checkbox" class="form-check-input" name="remember" checked>
-							<label class="form-check-label text-gray-500 text-sm ml-2" for="rememberCheck">记住登录状态？</label>
+							<label class="form-check-label text-gray-500 text-sm ml-2" for="rememberCheck"><?php _e('记住登录状态？', 'ripro'); ?></label>
 						</div>
 						<input type="hidden" name="action" value="capalot_user_login">
 
 						<?php if (is_site_user_register()) : ?>
-							<p class="mb-3 text-gray-500">新用户？
-								<a class="hover:underline text-blue-500" href="<?php echo esc_url(wp_registration_url()); ?>">注册账号</a>
+							<p class="mb-3 text-gray-500"><?php _e('新用户？', 'ripro'); ?>
+								<a class="hover:underline text-blue-500" href="<?php echo esc_url(wp_registration_url()); ?>"><?php _e('注册账号', 'ripro'); ?></a>
 							</p>
 						<?php endif; ?>
 
 						<div>
-							<button type="submit" id="click-submit" class="p-2 bg-sky-600 w-full rounded-sm text-white ">立即登录</button>
+							<button type="submit" id="click-submit" class="p-2 bg-sky-600 w-full rounded-sm text-white "><?php _e('立即登录', 'ripro'); ?></button>
 						</div>
 
 					<?php elseif ($is_reg_action) : ?>
@@ -173,13 +173,13 @@ if ($is_login_action && !is_site_user_login()) {
 						<?php if (is_site_invitecode_register()) : ?>
 							<div class="mb-3 flex flex-col">
 								<label class="form-label mb-1 text-gray-500"><?php _e('邀请码* ', 'ripro'); ?><a target="_blank" class="ms-2 text-sm text-error " href="<?php echo _capalot('site_invitecode_get_url'); ?>"><?php _e('获取邀请码', 'ripro'); ?></a></label>
-								<input type="text" class="form-control focus:invalid:border-pink-500 focus:invalid:ring-pink-500 p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="invite_code" placeholder="必填">
+								<input type="text" class="form-control focus:invalid:border-pink-500 focus:invalid:ring-pink-500 p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="invite_code" placeholder="<?php _e('必填', 'ripro'); ?>">
 							</div>
 						<?php endif; ?>
 
 						<?php if (is_site_img_captcha()) : ?>
 							<div class="mb-3 flex justify-between  items-center w-full">
-								<input type="text" class="form-control w-1/2 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="captcha_code" placeholder="验证码">
+								<input type="text" class="form-control w-1/2 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="captcha_code" placeholder="<?php _e('验证码', 'ripro'); ?>">
 								<img id="captcha-img" class="rounded-2 lazy w-1/2" role="button" data-src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/captcha.png'); ?>" title="<?php _e('点击刷新验证码', 'ripro'); ?>" />
 							</div>
 						<?php endif; ?>
@@ -188,8 +188,8 @@ if ($is_login_action && !is_site_user_login()) {
 
 						<?php if (is_site_user_login()) : ?>
 							<p class="mb-3 text-gray-500">
-								已有账号？
-								<a class="hover:underline text-blue-500" href="<?php echo esc_url(wp_login_url()); ?>">登录账号</a>
+								<?php _e('已有账号？', 'ripro'); ?>
+								<a class="hover:underline text-blue-500" href="<?php echo esc_url(wp_login_url()); ?>"><?php _e('登录账号', 'ripro'); ?></a>
 							</p>
 						<?php endif; ?>
 
@@ -263,11 +263,11 @@ if ($is_login_action && !is_site_user_login()) {
 					<!-- oauth mode -->
 					<?php if (($is_login_action || $is_reg_action)) : ?>
 						<?php if (_capalot('is_sns_qq', false) || _capalot('is_sns_weixin', false)) : ?>
-							<div class="relative py-2">
+							<div class="relative py-4">
 								<hr>
-								<p class="text-sm w-32 text-gray-500 bg-white text-center absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 -right-1/2"><?php _e('快捷登录/注册', 'ripro'); ?></p>
+								<p class="text-sm text-gray-500 bg-white absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"><?php _e('快捷登录/注册', 'ripro'); ?></p>
 							</div>
-							<div class=" pt-4 pb-2 text-white text-center text-sm">
+							<div class="text-sm text-white flex flex-col md:space-x-2 space-x-0 space-y-2 md:space-y-0">
 								<?php if (_capalot('is_sns_qq', false)) : ?>
 									<a href="<?php echo get_oauth_permalink('qq'); ?>" class="btn bg-info hover:bg-[#4386d3]  cursor-pointer rounded py-1 px-4 mx-2"><i class="fab fa-qq me-1"></i><?php _e('QQ登录', 'ripro'); ?></a>
 								<?php endif; ?>
@@ -279,8 +279,8 @@ if ($is_login_action && !is_site_user_login()) {
 					<?php endif; ?>
 
 					<!-- Copyright -->
-					<p class="text-center text-sm text-gray-400">
-						<small class="text-muted">
+					<p class="text-center text-xs text-gray-400">
+						<small>
 							<?php _e('注册&登录即表示同意本站', 'ripro'); ?>
 							<a target="_blank" class="hover:underline" href="<?php echo _capalot('site_user_agreement_href', '#'); ?>"><?php _e('用户协议', 'ripro'); ?></a>、<a target="_blank" class="hover:underline" href="<?php echo _capalot('site_privacy_href', '#'); ?>"><?php _e('隐私政策', 'ripro'); ?></a>
 						</small>
