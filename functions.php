@@ -6,7 +6,7 @@ defined('ABSPATH') || exit;
  */
 function capalot_setup()
 {
-    if(is_admin() && !function_exists('domain_check')) {
+    if (is_admin() && !function_exists('domain_check')) {
         exit;
     }
 
@@ -59,6 +59,21 @@ function capalot_setup()
 }
 
 add_action('after_setup_theme', 'capalot_setup');
+
+// a18n
+function load_custom_language()
+{
+    $selected_language = $_COOKIE['lang'] ?? ''; // 默认为英语
+
+    if ($selected_language) {
+        load_theme_textdomain('ripro', get_template_directory() . '/languages');
+        load_textdomain('ripro', get_template_directory() . "/languages/$selected_language.mo");
+    }
+}
+
+add_action('after_setup_theme', 'load_custom_language');
+
+
 
 /**
  * 注册菜单
@@ -128,4 +143,3 @@ require_once get_template_directory() . '/inc/template-seo.php';
 
 // domain-check
 require_once get_template_directory() . '/domain-check.php';
-

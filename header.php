@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html <?php language_attributes(); ?> class="<?php echo get_site_default_color_style(); ?>">
+<html lang="<?php echo Capalot_Cookie::get('lang') ?? 'zh-CN' ?>" class="<?php echo get_site_default_color_style(); ?>">
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=<?php bloginfo('charset');?>">

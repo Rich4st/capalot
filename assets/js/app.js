@@ -22,6 +22,8 @@ let ca = {
       ca.add_post_views();
       ca.copy_password();
     }
+
+    ca.switch_lang();
   },
 
   /**
@@ -706,6 +708,23 @@ let ca = {
       .catch(() => {
         ca.notice({ title: '复制失败', icon: 'error' });
       })
+  },
+
+  // 切换语言
+  switch_lang: function() {
+    const options = document.querySelectorAll('#lang-option');
+
+    if (options.length <= 0) return;
+
+    options.forEach(o => {
+      o.addEventListener('click', function() {
+        document.cookie = `lang=${o.dataset.lang};path=/`;
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
+      })
+    })
   }
 }
 

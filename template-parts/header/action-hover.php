@@ -3,6 +3,25 @@ global $current_user;
 $uc_menus = get_uc_menus();
 $site_color = get_site_default_color_style();
 
+$lang_options = [
+    'zh_CN' => '简体中文',
+    'en_US' => 'English',
+    'tv_TV' => 'Tiếng Việt',
+    'th_TH' => 'ไทย',
+    'pg_PG' => 'Português',
+];
+
+$current_lang = array_filter($lang_options, function ($key) {
+    return $key === Capalot_Cookie::get('lang');
+}, ARRAY_FILTER_USE_KEY);
+$current_lang_key = array_key_first($current_lang);
+$current_lang_value = array_shift($current_lang);
+
+$lang_to_remove = Capalot_Cookie::get('lang') ?? 'zh_CN';
+if (isset($lang_options[$lang_to_remove])) {
+    unset($lang_options[$lang_to_remove]);
+}
+
 ?>
 
 
@@ -36,17 +55,19 @@ $site_color = get_site_default_color_style();
     <span class="cursor-pointer toggle-language " rel="nofollow noopener noreferrer" title='多语言'>
         <i class="fa-solid fa-language text-xl"></i>
     </span>
-    <div class="group-hover:block hidden  absolute rounded-lg  shadow-lg dark:bg-dark-card top-6 right-0 w-28 z-[9999]">
-        <div class="dark:bg-dark rounded-lg shadow-lg overflow-hidden text-sm cursor-pointer  bg-white w-full space-y-2 py-2">
-            <div class="hover:text-indigo-400">简体中文</div>
-            <div class="hover:text-indigo-400">English</div>
-            <div class="hover:text-indigo-400">俄语</div>
-            <div class="hover:text-indigo-400">西班牙语</div>
-        </div>
+    <div class="group-hover:block hidden absolute rounded-lg shadow-lg dark:bg-dark-card top-6 right-0 w-40 z-[9999]">
+        <ul class="dark:bg-dark rounded-lg shadow-lg text-sm text-left bg-white px-3 space-y-2 py-2">
+            <li data-lang="<?php echo $current_lang_key; ?> " class="font-bold rounded-md p-1 pl-2">
+                <?php echo $current_lang_value; ?>
+            </li>
+            <?php foreach ($lang_options as $key => $lang) : ?>
+                <li id="lang-option" data-lang="<?php echo $key; ?> " class="hover:text-indigo-400 cursor-pointer hover:bg-gray-100 rounded-md p-1 pl-2">
+                    <?php echo $lang; ?>
+                </li>
+            <?php endforeach; ?>
+        </ul>
     </div>
 </div>
-
-
 
 <?php if (is_user_logged_in()) : ?>
 
