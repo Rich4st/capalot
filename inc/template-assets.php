@@ -93,7 +93,7 @@ function enqueue_admin_custom_assets($hook)
 
   //商城管理页面加载
   if (strpos($hook, 'capalot-admin') !== false) {
-    wp_enqueue_script('apexcharts', get_template_directory_uri() . '/admin/font-awesome/apexcharts.min.js', array(), '3.35.3', true);
+    wp_enqueue_script('apexcharts', get_template_directory_uri() . '/admin/js/apexcharts.min.js', array(), '3.35.3', true);
   }
 }
 
