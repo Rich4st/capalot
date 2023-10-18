@@ -37,9 +37,9 @@ if ($post_format && isset($format_icons[$post_format])) {
   <li class="dark:bg-dark-card rounded-lg overflow-hidden cursor-pointer list-none bg-white border dark:border-[#222] transition  hover:-translate-y-1 hover:shadow-2xl  duration-500">
     <article class="post-item item-grid relative">
 
-      <div class="tips-badge absolute w-10 text-center top-0 start-0 z-50 m-2 bg-[#b0adac]  rounded-xl">
+      <div class="tips-badge absolute px-2 text-center top-0 start-0 z-50 m-2 bg-[#b0adac]  rounded-xl">
         <?php if (is_sticky()) : ?>
-          <div class="text-[0.5rem] bg-opacity-25 text-white">置顶</div>
+          <div class="text-[0.5rem] bg-opacity-25 text-white"><?php _e('置顶','ripro'); ?></div>
         <?php endif; ?>
       </div>
 
@@ -87,7 +87,7 @@ if ($post_format && isset($format_icons[$post_format])) {
     <article class="post-item relative group h-full">
 
       <?php if (is_sticky()) : ?>
-        <div class="tips-badge absolute w-10 text-center top-0 start-0 z-50 m-2 bg-gray-400  rounded-xl text-white bg-opacity-40">
+        <div class="tips-badge absolute px-2 text-center top-0 start-0 z-50 m-2 bg-gray-400  rounded-xl text-white bg-opacity-40">
           <?php _e('置顶', 'ripro'); ?>
         </div>
       <?php endif; ?>
@@ -138,7 +138,7 @@ if ($post_format && isset($format_icons[$post_format])) {
     <article class="relative flex flex-row p-2">
 
       <?php if (is_sticky()) : ?>
-        <div class="tips-badge absolute w-10 text-center top-1 start-1 z-50 m-2 bg-gray-400  rounded-xl text-xs text-white bg-opacity-40">
+        <div class="tips-badge absolute px-2 text-center top-1 start-1 z-50 m-2 bg-gray-400  rounded-xl text-xs text-white bg-opacity-40">
           <?php _e('置顶', 'ripro'); ?>
         </div>
       <?php endif; ?>
@@ -188,7 +188,7 @@ if ($post_format && isset($format_icons[$post_format])) {
     <article class="item-list relative p-2">
 
       <?php if (is_sticky()) : ?>
-        <div class="absolute w-10 text-center top-0 right-0 z-50 m-2 bg-gray-400 text-xs bg-opacity-60 text-white rounded-xl">
+        <div class="absolute px-2 text-center top-0 right-0 z-50 m-2 bg-gray-400 text-xs bg-opacity-60 text-white rounded-xl">
           <?php _e('置顶', 'ripro'); ?>
         </div>
       <?php endif; ?>

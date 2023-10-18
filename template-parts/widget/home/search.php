@@ -132,7 +132,7 @@ switch ($type) {
 
     <?php if (!empty($search_hot_exp)) : ?>
       <ul class="space-x-1 flex justify-center items-center text-sm text-gray-300">
-        <li class="mr-1">搜索热词:</li>
+        <li class="mr-1"><?php _e('搜索热词','ripro')?>:</li>
         <?php foreach ($search_hot_exp as $exp) {
           if (!empty($exp)) {
             echo '<li class="hover:text-gray-100 hover:underline"><a href="' . esc_url(home_url('/')). '?s=' . $exp . '">' . $exp . '</a></li>';

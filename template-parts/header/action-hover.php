@@ -46,13 +46,13 @@ if (isset($lang_options[$lang_to_remove])) {
 
 
 <?php if (is_site_notify()) : ?>
-    <span class="action-btn cursor-pointer toggle-notify" rel="nofollow noopener noreferrer" title='网站公告'>
+    <span class="action-btn cursor-pointer toggle-notify" rel="nofollow noopener noreferrer" title='<?php _e('网站公告', 'ripro'); ?>'>
         <i class="fa-regular fa-bell"></i>
     </span>
 <?php endif; ?>
 
 <div class="group relative">
-    <span class="cursor-pointer toggle-language " rel="nofollow noopener noreferrer" title='多语言'>
+    <span class="cursor-pointer toggle-language " rel="nofollow noopener noreferrer" title='<?php _e('多语言', 'ripro'); ?>'>
         <i class="fa-solid fa-language text-xl"></i>
     </span>
     <div class="group-hover:block hidden absolute rounded-lg shadow-lg dark:bg-dark-card top-6 right-0 w-40 z-[9999]">
@@ -74,7 +74,7 @@ if (isset($lang_options[$lang_to_remove])) {
     <div class="group relative ">
         <a class="flex" href="<?php echo get_uc_menu_link(); ?>" rel="nofollow noopener noreferrer" id="adminT">
             <div class="flex">
-                <img class="avatar-img rounded-full " src="<?php echo get_avatar_url($current_user->ID); ?>" width="30" alt="avatar">
+                <img class="avatar-img rounded-full " src="<?php echo get_avatar_url($current_user->ID); ?>" width="30" alt="<?php _e('avatar','ripro');?>">
                 <span class="ms-2 hidden md:block"><?php echo $current_user->display_name; ?></span>
             </div>
             <?php if (is_site_shop()) : ?>
@@ -89,7 +89,7 @@ if (isset($lang_options[$lang_to_remove])) {
                         <div class="hover-info p-2">
                             <div class="flex items-center ">
                                 <div class="mr-2">
-                                    <img class="rounded-full border m-4 h-10 w-10 inline-block border-white border-3 shadow" src="<?php echo get_avatar_url($current_user->ID); ?>" alt="user">
+                                    <img class="rounded-full border m-4 h-10 w-10 inline-block border-white border-3 shadow" src="<?php echo get_avatar_url($current_user->ID); ?>" alt="<?php _e('user','ripro');?>">
                                 </div>
                                 <div class="mr-2 flex flex-col ">
                                     <div class="rounded px-1">

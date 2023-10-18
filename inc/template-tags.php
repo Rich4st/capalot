@@ -108,8 +108,8 @@ function Capalot_Pagination($args = array())
 function infinite_scroll_button($type = 'click')
 {
   return '<div class="btn__wrapper text-center py-6">
-  <button id="load-more" type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"><i class="fa-solid fa-spinner fa-spin hidden more_icon"></i>加载更多</button>
-  <p id="no-more-button" style="display: none;" class="text-[#b9b2b2] text-[0.9rem]">没有更多了</p>
+  <button id="load-more" type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"><i class="fa-solid fa-spinner fa-spin hidden more_icon"></i>' . __('加载更多', 'ripro') . '</button>
+  <p id="no-more-button" style="display: none;" class="text-[#b9b2b2] text-[0.9rem]">' . __('已全部加载完毕', 'ripro') . '</p>
 </div>';
 }
 
@@ -347,12 +347,13 @@ function capalot_get_term_parents_link($id, $taxonomy, $visited = array())
 
 //  获取分类ID的顶级分类id
 
-function capalot_get_term_top_id($term_id, $taxonomy='category') {
+function capalot_get_term_top_id($term_id, $taxonomy = 'category')
+{
   $ancestors = get_ancestors($term_id, $taxonomy);
   if ($ancestors) {
-      $top_level_id = end($ancestors);
+    $top_level_id = end($ancestors);
   } else {
-      $top_level_id = $term_id;
+    $top_level_id = $term_id;
   }
   return $top_level_id;
 }
@@ -395,7 +396,7 @@ function is_weixin_visit()
 // 获取分类前缀
 function capalot_get_category_base()
 {
-  if(_capalot('site_no_category', false)) {
+  if (_capalot('site_no_category', false)) {
     $category_base = '';
   } else {
     // 获取用户在固定链接中设置的分类前缀
@@ -1287,23 +1288,24 @@ function capalot_is_mobile()
 
 //  获取自定义分类法筛选配置
 
-function get_site_custom_taxonomy() {
+function get_site_custom_taxonomy()
+{
 
   $data   = _capalot('site_custom_taxonomy', array());
   $config = array();
   if (empty($data) || !is_array($data)) {
-      return array();
+    return array();
   }
 
   foreach ($data as $key => $value) {
 
-      $custom_taxonomy = trim($value['taxonomy']);
+    $custom_taxonomy = trim($value['taxonomy']);
 
-      if (!preg_match("/^[a-zA-Z\s]+$/", $custom_taxonomy)) {
-          continue; //不是英文标识
-      }
+    if (!preg_match("/^[a-zA-Z\s]+$/", $custom_taxonomy)) {
+      continue; //不是英文标识
+    }
 
-      $config[$custom_taxonomy] = $value;
+    $config[$custom_taxonomy] = $value;
   }
 
   return $config;
@@ -1311,20 +1313,21 @@ function get_site_custom_taxonomy() {
 
 //  根据分类id获取当前分类筛选配置
 
-function get_cat_filter_config($cat_id) {
+function get_cat_filter_config($cat_id)
+{
 
   $data   = _capalot('site_term_filter_config', array());
 
   if (empty($cat_id) || empty($data)) {
-      return array();
+    return array();
   }
 
   $config = array();
 
   foreach ($data as $item) {
-      if ($item['cat_id'] == $cat_id) {
-          $config = $item;
-      }
+    if ($item['cat_id'] == $cat_id) {
+      $config = $item;
+    }
   }
 
   return $config;

@@ -48,7 +48,7 @@ $price_shape = get_template_directory_uri() . '/assets/img/price_shape.png';
 
 						<h3 class=" text-2xl font-bold text-red-500 my-4"><?php echo $item['coin_price']; ?><sup><?php echo get_site_coin_name(); ?></sup></h3>
 
-						<span class=" text-lg text-teal-500 text-<?php echo $vip_colors[$item['type']]; ?>"><i class="far fa-gem me-1"></i>VIP会员<?php echo $item['name']; ?><sup><?php echo $day_title; ?></sup></span>
+						<span class=" text-lg text-teal-500 text-<?php echo $vip_colors[$item['type']]; ?>"><i class="far fa-gem me-1"></i><?php echo $item['name']; ?><sup><?php echo $day_title; ?></sup></span>
 					</div>
 					<div class=" p-4 text-md text-gray-600 dark:text-gray-400 ">
 						<ul class="">
@@ -77,7 +77,7 @@ $price_shape = get_template_directory_uri() . '/assets/img/price_shape.png';
 
 						<?php else : ?>
 							<a class="border border-teal-500 text-teal-500 text-md p-2 hover:bg-teal-500 hover:text-white rounded-full btn" rel="nofollow noopener noreferrer" href="<?php echo esc_url(wp_login_url(get_current_url())); ?>"><i class="far fa-user me-1">
-								</i>登录后升级
+								</i><?php _e('登录后升级','ripro');?>
 							</a>
 						<?php endif; ?>
 
