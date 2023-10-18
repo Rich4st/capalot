@@ -224,7 +224,6 @@ let ca = {
             return;
           }
 
-          ca.notice({ title: msg, icon: 'success' });
           captcha_code.setAttribute('src', msg)
         }
       })
