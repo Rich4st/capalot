@@ -735,16 +735,16 @@ class Capalot_Ticket
   {
     switch ($status) {
       case '0':
-        return '待回复';
+        return _e('待回复', 'ripro');
         break;
       case '1':
-        return '处理中';
+        return _e('处理中', 'ripro');
         break;
       case '2':
-        return '已回复';
+        return _e('已回复', 'ripro');
         break;
       default:
-        return '已关闭';
+        return _e('已关闭', 'ripro');
         break;
     }
   }
@@ -756,16 +756,16 @@ class Capalot_Ticket
   {
     switch ($type) {
       case '1':
-        return '资源问题';
+        return _e('资源问题', 'ripro');
         break;
       case '2':
-        return '会员问题';
+        return _e('会员问题', 'ripro');
         break;
       case '3':
-        return '网站BUG';
+        return _e('网站BUG', 'ripro');
         break;
       default:
-        return '其他问题';
+        return _e('其他问题', 'ripro');
         break;
     }
   }

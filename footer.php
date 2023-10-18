@@ -118,9 +118,9 @@ Footer END -->
 
 <div class=" md:hidden fixed bottom-0 w-full left-0 z-[9988899] bg-white dark:bg-dark-card shadow-[0_-3px_10px_0_rgba(0,0,0,0.05)] border-t dark:border-t-[#222] ">
   <ul class=" flex text-center py-2 justify-around text-gray-600 dark:text-gray-50 ">
-    <li><a target="" href="/"><i class="fas fa-home text-lg "></i><span class=" block text-sm ">首页</span></a></li>
+    <li><a target="" href="/"><i class="fas fa-home text-lg "></i><span class=" block text-sm "><?php _e('首页','ripro');?></span></a></li>
     <?php foreach (_capalot('site_footer_widget_link1', array()) as $item) {
-      $link_item = '<li><a href="' . $item['href'] . '"  ><i class="fas fa-layer-group text-lg "></i><span class=" block text-sm ">分类</span></a></li>';
+      $link_item = '<li><a href="' . $item['href'] . '"  ><i class="fas fa-layer-group text-lg "></i><span class=" block text-sm ">'. __('分类','ripro') . '</span></a></li>';
 
       if ($item['title'] === '标签云' &&  _capalot('is_site_tags_page')) {
         echo  $link_item;
@@ -133,8 +133,8 @@ Footer END -->
         echo  $link_item;
       }
     } ?>
-    <li><a target="" href="/user"><i class="fas fa-user text-lg "></i><span class=" block text-sm ">我的</span></a></li>
-    <li><a target="" href="https://ritheme.com/"><i class="fab fa-wordpress text-lg "></i><span class=" block text-sm ">同款</span></a></li>
+    <li><a target="" href="/user"><i class="fas fa-user text-lg "></i><span class=" block text-sm "><?php _e('我的','ripro');?></span></a></li>
+    <li><a target="" href="https://ritheme.com/"><i class="fab fa-wordpress text-lg "></i><span class=" block text-sm "><?php _e('同款','ripro');?></span></a></li>
   </ul>
 </div>
 

@@ -99,9 +99,9 @@ $is_delete = get_response_param('delete', 0, 'get');
 						<span class=" w-12 h-12 mr-2">
 							<img class="rounded-full" src="<?php echo get_avatar_url($data->creator_id); ?>">
 						</span>
-						<span class="ms-1"><?php echo $current_user->display_name; ?> <?php echo wp_date('Y-m-d H:i', $data->create_time); ?> 提交</span>
+						<span class="ms-1"><?php echo $current_user->display_name; ?> <?php echo wp_date('Y-m-d H:i', $data->create_time); ?><?php _e('提交','ripro');?></span>
 						<span class="ms-2">【<?php echo Capalot_Ticket::get_type($data->type); ?>】</span>
-						<span class="ms-2">状态：(<?php echo Capalot_Ticket::get_status($data->status); ?>)</span>
+						<span class="ms-2"><?php _e('状态','ripro')?>：(<?php echo Capalot_Ticket::get_status($data->status); ?>)</span>
 					</div>
 					<h5 class="font-bold mb-2"><i class="fas fa-question-circle me-1"></i><?php echo esc_html($data->title); ?></h5>
 					<div class="p-2 lg:p-3 bg-info bg-opacity-25 rounded-2">

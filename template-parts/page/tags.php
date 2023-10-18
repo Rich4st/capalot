@@ -63,7 +63,7 @@ $bg_image = get_template_directory_uri() . '/assets/img/bg.jpg';
 								</div>
 								<div class=" lg:col-span-5 col-span-4">
 									<b class=" text-md font-normal text-gray-600 line-clamp-1  hover:underline dark:text-gray-50"><?php echo $tag->name; ?></b>
-									<p class=" text-sm text-gray-500 dark:text-gray-400"><span class="mr-2"><b class="b mr-1"><?php echo $tag->count; ?></b>个文章</span></p>
+									<p class=" text-sm text-gray-500 dark:text-gray-400"><span class="mr-2"><b class="b mr-1"><?php echo $tag->count; ?></b>个<?php _e('文章','ripro')?></span></p>
 								</div>
 							</div>
 						</a>

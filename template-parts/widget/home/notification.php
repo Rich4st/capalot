@@ -64,7 +64,7 @@ $container = _capalot('site_container_width', '1400');
 								$u_avatar = get_avatar_url($item['uid']);
 								$info = (empty($item['href'])) ? $item['info'] : '<a target="_blank" href="' . $item['href'] . '">' . $item['info'] . '</a>';
 								if (empty($u_name)) {
-									$u_name = '游客';
+									$u_name = __('游客','ripro');
 								} else {
 									$u_name = capalot_substr_cut($u_name);
 								}

@@ -298,7 +298,7 @@ get_header();
                                         <div class="md:w-[50%] w-full">
                                             <div class="input-group input-group-sm mb-1">
                                                 <span class="input-group-text pb-2"><?php _e('预览地址', 'ripro'); ?></span>
-                                                <input type="text" class="form-control w-full   dark:border-gray-500 dark:bg-dark  p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" placeholder="选填" name="post_meta[capalot_demourl]" value="<?php echo $post_meta_fields['capalot_demourl']; ?>">
+                                                <input type="text" class="form-control w-full   dark:border-gray-500 dark:bg-dark  p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" placeholder="<?php _e('选填,格式:按钮名称|Url地址', 'ripro'); ?>" name="post_meta[capalot_demourl]" value="<?php echo $post_meta_fields['capalot_demourl']; ?>">
                                             </div>
                                         </div>
                                         <div class="md:w-[50%] w-full">

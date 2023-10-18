@@ -78,7 +78,7 @@ class Capalot_Ajax
     if (!check_ajax_referer('capalot_ajax', 'nonce', false)) {
       wp_send_json([
         'status' => 0,
-        'msg' => '非法请求',
+        'msg' => __('非法请求','ripro'),
       ]);
     }
   }
@@ -92,7 +92,7 @@ class Capalot_Ajax
     if (!is_site_user_login()) {
       wp_send_json(array(
         'status' => 0,
-        'msg'    => '本站未开启登录功能',
+        'msg'    => __('本站未开启登录功能','ripro'),
       ));
     }
 
@@ -104,14 +104,14 @@ class Capalot_Ajax
     if (!$user_name || !$user_password) {
       wp_send_json(array(
         'status' => 0,
-        'msg'    => '请输入账号或密码',
+        'msg'    => __('请输入账号或密码','ripro'),
       ));
     }
 
     if (is_site_img_captcha() && !verify_captcha_code(strtolower($captcha_code))) {
       wp_send_json(array(
         'status' => 0,
-        'msg'    => '验证码错误，请刷新验证码',
+        'msg'    => __('验证码错误，请刷新验证码','ripro'),
       ));
     }
 
@@ -125,7 +125,7 @@ class Capalot_Ajax
     if (is_wp_error($UserLogin)) {
       wp_send_json(array(
         'status' => 0,
-        'msg'    => '用户名或密码不正确',
+        'msg'    => __('用户名或密码不正确','ripro'),
       ));
     }
 
@@ -133,7 +133,7 @@ class Capalot_Ajax
       wp_logout();
       wp_send_json(array(
         'status' => 0,
-        'msg'    => sprintf('此账号已被封禁（ %s ）', get_user_meta($UserLogin->ID, 'capalot_banned_reason', true)),
+        'msg'    => sprintf(__('此账号已被封禁（ %s ）','ripro'), get_user_meta($UserLogin->ID, 'capalot_banned_reason', true)),
       ));
     }
 
@@ -156,7 +156,7 @@ class Capalot_Ajax
     if (!is_site_user_register()) {
       wp_send_json(array(
         'status' => 0,
-        'msg'    => '本站未开启注册功能',
+        'msg'    => __('本站未开启注册功能','ripro'),
       ));
     }
 
@@ -577,7 +577,7 @@ class Capalot_Ajax
 
     wp_send_json(array(
       'status' => 1,
-      'msg'    => '头像上传成功',
+      'msg'    => __('头像上传成功','ripro'),
     ));
   }
 
@@ -822,7 +822,7 @@ class Capalot_Ajax
     if (!is_site_shop())
       wp_send_json([
         'status' => 0,
-        'msg' => '商城功能未开启',
+        'msg' => __('商城功能未开启','ripro'),
       ]);
 
     if (
@@ -831,7 +831,7 @@ class Capalot_Ajax
     )
       wp_send_json([
         'status' => 0,
-        'msg' => '请登录后购买',
+        'msg' => __('请登录后购买','ripro'),
       ]);
 
     $post_price = get_user_pay_post_price($user_id, $post_id);
@@ -839,12 +839,12 @@ class Capalot_Ajax
     if ($post_price === false)
       wp_send_json([
         'status' => 0,
-        'msg' => '暂无购买权限',
+        'msg' => __('暂无购买权限','ripro'),
       ]);
 
     wp_send_json([
       'status' => 1,
-      'msg' => '获取成功',
+      'msg' => __('获取成功','ripro'),
       'data' => $body
     ]);
   }
@@ -863,7 +863,7 @@ class Capalot_Ajax
     if (!is_site_shop())
       wp_send_json([
         'status' => 0,
-        'msg' => '商城功能未开启',
+        'msg' => __('商城功能未开启','ripro'),
       ]);
 
     if (
@@ -872,13 +872,13 @@ class Capalot_Ajax
     )
       wp_send_json([
         'status' => 0,
-        'msg' => '请登录后购买',
+        'msg' => __('请登录后购买','ripro'),
       ]);
 
     if (!in_array($order_type, array(1, 2, 3, 4)))
       wp_send_json([
         'status' => 0,
-        'msg' => '订单类型错误',
+        'msg' => __('订单类型错误','ripro'),
       ]);
 
     // 构建订单数据
@@ -904,7 +904,7 @@ class Capalot_Ajax
       if (empty(get_permalink($post_id)))
         wp_send_json([
           'status' => 0,
-          'msg' => '文章不存在',
+          'msg' => __('文章不存在','ripro'),
         ]);
 
       $price_data = get_post_price_data($post_id);
@@ -913,7 +913,7 @@ class Capalot_Ajax
       if ($post_price === false)
         wp_send_json([
           'status' => 0,
-          'msg' => '暂无购买权限',
+          'msg' => __('暂无购买权限','ripro'),
         ]);
 
       if ($post_price > 0) {
@@ -992,14 +992,14 @@ class Capalot_Ajax
     if (empty($order_data['order_price']))
       wp_send_json([
         'status' => 0,
-        'msg' => '订单金额错误',
+        'msg' =>  __('订单金额错误', 'ripro'),
       ]);
 
     // 订单入库
     if (!Capalot_Shop::add_order($order_data))
       wp_send_json([
         'status' => 0,
-        'msg' => '订单创建失败',
+        'msg' =>  __('订单创建失败', 'ripro'),
       ]);
 
     // // 请求支付接口
@@ -1079,19 +1079,19 @@ class Capalot_Ajax
       if ($is_like) {
         wp_send_json(array(
           'status' => 0,
-          'msg'    => '您已点赞过',
+          'msg'    => __('您已点赞过', 'ripro'),
         ));
       }
 
       if ($post_id && capalot_add_post_likes($post_id, 1)) {
         wp_send_json(array(
           'status' => 1,
-          'msg'    => '点赞成功',
+          'msg'    => __('点赞成功', 'ripro'),
         ));
       } else {
         wp_send_json(array(
           'status' => 0,
-          'msg'    => '点赞失败',
+          'msg'    => __('点赞失败', 'ripro'),
         ));
       }
     } else {
@@ -1099,7 +1099,7 @@ class Capalot_Ajax
 
       wp_send_json(array(
         'status' => 1,
-        'msg'    => '已取消点赞',
+        'msg'    => __('已取消点赞', 'ripro'),
       ));
     }
   }
@@ -1126,14 +1126,14 @@ class Capalot_Ajax
       if ($is_fav) {
         wp_send_json(array(
           'status' => 0,
-          'msg'    => '您已收藏过',
+          'msg'    => __('您已收藏过', 'ripro'),
         ));
       }
 
       if (capalot_add_post_fav($user_id, $post_id)) {
         wp_send_json(array(
           'status' => 1,
-          'msg'    => '收藏成功',
+          'msg'    => __('收藏成功', 'ripro'),
         ));
       }
     } else {
@@ -1142,7 +1142,7 @@ class Capalot_Ajax
       }
       wp_send_json(array(
         'status' => 1,
-        'msg'    => '已取消收藏',
+        'msg'    => __('已取消收藏', 'ripro'),
       ));
     }
   }
@@ -1156,7 +1156,7 @@ class Capalot_Ajax
     $share_url = get_user_aff_permalink(get_permalink($post_id), $user_id);
 
     $body = '<div class="share-body"><img class="share-qrcode" src="' . get_qrcode_url($share_url) . '">';
-    $body .= '<div class="share-url user-select-all">' . $share_url . '</div><div class="share-desc">' . '手机扫码或复制链接分享' . '</div></div>';
+    $body .= '<div class="share-url user-select-all">' . $share_url . '</div><div class="share-desc">' . _e('手机扫码或复制链接分享','ripro') . '</div></div>';
 
     $post = get_post($post_id);
     $categories = get_the_category($post_id);

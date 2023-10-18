@@ -82,10 +82,10 @@ global $current_user;
 			<h5 class="text-center mb-4 text-muted"><?php _e('使用CDK码兑换站内币', 'ripro'); ?></h5>
 			<form class="w-64 flex flex-col mx-auto" id="vip-cdk-action">
 				<div class="mb-3">
-					<input type="text" class="bg-[#ededed] h-8 w-full  dark:border-gray-500 dark:bg-dark form-control p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="cdk_code" placeholder="兑换码/CDK卡号" value="">
+					<input type="text" class="bg-[#ededed] h-8 w-full  dark:border-gray-500 dark:bg-dark form-control p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="cdk_code" placeholder="<?php _e('兑换码/CDK卡号','ripro')?>" value="">
 				</div>
 				<div class="flex flex-row space-x-2 mb-3">
-					<input type="text" class=" bg-[#ededed] h-8 w-full  dark:border-gray-500 dark:bg-dark form-control p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="captcha_code" placeholder="验证码">
+					<input type="text" class=" bg-[#ededed] h-8 w-full  dark:border-gray-500 dark:bg-dark form-control p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="captcha_code" placeholder="<?php _e('验证码','ripro')?>">
 					<!-- <img id="captcha-img" class="rounded-2 w-full h-8 bg-[#cacaca]  text-white mx-2 rounded" role="button" data-src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/captcha.png'); ?>" title="<?php _e('点击刷新验证码', 'ripro'); ?>" /> -->
 					<img id="captcha-img" class="rounded-2 w-full h-8 bg-[#cacaca]  text-white mx-2 rounded" role="button" src="<?php echo get_template_directory_uri() ?>/assets/img/captcha.png" title="<?php _e('点击刷新验证码', 'ripro'); ?>" />
 				</div>

@@ -83,7 +83,7 @@ if ($unsetoauth == 'qq' || $unsetoauth == 'weixin') {
       <?php if (_capalot('is_sns_qq', false) || _capalot('is_sns_weixin', false)) : ?>
         <div class="relative my-4">
           <hr>
-          <p class="text-sm w-32 bg-white dark:bg-dark-card text-center absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 -right-1/2"><?php _e('快捷登录绑定信息', 'ripro'); ?></p>
+          <p class="text-sm bg-white dark:bg-dark-card  text-gray-500 absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 text-center"><?php _e('快捷登录绑定信息', 'ripro'); ?></p>
         </div>
         <div class="grid gap-4 md:block py-4  text-white text-center">
 
