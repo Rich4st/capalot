@@ -8,7 +8,7 @@ $message = $Capalot_List_Table->message;
 ?>
 
 <!-- 主页面 -->
-<div class="wrap zb-admin-page">
+<div class="wrap capalot-admin-page">
 
   <h1 class="wp-heading-inline">推广中心/管理</h1>
   <p>可根据推荐人数字ID或登录名，订单号搜索，关联订单号查询，如果订单状态失效或者订单删除则佣金失效</p>
@@ -29,7 +29,7 @@ $message = $Capalot_List_Table->message;
       <form method="get">
         <?php $Capalot_List_Table->search_box('搜索', 'post_id'); ?>
         <input type="hidden" name="page" value="<?php echo $_GET['page']; ?>">
-        <?php wp_nonce_field('zb-admin-page-nonce', '_nonce'); ?>
+        <?php wp_nonce_field('capalot-admin-nonce', '_nonce'); ?>
         <?php $Capalot_List_Table->display(); ?>
       </form>
     </div>
@@ -260,13 +260,13 @@ class Capalot_List_Table extends WP_List_Table
 
     $actions = array();
     if (!empty($item['order_trade_no'])) {
-      $actions['edit'] = sprintf('<a href="admin.php?page=zb-admin-page-order&s=%s">订单详情</a>', $item['order_trade_no']);
+      $actions['edit'] = sprintf('<a href="admin.php?page=capalot-admin-order&s=%s">订单详情</a>', $item['order_trade_no']);
     }
 
     $actions['delete'] = sprintf(
-      '<a href="admin.php?page=zb-admin-page-aff&action=delete&id=%s&_nonce=%s" onclick="return confirm(\'确定删除这条记录?\')">删除</a>',
+      '<a href="admin.php?page=capalot-admin-affiliate&action=delete&id=%s&_nonce=%s" onclick="return confirm(\'确定删除这条记录?\')">删除</a>',
       $row_id,
-      wp_create_nonce('zb-admin-page-nonce')
+      wp_create_nonce('capalot-admin-nonce')
     );
 
     return sprintf(
@@ -307,13 +307,14 @@ class Capalot_List_Table extends WP_List_Table
   public function process_bulk_action()
   {
     global $wpdb;
+    $aff_table   = $wpdb->prefix . 'capalot_aff'; //AFF表 a
     if (empty($this->current_action())) {
       return false;
     }
 
     $ids = isset($_REQUEST['id']) ? $_REQUEST['id'] : array();
     $_nonce = isset($_REQUEST['_nonce']) ? $_REQUEST['_nonce'] : '';
-    if (!wp_verify_nonce($_nonce, 'zb-admin-page-nonce')) {
+    if (!wp_verify_nonce($_nonce, 'capalot-admin-nonce')) {
       $this->set_message('nonce验证失败，请返回刷新重试');
       return false;
     }
@@ -335,22 +336,19 @@ class Capalot_List_Table extends WP_List_Table
             $update = Capalot_Aff::update_aff_log(
               array('status' => $status, 'comple_time' => time()),
               array('id' => $id),
-              array('%d', '%s'),
-              array('%d')
+              array('status' => '%d', 'comple_time' => '%s'),
             );
           } elseif ($status === 0) {
             $update = Capalot_Aff::update_aff_log(
-              array('status' => $status, 'apply_time' => 0, 'comple_time' => ''),
+              array('status' => $status, 'apply_time' => 0, 'comple_time' => 0),
               array('id' => $id),
-              array('%d', '%s', '%s'),
-              array('%d')
+              array('status' => '%d', 'apply_time' => '%s', 'comple_time' => '%d'),
             );
           } else {
             $update = Capalot_Aff::update_aff_log(
-              array('status' => $status, 'apply_time' => time(), 'comple_time' => ''),
+              array('status' => $status, 'apply_time' => time(), 'comple_time' => 0),
               array('id' => $id),
-              array('%d', '%s', '%s'),
-              array('%d')
+              array('status' => '%d', 'apply_time' => '%s', 'comple_time' => '%d'),
             );
           }
 
@@ -365,7 +363,7 @@ class Capalot_List_Table extends WP_List_Table
           $ids = implode(',', $ids);
         }
         if (!empty($ids)) {
-          $sql = $wpdb->query("DELETE FROM $wpdb->cao_aff_tbl WHERE status = 0 AND id IN($ids)");
+          $sql = $wpdb->query("DELETE FROM {$aff_table} WHERE status = 0 AND id IN($ids)");
           if ($sql) {
             $this->set_message(sprintf('成功删除 %d 条记录', $sql));
           } else {
