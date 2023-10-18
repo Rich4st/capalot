@@ -360,7 +360,7 @@ class Capalot_Aff
   }
 
   // 更新推广记录
-  public static function update_aff_log($data, $where)
+  public static function update_aff_log($data, $where, $data_format, $where_format = ['id' => '%d'])
   {
     global $wpdb;
     $table_name = $wpdb->prefix . 'capalot_aff';
@@ -368,18 +368,21 @@ class Capalot_Aff
     $sql = "UPDATE $table_name SET ";
 
     $set_clause = array();
-    foreach ($data as $key => $value) {
-      $set_clause[] = "$key = $value";
+    foreach ($data as $key => $_value) {
+      $set_clause[] = "$key = $data_format[$key]";
     }
     $sql .= implode(', ', $set_clause);
 
-    $where_clause = array();
-    foreach ($where as $key => $value) {
-      $where_clause[] = "$key = $key";
+    $where_clause = [];
+    foreach ($where as $key => $_valua) {
+      $where_clause[] = "$key = $where_format[$key]";
     }
-    $sql .= " WHERE " . implode(' AND ', $where_clause);
+    $sql .= ' WHERE ' . implode(' AND ', $where_clause);
 
-    $result = $wpdb->query($wpdb->prepare($sql, $data));
+    $data_values = array_values($data);
+    $where_value = array_values($where);
+
+    $result = $wpdb->query($wpdb->prepare($sql, array_merge($data_values, $where_value)));
 
     return $result;
   }
