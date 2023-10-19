@@ -1455,6 +1455,8 @@ class Capalot_Ajax
     $update_aff = Capalot_Aff::update_aff_log(
       array('status' => 1, 'apply_time' => time()),
       array('aff_uid' => $user_id, 'status' => 0),
+      ['status' => '%d', 'apply_time' => '%s'],
+      [ 'aff_uid' => '%d', 'status' => '%d' ]
     );
 
     if (!$update_aff) {

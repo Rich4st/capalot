@@ -6,6 +6,7 @@
                     <?php if (_capalot('is_site_pro_search', true)) : ?>
                         <div class="search-select w-2/6 lg:w-1/6 self-center">
                             <div class=" flex justify-center ">
+                                <label for="cat-search-select" class=" text-sm opacity-0">.</label>
                                 <?php
                                 wp_dropdown_categories(array(
                                     'hide_empty'       => false,
