@@ -63,7 +63,7 @@ $container = _capalot('site_container_width', '1400');
     ?>
     <?php if ($section_title) : ?>
       <div class="section-title text-center mb-4 dark:text-white ">
-        <a class="text-2xl text-black dark:text-gray-50 cursor-pointer" href="<?php echo get_category_link($cat_id) ?>" title="<?php echo get_cat_name($cat_id); ?>"><?php echo $section_title ?></a>
+        <div class="text-2xl text-black dark:text-gray-50 "  title="<?php echo get_cat_name($cat_id); ?>"><?php echo $section_title ?></div>
         <?php if (!empty($section_desc)) : ?>
           <p class="text-muted mt-4 text-gray-400"><?php echo $section_desc ?></p>
         <?php endif; ?>
