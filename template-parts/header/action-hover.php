@@ -169,7 +169,7 @@ if (isset($lang_options[$lang_to_remove])) {
 <?php else : ?>
 
     <?php if (is_site_user_login()) : ?>
-        <a class="action-btn login-btn btn-sm btn" rel="nofollow noopener noreferrer" href="<?php echo esc_url(wp_login_url(get_current_url())); ?>"><i class="far fa-user me-1"></i>
+        <a class="action-btn login-btn md:text-base text-sm btn" rel="nofollow noopener noreferrer" href="<?php echo esc_url(wp_login_url(get_current_url())); ?>"><i class="far fa-user me-1"></i>
             <?php echo __('登录', 'ripro'); ?>
         </a>
     <?php endif; ?>
