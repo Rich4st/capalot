@@ -1,5 +1,6 @@
 let currentPage = 1;
 const body = jQuery("body");
+var lazyLoadInstance = null;
 
 let ca = {
 
@@ -724,7 +725,13 @@ let ca = {
         }, 500);
       })
     })
-  }
+  },
+
+  // 懒加载配置
+  lazyload: function () {
+    lazyLoadInstance = new LazyLoad();
+    lazyLoadInstance.update();
+  },
 }
 
 document.addEventListener('DOMContentLoaded', () => {
