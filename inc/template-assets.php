@@ -38,6 +38,8 @@ function capalot_assets()
   wp_enqueue_script('swiper', get_template_directory_uri() . '/assets/js/swiper-bundle.min.js', array(), '10.1.0', true);
   // gsap
   wp_enqueue_script('gsap', get_template_directory_uri() . '/assets/js/gsap/gsap.min.js', array(), '3.12.1', true);
+  // lazyload
+  wp_enqueue_script('lazyload', get_template_directory_uri() . '/assets/js/lazyload.min.js', array(), '17.8.0', true);
 
   if (is_singular() && comments_open() && get_option('thread_comments')) {
     wp_enqueue_script('comment-reply');

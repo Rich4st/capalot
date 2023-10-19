@@ -25,6 +25,7 @@ let ca = {
     }
 
     ca.switch_lang();
+    ca.lazyload();
   },
 
   /**
