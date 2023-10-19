@@ -70,7 +70,7 @@ $container = _capalot('site_container_width', '1400');
 								}
 								?>
 								<div class="flex flex-row space-x-2 items-center ">
-									<div class="h-8 w-8 flex items-center justify-center"><img class="rounded-full  overflow-hidden border-white border-2 shadow" src="<?php echo $u_avatar; ?>"></div>
+									<div class="h-8 w-8 flex items-center justify-center"><img class="rounded-full  overflow-hidden border-white border-2 shadow" src="<?php echo $u_avatar; ?>" alt="<?php bloginfo('name') ?>"></div>
 									<b class="name font-bold"><?php echo $u_name; ?></b>
 									<p class="info overflow-hidden text-ellipsis whitespace-nowrap"><?php echo $info; ?><span class="times"><?php echo $times; ?></span></p>
 								</div>

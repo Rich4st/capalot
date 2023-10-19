@@ -24,7 +24,7 @@ if (empty($args)) {
               if (strpos($item['link'], 'http') === false) :
                 $item['link'] = 'https://' . $item['link'];
               endif; ?>
-              <a class="bgBtn bg-<?php echo esc_attr($item['color']); ?> px-6 rounded-full hover:opacity-70 p-2 w-fit !mx-0" href="<?php echo $item['link']; ?>"><i class="<?php echo esc_attr($item['icon']); ?> me-1"></i><?php echo $item['title']; ?></a>
+              <a class="bgBtn bg-<?php echo esc_attr($item['color']); ?> px-6 rounded-full hover:opacity-70 p-2 w-fit !mx-0" href="<?php if($item['link'] == 'https://' || $item['link'] == 'https://#'){echo esc_url(home_url('/'));}else{echo $item['link'];}   ?>"><i class="<?php echo esc_attr($item['icon']); ?> me-1"></i><?php echo $item['title']; ?></a>
           <?php endforeach;
           endif; ?>
         </div>
