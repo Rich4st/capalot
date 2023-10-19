@@ -54,12 +54,12 @@ if (!empty($capalot_downurl_new) && is_array($capalot_downurl_new)) {
     <?php else : ?>
       <div class="down-buy-warp">
         <?php if ($is_user_login_get_status) : ?>
-          <div class="text-center">
+          <div class="text-center text-teal-500">
             <i class="fa-solid fa-lock"></i>
             <?php _e('本资源登录后免费下载', 'ripro'); ?>
           </div>
-          <div class="buy-btns">
-            <a rel="nofollow noopener noreferrer" href="<?php echo esc_url(wp_login_url(get_current_url())); ?>" class="btn btn-info px-4 rounded-pill"><i class="fa-solid fa-user"></i><?php _e('登录后下载', 'ripro'); ?></a>
+          <div class="buy-btns  text-center text-sm">
+            <a rel="nofollow noopener noreferrer" href="<?php echo esc_url(wp_login_url(get_current_url())); ?>" class="btn btn-info m-auto my-3 inline-block bg-sky-500 text-white px-6 py-2 rounded-full hover:bg-sky-600"><i class="fa-solid fa-user mr-1"></i><?php _e('登录后下载', 'ripro'); ?></a>
           </div>
 
         <?php else : ?>
