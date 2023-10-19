@@ -102,12 +102,13 @@ $page_link = get_uc_menu_link('tougao');
 							</div>
 
 							<div class="max-w-[6rem] ratio ratio-3x2  col-auto mr-2">
-								<a target="<?php echo get_target_blank(); ?>" class="block  bg-no-repeat bg-cover" style="background-image: url(<?php echo capalot_get_thumbnail_url(); ?>);" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" data-bg="<?php echo capalot_get_thumbnail_url(); ?>"></a>
+								<a target="<?php echo get_target_blank(); ?>" class="block  bg-no-repeat bg-cover bg-center" style="background-image: url(<?php echo capalot_get_thumbnail_url(); ?>);" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" data-bg="<?php echo capalot_get_thumbnail_url(); ?>">
+								</a>
 							</div>
 							<div class="entry-wrapper w-full text-gray-400 text-[0.75rem] ">
-								<div class="entry-body  h-3/4  ">
-									<div class="mb-1 whitespace-nowrap text-ellipsis overflow-hidde"><i class="fa-solid fa-tag pr-2" style="color: #82a6f0;"></i><?php capalot_meta_category(2); ?></div>
-									<h2 class="text-black text-base dark:text-gray-50  font-bold  whitespace-nowrap text-ellipsis overflow-hidden w-[12rem]">
+								<div class="entry-body h-3/4 text-base">
+									<div class="whitespace-nowrap text-ellipsis overflow-hidde mb-2 "><?php capalot_meta_category(2); ?></div>
+									<h2 class="text-black  dark:text-gray-50  font-bold  whitespace-nowrap text-ellipsis overflow-hidden w-[12rem]">
 										<a target="<?php echo get_target_blank(); ?>" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a>
 									</h2>
 								</div>
@@ -118,7 +119,7 @@ $page_link = get_uc_menu_link('tougao');
 										<span class="meta-fav md:inline-block hidden mr-1"><i class="far fa-star pr-1"></i><?php echo capalot_get_post_favorites(); ?></span>
 										<span class="meta-views mr-1"><i class="fa-regular fa-eye md:pr-1"></i><?php echo capalot_get_post_views(); ?></span>
 										<?php if (is_site_shop() && post_has_pay($post_id)) : ?>
-											<span class="meta-price whitespace-nowrap flex flex-row "><i class="<?php echo get_site_coin_icon(); ?> md:pr-1" ></i><?php echo $post_price; ?></span>
+											<span class="meta-price whitespace-nowrap flex flex-row "><i class="<?php echo get_site_coin_icon(); ?> md:pr-1"></i><?php echo $post_price; ?></span>
 										<?php endif; ?>
 
 

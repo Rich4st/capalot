@@ -759,16 +759,16 @@ class Capalot_Ticket
   {
     switch ($type) {
       case '1':
-        return _e('资源问题', 'ripro');
+        return __('资源问题', 'ripro');
         break;
       case '2':
-        return _e('会员问题', 'ripro');
+        return __('会员问题', 'ripro');
         break;
       case '3':
-        return _e('网站BUG', 'ripro');
+        return __('网站BUG', 'ripro');
         break;
       default:
-        return _e('其他问题', 'ripro');
+        return __('其他问题', 'ripro');
         break;
     }
   }

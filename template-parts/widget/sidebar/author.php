@@ -33,7 +33,7 @@ $comment_count = get_comments(array(
       <div class=" w-1/4  flex items-center">
         <!-- Avatar -->
         <div class=" ">
-          <img class="lazy avatar-img rounded-circle   w-12 h-12 shadow rounded-full" src="<?php echo $author_img; ?>">
+          <img class="lazy avatar-img rounded-circle   w-12 h-12 shadow rounded-full" src="<?php echo $author_img; ?>" alt="avatar">
         </div>
 
       </div>
