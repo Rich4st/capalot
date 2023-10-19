@@ -1,3 +1,15 @@
+<meta http-equiv="Content-Type" content="text/html; charset=<?php bloginfo('charset'); ?>">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+<meta charset="UTF-8">
+<title><?php bloginfo('name'); ?> | <?php the_title() ?></title>
+<meta name="description" content="<?php bloginfo('description'); ?>-<?php the_title() ?>">
+<meta name="keywords" content="<?php bloginfo('name'); ?>-<?php the_title() ?>">
+<meta name="og:title" content="<?php bloginfo('name'); ?>-<?php the_title() ?>">
+<meta name="og:description" content="<?php bloginfo('description'); ?>-<?php the_title() ?>">
+<meta name="og:keywords" content="<?php bloginfo('name'); ?>-<?php the_title() ?>">
+<meta property="og:type" content="<?php bloginfo('name'); ?>-<?php the_title() ?>">
+<meta property="og:url" content="<?php bloginfo('url') ?>">
+<meta property="og:site_name" content="<?php bloginfo('name') ?>">
 <?php
 
 defined('ABSPATH') || exit;
@@ -115,16 +127,16 @@ if ($is_login_action && !is_site_user_login()) {
 					<img class="logo regular  w-10 h-10" src="<?php echo esc_url(_capalot('site_logo', '')); ?>" alt="<?php echo get_bloginfo('name'); ?>">
 				</a>
 
-				<form id="account-from" class="text-start account-from space-y-2  ">
+				<form id="account-from" class="text-start account-from space-y-4  ">
 
 					<?php if ($is_login_action) : ?>
 						<!-- 登录表单 -->
 						<div class="flex flex-col">
-							<label class="form-label mb-1 text-gray-500"><?php _e('邮箱或用户名', 'ripro'); ?></label>
+							<label class="form-label mb-2 text-gray-500"><?php _e('邮箱或用户名', 'ripro'); ?></label>
 							<input type="text" class="form-control p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="user_name">
 						</div>
 						<div class="flex flex-col">
-							<label class="form-label text-gray-500 mb-1"><?php _e('密码', 'ripro'); ?><a class="text-gray-500 text-sm hover:underline ml-2" href="<?php echo esc_url(wp_lostpassword_url()); ?>"><?php _e('忘记密码？', 'ripro'); ?></a></label>
+							<label class="form-label text-gray-500 mb-2"><?php _e('密码', 'ripro'); ?><a class="text-gray-500 underline ml-2" href="<?php echo esc_url(wp_lostpassword_url()); ?>"><?php _e('忘记密码？', 'ripro'); ?></a></label>
 							<input class="form-control p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" type="password" autocomplete="TRUE" name="user_password">
 						</div>
 
@@ -278,7 +290,7 @@ if ($is_login_action && !is_site_user_login()) {
 					<?php endif; ?>
 
 					<!-- Copyright -->
-					<p class="text-center text-xs text-gray-400 max-w-[20rem] m-auto">
+					<p class="text-center  text-gray-400 max-w-[20rem] m-auto">
 						<small>
 							<?php _e('注册&登录即表示同意本站', 'ripro'); ?>
 							<a target="_blank" class="hover:underline" href="<?php echo _capalot('site_user_agreement_href', '#'); ?>"><?php _e('用户协议', 'ripro'); ?></a>、<a target="_blank" class="hover:underline" href="<?php echo _capalot('site_privacy_href', '#'); ?>"><?php _e('隐私政策', 'ripro'); ?></a>
