@@ -63,7 +63,7 @@ $container = _capalot('site_container_width', '1400');
     ?>
     <?php if ($section_title) : ?>
       <div class="section-title text-center mb-4 dark:text-white ">
-        <div class="text-2xl text-black dark:text-gray-50 "  title="<?php echo get_cat_name($cat_id); ?>"><?php echo $section_title ?></div>
+        <div class="text-2xl text-black dark:text-gray-50 " title="<?php echo get_cat_name($cat_id); ?>"><?php echo $section_title ?></div>
         <?php if (!empty($section_desc)) : ?>
           <p class="text-muted mt-4 text-gray-400"><?php echo $section_desc ?></p>
         <?php endif; ?>
@@ -81,15 +81,13 @@ $container = _capalot('site_container_width', '1400');
           <?php $counter++;
           endwhile; ?>
         </ul>
-        <ul class=" <?php echo esc_attr($cms_box_order); ?>">
-          <div class="grid  <?php echo esc_attr($cms_list_item_rows); ?>  gap-4 ">
-            <?php while ($PostData->have_posts() && $counter < 5) : $PostData->the_post(); ?>
-              <?php if ($counter == 0) : continue;
-              endif; ?>
-              <?php get_template_part('template-parts/loop/item', '', $cms_list_item_config); ?>
-            <?php $counter++;
-            endwhile; ?>
-          </div>
+        <ul class=" <?php echo esc_attr($cms_box_order); ?> grid  <?php echo esc_attr($cms_list_item_rows); ?>  gap-4 ">
+          <?php while ($PostData->have_posts() && $counter < 5) : $PostData->the_post(); ?>
+            <?php if ($counter == 0) : continue;
+            endif; ?>
+            <?php get_template_part('template-parts/loop/item', '', $cms_list_item_config); ?>
+          <?php $counter++;
+          endwhile; ?>
         </ul>
 
       <?php else : get_template_part('template-parts/loop/item', 'none');

@@ -28,7 +28,7 @@ $container = _capalot('site_container_width', '1400');
             <i class="<?php echo esc_attr($item['icon']); ?> w-8 h-8  text-white"></i>
           </div>
           <div class="md:ml-2 ml-0 md:w-[60%] w-full">
-            <h4 class="font-semibold dark:text-gray-50 truncate">
+            <p class="font-semibold dark:text-gray-50 truncate">
               <?php if (!empty($item['link'])) :
                 if (strpos($item['link'], 'http') === false) :
                   $item['link'] = 'https://' . $item['link'];
@@ -38,7 +38,7 @@ $container = _capalot('site_container_width', '1400');
               <?php else : ?>
                 <?php echo $item['title']; ?>
               <?php endif; ?>
-            </h4>
+            </p>
             <p class="text-sm text-gray-700 font-medium dark:text-gray-400 truncate"><?php echo $item['desc']; ?></p>
           </div>
 
