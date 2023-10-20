@@ -25,7 +25,7 @@ if ($unsetoauth == 'qq' || $unsetoauth == 'weixin') {
         <div class="flex items-center">
           <div class="position me-3">
             <div class="avatar avatar-xl py-2">
-              <img class="rounded-full border border-white shadow" src="<?php echo get_avatar_url($current_user->ID); ?>" alt="user">
+              <img class="rounded-full border border-white shadow lazy" data-src="<?php echo get_avatar_url($current_user->ID); ?>" alt="user">
             </div>
           </div>
           <div class="block">

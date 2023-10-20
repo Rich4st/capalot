@@ -1210,6 +1210,7 @@ class Capalot_Ajax
     $ajaxposts = new WP_Query([
       'ignore_sticky_posts' => false,
       'post_status' => 'publish',
+      'post_type'   => 'post',
       'paged' => $_POST['paged'],
       's' => $s,
       'category_name' => $cat,

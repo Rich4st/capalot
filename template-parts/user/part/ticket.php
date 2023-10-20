@@ -97,7 +97,7 @@ $is_delete = get_response_param('delete', 0, 'get');
 				<div class="mb-3">
 					<div class="mb-3 text-muted text-[#9497a4] flex items-center ">
 						<span class=" w-12 h-12 mr-2">
-							<img class="rounded-full" src="<?php echo get_avatar_url($data->creator_id); ?>" alt="avatar">
+							<img class="rounded-full lazy" data-src="<?php echo get_avatar_url($data->creator_id); ?>" alt="avatar">
 						</span>
 						<span class="ms-1"><?php echo $current_user->display_name; ?> <?php echo wp_date('Y-m-d H:i', $data->create_time); ?><?php _e('提交','ripro');?></span>
 						<span class="ms-2">【<?php echo Capalot_Ticket::get_type($data->type); ?>】</span>
@@ -118,7 +118,7 @@ $is_delete = get_response_param('delete', 0, 'get');
 					<div class="mb-3 my-4">
 						<div class="mb-3 small text-muted flex items-center text-[#9497a4]">
 							<span class="w-12 h-12 mr-2">
-								<img class="rounded-full" src="<?php echo get_avatar_url($data->assignee_id); ?>">
+								<img class="rounded-full lazy" data-src="<?php echo get_avatar_url($data->assignee_id); ?>">
 							</span>
 							<span class="ms-1"><?php echo get_userdata($data->assignee_id)->display_name; ?> <?php echo wp_date('Y-m-d H:i', $data->reply_time); ?> <?php _e('工单回复内容：', 'ripro'); ?></span>
 						</div>
@@ -208,7 +208,7 @@ $is_delete = get_response_param('delete', 0, 'get');
 					<a href="<?php echo esc_url(add_query_arg(array('action' => 'view', 'id' => $item->id), $ticket_link)); ?>" class="px-4 my-2 block ">
 						<div class="flex items-center">
 							<div class="w-12 h-12">
-								<img class="avatar-img rounded-full" src="<?php echo get_avatar_url($item->creator_id); ?>" alt="avatar">
+								<img class="avatar-img rounded-full lazy" data-src="<?php echo get_avatar_url($item->creator_id); ?>" alt="avatar">
 							</div>
 							<div class="w-full pl-2">
 								<div class="flex w-full justify-between ">

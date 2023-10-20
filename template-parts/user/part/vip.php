@@ -27,7 +27,7 @@ $price_shape = get_template_directory_uri() . '/assets/img/price_shape.png';
 		<div class="flex items-center justify-center mb-3">
 			<div class="me-2">
 				<div class=" mb-2">
-					<img class="avatar-img rounded-full border border-white  shadow" src="<?php echo get_avatar_url($current_user->ID); ?>" alt="user">
+					<img class="avatar-img rounded-full border border-white  shadow lazy" data-src="<?php echo get_avatar_url($current_user->ID); ?>" alt="user">
 				</div>
 			</div>
 			<div class="ms-2 ">
@@ -158,12 +158,12 @@ $price_shape = get_template_directory_uri() . '/assets/img/price_shape.png';
 				</div>
 				<div class="flex flex-row space-x-2 mb-3">
 					<input type="text" class="bg-[#ededed] h-8 w-full  dark:border-gray-500 dark:bg-dark form-control p-1.5 border rounded-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" name="captcha_code" placeholder="<?php _e('验证码','ripro')?>">
-					<img id="captcha-img" class="rounded-2 w-full h-8 bg-[#cacaca]  text-white mx-2 rounded" role="button" src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/captcha.png'); ?>" data-src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/captcha.png'); ?>" title="<?php _e('点击刷新验证码', 'ripro'); ?>" />
+					<img id="captcha-img" class="rounded-2 w-full h-8 bg-[#cacaca]  text-white mx-2 rounded lazy" role="button" data-src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/captcha.png'); ?>" title="<?php _e('点击刷新验证码', 'ripro'); ?>" />
 				</div>
 				<div class="flex flex-row justify-center space-x-2 mb-3 mt-3 text-center text-sm">
 					<input type="hidden" name="action" value="capalot_vip_cdk_action">
 					<button type="submit" id="vip-cdk-submit" class="btn bg-[#d6293e] text-white px-4 py-1 rounded"><i class="fas fa-gift me-1"></i><?php _e('立即兑换', 'ripro'); ?></button>
-					<a class="btn bg-[#f7c32e]  px-4 py-1 rounded" target="_blank" href="<?php echo _capalot('site_cdk_pay_link'); ?>" rel="nofollow noopener noreferrer"><i class="fas fa-external-link-alt me-1"></i><?php _e('购买CDK', 'ripro'); ?></a>
+					<!-- <a class="btn bg-[#f7c32e]  px-4 py-1 rounded" target="_blank" href="<?php echo _capalot('site_cdk_pay_link'); ?>" rel="nofollow noopener noreferrer"><i class="fas fa-external-link-alt me-1"></i><?php _e('购买CDK', 'ripro'); ?></a> -->
 
 				</div>
 			</form>
