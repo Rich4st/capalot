@@ -272,7 +272,6 @@ class Capalot_Ajax
     $role       = 'author'; 
     $userdata = compact('user_login', 'user_pass', 'user_email', 'role');
     
-    var_dump($userdata);
     $user_id = wp_insert_user($userdata);
 
     if (is_wp_error($user_id)) {
