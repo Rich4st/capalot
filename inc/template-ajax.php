@@ -1338,7 +1338,8 @@ class Capalot_Ajax
       $order_price = site_convert_amount($cdk_data->amount, 'rmb');
       $order_type = 2;
       $order_info = array(
-        'ip' => get_ip_address(),
+        'ip'    => get_ip_address(),
+        'code'  => $cdk_data->code,
       );
     } elseif ($cdk_data->type == 2) {
       // 会员兑换卡...

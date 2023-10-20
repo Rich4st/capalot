@@ -41,7 +41,8 @@ function is_site_tougao()
 }
 
 //是否开启了分类筛选
-function is_site_term_filter() {
+function is_site_term_filter()
+{
     return (bool) _capalot('is_site_term_filter', true);
 }
 
@@ -803,7 +804,7 @@ function capalot_get_request_pay($order_data)
         'status' => 0, //状态
         'method' => 'popup', // popup|弹窗  url|跳转 jsapi|js方法
         'num' => $order_data['order_trade_no'], // 订单号
-        'msg' => __('支付接口未配置','ripro'), //消息
+        'msg' => __('支付接口未配置', 'ripro'), //消息
     ];
 
     $pay_option = capalot_get_pay_options($order_data['pay_type']);
@@ -822,7 +823,7 @@ function capalot_get_request_pay($order_data)
         && $pay_option['id'] === 'site_coin_pay'
         && !empty(_capalot('is_pay_vip_allow_online', false))
     ) {
-        $result['msg'] = __('支付接口暂未开启','ripro');
+        $result['msg'] = __('支付接口暂未开启', 'ripro');
         return $result;
     }
 
@@ -841,12 +842,12 @@ function capalot_get_request_pay($order_data)
             usleep(500000);
 
             if ($user_balance < $coin_amount) {
-                $result['msg'] = __('余额不足','ripro');
+                $result['msg'] = __('余额不足', 'ripro');
                 return $result;
             }
 
             if (!change_user_coin_balance($user_id, $coin_amount, '-')) {
-                $result['msg'] = __('余额支付失败','ripro');
+                $result['msg'] = __('余额支付失败', 'ripro');
                 return $result;
             }
 
@@ -855,7 +856,7 @@ function capalot_get_request_pay($order_data)
             $update_order = Capalot_Shop::pay_notify_callback($order_data);
 
             if (!$update_order) {
-                $result['msg'] = __('订单状态处理异常','ripro');
+                $result['msg'] = __('订单状态处理异常', 'ripro');
                 $result['foo'] = $update_order;
                 return $result;
             } else {
@@ -863,7 +864,7 @@ function capalot_get_request_pay($order_data)
                     'status' => 1, //状态
                     'method' => 'reload', // popup|弹窗  url|跳转 reload|刷新 jsapi|js方法
                     'num'    => $order_data['order_trade_no'], //订单号
-                    'msg'    => __('支付成功','ripro'),
+                    'msg'    => __('支付成功', 'ripro'),
                     'foo'    => $update_order
                 ];
             }
@@ -949,7 +950,16 @@ function capalot_pay_callback($order)
             'href' => get_permalink($post_id),
         ]);
     } elseif ($order['order_type'] == 2) {
-        // TODO:充值订单
+        // 充值订单
+        if (in_array($order['pay_type'], [77, 99])) {
+            return false;
+        }
+
+        if ($order['pay_price'] > 0) {
+            $recharge_num = site_convert_amount($order['pay_price'], 'coin');
+
+            change_user_coin_balance($order['user_id'], $recharge_num, '+');
+        }
     } else {
         $uc_vip_info = get_user_vip_data($order['user_id']);
 
