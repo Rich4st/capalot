@@ -13,15 +13,15 @@ $is_user_login_get_status = $user_pay_post_status === '0' && empty($user_id);
 
 <div class=" p-4 border-dashed border-2 border-rose-200 rounded-md my-4 bg-gray-100 overflow-hidden relative dark:bg-dark-card dark:border-gray-600">
   <?php if ($user_pay_post_status && !$is_user_login_get_status) : ?>
-    <div class="absolute right-0 top-0 px-2 bg-rose-300 text-white z-40 rounded-tr-md rounded-bl-md"><span class=" text-sm  "><?php echo _e('已获得查看权限','ripro'); ?></span></div>
+    <div class="absolute right-0 top-0 px-2 bg-rose-300 text-white z-40 rounded-tr-md rounded-bl-md"><span class="text-sm"><i class="fas fa-unlock me-1"></i><?php echo _e('已获得查看权限','ripro'); ?></span></div>
     <?php echo $content; ?>
   <?php else : ?>
-    <span class="absolute right-0 top-0 px-2 bg-rose-300 text-white z-40 rounded-tr-md rounded-bl-md"><?php echo _e('隐藏内容','ripro'); ?></span>
+    <span class="absolute right-0 top-0 px-2 bg-rose-300 text-white z-40 rounded-tr-md rounded-bl-md"><i class="fas fa-lock me-1"></i><?php echo _e('隐藏内容','ripro'); ?></span>
     <div class="my-2  py-[1.5rem] px-[1rem] text-center block">
       <?php if ($is_user_login_get_status) : ?>
         <div class="text-[#ff5722] text-[1.25rem] mb-[1rem] flex justify-center items-center"><i class="fas fa-lock me-1"></i><?php _e('本内容登录后免费查看', 'ripro'); ?></div>
-        <div class="text-[#ff5722] text-[1.25rem] mb-[1rem] flex justify-center items-center leading-[1.5rem]">
-          <a rel="nofollow noopener noreferrer" href="<?php echo esc_url(wp_login_url(get_current_url())); ?>" class="btn btn-info px-4 rounded-pill"><i class="far fa-user me-1"></i><?php _e('登录后查看', 'capalot'); ?></a>
+        <div class="text-[#ff5722] mb-[1rem] flex justify-center items-center leading-[1.5rem]">
+          <a rel="nofollow noopener noreferrer" href="<?php echo esc_url(wp_login_url(get_current_url())); ?>" class="btn bg-info hover:bg-opacity-80 px-4 py-2 rounded-full"><i class="far fa-user me-1"></i><?php _e('登录后查看', 'capalot'); ?></a>
         </div>
 
       <?php else : ?>

@@ -113,9 +113,9 @@ global $current_user;
 		if (empty($data)) {
 			echo '<p class="p-4 text-center">' . __('暂无记录', 'ripro') . '</p>';
 		} else {
-			echo '<ul class="list-group mt-2">';
+			echo '<ul class="bg-[#ededed] rounded border dark:bg-dark dark:border-transparent border-[#dadada]">';
 			foreach ($data as $key => $item) { ?>
-				<div class="list-group-item list-group-item-action">
+				<div class="px-4 my-2 block ">
 					<small class="text-muted"><?php echo wp_date('Y-m-d H:i', $item->create_time); ?></small>
 					<small class="text-muted"><?php printf(__('充值金额：￥%1$s（%2$s）', 'ripro'), $item->order_price, site_convert_amount($item->order_price, 'coin') . get_site_coin_name()); ?></small>
 

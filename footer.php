@@ -26,12 +26,16 @@ Footer END -->
 
 
 <?php get_template_part('template-parts/footer/rollbar'); ?>
-<div class=" fixed lg:right-8 lg:bottom-12 right-4 bottom-20 z-50 hidden  " id="Top_btn">
-  <div class="  text-center w-[48px] ">
+<div class=" fixed  lg:bottom-12 right-2 bottom-20 z-50 hidden" id="Top_btn">
+  <div class=" text-center w-12">
     <div class=" cursor-pointer bg-white dark:bg-dark-card dark:border-[#252529] p-2 rounded-md shadow-lg border border-gray-200 text-2xl text-gray-500 dark:text-gray-400 hover:opacity-70"><i class="fas fa-caret-up"></i></div>
   </div>
 </div>
-<script type="text/javascript">
+
+<div class=" fixed top-0 left-0 right-0 bottom-0 backdrop-blur-lg   bg-black/80 z-[99] hidden" id="fixedB"></div>
+<?php get_template_part('template-parts/footer/off-canvas'); ?>
+
+<script>
   // 返回顶部
   window.onload = function() {
     var totop = document.getElementById("Top_btn");
@@ -59,15 +63,7 @@ Footer END -->
 
     }
   }
-</script>
 
-
-
-
-<div class=" fixed top-0 left-0 right-0 bottom-0 backdrop-blur-lg   bg-black/80 z-[99] hidden" id="fixedB"></div>
-<?php get_template_part('template-parts/footer/off-canvas'); ?>
-
-<script>
   // 移动端导航
   let menuA = document.getElementById('menuA');
   let fixedB = document.getElementById('fixedB');
@@ -118,9 +114,9 @@ Footer END -->
 
 <div class=" md:hidden fixed bottom-0 w-full left-0 z-[9988899] bg-white dark:bg-dark-card shadow-[0_-3px_10px_0_rgba(0,0,0,0.05)] border-t dark:border-t-[#222] ">
   <ul class=" flex text-center py-2 justify-around text-gray-600 dark:text-gray-50 ">
-    <li><a target="" href="/"><i class="fas fa-home text-lg "></i><span class=" block text-sm "><?php _e('首页','ripro');?></span></a></li>
+    <li><a target="" href="/"><i class="fas fa-home text-lg "></i><span class=" block text-sm "><?php _e('首页', 'ripro'); ?></span></a></li>
     <?php foreach (_capalot('site_footer_widget_link1', array()) as $item) {
-      $link_item = '<li><a href="' . $item['href'] . '"  ><i class="fas fa-layer-group text-lg "></i><span class=" block text-sm ">'. __('分类','ripro') . '</span></a></li>';
+      $link_item = '<li><a href="' . $item['href'] . '"  ><i class="fas fa-layer-group text-lg "></i><span class=" block text-sm ">' . __('分类', 'ripro') . '</span></a></li>';
 
       if ($item['title'] === '标签云' &&  _capalot('is_site_tags_page')) {
         echo  $link_item;
@@ -133,8 +129,8 @@ Footer END -->
         echo  $link_item;
       }
     } ?>
-    <li><a target="" href="/user"><i class="fas fa-user text-lg "></i><span class=" block text-sm "><?php _e('我的','ripro');?></span></a></li>
-    <li><a target="" href="https://ritheme.com/"><i class="fab fa-wordpress text-lg "></i><span class=" block text-sm "><?php _e('同款','ripro');?></span></a></li>
+    <li><a target="" href="/user"><i class="fas fa-user text-lg "></i><span class=" block text-sm "><?php _e('我的', 'ripro'); ?></span></a></li>
+    <li><a target="" href="https://ritheme.com/"><i class="fab fa-wordpress text-lg "></i><span class=" block text-sm "><?php _e('同款', 'ripro'); ?></span></a></li>
   </ul>
 </div>
 

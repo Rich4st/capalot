@@ -738,16 +738,16 @@ class Capalot_Ticket
   {
     switch ($status) {
       case '0':
-        return _e('待回复', 'ripro');
+        return __('待回复', 'ripro');
         break;
       case '1':
-        return _e('处理中', 'ripro');
+        return __('处理中', 'ripro');
         break;
       case '2':
-        return _e('已回复', 'ripro');
+        return __('已回复', 'ripro');
         break;
       default:
-        return _e('已关闭', 'ripro');
+        return __('已关闭', 'ripro');
         break;
     }
   }
