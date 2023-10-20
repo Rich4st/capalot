@@ -851,7 +851,6 @@ function capalot_get_request_pay($order_data)
                 return $result;
             }
 
-            $pay_trade_no = '2023-' . time();
             // 处理支付回调
             $update_order = Capalot_Shop::pay_notify_callback($order_data);
 
@@ -920,7 +919,7 @@ function capalot_pay_callback($order)
         return false;
 
     $post_id = $order['post_id'];
-    $order_info = maybe_unserialize($post_id);
+    $order_info = maybe_unserialize($order['order_info']);
 
     if ($order['order_type'] == 1) {
         $sales_count = absint(get_post_meta($post_id, 'capalot_paynum', true));
@@ -961,11 +960,19 @@ function capalot_pay_callback($order)
             change_user_coin_balance($order['user_id'], $recharge_num, '+');
         }
     } else {
+        // 充值VIP订单
         $uc_vip_info = get_user_vip_data($order['user_id']);
 
         if ($uc_vip_info['type'] != 'boosvip') {
-            $update = update_user_vip_data($order['user_id'], $order['order_price']);
+            update_user_vip_data($order['user_id'], $order_info['vip_day']);
         }
+
+        $site_vip_options = get_site_vip_options();
+
+        Capalot_Notification::add(([
+            'info' => sprintf(__('成功开通了本站%s', 'ripro'), $site_vip_options[$order_info['vip_type']]['name']),
+            'uid'  => $order['user_id'],
+        ]));
     }
 }
 add_action('capalot_pay_success', 'capalot_pay_callback', 10, 1);
