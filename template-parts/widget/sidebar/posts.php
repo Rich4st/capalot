@@ -30,13 +30,13 @@ $PostData = new WP_Query($query_args);
         <div class="col ">
           <div class=" grid grid-cols-6 gap-4 items-center">
 
-            <div class=" col-span-2">
+            <div class=" col-span-2 sm:col-span-1 lg:col-span-2">
               <a target="<?php echo get_target_blank(); ?>" class="media-img lazy" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
                 <img class=" w-full h-14 object-cover rounded-md lazy" data-src="<?php echo capalot_get_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
               </a>
             </div>
 
-            <div class=" col-span-4">
+            <div class=" col-span-4 sm:col-span-5 lg:col-span-4">
               <div class="">
                 <h2 class="">
                   <a class=" text-sm line-clamp-2  text-neutral-500 hover:text-neutral-900 dark:text-gray-400 dark:hover:text-white" target="<?php echo get_target_blank(); ?>" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a>

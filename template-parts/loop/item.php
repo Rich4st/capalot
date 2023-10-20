@@ -54,10 +54,10 @@ if ($post_format && isset($format_icons[$post_format])) {
 
       <div class="entry-wrapper text-gray-400 p-2">
         <?php if ($args['is_entry_cat']) : ?>
-          <div class="entry-cat-dot mb-1 line-clamp-1 min-h-[1rem]"><?php capalot_meta_category(2); ?></div>
+          <div class="entry-cat-dot line-clamp-1 min-h-[1rem]"><?php capalot_meta_category(2); ?></div>
         <?php endif; ?>
 
-        <a class="font-bold min-h-[1.25rem] text-gray-600 dark:text-gray-300 line-clamp-1
+        <a class="font-bold min-h-[1.25rem] my-2 text-gray-600 dark:text-gray-300 line-clamp-1
         hover:text-orange-600 dark:hover:text-gray-100 " target="<?php echo get_target_blank(); ?>" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a>
 
         <?php if ($args['is_entry_desc']) : ?>
