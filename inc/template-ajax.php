@@ -267,8 +267,13 @@ class Capalot_Ajax
       }
     }
 
-
-    $user_id = wp_create_user($user_name, $user_password, $user_email);
+    $user_login = $user_name;
+    $user_pass  = $user_password;
+    $role       = 'author'; 
+    $userdata = compact('user_login', 'user_pass', 'user_email', 'role');
+    
+    var_dump($userdata);
+    $user_id = wp_insert_user($userdata);
 
     if (is_wp_error($user_id)) {
       wp_send_json(array(
