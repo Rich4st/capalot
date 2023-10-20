@@ -20,7 +20,7 @@ $price_shape = get_template_directory_uri() . '/assets/img/price_shape.png';
 ?>
 
 <div class=" relative overflow-hidden">
-	<div class="absolute left-0 top-0 right-0 w-full h-full z-[-1] " style="background-image: url(<?php echo $bg_image; ?>); background-position:50%;background-size:100%; "></div>
+	<div class="absolute left-0 top-0 right-0 w-full h-full z-[-1] lazy" data-bg="<?php echo $bg_image; ?>" style="background-position:50%;background-size:100%; "></div>
 	<div class=" absolute  backdrop-blur-lg h-full w-full bg-black/30"></div>
 	<div class=" relative z-50 py-12 text-center text-white ">
 		<h1 class="  text-xl font-bold "><i class="far fa-gem me-1 "></i><?php _e('本站VIP', 'ripro'); ?></h1>

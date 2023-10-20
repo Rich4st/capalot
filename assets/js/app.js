@@ -398,6 +398,7 @@ let ca = {
             $('#no-more-button').show();
           }
           $('.posts-wrap').append(response.html);
+          lazyLoadInstance.update();
         },
         complete: () => {
           icon.style.display = 'none'

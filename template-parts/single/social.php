@@ -17,7 +17,7 @@ $author_name = get_the_author_meta('display_name', $author_id);
   <div class="col">
     <?php if (_capalot('single_bottom_author', true)) : ?>
       <a class="flex items-center" href="<?php echo esc_url(get_author_posts_url($author_id, $author_name)); ?>">
-        <img class="w-8 h-8 rounded-full mr-2" src="<?php echo get_avatar_url($author_id); ?>" alt="">
+        <img class="w-8 h-8 rounded-full mr-2 lazy" data-src="<?php echo get_avatar_url($author_id); ?>" alt="">
         <?php echo $author_name; ?>
       </a>
     <?php endif; ?>

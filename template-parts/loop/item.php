@@ -110,8 +110,8 @@ if ($post_format && isset($format_icons[$post_format])) {
       </div>
 
       <div class="entry-media ratio h-full <?php echo esc_attr($args['media_class']); ?>">
-        <a target="<?php echo get_target_blank(); ?>" style="background-image: url(<?php echo capalot_get_thumbnail_url(); ?>);" class="block h-full  bg-no-repeat overflow-hidden  <?php echo esc_attr($args['media_size_type']); ?>
-        <?php echo esc_attr($args['media_fit_type']); ?>" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" data-bg="<?php echo capalot_get_thumbnail_url(); ?>">
+        <a target="<?php echo get_target_blank(); ?>" data-bg="<?php echo capalot_get_thumbnail_url(); ?>" class="block h-full lazy  bg-no-repeat overflow-hidden  <?php echo esc_attr($args['media_size_type']); ?>
+        <?php echo esc_attr($args['media_fit_type']); ?>" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
           <?php if ($post_format_icon) : ?>
             <div class="post-format-icon "><i class="<?php echo $post_format_icon; ?>"></i></div>
           <?php endif; ?>
@@ -144,7 +144,7 @@ if ($post_format && isset($format_icons[$post_format])) {
       <?php endif; ?>
 
       <div class="max-w-[8rem] ratio ratio-16x9 col-auto mr-2 h-full ">
-        <a target="<?php echo get_target_blank(); ?>" style="background-image: url(<?php echo capalot_get_thumbnail_url(); ?>);" class="block  bg-no-repeat  <?php echo esc_attr($args['media_size_type']); ?>
+        <a target="<?php echo get_target_blank(); ?>" class="block lazy  bg-no-repeat  <?php echo esc_attr($args['media_size_type']); ?>
         <?php echo esc_attr($args['media_fit_type']); ?>" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" data-bg="<?php echo capalot_get_thumbnail_url(); ?>">
           <?php if ($post_format_icon) : ?>
             <div class="post-format-icon"><i class="<?php echo $post_format_icon; ?>"></i></div>

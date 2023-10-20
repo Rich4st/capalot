@@ -145,7 +145,7 @@ switch ($type) {
 
   <div class="media-container -z-10 h-full w-full">
     <?php if ($type === 'img') : ?>
-      <img class="h-full w-full object-cover" src="<?php echo esc_url($args['bg_img']); ?>" alt="<?php echo esc_attr($args['title']); ?>">
+      <img class="h-full w-full object-cover lazy"  data-src="<?php echo esc_url($args['bg_img']); ?>" alt="<?php echo esc_attr($args['title']); ?>">
     <?php elseif ($type === 'video') : ?>
       <video class="h-full w-full object-cover" src="<?php echo esc_url($args['bg_video']); ?>" autoplay muted loop></video>
     <?php endif; ?>

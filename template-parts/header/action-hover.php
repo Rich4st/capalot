@@ -74,7 +74,7 @@ if (isset($lang_options[$lang_to_remove])) {
     <div class="group relative ">
         <a class="flex" href="<?php echo get_uc_menu_link(); ?>" rel="nofollow noopener noreferrer" id="adminT">
             <div class="flex">
-                <img class="avatar-img rounded-full " src="<?php echo get_avatar_url($current_user->ID); ?>" width="30" alt="<?php _e('avatar','ripro');?>">
+                <img class="avatar-img rounded-full lazy" data-src="<?php echo get_avatar_url($current_user->ID); ?>" width="30" alt="<?php _e('avatar','ripro');?>">
                 <span class="ms-2 hidden md:block"><?php echo $current_user->display_name; ?></span>
             </div>
             <?php if (is_site_shop()) : ?>
@@ -89,7 +89,7 @@ if (isset($lang_options[$lang_to_remove])) {
                         <div class="hover-info p-2">
                             <div class="flex items-center ">
                                 <div class="mr-2">
-                                    <img class="rounded-full border m-4 h-10 w-10 inline-block border-white border-3 shadow" src="<?php echo get_avatar_url($current_user->ID); ?>" alt="<?php _e('user','ripro');?>">
+                                    <img class="rounded-full border m-4 h-10 w-10 inline-block border-white border-3 shadow lazy" data-src="<?php echo get_avatar_url($current_user->ID); ?>" alt="<?php _e('user','ripro');?>">
                                 </div>
                                 <div class="mr-2 flex flex-col ">
                                     <div class="rounded px-1">

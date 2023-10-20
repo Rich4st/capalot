@@ -102,7 +102,7 @@ $page_link = get_uc_menu_link('tougao');
 							</div>
 
 							<div class="max-w-[6rem] ratio ratio-3x2  col-auto mr-2">
-								<a target="<?php echo get_target_blank(); ?>" class="block  bg-no-repeat bg-cover bg-center" style="background-image: url(<?php echo capalot_get_thumbnail_url(); ?>);" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" data-bg="<?php echo capalot_get_thumbnail_url(); ?>">
+								<a target="<?php echo get_target_blank(); ?>" class="block  bg-no-repeat bg-cover bg-center lazy" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" data-bg="<?php echo capalot_get_thumbnail_url(); ?>">
 								</a>
 							</div>
 							<div class="entry-wrapper w-full text-gray-400 text-[0.75rem] ">

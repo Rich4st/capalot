@@ -7,7 +7,7 @@ $bg_img = (!empty($meta_bg)) ? $meta_bg : capalot_get_thumbnail_url();
 ?>
 
 <div class=" relative overflow-hidden">
-    <div class=" absolute left-0 top-0 right-0 w-full h-full z-[-1]" style="background-image: url(<?php echo esc_url($bg_img); ?>); background-position:50%;background-size:100%;"></div>
+    <div class=" absolute left-0 top-0 right-0 w-full h-full z-[-1] lazy" data-bg="<?php echo esc_url($bg_img); ?>" style="background-position:50%;background-size:100%;"></div>
 	<div class=" absolute  backdrop-blur-lg h-full w-full bg-black/30"></div>
     <div class=" max-w-[80rem] m-auto lg:px-0 px-4 lg:py-12 py-8 text-center relative z-50">
         <?php

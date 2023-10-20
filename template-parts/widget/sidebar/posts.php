@@ -21,7 +21,7 @@ $PostData = new WP_Query($query_args);
 ?>
 <div class=" bg-white p-4 rounded-md my-3 dark:bg-dark-card">
 
-  <h5 class="widget-title mb-4 dark:text-gray-50"><?php echo $args['title']; ?></h5>
+  <p class="widget-title mb-4 dark:text-gray-50"><?php echo $args['title']; ?></p>
 
   <div class="row g-3 row-cols-1 grid gap-2">
     <?php if ($PostData->have_posts()) :
@@ -32,7 +32,7 @@ $PostData = new WP_Query($query_args);
 
             <div class=" col-span-2 sm:col-span-1 lg:col-span-2">
               <a target="<?php echo get_target_blank(); ?>" class="media-img lazy" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
-                <img class=" w-full h-14 object-cover rounded-md" src="<?php echo capalot_get_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
+                <img class=" w-full h-14 object-cover rounded-md lazy" data-src="<?php echo capalot_get_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
               </a>
             </div>
 
