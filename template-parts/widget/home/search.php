@@ -164,11 +164,3 @@ switch ($type) {
     })
   </script>
 <?php endif; ?>
-
-<script>
-  window.onload = function() {
-    let selectA = document.querySelector('.search-select #cat-search-select');
-    // selectA.setAttribute('aria-label', 'select');
-    console.log(selectA);
-  }
-</script>

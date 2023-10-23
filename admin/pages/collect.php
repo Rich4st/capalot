@@ -17,9 +17,28 @@ function start_collect()
 ?>
 
 <main>
-  <input id="collect_url" type="text">
 
-  <button id="collect_button">开始采集</button>
+  <div class="wrap cj_page">
+    <div>
+      <div class="cj_box ">
+        <h1 class="wp-heading-inline">采集管理</h1>
+        <p>采集管理相关描述......</p>
+        <div class="cj_form">
+          <form method="post" class="form-wrap">
+            <div class="form-field form-required term-name-wrap">
+              <label>采集数据</label>
+              <input id="collect_url" class=" " type="text">
+            </div>
+            <div class="submit">
+              <button id="collect_button" class=" button-primary">开始采集</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <br class="clear">
+  </div>
+
 </main>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
