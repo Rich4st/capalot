@@ -122,3 +122,29 @@ function _capalot_reply_hide_shortcode($atts, $content = '')
   return do_shortcode($html);
 }
 add_shortcode('capalot-reply-hide', '_capalot_reply_hide_shortcode');
+
+/**
+ * m3u8视频组件
+ */
+CSF::createSection($prefix, array(
+  'title' => 'm3u8视频组件[capalot-m3u8]',
+  'view' => 'normal',
+  'shortcode' => 'capalot-m3u8',
+  'fields' => array(
+    array(
+      'id' => 'content',
+      'type' => 'text',
+      'title' => '',
+      'desc' => '请输入视频地址',
+    ),
+  ),
+));
+function capalot_m3u8_shortcode($atts, $content = '')
+{
+  ob_start();
+  get_template_part('template-parts/shortcode/capalot-m3u8', '', $content);
+  $html = ob_get_clean();
+
+  return do_shortcode($html);
+}
+add_shortcode('capalot-m3u8', 'capalot_m3u8_shortcode');

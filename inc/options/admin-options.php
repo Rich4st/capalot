@@ -1462,6 +1462,62 @@ CSF::createSection($prefix, array(
   ),
 ));
 
+/**
+ * 播放器设置
+ */
+CSF::createSection($prefix, array(
+  'id'     => 'player',
+  'icon'   => 'dashicons dashicons-controls-play',
+  'title'  => '视频设置',
+  'fields' => array(
+
+    [
+      'id'     => 'collect_option',
+      'type'   => 'group',
+      'title'  => '采集设置',
+      'fields' => [
+        [
+          'id'    => 'collect_url',
+          'type'  => 'text',
+          'title' => '采集API接口',
+        ]
+      ]
+    ],
+
+    [
+      'id'     => 'players',
+      'type'   => 'group',
+      'title'  => '播放地址',
+      'fields' => [
+        [
+          'id'    => 'name',
+          'type'  => 'text',
+          'title' => '播放地址名称',
+        ],
+        [
+          'id'    => 'play_url',
+          'type'  => 'text',
+          'title' => '播放地址',
+        ],
+        [
+          'id'    => 'remark',
+          'type'  => 'text',
+          'title' => '备注',
+        ]
+      ],
+    ],
+
+    // switcher
+    array(
+      'id'      => 'start_collect',
+      'type'    => 'switcher',
+      'title'   => '开始采集',
+      'label'   => '开启后开始采集',
+      'default' => false,
+    ),
+  )
+
+));
 
 /**
  * 商城设置

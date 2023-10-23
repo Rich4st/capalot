@@ -241,6 +241,15 @@ class Capalot_Admin
       $menu_slug . '-clean',
       array($this, 'admin_page_clean')
     );
+
+    add_submenu_page(
+      $menu_slug,
+      $menu_title . '-采集管理',
+      '采集管理',
+      $menu_role,
+      $menu_slug . '-collect',
+      array($this, 'admin_page_collect')
+    );
   }
 
   /**
@@ -311,6 +320,12 @@ class Capalot_Admin
   public function admin_page_clean()
   {
     $this->load_page('clean');
+  }
+
+  // 采集管理页面
+  public function admin_page_collect()
+  {
+    $this->load_page('collect');
   }
 
   //用户注册时触发
