@@ -47,12 +47,12 @@ $item_config['type'] = 'grid';
 
 <div class="my-3">
    <h2 class="mb-4"><i class="fab fa-hive me-1"></i><?php _e('相关文章', 'ripro'); ?></h2>
-   <div class=" grid lg:grid-cols-3 md:grid-cols-2 gap-4">
+   <ul class=" grid lg:grid-cols-3 md:grid-cols-2 gap-4">
     <?php 
     while ($PostData->have_posts()): $PostData->the_post();
         get_template_part('template-parts/loop/item', '', $item_config);
     endwhile;
     wp_reset_postdata();
     ?>
-    </div>
+    </ul>
 </div>

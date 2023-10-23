@@ -48,7 +48,7 @@ $container = _capalot('site_container_width', '1400');
 
           <div class="swiper-slide text-white ">
             <div class=" relative h-60 md:h-[30rem]">
-              <img data-src="<?php echo $item['_img']; ?>" src="<?php echo $item['_img']; ?>" class="w-full h-full object-cover" alt="<?php bloginfo('name') ?>">
+              <img data-src="<?php echo $item['_img']; ?>"  class="w-full h-full lazy object-cover" alt="<?php bloginfo('name') ?>">
               <?php echo $args['container']; ?>
               <div class="absolute bottom-1/2 space-y-2 text-center w-full translate-y-1/2 px-10">
                 <?php echo $item['_desc']; ?>

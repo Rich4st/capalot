@@ -84,7 +84,7 @@ $post_id = get_the_id();
 ?>
 <div class=" bg-white p-4 rounded-md my-3 dark:bg-dark-card">
 
-  <h5 class="widget-title mb-4 dark:text-gray-50"><?php echo $args['title']; ?></h5>
+  <p class="widget-title mb-4 dark:text-gray-50"><?php echo $args['title']; ?></p>
 
   <div class="row g-3 row-cols-1 grid gap-4">
     <?php if ($PostData->have_posts()) : $rank_key = 0;

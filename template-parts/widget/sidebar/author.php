@@ -23,7 +23,7 @@ $comment_count = get_comments(array(
 
 <div class="my-3 bg-white  rounded-md p-4 dark:bg-dark-card">
   <?php if (!empty($args['title'])) : ?>
-    <h5 class="widget-title mb-4 dark:text-gray-50"><?php echo $args['title']; ?></h5>
+    <p class="widget-title mb-4 dark:text-gray-50"><?php echo $args['title']; ?></p>
   <?php endif; ?>
 
 
@@ -33,7 +33,7 @@ $comment_count = get_comments(array(
       <div class=" w-1/4  flex items-center">
         <!-- Avatar -->
         <div class=" ">
-          <img class="lazy avatar-img rounded-circle   w-12 h-12 shadow rounded-full" src="<?php echo $author_img; ?>" alt="avatar">
+          <img class="lazy avatar-img rounded-circle w-12 h-12 shadow rounded-full" data-src="<?php echo $author_img; ?>" alt="avatar">
         </div>
 
       </div>

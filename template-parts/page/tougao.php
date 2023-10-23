@@ -131,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // 创建新文章或更新现有文章
         if ($is_editing) {
             wp_update_post($post);
-            $message = '<div class="alert alert-success mb-2 bg-[#cef2e7] text-[#0a966c] md:p-4 p-2 rounded" role="alert"><i class="fas fa-check-circle me-1"></i>' . __('更新成功', 'ripro') . ' <a class="text-gray-500" target="_blank" href="' . esc_url(get_permalink($post_id)) . '">' . esc_url(get_permalink($post_id)) . '</a></div>';
+            $message = '<div class="alert alert-success mb-2 bg-[#cef2e7] text-[#0a966c] md:p-4 p-2 rounded" role="alert"><i class="fas fa-check-circle me-1"></i>' . __('更新成功', 'ripro') . ' <a class="text-gray-500 w-full line-clamp-1" target="_blank" href="' . esc_url(get_permalink($post_id)) . '">' . esc_url(get_permalink($post_id)) . '</a></div>';
         } else {
             $post_id = wp_insert_post($post);
             wp_redirect(esc_url(add_query_arg(array('post_id' => $post_id), home_url('/tougao'))));

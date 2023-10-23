@@ -8,7 +8,7 @@ $uc_vip_info = get_user_vip_data($current_user->ID);
 <div class="bg-white rounded overflow-hidden dark:bg-dark-card">
 	<div class="py-4">
 		<div class="flex justify-center">
-			<img class="avatar-img rounded-full border  border-white  shadow" src="<?php echo get_avatar_url($current_user->ID); ?>" alt="user">
+			<img class="avatar-img rounded-full border lazy border-white  shadow" data-src="<?php echo get_avatar_url($current_user->ID); ?>" alt="user">
 		</div>
 		<h5 class="flex justify-center items-center text-xl mb-1">
 			<?php echo $current_user->display_name; ?>

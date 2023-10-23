@@ -58,7 +58,7 @@ $container = _capalot('site_container_width', '1400');
       ?>
 
         <div class="swiper-slide  cursor-pointer text-white h-full w-full">
-          <div class="w-full h-full  text-center bg-cover bg-center absolute hover:bg-right-top duration-500" style="background-image: url(<?php echo $bg_img; ?>);">
+          <div class="w-full h-full  text-center bg-cover bg-center absolute hover:bg-right-top duration-500 lazy" data-bg="<?php echo $bg_img; ?>">
             <a href="<?php echo get_tag_link($item->term_id, $taxonomy_name); ?>" class="h-full w-full ">
               <div class="h-full w-full bg-black bg-opacity-30 relative overflow-hidden flex flex-col justify-center items-center ">
                 <?php if (!empty($args['is_num'])) : ?>

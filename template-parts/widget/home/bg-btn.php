@@ -6,7 +6,7 @@ if (empty($args)) {
 
 ?>
 <div class="py-3 dark:bg-dark">
-  <div class="<?php echo esc_attr($args['bg_style']); ?> text-white text-center py-8  relative bg-repeat bg-cover" data-bg="<?php echo esc_url($args['bg_img']); ?>" style="background-image: url(<?php echo esc_url($args['bg_img']); ?>);">
+  <div class="<?php echo esc_attr($args['bg_style']); ?> text-white text-center py-8  relative bg-repeat bg-cover lazy" data-bg="<?php echo esc_url($args['bg_img']); ?>">
     <div class=" absolute inset-0 bg-black opacity-50 z-10"></div>
     <div class="container py-5 m-auto relative z-50">
       <div class=" px-4 lg:px-0">

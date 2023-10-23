@@ -8,7 +8,7 @@
   <div class="logo-wrapper flex items-center justify-center mt-2  ">
     <?php $logo_img = _capalot('site_logo', '');
     if (!empty($logo_img)) {
-      echo '<a href="' . esc_url(home_url('/')) . '"><img class="logo regular h-16" src="' . esc_url($logo_img) . '" alt="' . esc_attr(get_bloginfo('name')) . '"></a>';
+      echo '<a href="' . esc_url(home_url('/')) . '"><img class="logo regular h-16 lazy" data-src="' . esc_url($logo_img) . '" alt="' . esc_attr(get_bloginfo('name')) . '"></a>';
     } else {
       echo '<a class="logo text" href="' . esc_url(home_url('/')) . '">' . esc_html(get_bloginfo('name')) . '</a>';
     } ?>

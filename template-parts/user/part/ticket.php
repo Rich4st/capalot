@@ -96,18 +96,18 @@ $is_delete = get_response_param('delete', 0, 'get');
 				} ?>
 				<div class="mb-3">
 					<div class="mb-3 text-muted text-[#9497a4] flex items-center ">
-						<span class=" w-12 h-12 mr-2">
-							<img class="rounded-full" src="<?php echo get_avatar_url($data->creator_id); ?>" alt="avatar">
+						<span class="md:w-12 md:h-12 w-8 h-8 mr-2">
+							<img class="rounded-full lazy" data-src="<?php echo get_avatar_url($data->creator_id); ?>" alt="avatar">
 						</span>
-						<span class="ms-1"><?php echo $current_user->display_name; ?> <?php echo wp_date('Y-m-d H:i', $data->create_time); ?><?php _e('提交','ripro');?></span>
-						<span class="ms-2">【<?php echo Capalot_Ticket::get_type($data->type); ?>】</span>
-						<span class="ms-2"><?php _e('状态','ripro')?>：(<?php echo Capalot_Ticket::get_status($data->status); ?>)</span>
+						<span class="ms-1 text-sm md:text-base"><?php echo $current_user->display_name; ?> <?php echo wp_date('Y-m-d H:i', $data->create_time); ?><?php _e('提交','ripro');?></span>
+						<span class="ms-1 text-sm md:text-base">【<?php echo Capalot_Ticket::get_type($data->type); ?>】</span>
+						<span class="ms-1 text-sm md:text-base"><?php _e('状态','ripro')?>：(<?php echo Capalot_Ticket::get_status($data->status); ?>)</span>
 					</div>
 					<h5 class="font-bold mb-2"><i class="fas fa-question-circle me-1"></i><?php echo esc_html($data->title); ?></h5>
 					<div class="p-2 lg:p-3 bg-info bg-opacity-25 rounded-2">
 						<?php echo $data->content; ?>
 						<?php if (!empty($data->file)) : ?>
-							<div class="mt-2"><a class="btn-link text-muted" href="<?php echo esc_url($data->file); ?>" onclick="event.preventDefault(); document.getElementById('flieImage').src=this.href"><?php _e('查看附件', 'ripro'); ?></a><img class="border border-white border-3 shadow" id="flieImage" src=""></div>
+							<div class="mt-2"><a class="btn-link text-muted" href="<?php echo esc_url($data->file); ?>" onclick="event.preventDefault(); document.getElementById('flieImage').src=this.href"><?php _e('查看附件', 'ripro'); ?></a><img class="border border-white border-3 shadow" id="flieImage" src="" alt="flieImage"></div>
 						<?php endif; ?>
 					</div>
 
@@ -117,10 +117,10 @@ $is_delete = get_response_param('delete', 0, 'get');
 					<hr>
 					<div class="mb-3 my-4">
 						<div class="mb-3 small text-muted flex items-center text-[#9497a4]">
-							<span class="w-12 h-12 mr-2">
-								<img class="rounded-full" src="<?php echo get_avatar_url($data->assignee_id); ?>">
+							<span class="md:w-12 md:h-12 w-8 h-8 mr-2">
+								<img class="rounded-full lazy" data-src="<?php echo get_avatar_url($data->assignee_id); ?>" alt="avatar">
 							</span>
-							<span class="ms-1"><?php echo get_userdata($data->assignee_id)->display_name; ?> <?php echo wp_date('Y-m-d H:i', $data->reply_time); ?> <?php _e('工单回复内容：', 'ripro'); ?></span>
+							<span class="ms-1 text-sm md:text-base"><?php echo get_userdata($data->assignee_id)->display_name; ?> <?php echo wp_date('Y-m-d H:i', $data->reply_time); ?> <?php _e('工单回复内容：', 'ripro'); ?></span>
 						</div>
 						<div class="p-2 lg:p-3 bg-success bg-opacity-25 rounded-2">
 							<?php echo $data->reply_content; ?>
@@ -208,7 +208,7 @@ $is_delete = get_response_param('delete', 0, 'get');
 					<a href="<?php echo esc_url(add_query_arg(array('action' => 'view', 'id' => $item->id), $ticket_link)); ?>" class="px-4 my-2 block ">
 						<div class="flex items-center">
 							<div class="w-12 h-12">
-								<img class="avatar-img rounded-full" src="<?php echo get_avatar_url($item->creator_id); ?>" alt="avatar">
+								<img class="avatar-img rounded-full lazy" data-src="<?php echo get_avatar_url($item->creator_id); ?>" alt="avatar">
 							</div>
 							<div class="w-full pl-2">
 								<div class="flex w-full justify-between ">
