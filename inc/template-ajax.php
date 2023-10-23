@@ -68,6 +68,7 @@ class Capalot_Ajax
     $this->add_action('user_lost_pwd', 0); //找回密码
     $this->add_action('user_reset_pwd', 0); //重置新密码
     $this->add_action('user_aff_action', 1); //提现申请
+    $this->add_action('start_collect', 1); // 采集数据
   }
 
   /**
@@ -78,7 +79,7 @@ class Capalot_Ajax
     if (!check_ajax_referer('capalot_ajax', 'nonce', false)) {
       wp_send_json([
         'status' => 0,
-        'msg' => __('非法请求','ripro'),
+        'msg' => __('非法请求', 'ripro'),
       ]);
     }
   }
@@ -92,7 +93,7 @@ class Capalot_Ajax
     if (!is_site_user_login()) {
       wp_send_json(array(
         'status' => 0,
-        'msg'    => __('本站未开启登录功能','ripro'),
+        'msg'    => __('本站未开启登录功能', 'ripro'),
       ));
     }
 
@@ -104,14 +105,14 @@ class Capalot_Ajax
     if (!$user_name || !$user_password) {
       wp_send_json(array(
         'status' => 0,
-        'msg'    => __('请输入账号或密码','ripro'),
+        'msg'    => __('请输入账号或密码', 'ripro'),
       ));
     }
 
     if (is_site_img_captcha() && !verify_captcha_code(strtolower($captcha_code))) {
       wp_send_json(array(
         'status' => 0,
-        'msg'    => __('验证码错误，请刷新验证码','ripro'),
+        'msg'    => __('验证码错误，请刷新验证码', 'ripro'),
       ));
     }
 
@@ -125,7 +126,7 @@ class Capalot_Ajax
     if (is_wp_error($UserLogin)) {
       wp_send_json(array(
         'status' => 0,
-        'msg'    => __('用户名或密码不正确','ripro'),
+        'msg'    => __('用户名或密码不正确', 'ripro'),
       ));
     }
 
@@ -133,7 +134,7 @@ class Capalot_Ajax
       wp_logout();
       wp_send_json(array(
         'status' => 0,
-        'msg'    => sprintf(__('此账号已被封禁（ %s ）','ripro'), get_user_meta($UserLogin->ID, 'capalot_banned_reason', true)),
+        'msg'    => sprintf(__('此账号已被封禁（ %s ）', 'ripro'), get_user_meta($UserLogin->ID, 'capalot_banned_reason', true)),
       ));
     }
 
@@ -156,7 +157,7 @@ class Capalot_Ajax
     if (!is_site_user_register()) {
       wp_send_json(array(
         'status' => 0,
-        'msg'    => __('本站未开启注册功能','ripro'),
+        'msg'    => __('本站未开启注册功能', 'ripro'),
       ));
     }
 
@@ -269,9 +270,9 @@ class Capalot_Ajax
 
     $user_login = $user_name;
     $user_pass  = $user_password;
-    $role       = 'author'; 
+    $role       = 'author';
     $userdata = compact('user_login', 'user_pass', 'user_email', 'role');
-    
+
     $user_id = wp_insert_user($userdata);
 
     if (is_wp_error($user_id)) {
@@ -581,7 +582,7 @@ class Capalot_Ajax
 
     wp_send_json(array(
       'status' => 1,
-      'msg'    => __('头像上传成功','ripro'),
+      'msg'    => __('头像上传成功', 'ripro'),
     ));
   }
 
@@ -826,7 +827,7 @@ class Capalot_Ajax
     if (!is_site_shop())
       wp_send_json([
         'status' => 0,
-        'msg' => __('商城功能未开启','ripro'),
+        'msg' => __('商城功能未开启', 'ripro'),
       ]);
 
     if (
@@ -835,7 +836,7 @@ class Capalot_Ajax
     )
       wp_send_json([
         'status' => 0,
-        'msg' => __('请登录后购买','ripro'),
+        'msg' => __('请登录后购买', 'ripro'),
       ]);
 
     $post_price = get_user_pay_post_price($user_id, $post_id);
@@ -843,12 +844,12 @@ class Capalot_Ajax
     if ($post_price === false)
       wp_send_json([
         'status' => 0,
-        'msg' => __('暂无购买权限','ripro'),
+        'msg' => __('暂无购买权限', 'ripro'),
       ]);
 
     wp_send_json([
       'status' => 1,
-      'msg' => __('获取成功','ripro'),
+      'msg' => __('获取成功', 'ripro'),
       'data' => $body
     ]);
   }
@@ -867,7 +868,7 @@ class Capalot_Ajax
     if (!is_site_shop())
       wp_send_json([
         'status' => 0,
-        'msg' => __('商城功能未开启','ripro'),
+        'msg' => __('商城功能未开启', 'ripro'),
       ]);
 
     if (
@@ -876,13 +877,13 @@ class Capalot_Ajax
     )
       wp_send_json([
         'status' => 0,
-        'msg' => __('请登录后购买','ripro'),
+        'msg' => __('请登录后购买', 'ripro'),
       ]);
 
     if (!in_array($order_type, array(1, 2, 3, 4)))
       wp_send_json([
         'status' => 0,
-        'msg' => __('订单类型错误','ripro'),
+        'msg' => __('订单类型错误', 'ripro'),
       ]);
 
     // 构建订单数据
@@ -908,7 +909,7 @@ class Capalot_Ajax
       if (empty(get_permalink($post_id)))
         wp_send_json([
           'status' => 0,
-          'msg' => __('文章不存在','ripro'),
+          'msg' => __('文章不存在', 'ripro'),
         ]);
 
       $price_data = get_post_price_data($post_id);
@@ -917,7 +918,7 @@ class Capalot_Ajax
       if ($post_price === false)
         wp_send_json([
           'status' => 0,
-          'msg' => __('暂无购买权限','ripro'),
+          'msg' => __('暂无购买权限', 'ripro'),
         ]);
 
       if ($post_price > 0) {
@@ -1160,7 +1161,7 @@ class Capalot_Ajax
     $share_url = get_user_aff_permalink(get_permalink($post_id), $user_id);
 
     $body = '<div class="share-body"><img class="share-qrcode" src="' . get_qrcode_url($share_url) . '">';
-    $body .= '<div class="share-url user-select-all">' . $share_url . '</div><div class="share-desc">' . _e('手机扫码或复制链接分享','ripro') . '</div></div>';
+    $body .= '<div class="share-url user-select-all">' . $share_url . '</div><div class="share-desc">' . _e('手机扫码或复制链接分享', 'ripro') . '</div></div>';
 
     $post = get_post($post_id);
     $categories = get_the_category($post_id);
@@ -1462,7 +1463,7 @@ class Capalot_Ajax
       array('status' => 1, 'apply_time' => time()),
       array('aff_uid' => $user_id, 'status' => 0),
       ['status' => '%d', 'apply_time' => '%s'],
-      [ 'aff_uid' => '%d', 'status' => '%d' ]
+      ['aff_uid' => '%d', 'status' => '%d']
     );
 
     if (!$update_aff) {
@@ -1475,5 +1476,26 @@ class Capalot_Ajax
       'status' => 1,
       'msg'    => __('申请提现成功，请联系网站客服人工处理', 'ripro'),
     ));
+  }
+
+  //数据采集
+  public function start_collect()
+  {
+    $this->valid_nonce_ajax(); #安全验证
+
+    extract($_POST);
+
+    if (empty($url))
+      wp_send_json([
+        'status' => 0,
+        'msg'    => __('请输入采集地址', 'ripro'),
+      ]);
+
+    $response = wp_remote_get($url);
+
+    wp_send_json([
+      'status' => 1,
+      'msg'    => $response,
+    ]);
   }
 }

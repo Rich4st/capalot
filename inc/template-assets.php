@@ -44,32 +44,15 @@ function capalot_assets()
   if (is_singular() && comments_open() && get_option('thread_comments')) {
     wp_enqueue_script('comment-reply');
   }
-  // 文章详情页参数
+  // 全局参数
   $script_params = array(
     'home_url' => esc_url(home_url()),
     'ajax_url' => esc_url(admin_url('admin-ajax.php')),
     'theme_url' => esc_url(get_template_directory_uri()),
     'singular_id' => 0,
-    // 'post_content_nav' => intval(_capalot('site_post_content_nav', 0)),
     'category_base' => capalot_get_category_base(),
     'current_user_id' => get_current_user_id(),
     'ajax_nonce' => wp_create_nonce("capalot_ajax"),
-    'get_text' => array(
-
-      '__copied_pwd' => '密码已复制剪贴板',
-      '__copt_btn' => '复制',
-      '__coppied__success' => '复制成功',
-      '__commiting' => '提交中...',
-      '__commit_success' => '提交成功',
-      '__comment_success' => '评论成功',
-      '__refresh_page' => '即将刷新页面',
-      '__paying' => '支付中...',
-      '__pay_success' => '支付成功',
-      '__pay_error' => '支付失败',
-      '__pay_cancel' => '支付已取消',
-      '__delete_confirm' => '确定删除此纪录？',
-
-    )
   );
 
   if (is_singular())
@@ -92,6 +75,19 @@ function enqueue_admin_custom_assets($hook)
   //fontawesome
   wp_enqueue_style('admin-fontawesome', get_template_directory_uri() . '/admin/css/font-awesome/css/all.css', array(), '6.4.2');
   wp_enqueue_style('admin-fontawesome-shims', get_template_directory_uri() . '/admin/css/font-awesome/css/v4-shims.css', array(), '6.4.2');
+  // jquery
+  wp_enqueue_script('ca-admin-all', get_template_directory_uri() . '/admin/js/admin-all.js', array('jquery'));
+  // app.js
+  wp_enqueue_script('app', get_template_directory_uri() . '/assets/js/app.js', array(), '0.1.0', true);
+
+  $script_params = array(
+      'home_url'   => esc_url(home_url()),
+      'ajax_url'   => esc_url(admin_url('admin-ajax.php')),
+      'theme_url'  => esc_url(get_template_directory_uri()),
+      'ajax_nonce' => wp_create_nonce("capalot_ajax"),
+  );
+
+  wp_localize_script('ca-admin-all', 'capalot', $script_params);
 
   //商城管理页面加载
   if (strpos($hook, 'capalot-admin') !== false) {
