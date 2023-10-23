@@ -1472,19 +1472,6 @@ CSF::createSection($prefix, array(
   'fields' => array(
 
     [
-      'id'     => 'collect_option',
-      'type'   => 'group',
-      'title'  => '采集设置',
-      'fields' => [
-        [
-          'id'    => 'collect_url',
-          'type'  => 'text',
-          'title' => '采集API接口',
-        ]
-      ]
-    ],
-
-    [
       'id'     => 'players',
       'type'   => 'group',
       'title'  => '播放地址',
@@ -1507,14 +1494,6 @@ CSF::createSection($prefix, array(
       ],
     ],
 
-    // switcher
-    array(
-      'id'      => 'start_collect',
-      'type'    => 'switcher',
-      'title'   => '开始采集',
-      'label'   => '开启后开始采集',
-      'default' => false,
-    ),
   )
 
 ));
