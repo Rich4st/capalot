@@ -16,7 +16,7 @@ defined('WPINC') || exit;
         <h1 class="wp-heading-inline">采集管理</h1>
         <p>采集管理相关描述......</p>
         <div class="cj_form">
-          <form method="post" class="form-wrap">
+          <div class="form-wrap">
             <div class="form-field form-required term-name-wrap">
               <label>采集数据</label>
               <input id="collect_url" class=" " type="text">
@@ -24,7 +24,7 @@ defined('WPINC') || exit;
             <div class="submit">
               <button id="collect_button" class=" button-primary">开始采集</button>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
@@ -53,6 +53,11 @@ defined('WPINC') || exit;
       });
 
       const dataList = JSON.parse(response.msg.body).list
+
+      if(!dataList || !dataList.length) {
+        alert('采集失败,请稍后重试!');
+        return;
+      }
 
       const promises = dataList.map(async item => {
         const {
@@ -95,7 +100,7 @@ defined('WPINC') || exit;
                         <p>类型：${tags}</p>
                       `);
 
-          return await fetch('http://106.52.244.92/auto-post.php?action=publish&key=123456', {
+          return await fetch(`${capalot.home_url}/auto-post.php?action=publish&key=123456`, {
             method: 'POST',
             body: formData
           })
