@@ -221,9 +221,11 @@
   align-items: center;
   margin-bottom: 4px;
 }
+
 .download_list ul li span {
   display: block;
 }
+
 .download_list ul li a {
   color: rgb(107 114 128);
   text-decoration: none;
@@ -232,10 +234,12 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
 }
+
 .download_list ul li a:hover {
   text-decoration: underline;
   color: #1981e1;
 }
+
 .download_list ul li .d_numA {
   width: 20px;
   height: 20px;
@@ -244,6 +248,7 @@
   border-radius: 4px;
   background: rgb(229 231 235);
 }
+
 .download_list ul li .d_numB {
   text-align: right;
 }
@@ -288,10 +293,11 @@
 
 
 /* 推广 */
-.card_listT ul li span{
+.card_listT ul li span {
   display: block;
 }
-.card_listT ul li{
+
+.card_listT ul li {
   display: grid;
   gap: 0.8rem;
   grid-template-columns: auto auto repeat(1, 50% 1fr);
@@ -300,7 +306,8 @@
   align-items: center;
   margin-bottom: 4px;
 }
-.card_listT ul li .card_num{
+
+.card_listT ul li .card_num {
   width: 20px;
   height: 20px;
   text-align: center;
@@ -308,9 +315,25 @@
   border-radius: 4px;
   background: rgb(229 231 235);
 }
-.card_listT ul li img{
+
+.card_listT ul li img {
   height: 2rem;
   width: 2rem;
   display: block;
   border-radius: 100%;
+}
+
+
+/* 采集管理 */
+.cj_page .cj_box {
+  max-width: 600px;
+  margin: 0 auto;
+  margin-top: 30px;
+
+}
+.cj_page .cj_form {
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  border: solid #2271b1 1px;
 }
